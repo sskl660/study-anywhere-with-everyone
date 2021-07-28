@@ -136,3 +136,14 @@ git add .
 git commit -m "test"
 git commit -am "test"
 git push
+cd ~
+git add .
+git commit -am "final test"
+git push
+git commit -am "good morning!"
+git push
+git add .
+git commit -m "good morning"
+git push
+git pull
+git push
