@@ -28,3 +28,10 @@ sudo vi /etc/ssh/sshd_config
 sudo install apt-get
 install apt-get
 apt-get
+ls
+cd ~
+ls
+git pull
+git add .
+git commit -m "update ERD"
+git push
