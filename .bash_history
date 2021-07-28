@@ -35,3 +35,18 @@ git pull
 git add .
 git commit -m "update ERD"
 git push
+cd ~
+git pull
+git add .
+git commit -m "upload SSAZIPsql"
+git push
+cd ~
+ls
+git pull
+cd frontend/
+ls
+git add .
+git commit -m "dockerfile added"
+git push
+git config --system --unset credential.helper
+git config --system --unset credential.helper
