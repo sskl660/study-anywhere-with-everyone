@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">성공했나..!!!?</router-link> |
+      <router-link to="/">성공했다ㅠㅠㅠㅠㅠ</router-link> |
       <router-link to="/about">YEAH!!!!!</router-link>
     </div>
     <router-view />
