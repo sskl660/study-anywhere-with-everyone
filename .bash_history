@@ -147,3 +147,49 @@ git commit -m "good morning"
 git push
 git pull
 git push
+git clone https://lab.ssafy.com/s05-webmobile2-sub2/S05P12A307.git
+git clone https://lab.ssafy.com/s05-webmobile2-sub2/S05P12A307.git
+cd ~
+git commit -am "happy good morning"
+git push
+git branch docker
+git branch
+git checkout docker
+ls
+git branch challenge origin/challenge
+git branch challenge origin/master
+git bransh origin
+git branch origin
+git branch -r
+git push origin docker
+git branch origin
+git branch -r
+git branch challenge
+git barnch
+git branch
+git rm branch origin
+git push origin challenge
+git branch -r
+git push origin --delete docker
+git branch -r
+git push origin docker
+git branch -r
+git branch
+git branch -d origin
+git branch
+ls
+git commit -m "docker nginx running update"
+git add .
+git commit -m "docker nginx running update"
+git push
+git push --set-upstream origin docker
+git push
+git branch -r
+git merge origin/master origin/docker
+git checkout master
+git pull
+git commit -am "test nginx running in jenkins"
+git push
+git pull
+git commit -am "test nginx runing in jenkins"
+git push
