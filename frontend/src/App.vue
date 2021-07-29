@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Happy Good Morning!!</router-link> |
+      <router-link to="/">Welcome</router-link> |
       <router-link to="/about">YEAH!!!!!</router-link>
     </div>
-    <router-view />
+    <div class="contrainer">
+      <router-view />
+    </div>
   </div>
 </template>
 
