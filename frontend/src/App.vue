@@ -2,8 +2,7 @@
   <div id="app">
     <Navbar/>
     <div id="nav">
-      <router-link to="/">Welcome</router-link> |
-      <router-link to="/about">YEAH!!!!!</router-link>
+      <router-link to="/">Welcome</router-link>
     </div>
     <div class="contrainer">
       <router-view />
