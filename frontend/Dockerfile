@@ -1,25 +1,29 @@
-#FROM ubuntu:18.04
-FROM node:lts-alpine
+# Build Setting
+FROM node:lts-alpine as build-stage
 MAINTAINER Taehyun Kim <sskl600@naver.com>
 
 # Avoiding user interaction with tzdata
 ENV DEBIAN_FRONTEND=noninteractive
 
-# RUN apt-get update
-# RUN apt-get install -y node.js
-# RUN apt-get install -y npm
-RUN npm install -g http-server
-
+# RUN npm install -g http-server
 WORKDIR /app
-
 COPY package*.json ./
-
 RUN npm install
-
 COPY . .
-
 RUN npm run build
 
-EXPOSE 8080
-CMD [ "http-server", "dist" ]
+# production stage
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+# CMD [ "http-server", "dist" ]
+
+
+# Usage
+# Move to folder included Dockerfile
+
+# docker build -t "name" .
+
+# docker run -p "serverport":"exposeport" --name "name" -d "imageName"
 
