@@ -1,0 +1,17 @@
+version: '3'
+services:
+  backend:
+    # backend 폴더 안에서 Docker 파일 빌드 수행
+    build: ./backend
+    # 연결할 디렉토리 : 컨테이너 내 디렉토리
+    volume:
+      - ./backend:/usr/src/app
+    # 내부에서 개방할 포트 : 외부에서 접근할 포트
+    ports:
+      - '3000:7777'
+  frontend:
+    # frontend 폴더 안에서 Docker 파일 빌드 수행
+    build: ./frontend
+    # 내부에서 개방할 포트 : 외부에서 접근할 포트
+    ports:
+      - '80:9000'

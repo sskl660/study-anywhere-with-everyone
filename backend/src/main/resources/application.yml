@@ -3,7 +3,7 @@
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 #    url: jdbc:mysql://localhost:3306/test2?serverTimezone=UTC&characterEncoding=UTF-8
 #    username: root
-#    password: Youhhw0509!
+#    password: ssafy1234
 #
 #  jpa:
 #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
