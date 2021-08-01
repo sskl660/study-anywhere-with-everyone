@@ -1,6 +1,6 @@
 /* 모달창 높이 조정 */
 .modal {
-  margin-top: 250px;  
+  margin-top: 250px;
 }
 
 /* 모달창 디자인 */
@@ -10,7 +10,7 @@
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
-  background-color: #99B7FF !important;
+  background-color: #99b7ff !important;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 1rem !important;
@@ -66,9 +66,9 @@
 
 /* 로그인 버튼 */
 .btn-primary {
-  color: #FFFFFF !important;
-  background-color: #1C84C4 !important;
-  border-color: #1C84C4 !important;
+  color: #ffffff !important;
+  background-color: #1c84c4 !important;
+  border-color: #1c84c4 !important;
   font-weight: bold !important;
   margin-right: 48px !important;
   border-radius: 6px !important;
@@ -76,20 +76,25 @@
 
 /* 로그인 버튼 색 변경 방지 */
 .btn-primary:hover {
-  color: #FFFFFF;
-  background-color: #1C84C4;
-  border-color: #1C84C4;
+  color: #ffffff;
+  background-color: #1c84c4;
+  border-color: #1c84c4;
 }
 
-.btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
-  color: #FFFFFF !important;
-  background-color: #1C84C4 !important;
-  border-color: #1C84C4 !important;
+.btn-check:checked + .btn-primary,
+.btn-check:active + .btn-primary,
+.btn-primary:active,
+.btn-primary.active,
+.show > .btn-primary.dropdown-toggle {
+  color: #ffffff !important;
+  background-color: #1c84c4 !important;
+  border-color: #1c84c4 !important;
 }
 
-.btn-check:focus + .btn-primary, .btn-primary:focus {
-  color: #FFFFFF !important;
-  background-color: #1C84C4 !important;
-  border-color: #1C84C4 !important;
+.btn-check:focus + .btn-primary,
+.btn-primary:focus {
+  color: #ffffff !important;
+  background-color: #1c84c4 !important;
+  border-color: #1c84c4 !important;
   box-shadow: none !important;
 }
