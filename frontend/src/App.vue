@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar/>
+    <Header/>
     <div id="nav">
       <router-link to="/">Welcome</router-link>
       <router-link to="ChallengeRoom">ChallengeRoom</router-link>
@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import Navbar from '@/components/header/Navbar.vue'
+import Header from '@/components/common/Header.vue'
 
 export default {
   name: 'app',
   components: {
-    Navbar,
+    Header,
   }
 }
 </script>
