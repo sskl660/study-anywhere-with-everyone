@@ -1,0 +1,129 @@
+#title {
+  position: absolute;
+  left: auto;
+  top: 30px;
+}
+
+#main_header {
+  width: 1612px;
+  margin: 0 auto;
+  height: 160px;
+  position: relative;
+}
+
+#body {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.ChallengeDetail {
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px solid green;
+}
+
+.ChallengeTicket {
+  margin-bottom: 10px;
+  padding: 20px;
+  border: 1px solid green;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+.outline {
+  /* width: 580px;
+  height: 650px; */
+  width: 93%;
+  height: 93%;
+  margin: auto;
+  padding: auto;
+  border-radius: 33px;
+  border: 3px solid #4c67aa;
+
+  padding: auto;
+  margin-top: 3%;
+}
+
+.outline2 {
+  /* width: 500px;
+  height: 600px; */
+  width: 500px;
+  height: 540px;
+  margin: auto;
+  padding: auto;
+
+  position: absolute;
+}
+
+.table {
+  width: 100%;
+  height: 100%;
+  border-radius: 33px;
+  margin: 6.8%;
+  padding: 5%;
+  background-color: #ffffff;
+}
+
+.col-4 {
+  /* flex: 0 0 25%; */
+  /* max-width: 100%; */
+  width: 780px;
+  height: 680px;
+  border-radius: 33px;
+  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-right: 50px;
+}
+
+.col-5 {
+  /* flex: 0 0 25%; */
+  /* max-width: 100%; */
+  width: 785px;
+  height: 680px;
+  border-radius: 33px;
+  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.col {
+  flex-basis: 0;
+  flex-grow: 1;
+  padding: 8px;
+}
+
+.flex_container {
+  display: flex;
+}
+
+/* 로그인 버튼 */
+.Cjoin_btn .btn-secondary {
+  color: #1f4256;
+  background-color: #99b7ff;
+  border-color: #99b7ff;
+  font-size: 25px;
+  font-weight: bold;
+  width: 171px;
+  height: 54px;
+  margin-right: 69%;
+  margin-bottom: 5px;
+}
+
+.table > thead {
+  background-color: #99b7ff;
+  border-radius: 33px;
+}
+
+.stars {
+  width: 340px;
+  height: 340px;
+}
+
+.stars-box {
+  position: absolute;
+  margin-top: -180px;
+  margin-left: 68%;
+  width: 50px;
+  height: 50px;
+}

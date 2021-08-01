@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Welcome from '../views/Welcome.vue'
+import ChallengeRoom from '../components/ChallengeRoom.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,11 @@ const routes = [
     path: '/',
     name: 'Welcome',
     component: Welcome
+  },
+  {
+    path: '/ChallengeRoom',
+    name: 'ChallengeRoom',
+    component: ChallengeRoom
   },
   // {
   //   path: '/about',
