@@ -14,13 +14,11 @@
         <div class="star3-box">
           <img class="star3" src="../assets/star.png" alt="star">
         </div>
-
         <!-- SSAZIP 구현 -->
         <img class="ssazip" src="../assets/ssazip.png" alt="ssazip">
-
         <!-- 로그인, 회원가입 버튼 -->
         <div class="d-flex menu">
-          <div class="login-btn"><ButtonRound :text="login"/></div>
+          <div class="login-btn"><LoginModal :text="login"/></div>
           <div class="join-btn"><ButtonRound :text="join"/></div>
         </div>
       </div>
@@ -31,12 +29,14 @@
 
 <script>
 import ButtonRound from '@/components/common/ButtonRound'
+import LoginModal from '@/components/LoginModal'
 import "@/views/css/welcome.css";
 
 export default {
   name: 'Welcome',
   components: {
     ButtonRound, // 둥근 버튼을 가져옴
+    LoginModal,  // 로그인 모달을 가져옴
   },
   data: function () {
     return {
@@ -47,7 +47,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

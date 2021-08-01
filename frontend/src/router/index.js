@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Welcome from '../views/Welcome.vue'
 import Profile from '../views/Profile.vue'
+import ChallengeRoom from '../components/ChallengeRoom.vue'
 
 Vue.use(VueRouter)
 
@@ -14,7 +15,12 @@ const routes = [
   {
     path:'/profile',
     name: 'Profile',
-    component: Profile  
+    component: Profile
+  },
+  {  
+    path: '/ChallengeRoom',
+    name: 'ChallengeRoom',
+    component: ChallengeRoom
   },
   // {
   //   path: '/about',

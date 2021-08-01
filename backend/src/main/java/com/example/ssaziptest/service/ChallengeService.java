@@ -4,7 +4,15 @@ import com.example.ssaziptest.domain.challenge.ChallengeCreateRequest;
 import com.example.ssaziptest.domain.challenge.ChallengeDetailResponse;
 import com.example.ssaziptest.domain.challenge.ChallengeEntity;
 import com.example.ssaziptest.domain.challenge.ChallengeListResponse;
+import com.example.ssaziptest.domain.group.GroupMemberRequest;
+import com.example.ssaziptest.domain.task.BulletJournalResponse;
+import com.example.ssaziptest.domain.task.TaskDetailResponse;
+import com.example.ssaziptest.domain.task.TaskEntity;
+import com.example.ssaziptest.domain.user.UserEntity;
 import com.example.ssaziptest.repository.ChallengeRepository;
+import com.example.ssaziptest.repository.GroupmemberRepository;
+import com.example.ssaziptest.repository.TaskRepository;
+import com.example.ssaziptest.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +30,12 @@ public class ChallengeService {
 
     @Autowired
     private ChallengeRepository challengeRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private GroupmemberRepository groupmemberRepository;
+    @Autowired
+    private TaskRepository taskRepository;
 
     @Transactional
     public int createChallenge(ChallengeCreateRequest request) {
@@ -66,9 +80,58 @@ public class ChallengeService {
                     .challengeEnddate(challengeEntity.getChallengeEnddate())
                     .challengeDesc(challengeEntity.getChallengeDesc())
                     .challengeTaskCnt(challengeEntity.getChallengeTaskCnt())
+                    .challengeTaskdeadlines(challengeEntity.getChallengeTaskdeadlines())
                     .build();
             return challengeDetailResponse;
         }
         else return null;
+    }
+
+    @Transactional
+    public void joinChallenge(String userEmail, int challengeNo){
+        Optional<UserEntity> userEntityTemp = userRepository.findById(userEmail);
+        Optional<ChallengeEntity> challengeEntityTemp = challengeRepository.findById(challengeNo);
+        UserEntity userEntity = userEntityTemp.orElse(null);
+        ChallengeEntity challengeEntity = challengeEntityTemp.orElse(null);
+
+        GroupMemberRequest request = new GroupMemberRequest();
+        request.setUserEntity(userEntity);
+        request.setChallengeEntity(challengeEntity);
+        request.setGroupUsername(userEntity.getUserName());
+
+        groupmemberRepository.save(request.toEntity());
+    }
+
+    @Transactional
+    public List<BulletJournalResponse> getTaskList(int challengeno){
+        List<TaskEntity> taskEntityList = taskRepository.findByTaskChallengeEntity_ChallengeNo(challengeno);
+        List<BulletJournalResponse> bjList = new ArrayList<>();
+        for(TaskEntity taskEntity: taskEntityList){
+            BulletJournalResponse bjresponse = BulletJournalResponse.builder()
+                    .taskNo(taskEntity.getTaskNo())
+                    .taskIndex(taskEntity.getTaskIndex())
+                    .userName(taskEntity.getTaskUserEntity().getUserName())
+                    .userEmail(taskEntity.getTaskUserEntity().getUserEmail())
+                    .build();
+            bjList.add(bjresponse);
+        }
+        return bjList;
+    }
+
+    @Transactional
+    public TaskDetailResponse getTaskDetail(int taskNo){
+        TaskEntity taskEntity = taskRepository.findById(taskNo).orElse(null);
+        TaskDetailResponse taskDetailResponse = new TaskDetailResponse();
+        if(taskEntity!=null){
+            taskDetailResponse.setTaskNo(taskNo);
+            taskDetailResponse.setTaskIndex(taskEntity.getTaskIndex());
+            taskDetailResponse.setTaskContent(taskEntity.getTaskContent());
+            taskDetailResponse.setTaskDesc(taskEntity.getTaskDesc());
+            taskDetailResponse.setTaskImage(taskEntity.getTaskImage());
+            taskDetailResponse.setTaskFile(taskEntity.getTaskFile());
+            taskDetailResponse.setUserEmail(taskEntity.getTaskUserEntity().getUserEmail());
+            taskDetailResponse.setUserName(taskEntity.getTaskUserEntity().getUserName());
+        }
+        return taskDetailResponse;
     }
 }
