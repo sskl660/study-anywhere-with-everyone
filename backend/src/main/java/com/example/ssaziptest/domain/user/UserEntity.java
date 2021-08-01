@@ -1,5 +1,8 @@
 package com.example.ssaziptest.domain.user;
 
+import com.example.ssaziptest.domain.group.GroupmemberEntity;
+import com.example.ssaziptest.domain.task.TaskEntity;
+import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,6 +10,8 @@ import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,21 +21,30 @@ import javax.persistence.*;
 public class UserEntity {
 
     //not null
+
     @Id
+    @NotNull
     private String userEmail;
     @Column(name = "user_name")
+    @NotNull
     private String userName;
     @Column(name = "user_password")
+    @NotNull
     private String userPassword;
     @Column(name = "user_number")
+    @NotNull
     private String userNumber;
     @Column(name = "user_term")
+    @NotNull
     private int userTerm;
     @Column(name = "user_graduated")
-    private boolean userGraduated;
+    @NotNull
+    private Boolean userGraduated; //boolean으로 하면 lombok 안먹음;
     @CreatedDate
     @Column(name = "user_joindate")
+    @NotNull
     private String userJoindate;
+
     //초기 null
     @Column(name = "user_totalcomplete")
     private Integer userTotalcomplete;
@@ -61,6 +75,12 @@ public class UserEntity {
     @Column(name = "user_following")
     private Integer userFollowing;
 
+    @OneToMany(mappedBy = "groupUserEntity")
+    List<GroupmemberEntity> challengegroups = new ArrayList<>();
+    @OneToMany(mappedBy = "taskUserEntity")
+    List<TaskEntity> taskResults = new ArrayList<>();
+
+
     @PrePersist
     public void prePersist(){
         this.userTotalcomplete=this.userTotalcomplete==null?0:this.userTotalcomplete;
@@ -77,6 +97,7 @@ public class UserEntity {
         this.userWeekcomplete=this.userWeekcomplete==null?0:this.userWeekcomplete;
         this.userFollower=this.userFollower==null?0:this.userFollower;
         this.userFollowing=this.userFollowing==null?0:this.userFollowing;
+        //this.challengegroups=this.challengegroups.isEmpty()?
     }
 
     @Builder
