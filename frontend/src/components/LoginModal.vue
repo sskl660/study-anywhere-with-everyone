@@ -68,7 +68,7 @@
 </template>
 
 <script>
-  import "@/components/css/loginmodal.css";
+  // import "@/components/css/loginmodal.css";
 
   export default {
     name: 'LoginModal',
