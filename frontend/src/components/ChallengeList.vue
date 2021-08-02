@@ -28,7 +28,7 @@ import "@/components/css/challengelist.css";
 
 export default {
   name: 'ChallengeList',
-   props: {
+  props: {
     title: {
       type: String
     }
@@ -38,7 +38,7 @@ export default {
   },
   data: function () {
     return {
-       challenge: {
+        challenge: {
         challenge_name: '희오니의 알고 10문제 챌린지',
         challenge_level: 3,
         challenge_remain_hour: 1,

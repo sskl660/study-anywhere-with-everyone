@@ -1,6 +1,6 @@
 /* welcome 페이지 메시지 부분 */
 .message {
-  padding-top: 100px;
+  padding-top: 200px;
   color: #FFFFFF;
 }
 
@@ -58,73 +58,4 @@
 .star3 {
   width: 50px;
   height: 50px;
-}
-
-/* 로그인과 회원가입 버튼을 감싸는 부분 */
-.menu {
-  padding-right:0px;
-}
-
-/* 로그인 버튼 */
-.login-btn .btn-outline-primary {
-  color: #1C84C4;
-  background-color: #FFFFFF;
-  border-color: #FFFFFF;
-  font-size: 25px;
-  font-weight: bold;
-  width: 180px;
-  height: 60px;
-  margin-right: 90px;
-}
-
-/* 로그인 버튼 색 변경 방지 */
-.login-btn .btn-outline-primary:hover {
-  color: #1C84C4;
-  background-color: #FFFFFF;
-  border-color: #FFFFFF;
-}
-
-.login-btn .btn-check:checked + .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .show > .btn-outline-primary.dropdown-toggle {
-  color: #1C84C4 !important;
-  background-color: #FFFFFF !important;
-  border-color: #FFFFFF !important;
-}
-
-.login-btn .btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
-  color: #1C84C4 !important;
-  background-color: #FFFFFF !important;
-  border-color: #FFFFFF !important;
-  box-shadow: none !important;
-}
-
-/* 회원가입 버튼 */
-.join-btn .btn-secondary {
-  color: #FFFFFF;
-  background-color: #1C84C4;
-  border-color: #1C84C4;
-  font-size: 25px;
-  font-weight: bold;
-  width: 180px;
-  height: 60px;
-  margin-left: 90px;
-}
-
-/* 회원가입 버튼 색 변경 방지 */
-.join-btn .btn-secondary:hover {
-  color: #FFFFFF;
-  background-color: #1C84C4;
-  border-color: #1C84C4;
-}
-
-.join-btn .btn-check:checked + .btn-secondary, .btn-check:active + .btn-secondary, .btn-secondary:active, .btn-secondary.active, .show > .btn-secondary.dropdown-toggle {
-  color: #FFFFFF !important;
-  background-color: #1C84C4 !important;
-  border-color: #1C84C4 !important;
-}
-
-.join-btn .btn-check:focus + .btn-secondary, .btn-secondary:focus {
-  color: #FFFFFF !important;
-  background-color: #1C84C4 !important;
-  border-color: #1C84C4 !important;
-  box-shadow: none !important;
 }
