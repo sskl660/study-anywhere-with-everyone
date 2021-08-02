@@ -34,7 +34,6 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
                                 </tr>
                                 <tr>
                                 <th scope="row" style="background-color: #b7beda">김태현</th>

@@ -12,74 +12,77 @@
       </ul>
     </div> -->
 
-    <!-- 모달창 -->
-    <b-modal
-      id="modal-prevent-closing"
-      
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="handleOk"
-      ok-title="생성"
-      cancel-title="취소"
-      style="top: 5;"
-    >
-      <form ref="form" @submit.stop.prevent="handleSubmit">
-        <div class="d-flex justify-content-center">
-            <div class="left flex-item">
-                <div class="col Tleft flex-item">
-                    
-                </div>
-                <div class="col Dleft flex-item">
-                    <div class="d-flex justify-content-center">
-                        <!-- 이메일 입력칸 라벨 -->
-                        <b-form-group
-                            label="이메일"
-                            label-for="name-input"
-                            invalid-feedback="E-mail is required"
-                            :state="nameState"
-                        ></b-form-group>
-                        <!-- 이메일 입력칸 -->
-                        <b-form-input
-                            id="name-input"
-                            v-model="name"
-                            :state="nameState"
-                            required
-                            style="width:50%; margin-bottom:15px;"
-                        ></b-form-input>
-                        </div>
+    <div class="post-detail-modal">
+      <!-- 모달창 -->
+      <b-modal
+        id="modal-prevent-closing"
+        @show="resetModal"
+        @hidden="resetModal"
+        @ok="handleOk"
+        ok-title="생성"
+        cancel-title="취소"
+        style="top: 5;"
+      >
+        <form ref="form" @submit.stop.prevent="handleSubmit">
+          <div class="d-flex justify-content-center">
+              <div class="left flex-item">
+                  <div class="col Tleft flex-item">
+                      
+                  </div>
+                  <div class="col Dleft flex-item">
+                      <div class="d-flex justify-content-center">
+                          <!-- 이메일 입력칸 라벨 -->
+                          <b-form-group
+                              label="이메일"
+                              label-for="name-input"
+                              invalid-feedback="E-mail is required"
+                              :state="nameState"
+                          ></b-form-group>
+                          <!-- 이메일 입력칸 -->
+                          <b-form-input
+                              id="name-input"
+                              v-model="name"
+                              :state="nameState"
+                              required
+                              style="width:50%; margin-bottom:15px;"
+                          ></b-form-input>
+                          </div>
 
-                        <div class="d-flex justify-content-center">
-                        <!-- 비밀번호 입력칸 라벨 -->
-                        <b-form-group
-                            label="비밀번호"
-                            label-for="name-input"
-                            invalid-feedback="Password is required"
-                            :state="nameState"
-                        ></b-form-group>
-                        <!-- 비밀번호 입력칸 -->
-                        <b-form-input
-                            id="name-input"
-                            v-model="name"
-                            :state="nameState"
-                            required
-                            style="margin-right:15px;"
-                        ></b-form-input>
-                        </div>
-                </div>
-            </div>
+                          <div class="d-flex justify-content-center">
+                          <!-- 비밀번호 입력칸 라벨 -->
+                          <b-form-group
+                              label="비밀번호"
+                              label-for="name-input"
+                              invalid-feedback="Password is required"
+                              :state="nameState"
+                          ></b-form-group>
+                          <!-- 비밀번호 입력칸 -->
+                          <b-form-input
+                              id="name-input"
+                              v-model="name"
+                              :state="nameState"
+                              required
+                              style="margin-right:15px;"
+                          ></b-form-input>
+                          </div>
+                  </div>
+              </div>
 
-            <div class="right flex-item">
+              <div class="right flex-item">
 
-            </div>
-        </div>
+              </div>
+          </div>
 
-      </form>
-    </b-modal>
+        </form>
+      </b-modal>
+    </div>
+
+    
   </div>
 </template>
 
 <script>
-  // import "@/components/css/PostDetailModal.css";
+  import "@/components/css/PostDetailModal.css";
 
   export default {
     name: 'PostDetailModal',
@@ -133,4 +136,3 @@
     // }
   }
 </script>
-
