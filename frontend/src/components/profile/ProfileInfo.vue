@@ -1,8 +1,8 @@
 <template>
-  <div style="d-flex ">
+  <div class="d-flex justify-content-center">
     <!-- id 카드 -->
     <IdCard style="display:inline-block"/>
-    <!-- 카드 우측의 컨테이너 -->
+    <!-- 프로필 정보 우측의 컨테이너 -->
     <div class="profile-info" style="display:inline-block">
       <!-- 상단의 챌린지수, 팔로워수, 팔로잉수 -->
       <ProfileStatus />
@@ -23,7 +23,7 @@ export default {
     IdCard,
     ProfileStatus,
     ProfileIntro,
-  }
+  },
 }
 </script>
 

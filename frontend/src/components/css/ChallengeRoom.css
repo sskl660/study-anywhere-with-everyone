@@ -113,9 +113,10 @@
 
 .flex_container {
   display: flex;
+  margin-top: 90px;
 }
 
-/* 로그인 버튼 */
+/* 가입하기 버튼 */
 .Cjoin_btn .btn-secondary {
   color: #1f4256;
   background-color: #99b7ff;
@@ -128,7 +129,21 @@
   margin-bottom: 5px;
 }
 
+/* 가입완료 버튼 */
+.Cjoindone_btn .btn-secondary {
+  color: #1f4256;
+  background-color: #f9d479;
+  border-color: #f9d479;
+  font-size: 25px;
+  font-weight: bold;
+  width: 171px;
+  height: 54px;
+  margin-right: 69%;
+  margin-bottom: 5px;
+}
+
 .Ctitle {
+  margin-top: 20px;
   width: 90%;
   height: 89%;
 }
@@ -162,4 +177,37 @@
   left: auto;
   margin-top: -100px;
   margin-left: 10%;
+}
+
+.Cdetail {
+  width: 90%;
+  height: 100%;
+  margin: auto;
+  padding: auto;
+  padding-top: 30px;
+  text-align: left;
+  /* background-color: antiquewhite; */
+  overflow: scroll;
+}
+
+.Cdetail::-webkit-scrollbar {
+  display: none;
+}
+
+#uploadimg {
+  width: 50%;
+  padding: 2rem;
+
+  .file-input {
+    display: none;
+  }
+  .upload-image {
+    padding-top: 1rem;
+    width: 200px;
+    height: 200px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }

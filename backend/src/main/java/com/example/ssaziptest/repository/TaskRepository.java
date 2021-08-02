@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<TaskEntity,Integer> {
     List<TaskEntity> findByTaskChallengeEntity_ChallengeNo(@Param(value = "challengeno") int challengeno);
+    List<TaskEntity> findByTaskChallengeEntity_ChallengeNoAndTaskUserEntity_UserEmail(@Param(value = "challengeno")int challengeno, @Param(value = "useremail")String useremail);
 }
