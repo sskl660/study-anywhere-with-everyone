@@ -19,7 +19,7 @@ const routes = [
     component: Profile
   },
   {  
-    path: '/ChallengeRoom',
+    path: '/challengeRoom',
     name: 'ChallengeRoom',
     component: ChallengeRoom
   },
