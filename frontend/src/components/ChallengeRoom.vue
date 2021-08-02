@@ -3,8 +3,8 @@
         <div class="stars-box">
             <img class="stars" src="../assets/manystar.png" alt="manystar">
         </div>
-        <div id="title">
-            <h1>Title.vue 자리</h1>
+        <div class="challengetitle">
+            <div class="Ctitle"><Title :text="챌린지"/></div>
         </div>
 
         <div class="d-flex row wider justify-content-center" id="body">
@@ -28,7 +28,7 @@
                             <tbody>
                                 <tr>
                                 <th scope="row" style="background-color: #b7beda">권희은</th>
-                                <td></td>
+                                <td><PostDetailModal text="모달"/></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -132,33 +132,37 @@
             </div>
             </div>
             <div class="col col-5 flex-item">
-                <article class="ChallengeDetail">
-                    <h1>ChannlengDetail.vue 자리</h1>
-                </article>
-                <article class="ChallengeTicket">
-                    <h1>ChallengeTicket.vue 자리</h1>
-                </article>
+                <div class="ChallengeDetail">
+                    
+                </div>
+                <div class="ChallengeTicket">
+                    <img class="ticketbody" src="../assets/ticketbody.png" alt="ticketbody">
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
-// import Title from '@/components/common/Title.vue'
+import Title from '@/components/common/Title.vue'
 import ButtonRound from '@/components/common/ButtonRound.vue'
 // import Difficulty from '@/components/common/Difficulty'
+import PostDetailModal from '@/components/PostDetailModal'
 import "@/components/css/ChallengeRoom.css";
 
 export default {
     name: 'ChallengeRoom',
     components: {
-        // Title,          // 타이틀 가져오기
+        Title,          // 타이틀 가져오기
         ButtonRound,    // 둥근 버튼 가져오기
         // Difficulty      // 난이도 가져오기
+        PostDetailModal,
     },
     data: function(){
         return{
             // 버튼에 들어갈 문구들
+            모달: '모달',
             가입하기: '가입하기',
+            챌린지: '히오니의 알고 챌린지',
         }
     }
 }
