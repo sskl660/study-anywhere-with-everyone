@@ -20,6 +20,7 @@ public class ChallengeDetailResponse {
     private int challengeTaskCnt;
     //private String[][] challengeGroup;
     private List<String> challengeTaskdeadlines;
+    private List<String[]> challengeGroup;
 
     public ChallengeEntity toEntity(){
         ChallengeEntity challengeEntity = ChallengeEntity.builder()

@@ -19,7 +19,7 @@ public class ChallengeController {
     @Autowired
     private ChallengeService challengeService;
 
-
+    /*챌린지 정보 요청*/
     @GetMapping(value = "/info/{challengeno}")
     public ResponseEntity<ChallengeDetailResponse> getChallengeDetail(@PathVariable("challengeno") int challengeno) throws Exception{
         ChallengeDetailResponse challengeDetailResponse = challengeService.getChallengeDetail(challengeno);
@@ -27,17 +27,21 @@ public class ChallengeController {
         return new ResponseEntity<>(challengeDetailResponse,HttpStatus.OK);
     }
 
+    /*챌린지 가입 요청*/
     @PostMapping(value = "/join")
     public void joinChallenge(@RequestBody ChallengeJoinRequest request){
         challengeService.joinChallenge(request.getUserEmail(), request.getChallengeNo());
     }
 
+    /*Bullet Journal 과제 현황 요청*/
     @GetMapping(value = "/tasklist/{challengeno}")
     public ResponseEntity<List<BulletJournalResponse>> taskList(@PathVariable("challengeno") int challengeNo) throws Exception{
         List<BulletJournalResponse> bulletJournalResponses = challengeService.getTaskList(challengeNo);
         if(bulletJournalResponses.isEmpty()) return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(bulletJournalResponses,HttpStatus.OK);
     }
+
+    /*Bullet Journal 과제 상세 열기*/
     @GetMapping(value = "/task/{taskno}")
     public ResponseEntity<TaskDetailResponse> taskDetail(@PathVariable("taskno") int taskNo) throws Exception{
         TaskDetailResponse taskDetailResponse = challengeService.getTaskDetail(taskNo);

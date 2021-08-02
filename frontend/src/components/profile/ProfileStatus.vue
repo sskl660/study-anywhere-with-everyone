@@ -1,9 +1,20 @@
 <template>  
   <div>
-    <div class="profile-status d-flex jusstify-content-between" style="display:inline-block">
-      <div>challenge</div>
-      <div>follower</div>
-      <div>following</div>
+    <div class="profile-status d-flex justify-content-between" style="display:inline-block">
+      <div class="profile-status-info d-flex justify-content-between" style="display:inline-block">
+        <div >challenge 
+          <div style="font-weight:bold">0</div>
+        </div>
+        <div>
+          follower
+          <div style="font-weight:bold">0</div>
+        </div>
+        <div>
+          following
+          <div style="font-weight:bold">0</div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -20,9 +31,14 @@ export default {
   width: 550px;
   height: 70px;
   background-color: #E1AF4E ;
-  position: relative;
-  top: -100px;
-  left:12px;
   border-radius: 1rem;
+  margin-top: 5px;
+  margin-left:10px;
+}
+.profile-status-info {
+  width: 420px;
+  height: 60px;
+  margin-left: 70px;
+  margin-top: 10px;
 }
 </style>
