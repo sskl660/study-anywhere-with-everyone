@@ -60,7 +60,7 @@
 }
 
 .btn-secondary {
-  color: #ffffff !important;
+  color: #ffffff;
   background-color: #f53535;
   border-color: #f53535;
   font-weight: bold !important;
@@ -106,4 +106,13 @@
   color: #ffffff;
   background-color: #f59c35;
   border-color: #f59c35;
+}
+
+.writepost {
+  width: auto;
+  height: 330px !important;
+  resize: none;
+  overflow: hidden;
+  background-color: #e7eeff;
+  margin-top: 200px;
 }
