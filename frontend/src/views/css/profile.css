@@ -1,6 +1,6 @@
 /* png 타이틀 이미지 크기 */
 .title {
-  width: 50%;
+  width: 45%;
   top: 10%;
 }
 /* 이미지를 뒤에 깔아주기 */
@@ -15,7 +15,7 @@
 }
 /* 타이틀 텍스트 조정 */
 .title-text {
-  font-size: 35px;
+  font-size: 30px;
   font-weight: bold;
   color: #420909;
 }
