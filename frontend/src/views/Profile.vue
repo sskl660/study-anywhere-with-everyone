@@ -1,27 +1,47 @@
 <template>
   <div>
-    <Title style="display:inline-block"/>
-    <div class="id-container">
-      <div>idcard</div>
+    <div class="profile-info-continer">
+      <!-- 타이틀도 추후에 bg-img로 바꿔주기 -->
+      <Title style="display:inline-block"/>
+      <!-- 프로필 상단의 카드와 팔로워, 각오 소개글 -->
+      <ProfileInfo class="id-container"/>
+      <!-- 프로필 티켓 -->
+
+    </div>
+    <div>
+      <ProfileTicket style="d-flex justify-content-center" />   
+
     </div>
   </div>
 </template>
 
 <script>
 import Title from '@/components/common/Title.vue'
+import ProfileInfo from '@/components/profile/ProfileInfo.vue'
+import ProfileTicket from '@/components/profile/ProfileTicket.vue'
 import './css/profile.css'
 
 export default {
   name: 'Profile',
   components: {
     Title,
+    ProfileInfo,
+    ProfileTicket
   },
 }
 </script>
 
 <style>
+/* 티켓상단의 개인정보부분 영역 컨테이너*/
 .id-container {
-  top: 300px;
-  display: inline-block;
+  height: 350px;
+  /* margin-top:60px;
+  margin-left: 310px;
+  margin-right: 17%; */
+  position: relative;
+  top: 60px;
+}
+.profile-info-continer {
+  height: 570px;
 }
 </style>

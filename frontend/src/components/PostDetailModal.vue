@@ -82,6 +82,13 @@
 </template>
 
 <script>
+  // import Vue from 'vue';
+  // import CKEditor from '@ckeditor/ckeditor5-vue2';
+  // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+  // import VueAlertify from 'vue-alertify'; 
+
+  // Vue.use(CKEditor).use(VueAlertify);
+
   import "@/components/css/PostDetailModal.css";
 
   export default {

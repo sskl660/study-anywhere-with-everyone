@@ -4,6 +4,7 @@ import Welcome from '../views/Welcome.vue'
 import Challenges from '../views/Challenges.vue'
 import Profile from '../views/Profile.vue'
 import ChallengeRoom from '../components/ChallengeRoom.vue'
+import PostDetail from '../components/PostDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -24,10 +25,15 @@ const routes = [
     component: Profile
   },
   {  
-    path: '/ChallengeRoom',
+    path: '/challengeRoom',
     name: 'ChallengeRoom',
     component: ChallengeRoom
   },
+  {
+    path: '/PostDetail',
+    name: 'PostDetail',
+    component: PostDetail
+  }
   // {
   //   path: '/about',
   //   name: 'About',

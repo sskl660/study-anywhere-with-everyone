@@ -28,7 +28,7 @@
                             <tbody>
                                 <tr>
                                 <th scope="row" style="background-color: #b7beda">권희은</th>
-                                <td><PostDetailModal text="모달"/></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -123,7 +123,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
+                                <td><router-link to="/PostDetail">과제</router-link></td>
                                 </tr>
                             </tbody>
                         </table> 
@@ -139,14 +139,27 @@
                 </div>
             </div>
         </div>
+    <insert-modal v-on:call-parent-insert="closeAfterInsert"></insert-modal>
+    <detail-modal v-on:call-parent-change-to-delete="changeToDelete"></detail-modal>
     </div>
 </template>
 <script>
 import Title from '@/components/common/Title.vue'
 import ButtonRound from '@/components/common/ButtonRound.vue'
 // import Difficulty from '@/components/common/Difficulty'
-import PostDetailModal from '@/components/PostDetailModal'
-import "@/components/css/ChallengeRoom.css";
+// import PostDetailModal from '@/components/PostDetailModal'
+import "@/components/css/ChallengeRoom.css"
+
+// import InsertModal from '@/components/modals/InsertModal.vue'
+// import DetailModal from '@/components/modals/DetailModal.vue';
+// import router from '../router/index.js'
+
+// import { Modal } from 'bootstrap';
+
+// import Vue from 'vue';
+// import VueAlertify from 'vue-alertify'; 
+// Vue.use(VueAlertify);
+
 
 export default {
     name: 'ChallengeRoom',
@@ -154,16 +167,32 @@ export default {
         Title,          // 타이틀 가져오기
         ButtonRound,    // 둥근 버튼 가져오기
         // Difficulty      // 난이도 가져오기
-        PostDetailModal,
+        //PostDetailModal,
+        //InsertModal, // 작성자가 처음 과제를 제출하는 모달
+        //DetailModal, // 작성 후 보여지는 모달
     },
     data: function(){
         return{
             // 버튼에 들어갈 문구들
-            모달: '모달',
             가입하기: '가입하기',
             챌린지: '히오니의 알고 챌린지',
+
+            // 모달
+            // insertModal : null,
+            // detailModal : null
         }
-    }
+    },
+    // methods : {
+    //     // insert
+    //     showInsertModal(){
+    //     this.insertModal.show();
+    //     },
+
+    //     closeAfterInsert(){
+    //     this.insertModal.hide();
+    //     },
+
+    // }
 }
 </script>
 <style scoped>
