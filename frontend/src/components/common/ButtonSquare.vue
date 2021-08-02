@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'ButtonRound',
+  name: 'ButtonSquare',
   props: {
     text: {
       type: String

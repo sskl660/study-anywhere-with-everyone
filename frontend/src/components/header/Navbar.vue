@@ -22,7 +22,7 @@ export default {
     return {
       count:4,
       icons:["fa fa-home","fa fa-address-card","fa fa-flag","fa fa-rocket"],
-      list:[{'isLink':true, url:"/"},{'isLink':true,url:"/profile"},{'isLink':true,url:"/foo"},{'isLink':false}],
+      list:[{'isLink':true, url:"/"},{'isLink':true, url:"/profile"},{'isLink':true, url:"/foo"},{'isLink':true, url:"/challengeroom"}],
       backgroundColor:'#F9D479',
       color:'#EE4748',
       position:'top-right',
