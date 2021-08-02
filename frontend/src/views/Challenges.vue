@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="challenges-container">
     <div class="stars-left-box">
       <img class="stars" src="../assets/manystar.png" alt="manystar">
     </div>

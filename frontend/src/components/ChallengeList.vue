@@ -1,23 +1,27 @@
 <template>
-  <div class="challenge-list">
-    <div class="challenge-title">{{ title }}</div>
-    <div class="d-flex justify-content-center">
-      <ChallengeListItem :challenge="challenge"/>
+  <div>
+    <div class="challenge-title-container">
+      <div class="challenge-title">{{ title }}</div>
     </div>
-    <div class="d-flex justify-content-center">
-      <ChallengeListItem :challenge="challenge"/>
-    </div>
-    <div class="d-flex justify-content-center">
-      <ChallengeListItem :challenge="challenge"/>
-    </div>
-    <div class="d-flex justify-content-center">
-      <ChallengeListItem :challenge="challenge"/>
-    </div>
-    <div class="d-flex justify-content-center">
-      <ChallengeListItem :challenge="challenge"/>
-    </div>
-    <div class="d-flex justify-content-center">
-      <ChallengeListItem :challenge="challenge"/>
+    <div class="challenge-list-container">
+      <div class="d-flex justify-content-center">
+        <ChallengeListItem :challenge="challenge"/>
+      </div>
+      <div class="d-flex justify-content-center">
+        <ChallengeListItem :challenge="challenge"/>
+      </div>
+      <div class="d-flex justify-content-center">
+        <ChallengeListItem :challenge="challenge"/>
+      </div>
+      <div class="d-flex justify-content-center">
+        <ChallengeListItem :challenge="challenge"/>
+      </div>
+      <div class="d-flex justify-content-center">
+        <ChallengeListItem :challenge="challenge"/>
+      </div>
+      <div class="d-flex justify-content-center">
+        <ChallengeListItem :challenge="challenge"/>
+      </div>
     </div>
   </div>
 </template>
