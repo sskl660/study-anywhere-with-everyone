@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Welcome from '../views/Welcome.vue'
 import Profile from '../views/Profile.vue'
 import ChallengeRoom from '../components/ChallengeRoom.vue'
+import PostDetail from '../components/PostDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
     name: 'ChallengeRoom',
     component: ChallengeRoom
   },
+  {
+    path: '/PostDetail',
+    name: 'PostDetail',
+    component: PostDetail
+  }
   // {
   //   path: '/about',
   //   name: 'About',
