@@ -2,7 +2,8 @@
   <div id="app">
     <Header/>
     <div id="nav">
-      <router-link to="/">Welcome</router-link>
+      <router-link to="/">Welcome</router-link> |
+      <router-link to="Challenges">Challenges</router-link>  |
       <router-link to="ChallengeRoom">ChallengeRoom</router-link>
     </div>
     <div class="contrainer">

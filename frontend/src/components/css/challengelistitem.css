@@ -1,0 +1,20 @@
+.challenge {
+  background:url('../../assets/challenge_ticket.png');
+  background-repeat: no-repeat;
+  width: 370px;
+  height: 250px;
+  padding-top: 55px;
+}
+
+.challenge-name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.challenge-content {
+  /* font-family: 'Noto Sans KR', sans-serif; */
+  /* font-weight: bold; */
+  text-align: left;
+  margin-left: 55px;
+  font-size: 16px;
+}

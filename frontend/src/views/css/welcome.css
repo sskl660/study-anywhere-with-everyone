@@ -1,12 +1,12 @@
 /* welcome 페이지 메시지 부분 */
 .message {
-  padding-top: 70px;
+  padding-top: 100px;
   color: #FFFFFF;
 }
 
 /* welcome 페이지의 중앙 요소를 감싸는 부분 */
 .welcome-container {
-  padding-top: 70px;
+  padding-top: 100px;
   padding-bottom: 120px;
   width: 100%;
 }

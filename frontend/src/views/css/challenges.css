@@ -1,0 +1,25 @@
+.stars {
+  width: 340px;
+  height: 340px;
+}
+
+.stars-left-box {
+  position: absolute;
+  margin-top: -180px;
+  margin-left: 240px;
+  width: 50px;
+  height: 50px;
+}
+
+.stars-right-box {
+  position: absolute;
+  margin-top: -180px;
+  margin-left: 1305px;
+  width: 50px;
+  height: 50px;
+}
+
+.challenges {
+  margin-left: 150px;
+  margin-right: 150px;
+}
