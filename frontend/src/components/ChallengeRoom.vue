@@ -1,5 +1,5 @@
 <template>
-    <div class="flex_container">
+    <div class="flex_container" id="total">
         <div class="stars-box">
             <img class="stars" src="../assets/manystar.png" alt="manystar">
         </div>
@@ -8,7 +8,12 @@
         </div>
 
         <div class="d-flex row wider justify-content-center" id="body">
-            <div class="Cjoin_btn"><ButtonRound :text="가입하기"/></div>
+            <li class="changebtn" v-if="!beforejoin">
+                <div class="Cjoin_btn"><ButtonRound :text="가입하기"/></div>
+            </li>
+            <li class="changebtn" v-else>
+                <div class="Cjoindone_btn"><ButtonRound :text="가입완료"/></div>
+            </li>
             <div class="col col-4 flex-item">
                 <div class="outline">
                     <div class="outline2">
@@ -133,7 +138,24 @@
             </div>
             <div class="col col-5 flex-item">
                 <div class="ChallengeDetail">
-                    
+                    <div class="Cdetail">
+                        <h4>🔥 삼성 코테 기출 알고 4시간 박살 🔥</h4>
+                        <br>
+                        저희 스터디는 1일 1알고리즘으로
+                        네카라쿠배를 갈 사람들 입니다!<br>
+                        일주일동안 백준 총 7문제를 풀 것입니다.<br>
+
+                        과제 1 : BJ 3049<br>
+                        과제 2 : BJ 8490<br>
+                        과제 3 : BJ 908<br>
+                        과제 4 : BJ 193<br>
+                        과제 5 : BJ 9830<br>
+                        과제 6 : BJ 1394<br>
+                        과제 7 : BJ 9033<br>
+
+                        <br>
+                        <strong>참여멤버 : @권희은 @김준형 @김태현 @이장섭 @유희원 @차은채</strong>
+                    </div>
                 </div>
                 <div class="ChallengeTicket">
                     <img class="ticketbody" src="../assets/ticketbody.png" alt="ticketbody">
@@ -176,6 +198,7 @@ export default {
         return{
             // 버튼에 들어갈 문구들
             가입하기: '가입하기',
+            가입완료: '가입완료',
             챌린지: '히오니의 알고 챌린지',
 
             // 모달
