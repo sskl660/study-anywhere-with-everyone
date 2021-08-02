@@ -1,125 +1,156 @@
 <template>
   <div>
-    <!-- 모달창 띄우는 버튼 -->
-    <b-button pill v-b-modal.modal-prevent-closing variant="outline-primary">{{ text }}</b-button>
+    <button type="button" class="btn btn-primary login-btn" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-whatever="@mdo">{{ text }}</button>
 
-    <!-- 필요 없는 부분이나 참고를 위해 남겨둠. 구현 완료 후 지울 예정 -->
-    <!-- <div class="mt-3">
-      Submitted Names:
-      <div v-if="submittedNames.length === 0">--</div>
-      <ul v-else class="mb-0 pl-3">
-        <li v-for="(name, idx) in submittedNames" :key="idx">{{ name }}</li>
-      </ul>
-    </div> -->
-
-    <!-- 모달창 -->
-    <b-modal
-      id="modal-prevent-closing"
-      ref="modal"
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="handleOk"
-      ok-only
-      ok-title="로그인"
-      style="top: 5;"
-    >
-      <form ref="form" @submit.stop.prevent="handleSubmit">
-        <div class="d-flex justify-content-center">
-          <!-- 이메일 입력칸 라벨 -->
-          <b-form-group
-            label="이메일"
-            label-for="email-input"
-            invalid-feedback="E-mail is required"
-            :state="nameState"
-          ></b-form-group>
-          <!-- 이메일 입력칸 -->
-          <b-form-input
-            id="email-input"
-            v-model="email"
-            :state="nameState"
-            required
-            style="width:50%; margin-bottom:15px;"
-          ></b-form-input>
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content login-content">
+          <div class="modal-body">
+            <form>
+              <div class="d-flex">
+                <label for="email-input" class="col-form-label input-label">이메일</label>
+                <input type="text" class="form-control input-form" id="email-input">
+              </div>
+              <div class="d-flex">
+                <label for="password-input" class="col-form-label input-label">비밀번호</label>
+                <input type="text" class="form-control input-form" id="password-input">
+              </div>
+            </form>
+          </div>
+          <div class="form-check check-part">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label check-label" for="flexCheckDefault">
+              로그인 상태 유지
+            </label>
+          </div>
+          <div class="modal-footer login-footer">
+            <button type="button" class="btn btn-light login-button" data-bs-dismiss="modal">로그인</button>
+          </div>
         </div>
-        <div class="d-flex justify-content-center">
-          <!-- 비밀번호 입력칸 라벨 -->
-          <b-form-group
-            label="비밀번호"
-            label-for="password-input"
-            invalid-feedback="Password is required"
-            :state="nameState"
-          ></b-form-group>
-          <!-- 비밀번호 입력칸 -->
-          <b-form-input
-            id="password-input"
-            v-model="password"
-            :state="nameState"
-            required
-            style="margin-right:15px;"
-          ></b-form-input>
-        </div>
-        <!-- 로그인 상태 유지 체크 박스 -->
-        <b-form-checkbox>
-          로그인 상태 유지
-        </b-form-checkbox>
-      </form>
-    </b-modal>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  // import "@/components/css/loginmodal.css";
 
-  export default {
-    name: 'LoginModal',
-    props: {
-      text: {
-        type: String
-      }
-    },
-    data() {
-      return {
-        email: '',
-        password: '',
-        nameState: null,
-        submittedNames: []
-      }
-    },
-    methods: {
-      checkFormValidity() {
-        const valid = this.$refs.form.checkValidity()
-        this.nameState = valid
-        return valid
-      },
-      resetModal() {
-        this.name = ''
-        this.nameState = null
-      },
-      handleOk(bvModalEvt) {
-        // Prevent modal from closing
-        bvModalEvt.preventDefault()
-        // Trigger submit handler
-        this.handleSubmit()
-      },
-      handleSubmit() {
-        // Exit when the form isn't valid
-        if (!this.checkFormValidity()) {
-          return
-        }
-        // Push the name to submitted names
-        // this.submittedNames.push(this.name)
-        // Hide the modal manually
-        this.$nextTick(() => {
-          this.$bvModal.hide('modal-prevent-closing')
-        })
-      },
-      close() {
-        const obj = document.querySelector('#modal-prevent-closing');
-        obj.style.display = 'none';
-      }
-    },
-    // created: function() {
-    //   document.querySelector('.btn-secondary').innerText = '로그인'
-    // }
+export default {
+  name: 'LoginModal',
+  props: {
+    text: {
+      type: String
+    }
   }
+}
 </script>
+
+<style scoped>
+  /* 로그인 버튼 */
+  .login-btn {
+    color: #1C84C4;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+    font-size: 25px;
+    font-weight: bold;
+    width: 180px;
+    height: 60px;
+    margin-right: 90px;
+    border-radius: 2rem;
+  }
+
+  /* 로그인 버튼 색 변경 방지 */
+  .login-btn[data-v-f7af2618]:hover {
+    color: #1C84C4;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+  }
+
+  .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
+    color: #1C84C4;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+  }
+
+  .btn-check:focus + .btn-primary, .btn-primary:focus {
+    color: #1C84C4;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+    box-shadow: none;
+  }
+
+  .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: none;
+  }
+
+  /* 모달창 커스텀 */
+  .login-content {
+    font-family: "Noto Sans KR", sans-serif;
+    background-color: #99b7ff;
+    border-radius: 1rem;
+    margin-top: 350px;
+  }
+
+  .input-label {
+    width: 100px;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-right: 5px;
+  }
+
+  .input-form {
+    margin-top: 20px;
+    margin-right: 45px;
+    border-radius: 0.5rem;
+  }
+
+  .login-footer {
+    padding-top: 0px;
+    border-style: none;
+  }
+
+  .check-part {
+    width: 115px;
+    margin-left: 120px;
+    padding: 0px;
+  }
+
+  .form-control:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .form-check-input:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .login-button {
+    margin-right: 50px;
+    color: #ffffff;
+    background-color: #1c84c4;
+    border-style: none;
+  }
+
+  .login-button:hover {
+    color: #ffffff;
+    background-color: #1c84c4;
+    border-style: none;
+  }
+
+  .btn-check:checked + .btn-light, .btn-check:active + .btn-light, .btn-light:active, .btn-light.active, .show > .btn-light.dropdown-toggle {
+    color: #ffffff;
+    background-color: #1c84c4;
+    border-style: none;
+  }
+
+  .btn-check:focus + .btn-light, .btn-light:focus {
+    color: #ffffff;
+    background-color: #1c84c4;
+    border-style: none;
+    box-shadow: none;
+  }
+
+  .btn-check:checked + .btn-light:focus, .btn-check:active + .btn-light:focus, .btn-light:active:focus, .btn-light.active:focus, .show > .btn-light.dropdown-toggle:focus {
+    box-shadow: none;
+  }
+</style>
