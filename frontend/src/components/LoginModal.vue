@@ -28,14 +28,14 @@
           <!-- 이메일 입력칸 라벨 -->
           <b-form-group
             label="이메일"
-            label-for="name-input"
+            label-for="email-input"
             invalid-feedback="E-mail is required"
             :state="nameState"
           ></b-form-group>
           <!-- 이메일 입력칸 -->
           <b-form-input
-            id="name-input"
-            v-model="name"
+            id="email-input"
+            v-model="email"
             :state="nameState"
             required
             style="width:50%; margin-bottom:15px;"
@@ -45,14 +45,14 @@
           <!-- 비밀번호 입력칸 라벨 -->
           <b-form-group
             label="비밀번호"
-            label-for="name-input"
+            label-for="password-input"
             invalid-feedback="Password is required"
             :state="nameState"
           ></b-form-group>
           <!-- 비밀번호 입력칸 -->
           <b-form-input
-            id="name-input"
-            v-model="name"
+            id="password-input"
+            v-model="password"
             :state="nameState"
             required
             style="margin-right:15px;"
@@ -79,7 +79,8 @@
     },
     data() {
       return {
-        name: '',
+        email: '',
+        password: '',
         nameState: null,
         submittedNames: []
       }
