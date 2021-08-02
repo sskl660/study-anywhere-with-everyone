@@ -17,12 +17,14 @@ public class ChallengeListController {
     @Autowired
     private ChallengeService challengeService;
 
+    /*챌린지 생성*/
     @PostMapping(value = "create")
     public ResponseEntity<Integer> createChallenge(@RequestBody ChallengeCreateRequest request) throws Exception{
 
         int response = challengeService.createChallenge(request);
         return new ResponseEntity<Integer>(response, HttpStatus.OK);
     }
+    /*챌린지 목록 조회*/
     @GetMapping(value = "")
     public ResponseEntity<List<ChallengeListResponse>> challengeList() throws Exception{
         List<ChallengeListResponse> challenges = challengeService.getChallengelist();

@@ -5,6 +5,7 @@ import com.example.ssaziptest.domain.challenge.ChallengeDetailResponse;
 import com.example.ssaziptest.domain.challenge.ChallengeEntity;
 import com.example.ssaziptest.domain.challenge.ChallengeListResponse;
 import com.example.ssaziptest.domain.group.GroupMemberRequest;
+import com.example.ssaziptest.domain.group.GroupmemberEntity;
 import com.example.ssaziptest.domain.task.BulletJournalResponse;
 import com.example.ssaziptest.domain.task.TaskDetailResponse;
 import com.example.ssaziptest.domain.task.TaskEntity;
@@ -67,8 +68,7 @@ public class ChallengeService {
 
     @Transactional
     public ChallengeDetailResponse getChallengeDetail(int challengeNo) {
-        Optional<ChallengeEntity> challengeEntityTemp = challengeRepository.findById(challengeNo);
-        ChallengeEntity challengeEntity = challengeEntityTemp.orElse(null);
+        ChallengeEntity challengeEntity = challengeRepository.findById(challengeNo).orElse(null);
         if(challengeEntity!=null){
             ChallengeDetailResponse challengeDetailResponse = ChallengeDetailResponse.builder()
                     .challengeNo(challengeEntity.getChallengeNo())
@@ -82,6 +82,15 @@ public class ChallengeService {
                     .challengeTaskCnt(challengeEntity.getChallengeTaskCnt())
                     .challengeTaskdeadlines(challengeEntity.getChallengeTaskdeadlines())
                     .build();
+            List<String[]> members = new ArrayList<>();
+            List<GroupmemberEntity> groupmemberEntities = groupmemberRepository.findByGroupChallengeEntity_ChallengeNo(challengeNo);
+            for(GroupmemberEntity groupmemberEntity: groupmemberEntities){
+                String[] temp = new String[2];
+                temp[0] = groupmemberEntity.getGroupUserEntity().getUserEmail();
+                temp[1] = groupmemberEntity.getGroupUsername();
+                members.add(temp);
+            }
+            challengeDetailResponse.setChallengeGroup(members);
             return challengeDetailResponse;
         }
         else return null;
@@ -89,10 +98,8 @@ public class ChallengeService {
 
     @Transactional
     public void joinChallenge(String userEmail, int challengeNo){
-        Optional<UserEntity> userEntityTemp = userRepository.findById(userEmail);
-        Optional<ChallengeEntity> challengeEntityTemp = challengeRepository.findById(challengeNo);
-        UserEntity userEntity = userEntityTemp.orElse(null);
-        ChallengeEntity challengeEntity = challengeEntityTemp.orElse(null);
+        UserEntity userEntity = userRepository.findById(userEmail).orElse(null);
+        ChallengeEntity challengeEntity = challengeRepository.findById(challengeNo).orElse(null);
 
         GroupMemberRequest request = new GroupMemberRequest();
         request.setUserEntity(userEntity);
