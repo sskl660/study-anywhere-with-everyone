@@ -2,15 +2,13 @@
   <div>
     <div class="profile-info-continer">
       <!-- 타이틀도 추후에 bg-img로 바꿔주기 -->
-      <Title style="display:inline-block"/>
+      <Title style="display:inline-block" :text="profile_title"/>
       <!-- 프로필 상단의 카드와 팔로워, 각오 소개글 -->
       <ProfileInfo class="id-container"/>
-      <!-- 프로필 티켓 -->
-
     </div>
+    <!-- 프로필 티켓 -->
     <div>
       <ProfileTicket style="d-flex justify-content-center" />   
-
     </div>
   </div>
 </template>
@@ -28,6 +26,11 @@ export default {
     ProfileInfo,
     ProfileTicket
   },
+  data: function(){
+    return{
+        profile_title: '땡땡땡의 프로필',
+    }
+  }
 }
 </script>
 
