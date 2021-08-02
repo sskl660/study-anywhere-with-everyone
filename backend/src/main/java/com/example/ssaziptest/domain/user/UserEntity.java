@@ -7,7 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,8 +18,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @DynamicInsert
+@DynamicUpdate
 @Entity(name = "user")
 @Table(name = "user")
+@EntityListeners(AuditingEntityListener.class)
 public class UserEntity {
 
     //not null
@@ -42,7 +46,6 @@ public class UserEntity {
     private Boolean userGraduated; //boolean으로 하면 lombok 안먹음;
     @CreatedDate
     @Column(name = "user_joindate")
-    @NotNull
     private String userJoindate;
 
     //초기 null
