@@ -25,6 +25,7 @@
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
         <div class="d-flex justify-content-center">
+          
             <div class="left flex-item">
                 <div class="col Tleft flex-item">
                     
@@ -64,6 +65,10 @@
                             required
                             style="margin-right:15px;"
                         ></b-form-input>
+                        <!-- 과제 설명 칸 -->
+                            <div class="">
+                            </div>
+
                         </div>
                 </div>
             </div>
@@ -79,7 +84,14 @@
 </template>
 
 <script>
-  // import "@/components/css/PostDetailModal.css";
+  // import Vue from 'vue';
+  // import CKEditor from '@ckeditor/ckeditor5-vue2';
+  // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+  // import VueAlertify from 'vue-alertify'; 
+
+  // Vue.use(CKEditor).use(VueAlertify);
+
+  import "@/components/css/PostDetailModal.css";
 
   export default {
     name: 'PostDetailModal',
