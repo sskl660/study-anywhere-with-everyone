@@ -10,7 +10,9 @@
 
     <div class="card-intro" style="display: inline-block;">
       <p style="font-size:25px">
-        5기 아이유 
+        <!-- <p >{{ userTerm }}기 {{userName}}</p> -->
+        <!-- pp{{user_info.userTerm}}기 {{user_info.userName}} -->
+        {{userInfo.userTerm}}기 {{userInfo.userName}}
         <!-- user가 누군지에 따라서 프로필편집, 팔로우, 팔로우 취소로 보이게 하기 -->
         <!-- <button type="button" class="btn profile-edit-btn">프로필편집</button> -->
         <!-- Button trigger modal -->
@@ -18,10 +20,10 @@
           프로필편집
         </button>
       </p>
-      <p>mbti</p>
-      <p>개발스타일</p>
-      <p>관심분야</p>
-      <p>기술스택</p>    
+      <p>{{userInfo.userMbti}}</p>
+      <p>{{userInfo.userDevstyle}}</p>
+      <p>{{userInfo.userWishfield}}</p>
+      <p>{{userInfo.userTechstack}}</p>    
     </div>
   </div>
 </template>
@@ -41,6 +43,11 @@ export default {
       profileEdit: '프로필 편집',
       follow: '팔로우',
       unfollow: '팔로우 취소',
+    }
+  },
+  props: {
+    userInfo: {
+      type: Object
     }
   }
 }
