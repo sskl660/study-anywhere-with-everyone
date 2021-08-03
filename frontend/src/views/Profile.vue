@@ -23,6 +23,7 @@ import ProfileInfo from '@/components/profile/ProfileInfo.vue'
 import ProfileTicket from '@/components/profile/ProfileTicket.vue'
 import ProfileEditModal from '@/components/profile/ProfileEditModal.vue'
 import './css/profile.css'
+// import axios from 'axios'
 
 export default {
   name: 'Profile',
@@ -35,7 +36,36 @@ export default {
   data: function(){
     return{
         profile_title: '땡땡땡의 프로필',
+        user_email: 'bbb@bbb.com',
+        user_info: {
+          user_term : 0, 
+          user_graduated : Boolean,
+          user_image : '',
+          user_git : String,
+          user_blog : String,
+          user_devstyle : String,
+          user_mbti : String,
+          user_wishfield : String,
+          user_introduce : String,
+          user_techstack : String,
+        }
     }
+  },
+  methods: {
+    getUserInfo: function () {
+      // axios({
+      // metthod: 'get',
+      // url: `http://localhost:8080/profile/info/${this.user_email}/`,
+      // })
+      //   .then((res) => {
+      //     console.log(res)
+      //     this.user_info = res.data
+      //   })
+    }
+
+  },
+  created: function () {
+    this.getUserInfo()
   }
 }
 </script>

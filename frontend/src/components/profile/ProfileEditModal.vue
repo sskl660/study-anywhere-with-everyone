@@ -76,6 +76,7 @@
 
 <script>
 import ProfileImage from "@/components/common/ProfileImage.vue"
+// import "@/css/profilemodal.css";
 
 export default {
   name: 'ProfileEditModal',
