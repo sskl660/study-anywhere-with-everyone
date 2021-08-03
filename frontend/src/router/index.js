@@ -6,6 +6,7 @@ import Challenges from '../views/Challenges.vue'
 import Profile from '../views/Profile.vue'
 import ChallengeRoom from '../components/ChallengeRoom.vue'
 import PostDetail from '../components/PostDetail.vue'
+import PostDetailAfter from '../components/PostDetailAfter.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/PostDetail',
     name: 'PostDetail',
     component: PostDetail
+  },
+  {
+    path: '/PostDetailAfter',
+    name: 'PostDetailAfter',
+    component: PostDetailAfter
   }
   // {
   //   path: '/about',
