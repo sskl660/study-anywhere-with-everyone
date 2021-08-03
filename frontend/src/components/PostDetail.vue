@@ -8,7 +8,7 @@
             <div class="d-flex justify-content-center">
                 <div class="left flex-item">
                     <div class="col Tleft flex-item">
-                        <h1>OOO의 과제2</h1>
+                        <h1>아이유의 과제2</h1>
                     </div>
                     <div class="col Dleft flex-item">
 
@@ -40,10 +40,23 @@
                         </div>
 
                     </div>
+
+                    <!-- <div class="like-box">
+                        <img class="like" src="../assets/grayheart.png" alt="likeU">
+                    </div> -->
                 </div>
 
                 <div class="right flex-item">
-
+                    <div id='infowriter'>
+                        <ProfileImage class="comment-img-box" />
+                        <h4 id="writername">5기 아이유</h4>
+                        <hr id="line">
+                    </div>
+                    <div>
+                        <textarea name="" id="comment" cols="40" rows="2"></textarea>
+                        <button>전송</button>
+                    </div>
+                    
                 </div>
             </div>
             
@@ -59,6 +72,7 @@
 <script>
 import "@/components/css/PostDetail.css"
 import ButtonSquare from '@/components/common/ButtonSquare.vue'
+import ProfileImage from "@/components/common/ProfileImage.vue"
 
 import Vue from 'vue';
 import CKEditor from '@ckeditor/ckeditor5-vue2';
@@ -80,6 +94,7 @@ export default {
     components: {
         // Title,          // 타이틀 가져오기
         ButtonSquare,    // 둥근 버튼 가져오기
+        ProfileImage,
     },
     data: function(){
         return{
@@ -98,6 +113,7 @@ export default {
             alert(message);
         },
 
+        // 여기서부터 사진 업로드
         onDrop (event) {
         this.inputImageFile(event.dataTransfer.files)
         },
@@ -150,12 +166,15 @@ export default {
 <style>
 /* CKEditor 는 vue 와 별개로 rendering 되어서 scope 를 넣으면 반영되지 않는다. */
 .ck-editor__editable {
-    min-height: 300px !important;
+    height: 380px !important;
 }
 
 .ck.ck-reset.ck-editor.ck-rounded-corners {
-    margin-top: 200px;
+    /* margin-top: 200px; */
     background-color: #e7eeff;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
 }
 
 .thumbnail-wrapper{
@@ -166,5 +185,13 @@ export default {
     width: 100px !important;
     margin-right: 5px;
     max-width: 100%;
+}
+
+.comment-img-box {
+  width: 75px;
+  height: 75px;
+  position: relative;
+  top: 17px;
+  left: -160px;
 }
 </style>
