@@ -1,8 +1,10 @@
 package com.example.ssaziptest.service;
 
+import com.example.ssaziptest.domain.feed.FeedEntity;
 import com.example.ssaziptest.domain.follow.FollowEntity;
 import com.example.ssaziptest.domain.follow.FollowRequest;
 import com.example.ssaziptest.domain.user.UserEntity;
+import com.example.ssaziptest.repository.FeedRepository;
 import com.example.ssaziptest.repository.FollowRepository;
 import com.example.ssaziptest.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -22,20 +24,45 @@ public class FollowService {
     private FollowRepository followRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private FeedRepository feedRepository;
 
     @Transactional
     public void followUser(FollowRequest request){
         UserEntity userEntity = userRepository.findById(request.getUserEmail()).orElse(null);
+        UserEntity followerEntity = userRepository.findById(request.getFollowFollower()).orElse(null);
         FollowEntity followEntity = FollowEntity.builder()
                 .followUserEntity(userEntity)
                 .followFollower(request.getFollowFollower())
                 .build();
         followRepository.save(followEntity);
-    }
+        userEntity.setUserFollower(userEntity.getUserFollower()+1);
+        followerEntity.setUserFollowing(followerEntity.getUserFollowing()+1);
+        userRepository.save(userEntity);
+        userRepository.save(followerEntity);
+
+        List<FollowEntity> followEntities = followRepository.findByFollowUserEntity_UserEmail(request.getFollowFollower());
+        //팔로워들한테 다 save
+        for(FollowEntity followEntity1: followEntities) {
+            FeedEntity feedEntity = FeedEntity.builder()
+                    .feedType(4)
+                    .feedOwner(followEntity1.getFollowFollower())
+                    .feedUserEntity(followerEntity)
+                    .feedInfo(request.getUserEmail())
+                    .build();
+            feedRepository.save(feedEntity);
+            }
+        }
     @Transactional
     public void unfollowUser(FollowRequest request){
         FollowEntity followEntity = followRepository.findByFollowUserEntity_UserEmailAndFollowFollower(request.getUserEmail(), request.getFollowFollower());
         followRepository.delete(followEntity);
+        UserEntity userEntity = userRepository.findById(request.getUserEmail()).orElse(null);
+        UserEntity followerEntity = userRepository.findById(request.getFollowFollower()).orElse(null);
+        userEntity.setUserFollower(userEntity.getUserFollower()-1);
+        followerEntity.setUserFollowing(followerEntity.getUserFollowing()-1);
+        userRepository.save(userEntity);
+        userRepository.save(followerEntity);
     }
     @Transactional
     public List<String[]> getFollowers(String userEmail){
