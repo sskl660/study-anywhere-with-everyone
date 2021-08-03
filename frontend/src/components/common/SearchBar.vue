@@ -6,7 +6,6 @@
         <img class="search-icon" src="../../assets/searchicon.png" alt="search-icon">
       </button>
     </div>
-    
   </div>
 </template>
 
