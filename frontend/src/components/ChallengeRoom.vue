@@ -219,5 +219,29 @@ export default {
 }
 </script>
 <style scoped>
-    
+    /* 가입하기 버튼 */
+.Cjoin_btn .btn-light {
+  color: #1f4256;
+  background-color: #99b7ff;
+  border-color: #99b7ff;
+  font-size: 25px;
+  font-weight: bold;
+  width: 171px;
+  height: 54px;
+  margin-right: 69%;
+  margin-bottom: 5px;
+}
+
+/* 가입완료 버튼 */
+.Cjoindone_btn .btn-light {
+  color: #1f4256;
+  background-color: #f9d479;
+  border-color: #f9d479;
+  font-size: 25px;
+  font-weight: bold;
+  width: 171px;
+  height: 54px;
+  margin-right: 69%;
+  margin-bottom: 5px;
+}
 </style>

@@ -44,7 +44,7 @@
 .left {
   /* flex: 0 0 25%; */
   /* max-width: 100%; */
-  margin-top: 30px;
+  margin-top: 45px;
   width: 45%;
   height: 680px;
   border-radius: 33px;
@@ -54,7 +54,7 @@
 .right {
   /* flex: 0 0 25%; */
   /* max-width: 100%; */
-  margin-top: 30px;
+  margin-top: 45px;
   width: 40%;
   height: 680px;
   border-radius: 33px;

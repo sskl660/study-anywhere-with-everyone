@@ -60,9 +60,13 @@
                 </div>
             </div>
             
-            
-            <div class="Pjoin_btn"><ButtonSquare :text="생성" @click="sendPost"/></div>
-            <div class="Pcancel_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="취소"/></router-link></div>
+            <div class="btn-footer">
+                <router-link to="/ChallengeRoom"><button type="button" class="btn btn-danger Pcancel_btn">취소</button></router-link>&nbsp;
+                <button type="button" class="btn btn-primary Pjoin_btn" @click="sendPost">생성</button>
+            </div>
+
+            <!-- <div class="Pjoin_btn"><ButtonSquare :text="생성" @click="sendPost"/></div>
+            <div class="Pcancel_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="취소"/></router-link></div> -->
             <!-- <div class="Pback_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="뒤로"/></router-link></div> -->
             
         </div>
@@ -71,7 +75,7 @@
 
 <script>
 import "@/components/css/PostDetail.css"
-import ButtonSquare from '@/components/common/ButtonSquare.vue'
+// import ButtonSquare from '@/components/common/ButtonSquare.vue'
 import ProfileImage from "@/components/common/ProfileImage.vue"
 
 import Vue from 'vue';
@@ -93,14 +97,14 @@ export default {
     name: 'PostDetail',
     components: {
         // Title,          // 타이틀 가져오기
-        ButtonSquare,    // 둥근 버튼 가져오기
+        // ButtonSquare,    // 둥근 버튼 가져오기
         ProfileImage,
     },
     data: function(){
         return{
             // 버튼에 들어갈 문구들
-            생성: '생성',
-            취소: '취소',
+            // 생성: '생성',
+            // 취소: '취소',
             뒤로: '돌아가기',
             CKEditor : '',
             filename: '',
@@ -194,4 +198,11 @@ export default {
   top: 17px;
   left: -160px;
 }
+.btn-footer {
+    display: flex;
+    justify-content: right;
+    padding-top: 2px;
+    border-style: none;
+    margin-left: 930px;
+  }
 </style>
