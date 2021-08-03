@@ -1,10 +1,10 @@
 <template>
   <div>
-    <button type="button" class="btn btn-primary logout-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary logout-btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
       <i class="fas fa-sign-out-alt fa-2x"></i>
     </button>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content logout-content">
           <div class="modal-body">

@@ -44,6 +44,20 @@ export default {
 </script>
 
 <style scoped>
+  @font-face {
+      font-family: 'KyoboHand';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+  }
+
+  h1 {
+    font-family: 'KyoboHand';
+  }
+
+
+
+
   /* 로그인과 회원가입 버튼을 감싸는 부분 */
   .menu {
     padding-right: 0px;
