@@ -1,13 +1,23 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Welcome</router-link>
-    </div>
+    <Header/>
     <div class="contrainer">
       <router-view />
     </div>
   </div>
 </template>
+
+<script>
+import Header from '@/components/common/Header.vue'
+
+export default {
+  name: 'app',
+  components: {
+    Header,
+  }
+}
+</script>
+
 
 <style>
 #app {
@@ -31,3 +41,4 @@
   color: #42b983;
 }
 </style>
+

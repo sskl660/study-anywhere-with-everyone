@@ -1,0 +1,21 @@
+/* png 타이틀 이미지 크기 */
+.title {
+  width: 45%;
+  top: 10%;
+}
+/* 이미지를 뒤에 깔아주기 */
+.png {
+  position: relative;
+  top: 40px;
+}
+/* 이미지 위에 올라갈 내용을 고정해주기 */
+.png .png-content {
+  position: absolute;
+  top: 25%;
+}
+/* 타이틀 텍스트 조정 */
+.title-text {
+  font-size: 30px;
+  font-weight: bold;
+  color: #420909;
+}

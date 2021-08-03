@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Welcome from '../views/Welcome.vue'
+import Join from '../views/Join.vue'
+import Challenges from '../views/Challenges.vue'
+import Profile from '../views/Profile.vue'
+import ChallengeRoom from '../components/ChallengeRoom.vue'
+import PostDetail from '../components/PostDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -10,6 +15,31 @@ const routes = [
     name: 'Welcome',
     component: Welcome
   },
+  {
+    path: '/join',
+    name: 'Join',
+    component: Join
+  },
+  {
+    path:'/challenges',
+    name: 'Challenges',
+    component: Challenges
+  },
+  {
+    path:'/profile',
+    name: 'Profile',
+    component: Profile
+  },
+  {  
+    path: '/challengeRoom',
+    name: 'ChallengeRoom',
+    component: ChallengeRoom
+  },
+  {
+    path: '/PostDetail',
+    name: 'PostDetail',
+    component: PostDetail
+  }
   // {
   //   path: '/about',
   //   name: 'About',

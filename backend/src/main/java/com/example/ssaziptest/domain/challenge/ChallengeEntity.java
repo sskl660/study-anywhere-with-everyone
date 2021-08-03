@@ -1,12 +1,15 @@
 package com.example.ssaziptest.domain.challenge;
 
-import lombok.AllArgsConstructor;
+import com.example.ssaziptest.domain.group.GroupmemberEntity;
+import com.example.ssaziptest.domain.task.TaskEntity;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -35,8 +38,18 @@ public class ChallengeEntity {
     @Column(name = "challenge_task_cnt")
     private int challengeTaskCnt;
 
+    //task생성할때 task 갯수 뿐 아니라 각각의 마감 기한이 여기서 필요할거같은데...?
+    @ElementCollection
+    @Column(name = "challenge_taskdeadlines")
+    private List<String> challengeTaskdeadlines;
+
+    @OneToMany(mappedBy = "groupChallengeEntity")
+    List<GroupmemberEntity> members = new ArrayList<>();
+    @OneToMany(mappedBy = "taskChallengeEntity")
+    List<TaskEntity> tasks = new ArrayList<>();
+
     @Builder
-    public ChallengeEntity(int challengeNo, String challengeName, String challengeCategory, int challengeLevel, int challengeCapacity, String challengeStartdate, String challengeEnddate, String challengeDesc, int challengeTaskCnt) {
+    public ChallengeEntity(int challengeNo, String challengeName, String challengeCategory, int challengeLevel, int challengeCapacity, String challengeStartdate, String challengeEnddate, String challengeDesc, int challengeTaskCnt, List<String> challengeTaskdeadlines, List<GroupmemberEntity> members, List<TaskEntity> tasks) {
         this.challengeNo = challengeNo;
         this.challengeName = challengeName;
         this.challengeCategory = challengeCategory;
@@ -46,5 +59,8 @@ public class ChallengeEntity {
         this.challengeEnddate = challengeEnddate;
         this.challengeDesc = challengeDesc;
         this.challengeTaskCnt = challengeTaskCnt;
+        this.challengeTaskdeadlines = challengeTaskdeadlines;
+        this.members = members;
+        this.tasks = tasks;
     }
 }
