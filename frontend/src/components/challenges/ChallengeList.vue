@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import ChallengeListItem from '@/components/ChallengeListItem'
-import "@/components/css/challengelist.css";
+import ChallengeListItem from '@/components/challenges/ChallengeListItem'
+import "@/components/css/challenges/challengelist.css";
 
 export default {
   name: 'ChallengeList',

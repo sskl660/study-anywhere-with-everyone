@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import "@/components/css/challengelistitem.css";
+import "@/components/css/challenges/challengelistitem.css";
 
 export default {
   name: 'ChallengeListItem',

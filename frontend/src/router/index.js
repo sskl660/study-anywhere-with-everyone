@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Welcome from '../views/Welcome.vue'
+import Join from '../views/Join.vue'
 import Challenges from '../views/Challenges.vue'
 import Profile from '../views/Profile.vue'
 import ChallengeRoom from '../components/ChallengeRoom.vue'
@@ -13,6 +14,11 @@ const routes = [
     path: '/',
     name: 'Welcome',
     component: Welcome
+  },
+  {
+    path: '/join',
+    name: 'Join',
+    component: Join
   },
   {
     path:'/challenges',

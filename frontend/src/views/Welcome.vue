@@ -19,7 +19,9 @@
         <!-- 로그인, 회원가입 버튼 -->
         <div class="d-flex menu">
           <div class="login-btn"><LoginModal text="Login"/></div>
-          <div class="join-btn"><ButtonRound text="Join"/></div>
+          <div class="join-btn">
+            <router-link to="/join"><ButtonRound text="Join"/></router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -29,7 +31,7 @@
 
 <script>
 import ButtonRound from '@/components/common/ButtonRound'
-import LoginModal from '@/components/LoginModal'
+import LoginModal from '@/components/modals/LoginModal'
 import "@/views/css/welcome.css";
 
 export default {
