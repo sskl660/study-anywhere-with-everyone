@@ -22,15 +22,15 @@ public class ChallengeDetailResponse {
     private List<String> challengeTaskdeadlines;
     private List<String[]> challengeGroup;
 
-    public ChallengeEntity toEntity(){
-        ChallengeEntity challengeEntity = ChallengeEntity.builder()
-                .challengeNo(challengeNo)
-                .challengeName(challengeName).challengeCategory(challengeCategory)
-                .challengeLevel(challengeLevel).challengeCapacity(challengeCapacity).challengeStartdate(challengeStartdate)
-                .challengeEnddate(challengeEnddate).challengeDesc(challengeDesc).challengeTaskCnt(challengeTaskCnt)
-                .challengeTaskdeadlines(challengeTaskdeadlines).build();
-        return challengeEntity;
-    }
+//    public ChallengeEntity toEntity(){
+//        ChallengeEntity challengeEntity = ChallengeEntity.builder()
+//                .challengeNo(challengeNo)
+//                .challengeName(challengeName).challengeCategory(challengeCategory)
+//                .challengeLevel(challengeLevel).challengeCapacity(challengeCapacity).challengeStartdate(challengeStartdate)
+//                .challengeEnddate(challengeEnddate).challengeDesc(challengeDesc).challengeTaskCnt(challengeTaskCnt)
+//                .challengeTaskdeadlines(challengeTaskdeadlines).build();
+//        return challengeEntity;
+//    }
 
     @Builder
 
