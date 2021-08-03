@@ -34,6 +34,11 @@
   background-color: #ffffff;
   margin-right: 50px;
   box-shadow: 8px 8px 8px #4c67aa;
+  overflow: scroll;
+}
+
+.Dleft::-webkit-scrollbar {
+  display: none;
 }
 
 .left {
@@ -116,3 +121,53 @@
   background-color: #e7eeff;
   margin-top: 200px;
 }
+
+#uploadimg {
+  width: 100%;
+  padding: 2rem;
+  height: auto;
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-image {
+  padding-top: 1rem;
+  width: 200px;
+  height: 200px;
+}
+
+img {
+  width: 207%;
+  height: 100%;
+}
+
+#writername {
+  position: relative;
+  top: -35px;
+  left: -50px;
+}
+
+#line {
+  width: 95%;
+  margin-top: -10px;
+  border: 1px solid #3e5ba3;
+  margin-left: 10px;
+}
+
+#comment {
+  resize: none;
+}
+/* .like-box {
+  position: absolute;
+  margin-top: -60px;
+  margin-left: 2%;
+  width: 50px;
+  height: 50px;
+}
+
+.like {
+  width: 90%;
+  height: 80%;
+} */

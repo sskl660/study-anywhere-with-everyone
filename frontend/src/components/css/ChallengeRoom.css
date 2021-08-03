@@ -193,21 +193,3 @@
 .Cdetail::-webkit-scrollbar {
   display: none;
 }
-
-#uploadimg {
-  width: 50%;
-  padding: 2rem;
-
-  .file-input {
-    display: none;
-  }
-  .upload-image {
-    padding-top: 1rem;
-    width: 200px;
-    height: 200px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
