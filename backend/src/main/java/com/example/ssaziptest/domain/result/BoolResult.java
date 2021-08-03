@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class BoolResult {
     private String name;
     private boolean result = false;
-    private String state = "state";
+    private String state = "this is token place";
 }

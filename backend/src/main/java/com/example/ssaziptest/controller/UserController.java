@@ -38,7 +38,7 @@ public class UserController {
         UserEntity userEntity = userService.login(request.getUserEmail(), request.getUserPassword());
         BoolResult br = new BoolResult();
         br.setName("login");
-        br.setState("succ");
+        br.setState("this istooooooken");
         if(userEntity != null) br.setResult(true);
         return new ResponseEntity<>(br, HttpStatus.OK);
     }
