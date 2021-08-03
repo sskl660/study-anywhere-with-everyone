@@ -5,6 +5,8 @@ MAINTAINER Taehyun Kim <sskl600@naver.com>
 # Avoiding user interaction with tzdata
 ENV DEBIAN_FRONTEND=noninteractive
 
+# RUN npm install -g http-server
+
 # WORKDIR /app
 WORKDIR /usr/src/app
 COPY package*.json ./

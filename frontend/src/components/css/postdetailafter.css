@@ -71,46 +71,38 @@
   font-weight: bold !important;
 }
 
-.Pjoin_btn .btn-secondary {
-  color: #ffffff;
-  background-color: #4c67aa;
-  border-color: #4c67aa;
-  margin-left: 85%;
-  margin-top: 5px;
-}
-
-.Pcancel_btn .btn-secondary {
+.Pdelete_btn .btn-secondary {
   color: #ffffff;
   background-color: #f53535;
   border-color: #f53535;
-  margin-left: 73%;
+  margin-left: 855px;
   margin-top: -63px;
+  width: 400px;
 }
 
-.Pback_btn .btn-secondary {
+button.btn.btn-danger.Pdelete_btn {
+  width: 60px;
+  margin-left: 89%;
+}
+
+.Pback_btn .btn-light {
   color: #ffffff;
   background-color: #f1c069;
   border-color: #f1c069;
   margin-right: 80%;
-  margin-top: -111px;
+  margin-top: -67px;
 }
 
-.Pjoin_btn .btn-secondary:hover {
-  color: #ffffff;
-  background-color: #3e5ba3;
-  border-color: #3e5ba3;
-}
-
-.Pcancel_btn .btn-secondary:hover {
+.Pdelete_btn .btn-secondary:hover {
   color: #ffffff;
   background-color: #ec2626;
   border-color: #ec2626;
 }
 
-.Pback_btn .btn-secondary:hover {
+.Pback_btn .btn-light:hover {
   color: #ffffff;
-  background-color: #f59c35;
-  border-color: #f59c35;
+  background-color: #f0b756;
+  border-color: #f0b756;
 }
 
 .writepost {
@@ -126,7 +118,6 @@
   width: 100%;
   padding: 2rem;
   height: auto;
-  margin-top: -10px;
 }
 
 .file-input {
@@ -160,7 +151,7 @@ img {
 #comment {
   resize: none;
 }
-/* .like-box {
+.like-box {
   position: absolute;
   margin-top: -60px;
   margin-left: 2%;
@@ -171,4 +162,4 @@ img {
 .like {
   width: 90%;
   height: 80%;
-} */
+}
