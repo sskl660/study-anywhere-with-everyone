@@ -331,3 +331,16 @@ git push
 git pull
 git commit -am "update CORS"
 git push
+cd ~
+git pull
+git status
+git add .
+git commit -am "update properties"
+git push
+git pull
+git commit -am "update properties"
+git push
+git pull
+git add .
+git commit -am "update properties"
+git push
