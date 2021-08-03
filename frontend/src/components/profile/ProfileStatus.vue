@@ -3,15 +3,15 @@
     <div class="profile-status d-flex justify-content-between" style="display:inline-block">
       <div class="profile-status-info d-flex justify-content-between" style="display:inline-block">
         <div >challenge 
-          <div style="font-weight:bold">0</div>
+          <div style="font-weight:bold">{{userInfo.userTotalcomplete}}</div>
         </div>
         <div>
           follower
-          <div style="font-weight:bold">0</div>
+          <div style="font-weight:bold">{{userInfo.userFollower}}</div>
         </div>
         <div>
           following
-          <div style="font-weight:bold">0</div>
+          <div style="font-weight:bold">{{userInfo.userFollowing}}</div>
         </div>
       </div>
 
@@ -22,7 +22,12 @@
 
 <script>
 export default {
-
+  name: 'ProfileStatus',
+  props: {
+    userInfo: {
+      type: Object
+    }
+  }
 }
 </script>
 
