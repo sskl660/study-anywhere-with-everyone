@@ -7,6 +7,6 @@ RUN ./gradlew clean
 RUN ./gradlew build
 
 FROM adoptopenjdk/openjdk11:ubi
-COPY --from=builder build/libs/*.jar app.jar
+COPY --from=builder build/libs/*.jar/ app.jar
 #COPY ./build/libs/*.jar /usr/src/app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
