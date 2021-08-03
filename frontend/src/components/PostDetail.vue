@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import "@/components/css/postdetail.css"
+import "@/components/css/PostDetail.css"
 // import ButtonSquare from '@/components/common/ButtonSquare.vue'
 import ProfileImage from "@/components/common/ProfileImage.vue"
 // import CommentBox from "@/components/challengeroom/CommentBox.vue"
