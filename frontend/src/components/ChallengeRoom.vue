@@ -127,7 +127,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
+                                <td><router-link to="/PostDetailAfter">제출후</router-link></td>
                                 <td><router-link to="/PostDetail">과제</router-link></td>
                                 </tr>
                             </tbody>
@@ -170,7 +170,7 @@ import Title from '@/components/common/Title.vue'
 import ButtonRound from '@/components/common/ButtonRound.vue'
 // import Difficulty from '@/components/common/Difficulty'
 // import PostDetailModal from '@/components/PostDetailModal'
-import "@/components/css/ChallengeRoom.css"
+import "@/components/css/challengeroom.css"
 
 // import InsertModal from '@/components/modals/InsertModal.vue'
 // import DetailModal from '@/components/modals/DetailModal.vue';
@@ -219,5 +219,29 @@ export default {
 }
 </script>
 <style scoped>
-    
+    /* 가입하기 버튼 */
+.Cjoin_btn .btn-light {
+  color: #1f4256;
+  background-color: #99b7ff;
+  border-color: #99b7ff;
+  font-size: 25px;
+  font-weight: bold;
+  width: 171px;
+  height: 54px;
+  margin-right: 69%;
+  margin-bottom: 5px;
+}
+
+/* 가입완료 버튼 */
+.Cjoindone_btn .btn-light {
+  color: #1f4256;
+  background-color: #f9d479;
+  border-color: #f9d479;
+  font-size: 25px;
+  font-weight: bold;
+  width: 171px;
+  height: 54px;
+  margin-right: 69%;
+  margin-bottom: 5px;
+}
 </style>
