@@ -170,7 +170,7 @@ import Title from '@/components/common/Title.vue'
 import ButtonRound from '@/components/common/ButtonRound.vue'
 // import Difficulty from '@/components/common/Difficulty'
 // import PostDetailModal from '@/components/PostDetailModal'
-import "@/components/css/challengeroom.css"
+import "@/components/css/ChallengeRoom.css"
 
 // import InsertModal from '@/components/modals/InsertModal.vue'
 // import DetailModal from '@/components/modals/DetailModal.vue';
