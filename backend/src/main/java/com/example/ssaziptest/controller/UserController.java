@@ -1,5 +1,6 @@
 package com.example.ssaziptest.controller;
 
+import com.example.ssaziptest.common.util.JwtTokenUtil;
 import com.example.ssaziptest.domain.follow.FollowRequest;
 import com.example.ssaziptest.domain.result.BoolResult;
 import com.example.ssaziptest.domain.task.TaskTicketResponse;
@@ -34,13 +35,15 @@ public class UserController {
     }
     /*로그인*/
     @PostMapping(value = "login")
-    public ResponseEntity<BoolResult> login(@RequestBody LoginRequest request) throws Exception{
+    //public ResponseEntity<BoolResult> login(@RequestBody LoginRequest request) throws Exception{
+    public ResponseEntity<UserLoginPostResponse> login(@RequestBody LoginRequest request) throws Exception{
         UserEntity userEntity = userService.login(request.getUserEmail(), request.getUserPassword());
-        BoolResult br = new BoolResult();
-        br.setName("login");
-        br.setState("this istooooooken");
-        if(userEntity != null) br.setResult(true);
-        return new ResponseEntity<>(br, HttpStatus.OK);
+//        BoolResult br = new BoolResult();
+//        br.setName("login");
+//        br.setState("this istooooooken");
+        //if(userEntity != null) br.setResult(true);
+        if(userEntity == null)  return ResponseEntity.status(401).body(UserLoginPostResponse.of(401, "Invalid Password", null));
+        return ResponseEntity.ok(UserLoginPostResponse.of(200, "Success", JwtTokenUtil.getToken(request.getUserEmail())));
     }
     /*회원 정보 요청*/
     @GetMapping(value = "profile/info/{useremail}")

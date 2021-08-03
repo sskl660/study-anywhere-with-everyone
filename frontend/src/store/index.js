@@ -62,7 +62,7 @@ export default new Vuex.Store({
       })
         .then(res => {
           console.log(credentials)
-          commit('LOGIN', res.data.state)
+          commit('LOGIN', res.data.accessToken)
         })
         .catch(err => {
         console.log(err)
