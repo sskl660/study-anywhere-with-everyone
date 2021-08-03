@@ -14,7 +14,7 @@
         <!-- user가 누군지에 따라서 프로필편집, 팔로우, 팔로우 취소로 보이게 하기 -->
         <!-- <button type="button" class="btn profile-edit-btn">프로필편집</button> -->
         <!-- Button trigger modal -->
-        <button type="button" class="btn profile-edit-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn profile-edit-btn" data-bs-toggle="modal" data-bs-target="#profileEditModal">
           프로필편집
         </button>
       </p>

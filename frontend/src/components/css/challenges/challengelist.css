@@ -1,0 +1,25 @@
+.challenge-title-container {
+  background-color:rgba(255,255,255, 0.2);
+  margin-top: 100px;
+  width: 450px;
+  height: 130px;
+  border-radius: 3rem 3rem 0rem 0rem;
+  padding-top: 40px;
+}
+
+.challenge-title {
+  font-size: 35px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  width: 100% !important;
+}
+
+.challenge-list-container {
+  background-color:rgba(255,255,255, 0.2);
+  margin-bottom: 100px;
+  width: 450px;
+  height: 1000px;
+  overflow-y: scroll;
+  border-radius: 0rem 0rem 3rem 3rem;
+}
