@@ -4,16 +4,15 @@ import com.example.ssaziptest.domain.challenge.ChallengeCreateRequest;
 import com.example.ssaziptest.domain.challenge.ChallengeDetailResponse;
 import com.example.ssaziptest.domain.challenge.ChallengeEntity;
 import com.example.ssaziptest.domain.challenge.ChallengeListResponse;
+import com.example.ssaziptest.domain.feed.FeedEntity;
+import com.example.ssaziptest.domain.follow.FollowEntity;
 import com.example.ssaziptest.domain.group.GroupMemberRequest;
 import com.example.ssaziptest.domain.group.GroupmemberEntity;
 import com.example.ssaziptest.domain.task.BulletJournalResponse;
 import com.example.ssaziptest.domain.task.TaskDetailResponse;
 import com.example.ssaziptest.domain.task.TaskEntity;
 import com.example.ssaziptest.domain.user.UserEntity;
-import com.example.ssaziptest.repository.ChallengeRepository;
-import com.example.ssaziptest.repository.GroupmemberRepository;
-import com.example.ssaziptest.repository.TaskRepository;
-import com.example.ssaziptest.repository.UserRepository;
+import com.example.ssaziptest.repository.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +36,10 @@ public class ChallengeService {
     private GroupmemberRepository groupmemberRepository;
     @Autowired
     private TaskRepository taskRepository;
+    @Autowired
+    private FollowRepository followRepository;
+    @Autowired
+    private FeedRepository feedRepository;
 
     @Transactional
     public int createChallenge(ChallengeCreateRequest request) {
@@ -107,6 +110,18 @@ public class ChallengeService {
         request.setGroupUsername(userEntity.getUserName());
 
         groupmemberRepository.save(request.toEntity());
+
+        List<FollowEntity> followEntities = followRepository.findByFollowUserEntity_UserEmail(userEmail);
+        //팔로워들한테 다 save
+        for(FollowEntity followEntity: followEntities){
+            FeedEntity feedEntity = FeedEntity.builder()
+                    .feedType(1)
+                    .feedOwner(followEntity.getFollowFollower())
+                    .feedUserEntity(userEntity)
+                    .feedInfo(Integer.toString(challengeNo))
+                    .build();
+            feedRepository.save(feedEntity);
+        }
     }
 
     @Transactional
