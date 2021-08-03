@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '@/router'
 
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -17,9 +18,9 @@ export default new Vuex.Store({
   actions: {
     //회원가입 1
     join: function ({ commit }, credentials) {
-      console.log("actc??")
+
       axios({
-        method: 'post',
+        method:'post',
         url: '/signup',
         data: credentials
       })
