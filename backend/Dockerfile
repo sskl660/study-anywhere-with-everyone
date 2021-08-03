@@ -7,5 +7,3 @@ RUN ./gradlew clean
 RUN ./gradlew build
 COPY ./build/libs/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
-
-
