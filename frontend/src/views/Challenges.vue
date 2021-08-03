@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import SearchBar from '@/components/SearchBar'
-import ChallengeList from '@/components/ChallengeList'
+import SearchBar from '@/components/common/SearchBar'
+import ChallengeList from '@/components/challenges/ChallengeList'
 import "@/views/css/challenges.css";
 
 export default {

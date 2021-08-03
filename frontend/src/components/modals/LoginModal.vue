@@ -59,7 +59,7 @@ export default {
   }
 
   /* 로그인 버튼 색 변경 방지 */
-  .login-btn[data-v-f7af2618]:hover {
+  .login-btn:hover {
     color: #1C84C4;
     background-color: #FFFFFF;
     border-color: #FFFFFF;
