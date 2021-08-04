@@ -30,11 +30,15 @@ public class GroupmemberEntity {
     @JoinColumn(name = "fk_challenge_group_no")
     private ChallengeEntity groupChallengeEntity;
 
+    @Column(name = "group_iscomplete")
+    private Boolean groupIscomplete;
+
     @Builder
-    public GroupmemberEntity(int groupNo, String groupUsername, UserEntity userEntity, ChallengeEntity challengeEntity) {
+    public GroupmemberEntity(int groupNo, String groupUsername, UserEntity groupUserEntity, ChallengeEntity groupChallengeEntity, Boolean groupIscomplete) {
         this.groupNo = groupNo;
         this.groupUsername = groupUsername;
-        this.groupUserEntity = userEntity;
-        this.groupChallengeEntity = challengeEntity;
+        this.groupUserEntity = groupUserEntity;
+        this.groupChallengeEntity = groupChallengeEntity;
+        this.groupIscomplete = groupIscomplete;
     }
 }
