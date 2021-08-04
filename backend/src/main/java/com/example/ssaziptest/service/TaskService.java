@@ -115,6 +115,7 @@ public class TaskService {
                         UserEntity userEntity = userRepository.getById(groupmemberEntity.getGroupUserEntity().getUserEmail());
                         Integer temp = userEntity.getUserTotalcomplete();
                         userEntity.setUserTotalcomplete(temp+1);
+                        userEntity.setUserWeekcomplete(userEntity.getUserWeekcomplete()+1);
                         userRepository.save(userEntity);
 
                         List<FollowEntity> followEntities = followRepository.findByFollowUserEntity_UserEmail(userEntity.getUserEmail());
