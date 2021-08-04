@@ -1,6 +1,7 @@
 package com.example.ssaziptest.domain.task;
 
 import com.example.ssaziptest.domain.challenge.ChallengeEntity;
+import com.example.ssaziptest.domain.comment.CommentEntity;
 import com.example.ssaziptest.domain.user.UserEntity;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -40,6 +43,9 @@ public class TaskEntity {
     private String taskFile;
 //    @Column(name = "task_deadline")
 //    private String taskDeadline;
+
+    @OneToMany(mappedBy = "commentTaskEntity")
+    List<CommentEntity> commentEntities = new ArrayList<>();
 
     @Builder
     public TaskEntity(int taskNo, UserEntity taskUserEntity, ChallengeEntity taskChallengeEntity, int taskIndex, String taskContent, String taskDesc, String taskImage, String taskFile) {
