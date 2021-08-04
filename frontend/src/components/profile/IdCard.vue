@@ -1,17 +1,19 @@
 <template>
   <div class="idcard" style="d-flex justify-content-center display: inline-block;">
+    <!-- 프로필카드 좌측 컨테이너 -->
     <div class="idcard-left" style="display: inline-block;">
+      <!-- 프로필카드 이미지 -->
       <ProfileImage class="profile-img-box" />
+      <!-- 깃헙 아이콘. 블로그 아이콘 클릭시 해당 링크로 이동 -->
       <p>
-        <i class="fa fa-git-square fa-2x" style="color:black" type="button"></i>
-        <i class="fab fa-blogger fa-2x ms-5" style="color:orange" type="button"></i>
+        <a :href="userInfo.userGit"><i class="fa fa-git-square fa-2x" style="color:black" type="button"></i></a>
+        <a :href="userInfo.userBlog"><i class="fab fa-blogger fa-2x ms-5" style="color:orange" type="button"></i></a>
       </p>
     </div>
-
+  <!-- 프로필카드 우측 컨테이너  -->
     <div class="card-intro" style="display: inline-block;">
       <p style="font-size:25px">
-        <!-- <p >{{ userTerm }}기 {{userName}}</p> -->
-        <!-- pp{{user_info.userTerm}}기 {{user_info.userName}} -->
+        <!-- 몇기 이름 -->
         {{userInfo.userTerm}}기 {{userInfo.userName}}
         <!-- user가 누군지에 따라서 프로필편집, 팔로우, 팔로우 취소로 보이게 하기 -->
         <!-- <button type="button" class="btn profile-edit-btn">프로필편집</button> -->
@@ -20,10 +22,21 @@
           프로필편집
         </button>
       </p>
-      <p>{{userInfo.userMbti}}</p>
-      <p>{{userInfo.userDevstyle}}</p>
-      <p>{{userInfo.userWishfield}}</p>
-      <p>{{userInfo.userTechstack}}</p>    
+      <!-- 유저 부가정보 항목-->
+      <div align="right" style="display: inline-block;">
+        <p style="color: #1F4256">MBTI</p>
+        <p style="color: #1F4256">개발 스타일</p>
+        <p style="color: #1F4256">관심분야</p>
+        <p style="color: #1F4256">기술스택</p>  
+      </div>
+      <!-- 유저정보 -->
+      <div align="left" style="display: inline-block; margin-left:30px;">
+        <p>{{userInfo.userMbti}}</p>
+        <p>{{userInfo.userDevstyle}}</p>
+        <p>{{userInfo.userWishfield}}</p>
+        <p>{{userInfo.userTechstack}}</p>  
+      </div>
+ 
     </div>
   </div>
 </template>
