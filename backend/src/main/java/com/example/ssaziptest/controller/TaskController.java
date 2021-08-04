@@ -1,5 +1,6 @@
 package com.example.ssaziptest.controller;
 
+import com.example.ssaziptest.domain.task.LikeRequest;
 import com.example.ssaziptest.domain.task.TaskSubmitRequest;
 import com.example.ssaziptest.domain.task.TaskUpdateRequest;
 import com.example.ssaziptest.service.TaskService;
@@ -28,5 +29,14 @@ public class TaskController {
     @DeleteMapping(value = "/{taskno}")
     public void deleteTask(@PathVariable("taskno") int taskno){
         taskService.deleteTask(taskno);
+    }
+
+    @PostMapping(value = "/like")
+    public void like(@RequestBody LikeRequest request){
+        taskService.like(request);
+    }
+    @DeleteMapping(value = "/unlike")
+    public void unlike(@RequestBody LikeRequest request){
+        taskService.unlike(request);
     }
 }
