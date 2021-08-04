@@ -1,4 +1,4 @@
-package com.example.ssaziptest;
+package com.example.ssaziptest.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -10,7 +10,6 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://13.125.119.76:3000", "http://localhost:3000")
-                //.allowedOrigins("http://localhost:3000")
                 .allowCredentials(true);
     }
 }

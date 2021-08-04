@@ -52,6 +52,6 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("SSAZIP API")
-                .description("SSAZIPAPI").build();
+                .description("STUDY ANYWHERE WITH EVERYONE").build();
     }
 }
