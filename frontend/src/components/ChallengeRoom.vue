@@ -1,14 +1,11 @@
 <template>
     <div class="flex_container" id="total">
+        <!-- <Title :text="chall_info.challengeName" /> -->
         <div class="stars-box">
             <img class="stars" src="../assets/manystar.png" alt="manystar" />
         </div>
         <div class="challengetitle">
-<<<<<<< HEAD
-            <div class="Ctitle"><Title :text="챌린지" /></div>
-=======
-            <div class="Ctitle"><Title :text="chall_info.challengeName"/></div>
->>>>>>> 6dbc95e60256e3c4fc9fe19231405118d9c1639b
+            <div class="Ctitle"><Title v-bind:text="chall_info.challengeName" /></div>
         </div>
 
         <div class="d-flex row wider justify-content-center" id="body">
@@ -16,10 +13,10 @@
                 <li class="changebtn" v-if="!beforejoin">
                     <div class="Cjoin_btn"><ButtonRound :text="가입하기" /></div>
                     <div class="alarm">
-                        <h5>가입 마감까지 20 : 56</h5>
+                        <h5 id="rest">{{ restTime }}</h5>
                     </div>
                 </li>
-                <li class="changebtn" v-else-if="afterjoin">
+                <!-- <li class="changebtn" v-   -if="afterjoin">
                     <div class="Cjoindone_btn"><ButtonRound :text="가입완료" /></div>
                     <div class="alarm">
                         <h5>진행 중</h5>
@@ -30,7 +27,7 @@
                     <div class="alarm">
                         <h5 style="color: #EE4748">종료</h5>
                     </div>
-                </li>
+                </li> -->
                 <!-- <div class="alarm">
                     <h4> 가입 마감까지 20 : 56 </h4>
                 </div> -->
@@ -133,45 +130,38 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-<<<<<<< HEAD
                                     <th scope="row" style="background-color: #b7beda">김싸피</th>
                                     <td></td>
                                     <td></td>
+                                    <td>
+                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
+                                    </td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
+                                    </td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <th scope="row" style="background-color: #b7beda">김싸피</th>
+                                    <td>
+                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
+                                    </td>
+                                    <td>
+                                        <router-link to="/PostDetail"><div class="before"/></router-link>
+                                    </td>
+                                    <td>
+                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
+                                    </td>
+                                    <td><div class="fail"></div></td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><button class="check"></button></td>
-                                    <td><router-link to="/PostDetailAfter">제출후</router-link></td>
-                                    <td><router-link to="/PostDetail">과제</router-link></td>
-=======
-                                <th scope="row" style="background-color: #b7beda">김싸피</th>
-                                <td></td>
-                                <td></td>
-                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
-                                <td></td>
-                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
-                                <td></td>
-                                <td></td>
-                                </tr>
-                                <tr>
-                                <th scope="row" style="background-color: #b7beda">김싸피</th>
-                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
-                                <td><router-link to="/PostDetail"><div class="before"/></router-link></td>
-                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
-                                <td><div class="fail"></div></td>
-                                <td></td>
-                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
-                                <td><router-link to="/PostDetail"><div class="before"/></router-link></td>
->>>>>>> 6dbc95e60256e3c4fc9fe19231405118d9c1639b
+                                    <td>
+                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
+                                    </td>
+                                    <td>
+                                        <router-link to="/PostDetail"><div class="before"/></router-link>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -185,7 +175,6 @@
                         <br />
                         저희 스터디는 1일 1알고리즘으로 네카라쿠배를 갈 사람들 입니다!<br />
                         일주일동안 백준 총 7문제를 풀 것입니다.<br />
-
                         과제 1 : BJ 3049<br />
                         과제 2 : BJ 8490<br />
                         과제 3 : BJ 908<br />
@@ -193,7 +182,6 @@
                         과제 5 : BJ 9830<br />
                         과제 6 : BJ 1394<br />
                         과제 7 : BJ 9033<br />
-
                         <br />
                         <strong>참여멤버 : @권희은 @김준형 @김태현 @이장섭 @유희원 @차은채</strong>
                     </div>
@@ -203,8 +191,8 @@
                 </div>
             </div>
         </div>
-        <insert-modal v-on:call-parent-insert="closeAfterInsert"></insert-modal>
-        <detail-modal v-on:call-parent-change-to-delete="changeToDelete"></detail-modal>
+        <!-- <insert-modal v-on:call-parent-insert="closeAfterInsert"></insert-modal> -->
+        <!-- <detail-modal v-on:call-parent-change-to-delete="changeToDelete"></detail-modal> -->
     </div>
 </template>
 <script>
@@ -212,12 +200,8 @@ import Title from '@/components/common/Title.vue';
 import ButtonRound from '@/components/common/ButtonRound.vue';
 // import Difficulty from '@/components/common/Difficulty'
 // import PostDetailModal from '@/components/PostDetailModal'
-<<<<<<< HEAD
 import '@/components/css/ChallengeRoom.css';
-=======
-import "@/components/css/ChallengeRoom.css"
 import axios from '@/util/http-common.js';
->>>>>>> 6dbc95e60256e3c4fc9fe19231405118d9c1639b
 
 // import InsertModal from '@/components/modals/InsertModal.vue'
 // import DetailModal from '@/components/modals/DetailModal.vue';
@@ -247,68 +231,80 @@ export default {
             // 챌린지: '히오니의 알고 챌린지',
             challengeno: 1,
             chall_info: {
-              "challengeCapacity": 0,
-              "challengeCategory": "string",
-              "challengeDesc": "string",
-              "challengeEnddate": "string",
-              "challengeGroup": [
-                [
-                  "string"
-                ]
-              ],
-              "challengeLevel": 0,
-              "challengeName": "string",
-              "challengeNo": 0,
-              "challengeStartdate": "string",
-              "challengeTaskCnt": 0,
-              "challengeTaskdeadlines": ["string"]
-            }
+                challengeCapacity: 6,
+                challengeCategory: 'Algo',
+                challengeDesc: '알고 챌린지이다\n아이아이\n백준풀자',
+                challengeEnddate: 'string',
+                challengeGroup: [['string']],
+                challengeLevel: 0,
+                challengeName: 'what!!!',
+                challengeNo: 0,
+                challengeStartdate: '2021-08-19 23:59:59',
+                challengeTaskCnt: 0,
+                challengeTaskdeadlines: ['string'],
+            },
 
             // 모달
             // insertModal : null,
             // detailModal : null
         };
     },
-    methods : {
+    methods: {
         // // insert
         // showInsertModal(){
         // this.insertModal.show();
         // },
 
-<<<<<<< HEAD
-    //     closeAfterInsert(){
-    //     this.insertModal.hide();
-    //     },
-
-    // }
-};
-=======
         // closeAfterInsert(){
         // this.insertModal.hide();
         // },
-      getChallInfo: function(){
-        axios({
-          methods: 'get',
-          url: `/challenge/info/${this.challengeno}`
-        })
-        .then((res) =>{
-          alert('제발좀')
-          console.log(res.data)
-          this.chall_info = res.data
-          console.log(this.chall_info)
-        })
-        .catch((err) => {
-          alert('dkjakj')
-          console.log(err)
-          console.log('아무말')
-        })
-      }
+        getChallInfo: function() {
+            axios({
+                methods: 'get',
+                url: `/challenge/info/${this.challengeno}`,
+            })
+                .then((res) => {
+                    this.chall_info = res.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        countDownTimer: function(id) {
+            var date = this.chall_info.challengeStartdate;
+            //const countDownTimer = function (id) {
+            var _vDate = new Date(date); // 전달 받은 일자
+            var _second = 1000;
+            var _minute = _second * 60;
+            var _hour = _minute * 60;
+            var _day = _hour * 24;
+            var timer;
+            function showRemaining() {
+                var now = new Date();
+                var distDt = _vDate - now - 1;
+                if (distDt < 0) {
+                    clearInterval(timer);
+                    document.getElementById(id).textContent = '모집이 종료 되었습니다!';
+                    return;
+                }
+                var days = Math.floor(distDt / _day);
+                var hours = Math.floor((distDt % _day) / _hour);
+                var minutes = Math.floor((distDt % _hour) / _minute);
+                var seconds = Math.floor((distDt % _minute) / _second);
+                //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
+                document.getElementById(id).textContent = '마감까지 ' + days + '일 ';
+                document.getElementById(id).textContent += hours + '시간 ';
+                document.getElementById(id).textContent += minutes + '분 ';
+                document.getElementById(id).textContent += seconds + '초';
+            }
+            timer = setInterval(showRemaining, 1000);
+        },
     },
-    created: function(){
-      this.getChallInfo() //생성할 때 바로 불러줘
-    }
-}
->>>>>>> 6dbc95e60256e3c4fc9fe19231405118d9c1639b
+    created: function() {
+        this.getChallInfo(); //생성할 때 바로 불러줘
+        this.countDownTimer('rest', this.chall_info.challengeStartdate);
+    },
+};
 </script>
 <style scoped>
 /* 가입하기 버튼 */
@@ -338,7 +334,7 @@ export default {
 }
 
 .alarm {
-    color: #f59c35;
+    color: #e92828;
     margin-left: 10px;
     margin-top: 20px;
 }
@@ -363,30 +359,26 @@ export default {
 } */
 
 .table > :not(caption) > * > * {
-    padding: 0.0 0.0;
-<<<<<<< HEAD
-} */
-</style>
-=======
+    padding: 0 0;
 }
 
 /* 과제 제출 전 칸 */
-.before{
+.before {
     background-color: #f9d479;
     width: 100%;
     height: 100%;
 }
 
 /* 과제 제출 후 파란색으로 변함 */
-.after{
-    background-color: #1F4256;
+.after {
+    background-color: #1f4256;
     width: 100%;
     height: 100%;
 }
 
 /* 과제 제출 안하면 빨간색으로 변함 */
-.fail{
-    background-color: #EE4748;
+.fail {
+    background-color: #ee4748;
     width: 100%;
     height: 100%;
 }
@@ -394,6 +386,4 @@ export default {
 th {
     width: 100px;
 }
-
 </style>
->>>>>>> 6dbc95e60256e3c4fc9fe19231405118d9c1639b
