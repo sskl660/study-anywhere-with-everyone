@@ -33,9 +33,9 @@ public class TaskEntity {
 
     @Column(name = "task_index")
     private int taskIndex;
-    @Column(name = "task_content")
+    @Column(name = "task_content", length = 2000)
     private String taskContent;
-    @Column(name = "task_desc")
+    @Column(name = "task_desc", length = 300)
     private String taskDesc;
     @Column(name = "task_image")
     private String taskImage;
