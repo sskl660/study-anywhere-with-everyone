@@ -163,3 +163,9 @@ img {
   width: 90%;
   height: 80%;
 }
+
+.like-num {
+  position: absolute;
+  margin-top: -49px;
+  margin-left: 7%;
+}
