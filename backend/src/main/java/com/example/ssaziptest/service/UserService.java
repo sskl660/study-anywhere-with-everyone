@@ -113,6 +113,11 @@ public class UserService {
             }
             taskTicketResponse.setTaskNo(temp);
 
+            for(Integer in: taskTicketResponse.getTaskNo()){
+                if(in==null) taskTicketResponse.setIsComplete(false);
+                break;
+            }
+
             taskTicketResponseList.add(taskTicketResponse);
         }
         return taskTicketResponseList;

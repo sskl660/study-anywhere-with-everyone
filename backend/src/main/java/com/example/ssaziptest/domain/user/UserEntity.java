@@ -1,5 +1,6 @@
 package com.example.ssaziptest.domain.user;
 
+import com.example.ssaziptest.domain.comment.CommentEntity;
 import com.example.ssaziptest.domain.feed.FeedEntity;
 import com.example.ssaziptest.domain.group.GroupmemberEntity;
 import com.example.ssaziptest.domain.task.TaskEntity;
@@ -86,6 +87,8 @@ public class UserEntity {
     List<TaskEntity> taskResults = new ArrayList<>();
     @OneToMany(mappedBy = "feedUserEntity")
     List<FeedEntity> feedList = new ArrayList<>();
+    @OneToMany(mappedBy = "commentUserEntity")
+    List<CommentEntity> commentEntities = new ArrayList<>();
 
 
     @PrePersist
@@ -118,7 +121,7 @@ public class UserEntity {
 //    }
 
     @Builder
-    public UserEntity(String userEmail, String userName, String userPassword, String userNumber, int userTerm, boolean userGraduated, LocalDateTime userJoindate, int userTotalcomplete, String userImage, String userGit, String userBlog, String userDevstyle, String userMbti, String userWishfield, String userIntroduce, String userTechstack, int userTotaltime, int userWeektime, int userWeekcomplete, int userFollower, int userFollowing) {
+    public UserEntity(String userEmail, String userName, String userPassword, String userNumber, int userTerm, boolean userGraduated, LocalDateTime userJoindate, Integer userTotalcomplete, String userImage, String userGit, String userBlog, String userDevstyle, String userMbti, String userWishfield, String userIntroduce, String userTechstack, int userTotaltime, int userWeektime, int userWeekcomplete, int userFollower, int userFollowing) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;
