@@ -158,4 +158,31 @@ public class ChallengeService {
         }
         return taskDetailResponse;
     }
+
+    @Transactional
+    public List<ChallengeListResponse> searchChallenges(String keyword){
+        List<ChallengeEntity> challengeEntities = challengeRepository.findByChallengeName(keyword);
+        List<GroupmemberEntity> groupmemberEntities = groupmemberRepository.findByGroupUsername(keyword);
+        for(GroupmemberEntity groupmemberEntity:groupmemberEntities){
+            ChallengeEntity challengeEntity = challengeRepository.findById(groupmemberEntity.getGroupChallengeEntity().getChallengeNo()).orElse(null);
+            challengeEntities.add(challengeEntity);
+        }
+        List<ChallengeListResponse> list = new ArrayList<>();
+        for(ChallengeEntity challengeEntity : challengeEntities){
+            ChallengeListResponse challengeDto = ChallengeListResponse.builder()
+                    .challengeNo(challengeEntity.getChallengeNo())
+                    .challengeName(challengeEntity.getChallengeName())
+                    .challengeCategory(challengeEntity.getChallengeCategory())
+                    .challengeLevel(challengeEntity.getChallengeLevel())
+                    .challengeCapacity(challengeEntity.getChallengeCapacity())
+                    .challengeStartdate(challengeEntity.getChallengeStartdate())
+                    .challengeEnddate(challengeEntity.getChallengeEnddate())
+                    .challengeDesc(challengeEntity.getChallengeDesc())
+                    .challengeTaskCnt(challengeEntity.getChallengeTaskCnt())
+                    .build();
+            list.add(challengeDto);
+        }
+        return list;
+    }
+
 }

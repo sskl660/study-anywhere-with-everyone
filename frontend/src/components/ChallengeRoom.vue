@@ -4,7 +4,11 @@
             <img class="stars" src="../assets/manystar.png" alt="manystar" />
         </div>
         <div class="challengetitle">
+<<<<<<< HEAD
             <div class="Ctitle"><Title :text="챌린지" /></div>
+=======
+            <div class="Ctitle"><Title :text="chall_info.challengeName"/></div>
+>>>>>>> 6dbc95e60256e3c4fc9fe19231405118d9c1639b
         </div>
 
         <div class="d-flex row wider justify-content-center" id="body">
@@ -35,7 +39,7 @@
             <div class="col col-4 flex-item">
                 <div class="outline">
                     <div class="outline2">
-                        <table class="table ">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
@@ -129,6 +133,7 @@
                                     <td></td>
                                 </tr>
                                 <tr>
+<<<<<<< HEAD
                                     <th scope="row" style="background-color: #b7beda">김싸피</th>
                                     <td></td>
                                     <td></td>
@@ -147,6 +152,26 @@
                                     <td><button class="check"></button></td>
                                     <td><router-link to="/PostDetailAfter">제출후</router-link></td>
                                     <td><router-link to="/PostDetail">과제</router-link></td>
+=======
+                                <th scope="row" style="background-color: #b7beda">김싸피</th>
+                                <td></td>
+                                <td></td>
+                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
+                                <td></td>
+                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
+                                <td></td>
+                                <td></td>
+                                </tr>
+                                <tr>
+                                <th scope="row" style="background-color: #b7beda">김싸피</th>
+                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
+                                <td><router-link to="/PostDetail"><div class="before"/></router-link></td>
+                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
+                                <td><div class="fail"></div></td>
+                                <td></td>
+                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
+                                <td><router-link to="/PostDetail"><div class="before"/></router-link></td>
+>>>>>>> 6dbc95e60256e3c4fc9fe19231405118d9c1639b
                                 </tr>
                             </tbody>
                         </table>
@@ -187,7 +212,12 @@ import Title from '@/components/common/Title.vue';
 import ButtonRound from '@/components/common/ButtonRound.vue';
 // import Difficulty from '@/components/common/Difficulty'
 // import PostDetailModal from '@/components/PostDetailModal'
+<<<<<<< HEAD
 import '@/components/css/ChallengeRoom.css';
+=======
+import "@/components/css/ChallengeRoom.css"
+import axios from '@/util/http-common.js';
+>>>>>>> 6dbc95e60256e3c4fc9fe19231405118d9c1639b
 
 // import InsertModal from '@/components/modals/InsertModal.vue'
 // import DetailModal from '@/components/modals/DetailModal.vue';
@@ -214,25 +244,71 @@ export default {
             // 버튼에 들어갈 문구들
             가입하기: '가입하기',
             가입완료: '가입완료',
-            챌린지: '히오니의 알고 챌린지',
+            // 챌린지: '히오니의 알고 챌린지',
+            challengeno: 1,
+            chall_info: {
+              "challengeCapacity": 0,
+              "challengeCategory": "string",
+              "challengeDesc": "string",
+              "challengeEnddate": "string",
+              "challengeGroup": [
+                [
+                  "string"
+                ]
+              ],
+              "challengeLevel": 0,
+              "challengeName": "string",
+              "challengeNo": 0,
+              "challengeStartdate": "string",
+              "challengeTaskCnt": 0,
+              "challengeTaskdeadlines": ["string"]
+            }
 
             // 모달
             // insertModal : null,
             // detailModal : null
         };
     },
-    // methods : {
-    //     // insert
-    //     showInsertModal(){
-    //     this.insertModal.show();
-    //     },
+    methods : {
+        // // insert
+        // showInsertModal(){
+        // this.insertModal.show();
+        // },
 
+<<<<<<< HEAD
     //     closeAfterInsert(){
     //     this.insertModal.hide();
     //     },
 
     // }
 };
+=======
+        // closeAfterInsert(){
+        // this.insertModal.hide();
+        // },
+      getChallInfo: function(){
+        axios({
+          methods: 'get',
+          url: `/challenge/info/${this.challengeno}`
+        })
+        .then((res) =>{
+          alert('제발좀')
+          console.log(res.data)
+          this.chall_info = res.data
+          console.log(this.chall_info)
+        })
+        .catch((err) => {
+          alert('dkjakj')
+          console.log(err)
+          console.log('아무말')
+        })
+      }
+    },
+    created: function(){
+      this.getChallInfo() //생성할 때 바로 불러줘
+    }
+}
+>>>>>>> 6dbc95e60256e3c4fc9fe19231405118d9c1639b
 </script>
 <style scoped>
 /* 가입하기 버튼 */
@@ -285,8 +361,39 @@ export default {
     height: 40px;
     border-radius: 100%;
 } */
-/* 
+
 .table > :not(caption) > * > * {
     padding: 0.0 0.0;
+<<<<<<< HEAD
 } */
 </style>
+=======
+}
+
+/* 과제 제출 전 칸 */
+.before{
+    background-color: #f9d479;
+    width: 100%;
+    height: 100%;
+}
+
+/* 과제 제출 후 파란색으로 변함 */
+.after{
+    background-color: #1F4256;
+    width: 100%;
+    height: 100%;
+}
+
+/* 과제 제출 안하면 빨간색으로 변함 */
+.fail{
+    background-color: #EE4748;
+    width: 100%;
+    height: 100%;
+}
+
+th {
+    width: 100px;
+}
+
+</style>
+>>>>>>> 6dbc95e60256e3c4fc9fe19231405118d9c1639b

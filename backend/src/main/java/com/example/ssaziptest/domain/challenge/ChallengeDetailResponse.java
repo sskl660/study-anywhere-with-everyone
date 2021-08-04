@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -14,12 +16,12 @@ public class ChallengeDetailResponse {
     private String challengeCategory;
     private int challengeLevel;
     private int challengeCapacity;
-    private String challengeStartdate;
-    private String challengeEnddate;
+    private LocalDate challengeStartdate;
+    private LocalDate challengeEnddate;
     private String challengeDesc;
     private int challengeTaskCnt;
     //private String[][] challengeGroup;
-    private List<String> challengeTaskdeadlines;
+    private List<LocalDate> challengeTaskdeadlines;
     private List<String[]> challengeGroup;
 
 //    public ChallengeEntity toEntity(){
@@ -34,7 +36,7 @@ public class ChallengeDetailResponse {
 
     @Builder
 
-    public ChallengeDetailResponse(int challengeNo, String challengeName, String challengeCategory, int challengeLevel, int challengeCapacity, String challengeStartdate, String challengeEnddate, String challengeDesc, int challengeTaskCnt, List<String> challengeTaskdeadlines) {
+    public ChallengeDetailResponse(int challengeNo, String challengeName, String challengeCategory, int challengeLevel, int challengeCapacity, LocalDate challengeStartdate, LocalDate challengeEnddate, String challengeDesc, int challengeTaskCnt, List<LocalDate> challengeTaskdeadlines) {
         this.challengeNo = challengeNo;
         this.challengeName = challengeName;
         this.challengeCategory = challengeCategory;
