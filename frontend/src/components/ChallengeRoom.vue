@@ -10,20 +10,23 @@
 
         <div class="d-flex row wider justify-content-center" id="body">
             <div class="joinbox">
+                <!-- 가입버튼 누르기 전에는 가입하기 버튼과 가입 마감까지 남은 시간이 보여진다 -->
                 <li class="changebtn" v-if="!beforejoin">
-                    <div class="Cjoin_btn"><ButtonRound :text="가입하기" /></div>
+                    <div class="Cjoin_btn"><ButtonRound :text="가입하기" @click="hidebtn" /></div>
                     <div class="alarm">
                         <h5 id="rest">{{ restTime }}</h5>
                     </div>
                 </li>
-                <!-- <li class="changebtn" v-   -if="afterjoin">
+                <!-- 가입하기 버튼을 누르면 가입완료 버튼으로 바뀌고 시간이 진행중으로 바뀐다 -->
+                <li class="changebtn" v-else>
                     <div class="Cjoindone_btn"><ButtonRound :text="가입완료" /></div>
                     <div class="alarm">
                         <h5>진행 중</h5>
                     </div>
                 </li>
-                <li class="changebtn" v-else>
-                    <div class="Cjoindone_btn"><ButtonRound :text="가입완료" /></div>
+                <!-- 가입완료 후 챌린지 마감시간이 지나면 진행중이 종료 바뀜 -->
+                <!-- <li class="changebtn">
+                    <div class="Cjoindone_btn"><ButtonRound :text="가입완료"/></div>
                     <div class="alarm">
                         <h5 style="color: #EE4748">종료</h5>
                     </div>
@@ -171,19 +174,12 @@
             <div class="col col-5 flex-item">
                 <div class="ChallengeDetail">
                     <div class="Cdetail">
-                        <h4>🔥 삼성 코테 기출 알고 4시간 박살 🔥</h4>
-                        <br />
-                        저희 스터디는 1일 1알고리즘으로 네카라쿠배를 갈 사람들 입니다!<br />
-                        일주일동안 백준 총 7문제를 풀 것입니다.<br />
-                        과제 1 : BJ 3049<br />
-                        과제 2 : BJ 8490<br />
-                        과제 3 : BJ 908<br />
-                        과제 4 : BJ 193<br />
-                        과제 5 : BJ 9830<br />
-                        과제 6 : BJ 1394<br />
-                        과제 7 : BJ 9033<br />
-                        <br />
-                        <strong>참여멤버 : @권희은 @김준형 @김태현 @이장섭 @유희원 @차은채</strong>
+                        <p>{{ chall_info.challengeDesc }}</p>
+
+                        <strong
+                            >참여멤버 :
+                            <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)"> @{{ name[1] }} </span>
+                        </strong>
                     </div>
                 </div>
                 <div class="ChallengeTicket">
@@ -191,8 +187,9 @@
                 </div>
             </div>
         </div>
-        <!-- <insert-modal v-on:call-parent-insert="closeAfterInsert"></insert-modal> -->
-        <!-- <detail-modal v-on:call-parent-change-to-delete="changeToDelete"></detail-modal> -->
+        <!-- 여기가 있으면 통신이 안된다 -->
+        <!-- <insert-modal v-on:call-parent-insert="closeAfterInsert"></insert-modal>
+    <detail-modal v-on:call-parent-change-to-delete="changeToDelete"></detail-modal> -->
     </div>
 </template>
 <script>
@@ -215,6 +212,7 @@ import axios from '@/util/http-common.js';
 
 export default {
     name: 'ChallengeRoom',
+    el: 'goprofile',
     components: {
         Title, // 타이틀 가져오기
         ButtonRound, // 둥근 버튼 가져오기
@@ -231,17 +229,37 @@ export default {
             // 챌린지: '히오니의 알고 챌린지',
             challengeno: 1,
             chall_info: {
+                // "challengeCapacity": 0,
+                // "challengeCategory": "string",
+                // "challengeDesc": "string",
+                // "challengeEnddate": "string",
+                // "challengeGroup": [
+                //   [
+                //     "string"
+                //   ]
+                // ],
+                // "challengeLevel": 0,
+                // "challengeName": "string",
+                // "challengeNo": 0,
+                // "challengeStartdate": "string",
+                // "challengeTaskCnt": 0,
+                // "challengeTaskdeadlines": ["string"]
+
+                challengeNo: 1,
+                challengeName: '히알챌',
+                challengeCategory: 'Algorithm',
+                challengeLevel: 3,
                 challengeCapacity: 6,
-                challengeCategory: 'Algo',
-                challengeDesc: '알고 챌린지이다\n아이아이\n백준풀자',
-                challengeEnddate: 'string',
-                challengeGroup: [['string']],
-                challengeLevel: 0,
-                challengeName: 'what!!!',
-                challengeNo: 0,
-                challengeStartdate: '2021-08-19 23:59:59',
-                challengeTaskCnt: 0,
-                challengeTaskdeadlines: ['string'],
+                challengeStartdate: '2021-07-04',
+                challengeEnddate: '2021-08-04',
+                challengeDesc: '히오니의 알고리즘 챌린지',
+                challengeTaskCnt: 7,
+                challengeTaskdeadlines: ['2021-08-01', '2021-08-02', '2021-08-03'],
+                challengeGroup: [
+                    ['123', '주인공'],
+                    ['456', '제발좀'],
+                    ['789', '김이름'],
+                ],
             },
 
             // 모달
