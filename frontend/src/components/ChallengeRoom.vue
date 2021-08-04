@@ -4,7 +4,7 @@
             <img class="stars" src="../assets/manystar.png" alt="manystar">
         </div>
         <div class="challengetitle">
-            <div class="Ctitle"><Title :text="챌린지"/></div>
+            <div class="Ctitle"><Title :text="chall_info.challengeName"/></div>
         </div>
 
         <div class="d-flex row wider justify-content-center" id="body">
@@ -189,6 +189,7 @@ import ButtonRound from '@/components/common/ButtonRound.vue'
 // import Difficulty from '@/components/common/Difficulty'
 // import PostDetailModal from '@/components/PostDetailModal'
 import "@/components/css/ChallengeRoom.css"
+import axios from '@/util/http-common.js';
 
 // import InsertModal from '@/components/modals/InsertModal.vue'
 // import DetailModal from '@/components/modals/DetailModal.vue';
@@ -216,24 +217,61 @@ export default {
             // 버튼에 들어갈 문구들
             가입하기: '가입하기',
             가입완료: '가입완료',
-            챌린지: '히오니의 알고 챌린지',
+            // 챌린지: '히오니의 알고 챌린지',
+            challengeno: 1,
+            chall_info: {
+              "challengeCapacity": 0,
+              "challengeCategory": "string",
+              "challengeDesc": "string",
+              "challengeEnddate": "string",
+              "challengeGroup": [
+                [
+                  "string"
+                ]
+              ],
+              "challengeLevel": 0,
+              "challengeName": "string",
+              "challengeNo": 0,
+              "challengeStartdate": "string",
+              "challengeTaskCnt": 0,
+              "challengeTaskdeadlines": ["string"]
+            }
 
             // 모달
             // insertModal : null,
             // detailModal : null
         }
     },
-    // methods : {
-    //     // insert
-    //     showInsertModal(){
-    //     this.insertModal.show();
-    //     },
+    methods : {
+        // // insert
+        // showInsertModal(){
+        // this.insertModal.show();
+        // },
 
-    //     closeAfterInsert(){
-    //     this.insertModal.hide();
-    //     },
-
-    // }
+        // closeAfterInsert(){
+        // this.insertModal.hide();
+        // },
+      getChallInfo: function(){
+        axios({
+          methods: 'get',
+          url: `/challenge/info/${this.challengeno}`
+        })
+        .then((res) =>{
+          alert('제발좀')
+          console.log(res.data)
+          this.chall_info = res.data
+          console.log(this.chall_info)
+        })
+        .catch((err) => {
+          alert('dkjakj')
+          console.log(err)
+          console.log('아무말')
+        })
+      }
+    },
+    created: function(){
+      this.getChallInfo() //생성할 때 바로 불러줘
+    }
 }
 </script>
 <style scoped>

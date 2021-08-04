@@ -90,7 +90,6 @@ export default new Vuex.Store({
         setToken: function({ commit }) {
             commit('SET_TOKEN');
         },
-<<<<<<< HEAD
         // 댓글 기능
         // action은 mutation을 호출하고 mutations는 state값을 가져온다.
       addComment: function ({ commit }, commentItem) {
@@ -100,7 +99,6 @@ export default new Vuex.Store({
       // addComment(context, commentItem) {
       //   context.commit('ADD_COMMENT', commentItem);
       //   }
-=======
         //이메일 체크
         emailcheck: function ({ commit }, email) {
             axios({
@@ -117,7 +115,6 @@ export default new Vuex.Store({
                     alert("잠시후 다시 시도 해주세요")
                 })
         },
->>>>>>> a39fa7a8aa1abdb2d1f30389bb4e4be6319625d7
     },
 
     getter: {
