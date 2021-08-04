@@ -4,6 +4,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 public class ChallengeListResponse {
@@ -12,8 +15,8 @@ public class ChallengeListResponse {
     private String challengeCategory;
     private int challengeLevel;
     private int challengeCapacity;
-    private String challengeStartdate;
-    private String challengeEnddate;
+    private LocalDate challengeStartdate;
+    private LocalDate challengeEnddate;
     private String challengeDesc;
     private int challengeTaskCnt;
 
@@ -27,7 +30,7 @@ public class ChallengeListResponse {
     }
 
     @Builder
-    public ChallengeListResponse(int challengeNo, String challengeName, String challengeCategory, int challengeLevel, int challengeCapacity, String challengeStartdate, String challengeEnddate, String challengeDesc, int challengeTaskCnt) {
+    public ChallengeListResponse(int challengeNo, String challengeName, String challengeCategory, int challengeLevel, int challengeCapacity, LocalDate challengeStartdate, LocalDate challengeEnddate, String challengeDesc, int challengeTaskCnt) {
         this.challengeNo = challengeNo;
         this.challengeName = challengeName;
         this.challengeCategory = challengeCategory;

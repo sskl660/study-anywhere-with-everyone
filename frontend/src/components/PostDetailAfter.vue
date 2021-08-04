@@ -32,6 +32,10 @@
                     <div class="like-box">
                         <img class="like" src="../assets/grayheart.png" alt="likeU">
                     </div>
+                    <div class="like-num">
+                        <h6><strong>307명</strong>이 좋아합니다</h6>
+                    </div>
+                    
                     <!-- <div class="like-box">
                         <img v-if="isShowing" :src="grayheart" alt="likeU" class="like" @click="isShowing = !isShowing">
                     </div> -->

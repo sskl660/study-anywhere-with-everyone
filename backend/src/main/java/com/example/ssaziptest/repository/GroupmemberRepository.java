@@ -11,4 +11,5 @@ import java.util.List;
 public interface GroupmemberRepository extends JpaRepository<GroupmemberEntity, Integer> {
     List<GroupmemberEntity> findByGroupChallengeEntity_ChallengeNo(@Param(value = "challengeno") int challengeno);
     List<GroupmemberEntity> findByGroupUserEntity_UserEmail(@Param(value = "useremail")String useremail);
+    List<GroupmemberEntity> findByGroupUsername(String userName);
 }

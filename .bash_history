@@ -296,3 +296,51 @@ git commit -am "update Properties"
 git push
 git commit -am "update Properties"
 git push
+git pull
+cd ~
+ls
+git pull
+git commit -am "update properties"
+git add .
+git push
+git commit -am "update properties"
+git push
+git commit -am "update properties"
+git push
+git add .
+git commit -am "update Dockerfile"
+git status
+git diff
+git log
+git push
+git commit -am "update Dockerfile"
+git push
+git commit -am "update properties"
+git push
+git pull
+git add ..
+git status
+git pull
+git add .
+git push
+git pull
+git push
+git add .
+git commit -am "update CORS"
+git push
+git pull
+git commit -am "update CORS"
+git push
+cd ~
+git pull
+git status
+git add .
+git commit -am "update properties"
+git push
+git pull
+git commit -am "update properties"
+git push
+git pull
+git add .
+git commit -am "update properties"
+git push
