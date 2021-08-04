@@ -9,4 +9,5 @@ public class TaskTicketResponse {
     private int challengeNo;
     private int challengeTaskCnt;
     private Integer[] taskNo;
+    private Boolean isComplete;
 }
