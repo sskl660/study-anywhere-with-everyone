@@ -10,6 +10,7 @@
 
 /* 챌린지 목록 제목 */
 .challenge-title {
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 35px;
   font-weight: bold;
   color: white;

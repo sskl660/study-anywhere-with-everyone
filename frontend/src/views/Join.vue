@@ -1,12 +1,15 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="join-container">
+      
       <!-- 계정 등록 -->
       <p>계정 등록</p>
       <div class="d-flex email-container">
         <label for="email" class="input-label">이메일</label>
         <input type="text" id="email" class="account-input email-input" 
-          placeholder="40글자 이내로 입력해주세요." v-model="credentials.userEmail">
+          placeholder="40글자 이내로 입력해주세요." 
+          onfocus="this.placeholder=''" onblur="this.placeholder='40글자 이내로 입력해주세요.'"
+          v-model="credentials.userEmail">
         <!-- 중복체크 버튼 -->
         <div class="check-button">
           <ButtonSquare text="중복체크"/>
@@ -15,7 +18,9 @@
       <div>
         <label for="password" class="input-label">비밀번호</label>
         <input type="text" id="password" class="account-input password-input" 
-          placeholder="8 이상 16 이하 글자수로 입력해주세요." v-model="credentials.userPassword">
+          placeholder="8 이상 16 이하 글자수로 입력해주세요."
+          onfocus="this.placeholder=''" onblur="this.placeholder='8 이상 16 이하 글자수로 입력해주세요.'"
+          v-model="credentials.userPassword">
       </div>
       <div>
         <label for="password-confirm" class="input-label">비밀번호 확인</label>
@@ -34,15 +39,18 @@
         <div>
           <label for="name" class="input-label name-label">이름</label>
           <input type="text" id="name" class="info-input name-input" 
-            placeholder="8글자 이내로 입력해주세요." v-model="credentials.userName">
+            placeholder="8글자 이내로 입력해주세요."
+            onfocus="this.placeholder=''" onblur="this.placeholder='8글자 이내로 입력해주세요.'"
+            v-model="credentials.userName">
         </div>
         <div>
           <label for="phone" class="input-label">전화번호</label>
           <input type="text" id="phone" class="info-input phone-input" 
-            placeholder="ex) 01012345678" v-model="credentials.userNumber">
+            placeholder="ex) 01012345678"
+            onfocus="this.placeholder=''" onblur="this.placeholder='ex) 01012345678'"
+            v-model="credentials.userNumber">
         </div>
       </div>
-      
       <div class="d-flex justify-content-center last-row-input">
         <div>
           <label for="grade" class="input-label">기수</label>
@@ -59,10 +67,17 @@
       </div>
       <br>
 
-      <!-- 가입 버튼 -->
-      <div class="join-button" @click="join(credentials)">
-        <ButtonRound text="가입하기"/>
+      <div class="d-flex justify-content-center">
+        <!-- 돌아가기 버튼 -->
+        <div class="back-button">
+          <router-link to="/"><ButtonRound text="돌아가기"/></router-link>
+        </div>
+        <!-- 가입 버튼 -->
+        <div class="join-button" @click="join(credentials)">
+          <ButtonRound text="가입하기"/>
+        </div>
       </div>
+      
     </div>
   </div>
 </template>
@@ -132,6 +147,7 @@ export default {
   /* 전체 input 태그 CSS */
   input {
     padding-left: 15px;
+    border-style: none;
   }
 
   input:focus {
@@ -223,6 +239,19 @@ export default {
     border-radius: 0.5rem;
   }
 
+  /* 돌아가기 버튼 */
+  .back-button .btn-light {
+    font-family: 'Godo';
+    font-size: 23px;
+    width: 170px;
+    height: 60px;
+    margin-top: 10px;
+    margin-right: 50px;
+    color: #FFFFFF;
+    background-color: #919599;;
+    border-style: none;
+  }
+
   /* 회원가입 버튼 */
   .join-button .btn-light {
     font-family: 'Godo';
@@ -230,6 +259,7 @@ export default {
     width: 170px;
     height: 60px;
     margin-top: 10px;
+    margin-left: 50px;
     background-color: #99B7FF;
     border-style: none;
   }
@@ -239,7 +269,98 @@ export default {
     position: absolute;
     width: 370px;
     height: 200px;
-    top: 308px;
+    top: 302px;
     right: 470px;
+  }
+
+  /* SSAZIP 여러 개 모인 이미지 : 반응형 CSS */
+  @media (min-width: 990px) and (max-width: 1058px) {
+    .eggs {
+      position: absolute;
+      width: 370px;
+      height: 200px;
+      top: 302px;
+      right: 10px;
+    }
+  }
+
+  @media (min-width: 1059px) and (max-width: 1127px) {
+    .eggs {
+      position: absolute;
+      width: 370px;
+      height: 200px;
+      top: 302px;
+      right: 50px;
+    }
+  }
+
+  @media (min-width: 1128px) and (max-width: 1200px) {
+    .eggs {
+      position: absolute;
+      width: 370px;
+      height: 200px;
+      top: 302px;
+      right: 80px;
+    }
+  }
+
+   @media (min-width: 1201px) and (max-width: 1250px) {
+    .eggs {
+      position: absolute;
+      width: 370px;
+      height: 200px;
+      top: 302px;
+      right: 100px;
+    }
+  }
+
+  @media (min-width: 1251px) and (max-width: 1300px) {
+    .eggs {
+      position: absolute;
+      width: 370px;
+      height: 200px;
+      top: 302px;
+      right: 120px;
+    }
+  }
+
+  @media (min-width: 1301px) and (max-width: 1399px) {
+    .eggs {
+      position: absolute;
+      width: 370px;
+      height: 200px;
+      top: 302px;
+      right: 130px;
+    }
+  }
+
+  @media (min-width: 1400px) and (max-width: 1499px) {
+    .eggs {
+      position: absolute;
+      width: 370px;
+      height: 200px;
+      top: 302px;
+      right: 250px;
+    }
+  }
+
+   @media (min-width: 1500px) and (max-width: 1600px) {
+    .eggs {
+      position: absolute;
+      width: 370px;
+      height: 200px;
+      top: 302px;
+      right: 310px;
+    }
+  }
+
+  @media (min-width: 1601px) and (max-width: 1700px) {
+    .eggs {
+      position: absolute;
+      width: 370px;
+      height: 200px;
+      top: 302px;
+      right: 360px;
+    }
   }
 </style>

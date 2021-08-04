@@ -1,3 +1,11 @@
+/* 폰트 등록 */
+@font-face {
+  font-family: 'GongGothicMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* 챌린지 티켓 */
 .challenge {
   background:url('../../../assets/challenge_ticket.png');
@@ -10,15 +18,18 @@
 
 /* 챌린지 이름 */
 .challenge-name {
+  font-family: 'GongGothicMedium';
   font-weight: bold;
   font-size: 20px;
+  margin-bottom: 5px;
 }
 
 /* 챌린지 내용 */
 .challenge-content {
   /* font-family: 'Noto Sans KR', sans-serif; */
   /* font-weight: bold; */
+  font-family: 'GongGothicMedium';
   text-align: left;
-  margin-left: 55px;
+  margin-left: 68px;
   font-size: 16px;
 }
