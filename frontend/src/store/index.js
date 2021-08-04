@@ -10,6 +10,7 @@ export default new Vuex.Store({
         isLogin: false,
         config: null, // jwt 담는 객체
         comments: [],
+        emailposi: false //false 일때 중복
     },
 
     mutations: {
@@ -41,6 +42,11 @@ export default new Vuex.Store({
             console.log(state);
             state.comments.push(commentItem);
         },
+        //이메일 체크
+        EMAIL_CHECK(state, returnflag) {
+            state.emailposi = returnflag;
+            alert("중복체크 완료" + returnflag);
+        }
     },
 
     actions: {
@@ -83,6 +89,22 @@ export default new Vuex.Store({
         setToken: function({ commit }) {
             commit('SET_TOKEN');
         },
+        //이메일 체크
+        emailcheck: function ({ commit }, email) {
+            axios({
+                method: 'get',
+                url: `/signup/check/${email}`
+            })
+                .then((res) => {
+                    console.log(email);
+                    commit('EMAIL_CHECK', res.data)
+                    console.log(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    alert("잠시후 다시 시도 해주세요")
+                })
+        },
     },
 
     getter: {
@@ -92,5 +114,8 @@ export default new Vuex.Store({
         isLogin: function(state) {
             return state.isLogin;
         },
+        emailposi: function (state) {
+            return state.emailposi;
+        }
     },
 });

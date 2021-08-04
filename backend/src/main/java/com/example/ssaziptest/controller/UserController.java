@@ -9,6 +9,7 @@ import com.example.ssaziptest.service.FollowService;
 import com.example.ssaziptest.service.UserService;
 import com.google.api.Http;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,18 +31,20 @@ public class UserController {
     }
     /*ID 중복체크*/
     @GetMapping(value = "signup/check/{user_email}")
-    public boolean isUsableEmail(@PathVariable("user_email") String user_email) throws Exception{
-        return userService.checkEmail(user_email);
+    //public boolean isUsableEmail(@PathVariable("user_email") String user_email) throws Exception{
+    public ResponseEntity<Boolean> isUsableEmail(@PathVariable("user_email") String user_email) throws Exception{
+        boolean usable=userService.checkEmail(user_email);
+        System.out.println(usable);
+        //f(usable!=null)//사용가능
+            //return new ResponseEntity<Boolean>("suc",usable,HttpStatus.OK);
+            return  ResponseEntity.ok().body(usable);
+           // else return ResponseEntity.status(HttpStatus.NOT_FOUND);
     }
     /*로그인*/
     @PostMapping(value = "login")
     //public ResponseEntity<BoolResult> login(@RequestBody LoginRequest request) throws Exception{
     public ResponseEntity<UserLoginPostResponse> login(@RequestBody LoginRequest request) throws Exception{
         UserEntity userEntity = userService.login(request.getUserEmail(), request.getUserPassword());
-//        BoolResult br = new BoolResult();
-//        br.setName("login");
-//        br.setState("this istooooooken");
-        //if(userEntity != null) br.setResult(true);
         if(userEntity == null)  return ResponseEntity.status(401).body(UserLoginPostResponse.of(401, "Invalid Password", null));
         return ResponseEntity.ok(UserLoginPostResponse.of(200, "Success", JwtTokenUtil.getToken(request.getUserEmail())));
     }
