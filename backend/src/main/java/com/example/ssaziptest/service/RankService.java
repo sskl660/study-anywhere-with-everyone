@@ -2,6 +2,7 @@ package com.example.ssaziptest.service;
 
 import com.example.ssaziptest.domain.rank.ChallengeTopEntity;
 import com.example.ssaziptest.domain.rank.GalaxyTopEntity;
+import com.example.ssaziptest.domain.rank.GradsResponse;
 import com.example.ssaziptest.domain.rank.RankResponse;
 import com.example.ssaziptest.domain.user.UserEntity;
 import com.example.ssaziptest.repository.ChallengeTopRepository;
@@ -14,6 +15,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,10 +61,18 @@ public class RankService {
         return responses;
     }
 
-//    @Transactional
-//    public List<GradsResponse> getGraduates(){
-//
-//    }
+    @Transactional
+    public List<GradsResponse> getGraduates(){
+        List<UserEntity> userEntities = userRepository.findRandomGraduates();
+        List<GradsResponse> responses = new ArrayList<>();
+        for(UserEntity userEntity:userEntities) {
+            GradsResponse response = new GradsResponse();
+            response.setUserEmail(userEntity.getUserEmail());
+            response.setUserName(userEntity.getUserName());
+            responses.add(response);
+        }
+        return responses;
+    }
 
     @Scheduled(cron = "0 0 0 ? * 2")
     @Transactional
