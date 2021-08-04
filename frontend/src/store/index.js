@@ -8,27 +8,29 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         isLogin: false,
-        config: null, //jwt 담는 객체
+        config: null, // jwt 담는 객체
         comments: [],
     },
+
     mutations: {
-        //가입
+        // 가입
         JOIN: function(state) {
             console.log(state);
             router.push({ name: 'Welcome' });
         },
-        //로그인
+        // 로그인
         LOGIN: function(state, token) {
             localStorage.setItem('jwt', token);
             state.isLogin = true;
             router.push({ name: 'Challenges' });
         },
-        //로그아웃
+        // 로그아웃
         LOGOUT: function(state) {
             state.isLogin = false;
             localStorage.removeItem('jwt');
             router.push({ name: 'Welcome' });
         },
+        // 토큰 부여
         SET_TOKEN: function(state) {
             const token = localStorage.getItem('jwt');
             state.config = {
@@ -42,7 +44,7 @@ export default new Vuex.Store({
     },
 
     actions: {
-        //회원가입
+        // 회원가입
         join: function({ commit }, credentials) {
             axios({
                 method: 'post',
@@ -58,7 +60,7 @@ export default new Vuex.Store({
                     console.log(err);
                 });
         },
-        //로그인
+        // 로그인
         login: function({ commit }, credentials) {
             axios({
                 method: 'post',
@@ -73,15 +75,16 @@ export default new Vuex.Store({
                     console.log(err);
                 });
         },
-        //로그아웃
+        // 로그아웃
         logout: function({ commit }) {
             commit('LOGOUT');
         },
-        //토큰 요청
+        // 토큰 부여
         setToken: function({ commit }) {
             commit('SET_TOKEN');
         },
     },
+
     getter: {
         config: function(state) {
             return state.config;

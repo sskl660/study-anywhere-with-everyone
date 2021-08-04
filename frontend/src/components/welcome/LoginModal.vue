@@ -1,34 +1,42 @@
 <template>
   <div>
+
+    <!-- 로그인 버튼 -->
     <button type="button" class="btn btn-primary login-btn" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-whatever="@mdo">{{ text }}</button>
 
+    <!-- 로그인 모달창 -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content login-content">
           <div class="modal-body">
             <form>
+              <!-- 이메일 입력칸 -->
               <div class="d-flex">
                 <label for="email-input" class="col-form-label input-label">이메일</label>
                 <input type="text" class="form-control input-form" id="email-input" v-model="credentials.userEmail">
               </div>
+              <!-- 비밀번호 입력칸 -->
               <div class="d-flex">
                 <label for="password-input" class="col-form-label input-label">비밀번호</label>
                 <input type="text" class="form-control input-form" id="password-input" v-model="credentials.userPassword">
               </div>
             </form>
           </div>
+          <!-- 로그인 상태 유지 체크 부분 -->
           <div class="form-check check-part">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
             <label class="form-check-label check-label" for="flexCheckDefault">
               로그인 상태 유지
             </label>
           </div>
+          <!-- 모달창 내부 로그인 버튼 -->
           <div class="modal-footer login-footer">
             <button type="button" class="btn btn-light login-button" data-bs-dismiss="modal" @click="login(credentials)">로그인</button>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -95,7 +103,7 @@ export default {
     box-shadow: none;
   }
 
-  /* 모달창 커스텀 */
+  /* 모달창 크기 */
   .login-content {
     font-family: "Noto Sans KR", sans-serif;
     background-color: #99b7ff;
@@ -103,6 +111,7 @@ export default {
     margin-top: 350px;
   }
 
+  /* 입력칸 라벨 */
   .input-label {
     width: 100px;
     font-weight: bold;
@@ -110,23 +119,27 @@ export default {
     margin-right: 5px;
   }
 
+  /* 입력칸 */
   .input-form {
     margin-top: 20px;
     margin-right: 45px;
     border-radius: 0.5rem;
   }
 
+  /* 모달창 footer */
   .login-footer {
     padding-top: 0px;
     border-style: none;
   }
 
+  /* 체크 부분 */
   .check-part {
     width: 115px;
     margin-left: 120px;
     padding: 0px;
   }
 
+  /* 체크 부분 특수효과 제거 */
   .form-control:focus {
     outline: none;
     box-shadow: none;
@@ -137,6 +150,7 @@ export default {
     box-shadow: none;
   }
 
+  /* 모달창 내부 로그인 버튼 */
   .login-button {
     margin-right: 50px;
     color: #ffffff;
@@ -144,6 +158,7 @@ export default {
     border-style: none;
   }
 
+  /* 모달창 내부 로그인 버튼 특수효과 방지 */
   .login-button:hover {
     color: #ffffff;
     background-color: #1c84c4;

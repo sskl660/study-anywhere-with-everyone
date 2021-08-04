@@ -1,9 +1,12 @@
 <template>
   <div>
+    <!-- 상단 문구 -->
     <h1 class="display-4 message">Coming Soon...</h1>
+
     <!-- flexbox를 이용해 위치 조정 -->
     <div class="d-flex justify-content-center welcome-container">
       <div>
+
         <!-- 별 구현 -->
         <div class="star1-box">
           <img class="star1" src="../assets/star.png" alt="star">
@@ -14,8 +17,10 @@
         <div class="star3-box">
           <img class="star3" src="../assets/star.png" alt="star">
         </div>
+
         <!-- SSAZIP 구현 -->
         <img class="ssazip" src="../assets/ssazip.png" alt="ssazip">
+
         <!-- 로그인, 회원가입 버튼 -->
         <div class="d-flex menu">
           <div class="login-btn"><LoginModal text="Login"/></div>
@@ -23,15 +28,16 @@
             <router-link to="/join"><ButtonRound text="Join"/></router-link>
           </div>
         </div>
+        
       </div>
     </div>
-  </div>
-  
+
+  </div>  
 </template>
 
 <script>
 import ButtonRound from '@/components/common/ButtonRound'
-import LoginModal from '@/components/modals/LoginModal'
+import LoginModal from '@/components/welcome/LoginModal'
 import "@/views/css/welcome.css";
 
 export default {

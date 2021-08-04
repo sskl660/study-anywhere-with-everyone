@@ -1,7 +1,9 @@
+/* 챌린지 전체를 감싸는 컨테이너 */
 .challenges-container {
   margin-top: 90px;
 }
 
+/* 상단 별 위치 조정 */
 .stars {
   width: 340px;
   height: 340px;
@@ -23,6 +25,7 @@
   height: 50px;
 }
 
+/* 챌린지 목록 */
 .challenges {
   margin-left: 150px;
   margin-right: 150px;
