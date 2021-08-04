@@ -1,3 +1,4 @@
+/* 챌린지 티켓 */
 .challenge {
   background:url('../../../assets/challenge_ticket.png');
   background-repeat: no-repeat;
@@ -7,11 +8,13 @@
   margin-left: 8px;
 }
 
+/* 챌린지 이름 */
 .challenge-name {
   font-weight: bold;
   font-size: 20px;
 }
 
+/* 챌린지 내용 */
 .challenge-content {
   /* font-family: 'Noto Sans KR', sans-serif; */
   /* font-weight: bold; */
