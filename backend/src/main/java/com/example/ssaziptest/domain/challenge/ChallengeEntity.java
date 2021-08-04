@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +32,9 @@ public class ChallengeEntity {
     @Column(name = "challenge_capacity")
     private int challengeCapacity;
     @Column(name = "challenge_startdate")
-    private String challengeStartdate;
+    private LocalDate challengeStartdate;
     @Column(name = "challenge_enddate")
-    private String challengeEnddate;
+    private LocalDate challengeEnddate;
     @Column(name = "challenge_desc")
     private String challengeDesc;
     @Column(name = "challenge_task_cnt")
@@ -41,7 +43,7 @@ public class ChallengeEntity {
     //task생성할때 task 갯수 뿐 아니라 각각의 마감 기한이 여기서 필요할거같은데...?
     @ElementCollection
     @Column(name = "challenge_taskdeadlines")
-    private List<String> challengeTaskdeadlines;
+    private List<LocalDate> challengeTaskdeadlines;
 
     @OneToMany(mappedBy = "groupChallengeEntity")
     List<GroupmemberEntity> members = new ArrayList<>();
@@ -49,7 +51,7 @@ public class ChallengeEntity {
     List<TaskEntity> tasks = new ArrayList<>();
 
     @Builder
-    public ChallengeEntity(int challengeNo, String challengeName, String challengeCategory, int challengeLevel, int challengeCapacity, String challengeStartdate, String challengeEnddate, String challengeDesc, int challengeTaskCnt, List<String> challengeTaskdeadlines, List<GroupmemberEntity> members, List<TaskEntity> tasks) {
+    public ChallengeEntity(int challengeNo, String challengeName, String challengeCategory, int challengeLevel, int challengeCapacity, LocalDate challengeStartdate, LocalDate challengeEnddate, String challengeDesc, int challengeTaskCnt, List<LocalDate> challengeTaskdeadlines, List<GroupmemberEntity> members, List<TaskEntity> tasks) {
         this.challengeNo = challengeNo;
         this.challengeName = challengeName;
         this.challengeCategory = challengeCategory;
