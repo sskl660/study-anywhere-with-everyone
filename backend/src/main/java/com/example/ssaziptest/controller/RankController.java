@@ -1,5 +1,6 @@
 package com.example.ssaziptest.controller;
 
+import com.example.ssaziptest.domain.rank.GradsResponse;
 import com.example.ssaziptest.domain.rank.RankResponse;
 import com.example.ssaziptest.service.RankService;
 import io.swagger.annotations.Api;
@@ -36,5 +37,11 @@ public class RankController {
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
     /*졸업자 랜덤 3명 요청*/
+    @ApiOperation(value = "졸업자 랜덤 3명 요청")
+    @GetMapping(value = "/graduated")
+    public ResponseEntity<List<GradsResponse>> getGraduates(){
+        List<GradsResponse> responses = rankService.getGraduates();
+        return new ResponseEntity<>(responses,HttpStatus.OK);
+    }
 
 }
