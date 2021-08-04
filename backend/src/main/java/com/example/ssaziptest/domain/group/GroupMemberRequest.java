@@ -16,8 +16,10 @@ public class GroupMemberRequest {
 
     public GroupmemberEntity toEntity(){
         GroupmemberEntity groupmemberEntity = GroupmemberEntity.builder()
-                .userEntity(userEntity).challengeEntity(challengeEntity)
-                .groupUsername(groupUsername).build();
+                .groupUserEntity(userEntity).groupChallengeEntity(challengeEntity)
+                .groupUsername(groupUsername)
+                .groupIscomplete(false)
+                .build();
         return groupmemberEntity;
     }
 

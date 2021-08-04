@@ -121,7 +121,7 @@ public class UserEntity {
 //    }
 
     @Builder
-    public UserEntity(String userEmail, String userName, String userPassword, String userNumber, int userTerm, boolean userGraduated, LocalDateTime userJoindate, int userTotalcomplete, String userImage, String userGit, String userBlog, String userDevstyle, String userMbti, String userWishfield, String userIntroduce, String userTechstack, int userTotaltime, int userWeektime, int userWeekcomplete, int userFollower, int userFollowing) {
+    public UserEntity(String userEmail, String userName, String userPassword, String userNumber, int userTerm, boolean userGraduated, LocalDateTime userJoindate, Integer userTotalcomplete, String userImage, String userGit, String userBlog, String userDevstyle, String userMbti, String userWishfield, String userIntroduce, String userTechstack, int userTotaltime, int userWeektime, int userWeekcomplete, int userFollower, int userFollowing) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;
