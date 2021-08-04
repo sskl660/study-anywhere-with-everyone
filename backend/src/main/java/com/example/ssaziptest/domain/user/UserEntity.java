@@ -1,5 +1,6 @@
 package com.example.ssaziptest.domain.user;
 
+import com.example.ssaziptest.domain.comment.CommentEntity;
 import com.example.ssaziptest.domain.feed.FeedEntity;
 import com.example.ssaziptest.domain.group.GroupmemberEntity;
 import com.example.ssaziptest.domain.task.TaskEntity;
@@ -86,6 +87,8 @@ public class UserEntity {
     List<TaskEntity> taskResults = new ArrayList<>();
     @OneToMany(mappedBy = "feedUserEntity")
     List<FeedEntity> feedList = new ArrayList<>();
+    @OneToMany(mappedBy = "commentUserEntity")
+    List<CommentEntity> commentEntities = new ArrayList<>();
 
 
     @PrePersist
