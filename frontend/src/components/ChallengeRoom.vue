@@ -35,7 +35,7 @@
             <div class="col col-4 flex-item">
                 <div class="outline">
                     <div class="outline2">
-                        <table class="table ">
+                        <table class="table">
                             <thead>
                                 <tr>
                                 <th scope="col"></th>
@@ -132,21 +132,21 @@
                                 <th scope="row" style="background-color: #b7beda">김싸피</th>
                                 <td></td>
                                 <td></td>
+                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
                                 <td></td>
                                 <td></td>
                                 </tr>
                                 <tr>
                                 <th scope="row" style="background-color: #b7beda">김싸피</th>
+                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
+                                <td><router-link to="/PostDetail"><div class="before"/></router-link></td>
+                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
+                                <td><div class="fail"></div></td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><button class="check"></button></td>
-                                <td><router-link to="/PostDetailAfter">제출후</router-link></td>
-                                <td><router-link to="/PostDetail">과제</router-link></td>
+                                <td><router-link to="/PostDetailAfter"><div class="after"/></router-link></td>
+                                <td><router-link to="/PostDetail"><div class="before"/></router-link></td>
                                 </tr>
                             </tbody>
                         </table> 
@@ -287,9 +287,34 @@ export default {
     height: 40px;
     border-radius: 100%;
 } */
-/* 
+
 .table > :not(caption) > * > * {
     padding: 0.0 0.0;
-} */
+}
+
+/* 과제 제출 전 칸 */
+.before{
+    background-color: #f9d479;
+    width: 100%;
+    height: 100%;
+}
+
+/* 과제 제출 후 파란색으로 변함 */
+.after{
+    background-color: #1F4256;
+    width: 100%;
+    height: 100%;
+}
+
+/* 과제 제출 안하면 빨간색으로 변함 */
+.fail{
+    background-color: #EE4748;
+    width: 100%;
+    height: 100%;
+}
+
+th {
+    width: 100px;
+}
 
 </style>

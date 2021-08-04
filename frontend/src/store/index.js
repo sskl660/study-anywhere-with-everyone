@@ -36,7 +36,8 @@ export default new Vuex.Store({
             state.config = {
                 Anthorization: `JWT ${token}`,
             };
-        },
+      },
+        // 댓글
         ADD_COMMENT(state, commentItem) {
             console.log(state);
             state.comments.push(commentItem);
@@ -83,6 +84,15 @@ export default new Vuex.Store({
         setToken: function({ commit }) {
             commit('SET_TOKEN');
         },
+        // 댓글 기능
+        // action은 mutation을 호출하고 mutations는 state값을 가져온다.
+      addComment: function ({ commit }, commentItem) {
+        commit('ADD_COMMENT', commentItem);
+      },
+      // 위의 것 축약형
+      // addComment(context, commentItem) {
+      //   context.commit('ADD_COMMENT', commentItem);
+      //   }
     },
 
     getter: {
