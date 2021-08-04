@@ -30,4 +30,10 @@ public class ChallengeListController {
         if(challenges.isEmpty()) return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
         return new ResponseEntity<List<ChallengeListResponse>>(challenges,HttpStatus.OK);
     }
+
+    @GetMapping(value = "/{keyword}")
+    public ResponseEntity<List<ChallengeListResponse>> searchChallenges(@PathVariable(name = "keyword") String keyword) throws  Exception{
+        List<ChallengeListResponse> list = challengeService.searchChallenges(keyword);
+        return new ResponseEntity<>(list,HttpStatus.OK);
+    }
 }
