@@ -1,5 +1,6 @@
 package com.example.ssaziptest.service;
 
+import com.example.ssaziptest.domain.task.LikeRequest;
 import com.example.ssaziptest.domain.task.TaskEntity;
 import com.example.ssaziptest.domain.task.TaskSubmitRequest;
 import com.example.ssaziptest.domain.task.TaskUpdateRequest;
@@ -13,6 +14,7 @@ import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -63,5 +65,20 @@ public class TaskService {
         // int challengeNo = taskRepository.findById(taskNo).orElse(null).getTaskChallengeEntity().getChallengeNo();
         taskRepository.deleteById(taskNo);
         // return challengeNo;
+    }
+
+    @Transactional
+    public void like(LikeRequest request){
+        TaskEntity taskEntity = taskRepository.findById(request.getTaskNo()).orElse(null);
+        List<String> list = taskEntity.getTaskLikes();
+        list.add(request.getUserEmail());
+        taskEntity.setTaskLikes(list);
+    }
+    @Transactional
+    public void unlike(LikeRequest request){
+        TaskEntity taskEntity = taskRepository.findById(request.getTaskNo()).orElse(null);
+        List<String> list = taskEntity.getTaskLikes();
+        list.remove(request.getUserEmail());
+        taskEntity.setTaskLikes(list);
     }
 }

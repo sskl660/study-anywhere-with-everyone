@@ -41,6 +41,9 @@ public class TaskEntity {
     private String taskImage;
     @Column(name = "task_file")
     private String taskFile;
+    @ElementCollection
+    @Column(name = "task_ikes")
+    private List<String> taskLikes;
 //    @Column(name = "task_deadline")
 //    private String taskDeadline;
 
@@ -48,7 +51,7 @@ public class TaskEntity {
     List<CommentEntity> commentEntities = new ArrayList<>();
 
     @Builder
-    public TaskEntity(int taskNo, UserEntity taskUserEntity, ChallengeEntity taskChallengeEntity, int taskIndex, String taskContent, String taskDesc, String taskImage, String taskFile) {
+    public TaskEntity(int taskNo, UserEntity taskUserEntity, ChallengeEntity taskChallengeEntity, int taskIndex, String taskContent, String taskDesc, String taskImage, String taskFile, List<String> taskLikes, List<CommentEntity> commentEntities) {
         this.taskNo = taskNo;
         this.taskUserEntity = taskUserEntity;
         this.taskChallengeEntity = taskChallengeEntity;
@@ -57,13 +60,14 @@ public class TaskEntity {
         this.taskDesc = taskDesc;
         this.taskImage = taskImage;
         this.taskFile = taskFile;
-        //this.taskDeadline = taskDeadline;
+        this.taskLikes = taskLikes;
+        this.commentEntities = commentEntities;
     }
-
     @PrePersist
     public  void taskprePersist(){
         this.taskContent=this.taskContent==null?"":this.taskContent;
         this.taskImage=this.taskImage==null?"":this.taskImage;
         this.taskFile=this.taskFile==null?"":this.taskFile;
+        this.taskLikes=this.taskLikes==null?new ArrayList<>():this.taskLikes;
     }
 }
