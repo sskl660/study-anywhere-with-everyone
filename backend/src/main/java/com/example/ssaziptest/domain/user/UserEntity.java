@@ -1,5 +1,6 @@
 package com.example.ssaziptest.domain.user;
 
+import com.example.ssaziptest.domain.feed.FeedEntity;
 import com.example.ssaziptest.domain.group.GroupmemberEntity;
 import com.example.ssaziptest.domain.task.TaskEntity;
 import com.sun.istack.NotNull;
@@ -12,6 +13,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +48,7 @@ public class UserEntity {
     private Boolean userGraduated; //boolean으로 하면 lombok 안먹음;
     @CreatedDate
     @Column(name = "user_joindate")
-    private String userJoindate;
+    private LocalDateTime userJoindate;
 
     //초기 null
     @Column(name = "user_totalcomplete")
@@ -79,9 +81,11 @@ public class UserEntity {
     private Integer userFollowing;
 
     @OneToMany(mappedBy = "groupUserEntity")
-    List<GroupmemberEntity> challengegroups = new ArrayList<>();
+    List<GroupmemberEntity> challengeGroups = new ArrayList<>();
     @OneToMany(mappedBy = "taskUserEntity")
     List<TaskEntity> taskResults = new ArrayList<>();
+    @OneToMany(mappedBy = "feedUserEntity")
+    List<FeedEntity> feedList = new ArrayList<>();
 
 
     @PrePersist
@@ -103,18 +107,18 @@ public class UserEntity {
         //this.challengegroups=this.challengegroups.isEmpty()?
     }
 
-    @Builder
-    public UserEntity(String userEmail, String userName, String userPassword, String userNumber, int userTerm, boolean userGraduated) {
-        this.userEmail = userEmail;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userNumber = userNumber;
-        this.userTerm = userTerm;
-        this.userGraduated = userGraduated;
-    }
+//    @Builder
+//    public UserEntity(String userEmail, String userName, String userPassword, String userNumber, int userTerm, boolean userGraduated) {
+//        this.userEmail = userEmail;
+//        this.userName = userName;
+//        this.userPassword = userPassword;
+//        this.userNumber = userNumber;
+//        this.userTerm = userTerm;
+//        this.userGraduated = userGraduated;
+//    }
 
     @Builder
-    public UserEntity(String userEmail, String userName, String userPassword, String userNumber, int userTerm, boolean userGraduated, String userJoindate, int userTotalcomplete, String userImage, String userGit, String userBlog, String userDevstyle, String userMbti, String userWishfield, String userIntroduce, String userTechstack, int userTotaltime, int userWeektime, int userWeekcomplete, int userFollower, int userFollowing) {
+    public UserEntity(String userEmail, String userName, String userPassword, String userNumber, int userTerm, boolean userGraduated, LocalDateTime userJoindate, int userTotalcomplete, String userImage, String userGit, String userBlog, String userDevstyle, String userMbti, String userWishfield, String userIntroduce, String userTechstack, int userTotaltime, int userWeektime, int userWeekcomplete, int userFollower, int userFollowing) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;

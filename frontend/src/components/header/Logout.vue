@@ -11,7 +11,7 @@
             <div>로그아웃 하시겠어요?</div>
           </div>
           <div class="modal-footer logout-footer">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">네</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="logout()">네</button>
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">아니요</button>
           </div>
         </div>
@@ -25,13 +25,17 @@
   
   
 </template>
-
 <script>
+import {mapActions} from 'vuex'
   export default {
     name: 'Logout',
     components: {
-
-    }
+    },
+  methods: {
+    ...mapActions([
+      'logout'
+    ])
+  },
   }
 </script>
 

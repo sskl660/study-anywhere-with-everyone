@@ -3,9 +3,11 @@ package com.example.ssaziptest.repository;
 import com.example.ssaziptest.domain.follow.FollowEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface FollowRepository extends JpaRepository<FollowEntity, Integer> {
     List<FollowEntity> findByFollowUserEntity_UserEmail(@Param(value = "useremail") String useremail);
     List<FollowEntity> findByFollowFollower(String followfollower);

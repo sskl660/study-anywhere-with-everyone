@@ -1,7 +1,6 @@
 package com.example.ssaziptest.controller;
 
 import com.example.ssaziptest.domain.challenge.ChallengeCreateRequest;
-import com.example.ssaziptest.domain.challenge.ChallengeDetailResponse;
 import com.example.ssaziptest.domain.challenge.ChallengeListResponse;
 import com.example.ssaziptest.service.ChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ public class ChallengeListController {
     /*챌린지 생성*/
     @PostMapping(value = "create")
     public ResponseEntity<Integer> createChallenge(@RequestBody ChallengeCreateRequest request) throws Exception{
-
         int response = challengeService.createChallenge(request);
         return new ResponseEntity<Integer>(response, HttpStatus.OK);
     }
@@ -32,7 +30,4 @@ public class ChallengeListController {
         if(challenges.isEmpty()) return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
         return new ResponseEntity<List<ChallengeListResponse>>(challenges,HttpStatus.OK);
     }
-
-
-
 }

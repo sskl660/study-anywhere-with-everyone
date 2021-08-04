@@ -193,3 +193,154 @@ git push
 git pull
 git commit -am "test nginx runing in jenkins"
 git push
+cd ~
+ls
+git pull
+git push
+git status
+git add .
+git status
+git log
+git pull
+git checkout docker
+git status
+git stath
+git stash
+git stash list
+git checkout docker
+ls
+git remote
+git remote branch
+git branch
+git pull
+git pull
+ls
+git pull master
+git pull origin
+ls
+git merge docker master
+ls
+git stash drop
+git stash drop
+git stash
+git stash list
+git stash apply
+git commit add .
+git merge docker master
+ls
+git stash list
+git stash apply
+git checkout master
+git stash
+git merge docker master
+git status
+git log
+git diff
+git status
+git commit add .
+git add .
+git status
+git add .
+git branch
+git commit -am "merge"
+git status
+ls
+cd backend/
+ls
+git config core.autocrlf false
+git pull
+git pull
+git add .
+git status
+git commit -am "update(Dockerfile) : update Dockerfile"
+git push
+git merge origin docker
+git checkout master
+git merge master docker
+git status
+git push
+git push --set-upstream origin master
+git pull
+git pull origin master
+git push
+git push --set-upstream origin master
+ls
+git pull
+git add .
+git commit -am "update(Dockerfile) : update Dockerfile"
+git push
+git pull
+git commit -am "update(Dockerfile) : update Dockerfile"
+git push
+ls
+git pull master
+cd ..
+ls -a
+git pull master
+git status
+git add .
+git commit -am "update(Dockerfile) : update Dockerfile"
+git push
+git pull
+git push
+git pull
+git commit -am "update(Dockerfile) : update Dockerfile"
+git push
+git pull
+git status
+git add .
+git commit -am "update properties"
+git push 
+git add .
+git commit -am "update Properties"
+git push
+git commit -am "update Properties"
+git push
+git pull
+cd ~
+ls
+git pull
+git commit -am "update properties"
+git add .
+git push
+git commit -am "update properties"
+git push
+git commit -am "update properties"
+git push
+git add .
+git commit -am "update Dockerfile"
+git status
+git diff
+git log
+git push
+git commit -am "update Dockerfile"
+git push
+git commit -am "update properties"
+git push
+git pull
+git add ..
+git status
+git pull
+git add .
+git push
+git pull
+git push
+git add .
+git commit -am "update CORS"
+git push
+git pull
+git commit -am "update CORS"
+git push
+cd ~
+git pull
+git status
+git add .
+git commit -am "update properties"
+git push
+git pull
+git commit -am "update properties"
+git push
+git pull
+git add .
+git commit -am "update properties"
+git push

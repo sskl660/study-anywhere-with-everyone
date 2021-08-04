@@ -1,10 +1,11 @@
 <template>
   <div>
+    <!-- <p>{{this.user_info}}</p> -->
     <div class="profile-info-continer">
       <!-- 타이틀도 추후에 bg-img로 바꿔주기 -->
-      <Title style="display:inline-block" :text="profile_title"/>
+      <Title style="display:inline-block" :text="user_info.userName"/>
       <!-- 프로필 상단의 카드와 팔로워, 각오 소개글 -->
-      <ProfileInfo class="id-container"/>
+      <ProfileInfo class="id-container" :userInfo="user_info"/>
     </div>
     <!-- 프로필 티켓 -->
     <div>
@@ -23,6 +24,8 @@ import ProfileInfo from '@/components/profile/ProfileInfo.vue'
 import ProfileTicket from '@/components/profile/ProfileTicket.vue'
 import ProfileEditModal from '@/components/profile/ProfileEditModal.vue'
 import './css/profile.css'
+// import axios from 'axios'
+import axios from '@/util/http-common.js';
 
 export default {
   name: 'Profile',
@@ -34,8 +37,48 @@ export default {
   },
   data: function(){
     return{
-        profile_title: '땡땡땡의 프로필',
+        // 유저 이메일 정보 받아와서 넣기
+        useremail: 'bbb@bbb.com',
+        user_info: {
+          "userBlog": "string",
+          "userDevstyle": "string",
+          "userEmail": "string",
+          "userFollower": 0,
+          "userFollowing": 0,
+          "userGit": "string",
+          "userGraduated": true,
+          "userImage": "string",
+          "userIntroduce": "string",
+          "userMbti": "string",
+          "userName": "string",
+          "userNumber": "string",
+          "userTechstack": "string",
+          "userTerm": 0,
+          "userTotalcomplete": 0,
+          "userTotaltime": 0,
+          "userWeekcomplete": 0,
+          "userWeektime": 0,
+          "userWishfield": "string"
+        }
     }
+  },
+  methods: {
+    getUserInfo: function () {
+      axios({
+      method: 'get',
+      url: `/profile/info/${this.useremail}`,
+      })
+        .then((res) => {
+          console.log(res.data)
+          this.user_info = res.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  },
+  created: function () {
+    this.getUserInfo()
   }
 }
 </script>

@@ -1,13 +1,15 @@
 <template>
   <div class="d-flex justify-content-center">
     <!-- id 카드 -->
-    <IdCard style="display:inline-block"/>
+    <!-- <div>{{userInfo.userName}}</div> -->
+    
+    <IdCard style="display:inline-block" :userInfo="userInfo"/>
     <!-- 프로필 정보 우측의 컨테이너 -->
-    <div class="profile-info" style="display:inline-block">
+    <div class="profile-info" style="display:inline-block" >
       <!-- 상단의 챌린지수, 팔로워수, 팔로잉수 -->
-      <ProfileStatus />
+      <ProfileStatus :userInfo="userInfo"/>
       <!-- 하단의 각오 및 소개글 -->
-      <ProfileIntro style="display:inline-block"/>
+      <ProfileIntro style="display:inline-block" :userIntroduce="userInfo.userIntroduce"/>
     </div>
   </div>
 </template>
@@ -24,6 +26,11 @@ export default {
     ProfileStatus,
     ProfileIntro,
   },
+  props: {
+    userInfo: {
+      type: Object
+    }
+  }
 }
 </script>
 

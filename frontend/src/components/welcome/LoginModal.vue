@@ -13,12 +13,12 @@
               <!-- 이메일 입력칸 -->
               <div class="d-flex">
                 <label for="email-input" class="col-form-label input-label">이메일</label>
-                <input type="text" class="form-control input-form" id="email-input">
+                <input type="text" class="form-control input-form" id="email-input" v-model="credentials.userEmail">
               </div>
               <!-- 비밀번호 입력칸 -->
               <div class="d-flex">
                 <label for="password-input" class="col-form-label input-label">비밀번호</label>
-                <input type="text" class="form-control input-form" id="password-input">
+                <input type="text" class="form-control input-form" id="password-input" v-model="credentials.userPassword">
               </div>
             </form>
           </div>
@@ -31,7 +31,7 @@
           </div>
           <!-- 모달창 내부 로그인 버튼 -->
           <div class="modal-footer login-footer">
-            <button type="button" class="btn btn-light login-button" data-bs-dismiss="modal">로그인</button>
+            <button type="button" class="btn btn-light login-button" data-bs-dismiss="modal" @click="login(credentials)">로그인</button>
           </div>
         </div>
       </div>
@@ -41,14 +41,27 @@
 </template>
 
 <script>
-
+import {mapActions} from 'vuex'
 export default {
   name: 'LoginModal',
   props: {
     text: {
       type: String
     }
-  }
+  },
+  data: function(){
+    return {
+      credentials: {
+        userEmail: null,
+        userPassword: null
+      }
+    }
+  },
+  methods: {
+    ...mapActions([
+      'login'
+    ]),
+  },
 }
 </script>
 

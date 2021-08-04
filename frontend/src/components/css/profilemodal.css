@@ -1,0 +1,105 @@
+/* 모달창 커스텀 */
+.profile-modal-custom {
+  width:800px;
+  height: 850px;
+  background-color: #EDE0C6;
+  border-radius: 2rem;
+}
+/* 모달창 중앙위치하도록 조정 */
+.profile-modal-position {
+  margin-right: 850px;
+}
+/* 편집등록 버튼 */
+.profile-submit-btn {
+  background-color: #1C84C4 ;
+  border-color: #1C84C4 ;
+  color: #fff ;
+  font-weight:bold ;
+  margin-left: 10px;
+}
+
+/* 프로필 편집 모달 상위 영역 컨테이너 */
+.profile-edit-upper-container {
+  width: 650px;
+  margin-left:60px;
+}
+/* 동그란 프로필 사진 부분 */
+.profile-edit-img-box {
+  width: 200px;
+  height: 200px;
+  margin-top: 5px;
+}
+/* 사진 업로드 버튼 */
+.profile-img-edit-btn {
+  background-color: #420909;
+  border-color: #420909;
+  color: #fff;
+  margin-left: 5px;
+  margin-top: 20px;
+}
+/* 프로필 편집 모달의 상위파트 input창-제일 위 */
+.profile-intro-input-top {
+  width: 300px;
+  height: 40px;
+  padding-left: 15px;
+  border-radius: 0.5rem;
+  border-style: none;
+  margin-left:10px;
+}
+.profile-intro-input-top:focus {
+  outline: none;
+}
+/* 프로필 편집 모달의 상위파트 input창-나머지 3개 */
+.profile-intro-input {
+  width: 300px;
+  height: 40px;
+  padding-left: 15px;
+  border-radius: 0.5rem;
+  border-style: none;
+  margin-left:10px;
+  margin-top: 20px;
+}
+.profile-intro-input::placeholder {
+  color: #b3b3b3;
+}
+.profile-intro-input:focus {
+  outline: none;
+}
+
+/* 하위 영역 컨테이너*/
+.profile-edit-lower-container {
+  width: 650px;
+  margin-left:60px;
+  margin-top: 35px;
+}
+/* 하위 긴 입력창 2개 */
+.profile-long-input {
+  width: 500px;
+  height: 40px;
+  padding-left: 15px;
+  border-radius: 0.5rem;
+  border-style: none;
+  margin-left:10px;
+  margin-bottom: 20px;
+}
+.profile-long-input::placeholder {
+  color: #b3b3b3;
+}
+.profile-long-input:focus {
+  outline: none;
+}
+/* 하위 소개글 입력창 */
+.profile-textarea-input {
+  width: 500px;
+  height: 180px;
+  padding-left: 15px;
+  border-radius: 0.5rem;
+  border-style: none;
+  margin-left:10px;
+}
+.profile-textarea-input::placeholder {
+  color: #b3b3b3;
+}
+.profile-textarea-input:focus {
+  outline: none;
+}
