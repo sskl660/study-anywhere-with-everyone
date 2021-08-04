@@ -8,12 +8,30 @@
         </div>
 
         <div class="d-flex row wider justify-content-center" id="body">
-            <li class="changebtn" v-if="!beforejoin">
-                <div class="Cjoin_btn"><ButtonRound :text="가입하기"/></div>
-            </li>
-            <li class="changebtn" v-else>
-                <div class="Cjoindone_btn"><ButtonRound :text="가입완료"/></div>
-            </li>
+            <div class="joinbox">
+                <li class="changebtn" v-if="!beforejoin">
+                    <div class="Cjoin_btn"><ButtonRound :text="가입하기"/></div>
+                    <div class="alarm">
+                        <h5> 가입 마감까지 20 : 56 </h5>
+                    </div>
+                </li>
+                <li class="changebtn" v-else-if="afterjoin">
+                    <div class="Cjoindone_btn"><ButtonRound :text="가입완료"/></div>
+                    <div class="alarm">
+                        <h5> 진행 중 </h5>
+                    </div>
+                </li>
+                <li class="changebtn" v-else>
+                    <div class="Cjoindone_btn"><ButtonRound :text="가입완료"/></div>
+                    <div class="alarm">
+                        <h5 style="color: #EE4748"> 종료 </h5>
+                    </div>
+                </li>
+                <!-- <div class="alarm">
+                    <h4> 가입 마감까지 20 : 56 </h4>
+                </div> -->
+            </div>
+            
             <div class="col col-4 flex-item">
                 <div class="outline">
                     <div class="outline2">
@@ -126,7 +144,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
+                                <td><button class="check"></button></td>
                                 <td><router-link to="/PostDetailAfter">제출후</router-link></td>
                                 <td><router-link to="/PostDetail">과제</router-link></td>
                                 </tr>
@@ -244,4 +262,34 @@ export default {
   margin-right: 69%;
   margin-bottom: 5px;
 }
+
+.alarm{
+    color: #F59C35;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+/* .joinbox{
+    justify-content: center;
+} */
+
+.changebtn{
+    display: flex;
+    justify-content: left;
+    padding-top: 20px;
+    border-style: none;
+    margin-left: 210px;
+}
+
+/* .check{
+    background-color: #f9d479;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+} */
+/* 
+.table > :not(caption) > * > * {
+    padding: 0.0 0.0;
+} */
+
 </style>
