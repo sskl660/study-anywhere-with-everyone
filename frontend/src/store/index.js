@@ -29,8 +29,7 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log("actionerr")
-          console.log(err)
-          
+          console.log(err)  
         })
     }
   },

@@ -1,8 +1,12 @@
 <template>
   <div>
+
+    <!-- 챌린지 목록 제목 -->
     <div class="challenge-title-container">
       <div class="challenge-title">{{ title }}</div>
     </div>
+
+    <!-- 챌린지 티켓들 -->
     <div class="challenge-list-container">
       <div class="d-flex justify-content-center">
         <ChallengeListItem :challenge="challenge"/>
@@ -23,6 +27,7 @@
         <ChallengeListItem :challenge="challenge"/>
       </div>
     </div>
+    
   </div>
 </template>
 
