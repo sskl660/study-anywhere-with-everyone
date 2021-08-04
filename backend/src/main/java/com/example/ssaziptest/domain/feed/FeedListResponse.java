@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Blob;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -23,8 +24,8 @@ public class FeedListResponse {
     private int challengeNo;
     private String challengeName;
     private String challengeDesc;
-    private String challengeStartdate;
-    private String challengeEnddate;
+    private LocalDate challengeStartdate;
+    private LocalDate challengeEnddate;
     private int challengeMemberCnt;
     /*랜각공 참여 정보*/
     private String galaxyComment;
@@ -38,7 +39,7 @@ public class FeedListResponse {
     private LocalDateTime eventtime;
 
     @Builder
-    public FeedListResponse(String userEmail, String userName, String userImage, int challengeNo, String challengeName, String challengeDesc, String challengeStartdate, String challengeEnddate, int challengeMemberCnt, String galaxyComment, int galaxyMemberCnt, String followUserEmail, String followUserImage, int followerCnt, int followingCnt, LocalDateTime eventtime) {
+    public FeedListResponse(String userEmail, String userName, String userImage, int challengeNo, String challengeName, String challengeDesc, LocalDate challengeStartdate, LocalDate challengeEnddate, int challengeMemberCnt, String galaxyComment, int galaxyMemberCnt, String followUserEmail, String followUserImage, int followerCnt, int followingCnt, LocalDateTime eventtime) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userImage = userImage;
