@@ -64,7 +64,7 @@
                 </div>
                 <div class="d-flex">
                     <label for="code" class="input-label">참여코드</label>
-                    <input type="text" id="code" class="info-input code-input" v-model="accessCode"/>
+                    <input type="text" id="code" class="info-input code-input" v-model="accessCode" />
                     <!-- 참여코드 확인 버튼 -->
                     <div class="check-button" @click="codeCheck(accessCode)">
                         <ButtonSquare text="확인" />
@@ -84,7 +84,7 @@
 <script>
 import ButtonRound from '@/components/common/ButtonRound';
 import ButtonSquare from '@/components/common/ButtonSquare';
-import { mapActions ,mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: 'Join',
@@ -103,27 +103,25 @@ export default {
                 userGraduated: false,
                 userTerm: null,
             },
-            accessCode : null,
-            joinFlag :false,
+            accessCode: null,
+            joinFlag: false,
         };
     },
     methods: {
         ...mapActions([
             'join', // 회원가입 함수 등록
-            'emailcheck',//아이디 체크
+            'emailcheck', //아이디 체크
         ]),
-        codeCheck:function(accessCode){
-          if(accessCode=="307"){
-            alert("참여코드 확인 완료")
-          }
-          else
-            alert("참여코드 틀림 ㅠㅠ")
-        }
+        codeCheck: function(accessCode) {
+            if (accessCode == '307') {
+                alert('참여코드 확인 완료');
+            } else alert('참여코드 틀림 ㅠㅠ');
+        },
     },
-    computed:{
-      ...mapGetters([
-        'emailposi',//이메일 사용 가능 여부 flag
-      ])
+    computed: {
+        ...mapGetters([
+            'emailposi', //이메일 사용 가능 여부 flag
+        ]),
     },
 };
 </script>
