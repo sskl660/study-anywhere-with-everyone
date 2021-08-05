@@ -8,10 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.transaction.Transactional;
-import java.io.File;
 
 @Service
 @NoArgsConstructor
@@ -33,11 +31,7 @@ public class FileService {
     }
 
     @Transactional
-<<<<<<< HEAD
-    public FileInfoResponse getFile(int fileNo){
-=======
     public FileInfoResponse fileDownload(int fileNo){
->>>>>>> deccdb86eacf0c86c982fdf0273a3553e5dcda9d
         FileEntity file = fileRepository.findById(fileNo).get();
         FileInfoResponse fileInfoResponse = FileInfoResponse.builder()
                 .fileNo(fileNo)
