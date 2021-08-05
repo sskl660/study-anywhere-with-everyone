@@ -14,7 +14,7 @@
                 <li class="changebtn" v-if="!beforejoin">
                     <div class="Cjoin_btn"><ButtonRound :text="가입하기" @click="hidebtn" /></div>
                     <div class="alarm">
-                        <h5 id="rest">{{ restTime }}</h5>
+                        <h5 id="rest"></h5>
                     </div>
                 </li>
                 <!-- 가입하기 버튼을 누르면 가입완료 버튼으로 바뀌고 시간이 진행중으로 바뀐다 -->
@@ -53,85 +53,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">권희은</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                <tr v-for="person in chall_info.challengeGroup" :key="person">
+                                    <th scope="row" style="background-color: #b7beda">{{ person[1] }}</th>
+                                    <!-- <td>{{ peron[1] }}</td> -->
+                                    <td v-for="kan in chall_info.challengeTaskCnt" :key="kan">
+                                        <router-link to="/PostDetailAfter"><div class="after"/>{{kan}}</router-link>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">김태현</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">김준형</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">이장섭</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">유희원</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">차은채</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">김싸피</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">김싸피</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                <!-- 
                                 <tr>
                                     <th scope="row" style="background-color: #b7beda">김싸피</th>
                                     <td></td>
@@ -165,7 +94,7 @@
                                     <td>
                                         <router-link to="/PostDetail"><div class="before"/></router-link>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -178,7 +107,7 @@
 
                         <strong
                             >참여멤버 :
-                            <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)"> @{{ name[1] }} </span>
+                            <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)"> {{ name[1] }} </span>
                         </strong>
                     </div>
                 </div>
@@ -227,39 +156,35 @@ export default {
             가입하기: '가입하기',
             가입완료: '가입완료',
             // 챌린지: '히오니의 알고 챌린지',
-            challengeno: 1,
+            challengeno: 4,
             chall_info: {
-                // "challengeCapacity": 0,
-                // "challengeCategory": "string",
-                // "challengeDesc": "string",
-                // "challengeEnddate": "string",
-                // "challengeGroup": [
-                //   [
-                //     "string"
-                //   ]
-                // ],
-                // "challengeLevel": 0,
-                // "challengeName": "string",
-                // "challengeNo": 0,
-                // "challengeStartdate": "string",
-                // "challengeTaskCnt": 0,
-                // "challengeTaskdeadlines": ["string"]
+                challengeCapacity: 0,
+                challengeCategory: 'string',
+                challengeDesc: 'string',
+                challengeEnddate: 'string',
+                challengeGroup: [['string']],
+                challengeLevel: 0,
+                challengeName: 'string',
+                challengeNo: 0,
+                challengeStartdate: '2023-07-04',
+                challengeTaskCnt: 0,
+                challengeTaskdeadlines: ['string'],
 
-                challengeNo: 1,
-                challengeName: '히알챌',
-                challengeCategory: 'Algorithm',
-                challengeLevel: 3,
-                challengeCapacity: 6,
-                challengeStartdate: '2021-07-04',
-                challengeEnddate: '2021-08-04',
-                challengeDesc: '히오니의 알고리즘 챌린지',
-                challengeTaskCnt: 7,
-                challengeTaskdeadlines: ['2021-08-01', '2021-08-02', '2021-08-03'],
-                challengeGroup: [
-                    ['123', '주인공'],
-                    ['456', '제발좀'],
-                    ['789', '김이름'],
-                ],
+                // challengeNo: 1,
+                // challengeName: '히알챌',
+                // challengeCategory: 'Algorithm',
+                // challengeLevel: 3,
+                // challengeCapacity: 6,
+                // challengeStartdate: '2021-07-04',
+                // challengeEnddate: '2021-08-04',
+                // challengeDesc: '히오니의 알고리즘 챌린지',
+                // challengeTaskCnt: 7,
+                // challengeTaskdeadlines: ['2021-08-01', '2021-08-02', '2021-08-03'],
+                // challengeGroup: [
+                //     ['123', '주인공'],
+                //     ['456', '제발좀'],
+                //     ['789', '김이름'],
+                // ],
             },
 
             // 모달
@@ -283,8 +208,13 @@ export default {
             })
                 .then((res) => {
                     this.chall_info = res.data;
+                    console.log(this.chall_info);
+                    this.chall_info.challengeStartdate += ' 23:59:59';
+                    this.countDownTimer('rest', this.chall_info.challengeStartdate);
                 })
                 .catch((err) => {
+                    alert('false');
+
                     console.log(err);
                 });
         },
@@ -317,10 +247,17 @@ export default {
             }
             timer = setInterval(showRemaining, 1000);
         },
+        hidebtn() {
+            this.beforejoin = false;
+        },
+        nameprofile(num) {
+            var email = this.chall_info.challengeGroup[num][0];
+            alert(email);
+        },
     },
     created: function() {
         this.getChallInfo(); //생성할 때 바로 불러줘
-        this.countDownTimer('rest', this.chall_info.challengeStartdate);
+        //this.countDownTimer('rest', this.chall_info.challengeStartdate);
     },
 };
 </script>
