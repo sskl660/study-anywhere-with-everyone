@@ -20,9 +20,13 @@ export default {
                 completed: false,
             };
             if (this.commentOpinion)
+                //actions가 가지고 있는 함수 호출 하려면 dispatch를 해야한다.
+                // action같은 경우는 일반적인 메소드와 똑같이 사용할 것이다.
+                this.$store.dispatch('addComment', opinionItem);
                 // store가 가지고 있는 mutations를 호출하는 것
                 // 첫번째 인자값으로 mutations의 이름을 가져간다
-                this.$store.commit('ADD_COMMENT', opinionItem);
+                // mutation은 state를 관리하기 때문에 mutation이 가지는 메소드 이름은 대문자
+                //this.$store.commit('ADD_COMMENT', opinionItem);
                 // this.$store.state.comments.push(opinionItem);
             this.commentOpinion = '';
         },

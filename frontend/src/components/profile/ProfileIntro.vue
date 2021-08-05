@@ -1,8 +1,7 @@
 <template>
   <div class="profile-intro" style="display:inline-block">
-    <div class="profile-intro-content" style="display:inline-block">
+    <div align="left" class="profile-intro-content" v-html="Introduce" style="display:inline-block">
       {{userIntroduce}}
-      
     </div>
   </div>
 </template>
@@ -13,6 +12,16 @@ export default {
   props: {
     userIntroduce: {
       type: Object
+    }
+  },
+  data: function () {
+    return {
+      fixedIntroduce: "",
+    }
+  },
+  computed: {
+    Introduce: function () {
+      return this.userIntroduce.replace(/\n/g, '<br />');
     }
   }
 }
