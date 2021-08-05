@@ -15,7 +15,7 @@
                     <div class="Cjoin_btn" @click="hidebtn()"><ButtonRound :text="msg" /></div>
                     <!-- <div class="Cjoindone_btn" v-else><ButtonRound :text="가입완료" /></div> -->
                     <div class="alarm">
-                        <h5 id="rest">{{ restTime }}</h5>
+                        <h5 id="rest"></h5>
                     </div>
                 </li>
                 <!-- 가입하기 버튼을 누르면 가입완료 버튼으로 바뀌고 시간이 진행중으로 바뀐다 -->
@@ -186,7 +186,7 @@
 
                         <strong
                             >참여멤버 :
-                            <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)"> @{{ name[1] }} </span>
+                            <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)"> {{ name[1] }} </span>
                         </strong>
                         <br><br>
                         <div>
@@ -243,21 +243,17 @@ export default {
             // 챌린지: '히오니의 알고 챌린지',
             challengeno: 4,
             chall_info: {
-                "challengeCapacity": 0,
-                "challengeCategory": "string",
-                "challengeDesc": "string",
-                "challengeEnddate": "string",
-                "challengeGroup": [
-                  [
-                    "string"
-                  ]
-                ],
-                "challengeLevel": 0,
-                "challengeName": "string",
-                "challengeNo": 0,
-                "challengeStartdate": "string",
-                "challengeTaskCnt": 0,
-                "challengeTaskdeadlines": ["string"]
+                challengeCapacity: 0,
+                challengeCategory: 'string',
+                challengeDesc: 'string',
+                challengeEnddate: 'string',
+                challengeGroup: [['string']],
+                challengeLevel: 0,
+                challengeName: 'string',
+                challengeNo: 0,
+                challengeStartdate: 'string',
+                challengeTaskCnt: 0,
+                challengeTaskdeadlines: ['string'],
 
                 // challengeNo: 1,
                 // challengeName: 'SSA.ZIP',
@@ -275,7 +271,7 @@ export default {
                 //     ['789', '김이름'],
                 // ],
             },
-            // 과제 블럭 하나씩 
+            // 과제 블럭 하나씩
             // task_info:[{
             //   "taskIndex": 0, // 몇번째 과제인지
             //   "taskNo": 0, // 고유값. 과제 페이지로 넘어갈 때 사용
@@ -283,35 +279,35 @@ export default {
             //   "userName": "string"
             // }]
 
-            task_info:[
-              {
-                // 첫번째 과제만 내고 나머지는 안냄
-              "taskIndex": 1, // 2번과제로 생각하자
-              "taskNo": 123,
-              "userEmail": "jang@naver.com",
-              "userName": "이장섭",
-            },
-            {
-              //나는 1, 2 둘다 냄
-              "taskIndex": 1,
-              "taskNo": 456,
-              "userEmail": "cha@naver.com",
-              "userName": "차은채",
-            },
-            {
-              // 두번째 과제만 내고 나머지는 안냄
-              "taskIndex": 2,
-              "taskNo": 789,
-              "userEmail": "cha@naver.com",
-              "userName": "차은채",
-            },
-            {
-              "taskIndex": 2,
-              "taskNo": 98,
-              "userEmail": "IU-love@naver.com",
-              "userName": "아이유",
-            }
-            ]
+            task_info: [
+                {
+                    // 첫번째 과제만 내고 나머지는 안냄
+                    taskIndex: 1, // 2번과제로 생각하자
+                    taskNo: 123,
+                    userEmail: 'jang@naver.com',
+                    userName: '이장섭',
+                },
+                {
+                    //나는 1, 2 둘다 냄
+                    taskIndex: 1,
+                    taskNo: 456,
+                    userEmail: 'cha@naver.com',
+                    userName: '차은채',
+                },
+                {
+                    // 두번째 과제만 내고 나머지는 안냄
+                    taskIndex: 2,
+                    taskNo: 789,
+                    userEmail: 'cha@naver.com',
+                    userName: '차은채',
+                },
+                {
+                    taskIndex: 2,
+                    taskNo: 98,
+                    userEmail: 'IU-love@naver.com',
+                    userName: '아이유',
+                },
+            ],
 
             // 모달
             // insertModal : null,
@@ -327,7 +323,7 @@ export default {
         // closeAfterInsert(){
         // this.insertModal.hide();
         // },
-        
+
         //챌린지 페이지에서 챌린지 정보 불러오는 통신
         getChallInfo: function() {
             axios({
@@ -336,26 +332,28 @@ export default {
             })
                 .then((res) => {
                     this.chall_info = res.data;
-                    this.chall_info.challengeStartdate += " 23:59:59";
+                    this.chall_info.challengeStartdate += ' 23:59:59';
                     this.countDownTimer('rest', this.chall_info.challengeStartdate);
                 })
                 .catch((err) => {
+                    alert('false');
+
                     console.log(err);
                 });
         },
 
         // BJ 누르면 개인 정보로 넘어가는 통신
-        getTaskInfo: function(){
-          axios({
-            methods: 'get',
-            url: `/challenge/tasklist/${this.challengeno}`,
-          })
-          .then((res) => {
-            this.task_info = res.data;
-          })
-          .catch((err) => {
-            console.log(err);
-          })
+        getTaskInfo: function() {
+            axios({
+                methods: 'get',
+                url: `/challenge/tasklist/${this.challengeno}`,
+            })
+                .then((res) => {
+                    this.task_info = res.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         },
 
         countDownTimer: function(id) {
@@ -411,7 +409,6 @@ export default {
               taskno = this.task_info[n].taskNo;
               this.submit = !this.submit;
             }
-          }
 
           if(taskno != -1){ // 과제 제출 했을 경우
             alert(taskno)
@@ -430,7 +427,8 @@ export default {
         // this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
     },
-};
+  }
+}
 </script>
 <style scoped>
 /* 가입하기 버튼 */
