@@ -7,6 +7,7 @@ import Profile from '../views/Profile.vue'
 import ChallengeRoom from '../components/ChallengeRoom.vue'
 import PostDetail from '../components/PostDetail.vue'
 import PostDetailAfter from '../components/PostDetailAfter.vue'
+import EPeacefulWorld from '../views/EPeacefulWorld.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/PostDetailAfter',
     name: 'PostDetailAfter',
     component: PostDetailAfter
+  },
+  {
+    path: '/EPeacefulWorld',
+    name: 'EPeacefulWorld',
+    component: EPeacefulWorld
   }
   // {
   //   path: '/about',
