@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,20 @@ public class ChallengeService {
     @Transactional
     public int createChallenge(ChallengeCreateRequest request) {
         return challengeRepository.save(request.toEntity()).getChallengeNo();
+    }
+    public int updateChallenge(int challengeNo, ChallengeCreateRequest request){
+        ChallengeEntity challengeEntity = challengeRepository.findById(challengeNo).orElse(null);
+        challengeEntity.setChallengeName(request.getChallengeName());
+        challengeEntity.setChallengeCategory(request.getChallengeCategory());
+        challengeEntity.setChallengeLevel(request.getChallengeLevel());
+        challengeEntity.setChallengeCapacity(request.getChallengeCapacity());
+        challengeEntity.setChallengeStartdate(request.getChallengeStartdate());
+        challengeEntity.setChallengeEnddate(request.getChallengeEnddate());
+        challengeEntity.setChallengeTaskCnt(request.getChallengeTaskCnt());
+        challengeEntity.setChallengeTaskdeadlines(new ArrayList<>(Arrays.asList(request.getChallengeTaskdeadlines())));
+
+        challengeRepository.save(challengeEntity);
+        return challengeNo;
     }
 
     @Transactional

@@ -2,17 +2,13 @@ package com.example.ssaziptest.controller;
 
 import com.example.ssaziptest.common.util.JwtTokenUtil;
 import com.example.ssaziptest.domain.follow.FollowRequest;
-import com.example.ssaziptest.domain.result.BoolResult;
 import com.example.ssaziptest.domain.task.TaskTicketResponse;
 import com.example.ssaziptest.domain.user.*;
 import com.example.ssaziptest.service.FollowService;
 import com.example.ssaziptest.service.UserService;
-import com.google.api.Http;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
