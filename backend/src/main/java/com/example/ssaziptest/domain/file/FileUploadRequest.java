@@ -11,6 +11,6 @@ public class FileUploadRequest {
     private String fileOriginalname;
     private String filePath;
     private String userEmail;
-    private String fileInfo;
-    private int fileType;
+//    private String fileInfo;
+//    private int fileType;
 }

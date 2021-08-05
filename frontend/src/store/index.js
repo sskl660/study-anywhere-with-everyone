@@ -17,10 +17,11 @@ export default new Vuex.Store({
         userTerm: null,
     },
     // state를 유지하기 위해
-    plugins: [createPersistedState({
-        paths: ['userEmail', 'userName','emailposi',
-            'isLogin', 'userTerm', 'config','comments']
-    })],
+    plugins: [
+        createPersistedState({
+            paths: ['userEmail', 'userName', 'emailposi', 'isLogin', 'userTerm', 'config', 'comments'],
+        }),
+    ],
     mutations: {
         // 가입
         JOIN: function(state) {
@@ -55,6 +56,17 @@ export default new Vuex.Store({
             state.userName = userEntity.userName;
             state.userTerm = userEntity.userTerm;
         },
+        // 댓글
+        ADD_COMMENT(state, commentItem) {
+            console.log(state);
+            state.comments.push(commentItem);
+        },
+        //이메일 체크
+        EMAIL_CHECK(state, returnflag) {
+            state.emailposi = returnflag;
+            alert('중복체크 완료' + returnflag);
+        },
+
         // 댓글
         ADD_COMMENT(state, commentItem) {
             console.log(state);
