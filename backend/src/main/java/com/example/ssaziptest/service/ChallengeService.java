@@ -188,6 +188,7 @@ public class ChallengeService {
             taskDetailResponse.setTaskFile(taskEntity.getTaskFile());
             taskDetailResponse.setUserEmail(taskEntity.getTaskUserEntity().getUserEmail());
             taskDetailResponse.setUserName(taskEntity.getTaskUserEntity().getUserName());
+            taskDetailResponse.setUserTerm(taskEntity.getTaskUserEntity().getUserTerm());
             taskDetailResponse.setLikes(taskEntity.getTaskLikes().size());
             taskDetailResponse.setLikemembers(taskEntity.getTaskLikes());
         }
