@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -141,16 +142,35 @@ public class ChallengeService {
 
     @Transactional
     public List<BulletJournalResponse> getTaskList(int challengeno){
+        //챌린지
+        ChallengeEntity challengeEntity = challengeRepository.findById(challengeno).get();
+        //챌린지 과제들 마감 기한
+        List<LocalDate> deadlines = challengeEntity.getChallengeTaskdeadlines();
+        //챌린지에 제출 된 과제들
         List<TaskEntity> taskEntityList = taskRepository.findByTaskChallengeEntity_ChallengeNo(challengeno);
+        //그룹 멤버들
+        List<GroupmemberEntity> groupmemberEntities = groupmemberRepository.findByGroupChallengeEntity_ChallengeNo(challengeno);
+        //int membercnt = groupmemberEntities.size();
+
         List<BulletJournalResponse> bjList = new ArrayList<>();
-        for(TaskEntity taskEntity: taskEntityList){
-            BulletJournalResponse bjresponse = BulletJournalResponse.builder()
-                    .taskNo(taskEntity.getTaskNo())
-                    .taskIndex(taskEntity.getTaskIndex())
-                    .userName(taskEntity.getTaskUserEntity().getUserName())
-                    .userEmail(taskEntity.getTaskUserEntity().getUserEmail())
-                    .build();
-            bjList.add(bjresponse);
+        for(GroupmemberEntity groupmemberEntity:groupmemberEntities){
+            BulletJournalResponse response = new BulletJournalResponse();
+            Integer[] temp = new Integer[challengeEntity.getChallengeTaskCnt()];
+            for(TaskEntity taskEntity: taskEntityList){
+                if(taskEntity.getTaskUserEntity().getUserEmail() == groupmemberEntity.getGroupUserEntity().getUserEmail()){
+                    temp[taskEntity.getTaskIndex()] = taskEntity.getTaskNo();
+                }
+            }
+            for(int i=0; i<challengeEntity.getChallengeTaskCnt(); i++){
+                if(temp[i]==null&&deadlines.get(i).isBefore(LocalDate.now())){
+                    temp[i] = -1;
+                }
+            }
+            response.setTaskNo(temp);
+            response.setUserEmail(groupmemberEntity.getGroupUserEntity().getUserEmail());
+            response.setUserName(groupmemberEntity.getGroupUsername());
+
+            bjList.add(response);
         }
         return bjList;
     }
