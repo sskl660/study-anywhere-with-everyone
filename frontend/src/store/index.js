@@ -44,9 +44,12 @@ export default new Vuex.Store({
             state.config = {
                 Anthorization: `JWT ${token}`,
             };
+<<<<<<< HEAD
+=======
             state.userEmail = userEntity.userEmail;
             state.userName = userEntity.userName;
             state.userTerm = userEntity.userTerm;
+>>>>>>> 2c5a96db672beda40d7138042d1573dc1b438fb6
         },
         // 댓글
         ADD_COMMENT(state, commentItem) {
