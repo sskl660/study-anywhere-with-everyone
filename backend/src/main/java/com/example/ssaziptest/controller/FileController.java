@@ -8,13 +8,20 @@ import com.example.ssaziptest.repository.UserRepository;
 import com.example.ssaziptest.service.FileService;
 import com.example.ssaziptest.util.MD5Generator;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 @Api(tags = {"8.File"})
 @RestController
@@ -28,7 +35,7 @@ public class FileController {
     private FileRepository fileRepository;
 
     /*프로필 이미지 업로드*/
-    @PostMapping(value = "/upload/{useremail}")
+    @PostMapping(value = "/upload/profile/{useremail}")
     public int uploadProfile(@RequestParam("file") MultipartFile files, @PathVariable(name = "useremail")String useremail) {
         int fileId = 0;
         try {
@@ -56,7 +63,6 @@ public class FileController {
             fileDto.setUserEmail(useremail);
 
             fileId = fileService.fileUpload(fileDto);
-            //user나 task쪽 service로도 저장
             UserEntity userEntity = userRepository.getById(useremail);
             userEntity.setUserImage(Integer.toString(fileId));
             userRepository.save(userEntity);
@@ -64,6 +70,16 @@ public class FileController {
             e.printStackTrace();
         }
         return fileId;
+    }
+
+    @ApiOperation(value = "image 조회")
+    @GetMapping(value = "image/{fileno}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> userSearch(@PathVariable("fileno") int fileno) throws Exception {
+        FileEntity fileEntity = fileRepository.getById(fileno);
+        InputStream imageStream = new FileInputStream(fileEntity.getFilePath());
+        byte[] imageByteArray = IOUtils.toByteArray(imageStream);
+        imageStream.close();
+        return new ResponseEntity<>(imageByteArray, HttpStatus.OK);
     }
 
 }
