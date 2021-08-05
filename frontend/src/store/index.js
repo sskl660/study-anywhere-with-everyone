@@ -56,16 +56,16 @@ export default new Vuex.Store({
             state.userName = userEntity.userName;
             state.userTerm = userEntity.userTerm;
         },
-        // 댓글
-        ADD_COMMENT(state, commentItem) {
-            console.log(state);
-            state.comments.push(commentItem);
-        },
-        //이메일 체크
-        EMAIL_CHECK(state, returnflag) {
-            state.emailposi = returnflag;
-            alert('중복체크 done ' + returnflag);
-        },
+        // // 댓글
+        // ADD_COMMENT(state, commentItem) {
+        //     console.log(state);
+        //     state.comments.push(commentItem);
+        // },
+        // //이메일 체크
+        // EMAIL_CHECK(state, returnflag) {
+        //     state.emailposi = returnflag;
+        //     alert('중복체크 done ' + returnflag);
+        // },
     },
     // 젠킨스를 위한 변경사항
 
