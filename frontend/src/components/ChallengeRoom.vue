@@ -11,19 +11,20 @@
         <div class="d-flex row wider justify-content-center" id="body">
             <div class="joinbox">
                 <!-- 가입버튼 누르기 전에는 가입하기 버튼과 가입 마감까지 남은 시간이 보여진다 -->
-                <li class="changebtn" v-if="!beforejoin">
-                    <div class="Cjoin_btn"><ButtonRound :text="가입하기" @click="hidebtn()" /></div>
+                <li class="changebtn">
+                    <div class="Cjoin_btn" @click="hidebtn()"><ButtonRound :text="msg" /></div>
+                    <!-- <div class="Cjoindone_btn" v-else><ButtonRound :text="가입완료" /></div> -->
                     <div class="alarm">
                         <h5 id="rest"></h5>
                     </div>
                 </li>
                 <!-- 가입하기 버튼을 누르면 가입완료 버튼으로 바뀌고 시간이 진행중으로 바뀐다 -->
-                <li class="changebtn" v-else>
+                <!-- <li class="changebtn" v-else>
                     <div class="Cjoindone_btn"><ButtonRound :text="가입완료" /></div>
                     <div class="alarm">
                         <h5 id="rest">{{ restTime }}</h5>
                     </div>
-                </li>
+                </li> -->
                 <!-- 가입완료 후 챌린지 마감시간이 지나면 진행중이 종료 바뀜 -->
                 <!-- <li class="changebtn">
                     <div class="Cjoindone_btn"><ButtonRound :text="가입완료"/></div>
@@ -55,10 +56,18 @@
                             <tbody>
                                 <tr v-for="person in chall_info.challengeGroup" :key="person">
                                     <th scope="row" style="background-color: #b7beda">{{ person[1] }}</th>
-                                    <td v-for="(kan, index) in chall_info.challengeTaskCnt" :key="kan" @click="taskblock(person[0], index)">
-                                        <!-- <div v-for="no in task_info.taskIndex" :key="no"> -->
-                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
-                                        <!-- </div> -->
+                                    <td v-for="(kan, index) in chall_info.challengeTaskCnt" :key="kan" @click="taskblock(person[0],index)">
+                                      <!-- <div v-for="no in task_info.taskIndex" :key="no"> -->
+                                            <router-link to="/PostDetailAfter" v-if="submit">
+                                              <div class="after"></div>
+                                            </router-link>
+                                          <router-link to="/PostDetail" v-else><div class="before"/></router-link>
+                                          <div v-if="fail" class="fail"></div>
+                                      <!-- 과제 제출하기 전 false하고 제출하면 true로 해주고
+                                      과제 제출 여부 변수
+                                      마감 시간 변수
+                                      저 세개를 묶음으로 감싸고 감싼 div에서 v-if -->
+                                      <!-- </div> -->
                                     </td>
                                 </tr>
                             </tbody>
@@ -75,6 +84,10 @@
                             >참여멤버 :
                             <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)"> {{ name[1] }} </span>
                         </strong>
+                        <br><br>
+                        <div>
+                          <strong> 난이도: </strong><span v-for="level in chall_info.challengeLevel" :key="level"><img src="../assets/star.png" alt="levelstar" id="levelstar"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="ChallengeTicket">
@@ -119,8 +132,10 @@ export default {
     data: function() {
         return {
             // 버튼에 들어갈 문구들
-            가입하기: '가입하기',
-            가입완료: '가입완료',
+            msg: '가입하기',
+            // 가입완료: '가입완료',
+            submit: true,
+            fail: false,
             // 챌린지: '히오니의 알고 챌린지',
             challengeno: 4,
             chall_info: {
@@ -266,49 +281,64 @@ export default {
             }
             timer = setInterval(showRemaining, 1000);
         },
-        hidebtn() {
-            this.beforejoin = false;
+        // 가입하기 버튼 눌렀을 때
+        hidebtn(){
+        // this.beforejoin=false;
+        this.msg = '가입완료';
+        console.log(this.msg)
+        // document.getElementById('Cjoin_btn').style.backgroundColor = '#f9d479';
+        document.querySelector('.Cjoin_btn .btn-light').style.backgroundColor = '#f9d479';
+        // 여기에다가 로직을 작성해야한다
         },
-        nameprofile(num) {
-            var email = this.chall_info.challengeGroup[num][0];
-            alert(email);
+
+        nameprofile(num){
+          var email = this.chall_info.challengeGroup[num][0];
+          alert(email);
         },
-        taskblock(email, index) {
-            // var email = this.chall_info.challengeGroup[];
-            // var index = this.
-            let taskno = -1;
-            for (let n = 0; n < this.task_info.length; n++) {
-                if ((this.task_info[n].userEmail == email) & (this.task_info[n].taskIndex == index)) {
-                    taskno = this.task_info[n].taskNo;
-                }
+        // bj 블럭의 과제 블럭을 눌렀을 때
+        taskblock(email, index){
+          // var email = this.chall_info.challengeGroup[];
+          // var index = this.
+          let taskno = -1;
+          for( let n = 0; n < this.task_info.length; n++){
+            if(this.task_info[n].userEmail == email & this.task_info[n].taskIndex == index){
+              taskno = this.task_info[n].taskNo;
+              this.submit = !this.submit;
             }
 
-            if (taskno != -1) {
-                alert(taskno);
-            }
+          if(taskno != -1){ // 과제 제출 했을 경우
+            alert(taskno)
 
-            // alert(email + ' ' + index + '' + taskno);
-        },
+            this.submit = true;
+            console.log(!this.submit)
+            // submit == true;
+          }
+
+          
+          // alert(email + ' ' + index + '' + taskno);
+        }
     },
     created: function() {
         this.getChallInfo(); //생성할 때 바로 불러줘
         // this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
     },
-};
+  }
+}
 </script>
 <style scoped>
 /* 가입하기 버튼 */
 .Cjoin_btn .btn-light {
     color: #1f4256;
     background-color: #99b7ff;
-    border-color: #99b7ff;
+    /* border-color: #99b7ff; */
     font-size: 25px;
     font-weight: bold;
     width: 171px;
     height: 54px;
     margin-right: 69%;
     margin-bottom: 5px;
+    border-style: none;
 }
 
 /* 가입완료 버튼 */
@@ -376,5 +406,10 @@ export default {
 
 th {
     width: 100px;
+}
+
+#levelstar{
+  width: 45px;
+  height: 45px;
 }
 </style>
