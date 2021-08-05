@@ -12,7 +12,7 @@
             <div class="joinbox">
                 <!-- 가입버튼 누르기 전에는 가입하기 버튼과 가입 마감까지 남은 시간이 보여진다 -->
                 <li class="changebtn" v-if="!beforejoin">
-                    <div class="Cjoin_btn"><ButtonRound :text="가입하기" @click="hidebtn" /></div>
+                    <div class="Cjoin_btn"><ButtonRound :text="가입하기" @click="hidebtn()" /></div>
                     <div class="alarm">
                         <h5 id="rest">{{ restTime }}</h5>
                     </div>
@@ -21,7 +21,7 @@
                 <li class="changebtn" v-else>
                     <div class="Cjoindone_btn"><ButtonRound :text="가입완료" /></div>
                     <div class="alarm">
-                        <h5>진행 중</h5>
+                        <h5 id="rest">{{ restTime }}</h5>
                     </div>
                 </li>
                 <!-- 가입완료 후 챌린지 마감시간이 지나면 진행중이 종료 바뀜 -->
@@ -53,16 +53,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">권희은</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                <tr v-for="person in chall_info.challengeGroup" :key="person">
+                                    <th scope="row" style="background-color: #b7beda">{{ person[1] }}</th>
+                                    <td v-for="(kan, index) in chall_info.challengeTaskCnt" :key="kan" @click="taskblock(person[0],index)">
+                                      <!-- <div v-for="no in task_info.taskIndex" :key="no"> -->
+                                      <router-link to="/PostDetailAfter"><div class="after"/></router-link>
+                                      <!-- </div> -->
+                                    </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <th scope="row" style="background-color: #b7beda">김태현</th>
                                     <td></td>
                                     <td></td>
@@ -165,7 +164,7 @@
                                     <td>
                                         <router-link to="/PostDetail"><div class="before"/></router-link>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -227,40 +226,77 @@ export default {
             가입하기: '가입하기',
             가입완료: '가입완료',
             // 챌린지: '히오니의 알고 챌린지',
-            challengeno: 1,
+            challengeno: 4,
             chall_info: {
-                // "challengeCapacity": 0,
-                // "challengeCategory": "string",
-                // "challengeDesc": "string",
-                // "challengeEnddate": "string",
-                // "challengeGroup": [
-                //   [
-                //     "string"
-                //   ]
-                // ],
-                // "challengeLevel": 0,
-                // "challengeName": "string",
-                // "challengeNo": 0,
-                // "challengeStartdate": "string",
-                // "challengeTaskCnt": 0,
-                // "challengeTaskdeadlines": ["string"]
-
-                challengeNo: 1,
-                challengeName: '히알챌',
-                challengeCategory: 'Algorithm',
-                challengeLevel: 3,
-                challengeCapacity: 6,
-                challengeStartdate: '2021-07-04',
-                challengeEnddate: '2021-08-04',
-                challengeDesc: '히오니의 알고리즘 챌린지',
-                challengeTaskCnt: 7,
-                challengeTaskdeadlines: ['2021-08-01', '2021-08-02', '2021-08-03'],
-                challengeGroup: [
-                    ['123', '주인공'],
-                    ['456', '제발좀'],
-                    ['789', '김이름'],
+                "challengeCapacity": 0,
+                "challengeCategory": "string",
+                "challengeDesc": "string",
+                "challengeEnddate": "string",
+                "challengeGroup": [
+                  [
+                    "string"
+                  ]
                 ],
+                "challengeLevel": 0,
+                "challengeName": "string",
+                "challengeNo": 0,
+                "challengeStartdate": "string",
+                "challengeTaskCnt": 0,
+                "challengeTaskdeadlines": ["string"]
+
+                // challengeNo: 1,
+                // challengeName: 'SSA.ZIP',
+                // challengeCategory: 'Algorithm',
+                // challengeLevel: 3,
+                // challengeCapacity: 6,
+                // challengeStartdate: '2021-08-19',
+                // challengeEnddate: '2021-08-30',
+                // challengeDesc: '히오니의 알고리즘 챌린지',
+                // challengeTaskCnt: 7,
+                // challengeTaskdeadlines: ['2021-08-01', '2021-08-02', '2021-08-03'],
+                // challengeGroup: [
+                //     ['123', '주인공'],
+                //     ['456', '제발좀'],
+                //     ['789', '김이름'],
+                // ],
             },
+            // 과제 블럭 하나씩 
+            // task_info:[{
+            //   "taskIndex": 0, // 몇번째 과제인지
+            //   "taskNo": 0, // 고유값. 과제 페이지로 넘어갈 때 사용
+            //   "userEmail": "string",
+            //   "userName": "string"
+            // }]
+
+            task_info:[
+              {
+                // 첫번째 과제만 내고 나머지는 안냄
+              "taskIndex": 1, // 2번과제로 생각하자
+              "taskNo": 123,
+              "userEmail": "jang@naver.com",
+              "userName": "이장섭",
+            },
+            {
+              //나는 1, 2 둘다 냄
+              "taskIndex": 1,
+              "taskNo": 456,
+              "userEmail": "cha@naver.com",
+              "userName": "차은채",
+            },
+            {
+              // 두번째 과제만 내고 나머지는 안냄
+              "taskIndex": 2,
+              "taskNo": 789,
+              "userEmail": "cha@naver.com",
+              "userName": "차은채",
+            },
+            {
+              "taskIndex": 2,
+              "taskNo": 98,
+              "userEmail": "IU-love@naver.com",
+              "userName": "아이유",
+            }
+            ]
 
             // 모달
             // insertModal : null,
@@ -276,6 +312,8 @@ export default {
         // closeAfterInsert(){
         // this.insertModal.hide();
         // },
+        
+        //챌린지 페이지에서 챌린지 정보 불러오는 통신
         getChallInfo: function() {
             axios({
                 methods: 'get',
@@ -283,11 +321,28 @@ export default {
             })
                 .then((res) => {
                     this.chall_info = res.data;
+                    this.chall_info.challengeStartdate += " 23:59:59";
+                    this.countDownTimer('rest', this.chall_info.challengeStartdate);
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         },
+
+        // BJ 누르면 개인 정보로 넘어가는 통신
+        getTaskInfo: function(){
+          axios({
+            methods: 'get',
+            url: `/challenge/tasklist/${this.challengeno}`,
+          })
+          .then((res) => {
+            this.task_info = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+        },
+
         countDownTimer: function(id) {
             var date = this.chall_info.challengeStartdate;
             //const countDownTimer = function (id) {
@@ -317,10 +372,34 @@ export default {
             }
             timer = setInterval(showRemaining, 1000);
         },
+        hidebtn(){
+        this.beforejoin=false;
+        },
+        nameprofile(num){
+          var email = this.chall_info.challengeGroup[num][0];
+          alert(email);
+        },
+        taskblock(email, index){
+          // var email = this.chall_info.challengeGroup[];
+          // var index = this.
+          let taskno = -1;
+          for( let n = 0; n < this.task_info.length; n++){
+            if(this.task_info[n].userEmail == email & this.task_info[n].taskIndex == index){
+              taskno = this.task_info[n].taskNo;
+            }
+          }
+
+          if(taskno != -1){
+            alert(taskno)
+          }
+
+          // alert(email + ' ' + index + '' + taskno);
+        }
     },
     created: function() {
         this.getChallInfo(); //생성할 때 바로 불러줘
-        this.countDownTimer('rest', this.chall_info.challengeStartdate);
+        // this.getTaskInfo();
+        // this.countDownTimer('rest', this.chall_info.challengeStartdate);
     },
 };
 </script>
