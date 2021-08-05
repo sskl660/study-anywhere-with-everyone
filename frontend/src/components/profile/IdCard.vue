@@ -6,8 +6,8 @@
       <ProfileImage class="profile-img-box" />
       <!-- 깃헙 아이콘. 블로그 아이콘 클릭시 해당 링크로 이동 -->
       <p>
-        <a :href="userInfo.userGit"><i class="fa fa-git-square fa-2x" style="color:black" type="button"></i></a>
-        <a :href="userInfo.userBlog"><i class="fab fa-blogger fa-2x ms-5" style="color:orange" type="button"></i></a>
+        <a :href="userInfo.userGit" target="_blank"><i class="fa fa-git-square fa-2x" style="color:black" type="button"></i></a>
+        <a :href="userInfo.userBlog" target="_blank"><i class="fab fa-blogger fa-2x ms-5" style="color:orange" type="button"></i></a>
       </p>
     </div>
   <!-- 프로필카드 우측 컨테이너  -->
