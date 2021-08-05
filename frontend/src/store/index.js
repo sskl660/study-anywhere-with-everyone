@@ -37,7 +37,7 @@ export default new Vuex.Store({
             state.config = {
                 Anthorization: `JWT ${token}`,
             };
-      },
+        },
         // 댓글
         ADD_COMMENT(state, commentItem) {
             console.log(state);
