@@ -67,16 +67,6 @@ export default new Vuex.Store({
             alert('중복체크 완료' + returnflag);
         },
 
-        // 댓글
-        ADD_COMMENT(state, commentItem) {
-            console.log(state);
-            state.comments.push(commentItem);
-        },
-        //이메일 체크
-        EMAIL_CHECK(state, returnflag) {
-            state.emailposi = returnflag;
-            alert('중복체크 완료' + returnflag);
-        },
     },
 
     actions: {
