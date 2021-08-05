@@ -11,12 +11,16 @@ public class FileInfoResponse {
     private String fileName;
     private String filePath;
     private String userEmail;
+    private String fileInfo;
+    private int fileType;
 
     @Builder
-    public FileInfoResponse(int fileNo, String fileName, String filePath, String userEmail) {
+    public FileInfoResponse(int fileNo, String fileName, String filePath, String userEmail, String fileInfo, int fileType) {
         this.fileNo = fileNo;
         this.fileName = fileName;
         this.filePath = filePath;
         this.userEmail = userEmail;
+        this.fileInfo = fileInfo;
+        this.fileType = fileType;
     }
 }

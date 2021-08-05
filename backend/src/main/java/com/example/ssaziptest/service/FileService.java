@@ -1,6 +1,7 @@
 package com.example.ssaziptest.service;
 
 import com.example.ssaziptest.domain.file.FileEntity;
+import com.example.ssaziptest.domain.file.FileInfoResponse;
 import com.example.ssaziptest.domain.file.FileUploadRequest;
 import com.example.ssaziptest.repository.FileRepository;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.transaction.Transactional;
+import java.io.File;
 
 @Service
 @NoArgsConstructor
@@ -28,6 +30,18 @@ public class FileService {
                 .build();
         FileEntity fileEntity1 = fileRepository.save(fileEntity);
         return fileEntity1.getFileNo();
+    }
+
+    @Transactional
+    public FileInfoResponse getFile(int fileNo){
+        FileEntity file = fileRepository.findById(fileNo).get();
+        FileInfoResponse fileInfoResponse = FileInfoResponse.builder()
+                .fileNo(fileNo)
+                .fileName(file.getFileName())
+                .filePath(file.getFilePath())
+                .userEmail(file.getFileUseremail())
+                .build();
+        return fileInfoResponse;
     }
 
 }
