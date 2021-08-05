@@ -60,8 +60,8 @@ dependencies {
     implementation 'commons-io:commons-io:2.8.0'
     implementation 'commons-fileupload:commons-fileupload:1.4'
 
-
-
+    // WebSocket
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: '2.5.3'
 }
 
 test {
