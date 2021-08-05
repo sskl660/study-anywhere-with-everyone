@@ -1,194 +1,203 @@
 <template>
     <div class="flex_container" id="total">
+        <!-- <Title :text="chall_info.challengeName" /> -->
         <div class="stars-box">
-            <img class="stars" src="../assets/manystar.png" alt="manystar">
+            <img class="stars" src="../assets/manystar.png" alt="manystar" />
         </div>
         <div class="challengetitle">
-            <div class="Ctitle"><Title :text="챌린지"/></div>
+            <div class="Ctitle"><Title v-bind:text="chall_info.challengeName" /></div>
         </div>
 
         <div class="d-flex row wider justify-content-center" id="body">
             <div class="joinbox">
+                <!-- 가입버튼 누르기 전에는 가입하기 버튼과 가입 마감까지 남은 시간이 보여진다 -->
                 <li class="changebtn" v-if="!beforejoin">
-                    <div class="Cjoin_btn"><ButtonRound :text="가입하기"/></div>
+                    <div class="Cjoin_btn"><ButtonRound :text="가입하기" @click="hidebtn()" /></div>
                     <div class="alarm">
-                        <h5> 가입 마감까지 20 : 56 </h5>
+                        <h5 id="rest"></h5>
                     </div>
                 </li>
-                <li class="changebtn" v-else-if="afterjoin">
-                    <div class="Cjoindone_btn"><ButtonRound :text="가입완료"/></div>
-                    <div class="alarm">
-                        <h5> 진행 중 </h5>
-                    </div>
-                </li>
+                <!-- 가입하기 버튼을 누르면 가입완료 버튼으로 바뀌고 시간이 진행중으로 바뀐다 -->
                 <li class="changebtn" v-else>
-                    <div class="Cjoindone_btn"><ButtonRound :text="가입완료"/></div>
+                    <div class="Cjoindone_btn"><ButtonRound :text="가입완료" /></div>
                     <div class="alarm">
-                        <h5 style="color: #EE4748"> 종료 </h5>
+                        <h5 id="rest">{{ restTime }}</h5>
                     </div>
                 </li>
+                <!-- 가입완료 후 챌린지 마감시간이 지나면 진행중이 종료 바뀜 -->
+                <!-- <li class="changebtn">
+                    <div class="Cjoindone_btn"><ButtonRound :text="가입완료"/></div>
+                    <div class="alarm">
+                        <h5 style="color: #EE4748">종료</h5>
+                    </div>
+                </li> -->
                 <!-- <div class="alarm">
                     <h4> 가입 마감까지 20 : 56 </h4>
                 </div> -->
             </div>
-            
+
             <div class="col col-4 flex-item">
                 <div class="outline">
                     <div class="outline2">
-                        <table class="table ">
+                        <table class="table">
                             <thead>
                                 <tr>
-                                <th scope="col"></th>
-                                <th scope="col">과제1</th>
-                                <th scope="col">과제2</th>
-                                <th scope="col">과제3</th>
-                                <th scope="col">과제4</th>
-                                <th scope="col">과제5</th>
-                                <th scope="col">과제6</th>
-                                <th scope="col">과제7</th>
+                                    <th scope="col"></th>
+                                    <th scope="col">과제1</th>
+                                    <th scope="col">과제2</th>
+                                    <th scope="col">과제3</th>
+                                    <th scope="col">과제4</th>
+                                    <th scope="col">과제5</th>
+                                    <th scope="col">과제6</th>
+                                    <th scope="col">과제7</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                <th scope="row" style="background-color: #b7beda">권희은</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <tr v-for="person in chall_info.challengeGroup" :key="person">
+                                    <th scope="row" style="background-color: #b7beda">{{ person[1] }}</th>
+                                    <td v-for="(kan, index) in chall_info.challengeTaskCnt" :key="kan" @click="taskblock(person[0], index)">
+                                        <!-- <div v-for="no in task_info.taskIndex" :key="no"> -->
+                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
+                                        <!-- </div> -->
+                                    </td>
+                                </tr>
+                                <!-- <tr>
+                                    <th scope="row" style="background-color: #b7beda">김태현</th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
-                                <th scope="row" style="background-color: #b7beda">김태현</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                    <th scope="row" style="background-color: #b7beda">김준형</th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
-                                <th scope="row" style="background-color: #b7beda">김준형</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                    <th scope="row" style="background-color: #b7beda">이장섭</th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
-                                <th scope="row" style="background-color: #b7beda">이장섭</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                    <th scope="row" style="background-color: #b7beda">유희원</th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
-                                <th scope="row" style="background-color: #b7beda">유희원</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                    <th scope="row" style="background-color: #b7beda">차은채</th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
-                                <th scope="row" style="background-color: #b7beda">차은채</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                    <th scope="row" style="background-color: #b7beda">김싸피</th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
-                                <th scope="row" style="background-color: #b7beda">김싸피</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                    <th scope="row" style="background-color: #b7beda">김싸피</th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
-                                <th scope="row" style="background-color: #b7beda">김싸피</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                    <th scope="row" style="background-color: #b7beda">김싸피</th>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
-                                <th scope="row" style="background-color: #b7beda">김싸피</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                </tr>
-                                <tr>
-                                <th scope="row" style="background-color: #b7beda">김싸피</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><button class="check"></button></td>
-                                <td><router-link to="/PostDetailAfter">제출후</router-link></td>
-                                <td><router-link to="/PostDetail">과제</router-link></td>
-                                </tr>
+                                    <th scope="row" style="background-color: #b7beda">김싸피</th>
+                                    <td>
+                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
+                                    </td>
+                                    <td>
+                                        <router-link to="/PostDetail"><div class="before"/></router-link>
+                                    </td>
+                                    <td>
+                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
+                                    </td>
+                                    <td><div class="fail"></div></td>
+                                    <td></td>
+                                    <td>
+                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
+                                    </td>
+                                    <td>
+                                        <router-link to="/PostDetail"><div class="before"/></router-link>
+                                    </td>
+                                </tr> -->
                             </tbody>
-                        </table> 
+                        </table>
                     </div>
-            </div>
+                </div>
             </div>
             <div class="col col-5 flex-item">
                 <div class="ChallengeDetail">
                     <div class="Cdetail">
-                        <h4>🔥 삼성 코테 기출 알고 4시간 박살 🔥</h4>
-                        <br>
-                        저희 스터디는 1일 1알고리즘으로
-                        네카라쿠배를 갈 사람들 입니다!<br>
-                        일주일동안 백준 총 7문제를 풀 것입니다.<br>
+                        <p>{{ chall_info.challengeDesc }}</p>
 
-                        과제 1 : BJ 3049<br>
-                        과제 2 : BJ 8490<br>
-                        과제 3 : BJ 908<br>
-                        과제 4 : BJ 193<br>
-                        과제 5 : BJ 9830<br>
-                        과제 6 : BJ 1394<br>
-                        과제 7 : BJ 9033<br>
-
-                        <br>
-                        <strong>참여멤버 : @권희은 @김준형 @김태현 @이장섭 @유희원 @차은채</strong>
+                        <strong
+                            >참여멤버 :
+                            <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)"> {{ name[1] }} </span>
+                        </strong>
                     </div>
                 </div>
                 <div class="ChallengeTicket">
-                    <img class="ticketbody" src="../assets/ticketbody.png" alt="ticketbody">
+                    <img class="ticketbody" src="../assets/ticketbody.png" alt="ticketbody" />
                 </div>
             </div>
         </div>
-    <insert-modal v-on:call-parent-insert="closeAfterInsert"></insert-modal>
-    <detail-modal v-on:call-parent-change-to-delete="changeToDelete"></detail-modal>
+        <!-- 여기가 있으면 통신이 안된다 -->
+        <!-- <insert-modal v-on:call-parent-insert="closeAfterInsert"></insert-modal>
+    <detail-modal v-on:call-parent-change-to-delete="changeToDelete"></detail-modal> -->
     </div>
 </template>
 <script>
-import Title from '@/components/common/Title.vue'
-import ButtonRound from '@/components/common/ButtonRound.vue'
+import Title from '@/components/common/Title.vue';
+import ButtonRound from '@/components/common/ButtonRound.vue';
 // import Difficulty from '@/components/common/Difficulty'
 // import PostDetailModal from '@/components/PostDetailModal'
-import "@/components/css/ChallengeRoom.css"
+import '@/components/css/ChallengeRoom.css';
+import axios from '@/util/http-common.js';
 
 // import InsertModal from '@/components/modals/InsertModal.vue'
 // import DetailModal from '@/components/modals/DetailModal.vue';
@@ -197,74 +206,230 @@ import "@/components/css/ChallengeRoom.css"
 // import { Modal } from 'bootstrap';
 
 // import Vue from 'vue';
-// import VueAlertify from 'vue-alertify'; 
+// import VueAlertify from 'vue-alertify';
 // Vue.use(VueAlertify);
-
 
 export default {
     name: 'ChallengeRoom',
+    el: 'goprofile',
     components: {
-        Title,          // 타이틀 가져오기
-        ButtonRound,    // 둥근 버튼 가져오기
+        Title, // 타이틀 가져오기
+        ButtonRound, // 둥근 버튼 가져오기
         // Difficulty      // 난이도 가져오기
         //PostDetailModal,
         //InsertModal, // 작성자가 처음 과제를 제출하는 모달
         //DetailModal, // 작성 후 보여지는 모달
     },
-    data: function(){
-        return{
+    data: function() {
+        return {
             // 버튼에 들어갈 문구들
             가입하기: '가입하기',
             가입완료: '가입완료',
-            챌린지: '히오니의 알고 챌린지',
+            // 챌린지: '히오니의 알고 챌린지',
+            challengeno: 4,
+            chall_info: {
+                challengeCapacity: 0,
+                challengeCategory: 'string',
+                challengeDesc: 'string',
+                challengeEnddate: 'string',
+                challengeGroup: [['string']],
+                challengeLevel: 0,
+                challengeName: 'string',
+                challengeNo: 0,
+                challengeStartdate: 'string',
+                challengeTaskCnt: 0,
+                challengeTaskdeadlines: ['string'],
+
+                // challengeNo: 1,
+                // challengeName: 'SSA.ZIP',
+                // challengeCategory: 'Algorithm',
+                // challengeLevel: 3,
+                // challengeCapacity: 6,
+                // challengeStartdate: '2021-08-19',
+                // challengeEnddate: '2021-08-30',
+                // challengeDesc: '히오니의 알고리즘 챌린지',
+                // challengeTaskCnt: 7,
+                // challengeTaskdeadlines: ['2021-08-01', '2021-08-02', '2021-08-03'],
+                // challengeGroup: [
+                //     ['123', '주인공'],
+                //     ['456', '제발좀'],
+                //     ['789', '김이름'],
+                // ],
+            },
+            // 과제 블럭 하나씩
+            // task_info:[{
+            //   "taskIndex": 0, // 몇번째 과제인지
+            //   "taskNo": 0, // 고유값. 과제 페이지로 넘어갈 때 사용
+            //   "userEmail": "string",
+            //   "userName": "string"
+            // }]
+
+            task_info: [
+                {
+                    // 첫번째 과제만 내고 나머지는 안냄
+                    taskIndex: 1, // 2번과제로 생각하자
+                    taskNo: 123,
+                    userEmail: 'jang@naver.com',
+                    userName: '이장섭',
+                },
+                {
+                    //나는 1, 2 둘다 냄
+                    taskIndex: 1,
+                    taskNo: 456,
+                    userEmail: 'cha@naver.com',
+                    userName: '차은채',
+                },
+                {
+                    // 두번째 과제만 내고 나머지는 안냄
+                    taskIndex: 2,
+                    taskNo: 789,
+                    userEmail: 'cha@naver.com',
+                    userName: '차은채',
+                },
+                {
+                    taskIndex: 2,
+                    taskNo: 98,
+                    userEmail: 'IU-love@naver.com',
+                    userName: '아이유',
+                },
+            ],
 
             // 모달
             // insertModal : null,
             // detailModal : null
-        }
+        };
     },
-    // methods : {
-    //     // insert
-    //     showInsertModal(){
-    //     this.insertModal.show();
-    //     },
+    methods: {
+        // // insert
+        // showInsertModal(){
+        // this.insertModal.show();
+        // },
 
-    //     closeAfterInsert(){
-    //     this.insertModal.hide();
-    //     },
+        // closeAfterInsert(){
+        // this.insertModal.hide();
+        // },
 
-    // }
-}
+        //챌린지 페이지에서 챌린지 정보 불러오는 통신
+        getChallInfo: function() {
+            axios({
+                methods: 'get',
+                url: `/challenge/info/${this.challengeno}`,
+            })
+                .then((res) => {
+                    this.chall_info = res.data;
+                    this.chall_info.challengeStartdate += ' 23:59:59';
+                    this.countDownTimer('rest', this.chall_info.challengeStartdate);
+                })
+                .catch((err) => {
+                    alert('false');
+
+                    console.log(err);
+                });
+        },
+
+        // BJ 누르면 개인 정보로 넘어가는 통신
+        getTaskInfo: function() {
+            axios({
+                methods: 'get',
+                url: `/challenge/tasklist/${this.challengeno}`,
+            })
+                .then((res) => {
+                    this.task_info = res.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+
+        countDownTimer: function(id) {
+            var date = this.chall_info.challengeStartdate;
+            //const countDownTimer = function (id) {
+            var _vDate = new Date(date); // 전달 받은 일자
+            var _second = 1000;
+            var _minute = _second * 60;
+            var _hour = _minute * 60;
+            var _day = _hour * 24;
+            var timer;
+            function showRemaining() {
+                var now = new Date();
+                var distDt = _vDate - now - 1;
+                if (distDt < 0) {
+                    clearInterval(timer);
+                    document.getElementById(id).textContent = '모집이 종료 되었습니다!';
+                    return;
+                }
+                var days = Math.floor(distDt / _day);
+                var hours = Math.floor((distDt % _day) / _hour);
+                var minutes = Math.floor((distDt % _hour) / _minute);
+                var seconds = Math.floor((distDt % _minute) / _second);
+                //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
+                document.getElementById(id).textContent = '마감까지 ' + days + '일 ';
+                document.getElementById(id).textContent += hours + '시간 ';
+                document.getElementById(id).textContent += minutes + '분 ';
+                document.getElementById(id).textContent += seconds + '초';
+            }
+            timer = setInterval(showRemaining, 1000);
+        },
+        hidebtn() {
+            this.beforejoin = false;
+        },
+        nameprofile(num) {
+            var email = this.chall_info.challengeGroup[num][0];
+            alert(email);
+        },
+        taskblock(email, index) {
+            // var email = this.chall_info.challengeGroup[];
+            // var index = this.
+            let taskno = -1;
+            for (let n = 0; n < this.task_info.length; n++) {
+                if ((this.task_info[n].userEmail == email) & (this.task_info[n].taskIndex == index)) {
+                    taskno = this.task_info[n].taskNo;
+                }
+            }
+
+            if (taskno != -1) {
+                alert(taskno);
+            }
+
+            // alert(email + ' ' + index + '' + taskno);
+        },
+    },
+    created: function() {
+        this.getChallInfo(); //생성할 때 바로 불러줘
+        // this.getTaskInfo();
+        // this.countDownTimer('rest', this.chall_info.challengeStartdate);
+    },
+};
 </script>
 <style scoped>
-    /* 가입하기 버튼 */
+/* 가입하기 버튼 */
 .Cjoin_btn .btn-light {
-  color: #1f4256;
-  background-color: #99b7ff;
-  border-color: #99b7ff;
-  font-size: 25px;
-  font-weight: bold;
-  width: 171px;
-  height: 54px;
-  margin-right: 69%;
-  margin-bottom: 5px;
+    color: #1f4256;
+    background-color: #99b7ff;
+    border-color: #99b7ff;
+    font-size: 25px;
+    font-weight: bold;
+    width: 171px;
+    height: 54px;
+    margin-right: 69%;
+    margin-bottom: 5px;
 }
 
 /* 가입완료 버튼 */
 .Cjoindone_btn .btn-light {
-  color: #1f4256;
-  background-color: #f9d479;
-  border-color: #f9d479;
-  font-size: 25px;
-  font-weight: bold;
-  width: 171px;
-  height: 54px;
-  margin-right: 69%;
-  margin-bottom: 5px;
+    color: #1f4256;
+    background-color: #f9d479;
+    border-color: #f9d479;
+    font-size: 25px;
+    font-weight: bold;
+    width: 171px;
+    height: 54px;
+    margin-right: 69%;
+    margin-bottom: 5px;
 }
 
-.alarm{
-    color: #F59C35;
+.alarm {
+    color: #e92828;
     margin-left: 10px;
     margin-top: 20px;
 }
@@ -273,7 +438,7 @@ export default {
     justify-content: center;
 } */
 
-.changebtn{
+.changebtn {
     display: flex;
     justify-content: left;
     padding-top: 20px;
@@ -287,9 +452,33 @@ export default {
     height: 40px;
     border-radius: 100%;
 } */
-/* 
-.table > :not(caption) > * > * {
-    padding: 0.0 0.0;
-} */
 
+.table > :not(caption) > * > * {
+    padding: 0 0;
+}
+
+/* 과제 제출 전 칸 */
+.before {
+    background-color: #f9d479;
+    width: 100%;
+    height: 100%;
+}
+
+/* 과제 제출 후 파란색으로 변함 */
+.after {
+    background-color: #1f4256;
+    width: 100%;
+    height: 100%;
+}
+
+/* 과제 제출 안하면 빨간색으로 변함 */
+.fail {
+    background-color: #ee4748;
+    width: 100%;
+    height: 100%;
+}
+
+th {
+    width: 100px;
+}
 </style>
