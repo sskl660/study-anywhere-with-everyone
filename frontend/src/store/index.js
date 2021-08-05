@@ -68,7 +68,7 @@ export default new Vuex.Store({
         // },
     },
     // 젠킨스를 위한 변경사항
-
+    
     actions: {
         // 회원가입
         join: function({ commit }, credentials) {
