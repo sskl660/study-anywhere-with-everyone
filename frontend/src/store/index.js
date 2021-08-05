@@ -6,7 +6,7 @@ import router from '@/router';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {
+    state: { 
         isLogin: false,
         config: null, // jwt 담는 객체
         comments: [],
@@ -16,7 +16,7 @@ export default new Vuex.Store({
         userTerm: null,
     },
 
-    mutations: {
+    mutations: { //state 값을 바꿔주거나 통신한 결괏값으로 화면 이동이나 action을 취해주는 functions
         // 가입
         JOIN: function(state) {
             console.log(state);
@@ -26,7 +26,7 @@ export default new Vuex.Store({
         LOGIN: function(state, token) {
             localStorage.setItem('jwt', token);
             state.isLogin = true;
-            router.push({ name: 'Challenges' });
+            router.push({ name: 'Challenges' }); // 페이지 이동도 가능
         },
         // 로그아웃
         LOGOUT: function(state) {
@@ -44,12 +44,9 @@ export default new Vuex.Store({
             state.config = {
                 Anthorization: `JWT ${token}`,
             };
-<<<<<<< HEAD
-=======
             state.userEmail = userEntity.userEmail;
             state.userName = userEntity.userName;
             state.userTerm = userEntity.userTerm;
->>>>>>> 2c5a96db672beda40d7138042d1573dc1b438fb6
         },
         // 댓글
         ADD_COMMENT(state, commentItem) {
@@ -57,10 +54,15 @@ export default new Vuex.Store({
             state.comments.push(commentItem);
         },
         //이메일 체크
-        EMAIL_CHECK(state, returnflag) {
-            state.emailposi = returnflag;
+        EMAIL_CHECK(state, returnflag) { // state는 기본값. 그냥 써주기 // returnflag는 res.data(t인지 f인지 들어있는 정보)
+            state.emailposi = returnflag; // 저장해주고 값 바꿔주기
             alert('중복체크 완료' + returnflag);
         },
+        JOIN_CHALL(state, userEmail) {
+            console.log(state);
+            state.userEmail = userEmail;
+            alert('챌린지 가입 성공')
+        }
     },
 
     actions: {
@@ -129,9 +131,26 @@ export default new Vuex.Store({
                     alert('잠시후 다시 시도 해주세요');
                 });
         },
+        // bj 데이터
+        joinchall: function ({ commit }, {email, challengeNo}) {
+            axios({
+                method: 'get',
+                url: '/challenge/info/${challengeNo}',
+                // post 일때만 data가 필요한 것
+            })
+                .then((res) => { // 통신이 넘어오는 것
+                    console.log('잘 넘어온지 확인');
+                    commit('JOIN_CHALL', res.data);
+                    console.log(res.data);
+                    alert('챌린지 가입이 완료되었습니다!')
+                })
+                .catch((err) => {
+                    console.log(err);
+            })
+        }
     },
 
-    getters: {
+    getters: { // state값이 바뀌면 그걸 가져오는 것. state를 가져오기 위한 getter함수들
         config: function(state) {
             return state.config;
         },

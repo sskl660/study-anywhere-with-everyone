@@ -12,7 +12,7 @@
             <div class="joinbox">
                 <!-- 가입버튼 누르기 전에는 가입하기 버튼과 가입 마감까지 남은 시간이 보여진다 -->
                 <li class="changebtn">
-                    <div class="Cjoin_btn" @click="hidebtn()"><ButtonRound :text="msg" /></div>
+                    <div class="Cjoin_btn" @click="hidebtn(email, chall_info.challengeNo)"><ButtonRound :text="msg" /></div>
                     <!-- <div class="Cjoindone_btn" v-else><ButtonRound :text="가입완료" /></div> -->
                     <div class="alarm">
                         <h5 id="rest"></h5>
@@ -107,6 +107,8 @@ import ButtonRound from '@/components/common/ButtonRound.vue';
 // import PostDetailModal from '@/components/PostDetailModal'
 import '@/components/css/ChallengeRoom.css';
 import axios from '@/util/http-common.js';
+import { mapActions } from 'vuex';
+
 
 // import InsertModal from '@/components/modals/InsertModal.vue'
 // import DetailModal from '@/components/modals/DetailModal.vue';
@@ -204,7 +206,11 @@ export default {
                     userName: '아이유',
                 },
             ],
-
+            joinchall: {
+              userEmail: 'please@naver.com',
+              userName: '참여자',
+              challengeNo: 4
+            }
             // 모달
             // insertModal : null,
             // detailModal : null
@@ -282,13 +288,14 @@ export default {
             timer = setInterval(showRemaining, 1000);
         },
         // 가입하기 버튼 눌렀을 때
-        hidebtn(){
-        // this.beforejoin=false;
-        this.msg = '가입완료';
-        console.log(this.msg)
-        // document.getElementById('Cjoin_btn').style.backgroundColor = '#f9d479';
-        document.querySelector('.Cjoin_btn .btn-light').style.backgroundColor = '#f9d479';
-        // 여기에다가 로직을 작성해야한다
+        hidebtn(email, challengeNo){
+          // this.beforejoin=false;
+          this.msg = '가입완료';
+          console.log(this.msg);
+          // document.getElementById('Cjoin_btn').style.backgroundColor = '#f9d479';
+          document.querySelector('.Cjoin_btn .btn-light').style.backgroundColor = '#f9d479';
+          // 여기에다가 로직을 작성해야한다
+          this.joinchall(email, challengeNo); // email이랑 챌린지 번호 전송
         },
 
         nameprofile(num){
@@ -323,6 +330,9 @@ export default {
         // this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
     },
+    ...mapActions([ // import 해주는 느낌
+      'joinchall'
+    ])
   }
 }
 </script>
