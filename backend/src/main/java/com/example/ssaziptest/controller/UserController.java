@@ -48,8 +48,8 @@ public class UserController {
     //public ResponseEntity<BoolResult> login(@RequestBody LoginRequest request) throws Exception{
     public ResponseEntity<UserLoginPostResponse> login(@RequestBody LoginRequest request) throws Exception{
         UserEntity userEntity = userService.login(request.getUserEmail(), request.getUserPassword());
-        if(userEntity == null)  return ResponseEntity.status(401).body(UserLoginPostResponse.of(401, "Invalid Password", null));
-        return ResponseEntity.ok(UserLoginPostResponse.of(200, "Success", JwtTokenUtil.getToken(request.getUserEmail())));
+        if(userEntity == null)  return ResponseEntity.status(401).body(UserLoginPostResponse.of(401, "Invalid Password", null,userEntity));
+        return ResponseEntity.ok(UserLoginPostResponse.of(200, "Success", JwtTokenUtil.getToken(request.getUserEmail()),userEntity));
     }
     /*회원 정보 요청*/
     @ApiOperation(value = "회원 정보 요청")

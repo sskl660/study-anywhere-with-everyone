@@ -131,7 +131,6 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <!-- 
                                 <tr>
                                     <th scope="row" style="background-color: #b7beda">김싸피</th>
                                     <td></td>
