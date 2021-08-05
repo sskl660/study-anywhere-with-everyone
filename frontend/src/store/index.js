@@ -66,8 +66,8 @@ export default new Vuex.Store({
             state.emailposi = returnflag;
             alert('중복체크 완료' + returnflag);
         },
-
     },
+    // 젠킨스를 위한 변경사항
 
     actions: {
         // 회원가입
