@@ -472,3 +472,26 @@ git commit -am "Fix(Conflict)"
 git status
 git pull
 git branch
+ls
+cd ~
+ls
+git pull
+git status
+git add .
+git status
+git commit -am "fix(Conflict)"
+git push
+git status
+git add .
+git commit -am "update(Dockerfile) : update frontend dockerfile run by nginx"
+git push
+git status
+git log
+git status
+git add .
+git pull
+git status
+git status
+git add .
+git commit -am "fix(Conflict) : fix Conflict in backend"
+git push
