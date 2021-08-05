@@ -344,3 +344,82 @@ git pull
 git add .
 git commit -am "update properties"
 git push
+cd ~
+git status
+git checkout master
+git add .
+git commit
+git status
+git status
+git add .
+git status
+git checkout master
+git commit -am "git pull"
+git checkout master
+git pull origin master
+git status
+git log diff
+git log --stat
+git status
+git pull master
+git pull origin
+git status
+git add .
+git pull origin
+git status
+git checkout chat
+git checkout master
+git pull origin master
+git pull origin
+git config core.protectNTFS false
+git pull origin master
+git add .
+git status
+git status
+git commit -am "fix(Conflict) : fix conflict in frontend/store/index.js"
+git status
+git push
+git pull
+git status
+git push
+git push origin master
+git commit -am "fix(Conflict) : fix conflict in frontend/store/index.js"
+git push origin master
+git diff
+git log
+git log --stat
+git status
+git add.
+git commit -am "fix(Conflict) : fix conflict in frontend/store/index.js"
+git add .
+git commit -am "fix(Conflict) : fix conflict in frontend/store/index.js"
+git status
+git push
+git status
+git push
+git pull origin master
+git config core.protectNTFS false
+git pull origin master
+git fetch origin master
+git status
+git branch
+git merge origin master
+git merge origin/master
+git add .
+git merge origin/master
+git checkout -f HEAD
+git pull
+git pull origin master
+git clone https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307.git
+git clone 
+git clone https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307.git
+git clonehttps://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307.git
+git clone https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307.git
+cd S05P13A307/
+ls
+git pull
+git status
+git pull origin master
+git status
+git merge origin master
+git status
