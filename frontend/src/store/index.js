@@ -64,7 +64,7 @@ export default new Vuex.Store({
         //이메일 체크
         EMAIL_CHECK(state, returnflag) {
             state.emailposi = returnflag;
-            alert('중복체크 완료' + returnflag);
+            alert('중복체크 done ' + returnflag);
         },
     },
     // 젠킨스를 위한 변경사항
