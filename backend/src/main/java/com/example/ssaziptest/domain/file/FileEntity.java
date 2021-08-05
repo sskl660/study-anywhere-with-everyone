@@ -28,10 +28,12 @@ public class FileEntity {
     @Column(name = "file_useremail")
     private String fileUseremail;
 
+    /*
     //프로필인지 taskNo인지
     @Column(name = "file_info")
     private String fileInfo;
 
+    //1: 이미지 2: file
     @Column(name = "file_type")
     private int fileType;
 
@@ -39,14 +41,14 @@ public class FileEntity {
     @Column(name = "file_data")
     private Blob fileData;
 
+     */
+
     @Builder
-    public FileEntity(int fileNo, String fileName, String fileOriginalname, String filePath, String fileUseremail, String fileInfo, int fileType) {
+    public FileEntity(int fileNo, String fileName, String fileOriginalname, String filePath, String fileUseremail) {
         this.fileNo = fileNo;
         this.fileName = fileName;
         this.fileOriginalname = fileOriginalname;
         this.filePath = filePath;
         this.fileUseremail = fileUseremail;
-        this.fileInfo = fileInfo;
-        this.fileType = fileType;
     }
 }
