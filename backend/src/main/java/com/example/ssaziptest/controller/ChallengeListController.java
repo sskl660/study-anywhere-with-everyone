@@ -27,6 +27,13 @@ public class ChallengeListController {
         int response = challengeService.createChallenge(request);
         return new ResponseEntity<Integer>(response, HttpStatus.OK);
     }
+    /*챌린지 생성*/
+    @ApiOperation(value = "챌린지 수정")
+    @PutMapping(value = "update/{challengeno}")
+    public ResponseEntity<Integer> updateChallenge(@PathVariable(name = "challengeno")int challengeno, @RequestBody ChallengeCreateRequest request) throws Exception{
+        int response = challengeService.updateChallenge(challengeno,request);
+        return new ResponseEntity<Integer>(response, HttpStatus.OK);
+    }
     /*챌린지 목록 조회*/
     @ApiOperation(value = "챌린지 목록 조회")
     @GetMapping(value = "")

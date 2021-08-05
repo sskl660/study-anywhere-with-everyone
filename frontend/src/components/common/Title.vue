@@ -3,7 +3,7 @@
     <img class="title " src="@/assets/title.png" alt="title">
     <div class="d-flex justify-content-center">
       <div class="png-content" >
-        <p class="title-text">{{ text }}님의 프로필</p>
+        <p class="title-text">{{ text }}</p>
       </div>
     </div>
   </div>
