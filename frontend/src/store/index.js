@@ -2,6 +2,7 @@ import axios from '@/util/http-common.js';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import router from '@/router';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
@@ -15,8 +16,12 @@ export default new Vuex.Store({
         userName: null,
         userTerm: null,
     },
-
-    mutations: { //state 값을 바꿔주거나 통신한 결괏값으로 화면 이동이나 action을 취해주는 functions
+    // state를 유지하기 위해
+    plugins: [createPersistedState({
+        paths: ['userEmail', 'userName','emailposi',
+            'isLogin', 'userTerm', 'config','comments']
+    })],
+    mutations: {
         // 가입
         JOIN: function(state) {
             console.log(state);
@@ -36,6 +41,8 @@ export default new Vuex.Store({
             state.user = null;
             state.userName = null;
             state.userTerm = null;
+            state.userEmail = null;
+            state.comments = [];
             router.push({ name: 'Welcome' });
         },
         // 토큰 부여

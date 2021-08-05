@@ -79,7 +79,6 @@
                 <div class="ChallengeDetail">
                     <div class="Cdetail">
                         <p>{{ chall_info.challengeDesc }}</p>
-
                         <strong
                             >참여멤버 :
                             <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)"> {{ name[1] }} </span>
