@@ -2,6 +2,7 @@ import axios from '@/util/http-common.js';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import router from '@/router';
+//import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
@@ -15,7 +16,12 @@ export default new Vuex.Store({
     userName: null,
     userTerm: null,
   },
-
+  // state를 유지하기 위해
+  // plugins: [
+  //     createPersistedState({
+  //         paths: ['userEmail', 'userName', 'emailposi', 'isLogin', 'userTerm', 'config', 'comments'],
+  //     }),
+  // ],
   mutations: {
     // 가입
     JOIN: function(state) {
@@ -36,6 +42,8 @@ export default new Vuex.Store({
       state.user = null;
       state.userName = null;
       state.userTerm = null;
+      state.userEmail = null;
+      state.comments = [];
       router.push({ name: 'Welcome' });
     },
     // 토큰 부여
@@ -48,17 +56,18 @@ export default new Vuex.Store({
       state.userName = userEntity.userName;
       state.userTerm = userEntity.userTerm;
     },
-    // 댓글
-    ADD_COMMENT(state, commentItem) {
-      console.log(state);
-      state.comments.push(commentItem);
-    },
-    //이메일 체크
-    EMAIL_CHECK(state, returnflag) {
-      state.emailposi = returnflag;
-      alert('중복체크 완료' + returnflag);
-    },
+    // // 댓글
+    // ADD_COMMENT(state, commentItem) {
+    //     console.log(state);
+    //     state.comments.push(commentItem);
+    // },
+    // //이메일 체크
+    // EMAIL_CHECK(state, returnflag) {
+    //     state.emailposi = returnflag;
+    //     alert('중복체크 done ' + returnflag);
+    // },
   },
+  // 젠킨스를 위한 변경사항
 
   actions: {
     // 회원가입

@@ -423,3 +423,52 @@ git pull origin master
 git status
 git merge origin master
 git status
+git clone 
+user081312@DESKTOP-1NH5HJI MINGW64 /c/Users/user081312/Desktop
+$
+git clone https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307.git
+git checkout -f HEAD
+cd S05P13A307/
+git checkout -f HEAD
+git config core.protectNTFS false
+git checkout -f HEAD
+git status
+cd ..
+cd SSAZIP/
+ls
+git status
+git add .
+git status
+git commit -am "fix(Conflict)"
+git status
+git push
+git status
+git ls
+git checkout
+git status
+git pull
+git status
+git add .
+git status
+git log
+git stash
+git status
+git pull
+git stash
+git stash
+git status
+git add .
+git stash
+git stash drop
+git stash drop
+git stash drop
+git stash drop
+git status
+git add .
+git pull origin master
+git status
+git add .
+git commit -am "Fix(Conflict)"
+git status
+git pull
+git branch

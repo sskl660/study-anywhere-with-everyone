@@ -70,110 +70,6 @@
                                       <!-- </div> -->
                                     </td>
                                 </tr>
-                                <!-- <tr>
-                                    <th scope="row" style="background-color: #b7beda">김태현</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">김준형</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">이장섭</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">유희원</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">차은채</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">김싸피</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">김싸피</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">김싸피</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
-                                    </td>
-                                    <td></td>
-                                    <td>
-                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="background-color: #b7beda">김싸피</th>
-                                    <td>
-                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
-                                    </td>
-                                    <td>
-                                        <router-link to="/PostDetail"><div class="before"/></router-link>
-                                    </td>
-                                    <td>
-                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
-                                    </td>
-                                    <td><div class="fail"></div></td>
-                                    <td></td>
-                                    <td>
-                                        <router-link to="/PostDetailAfter"><div class="after"/></router-link>
-                                    </td>
-                                    <td>
-                                        <router-link to="/PostDetail"><div class="before"/></router-link>
-                                    </td>
-                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -183,7 +79,6 @@
                 <div class="ChallengeDetail">
                     <div class="Cdetail">
                         <p>{{ chall_info.challengeDesc }}</p>
-
                         <strong
                             >참여멤버 :
                             <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)"> {{ name[1] }} </span>
