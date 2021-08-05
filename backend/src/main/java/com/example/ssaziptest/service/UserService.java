@@ -105,6 +105,7 @@ public class UserService {
             ChallengeEntity challengeEntity = challengeRepository.findById(groupmemberEntity.getGroupChallengeEntity().getChallengeNo()).orElse(null);
             List<TaskEntity> taskEntities = taskRepository.findByTaskChallengeEntity_ChallengeNoAndTaskUserEntity_UserEmail(challengeEntity.getChallengeNo(),userEmail);
             taskTicketResponse.setChallengeNo(challengeEntity.getChallengeNo());
+            taskTicketResponse.setChallengeName(challengeEntity.getChallengeName());
             int taskcnt= challengeEntity.getChallengeTaskCnt();
             taskTicketResponse.setChallengeTaskCnt(taskcnt);
             Integer[] temp = new Integer[taskcnt];
@@ -112,12 +113,12 @@ public class UserService {
                 temp[taskEntity.getTaskIndex()] = taskEntity.getTaskNo();
             }
             taskTicketResponse.setTaskNo(temp);
-
+            int done = 0;
             for(Integer in: taskTicketResponse.getTaskNo()){
                 if(in==null) taskTicketResponse.setIsComplete(false);
-                break;
+                else done++;
             }
-
+            taskTicketResponse.setAchieveRate((100*done)/taskcnt);
             taskTicketResponseList.add(taskTicketResponse);
         }
         return taskTicketResponseList;
