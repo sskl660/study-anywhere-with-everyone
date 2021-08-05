@@ -2,6 +2,7 @@ import axios from '@/util/http-common.js';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import router from '@/router';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
@@ -15,7 +16,11 @@ export default new Vuex.Store({
         userName: null,
         userTerm: null,
     },
-
+    // state를 유지하기 위해
+    plugins: [createPersistedState({
+        paths: ['userEmail', 'userName','emailposi',
+            'isLogin', 'userTerm', 'config','comments']
+    })],
     mutations: {
         // 가입
         JOIN: function(state) {
@@ -36,6 +41,8 @@ export default new Vuex.Store({
             state.user = null;
             state.userName = null;
             state.userTerm = null;
+            state.userEmail = null;
+            state.comments = [];
             router.push({ name: 'Welcome' });
         },
         // 토큰 부여
@@ -44,12 +51,9 @@ export default new Vuex.Store({
             state.config = {
                 Anthorization: `JWT ${token}`,
             };
-<<<<<<< HEAD
-=======
             state.userEmail = userEntity.userEmail;
             state.userName = userEntity.userName;
             state.userTerm = userEntity.userTerm;
->>>>>>> 2c5a96db672beda40d7138042d1573dc1b438fb6
         },
         // 댓글
         ADD_COMMENT(state, commentItem) {
