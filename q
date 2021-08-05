@@ -1,0 +1,1522 @@
+[33mcommit 4b0bee7faf7a6802eea5650e0807cb0efc8a29cc[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Aug 5 21:11:05 2021 +0900
+
+    fix(Conflict) : fix conflict in frontend/store/index.js
+
+[33mcommit 01815d91879477e2f1bb7a73079e2d9dbfdee2b5[m
+Merge: f2d350a 3018468
+Author: 김태현 <sskl600@naver.com>
+Date:   Wed Aug 4 17:11:07 2021 +0000
+
+    Merge branch 'chat' into 'master'
+    
+    Galaxy Chat
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!40
+
+[33mcommit 30184689239c44e0e2a15bb7c6a2030963667a03[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Aug 5 02:09:08 2021 +0900
+
+    upload(Galaxy) : upload Galaxy vue files Structure
+
+[33mcommit f2d350a8d1390edb5ef1334f25d4136d39702934[m
+Merge: d1a45c1 c0f8226
+Author: 유희원 <youhhi0509@naver.com>
+Date:   Wed Aug 4 15:46:13 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    update(Backend): change varchar length
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!39
+
+[33mcommit c0f8226e17e38e5e2190fc5802a9af2b7cd75d6c[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Thu Aug 5 00:45:53 2021 +0900
+
+    update(Backend): change varchar length
+
+[33mcommit d1a45c1e6a9390664ea78d4586779cde130f623e[m
+Merge: b351baa f5ffef3
+Author: 유희원 <youhhi0509@naver.com>
+Date:   Wed Aug 4 15:19:31 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    update(Backend): random graduates
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!38
+
+[33mcommit f5ffef39785583f562349f94c28ae63ca287de18[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Thu Aug 5 00:19:02 2021 +0900
+
+    update(Backend): random graduates
+
+[33mcommit b351baa0d0e4b588373f8b65a62de92844647099[m
+Merge: 830d597 9cecd43
+Author: 권희은 <heenee777@naver.com>
+Date:   Wed Aug 4 14:45:50 2021 +0000
+
+    Merge branch 'profile_he' into 'master'
+    
+    update(Profile): update Profile for editing profile info
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!37
+
+[33mcommit 9cecd4304d1ce5e722fa7ddaf0df683acf735469[m
+Merge: b8c1c4c 830d597
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Wed Aug 4 23:42:49 2021 +0900
+
+    update(Profile): update Profile for editing profile info
+
+[33mcommit b8c1c4ce267019faf884f53063258d681e91ff2a[m
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Wed Aug 4 23:40:31 2021 +0900
+
+    update(Profile): update Profile for editing profile info
+
+[33mcommit 830d59774a9bb316fbf88a3b7d4008500c87660d[m
+Merge: 17a9e52 dd790c0
+Author: 김태현 <sskl600@naver.com>
+Date:   Wed Aug 4 14:29:35 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    Backend
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!36
+
+[33mcommit dd790c05b07a39b387f2acd9f12598c4656757b7[m
+Merge: 7ce1531 0c3978b
+Author: taehyunKim <sskl600@naver.com>
+Date:   Wed Aug 4 23:24:14 2021 +0900
+
+    update(Rank, CORS) : update Rank And CORS operations
+
+[33mcommit 0c3978b023e09d5295c1da0fe71f6340b8d5825e[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Wed Aug 4 22:18:57 2021 +0900
+
+    update(Backend): add rank api, without data
+
+[33mcommit 17a9e52aff0bf22261b31e2661fa65b066cc95d6[m
+Merge: 7ce1531 511b875
+Author: 유희원 <youhhi0509@naver.com>
+Date:   Wed Aug 4 09:17:50 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    Docs(Backend) updte swagger
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!33
+
+[33mcommit 511b8750df54f77e85bc1d83f62796c01a94115f[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Wed Aug 4 18:17:31 2021 +0900
+
+    Docs(Backend) updte swagger
+
+[33mcommit 7ce1531335986673d608c49d26b3614651fd2544[m
+Merge: c16fb0f bca26e1
+Author: 유희원 <youhhi0509@naver.com>
+Date:   Wed Aug 4 08:49:43 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    update(Backend):complete mark, mydb
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!32
+
+[33mcommit bca26e105394c50856b6ae22e5f96883f3a30666[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Wed Aug 4 17:49:29 2021 +0900
+
+    update(Backend):complete mark, mydb
+
+[33mcommit c16fb0f47f4c50166807b891f0fb1e97f60be03b[m
+Merge: eb60637 0fc4d4d
+Author: 유희원 <youhhi0509@naver.com>
+Date:   Wed Aug 4 08:16:26 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    update(Backend):complete challenge-feed, count up
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!31
+
+[33mcommit 0fc4d4d60ee33d8b2660f2509c14709ac2b640fe[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Wed Aug 4 17:16:09 2021 +0900
+
+    update(Backend):complete challenge-feed, count up
+
+[33mcommit eb606375d34091995671b3b77a86a993037fa0ed[m
+Author: 이장섭 <comet00096@gmail.com>
+Date:   Wed Aug 4 07:04:03 2021 +0000
+
+    Update http-common.js
+
+[33mcommit 510bead8f7918ade576db6f8e3df9ac4b33ddbf1[m
+Merge: 40d7213 ac6ea2b
+Author: 유희원 <youhhi0509@naver.com>
+Date:   Wed Aug 4 06:51:44 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    update(Backend):change String to LocalDate
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!30
+
+[33mcommit ac6ea2be894d25e8d80827df24e48a967e2dfc53[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Wed Aug 4 15:51:27 2021 +0900
+
+    update(Backend):change String to LocalDate
+
+[33mcommit 40d7213f3d67f64a3a70ffeece48c498c3f89119[m
+Merge: a39fa7a c9b2f35
+Author: 유희원 <youhhi0509@naver.com>
+Date:   Wed Aug 4 06:23:34 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    update(Backend):Search with keywords(challenge name or group member
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!29
+
+[33mcommit c9b2f35c326469441b3d9e3d9a529a1fe3bdb627[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Wed Aug 4 15:23:18 2021 +0900
+
+    update(Backend):Search with keywords(challenge name or group member
+
+[33mcommit a39fa7a8aa1abdb2d1f30389bb4e4be6319625d7[m
+Merge: 5bf1c02 75d61fd
+Author: 이장섭 <comet00096@gmail.com>
+Date:   Wed Aug 4 06:09:17 2021 +0000
+
+    Merge branch 'logincheck' into 'master'
+    
+    feat : email duplication check api connection
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!28
+
+[33mcommit 75d61fd25d2e0f788befbcf75baef846a2f27c82[m
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Wed Aug 4 15:04:44 2021 +0900
+
+    feat : email duplication check api connection
+
+[33mcommit 5bf1c025426ba4f7a28df2f80dd9e54036546788[m
+Merge: 98ca28f d217840
+Author: 유희원 <youhhi0509@naver.com>
+Date:   Wed Aug 4 05:55:42 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    update(Backend): Likes
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!27
+
+[33mcommit d2178401d3c7050976ef33976cb29225e102134b[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Wed Aug 4 14:55:22 2021 +0900
+
+    update(Backend): Likes
+
+[33mcommit 98ca28f30da71a535f567f76062b0b8d8eefe68e[m
+Merge: 599e07f f3f7b3b
+Author: 유희원 <youhhi0509@naver.com>
+Date:   Wed Aug 4 05:09:03 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    update(Backend): Comment
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!26
+
+[33mcommit f3f7b3bc0dfab2f2cd9c6cdc88f0cc5afce3a7ab[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Wed Aug 4 14:07:56 2021 +0900
+
+    update(Backend): Comment
+
+[33mcommit 599e07f4d5b6cf57a092cbb841c6d1c7e8fa9b01[m
+Merge: e69a51c 682bc94
+Author: 차은채 <jjcec@naver.com>
+Date:   Wed Aug 4 01:40:32 2021 +0000
+
+    Merge branch 'postdetailafter_ec' into 'master'
+    
+    Design : postdetailafterpage
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!25
+
+[33mcommit 682bc9473f23ddf425b5e3bcc69a6873d9c10c83[m
+Merge: 50c16af e69a51c
+Author: 차은채 <jjcec@naver.com>
+Date:   Wed Aug 4 10:38:09 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307 into postdetailafter_ec
+
+[33mcommit 50c16af1122063684d955df5fb6eb7203febb602[m
+Author: 차은채 <jjcec@naver.com>
+Date:   Wed Aug 4 10:37:58 2021 +0900
+
+    Design : postdetailafterpage
+
+[33mcommit e69a51cf7f04e95fd79ffe0a10924e82a7e9e2bc[m
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Wed Aug 4 10:36:58 2021 +0900
+
+    fix : local front port(port plus)
+
+[33mcommit 57e1bf58155bd4277f503eef57c3406ea1498bd5[m
+Merge: 57300eb 8567211
+Author: 김준형 <goodluck616@naver.com>
+Date:   Wed Aug 4 01:21:37 2021 +0000
+
+    Merge branch 'signup_axios_jh' into 'master'
+    
+    Design : Join Page Complete
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!24
+
+[33mcommit 8567211453ad9873ea1c8f6af24d87ae1f9a799e[m
+Merge: 56a8d9f 57300eb
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Wed Aug 4 10:12:41 2021 +0900
+
+    Merge : 210804 git pull & merge
+
+[33mcommit 56a8d9f9933ce44ec92f4f895876f7fd6755c7a9[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Wed Aug 4 10:06:36 2021 +0900
+
+    Design : Join Page Complete
+
+[33mcommit 57300eb0e7954d104600312bc8bad3045dd3c096[m
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Wed Aug 4 09:54:42 2021 +0900
+
+    fix : erazed secret key fix
+
+[33mcommit 9ca8b5904e35132e8c592da300415404798eb7bb[m
+Author: root <root@ip-172-26-13-55.ap-northeast-2.compute.internal>
+Date:   Wed Aug 4 00:04:36 2021 +0000
+
+    update application properties
+
+[33mcommit 07313f4ad8782d8c332f1126a924caecc7724f3d[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Wed Aug 4 08:58:08 2021 +0900
+
+    update properties
+
+[33mcommit 28ccae0f32566c2ef03d468f8137413dc5023784[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Wed Aug 4 08:27:48 2021 +0900
+
+    update Dockerfile
+
+[33mcommit 418eaf802fd7feb523f7a5a759c01dea0c437fcf[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Wed Aug 4 02:35:14 2021 +0900
+
+    update properties
+
+[33mcommit 260d7c928ad846fbabee9442c3cab6ad138efe03[m
+Merge: 56b5ae3 77dd7ca
+Author: taehyunKim <sskl600@naver.com>
+Date:   Wed Aug 4 02:27:44 2021 +0900
+
+    update properties
+
+[33mcommit 56b5ae3bcb29b581ad113060a57ea91a0f40561a[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Wed Aug 4 02:27:10 2021 +0900
+
+    update properties
+
+[33mcommit 77dd7ca099bd6f0e913d897493373cafc2dc4fe9[m
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Wed Aug 4 01:53:10 2021 +0900
+
+    fix : server port
+
+[33mcommit 9b266ece51c7f2bf50ea65bfba07316bf730d114[m
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Wed Aug 4 01:49:42 2021 +0900
+
+     fix : token check
+
+[33mcommit a8ce89bfc56c705713b4d05b98bae4acd8904bf2[m
+Merge: ee371c9 5d7aefa
+Author: 이장섭 <comet00096@gmail.com>
+Date:   Tue Aug 3 16:31:06 2021 +0000
+
+    Merge branch 'test_branch_js' into 'master'
+    
+    JWT_setting_by_JS
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!23
+
+[33mcommit 5d7aefa06655ddb469d60a34b8dae8b8ef655317[m
+Merge: 48ee53f ee371c9
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Wed Aug 4 01:28:57 2021 +0900
+
+    merge fix
+
+[33mcommit 48ee53ffdcf85eeab14e6c0ac47507bd82b5c051[m
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Wed Aug 4 01:21:47 2021 +0900
+
+    Feat : jwt setting
+
+[33mcommit a80fa4e9230c4f59984580c18d7959447841cf3b[m
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Wed Aug 4 01:20:59 2021 +0900
+
+    Feat : jwt setting
+
+[33mcommit ee371c91976988eb8e3076f80949e1530b0d7799[m
+Merge: f41a7a2 5f5e6e9
+Author: taehyunKim <sskl600@naver.com>
+Date:   Wed Aug 4 01:17:38 2021 +0900
+
+    update CORS
+
+[33mcommit f41a7a28d510cb20f5f98999c1c588628a92fd7d[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Wed Aug 4 01:15:03 2021 +0900
+
+    update CORS
+
+[33mcommit 5f5e6e947f00abee53462a446db23f4ff21685f4[m
+Merge: 0f2246b 08dfbdb
+Author: 권희은 <heenee777@naver.com>
+Date:   Tue Aug 3 16:08:37 2021 +0000
+
+    Merge branch 'profile_he' into 'master'
+    
+    update(Port): update port
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!22
+
+[33mcommit 08dfbdbbd7f01dfffb57dbbbf2b83e09f48e828e[m
+Merge: 75eb9d6 0f2246b
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Wed Aug 4 01:07:10 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307 into profile_he
+
+[33mcommit 75eb9d6f0c0cee4affcdd3cbd48f69ddea16dfd5[m
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Wed Aug 4 01:07:01 2021 +0900
+
+    update(Port): update port
+
+[33mcommit 0f2246b7540c113085a112b499556409ff52d3dd[m
+Merge: 46a8d02 3403d2d
+Author: 차은채 <jjcec@naver.com>
+Date:   Tue Aug 3 15:35:13 2021 +0000
+
+    Merge branch 'postdetailafter_ec' into 'master'
+    
+    Fix : css folder name again
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!21
+
+[33mcommit 3403d2d55fdb5d8e4ef41e311d3128d5fcfd1f52[m
+Author: 차은채 <jjcec@naver.com>
+Date:   Wed Aug 4 00:33:45 2021 +0900
+
+    Fix : css folder name again
+
+[33mcommit 46a8d0242c0a2bae9eba90207376b4804328ec8f[m
+Merge: be5a790 6b7a370
+Author: 차은채 <jjcec@naver.com>
+Date:   Tue Aug 3 15:20:17 2021 +0000
+
+    Merge branch 'postdetailafter_ec' into 'master'
+    
+    Fix : fix css file name
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!20
+
+[33mcommit 6b7a370af5cb11d44c7a8e6bd4ba91ff671999df[m
+Author: 차은채 <jjcec@naver.com>
+Date:   Wed Aug 4 00:17:59 2021 +0900
+
+    Fix : fix css file name
+
+[33mcommit be5a7904697ba94073b24e569fb0eb49311d2fa6[m
+Merge: 89e7692 751b3ab
+Author: 차은채 <jjcec@naver.com>
+Date:   Tue Aug 3 14:56:53 2021 +0000
+
+    Merge branch 'postdetailpage_ec' into 'master'
+    
+    Design : postdetailpage commit
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!19
+
+[33mcommit 751b3ab5845d926527b35e0a5fa8799f083f107f[m
+Merge: 6ababcb 89e7692
+Author: 차은채 <jjcec@naver.com>
+Date:   Tue Aug 3 23:52:10 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307 into postdetailpage_ec
+
+[33mcommit 6ababcbddba5a22a3334fa3e5d5db22eb3c9e681[m
+Author: 차은채 <jjcec@naver.com>
+Date:   Tue Aug 3 23:51:57 2021 +0900
+
+    Design : postdetailpage commit
+
+[33mcommit 89e7692c155e17e2ffee1c08f44936037688f599[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 23:38:05 2021 +0900
+
+    update properties
+
+[33mcommit 44786c55a3434fbbdb998ccb3e558fec1acc5c79[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 23:17:54 2021 +0900
+
+    update Dockerfile
+
+[33mcommit b10c553437fea4ebceb20917d66b9fd203f87134[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 23:15:45 2021 +0900
+
+    update Dockerfile
+
+[33mcommit fac08e51f4e074da0b68747a1528e7d9f41cdee7[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 23:05:11 2021 +0900
+
+    update properties
+
+[33mcommit 1426f3234ec9f19e9d071290e7fda0220a1956b7[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 23:02:25 2021 +0900
+
+    update properties
+
+[33mcommit 6c6b8a4128e95771ffdafa39e059f117ddd082c2[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 22:53:49 2021 +0900
+
+    update properties
+
+[33mcommit f4aa6ac6512250a9cfd4ea5dab4dbc232396af34[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 22:43:15 2021 +0900
+
+    update Properties
+
+[33mcommit f4eb87562abc7b84e4473dfcfae141bd827a2ab2[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 22:40:23 2021 +0900
+
+    update Properties
+
+[33mcommit 0e00083fe2e895d95b657bfd815913dd4019469e[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 22:34:34 2021 +0900
+
+    update properties
+
+[33mcommit 01b6a7f2e695fda6c702b247687cb14e03de5732[m
+Merge: 793596a 729fd3b
+Author: 권희은 <heenee777@naver.com>
+Date:   Tue Aug 3 13:30:21 2021 +0000
+
+    Merge branch 'profile_he' into 'master'
+    
+    update(Profile): connect back and front for userInfo
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!18
+
+[33mcommit 729fd3bba66461f4efca6f3a463eb1b0dc74c422[m
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Tue Aug 3 22:28:30 2021 +0900
+
+    update(Profile): connect back and front for userInfo
+
+[33mcommit 42fbf82270e4a44dd129745f840af87833706ca0[m
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Tue Aug 3 21:58:41 2021 +0900
+
+    save safepoiont
+
+[33mcommit 793596a5a65abde9b7267eb356f084807685f13b[m
+Merge: f34b923 85abf8c
+Author: 권희은 <heenee777@naver.com>
+Date:   Tue Aug 3 11:52:32 2021 +0000
+
+    Merge branch 'profile_he' into 'master'
+    
+    update(Profile): update user_info
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!17
+
+[33mcommit 85abf8c62d0a7c42479f8df16f341176a05844b6[m
+Merge: de04755 f34b923
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Tue Aug 3 20:51:31 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307 into profile_he
+
+[33mcommit de0475557b6eb8fe5c952e59f25741f2d402570c[m
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Tue Aug 3 20:51:15 2021 +0900
+
+    update(Profile): update user_info
+
+[33mcommit f34b9234cff4e9ed674a1c09b6dfc2e4dbcad625[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 19:57:12 2021 +0900
+
+    update(Dockerfile) : update Dockerfile
+
+[33mcommit b5111d37eef5bc9eaba3b58069efdf3c29dc4640[m
+Merge: 23f8a7a 5a0dae1
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Tue Aug 3 19:50:59 2021 +0900
+
+    pull
+
+[33mcommit 5a0dae1ed4c6aefffb69840565e8e5d245476bc9[m
+Merge: 6f8faff b9793f3
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 19:36:48 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307
+    
+    update Dokerfile
+
+[33mcommit 6f8faffd9a80f33116de75ab1f3425dca037a101[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 19:36:43 2021 +0900
+
+    update(Dockerfile) : update Dockerfile
+
+[33mcommit 23f8a7af7bd3e66f7dcfd24ace67fd87e47d2971[m[33m ([m[1;31morigin/test_branch_js[m[33m)[m
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Tue Aug 3 19:34:31 2021 +0900
+
+    feat : front join util
+
+[33mcommit 817a063e9e1972a0935e4473d3e2aa42fe96bb6f[m
+Merge: 9684766 b9793f3
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Tue Aug 3 19:00:00 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307 into test_branch_js
+    
+    # Conflicts:
+    #       backend/src/main/resources/application.properties
+
+[33mcommit b9793f304d645184ab3ff1e456203eecbfe9af3f[m
+Merge: 854a2fb c2dadab
+Author: 유희원 <youhhi0509@naver.com>
+Date:   Tue Aug 3 08:55:43 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    update(Backend): add WebConfig(CORS)
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!16
+
+[33mcommit c2dadab10c2bb50dca8f9dfb79032c1872fc7284[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Tue Aug 3 17:54:57 2021 +0900
+
+    update(Backend): add WebConfig(CORS)
+
+[33mcommit 854a2fbb70f90f3b1a81f07610a94fdfa40c0858[m
+Merge: 8aa42f6 d6d3353
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 17:19:54 2021 +0900
+
+    update(Dockerfile) : update Dockerfile
+
+[33mcommit 8aa42f6bf564495de0caedce1fb4bbaa6246a6d0[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 17:18:48 2021 +0900
+
+    update(Dockerfile) : update Dockerfile
+
+[33mcommit d6d33532ee440dcc065ad94783b55c67c948e3b5[m
+Author: 김태현 <sskl600@naver.com>
+Date:   Tue Aug 3 08:04:10 2021 +0000
+
+    Update Dockerfile
+
+[33mcommit 2c784f518ecc7a7939ecc12befc09a321e2bed90[m
+Merge: 11a5fcb fca8ca7
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 16:40:34 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307
+
+[33mcommit 11a5fcb462245d1f0331e2f228ac7f42de5251da[m[33m ([m[1;31morigin/docker[m[33m)[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 16:38:45 2021 +0900
+
+    update(Dockerfile) : update Dockerfile
+
+[33mcommit 69bef78006736b932c238134b6e5e6197daeb7e8[m
+Merge: 4a773d3 9684766
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Tue Aug 3 16:10:30 2021 +0900
+
+    Merge branch 'test_branch_js' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307
+
+[33mcommit 4a773d377690c6369052d6a110a50fb9edf838b0[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Tue Aug 3 16:09:26 2021 +0900
+
+    fix : Spring DB Change
+
+[33mcommit 96847666f1a92d50cb4094b2cfb632f6f82e3903[m
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Tue Aug 3 15:59:09 2021 +0900
+
+    fix : uncompleted join network
+
+[33mcommit fca8ca7dd5ca6e05e1c40519baa47afe8f2c63ac[m
+Merge: 8d02051 775997c
+Author: 권희은 <heenee777@naver.com>
+Date:   Tue Aug 3 06:56:09 2021 +0000
+
+    Merge branch 'profile_he' into 'master'
+    
+    update(ProfileEditModal): Update Profile Edit Modal
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!15
+
+[33mcommit 775997c763928d94a641259cecaa3b50e734802e[m
+Merge: af189f4 8d02051
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Tue Aug 3 15:54:54 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307 into profile_he
+
+[33mcommit af189f4129d58d23ee00105e6b1600a9cc88ff45[m
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Tue Aug 3 15:54:41 2021 +0900
+
+    update(ProfileEditModal): Update Profile Edit Modal
+
+[33mcommit 8d020515147885096cf1f834ea4118ca77f23e98[m
+Merge: 97b0800 e944e58
+Author: 유희원 <youhhi0509@naver.com>
+Date:   Tue Aug 3 06:45:36 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    update(Backend): update feed, follower
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!14
+
+[33mcommit e944e58e7434bc571a328979d9e26bc139a9b406[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Tue Aug 3 15:44:00 2021 +0900
+
+    update(Backend): update feed, follower
+
+[33mcommit 4847be29121303e93ed4a8628806af20c9123b40[m
+Author: SEOPSS\prero <comet00096@gmail.com>
+Date:   Tue Aug 3 13:57:51 2021 +0900
+
+    git branch test
+
+[33mcommit 97b0800550ebd5d917a4f37703fb1fd25e342284[m
+Merge: 5a7ed4c 03ee45d
+Author: 김준형 <goodluck616@naver.com>
+Date:   Tue Aug 3 04:38:52 2021 +0000
+
+    Merge branch 'join_jh' into 'master'
+    
+    FIx : Join page first complete
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!13
+
+[33mcommit 03ee45d10c1cd54e6998133dd43500f6f745be9a[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Tue Aug 3 13:38:09 2021 +0900
+
+    Design : Join page first complete
+
+[33mcommit 68043d484031d8de3f8ac6794f2b5a594eb3bb2d[m
+Merge: 3499005 5a7ed4c
+Author: 차은채 <jjcec@naver.com>
+Date:   Tue Aug 3 11:46:26 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307 into postdetailpage_ec
+
+[33mcommit 34990057aa5a6ad374bec9dd94cc6c07a7e04786[m
+Author: 차은채 <jjcec@naver.com>
+Date:   Tue Aug 3 11:46:17 2021 +0900
+
+    Design : postdetailpage button
+
+[33mcommit 9790d65b87e58351ec7b5300e2c155b5d0b7b969[m
+Merge: 6452ae0 3e93e7f
+Author: taehyunKim <sskl600@naver.com>
+Date:   Tue Aug 3 11:42:23 2021 +0900
+
+    merge
+
+[33mcommit 809b068fe8c2db5ea19de9b2ef0d823f924e05c9[m
+Merge: fb87d90 5a7ed4c
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Tue Aug 3 11:18:39 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307 into join_jh
+
+[33mcommit 5a7ed4c632f008630ce93f1bf03315d5765d2290[m
+Merge: 3d15ac9 b317593
+Author: 권희은 <heenee777@naver.com>
+Date:   Tue Aug 3 02:17:48 2021 +0000
+
+    Merge branch 'font_he' into 'master'
+    
+    Design(Font):design font
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!12
+
+[33mcommit fb87d90178bf8b34b3cfb18bc9e2452d43f52f3f[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Tue Aug 3 11:16:42 2021 +0900
+
+    Style : useless CSS removed
+
+[33mcommit b317593622a5155229c99766d124734a36590414[m
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Tue Aug 3 11:16:42 2021 +0900
+
+    Design(Font):design font
+
+[33mcommit 3d15ac94ceff0589933b5f3850586adc44ebabb3[m
+Merge: 3e93e7f d1f2f8e
+Author: 김준형 <goodluck616@naver.com>
+Date:   Tue Aug 3 01:43:49 2021 +0000
+
+    Merge branch 'join_jh' into 'master'
+    
+    Style : Font Test
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!11
+
+[33mcommit d1f2f8e86d7725e8602f0c71500b6021f04f960b[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Tue Aug 3 10:43:39 2021 +0900
+
+    Style : Font Test
+
+[33mcommit 3e93e7f32ffa9b6902b66513c8d2e4c8f9dd47c3[m
+Merge: 775b991 93892e6
+Author: 차은채 <jjcec@naver.com>
+Date:   Tue Aug 3 01:21:46 2021 +0000
+
+    Merge branch 'postdetailfile_ec' into 'master'
+    
+    Design : postdetailfile commit
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!10
+
+[33mcommit 93892e637a27bead71eb701632cd3cb7d66c0b01[m
+Merge: 6f39c80 775b991
+Author: 차은채 <jjcec@naver.com>
+Date:   Tue Aug 3 10:13:59 2021 +0900
+
+    MERGE : 0803 git pull & merge
+
+[33mcommit 6f39c80d57458fbb77ba6484a4d2d7cfd4efd223[m
+Author: 차은채 <jjcec@naver.com>
+Date:   Tue Aug 3 10:09:58 2021 +0900
+
+    Design : postdetailfile commit
+
+[33mcommit 775b9910fada812f21c2f75c0abaa70dd8924edb[m
+Merge: ccc4489 532375e
+Author: 김준형 <goodluck616@naver.com>
+Date:   Tue Aug 3 01:07:48 2021 +0000
+
+    Merge branch 'join_jh' into 'master'
+    
+    Fix : Modal Bug Fix
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!9
+
+[33mcommit 532375ee0dbcb6ae70093f5fe6b743b43d66bb3e[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Tue Aug 3 10:06:17 2021 +0900
+
+    Fix : Modal Bug Fix
+
+[33mcommit ccc44896582f63f5f657115e13eb653989e2d1c3[m
+Merge: f2fd5dd 76f50fa
+Author: 김준형 <goodluck616@naver.com>
+Date:   Mon Aug 2 23:23:40 2021 +0000
+
+    Merge branch 'challenges_jh' into 'master'
+    
+    Challenges JH
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!8
+
+[33mcommit 76f50fa1c2fcac73969f7a4fe7c0813da11e3fc7[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Tue Aug 3 08:09:54 2021 +0900
+
+    Design : Challenges UI complete
+
+[33mcommit 65e4c730c40809ca3c707abe444b10af0a5a97b1[m
+Merge: 227577b f2fd5dd
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Mon Aug 2 23:18:15 2021 +0900
+
+    210802 git pull & merge
+
+[33mcommit 227577bb8c826db676a6b26b1229f13b82424208[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Mon Aug 2 23:13:10 2021 +0900
+
+    Fix : Bootstrap Vue -> Bootstrap
+
+[33mcommit f2fd5dd84a0629694e05c16400347df1e470a03f[m
+Merge: 29580e9 a9e9c47
+Author: 차은채 <jjcec@naver.com>
+Date:   Mon Aug 2 14:06:52 2021 +0000
+
+    Merge branch 'postdetail_ec' into 'master'
+    
+    Design : postdetail first commit
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!7
+
+[33mcommit a9e9c47661aa1b98371906d918762f5e6e356ae8[m
+Merge: d092cae 29580e9
+Author: 차은채 <jjcec@naver.com>
+Date:   Mon Aug 2 23:03:51 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307 into postdetail_ec
+
+[33mcommit d092cae65b47fce710bf919cfaf7c9b886e15b2c[m
+Author: 차은채 <jjcec@naver.com>
+Date:   Mon Aug 2 23:03:35 2021 +0900
+
+    Design : postdetail first commit
+
+[33mcommit 29580e9fd9ed5e091cbbab14f34eb71663fec55f[m
+Merge: 5b7c123 8ed64ee
+Author: 권희은 <heenee777@naver.com>
+Date:   Mon Aug 2 13:16:44 2021 +0000
+
+    Merge branch 'profile_he' into 'master'
+    
+    Profile he
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!6
+
+[33mcommit 8ed64eec1a76dd8cea0e4a0ed63e1924fee7ac65[m
+Merge: b47835f 5b7c123
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Mon Aug 2 22:15:08 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307 into profile_he
+
+[33mcommit b47835fa4310b283ef06c8285bff8f622c7937a7[m
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Mon Aug 2 22:14:58 2021 +0900
+
+    build(ProfileModal): build Profile Modal
+
+[33mcommit 5b7c123c8c219660947f18dc706008f326e4f63c[m
+Merge: 4234387 87e7f94
+Author: 유희원 <youhhi0509@naver.com>
+Date:   Mon Aug 2 09:57:42 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    update(Backend): update task, challenge, follow2
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!5
+
+[33mcommit 87e7f94d91c92dcd3d6ca4d1382ead1b0a581623[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Mon Aug 2 18:56:28 2021 +0900
+
+    update(Backend): update task, challenge, follow2
+
+[33mcommit 4234387b4097372353523149b5454232323741c4[m
+Merge: 4fc909f 4e8d0be
+Author: 권희은 <heenee777@naver.com>
+Date:   Mon Aug 2 09:21:32 2021 +0000
+
+    Merge branch 'profile_he' into 'master'
+    
+    Profile he
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!4
+
+[33mcommit 4fc909fd38237a3520db6a37f8a9ab02214e6ff8[m
+Merge: 95dce6a 2c6ccde
+Author: 유희원 <youhhi0509@naver.com>
+Date:   Mon Aug 2 09:18:28 2021 +0000
+
+    Merge branch 'backend' into 'master'
+    
+    update(Backend): update task, challenge, follow
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!3
+
+[33mcommit 4e8d0be17a84b5a9d7b22424ae6192052c47d428[m
+Merge: 76fe233 95dce6a
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Mon Aug 2 18:16:16 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307 into profile_he
+
+[33mcommit 76fe23310b28aecaa591c34fa9711895a0ae1463[m
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Mon Aug 2 18:16:01 2021 +0900
+
+    update(Profile):update Profile
+
+[33mcommit 2c6ccde1dfb11f79c2a87a7ccb6694e81fe63b6b[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Mon Aug 2 18:10:24 2021 +0900
+
+    update(Backend): update task, challenge, follow
+
+[33mcommit 364b918fc464d161a7860286b7740cdc4eb8e063[m
+Merge: 9a0cf33 95dce6a
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Mon Aug 2 17:49:58 2021 +0900
+
+    210802 git pull & merge
+
+[33mcommit 9a0cf33fbdba632163f17fccfe719bbbb2f8c57b[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Mon Aug 2 17:43:13 2021 +0900
+
+    Style : Modal CSS check
+
+[33mcommit 95dce6a5be899578f167a45b29b26f9fe51c3e18[m
+Merge: 881d8d2 a1350f9
+Author: 차은채 <jjcec@naver.com>
+Date:   Mon Aug 2 07:40:05 2021 +0000
+
+    Merge branch 'postdetailmodal_ec' into 'master'
+    
+    Design : postdetailpage first commit
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!2
+
+[33mcommit a1350f969ec2a790ab45a30d402780473e80c53b[m
+Merge: 5e830cd 881d8d2
+Author: 차은채 <jjcec@naver.com>
+Date:   Mon Aug 2 16:36:58 2021 +0900
+
+    MERGE : 0802 git pull & merge
+
+[33mcommit 5e830cd8bffd84c6780fb5540f4cc4c1845953cb[m
+Author: 차은채 <jjcec@naver.com>
+Date:   Mon Aug 2 16:33:02 2021 +0900
+
+    Design : postdetailpage first commit
+
+[33mcommit 881d8d268bc1f16d30baa3748b7022e67724ed99[m
+Merge: b13754a 7d8ebc8
+Author: 권희은 <heenee777@naver.com>
+Date:   Mon Aug 2 07:27:59 2021 +0000
+
+    Merge branch 'profile_he' into 'master'
+    
+    Profile he
+    
+    See merge request s05-webmobile2-sub3/S05P13A307!1
+
+[33mcommit 7d8ebc8224680bc3bfaa810b574375dc82eeb41e[m
+Merge: 76f07b4 b13754a
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Mon Aug 2 16:24:39 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307 into profile_he
+
+[33mcommit 76f07b4ca9bc8b41320200f2bc2994df5a36b24a[m
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Mon Aug 2 16:24:31 2021 +0900
+
+    update(Profile):update Profile page
+
+[33mcommit 3d2de3b5832694ddaa146a4af4c8e5eae49d4a3d[m
+Merge: e82e703 b13754a
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Mon Aug 2 10:23:23 2021 +0900
+
+    Merge : 210802 git pull & merge
+
+[33mcommit e82e703b429d3f5d8d95b59c56223c22801692fd[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Mon Aug 2 10:22:01 2021 +0900
+
+    Design : Challenges UI complete
+
+[33mcommit b13754a50152997de860cb8b17f4a3416aa5ff88[m
+Merge: 1798a8c 69e83fb
+Author: 차은채 <jjcec@naver.com>
+Date:   Mon Aug 2 01:18:32 2021 +0000
+
+    Merge branch 'challengeroom_ec' into 'master'
+    
+    Design : PostDetailModal first commit
+    
+    See merge request s05-webmobile2-sub2/S05P12A307!12
+
+[33mcommit 69e83fb46068d7c2ca58c967323c8ff018ffd115[m
+Merge: 36eeb7c 1798a8c
+Author: 차은채 <jjcec@naver.com>
+Date:   Mon Aug 2 10:11:55 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub2/S05P12A307 into challengeroom_ec
+
+[33mcommit 36eeb7cf19f2af99778d2619ac55d1770e85cf5d[m
+Author: 차은채 <jjcec@naver.com>
+Date:   Mon Aug 2 10:11:43 2021 +0900
+
+    Design : PostDetailModal first commit
+
+[33mcommit 1798a8c16821363dfcbbb3993e695deb41d3cd4a[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Sun Aug 1 20:24:18 2021 +0900
+
+    update(Dockerfile) : update dockerfile
+
+[33mcommit 6f285cdfd94def4d741dd788a3010ec3464948f7[m
+Merge: fb89d7a 90a4019
+Author: 김준형 <goodluck616@naver.com>
+Date:   Sun Aug 1 10:17:30 2021 +0000
+
+    Merge branch 'loginModal_jh' into 'master'
+    
+    Fix : login input redundancy resolved
+    
+    See merge request s05-webmobile2-sub2/S05P12A307!11
+
+[33mcommit 90a4019baeb81d147b7a601876e8f8e7ff9c53b2[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Sun Aug 1 19:16:15 2021 +0900
+
+    Fix : login input redundancy resolved
+
+[33mcommit fb89d7ad1122c87d2e50411c773f29f2d743f04b[m
+Merge: 35e048c 9920743
+Author: 권희은 <heenee777@naver.com>
+Date:   Sun Aug 1 08:25:22 2021 +0000
+
+    Merge branch 'profile_he' into 'master'
+    
+    build(Profile): build Profile
+    
+    See merge request s05-webmobile2-sub2/S05P12A307!10
+
+[33mcommit 9920743c489a61888534a21d2dd2e9775f5552c8[m
+Merge: 74b33df 35e048c
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Sun Aug 1 17:22:50 2021 +0900
+
+    build(Profile):build profile
+
+[33mcommit 74b33dfba3c476f6046bdf185cf71c8204f21b81[m
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Sun Aug 1 17:19:52 2021 +0900
+
+    build(Profile):build profile
+
+[33mcommit 35e048cf754577188e56bbc5966ca0d30f1aab9b[m
+Merge: 12544d4 100f9df
+Author: 차은채 <jjcec@naver.com>
+Date:   Sun Aug 1 08:02:20 2021 +0000
+
+    Merge branch 'challengeroom_ec' into 'master'
+    
+    Design : challengeroom first commit
+    
+    See merge request s05-webmobile2-sub2/S05P12A307!9
+
+[33mcommit 100f9df952c0c525b76fae0628e283ca5b8a84a3[m
+Merge: 41ecca7 12544d4
+Author: 차은채 <jjcec@naver.com>
+Date:   Sun Aug 1 16:37:44 2021 +0900
+
+    MERGE : 0801 git pull & merge
+
+[33mcommit 41ecca7ca415b413f7fb97d54ccd649ebfe07dd3[m
+Author: 차은채 <jjcec@naver.com>
+Date:   Sun Aug 1 16:28:09 2021 +0900
+
+    Design : challengeroom first commit
+
+[33mcommit 12544d437234ee3b018d44bff06f3df98cf41c04[m
+Author: heewonyouh <67193692+heewonyouh@users.noreply.github.com>
+Date:   Sun Aug 1 15:29:54 2021 +0900
+
+    update(Backend) : update backend init
+
+[33mcommit 0bb5c9c0f518a6a3e1a0c8cca58cb20a5edd7888[m
+Merge: c73cff2 4f145ae
+Author: 권희은 <heenee777@naver.com>
+Date:   Sat Jul 31 02:13:55 2021 +0000
+
+    Merge branch 'LoginModal_jh' into 'master'
+    
+    Feat : Login Modal
+    
+    See merge request s05-webmobile2-sub2/S05P12A307!8
+
+[33mcommit 4f145ae9a81bebc290a6705bc56e2222b32e8195[m
+Merge: 5ac055a c73cff2
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Sat Jul 31 08:55:00 2021 +0900
+
+    Merge : 210731 git pull & merge
+
+[33mcommit 5ac055a2da94b7a800187c0d3400e12574a689e2[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Sat Jul 31 08:52:12 2021 +0900
+
+    Feat : Login Modal
+
+[33mcommit c73cff20872807d817479ed7db4f65d65eb3da6a[m
+Merge: 7b83cd4 0d4190f
+Author: 권희은 <heenee777@naver.com>
+Date:   Fri Jul 30 13:07:04 2021 +0000
+
+    Merge branch 'nav_he' into 'master'
+    
+    update(Nav):update Navbar template
+    
+    See merge request s05-webmobile2-sub2/S05P12A307!7
+
+[33mcommit 0d4190f10efa9c40d87ef77bd8a040916ceab039[m
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Fri Jul 30 22:03:33 2021 +0900
+
+    update(Nav):update Navbar template
+
+[33mcommit b3afd4060a2cb228b3bd71bc5ad13510bd301a56[m
+Author: 차은채 <jjcec@naver.com>
+Date:   Fri Jul 30 10:50:00 2021 +0900
+
+    0730 git pull
+
+[33mcommit 7b83cd40e23a361e08d8dc733fba2b1c265a8ada[m
+Author: 김태현 <sskl600@naver.com>
+Date:   Thu Jul 29 16:11:00 2021 +0000
+
+    Update application.yml
+
+[33mcommit 6452ae08cefbd53760d7f5e4c1531e403cdf1ed6[m
+Author: 김태현 <sskl600@naver.com>
+Date:   Thu Jul 29 16:10:47 2021 +0000
+
+    Update application.yml
+
+[33mcommit c1d6f6961d2c2583c2e02299dde79e849dfa386d[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 22:37:21 2021 +0900
+
+    update(Presentation): update Presentation file
+
+[33mcommit 7d04312bd017a4dc7d428cb3cb6c6648843a1982[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 21:58:22 2021 +0900
+
+    upload(Video) : upload 1st presentation video
+
+[33mcommit f948bd911206d360649c643c7be9d8fdf626a078[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 21:33:53 2021 +0900
+
+    upload(Presentation) : upload Presentation file
+
+[33mcommit 3c56dd3f25f689eef2020d841cfa249adced3a50[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 21:30:39 2021 +0900
+
+    upload(Presentation) : upload presentation file
+
+[33mcommit e453cb9e39984defd3617891c3dc6ca9cad45057[m
+Merge: fbca142 26d5748
+Author: 권희은 <heenee777@naver.com>
+Date:   Thu Jul 29 10:00:21 2021 +0000
+
+    Merge branch 'nav_he' into 'master'
+    
+    희은 배경 + 네비게이션바
+    
+    See merge request s05-webmobile2-sub2/S05P12A307!6
+
+[33mcommit 26d57482ba0096426a218897dce04cbfc25b52c1[m
+Merge: a2c930c fbca142
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Thu Jul 29 18:58:13 2021 +0900
+
+    Merge branch 'master' of https://lab.ssafy.com/s05-webmobile2-sub2/S05P12A307 into nav_he
+
+[33mcommit a2c930ca2253acb3a459f43ebbf542d8ef5d18d5[m
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Thu Jul 29 18:57:38 2021 +0900
+
+    0729 nav_he
+
+[33mcommit fbca1425fa15f91156cca10e0ffd4dcce9150671[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 18:49:23 2021 +0900
+
+    update docker
+
+[33mcommit 64409299ab1e3e9d007c608ee26d8ac3038db7e6[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 18:43:50 2021 +0900
+
+    test
+
+[33mcommit 7b8121453ecad8006e28cdfc4dbe62bf12e5e69d[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 17:52:17 2021 +0900
+
+    stash files
+
+[33mcommit c63aa6d12bd613cf7e689c545d9be351ce60dce2[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 17:47:52 2021 +0900
+
+    pull request
+
+[33mcommit 5c70522c55925786695e2464b61b8412d6320cd9[m
+Merge: 599f849 f072f12
+Author: 김준형 <goodluck616@naver.com>
+Date:   Thu Jul 29 08:35:45 2021 +0000
+
+    Merge branch 'test' into 'master'
+    
+    깃랩 슬랙 연동 테스트
+    
+    See merge request s05-webmobile2-sub2/S05P12A307!5
+
+[33mcommit f072f1205a68e502693378f7d5daec3d0eb6a18d[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Thu Jul 29 17:35:16 2021 +0900
+
+    test_jh
+
+[33mcommit 599f8492ea37b52d495f5d9cbfbcc76b25dfa8a6[m
+Merge: b76d5f8 319f561
+Author: 김준형 <goodluck616@naver.com>
+Date:   Thu Jul 29 08:20:45 2021 +0000
+
+    Merge branch 'message_jh' into 'master'
+    
+    웰컴 페이지 메시지 추가 및 기타 변경사항
+    
+    See merge request s05-webmobile2-sub2/S05P12A307!4
+
+[33mcommit 319f5614efd9c197acf406a1bb559665313f3d07[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Thu Jul 29 17:17:48 2021 +0900
+
+    message_jh
+
+[33mcommit b76d5f85667837914d25ed22a07d16ed78f71555[m
+Merge: 371c515 8efc9d1
+Author: 권희은 <heenee777@naver.com>
+Date:   Thu Jul 29 07:21:46 2021 +0000
+
+    Merge branch 'welcome_jh' into 'master'
+    
+    웰컴 페이지 UI 완성 (충돌 부분 해결 후 다시 PUSH)
+    
+    See merge request s05-webmobile2-sub2/S05P12A307!3
+
+[33mcommit 8efc9d16e9b4368c194db1f58367760c5c6e8118[m
+Merge: 86051e7 371c515
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Thu Jul 29 16:14:53 2021 +0900
+
+    welcome_jh (conflict resolve)
+
+[33mcommit 86051e762d15f834e714b01c6193e937af45c346[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Thu Jul 29 15:32:19 2021 +0900
+
+    welcome_jh
+
+[33mcommit 371c51584d00202f551e7bdd516d3bb1c4e77ed6[m
+Merge: c0cc6d7 4684238
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 11:25:52 2021 +0900
+
+    test nginx runing in jenkins
+
+[33mcommit c0cc6d72086ace5215ffc2e4df8f912532cfeab7[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 11:25:15 2021 +0900
+
+    test nginx running in jenkins
+
+[33mcommit 4684238c754ca81f720527fc9f7f228a32261a5b[m
+Merge: a07d601 ab53653
+Author: 김태현 <sskl600@naver.com>
+Date:   Thu Jul 29 02:22:32 2021 +0000
+
+    Merge branch 'docker' into 'master'
+    
+    docker nginx running update
+    
+    See merge request s05-webmobile2-sub2/S05P12A307!1
+
+[33mcommit ab53653d219f77766fc116e79792a50c8e10fc4a[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 11:20:38 2021 +0900
+
+    docker nginx running update
+
+[33mcommit 017a5ce710344bd17096354ba99b317a775fa0f0[m
+Author: Helloworld616 <goodluck616@naver.com>
+Date:   Thu Jul 29 10:11:11 2021 +0900
+
+    210729 git pull merge
+
+[33mcommit a07d601999740602663c9a185edaa6523cb3c8d8[m
+Merge: 69be4ed a9f8f8a
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 08:33:17 2021 +0900
+
+    happy good morning
+
+[33mcommit 69be4ed16de8e0d158d3ea5ca03924a7779f1470[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 08:32:05 2021 +0900
+
+    good morning!
+
+[33mcommit a9f8f8a41b33011e4e7c5eb6c3919f6b704f93c9[m
+Author: 김태현 <kimtaehyun@gimtaehyeon-ui-MacBookAir.local>
+Date:   Thu Jul 29 03:15:25 2021 +0900
+
+    successgit add .
+
+[33mcommit d41ff8a7b026f39f168c21deaaadd3534b933186[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 03:10:26 2021 +0900
+
+    final test
+
+[33mcommit d698e14c92ac0a9761defbf634d07f495dedc776[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 02:57:30 2021 +0900
+
+    test
+
+[33mcommit 50a1da4d83acd62e908c46ece76481aa77c4a398[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 02:46:50 2021 +0900
+
+    test
+
+[33mcommit ec01b5845ea2d4a33f7acf10f57485b23c44b438[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 02:33:59 2021 +0900
+
+    test
+
+[33mcommit c95df70eba03e87d1f925621760ad6d637202e26[m
+Author: taehyunKim <sskl600@naver.com>
+Date:   Thu Jul 29 02:29:37 2021 +0900
+
+    test
+
+[33mcommit bb16752a6630097d48cf4e4fd70f991b14aa1a7b[m
+Author: Kimtaehyun <sskl600@naver.com>
+Date:   Thu Jul 29 01:40:12 2021 +0900
+
+    SUCCESS..!
+
+[33mcommit f8f9d3fa17235a8ddfb2c00da670e78d3b8da67c[m
+Author: Kimtaehyun <sskl600@naver.com>
+Date:   Thu Jul 29 01:38:00 2021 +0900
+
+    YEAH!!!!
+
+[33mcommit 37105797aa60b24986f146ac30204d990d4186d0[m
+Author: Kimtaehyun <sskl600@naver.com>
+Date:   Thu Jul 29 01:27:51 2021 +0900
+
+    success pipeline!
+
+[33mcommit 48e273ecbef536c53c07a73fc20333a92c8d1fa1[m
+Author: Kimtaehyun <sskl600@naver.com>
+Date:   Thu Jul 29 01:22:24 2021 +0900
+
+    pipeline test3
+
+[33mcommit 33a68d58d3f1928e80626de2e1e474ba37aa40b4[m
+Author: Kimtaehyun <sskl600@naver.com>
+Date:   Thu Jul 29 00:49:30 2021 +0900
+
+    pipeline test2
+
+[33mcommit 3f2a50b30320a22caa7f3475e20b18e1ab115d9d[m
+Author: Kimtaehyun <sskl600@naver.com>
+Date:   Wed Jul 28 23:37:06 2021 +0900
+
+    test pipeline
+
+[33mcommit 7da31e9fae43efba99b52eb1b0f08e87952f98f0[m
+Author: Kimtaehyun <sskl600@naver.com>
+Date:   Wed Jul 28 21:23:01 2021 +0900
+
+    dockerfile added
+
+[33mcommit 93101de3f10159e8faefbb1aa4ad8d54fcea04fd[m
+Author: Kimtaehyun <sskl600@naver.com>
+Date:   Wed Jul 28 20:17:53 2021 +0900
+
+    upload SSAZIPsql
+
+[33mcommit b136362ac18feb9686cc3c5d303234f96ce26819[m
+Author: Kimtaehyun <sskl600@naver.com>
+Date:   Wed Jul 28 20:14:04 2021 +0900
+
+    update ERD
+
+[33mcommit f5bbec2d604018f451359daaf3642fe72ea7511a[m
+Author: heeeunk <heeeunk777@gmail.com>
+Date:   Wed Jul 28 20:06:54 2021 +0900
+
+    0728 frontend first buildup
+
+[33mcommit 249e6dadf5ddd839cbca85c21041e16b377bb58b[m
+Author: Kimtaehyun <sskl600@naver.com>
+Date:   Tue Jul 27 11:27:47 2021 +0900
+
+    enroll config
+
+[33mcommit e3ee7a6eebac19bbebdea1c6c5b58ee077a978d4[m
+Author: Kimtaehyun <sskl600@naver.com>
+Date:   Tue Jul 27 11:23:29 2021 +0900
+
+    Software basic plan upload

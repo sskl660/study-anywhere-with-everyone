@@ -163,8 +163,13 @@ public class ChallengeService {
             }
             for(int i=0; i<challengeEntity.getChallengeTaskCnt(); i++){
                 if(temp[i]==null){
+<<<<<<< HEAD
+                    if(deadlines.get(i).isBefore(LocalDate.now())) temp[i] = -1;
+                    else temp[i] = 0;
+=======
                     if(deadlines.get(i).isBefore(LocalDate.now())) temp[i] = -2;
                     else temp[i] = -1;
+>>>>>>> deccdb86eacf0c86c982fdf0273a3553e5dcda9d
                 }
             }
             response.setTaskNo(temp);
