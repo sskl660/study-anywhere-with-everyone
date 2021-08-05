@@ -59,7 +59,8 @@
                 <input class="profile-long-input editBlog" type="text" v-model.trim="userInfo.userBlog" placeholder="ex) 개인 블로그 주소를 입력해주세요.">
               </div>
               <div class="d-flex">
-                <input class="profile-textarea-input editIntroduce" type="text" v-model.trim="userInfo.userIntroduce" placeholder="ex) 각오, 소개 등 친구들에게 하고싶은 말을 자유롭게 써주세요.">
+                <textarea class="profile-textarea-input editIntroduce" type="text" v-model.trim="userInfo.userIntroduce" placeholder="ex) 각오, 소개 등 친구들에게 하고싶은 말을 자유롭게 써주세요.">
+                </textarea>
               </div> 
               <div style="color:red; font-weight:600; margin-top:20px; margin-right:220px;">* 소개글은 70자 이내로 작성해주세요.</div>
             </div>
