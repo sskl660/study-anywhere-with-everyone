@@ -33,7 +33,7 @@ public class FileService {
     }
 
     @Transactional
-    public FileInfoResponse getFile(int fileNo){
+    public FileInfoResponse fileDownload(int fileNo){
         FileEntity file = fileRepository.findById(fileNo).get();
         FileInfoResponse fileInfoResponse = FileInfoResponse.builder()
                 .fileNo(fileNo)
