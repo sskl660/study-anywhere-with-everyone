@@ -2,7 +2,7 @@ import axios from '@/util/http-common.js';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import router from '@/router';
-import createPersistedState from 'vuex-persistedstate';
+//import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
@@ -17,11 +17,11 @@ export default new Vuex.Store({
         userTerm: null,
     },
     // state를 유지하기 위해
-    plugins: [
-        createPersistedState({
-            paths: ['userEmail', 'userName', 'emailposi', 'isLogin', 'userTerm', 'config', 'comments'],
-        }),
-    ],
+    // plugins: [
+    //     createPersistedState({
+    //         paths: ['userEmail', 'userName', 'emailposi', 'isLogin', 'userTerm', 'config', 'comments'],
+    //     }),
+    // ],
     mutations: {
         // 가입
         JOIN: function(state) {
