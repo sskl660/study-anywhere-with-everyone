@@ -35,7 +35,7 @@ public class ChallengeEntity {
     private LocalDate challengeStartdate;
     @Column(name = "challenge_enddate")
     private LocalDate challengeEnddate;
-    @Column(name = "challenge_desc")
+    @Column(name = "challenge_desc", length = 600)
     private String challengeDesc;
     @Column(name = "challenge_task_cnt")
     private int challengeTaskCnt;
