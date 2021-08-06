@@ -7,7 +7,7 @@
     <!-- 프로필 정보 우측의 컨테이너 -->
     <div class="profile-info" style="display:inline-block" >
       <!-- 상단의 챌린지수, 팔로워수, 팔로잉수 -->
-      <ProfileStatus :userInfo="userInfo"/>
+      <ProfileStatus :userInfo="userInfo" :followers="followers" :followings="followings"/>
       <!-- 하단의 각오 및 소개글 -->
       <ProfileIntro style="display:inline-block" :userIntroduce="userInfo.userIntroduce"/>
     </div>
@@ -29,6 +29,12 @@ export default {
   props: {
     userInfo: {
       type: Object
+    },
+    followers: {
+      type: Array
+    },
+    followings: {
+      type: Array
     }
   }
 }
