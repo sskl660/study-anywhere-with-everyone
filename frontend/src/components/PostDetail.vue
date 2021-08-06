@@ -107,6 +107,7 @@ import "@/components/css/PostDetail.css"
 // import ButtonSquare from '@/components/common/ButtonSquare.vue'
 import ProfileImage from "@/components/common/ProfileImage.vue"
 // import CommentBox from "@/components/challengeroom/CommentBox.vue"
+// import axios from "@/util/http-common.js";
 
 import Vue from 'vue';
 import CKEditor from '@ckeditor/ckeditor5-vue2';
@@ -142,9 +143,38 @@ export default {
             imageSrc: '',
             attachFile: false,
             newImgSrc : '',
+            // taskno: 1,
+            // task_info:{
+            //     "likemembers": [
+            //         "string"
+            //     ],
+            //     "likes": 0,
+            //     "taskContent": "string",
+            //     "taskDesc": "string",
+            //     "taskFile": "string",
+            //     "taskImage": "string",
+            //     "taskIndex": 0,
+            //     "taskNo": 0,
+            //     "userEmail": "string",
+            //     "userName": "string"
+            // }
         }
     },
     methods:{
+        // getTaskInfo: function(){
+        //     axios({
+        //         methods: 'get',
+        //         url: `/challenge/task/${this.taskno}`,
+        //     })
+        //     .then((res) => {
+        //         console.log(res.data);
+        //         this.task_info = res.data;
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     })
+        // },
+
         sendPost(){
             let message = this.CKEditor.getData();
             alert(message);
@@ -207,6 +237,9 @@ export default {
         .catch(err => {
             console.log(err)
         })
+    },
+    created: function(){
+        // this.getTaskInfo();
     }
 }
 </script>
