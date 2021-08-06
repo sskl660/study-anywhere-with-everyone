@@ -62,12 +62,12 @@
                 <textarea class="profile-textarea-input editIntroduce" type="text" v-model.trim="userInfo.userIntroduce" placeholder="ex) 각오, 소개 등 친구들에게 하고싶은 말을 자유롭게 써주세요.">
                 </textarea>
               </div> 
-              <div style="color:red; font-weight:600; margin-top:20px; margin-right:220px;">* 소개글은 70자 이내로 작성해주세요.</div>
+              <div style="color:red; font-weight:600; margin-top:20px; margin-right:220px;">* 소개글은 100자 이내로 작성해주세요.</div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger mb-4 me-4" style="width:70px" data-bs-dismiss="modal">취소</button>
+          <!-- <button type="button" class="btn btn-danger mb-4 me-4" style="width:70px" data-bs-dismiss="modal">취소</button> -->
           <button @click="editSubmit" type="button" class="btn profile-submit-btn me-5 mb-4" data-bs-dismiss="modal" style="width:70px; font-weight:100">등록</button>
         </div>
       </div>

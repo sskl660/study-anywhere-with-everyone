@@ -8,11 +8,8 @@
       <ProfileInfo class="id-container" :userInfo="user_info" />
     </div>
     <!-- 프로필 티켓 -->
-    <div>
-      <ProfileTicket style="d-flex justify-content-center" />
-    </div>
-    <div>
-      <ProfileTicket style="d-flex justify-content-center" />
+    <div v-for="ticket in task_tickets" :key="ticket.challengeNo">
+      <ProfileTicket  :ticket="ticket" style="d-flex justify-content-center" />
     </div>
     <ProfileEditModal :userInfo="user_info" />
   </div>
@@ -39,7 +36,7 @@ export default {
   data: function () {
     return {
       // 유저 이메일 정보 받아와서 넣기
-      useremail: "IU-love@naver.com",
+      useremail: "jang@naver.com",
       profileTitle: "string",
       user_info: {
         userBlog: "",
@@ -64,6 +61,8 @@ export default {
       },
       task_tickets: [
         {
+          achieveRate: 0,
+          challengeName: "",
           challengeNo: 0,
           challangeTaskCnt: 0,
           isComplete: false,
@@ -80,7 +79,6 @@ export default {
         url: `/profile/info/${this.useremail}`,
       })
         .then((res) => {
-          console.log(res.data);
           this.user_info = res.data;
           this.getTitle(); //타이틀 내용 채워주기
         })
@@ -93,7 +91,6 @@ export default {
         url: `/profile/taskticket/${this.useremail}`,
       })
         .then((res) => {
-          console.log(res.data);
           this.task_tickets = res.data;
         })
         .catch((err) => {
