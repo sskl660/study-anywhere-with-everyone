@@ -38,13 +38,13 @@ const routes = [
     name: 'ChallengeRoom',
     component: ChallengeRoom,
   },
-  {
-    path: '/PostDetail',
+  {// 제출 안한과제
+    path: '/taskDetail',
     name: 'PostDetail',
     component: PostDetail,
   },
-  {
-    path: '/PostDetailAfter',
+  { // 제출한 과제
+    path: '/taskDetailAfter',
     name: 'PostDetailAfter',
     component: PostDetailAfter,
   },

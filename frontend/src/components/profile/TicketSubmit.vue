@@ -27,6 +27,7 @@ export default {
 .ticket-round {
   width:100px; 
   height:100px; 
+  /* 디폴트 회색 */
   background-color:#DDDDDD;
   border-radius: 70%;
   margin-right:8px;

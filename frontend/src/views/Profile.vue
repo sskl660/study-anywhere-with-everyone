@@ -59,7 +59,7 @@ export default {
         userWeektime: 0,
         userWishfield: "",
       },
-      task_tickets: [
+      task_tickets: [ // 챌린지 하나 내용
         {
           achieveRate: 0,
           challengeName: "",

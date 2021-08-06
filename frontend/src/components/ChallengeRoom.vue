@@ -56,7 +56,7 @@
                             <tbody>
                                 <tr v-for="person in chall_info.challengeGroup" :key="person">
                                     <th scope="row" style="background-color: #b7beda">{{ person[1] }}</th>
-                                    <td v-for="kan in chall_info.challengeTaskCnt" :key="kan" @click="taskblock(person[0])">
+                                    <td v-for="taskIdx in chall_info.challengeTaskCnt" :key="taskIdx" @click="taskblock(person[0])">
                                       <!-- <div v-for="no in task_info.taskIndex" :key="no"> -->
                                             <router-link to="/PostDetailAfter" v-if="submit">
                                               <div class="after"></div>
@@ -185,13 +185,14 @@ export default {
             //     "userName": "string"
             //   }
             // ]
-
+// -1 : 기간 안지난 미제출 : 흰색
+// -2 : 기간 지난 미제출 : 빨강
             task_info: [
                 {
                   "userName": "이장섭",
                   "userEmail": "jang@naver.com",
                   "taskNo": [
-                    -1,
+                    -2,
                     6,
                     5,
                     -1,
@@ -203,7 +204,7 @@ export default {
                   "userName": "차은채",
                   "userEmail": "cha@naver.com",
                   "taskNo": [
-                    -1,
+                    -2,
                     9,
                     -1,
                     -1,
@@ -223,18 +224,6 @@ export default {
                     -1
                   ]
                 },
-                {
-                  "userName": "아이유",
-                  "userEmail": "IU-love@naver.com",
-                  "taskNo": [
-                    -1,
-                    8,
-                    -1,
-                    -1,
-                    -1,
-                    -1
-                  ]
-                }
             ],
             temp: {
               challengeNo: 4,
@@ -255,6 +244,20 @@ export default {
         // this.insertModal.hide();
         // },
 
+        // BJ 누르면 개인 정보로 넘어가는 통신
+        getTaskInfo: function() {
+            axios({
+                methods: 'get',
+                url: `/challenge/tasklist/${this.challengeno}`,
+            })
+                .then((res) => {
+                    this.task_info = res.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+
         //챌린지 페이지에서 챌린지 정보 불러오는 통신
         getChallInfo: function() {
             axios({
@@ -273,19 +276,7 @@ export default {
                 });
         },
 
-        // BJ 누르면 개인 정보로 넘어가는 통신
-        getTaskInfo: function() {
-            axios({
-                methods: 'get',
-                url: `/challenge/tasklist/${this.challengeno}`,
-            })
-                .then((res) => {
-                    this.task_info = res.data;
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        },
+        
 
         countDownTimer: function(id) {
             var date = this.chall_info.challengeStartdate;
@@ -368,7 +359,7 @@ export default {
                   // this.submit = !this.submit;
                 }
                 // 기간 안지난 미제출 : 노랑
-                if(this.task_info[n].taskNo[n] == -1){
+                if(this.task_info[n].userEmail == email & this.task_info[n].taskNo[n] == -1){
                   alert(this.task_info[n].taskNo[n])
 
                   // this.submit = true;
@@ -376,7 +367,7 @@ export default {
                   // submit == true;
                 }
                 // 기간 지난 미제출 : 빨강
-                if(this.task_info[n].taskNo[n] == -2){
+                if(this.task_info[n].userEmail == email & this.task_info[n].taskNo[n] == -2){
                   alert(this.task_info[n].taskNo[n])
                 }
 
