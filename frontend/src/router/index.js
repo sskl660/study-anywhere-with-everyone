@@ -4,6 +4,7 @@ import Welcome from '../views/Welcome.vue';
 import Join from '../views/Join.vue';
 import Challenges from '../views/Challenges.vue';
 import Profile from '../views/Profile.vue';
+import ProfileMy from '../views/ProfileMy.vue';
 import ChallengeRoom from '../components/ChallengeRoom.vue';
 import PostDetail from '../components/PostDetail.vue';
 import PostDetailAfter from '../components/PostDetailAfter.vue';
@@ -29,9 +30,15 @@ const routes = [
     component: Challenges,
   },
   {
+    path: '/profilemy',
+    name: 'ProfileMy',
+    component: ProfileMy,
+  },
+  {
     path: '/profile',
     name: 'Profile',
     component: Profile,
+    props: true,
   },
   {
     path: '/challengeRoom',

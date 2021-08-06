@@ -15,11 +15,17 @@
       <p style="font-size:25px">
         <!-- 몇기 이름 -->
         {{userInfo.userTerm}}기 {{userInfo.userName}}
-        <!-- user가 누군지에 따라서 프로필편집, 팔로우, 팔로우 취소로 보이게 하기 -->
-        <!-- <button type="button" class="btn profile-edit-btn">프로필편집</button> -->
-        <!-- Button trigger modal -->
-        <button type="button" class="btn profile-edit-btn" data-bs-toggle="modal" data-bs-target="#profileEditModal">
+        <!-- 계정 주인이면 프로필 편집 모달 뜸 -->
+        <button v-if="this.checkOwner()" type="button" class="btn profile-edit-btn" data-bs-toggle="modal" data-bs-target="#profileEditModal">
           프로필편집
+        </button>
+        <!-- 계정주인이 아니고 팔로워 중에 한명이면 -->
+        <button v-else-if="this.checkFollow()" type="button" class="btn profile-edit-btn" data-bs-target="#profileEditModal">
+          언팔로우
+        </button>
+        <!-- 계정주인이 아니고 팔로워 중에 한명도 아니면 -->
+        <button v-else type="button" class="btn profile-edit-btn" data-bs-target="#profileEditModal">
+          팔로우
         </button>
       </p>
       <!-- 유저 부가정보 항목-->
@@ -43,6 +49,7 @@
 
 <script>
 import ProfileImage from "@/components/common/ProfileImage.vue"
+import { mapState } from 'vuex'
 // import ButtonSquare from '@/components/common/ButtonSquare.vue'
 export default {
   name: 'IdCard',
@@ -52,16 +59,52 @@ export default {
   },
   data: function () {
     return {
+      followers: []
       // 버튼에 들어갈 문구들
-      profileEdit: '프로필 편집',
-      follow: '팔로우',
-      unfollow: '팔로우 취소',
+      // owner: false,
+      // follow: false,
+      // unfollow: false,
+    }
+  },
+  methods: {
+    // 로그인한 사용자가 계정주인이면 true
+    checkOwner: function () {
+      // console.log('곰돌이??')
+      // console.log(this.userEmail)
+      // console.log(this.followers)
+      if (this.userEmail == this.userInfo.userEmail) return true;
+      else false;
+    },
+    // 로그인한 사용자가 계정주인이 아닌데 팔로워 중에 한명이라면 true
+    checkFollow: function () {
+      for (var i in this.followers) {
+        // console.log('찾아')
+        // console.log(i)
+        if (this.userEmail == this.followers[i][0]) return true;
+        else false;
+      }
+      
     }
   },
   props: {
     userInfo: {
       type: Object
+    },
+    followers: {
+      type: Array
+    },
+    followings: {
+      type: Array
     }
+  },
+  computed: {
+    ...mapState([
+      'userEmail',
+    ])
+  },
+  created:function() {
+    this.checkOwner();
+    this.checkFollower();
   }
 }
 </script>

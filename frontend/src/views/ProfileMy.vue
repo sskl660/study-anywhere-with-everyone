@@ -24,7 +24,7 @@ import ProfileEditModal from "@/components/profile/ProfileEditModal.vue";
 import "./css/profile.css";
 // import axios from 'axios'
 import axios from "@/util/http-common.js";
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 // import func from 'vue-editor-bridge'
 
 export default {
@@ -34,9 +34,6 @@ export default {
     ProfileInfo,
     ProfileTicket,
     ProfileEditModal,
-  },
-  props: {
-    userEmail: String,
   },
   data: function () {
     return {
@@ -83,15 +80,13 @@ export default {
     getUserInfo: function () {
       axios({
         method: "get",
-        url: `/profile/info/${this.$route.query.userEmail}`,
+        url: `/profile/info/${this.userEmail}`,
       })
         .then((res) => {
           this.user_info = res.data;
           this.getTitle(); //타이틀 내용 채워주기
-          console.log('follower')
-          console.log(this.followings)
-          // console.log('follower')
-          // console.log(this.userEmail)
+          // console.log(this.user_info)
+          // alert('profilemy')
         })
         .catch((err) => {
           console.log(err);
@@ -99,7 +94,7 @@ export default {
 
       axios({
         method: "get",
-        url: `/profile/taskticket/${this.$route.query.userEmail}`,
+        url: `/profile/taskticket/${this.userEmail}`,
       })
         .then((res) => {
           this.task_tickets = res.data;
@@ -110,14 +105,12 @@ export default {
 
       axios({
         method: "get",
-        url: `/follow/followers/${this.$route.query.userEmail}`,
+        url: `/follow/followers/${this.userEmail}`,
       })
         .then((res) => {
           this.followers = res.data;
           // console.log('follower')
           // console.log(this.followers)
-          // console.log('follower')
-          // console.log(this.userEmail)
         })
         .catch((err) => {
           console.log(err);
@@ -125,7 +118,7 @@ export default {
 
       axios({
         method: "get",
-        url: `/follow/followings/${this.$route.query.userEmail}`,
+        url: `/follow/followings/${this.userEmail}`,
       })
         .then((res) => {
           this.followings = res.data;
@@ -142,18 +135,17 @@ export default {
       this.profileTitle = `${this.user_info.userName} 님의 프로필`;
     },
   },
-  // computed: {
-  //   ...mapState([
-  //     'userEmail',
-  //   ])
-  // },
   computed: {
+    ...mapState([
+      'userEmail',
+    ]),
     newUserInfo: function () {
       return this.user_info
     }
   },
+
+
   created: function () {
-    // alert(this.userEmail);
     // 생성과 동시에 유저정보 가져오기
     this.getUserInfo();
   },

@@ -52,15 +52,15 @@ export default {
       five: "5",
       six: "6",
       seven: "7",
-      ticketExist: {
-        one: false,
-        two: false,
-        three: false,
-        four: false,
-        five: false,
-        six: false,
-        seven: false,
-      }
+      // ticketExist: {
+      //   one: false,
+      //   two: false,
+      //   three: false,
+      //   four: false,
+      //   five: false,
+      //   six: false,
+      //   seven: false,
+      // }
     }
   },
   components :{
