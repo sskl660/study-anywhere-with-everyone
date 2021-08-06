@@ -1,19 +1,32 @@
 package com.example.ssaziptest.controller;
 
 import com.example.ssaziptest.common.util.JwtTokenUtil;
+import com.example.ssaziptest.domain.file.FileUploadRequest;
 import com.example.ssaziptest.domain.follow.FollowRequest;
 import com.example.ssaziptest.domain.task.TaskTicketResponse;
 import com.example.ssaziptest.domain.user.*;
+import com.example.ssaziptest.service.FileService;
 import com.example.ssaziptest.service.FollowService;
 import com.example.ssaziptest.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.sql.rowset.serial.SerialBlob;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = {"1.User"})
 @RestController
@@ -23,6 +36,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private FollowService followService;
+    @Autowired
+    private FileService fileService;
 
     /*회원가입*/
     @ApiOperation(value = "회원 가입")
@@ -101,5 +116,43 @@ public class UserController {
     public ResponseEntity<List<String[]>> getFollowings(@PathVariable(name = "useremail")String userEmail) throws Exception{
         List<String[]> list = followService.getFollowings(userEmail);
         return new ResponseEntity<>(list,HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "파일업로드 테스트")
+    @PostMapping(value = "fileupload")
+    //@ModelAttribute FileUploadRequest request
+    public int blobTest(@RequestParam("file") MultipartFile file) throws IOException, SQLException {
+//        Map<String, Object> param = new HashMap<>();
+//        String filename = file.getOriginalFilename();
+//        byte[] bytes;
+//        request.setFileName(filename);
+//
+//        try {
+//            bytes = file.getBytes();
+//            try {
+//                Blob blob = new SerialBlob(bytes);
+//                request.setFileData(file);
+//            } catch (SQLException throwables) {
+//                throwables.printStackTrace();
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        InputStream inputStream = null;
+//        try {
+//            inputStream = new BufferedInputStream(file.getInputStream());
+//            System.out.println(inputStream);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        byte[] contents = file.getBytes();
+        Blob blob = new SerialBlob(contents);
+
+        FileUploadRequest request = FileUploadRequest.builder()
+                .fileData(blob)
+                .fileName(file.getName())
+                .build();
+
+        return fileService.fileUpload(request);
     }
 }
