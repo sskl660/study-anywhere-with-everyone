@@ -12,7 +12,7 @@
             <div class="joinbox">
                 <!-- 가입버튼 누르기 전에는 가입하기 버튼과 가입 마감까지 남은 시간이 보여진다 -->
                 <li class="changebtn">
-                    <div class="Cjoin_btn" @click="hidebtn(email, chall_info.challengeNo)"><ButtonRound :text="msg" /></div>
+                    <div class="Cjoin_btn" @click="hidebtn(temp)"><ButtonRound :text="msg" /></div>
                     <!-- <div class="Cjoindone_btn" v-else><ButtonRound :text="가입완료" /></div> -->
                     <div class="alarm">
                         <h5 id="rest"></h5>
@@ -56,7 +56,7 @@
                             <tbody>
                                 <tr v-for="person in chall_info.challengeGroup" :key="person">
                                     <th scope="row" style="background-color: #b7beda">{{ person[1] }}</th>
-                                    <td v-for="(kan, index) in chall_info.challengeTaskCnt" :key="kan" @click="taskblock(person[0],index)">
+                                    <td v-for="kan in chall_info.challengeTaskCnt" :key="kan" @click="taskblock(person[0])">
                                       <!-- <div v-for="no in task_info.taskIndex" :key="no"> -->
                                             <router-link to="/PostDetailAfter" v-if="submit">
                                               <div class="after"></div>
@@ -168,7 +168,7 @@ export default {
                 //     ['789', '김이름'],
                 // ],
             },
-            // 과제 블럭 하나씩
+            // 과제 블럭 하나씩 이전 버전
             // task_info:[{
             //   "taskIndex": 0, // 몇번째 과제인지
             //   "taskNo": 0, // 고유값. 과제 페이지로 넘어갈 때 사용
@@ -176,39 +176,69 @@ export default {
             //   "userName": "string"
             // }]
 
+            // task_info:[
+            //   {
+            //     "taskNo": [
+            //       0
+            //     ],
+            //     "userEmail": "string",
+            //     "userName": "string"
+            //   }
+            // ]
+
             task_info: [
                 {
-                    // 첫번째 과제만 내고 나머지는 안냄
-                    taskIndex: 1, // 2번과제로 생각하자
-                    taskNo: 123,
-                    userEmail: 'jang@naver.com',
-                    userName: '이장섭',
+                  "userName": "이장섭",
+                  "userEmail": "jang@naver.com",
+                  "taskNo": [
+                    -1,
+                    6,
+                    5,
+                    -1,
+                    4,
+                    -1
+                  ]
                 },
                 {
-                    //나는 1, 2 둘다 냄
-                    taskIndex: 1,
-                    taskNo: 456,
-                    userEmail: 'cha@naver.com',
-                    userName: '차은채',
+                  "userName": "차은채",
+                  "userEmail": "cha@naver.com",
+                  "taskNo": [
+                    -1,
+                    9,
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
                 },
                 {
-                    // 두번째 과제만 내고 나머지는 안냄
-                    taskIndex: 2,
-                    taskNo: 789,
-                    userEmail: 'cha@naver.com',
-                    userName: '차은채',
+                  "userName": "아이유",
+                  "userEmail": "IU-love@naver.com",
+                  "taskNo": [
+                    -1,
+                    8,
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
                 },
                 {
-                    taskIndex: 2,
-                    taskNo: 98,
-                    userEmail: 'IU-love@naver.com',
-                    userName: '아이유',
-                },
+                  "userName": "아이유",
+                  "userEmail": "IU-love@naver.com",
+                  "taskNo": [
+                    -1,
+                    8,
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                  ]
+                }
             ],
-            joinchall: {
-              userEmail: 'please@naver.com',
-              userName: '참여자',
-              challengeNo: 4
+            temp: {
+              challengeNo: 4,
+              userEmail: "aaa@naver.com"
             }
             // 모달
             // insertModal : null,
@@ -287,14 +317,15 @@ export default {
             timer = setInterval(showRemaining, 1000);
         },
         // 가입하기 버튼 눌렀을 때
-        hidebtn(email, challengeNo){
+        hidebtn(temp){
           // this.beforejoin=false;
           this.msg = '가입완료';
           console.log(this.msg);
           // document.getElementById('Cjoin_btn').style.backgroundColor = '#f9d479';
           document.querySelector('.Cjoin_btn .btn-light').style.backgroundColor = '#f9d479';
           // 여기에다가 로직을 작성해야한다
-          this.joinchall(email, challengeNo); // email이랑 챌린지 번호 전송
+          alert('버튼 작동 확인');
+          this.joinchall(temp); // email이랑 챌린지 번호 전송
         },
 
         nameprofile(num){
@@ -302,37 +333,66 @@ export default {
           alert(email);
         },
         // bj 블럭의 과제 블럭을 눌렀을 때
-        taskblock(email, index){
-          // var email = this.chall_info.challengeGroup[];
-          // var index = this.
-          let taskno = -1;
-          for( let n = 0; n < this.task_info.length; n++){
-            if(this.task_info[n].userEmail == email & this.task_info[n].taskIndex == index){
-              taskno = this.task_info[n].taskNo;
-              this.submit = !this.submit;
-            }
+    //     taskblock(email, index){
+    //       // var email = this.chall_info.challengeGroup[];
+    //       // var index = this.
+    //       let taskno = -1;
+    //       for( let n = 0; n < this.chall_info.challengeTaskCnt; n++){
+    //         if(this.task_info[n].userEmail == email & this.task_info[n].taskIndex == index){
+    //           taskno = this.task_info[n].taskNo;
+    //           this.submit = !this.submit;
+    //         }
 
-          if(taskno != -1){ // 과제 제출 했을 경우
-            alert(taskno)
+    //       if(taskno != -1){ // 과제 제출 했을 경우
+    //         alert(taskno)
 
-            this.submit = true;
-            console.log(!this.submit)
-            // submit == true;
-          }
+    //         this.submit = true;
+    //         console.log(!this.submit)
+    //         // submit == true;
+    //       }
 
           
-          // alert(email + ' ' + index + '' + taskno);
-        }
-    },
-    created: function() {
+    //       // alert(email + ' ' + index + '' + taskno);
+    //     }
+    // },
+        taskblock(email){
+              // var email = this.chall_info.challengeGroup[];
+              // var index = this.
+              let taskno = 0;
+              for( let n = 0; n < this.chall_info.challengeTaskCnt; n++){
+                // taskno 고유값 뽑아내기
+                // 과제 제출 했을 경우
+                if(this.task_info[n].userEmail == email & this.task_info[n].taskNo[n] != -1 & this.task_info[n].taskNo[n] != -2){
+                  taskno = this.task_info[n].taskNo[n];
+                  alert(taskno)
+                  // this.submit = !this.submit;
+                }
+                // 기간 안지난 미제출 : 노랑
+                if(this.task_info[n].taskNo[n] == -1){
+                  alert(this.task_info[n].taskNo[n])
+
+                  // this.submit = true;
+                  // console.log(!this.submit)
+                  // submit == true;
+                }
+                // 기간 지난 미제출 : 빨강
+                if(this.task_info[n].taskNo[n] == -2){
+                  alert(this.task_info[n].taskNo[n])
+                }
+
+              
+              // alert(email + ' ' + index + '' + taskno);
+            }
+        },
+        ...mapActions([ // import 해주는 느낌
+          'joinchall'
+        ])
+  },
+  created: function() {
         this.getChallInfo(); //생성할 때 바로 불러줘
         // this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
     },
-    ...mapActions([ // import 해주는 느낌
-      'joinchall'
-    ])
-  }
 }
 </script>
 <style scoped>

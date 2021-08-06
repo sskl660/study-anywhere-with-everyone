@@ -65,9 +65,8 @@ export default new Vuex.Store({
             state.emailposi = returnflag; // 저장해주고 값 바꿔주기
             alert('중복체크 완료' + returnflag);
         },
-        JOIN_CHALL(state, userEmail) {
+        JOIN_CHALL(state) { // state에서 사용하는 변수는 클라이언트가 사용하는 변수들.
             console.log(state);
-            state.userEmail = userEmail;
             alert('챌린지 가입 성공')
         }
     },
@@ -139,16 +138,18 @@ export default new Vuex.Store({
                 });
         },
         // bj 데이터
-        joinchall: function ({ commit }, {email, challengeNo}) {
+        joinchall: function ({ commit }, temp) {
+            console.log(temp);
             axios({
-                method: 'get',
-                url: '/challenge/info/${challengeNo}',
-                // post 일때만 data가 필요한 것
+                method: 'post',
+                url: '/challenge/join',
+                data: temp,
             })
                 .then((res) => { // 통신이 넘어오는 것
+                    console.log(res);
                     console.log('잘 넘어온지 확인');
-                    commit('JOIN_CHALL', res.data);
-                    console.log(res.data);
+                    commit('JOIN_CHALL');
+                    // commit('JOIN_CHALL', res.data); //res는 백엔드에서 넘겨주는 response, res.data는 body부분
                     alert('챌린지 가입이 완료되었습니다!')
                 })
                 .catch((err) => {
