@@ -106,13 +106,19 @@ export default {
         ProfileImage,
         CommentBox,
     },
+    props: {
+            forwardTaskNo: {
+                type: String,
+                default : ''
+            },
+        },
     data: function(){
         return{
             // 버튼에 들어갈 문구들
             // 생성: '생성',
             // 취소: '취소',
             뒤로: '돌아가기',
-            taskno: 1,
+            //taskno: 1,
             task_info:{
                 "likemembers": [
                     "string"
@@ -141,9 +147,10 @@ export default {
         getTaskInfo: function(){
             axios({
                 methods: 'get',
-                url: `/challenge/task/${this.taskno}`,
+                url: `/challenge/task/${this.forwardTaskNo}`,
             })
             .then((res) => {
+                alert("과제 상세 정보가 들어왔습니다.");
                 console.log(res.data);
                 this.task_info = res.data;
             })
@@ -197,7 +204,9 @@ export default {
         // }
     },
     created: function(){
+                alert(this.forwardTaskNo);
         this.getTaskInfo();
+
     }
     // mounted(){
     //     ClassicEditor

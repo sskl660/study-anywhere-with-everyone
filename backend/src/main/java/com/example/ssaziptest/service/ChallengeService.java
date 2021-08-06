@@ -9,6 +9,7 @@ import com.example.ssaziptest.domain.follow.FollowEntity;
 import com.example.ssaziptest.domain.group.GroupMemberRequest;
 import com.example.ssaziptest.domain.group.GroupmemberEntity;
 import com.example.ssaziptest.domain.task.BulletJournalResponse;
+import com.example.ssaziptest.domain.task.ChallengeTicketResponse;
 import com.example.ssaziptest.domain.task.TaskDetailResponse;
 import com.example.ssaziptest.domain.task.TaskEntity;
 import com.example.ssaziptest.domain.user.UserEntity;
@@ -174,6 +175,27 @@ public class ChallengeService {
             bjList.add(response);
         }
         return bjList;
+    }
+    @Transactional
+    public ChallengeTicketResponse[] getChallengeTicket(int challengeNo){
+        ChallengeEntity challengeEntity = challengeRepository.getById(challengeNo);
+        List<TaskEntity> taskEntityList = taskRepository.findByTaskChallengeEntity_ChallengeNo(challengeNo);
+        List<LocalDate> taskDeadlines = challengeEntity.getChallengeTaskdeadlines();
+        ChallengeTicketResponse[] temp = new ChallengeTicketResponse[challengeEntity.getChallengeTaskCnt()];
+        for(int i = 0; i<challengeEntity.getChallengeTaskCnt(); i++){
+            temp[i] = new ChallengeTicketResponse();
+        }
+        int[] arr = new int[challengeEntity.getChallengeTaskCnt()];
+        for(int i = 0; i<taskDeadlines.size(); i++){
+            if(taskDeadlines.get(i).isAfter(LocalDate.now())) temp[i].setInProgress(true);
+        }
+        for(TaskEntity taskEntity: taskEntityList){
+            arr[taskEntity.getTaskIndex()]++;
+        }
+        for(int i=0; i<taskDeadlines.size(); i++){
+            temp[i].setAchieveRate(100*arr[i]/challengeEntity.getChallengeTaskCnt());
+        }
+        return temp;
     }
 
     @Transactional

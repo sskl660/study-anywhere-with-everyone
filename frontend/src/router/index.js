@@ -38,6 +38,7 @@ const routes = [
     name: 'ChallengeRoom',
     component: ChallengeRoom,
   },
+<<<<<<< HEAD
   {// 제출 안한과제
     path: '/taskDetail',
     name: 'PostDetail',
@@ -45,8 +46,19 @@ const routes = [
   },
   { // 제출한 과제
     path: '/taskDetailAfter',
+=======
+  {//제출 안한과제 -> 내꺼일때만 들어기짐
+    path: '/postDetail',
+    name: 'PostDetail',
+    component: PostDetail,
+  },
+  {//제출 한 과제 ->삭제만 있음
+    path: '/postDetailAfter',
+>>>>>>> 6f5338f3d55380f502dc7730ce4b5500c3b65286
     name: 'PostDetailAfter',
     component: PostDetailAfter,
+    // true로 설정하면 데이터를 props로도 받습니다.
+    props: true
   },
   {
     path: '/EPeacefulWorld',
