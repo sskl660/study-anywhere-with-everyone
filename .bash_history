@@ -1,6 +1,3 @@
-cd ~
-ls
-mkdir Software_Plan
 mkdir software_plan
 cd software_plan/
 ls
@@ -494,4 +491,10 @@ git status
 git status
 git add .
 git commit -am "fix(Conflict) : fix Conflict in backend"
+git push
+git status
+cd ~
+git status
+git add .
+git commit -am "update(Dockerfile) : update Dockerfile"
 git push
