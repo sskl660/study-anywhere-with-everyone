@@ -68,7 +68,9 @@
                                             v-else
                                             :to="{ name: 'PostDetailAfter', params: { forwardTaskNo: task_info[index].taskNo[taskIdx - 1] } }"
                                         >
-                                            <div class="after">taskNO = {{ task_info[index].taskNo[taskIdx - 1] }}</div>
+                                            <div class="after">
+                                                <!-- taskNO = {{ task_info[index].taskNo[taskIdx - 1] }} -->
+                                            </div>
                                         </router-link>
                                     </td>
                                 </tr>
@@ -95,18 +97,17 @@
                     </div>
                 </div>
                 <div class="ChallengeTicket">
+                    <!-- <ChallengeTicket /> -->
                     <img class="ticketbody" src="../assets/ticketbody.png" alt="ticketbody" />
                 </div>
             </div>
         </div>
-        <!-- 여기가 있으면 통신이 안된다 -->
-        <!-- <insert-modal v-on:call-parent-insert="closeAfterInsert"></insert-modal>
-    <detail-modal v-on:call-parent-change-to-delete="changeToDelete"></detail-modal> -->
     </div>
 </template>
 <script>
 import Title from '@/components/common/Title.vue';
 import ButtonRound from '@/components/common/ButtonRound.vue';
+import ChallengeTicket from '@/components/challengeroom/ChallengeTicket.vue';
 // import Difficulty from '@/components/common/Difficulty'
 // import PostDetailModal from '@/components/PostDetailModal'
 import '@/components/css/ChallengeRoom.css';
@@ -129,10 +130,7 @@ export default {
     components: {
         Title, // 타이틀 가져오기
         ButtonRound, // 둥근 버튼 가져오기
-        // Difficulty      // 난이도 가져오기
-        //PostDetailModal,
-        //InsertModal, // 작성자가 처음 과제를 제출하는 모달
-        //DetailModal, // 작성 후 보여지는 모달
+        ChallengeTicket, // 챌린지 티켓 가져오기
     },
     data: function() {
         return {
@@ -264,6 +262,8 @@ export default {
                     console.log(err);
                 });
         },
+
+        
 
         countDownTimer: function(id) {
             var date = this.chall_info.challengeStartdate;
@@ -425,13 +425,15 @@ export default {
 
 .table > :not(caption) > * > * {
     padding: 0 0;
+    border-bottom-width: 0px;
 }
 
 /* 과제 제출 전 칸 */
 .before {
-    background-color: #f9d479;
+    background-color: #ffffff;
     width: 100%;
     height: 100%;
+    border: 1px solid #dddddd;
 }
 
 /* 과제 제출 후 파란색으로 변함 */
@@ -439,6 +441,7 @@ export default {
     background-color: #1f4256;
     width: 100%;
     height: 100%;
+    border: 1px solid #dddddd;
 }
 
 /* 과제 제출 안하면 빨간색으로 변함 */
@@ -446,6 +449,7 @@ export default {
     background-color: #ee4748;
     width: 100%;
     height: 100%;
+    border: 1px solid #dddddd;
 }
 
 th {
