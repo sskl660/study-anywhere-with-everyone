@@ -33,7 +33,11 @@ public class FileService {
     }
 
     @Transactional
+<<<<<<< HEAD
     public FileInfoResponse getFile(int fileNo){
+=======
+    public FileInfoResponse fileDownload(int fileNo){
+>>>>>>> deccdb86eacf0c86c982fdf0273a3553e5dcda9d
         FileEntity file = fileRepository.findById(fileNo).get();
         FileInfoResponse fileInfoResponse = FileInfoResponse.builder()
                 .fileNo(fileNo)
@@ -43,5 +47,6 @@ public class FileService {
                 .build();
         return fileInfoResponse;
     }
+
 
 }

@@ -59,6 +59,7 @@ dependencies {
 
     implementation 'commons-io:commons-io:2.8.0'
     implementation 'commons-fileupload:commons-fileupload:1.4'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
 
     // WebSocket
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: '2.5.3'

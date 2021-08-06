@@ -56,11 +56,11 @@ public class UserService {
     }
     @Transactional
     public void insertUserImg(FileUploadRequest request){
-        FileEntity fileEntity = fileRepository.findByFileUseremailAndFileInfo(request.getUserEmail(), request.getFileInfo());
-        fileEntity.setFileName(request.getFileName());
-        fileEntity.setFilePath(request.getFilePath());
-        fileEntity.setFileOriginalname(request.getFileOriginalname());
-        fileRepository.save(fileEntity);
+//        FileEntity fileEntity = fileRepository.findByFileUseremailAndFileInfo(request.getUserEmail(), request.getFileInfo());
+//        fileEntity.setFileName(request.getFileName());
+//        fileEntity.setFilePath(request.getFilePath());
+//        fileEntity.setFileOriginalname(request.getFileOriginalname());
+//        fileRepository.save(fileEntity);
 
     }
 
@@ -133,8 +133,14 @@ public class UserService {
                 else done++;
             }
             for(int i=0; i<taskcnt; i++){
-                if(temp[i]==null&&deadlines.get(i).isBefore(LocalDate.now())){
-                    temp[i] = -1;
+                if(temp[i]==null){
+<<<<<<< HEAD
+                    if(deadlines.get(i).isBefore(LocalDate.now())) temp[i] = -1;
+                    else temp[i] = 0;
+=======
+                    if(deadlines.get(i).isBefore(LocalDate.now())) temp[i] = -2;
+                    else temp[i] = -1;
+>>>>>>> deccdb86eacf0c86c982fdf0273a3553e5dcda9d
                 }
             }
             taskTicketResponse.setTaskNo(temp);
