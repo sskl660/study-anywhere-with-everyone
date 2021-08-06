@@ -3,6 +3,7 @@ package com.example.ssaziptest.controller;
 import com.example.ssaziptest.domain.challenge.ChallengeDetailResponse;
 import com.example.ssaziptest.domain.group.ChallengeJoinRequest;
 import com.example.ssaziptest.domain.task.BulletJournalResponse;
+import com.example.ssaziptest.domain.task.ChallengeTicketResponse;
 import com.example.ssaziptest.domain.task.TaskDetailResponse;
 import com.example.ssaziptest.service.ChallengeService;
 import io.swagger.annotations.Api;
@@ -48,6 +49,14 @@ public class ChallengeController {
         List<BulletJournalResponse> bulletJournalResponses = challengeService.getTaskList(challengeNo);
         if(bulletJournalResponses.isEmpty()) return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(bulletJournalResponses,HttpStatus.OK);
+    }
+    /*챌린지 과제 티켓 현황 요청*/
+    @ApiOperation(value = "챌린지 과제 티켓 현황 요청")
+    @ApiImplicitParam(name = "challengeno", value = "챌린지 pk 번호")
+    @GetMapping(value = "/taskticket/{challengeno}")
+    public ResponseEntity<ChallengeTicketResponse[]> getChallengeTicket(@PathVariable("challengeno") int challengeNo) throws Exception{
+        ChallengeTicketResponse[] challengeTicketResponses = challengeService.getChallengeTicket(challengeNo);
+        return new ResponseEntity<>(challengeTicketResponses,HttpStatus.OK);
     }
 
     /*Bullet Journal 과제 상세 열기*/
