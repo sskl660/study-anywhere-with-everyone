@@ -54,20 +54,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="person in chall_info.challengeGroup" :key="person">
+                                <tr v-for="(person, index) in chall_info.challengeGroup" :key="person">
                                     <th scope="row" style="background-color: #b7beda">{{ person[1] }}</th>
-                                    <td v-for="kan in chall_info.challengeTaskCnt" :key="kan" @click="taskblock(person[0])">
-                                      <!-- <div v-for="no in task_info.taskIndex" :key="no"> -->
-                                            <router-link to="/PostDetailAfter" v-if="submit">
-                                              <div class="after"></div>
-                                            </router-link>
-                                          <router-link to="/PostDetail" v-else><div class="before"/></router-link>
-                                          <div v-if="fail" class="fail"></div>
-                                      <!-- 과제 제출하기 전 false하고 제출하면 true로 해주고
-                                      과제 제출 여부 변수
-                                      마감 시간 변수
-                                      저 세개를 묶음으로 감싸고 감싼 div에서 v-if -->
-                                      <!-- </div> -->
+                                    <td v-for="taskIdx in chall_info.challengeTaskCnt" :key="taskIdx" @click="taskblock(person[0], taskIdx - 1)">
+                                        <!-- 제출 할 수 있는 아이들 -->
+                                        <router-link to="/postDetail" v-if="task_info[index].taskNo[taskIdx - 1] == -1">
+                                            <div class="before"></div>
+                                        </router-link>
+                                        <!-- -2, 마감기간 지난 미제출 -->
+                                        <div v-else-if="task_info[index].taskNo[taskIdx - 1] == -2" class="fail"></div>
+                                        <!-- 숫자, 제출 한 것 -->
+                                        <router-link
+                                            v-else
+                                            :to="{ name: 'PostDetailAfter', params: { forwardTaskNo: task_info[index].taskNo[taskIdx - 1] } }"
+                                        >
+                                            <div class="after">taskNO = {{ task_info[index].taskNo[taskIdx - 1] }}</div>
+                                        </router-link>
                                     </td>
                                 </tr>
                             </tbody>
@@ -83,9 +85,12 @@
                             >참여멤버 :
                             <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)"> {{ name[1] }} </span>
                         </strong>
-                        <br><br>
+                        <br /><br />
                         <div>
-                          <strong> 난이도: </strong><span v-for="level in chall_info.challengeLevel" :key="level"><img src="../assets/star.png" alt="levelstar" id="levelstar"></span>
+                            <strong> 난이도: </strong
+                            ><span v-for="level in chall_info.challengeLevel" :key="level"
+                                ><img src="../assets/star.png" alt="levelstar" id="levelstar"
+                            /></span>
                         </div>
                     </div>
                 </div>
@@ -107,7 +112,6 @@ import ButtonRound from '@/components/common/ButtonRound.vue';
 import '@/components/css/ChallengeRoom.css';
 import axios from '@/util/http-common.js';
 import { mapActions } from 'vuex';
-
 
 // import InsertModal from '@/components/modals/InsertModal.vue'
 // import DetailModal from '@/components/modals/DetailModal.vue';
@@ -139,6 +143,10 @@ export default {
             fail: false,
             // 챌린지: '히오니의 알고 챌린지',
             challengeno: 4,
+
+            //이동할 테스크 고유 넘버pk
+            forwardTaskNo: -1,
+
             chall_info: {
                 challengeCapacity: 0,
                 challengeCategory: 'string',
@@ -178,68 +186,41 @@ export default {
 
             // task_info:[
             //   {
-            //     "taskNo": [
-            //       0
-            //     ],
             //     "userEmail": "string",
             //     "userName": "string"
+            //      "taskNo": [
+            //       0
+            //     ],
             //   }
             // ]
-
+            //-1 기간 안지난 미제출(흰)
+            //-2 기간 지난 미제출(빨강)
             task_info: [
                 {
-                  "userName": "이장섭",
-                  "userEmail": "jang@naver.com",
-                  "taskNo": [
-                    -1,
-                    6,
-                    5,
-                    -1,
-                    4,
-                    -1
-                  ]
+                    userName: '이장섭',
+                    userEmail: 'jang@naver.com',
+                    taskNo: [-2, 1, 2, -1, 3, -1],
                 },
                 {
-                  "userName": "차은채",
-                  "userEmail": "cha@naver.com",
-                  "taskNo": [
-                    -1,
-                    9,
-                    -1,
-                    -1,
-                    -1,
-                    -1
-                  ]
+                    userName: '차은채',
+                    userEmail: 'cha@naver.com',
+                    taskNo: [-2, 4, -1, -1, -1, -1],
                 },
                 {
-                  "userName": "아이유",
-                  "userEmail": "IU-love@naver.com",
-                  "taskNo": [
-                    -1,
-                    8,
-                    -1,
-                    -1,
-                    -1,
-                    -1
-                  ]
+                    userName: '아이유',
+                    userEmail: 'IU-love@naver.com',
+                    taskNo: [-2, 5, -1, 6, -1, -1],
                 },
                 {
-                  "userName": "아이유",
-                  "userEmail": "IU-love@naver.com",
-                  "taskNo": [
-                    -1,
-                    8,
-                    -1,
-                    -1,
-                    -1,
-                    -1
-                  ]
-                }
+                    userName: '아이유',
+                    userEmail: 'IU-love@naver.com',
+                    taskNo: [-1, 7, -1, -1, -1, -1],
+                },
             ],
             temp: {
-              challengeNo: 4,
-              userEmail: "aaa@naver.com"
-            }
+                challengeNo: 4,
+                userEmail: 'aaa@naver.com',
+            },
             // 모달
             // insertModal : null,
             // detailModal : null
@@ -254,7 +235,19 @@ export default {
         // closeAfterInsert(){
         // this.insertModal.hide();
         // },
-
+        // BJ 누르면 개인 정보로 넘어가는 통신
+        getTaskInfo: function() {
+            axios({
+                methods: 'get',
+                url: `/challenge/tasklist/${this.challengeno}`,
+            })
+                .then((res) => {
+                    this.task_info = res.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
         //챌린지 페이지에서 챌린지 정보 불러오는 통신
         getChallInfo: function() {
             axios({
@@ -268,21 +261,6 @@ export default {
                 })
                 .catch((err) => {
                     alert('false');
-
-                    console.log(err);
-                });
-        },
-
-        // BJ 누르면 개인 정보로 넘어가는 통신
-        getTaskInfo: function() {
-            axios({
-                methods: 'get',
-                url: `/challenge/tasklist/${this.challengeno}`,
-            })
-                .then((res) => {
-                    this.task_info = res.data;
-                })
-                .catch((err) => {
                     console.log(err);
                 });
         },
@@ -317,83 +295,80 @@ export default {
             timer = setInterval(showRemaining, 1000);
         },
         // 가입하기 버튼 눌렀을 때
-        hidebtn(temp){
-          // this.beforejoin=false;
-          this.msg = '가입완료';
-          console.log(this.msg);
-          // document.getElementById('Cjoin_btn').style.backgroundColor = '#f9d479';
-          document.querySelector('.Cjoin_btn .btn-light').style.backgroundColor = '#f9d479';
-          // 여기에다가 로직을 작성해야한다
-          alert('버튼 작동 확인');
-          this.joinchall(temp); // email이랑 챌린지 번호 전송
+        hidebtn(temp) {
+            // this.beforejoin=false;
+            this.msg = '가입완료';
+            console.log(this.msg);
+            // document.getElementById('Cjoin_btn').style.backgroundColor = '#f9d479';
+            document.querySelector('.Cjoin_btn .btn-light').style.backgroundColor = '#f9d479';
+            // 여기에다가 로직을 작성해야한다
+            alert('버튼 작동 확인');
+            this.joinchall(temp); // email이랑 챌린지 번호 전송
         },
 
-        nameprofile(num){
-          var email = this.chall_info.challengeGroup[num][0];
-          alert(email);
+        nameprofile(num) {
+            var email = this.chall_info.challengeGroup[num][0];
+            alert(email);
         },
         // bj 블럭의 과제 블럭을 눌렀을 때
-    //     taskblock(email, index){
-    //       // var email = this.chall_info.challengeGroup[];
-    //       // var index = this.
-    //       let taskno = -1;
-    //       for( let n = 0; n < this.chall_info.challengeTaskCnt; n++){
-    //         if(this.task_info[n].userEmail == email & this.task_info[n].taskIndex == index){
-    //           taskno = this.task_info[n].taskNo;
-    //           this.submit = !this.submit;
-    //         }
+        //     taskblock(email, index){
+        //       // var email = this.chall_info.challengeGroup[];
+        //       // var index = this.
+        //       let taskno = -1;
+        //       for( let n = 0; n < this.chall_info.challengeTaskCnt; n++){
+        //         if(this.task_info[n].userEmail == email & this.task_info[n].taskIndex == index){
+        //           taskno = this.task_info[n].taskNo;
+        //           this.submit = !this.submit;
+        //         }
 
-    //       if(taskno != -1){ // 과제 제출 했을 경우
-    //         alert(taskno)
+        //       if(taskno != -1){ // 과제 제출 했을 경우
+        //         alert(taskno)
 
-    //         this.submit = true;
-    //         console.log(!this.submit)
-    //         // submit == true;
-    //       }
+        //         this.submit = true;
+        //         console.log(!this.submit)
+        //         // submit == true;
+        //       }
 
-          
-    //       // alert(email + ' ' + index + '' + taskno);
-    //     }
-    // },
-        taskblock(email){
-              // var email = this.chall_info.challengeGroup[];
-              // var index = this.
-              let taskno = 0;
-              for( let n = 0; n < this.chall_info.challengeTaskCnt; n++){
-                // taskno 고유값 뽑아내기
-                // 과제 제출 했을 경우
-                if(this.task_info[n].userEmail == email & this.task_info[n].taskNo[n] != -1 & this.task_info[n].taskNo[n] != -2){
-                  taskno = this.task_info[n].taskNo[n];
-                  alert(taskno)
-                  // this.submit = !this.submit;
-                }
-                // 기간 안지난 미제출 : 노랑
-                if(this.task_info[n].taskNo[n] == -1){
-                  alert(this.task_info[n].taskNo[n])
-
-                  // this.submit = true;
-                  // console.log(!this.submit)
-                  // submit == true;
-                }
-                // 기간 지난 미제출 : 빨강
-                if(this.task_info[n].taskNo[n] == -2){
-                  alert(this.task_info[n].taskNo[n])
-                }
-
-              
-              // alert(email + ' ' + index + '' + taskno);
-            }
+        //       // alert(email + ' ' + index + '' + taskno);
+        //     }
+        // },
+        taskblock(email, idx) {
+            // var email = this.chall_info.challengeGroup[];
+            // var index = this.
+            // let taskno = 0;
+            // for (let n = 0; n < this.chall_info.challengeTaskCnt; n++) {
+            //     // taskno 고유값 뽑아내기
+            //     // 과제 제출 했을 경우
+            //     if ((this.task_info[n].userEmail == email) & (this.task_info[n].taskNo[n] != -1) & (this.task_info[n].taskNo[n] != -2)) {
+            //         taskno = this.task_info[n].taskNo[n];
+            //         alert(taskno);
+            //         // this.submit = !this.submit;
+            //     }
+            //     // 기간 안지난 미제출 : 노랑
+            //     if (this.task_info[n].taskNo[n] == -1) {
+            //         alert(this.task_info[n].taskNo[n]);
+            //         // this.submit = true;
+            //         // console.log(!this.submit)
+            //         // submit == true;
+            //     }
+            //     // 기간 지난 미제출 : 빨강
+            //     if (this.task_info[n].taskNo[n] == -2) {
+            //         alert(this.task_info[n].taskNo[n]);
+            //     }
+            //     // alert(email + ' ' + index + '' + taskno);
+            // }
         },
-        ...mapActions([ // import 해주는 느낌
-          'joinchall'
-        ])
-  },
-  created: function() {
+        ...mapActions([
+            // import 해주는 느낌
+            'joinchall',
+        ]),
+    },
+    created: function() {
         this.getChallInfo(); //생성할 때 바로 불러줘
         // this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
     },
-}
+};
 </script>
 <style scoped>
 /* 가입하기 버튼 */
@@ -477,8 +452,8 @@ th {
     width: 100px;
 }
 
-#levelstar{
-  width: 45px;
-  height: 45px;
+#levelstar {
+    width: 45px;
+    height: 45px;
 }
 </style>
