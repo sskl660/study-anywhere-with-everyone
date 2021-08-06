@@ -32,7 +32,7 @@ export default {
 
 <style>
 .greeting {
-  position:absolute;
+  position:fixed;
   top: 40px;
   width: 260px;
   height: 45px;

@@ -5,7 +5,7 @@
       <!-- 타이틀도 추후에 bg-img로 바꿔주기 -->
       <Title style="display: inline-block" :text="this.profileTitle" />
       <!-- 프로필 상단의 카드와 팔로워, 각오 소개글 -->
-      <ProfileInfo class="id-container" :userInfo="user_info" />
+      <ProfileInfo class="id-container" :userInfo="user_info" :followers="followers" :followings="followings"/>
     </div>
     <!-- 프로필 티켓 -->
     <div v-for="ticket in task_tickets" :key="ticket.challengeNo">
@@ -13,6 +13,7 @@
     </div>
     <ProfileEditModal :userInfo="user_info" />
   </div>
+  
 </template>
 
 <script>
@@ -70,6 +71,8 @@ export default {
           taskNo: [],
         },
       ],
+      followers: [],
+      followings: [],
     };
   },
   methods: {
@@ -97,6 +100,33 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+
+      axios({
+        method: "get",
+        url: `/follow/followers/${this.userEmail}`,
+      })
+        .then((res) => {
+          this.followers = res.data;
+          // console.log('follower')
+          // console.log(this.followers)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      axios({
+        method: "get",
+        url: `/follow/followings/${this.userEmail}`,
+      })
+        .then((res) => {
+          this.followers = res.data;
+          // console.log('following')
+          // console.log(this.followings)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
     },
     // 최상단의 타이틀 부분 텍스트 함수
     getTitle: function () {
