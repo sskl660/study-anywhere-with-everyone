@@ -15,12 +15,12 @@ public class UserLoginPostResponse extends BaseResponseBody{
     @ApiModelProperty(name="JWT 인증 토큰", example="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN...")
     String accessToken;
 
-    public static UserLoginPostResponse of(Integer statusCode, String message, String accessToken, UserEntity userEntity) {
+    public static UserLoginPostResponse of(Integer statusCode, String message, String accessToken, UserInfoResponse userInfoResponse) {
         UserLoginPostResponse res = new UserLoginPostResponse();
         res.setStatusCode(statusCode);
         res.setMessage(message);
         res.setAccessToken(accessToken);
-        res.setUserEntity(userEntity);
+        res.setUserInfoResponse(userInfoResponse);
         return res;
     }
 }
