@@ -101,26 +101,11 @@ export default {
                 //     type: String,
                 //     default: '',
                 // },
-                userName: {
-                    type: String,
-                    default: '',
-                },
-                userGraduated: {
-                    type: Boolean,
-                    default: false,
-                },
-                userNumber: {
-                    type: String,
-                    default: '',
-                },
-                userPassword: {
-                    type: String,
-                    default: '',
-                },
-                userTerm: {
-                    type: Number,
-                    default: '',
-                },
+                userName: '',
+                userGraduated: false,
+                userNumber: null,
+                userPassword: '',
+                userTerm: null,
             },
             accessCode: null,
             joinFlag: false,
