@@ -28,9 +28,9 @@ export default {
             icons: ['fa fa-home', 'fa fa-address-card', 'fa fa-flag', 'fa fa-rocket'],
             list: [
                 { isLink: true, url: '/' },
-                { isLink: true, url: '/profile' },
+                { isLink: true, url: '/profilemy' },
                 { isLink: true, url: '/challenges' },
-                { isLink: true, url: '/challengeroom' },
+                { isLink: true, url: '/challengeroom'},
             ],
             backgroundColor: '#F9D479',
             color: '#EE4748',

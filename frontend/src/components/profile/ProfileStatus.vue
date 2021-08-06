@@ -14,9 +14,17 @@
               {{userInfo.userFollower}}
             </button>
             <ul class="dropdown-menu text-center" style="background-color: #E1AF4E; border-radius: 1rem" aria-labelledby="dropdownMenuButton1">
-              <div class="drop-list-title" style="">followers</div>
+              <div class="drop-list-title" style="">follower</div>
               <div class="drop-list">
-                <li><a class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;" href="#">권희은</a></li>
+                <div v-for="follower in followers" :key="follower[0]">
+                  <!-- <li><a class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;" href="#">{{follower[1]}}</a></li> -->
+                  <li>
+                    <router-link class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;" :to="{ name: 'Profile', query: { userEmail: follower[0] } }">
+                      {{follower[1]}}
+                    </router-link>
+                  </li>
+                  
+                </div>
               </div>              
             </ul>
           </div>
@@ -27,12 +35,20 @@
           following
           <div class="dropdown">
             <button class="btn pt-0 pb-0" style="height:30px; text-align:center; font-weight:bold;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              {{userInfo.userFollower}}
+              {{userInfo.userFollowing}}
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <ul class="dropdown-menu text-center" style="background-color: #E1AF4E; border-radius: 1rem" aria-labelledby="dropdownMenuButton1">
+              <div class="drop-list-title" style="">following</div>
+              <div class="drop-list">
+                <div v-for="following in followings" :key="following[0]">
+                  <li>
+                    <router-link :to="{ name: 'Profile', query: { userEmail: following[0] } }" class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;">
+                      {{following[1]}}
+                    </router-link>
+                  </li>
+                  <!-- <li><a class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;" href="#">{{following[1]}}</a></li> -->
+                </div>
+              </div>              
             </ul>
           </div>
           <!-- <div @click="followingList" style="font-weight:bold">{{userInfo.userFollowing}}</div> -->
@@ -60,16 +76,22 @@ export default {
   },
   methods: {
     followerList: function () {
-      console.log(this.userInfo.userFollower)
-      console.log(this.followers)
+      // console.log('cpzm')
+      // console.log(this.userInfo)
+      // console.log(this.followers)
     },
     followingList: function () {
-      console.log(this.userInfo.userFollowing)
+      console.log('cpzsssm')
+      // console.log(this.userInfo.userFollowing)
+      console.log(this.followings)
     }
   },
   created:function (){
-    this.followerList()
-  }
+    //alert('profile status')
+     this.followerList()
+     this.followingList()
+  },
+ 
 }
 </script>
 
