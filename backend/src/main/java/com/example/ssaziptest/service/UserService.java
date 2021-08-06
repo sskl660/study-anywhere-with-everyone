@@ -73,9 +73,9 @@ public class UserService {
     }
 
     @Transactional
-    public UserEntity login(String userEmail, String userPassword){
-        Optional<UserEntity> userEntity = userRepository.findUserEntityByUserEmailAndUserPassword(userEmail, userPassword);
-        return userEntity.orElse(null);
+    public UserInfoResponse login(String userEmail, String userPassword){
+        Optional<UserInfoResponse> userInfoResponse = userRepository.findUserEntityByUserEmailAndUserPassword(userEmail, userPassword);
+        return userInfoResponse.orElse(null);
     }
     @Transactional
     public UserDetailResponse findUserById(String userEmail){
