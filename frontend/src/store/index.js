@@ -106,11 +106,12 @@ export default new Vuex.Store({
                 .then((res) => {
                     console.log('로그인 통신 성공');
                     console.log(credentials);
-                    console.log(res.data.userInfoResponse);                   
+                    console.log(res.data.userInfoResponse);
                     commit('LOGIN', res.data.accessToken);
                     commit('SET_TOKEN', res.data.userInfoResponse);
                 })
                 .catch((err) => {
+                    alert('계정이나 인터넷을 확인해주세요');
                     console.log(err);
                 });
         },
@@ -147,18 +148,17 @@ export default new Vuex.Store({
                     alert('잠시후 다시 시도 해주세요');
                 });
         },
-        // bj 데이터
-        joinchall: function({ commit }, temp) {
-            console.log(temp);
+        // 챌린지 가입
+        joinChallenge: function({ commit },info) {
             axios({
                 method: 'post',
                 url: '/challenge/join',
-                data: temp,
+                data: {challengeNo: info[0],
+                userEmail: info[1]},
             })
                 .then((res) => {
                     // 통신이 넘어오는 것
                     console.log(res);
-                    console.log('잘 넘어온지 확인');
                     commit('JOIN_CHALL');
                     // commit('JOIN_CHALL', res.data); //res는 백엔드에서 넘겨주는 response, res.data는 body부분
                     alert('챌린지 가입이 완료되었습니다!');
