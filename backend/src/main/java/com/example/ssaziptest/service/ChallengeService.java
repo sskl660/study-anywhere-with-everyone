@@ -193,8 +193,9 @@ public class ChallengeService {
         for(TaskEntity taskEntity: taskEntityList){
             arr[taskEntity.getTaskIndex()]++;
         }
+        int membercnt = groupmemberRepository.findByGroupChallengeEntity_ChallengeNo(challengeNo).size();
         for(int i=0; i<taskDeadlines.size(); i++){
-            temp[i].setAchieveRate(100*arr[i]/challengeEntity.getChallengeTaskCnt());
+            temp[i].setAchieveRate(100*arr[i]/membercnt);
         }
         return temp;
     }
