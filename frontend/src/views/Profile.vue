@@ -23,6 +23,7 @@ import ProfileEditModal from "@/components/profile/ProfileEditModal.vue";
 import "./css/profile.css";
 // import axios from 'axios'
 import axios from "@/util/http-common.js";
+import { mapState } from 'vuex'
 // import func from 'vue-editor-bridge'
 
 export default {
@@ -36,7 +37,7 @@ export default {
   data: function () {
     return {
       // 유저 이메일 정보 받아와서 넣기
-      useremail: "jang@naver.com",
+      // useremail: "jang@naver.com",
       profileTitle: "string",
       user_info: {
         userBlog: "",
@@ -76,7 +77,7 @@ export default {
     getUserInfo: function () {
       axios({
         method: "get",
-        url: `/profile/info/${this.useremail}`,
+        url: `/profile/info/${this.userEmail}`,
       })
         .then((res) => {
           this.user_info = res.data;
@@ -88,7 +89,7 @@ export default {
 
       axios({
         method: "get",
-        url: `/profile/taskticket/${this.useremail}`,
+        url: `/profile/taskticket/${this.userEmail}`,
       })
         .then((res) => {
           this.task_tickets = res.data;
@@ -101,6 +102,11 @@ export default {
     getTitle: function () {
       this.profileTitle = `${this.user_info.userName} 님의 프로필`;
     },
+  },
+  computed: {
+    ...mapState([
+      'userEmail',
+    ])
   },
   created: function () {
     // 생성과 동시에 유저정보 가져오기
