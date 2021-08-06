@@ -318,7 +318,7 @@ export default {
         },
     },
     created: function() {
-        // alert('page cre');
+        this.challengeno=this.$route.query.cn;
         this.getChallInfo(); //생성할 때 바로 불러줘
         this.makeArr();
         this.getTaskInfo();
