@@ -10,7 +10,7 @@ export default new Vuex.Store({
         isLogin: false,
         config: null, // jwt 담는 객체
         comments: [],
-        emailposi: false //false 일때 중복
+        emailposi: false, //false 일때 중복
     },
 
     mutations: {
@@ -46,7 +46,7 @@ export default new Vuex.Store({
         EMAIL_CHECK(state, returnflag) {
             state.emailposi = returnflag;
             alert("중복체크 완료" + returnflag);
-        }
+        },
     },
 
     actions: {
@@ -107,7 +107,7 @@ export default new Vuex.Store({
         },
     },
 
-    getter: {
+    getters: {
         config: function(state) {
             return state.config;
         },
@@ -116,6 +116,6 @@ export default new Vuex.Store({
         },
         emailposi: function (state) {
             return state.emailposi;
-        }
+        },
     },
 });

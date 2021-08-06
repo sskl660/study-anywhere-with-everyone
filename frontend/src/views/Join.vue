@@ -10,11 +10,10 @@
           type="text" 
           id="email" 
           class="account-input email-input" 
-          placeholder="40글자 이내로 입력해주세요." 
+          placeholder="40자 이내로 입력해주세요." 
           onfocus="this.placeholder=''" 
-          onblur="this.placeholder='40글자 이내로 입력해주세요.'"
-          v-model="credentials.userEmail"
-        />
+          onblur="this.placeholder='40자 이내로 입력해주세요.'"
+          v-model="credentials.userEmail">
         <!-- 중복체크 버튼 -->
         <div class="check-button" @click="emailcheck(credentials.userEmail)">
           <ButtonSquare text="중복체크"/>
@@ -26,11 +25,10 @@
           type="text" 
           id="password" 
           class="account-input password-input" 
-          placeholder="8 이상 16 이하 글자수로 입력해주세요."
+          placeholder="8자 이상 16자 이하로 입력해주세요."
           onfocus="this.placeholder=''" 
-          onblur="this.placeholder='8 이상 16 이하 글자수로 입력해주세요.'"
-          v-model="credentials.userPassword"
-        />
+          onblur="this.placeholder='8자 이상 16자 이하로 입력해주세요.'"
+          v-model="credentials.userPassword">
       </div>
       <div>
         <label for="password-confirm" class="input-label">비밀번호 확인</label>
@@ -52,11 +50,10 @@
             type="text" 
             id="name" 
             class="info-input name-input" 
-            placeholder="8글자 이내로 입력해주세요."
+            placeholder="8자 이내로 입력해주세요."
             onfocus="this.placeholder=''" 
-            onblur="this.placeholder='8글자 이내로 입력해주세요.'"
-            v-model="credentials.userName"
-          />
+            onblur="this.placeholder='8자 이내로 입력해주세요.'"
+            v-model="credentials.userName">
         </div>
         <div>
           <label for="phone" class="input-label">전화번호</label>
@@ -67,8 +64,7 @@
             placeholder="ex) 01012345678"
             onfocus="this.placeholder=''" 
             onblur="this.placeholder='ex) 01012345678'"
-            v-model="credentials.userNumber"
-          />
+            v-model="credentials.userNumber">
         </div>
       </div>
       <div class="d-flex justify-content-center last-row-input">
@@ -99,6 +95,7 @@
       </div>
       
     </div>
+  </div>
 </template>
 
 <script>
@@ -109,36 +106,36 @@ import { mapActions ,mapGetters } from 'vuex';
 export default {
     name: 'Join',
     components: {
-        ButtonRound, // 둥근 버튼을 가져옴
-        ButtonSquare, // 사각 버튼을 가져옴
+      ButtonRound, // 둥근 버튼을 가져옴
+      ButtonSquare, // 사각 버튼을 가져옴
     },
     data: function() {
-        return {
-            /* API로 보낼 회원 정보 데이터. v-model을 통해 input 태그에서 값을 받는다. */
-            credentials: {
-                userEmail: null,
-                userPassword: null,
-                userNumber: null,
-                userName: null,
-                userGraduated: false,
-                userTerm: null,
-            },
-            accessCode : null,
-            joinFlag :false,
-        };
+      return {
+        /* API로 보낼 회원 정보 데이터. v-model을 통해 input 태그에서 값을 받는다. */
+        credentials: {
+          userEmail: null,
+          userPassword: null,
+          userNumber: null,
+          userName: null,
+          userGraduated: false,
+          userTerm: null,
+        },
+        accessCode : null,
+        joinFlag :false,
+      };
     },
     methods: {
-        ...mapActions([
-            'join', // 회원가입 함수 등록
-            'emailcheck',//아이디 체크
-        ]),
-        codeCheck:function(accessCode){
-          if(accessCode=="307"){
-            alert("참여코드 확인 완료")
-          }
-          else
-            alert("참여코드 틀림 ㅠㅠ")
+      ...mapActions([
+        'join', // 회원가입 함수 등록
+        'emailcheck',//아이디 체크
+      ]),
+      codeCheck:function(accessCode){
+        if(accessCode=="307"){
+          alert("참여코드 확인 완료")
         }
+        else
+          alert("참여코드 틀림 ㅠㅠ")
+      }
     },
     computed:{
       ...mapGetters([
@@ -149,27 +146,27 @@ export default {
 </script>
 
 <style scoped>
-/* 폰트 등록 */
-@font-face {
+  /* 폰트 등록 */
+  @font-face {
     font-family: 'Godo';
     font-style: normal;
     font-weight: 400;
     src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'),
         url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
-}
+  }
 
-/* 반투명 배경 */
-.join-container {
+  /* 반투명 배경 */
+  .join-container {
     background-color: rgba(255, 255, 255, 0.2);
     width: 1000px;
     height: 780px;
     margin-top: 100px;
     border-radius: 2rem;
     padding-top: 30px;
-}
+  }
 
-/* 큰 제목 */
-p {
+  /* 큰 제목 */
+  p {
     font-size: 40px;
     font-family: 'Noto Sans KR', sans-serif;
     color: #f59c35;
@@ -177,94 +174,94 @@ p {
     margin-left: 100px;
     margin-top: 35px;
     margin-bottom: 25px;
-}
+  }
 
-/* 전체 input 태그 CSS */
-input {
-  padding-left: 15px;
-  border-style: none;
-}
+  /* 전체 input 태그 CSS */
+  input {
+    padding-left: 15px;
+    border-style: none;
+  }
 
-input:focus {
+  input:focus {
     outline: none;
-}
+  }
 
-input::placeholder {
+  input::placeholder {
     font-family: 'Noto Sans KR', sans-serif;
     color: #b3b3b3;
-}
+  }
 
-/* 전체 input-label CSS */
-.input-label {
+  /* 전체 input-label CSS */
+  .input-label {
     font-family: 'Godo';
     color: #f9d479;
     font-size: 25px;
     margin-right: 15px;
-}
+  }
 
-/* 계정 등록 전체 영역 */
-.account-input {
+  /* 계정 등록 전체 영역 */
+  .account-input {
     width: 400px;
     height: 40px;
     border-radius: 0.5rem;
     margin-bottom: 25px;
-}
+  }
 
-/* 이메일 입력 전체 영역 */
-.email-container {
+  /* 이메일 입력 전체 영역 */
+  .email-container {
     margin-left: 173px;
-}
+  }
 
-/* 이메일 입력칸 */
-.email-input {
+  /* 이메일 입력칸 */
+  .email-input {
     margin-right: 20px;
-}
+  }
 
-/* 비밀번호 입력칸 */
-.password-input {
+  /* 비밀번호 입력칸 */
+  .password-input {
     margin-right: 190px;
-}
+  }
 
-/* 비밀번호 확인 입력칸 */
-.password-confirm-input {
+  /* 비밀번호 확인 입력칸 */
+  .password-confirm-input {
     margin-right: 240px;
-}
+  }
 
-/* 정보 등록 전체 영역 */
-.info-input {
+  /* 정보 등록 전체 영역 */
+  .info-input {
     width: 250px;
     height: 40px;
     border-radius: 0.5rem;
     margin-bottom: 30px;
-}
+  }
 
-/* 이름 입력칸 */
-.name-input {
+  /* 이름 입력칸 */
+  .name-input {
     margin-right: 60px;
-}
+  }
 
-/* 전화번호 입력칸 */
-.phone-input {
+  /* 전화번호 입력칸 */
+  .phone-input {
     margin-right: 60px;
-}
+  }
 
-/* 기수 입력칸 */
-.grade-input {
+  /* 기수 입력칸 */
+  .grade-input {
     margin-right: 60px;
-}
+  }
 
-/* 참여코드 입력칸 */
-.code-input {
+  /* 참여코드 입력칸 */
+  .code-input {
     margin-right: 20px;
-}
+  }
 
-/* 마지막 열 입력칸 전체 부분 */
-.last-row-input {
+  /* 마지막 열 입력칸 전체 부분 */
+  .last-row-input {
     margin-left: 17px;
-}
+  }
 
-/* 중복체크 버튼 */
-.check-button .btn-light {
+  /* 중복체크 버튼 */
+  .check-button .btn-light {
     font-family: 'Godo';
     font-size: 18px;
     height: 40px;
@@ -272,7 +269,7 @@ input::placeholder {
     background-color: #1c84c4;
     border-style: none;
     border-radius: 0.5rem;
-}
+  }
 
   /* 돌아가기 버튼 */
   .back-button .btn-light {
@@ -297,10 +294,10 @@ input::placeholder {
     margin-left: 50px;
     background-color: #99B7FF;
     border-style: none;
-}
+  }
 
-/* SSAZIP 여러 개 모인 이미지 */
-.eggs {
+  /* SSAZIP 여러 개 모인 이미지 */
+  .eggs {
     position: absolute;
     width: 370px;
     height: 200px;
@@ -339,7 +336,7 @@ input::placeholder {
     }
   }
 
-   @media (min-width: 1201px) and (max-width: 1250px) {
+  @media (min-width: 1201px) and (max-width: 1250px) {
     .eggs {
       position: absolute;
       width: 370px;
@@ -379,7 +376,7 @@ input::placeholder {
     }
   }
 
-   @media (min-width: 1500px) and (max-width: 1600px) {
+    @media (min-width: 1500px) and (max-width: 1600px) {
     .eggs {
       position: absolute;
       width: 370px;

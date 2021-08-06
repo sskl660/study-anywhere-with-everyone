@@ -17,10 +17,22 @@
 
     <!-- 챌린지 목록 -->
     <div class="d-flex justify-content-around challenges">
-      <ChallengeList title="알고리즘"/>
-      <ChallengeList title="CS"/>
-      <ChallengeList title="취업"/>
-    </div>\
+      <ChallengeList 
+        title="알고리즘"
+        v-for="(idx, challenge) in algoList"
+        :key="idx"
+        :challenge="challenge"/>
+      <ChallengeList 
+        title="CS"
+        v-for="(idx, challenge) in csList"
+        :key="idx"
+        :challenge="challenge"/>
+      <ChallengeList 
+        title="취업"
+        v-for="(idx, challenge) in csList"
+        :key="idx"
+        :challenge="challenge"/>
+    </div>
 
   </div>
 </template>
@@ -30,6 +42,7 @@ import SearchBar from '@/components/challenges/SearchBar'
 import ChallengeList from '@/components/challenges/ChallengeList'
 import ChallengeModal from '@/components/challenges/ChallengeModal'
 import "@/views/css/challenges.css";
+import axios from '@/util/http-common.js';
 
 export default {
   name: 'Challenges',
@@ -38,9 +51,39 @@ export default {
     ChallengeList, // 챌린지 목록
     ChallengeModal, //챌린지 모달
   },
+  data: function () {
+    return {
+      algoList: [],
+      csList: [],
+      jobList: [],
+    }
+  },
+  methods: {
+    getChallengeList: function () {
+      axios({
+        method: 'get',
+        url: '/challengelist'
+      })
+        .then(res => {
+          res.data.forEach(challenge => {
+            if (challenge.challengeCategory === 'ALGO') {
+              this.algoList.push(challenge)
+            }
+            if (challenge.challengeCategory === 'CS') {
+              this.csList.push(challenge)
+            }
+            if (challenge.challengeCategory === 'JOB') {
+              this.jobList.push(challenge)
+            }
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  },
+  created: function () {
+    this.getChallengeList()
+  }
 }
 </script>
-
-<style>
-
-</style>

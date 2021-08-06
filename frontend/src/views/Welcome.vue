@@ -27,8 +27,7 @@
           <div class="join-btn">
             <router-link to="/join"><ButtonRound text="Join"/></router-link>
           </div>
-        </div>
-        
+        </div>        
       </div>
     </div>
 
