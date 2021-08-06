@@ -23,8 +23,8 @@ public class FileService {
 
         FileEntity fileEntity = FileEntity.builder()
                 .fileName(request.getFileName())
-                .filePath(request.getFilePath())
                 .fileUseremail(request.getUserEmail())
+                .fileData(request.getFileData())
                 .build();
         FileEntity fileEntity1 = fileRepository.save(fileEntity);
         return fileEntity1.getFileNo();
@@ -36,7 +36,6 @@ public class FileService {
         FileInfoResponse fileInfoResponse = FileInfoResponse.builder()
                 .fileNo(fileNo)
                 .fileName(file.getFileName())
-                .filePath(file.getFilePath())
                 .userEmail(file.getFileUseremail())
                 .build();
         return fileInfoResponse;
