@@ -43,8 +43,6 @@ dependencies {
     implementation group: 'io.swagger', name: 'swagger-annotations', version: '1.5.21'
     implementation group: 'io.swagger', name: 'swagger-models', version: '1.5.21'
 
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-gcp-storage', version: '1.2.5.RELEASE'
-
     //jwt
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("com.auth0:java-jwt:3.10.3")

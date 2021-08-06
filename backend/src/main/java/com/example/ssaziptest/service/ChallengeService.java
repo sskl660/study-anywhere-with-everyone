@@ -166,7 +166,6 @@ public class ChallengeService {
 
                     if(deadlines.get(i).isBefore(LocalDate.now())) temp[i] = -2;
                     else temp[i] = -1;
-
                 }
             }
             response.setTaskNo(temp);
