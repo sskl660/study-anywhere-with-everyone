@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,15 +55,16 @@ public class UserService {
         userRepository.save(userEntity);
         return findUserById(request.getUserEmail());
     }
-    @Transactional
-    public void insertUserImg(FileUploadRequest request){
-//        FileEntity fileEntity = fileRepository.findByFileUseremailAndFileInfo(request.getUserEmail(), request.getFileInfo());
+//    @Transactional
+//    public void insertUserImg(FileUploadRequest request){
+//        List<FileEntity> temp = fileRepository.findByFileUseremailAndFileInfo(request.getUserEmail(), request.getFileInfo());
+//        FileEntity fileEntity = temp.get(0);
 //        fileEntity.setFileName(request.getFileName());
-//        fileEntity.setFilePath(request.getFilePath());
 //        fileEntity.setFileOriginalname(request.getFileOriginalname());
 //        fileRepository.save(fileEntity);
+//
+//    }
 
-    }
 
     @Transactional
     public boolean checkEmail(String user_email){
@@ -73,9 +75,9 @@ public class UserService {
     }
 
     @Transactional
-    public UserEntity login(String userEmail, String userPassword){
-        Optional<UserEntity> userEntity = userRepository.findUserEntityByUserEmailAndUserPassword(userEmail, userPassword);
-        return userEntity.orElse(null);
+    public UserInfoResponse login(String userEmail, String userPassword){
+        Optional<UserInfoResponse> userInfoResponse = userRepository.findUserEntityByUserEmailAndUserPassword(userEmail, userPassword);
+        return userInfoResponse.orElse(null);
     }
     @Transactional
     public UserDetailResponse findUserById(String userEmail){

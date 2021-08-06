@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.sql.Blob;
 
 @Api(tags = {"8.File"})
 @RestController
@@ -58,7 +59,6 @@ public class FileController {
             FileUploadRequest fileDto = new FileUploadRequest();
             fileDto.setFileOriginalname(origFilename);
             fileDto.setFileName(filename);
-            fileDto.setFilePath(filePath);
 
             fileDto.setUserEmail(useremail);
 
@@ -73,13 +73,24 @@ public class FileController {
         return fileId;
     }
 
-    @ApiOperation(value = "image 조회")
-    @GetMapping(value = "image/{fileno}", produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<byte[]> userSearch(@PathVariable("fileno") int fileno) throws Exception {
-        FileEntity fileEntity = fileRepository.getById(fileno);
-        InputStream imageStream = new FileInputStream(fileEntity.getFilePath());
-        byte[] imageByteArray = IOUtils.toByteArray(imageStream);
-        imageStream.close();
-        return new ResponseEntity<>(imageByteArray, HttpStatus.OK);
+//    @ApiOperation(value = "image 조회")
+//    @GetMapping(value = "image/{fileno}", produces = MediaType.IMAGE_JPEG_VALUE)
+//    public ResponseEntity<byte[]> userSearch(@PathVariable("fileno") int fileno) throws Exception {
+//        FileEntity fileEntity = fileRepository.getById(fileno);
+//        InputStream imageStream = new FileInputStream(fileEntity.getFilePath());
+//        byte[] imageByteArray = IOUtils.toByteArray(imageStream);
+//        imageStream.close();
+//        return new ResponseEntity<>(imageByteArray, HttpStatus.OK);
+//    }
+
+    //갑분 다운로드..?
+    @GetMapping(value = "fileread/{fileno}")
+    public ResponseEntity<byte[]> readfile(@PathVariable("fileno") int fileno) throws Exception{
+        Blob file = fileRepository.findById(fileno).get().getFileData();
+        InputStream is = null;
+        is = file.getBinaryStream();
+        int s = (int) file.length();
+        byte[] buffer = IOUtils.toByteArray(is);
+        return new ResponseEntity<>(buffer, HttpStatus.OK);
     }
 }
