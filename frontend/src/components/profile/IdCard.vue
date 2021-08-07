@@ -1,35 +1,55 @@
 <template>
   <div class="idcard" style="d-flex justify-content-center display: inline-block;">
+    <!-- 프로필카드 좌측 컨테이너 -->
     <div class="idcard-left" style="display: inline-block;">
+      <!-- 프로필카드 이미지 -->
       <ProfileImage class="profile-img-box" />
+      <!-- 깃헙 아이콘. 블로그 아이콘 클릭시 해당 링크로 이동 -->
       <p>
-        <i class="fa fa-git-square fa-2x" style="color:black" type="button"></i>
-        <i class="fab fa-blogger fa-2x ms-5" style="color:orange" type="button"></i>
+        <a :href="userInfo.userGit" target="_blank"><i class="fa fa-git-square fa-2x" style="color:black" type="button"></i></a>
+        <a :href="userInfo.userBlog" target="_blank"><i class="fab fa-blogger fa-2x ms-5" style="color:orange" type="button"></i></a>
       </p>
     </div>
-
+  <!-- 프로필카드 우측 컨테이너  -->
     <div class="card-intro" style="display: inline-block;">
       <p style="font-size:25px">
-        <!-- <p >{{ userTerm }}기 {{userName}}</p> -->
-        <!-- pp{{user_info.userTerm}}기 {{user_info.userName}} -->
+        <!-- 몇기 이름 -->
         {{userInfo.userTerm}}기 {{userInfo.userName}}
-        <!-- user가 누군지에 따라서 프로필편집, 팔로우, 팔로우 취소로 보이게 하기 -->
-        <!-- <button type="button" class="btn profile-edit-btn">프로필편집</button> -->
-        <!-- Button trigger modal -->
-        <button type="button" class="btn profile-edit-btn" data-bs-toggle="modal" data-bs-target="#profileEditModal">
+        <!-- 계정 주인이면 프로필 편집 모달 뜸 -->
+        <button v-if="this.checkOwner()" type="button" class="btn profile-edit-btn" data-bs-toggle="modal" data-bs-target="#profileEditModal">
           프로필편집
         </button>
+        <!-- 계정주인이 아니고 팔로워 중에 한명이면 -->
+        <button v-else-if="this.checkFollow()" type="button" class="btn profile-edit-btn" data-bs-target="#profileEditModal">
+          언팔로우
+        </button>
+        <!-- 계정주인이 아니고 팔로워 중에 한명도 아니면 -->
+        <button v-else type="button" class="btn profile-edit-btn" data-bs-target="#profileEditModal">
+          팔로우
+        </button>
       </p>
-      <p>{{userInfo.userMbti}}</p>
-      <p>{{userInfo.userDevstyle}}</p>
-      <p>{{userInfo.userWishfield}}</p>
-      <p>{{userInfo.userTechstack}}</p>    
+      <!-- 유저 부가정보 항목-->
+      <div align="right" style="display: inline-block;">
+        <p style="color: #1F4256">MBTI</p>
+        <p style="color: #1F4256">개발 스타일</p>
+        <p style="color: #1F4256">관심분야</p>
+        <p style="color: #1F4256">기술스택</p>  
+      </div>
+      <!-- 유저정보 -->
+      <div align="left" style="display: inline-block; margin-left:30px;">
+        <p>{{userInfo.userMbti}}</p>
+        <p>{{userInfo.userDevstyle}}</p>
+        <p>{{userInfo.userWishfield}}</p>
+        <p>{{userInfo.userTechstack}}</p>  
+      </div>
+ 
     </div>
   </div>
 </template>
 
 <script>
 import ProfileImage from "@/components/common/ProfileImage.vue"
+import { mapState } from 'vuex'
 // import ButtonSquare from '@/components/common/ButtonSquare.vue'
 export default {
   name: 'IdCard',
@@ -39,16 +59,52 @@ export default {
   },
   data: function () {
     return {
+      followers: []
       // 버튼에 들어갈 문구들
-      profileEdit: '프로필 편집',
-      follow: '팔로우',
-      unfollow: '팔로우 취소',
+      // owner: false,
+      // follow: false,
+      // unfollow: false,
+    }
+  },
+  methods: {
+    // 로그인한 사용자가 계정주인이면 true
+    checkOwner: function () {
+      // console.log('곰돌이??')
+      // console.log(this.userEmail)
+      // console.log(this.followers)
+      if (this.userEmail == this.userInfo.userEmail) return true;
+      else false;
+    },
+    // 로그인한 사용자가 계정주인이 아닌데 팔로워 중에 한명이라면 true
+    checkFollow: function () {
+      for (var i in this.followers) {
+        // console.log('찾아')
+        // console.log(i)
+        if (this.userEmail == this.followers[i][0]) return true;
+        else false;
+      }
+      
     }
   },
   props: {
     userInfo: {
       type: Object
+    },
+    followers: {
+      type: Array
+    },
+    followings: {
+      type: Array
     }
+  },
+  computed: {
+    ...mapState([
+      'userEmail',
+    ])
+  },
+  created:function() {
+    this.checkOwner();
+    this.checkFollower();
   }
 }
 </script>

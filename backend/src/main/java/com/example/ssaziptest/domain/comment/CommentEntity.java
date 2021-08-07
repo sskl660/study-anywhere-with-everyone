@@ -23,7 +23,7 @@ public class CommentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int commentNo;
 
-    @Column(name = "comment_content")
+    @Column(name = "comment_content", length = 400)
     private String commentContent;
 
     @CreatedDate

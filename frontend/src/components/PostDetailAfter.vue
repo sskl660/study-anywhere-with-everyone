@@ -9,7 +9,7 @@
                 <!-- 왼쪽 - 과제 설명란 -->
                 <div class="left flex-item">
                     <div class="col Tleft flex-item">
-                        <h1>아이유의 과제2</h1>
+                        <h1>{{task_info.userName + " 과제" + task_info.taskIndex}}</h1>
                         <!-- 작성자가 보이는 부분 -->
                     </div>
                     <div class="col Dleft flex-item">
@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div id="post">
-                            <!-- 작성된 내용이 보이는 부분 CKEditor부분 -->
+                            {{task_info.taskDesc}}
                         </div>
                         
                         <div>
@@ -30,10 +30,15 @@
                     </div>
 
                     <div class="like-box">
-                        <img class="like" src="../assets/grayheart.png" alt="likeU">
+                        <img @click="presslike(like)" class="like" src="../assets/grayheart.png" alt="likeU">
                     </div>
+
+                    <!-- <div class="like-box">
+                        <img @click="presslike()" class="like" src="../assets/redheart.png" alt="likeU">
+                    </div> -->
+
                     <div class="like-num">
-                        <h6><strong>307명</strong>이 좋아합니다</h6>
+                        <h6><strong>{{task_info.likes + " 명"}}</strong>이 좋아합니다</h6>
                     </div>
                     
                     <!-- <div class="like-box">
@@ -49,7 +54,7 @@
                     <!-- 댓글창 맨 위 개인 프로필 -->
                     <div id='infowriter'>
                         <ProfileImage class="comment-img-box" />
-                        <h4 id="writername">5기 아이유</h4>
+                        <h4 id="writername">{{ task_info.userTerm }} 기 {{task_info.userName}}</h4>
                         <hr id="line">
                     </div>
                     <div>
@@ -66,11 +71,10 @@
                 </div>
             </div>
             
-            <button type="button" class="btn btn-danger Pdelete_btn" @click="changeToDelete">삭제</button>
-
+            <div style="float: left"><button v-if="this.checkUser()" type="button" class="btn btn-danger Pdelete_btn">삭제</button></div>
             <!-- <div class="Pjoin_btn"><ButtonSquare :text="생성" @click="sendPost"/></div>
             <div class="Pcancel_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="취소"/></router-link></div> -->
-            <div class="Pback_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="뒤로"/></router-link></div>
+            <div class="Pback_btn" style="float:right"><router-link to="/ChallengeRoom"><ButtonSquare :text="뒤로"/></router-link></div>
             
         </div>
     </div>
@@ -81,6 +85,8 @@ import "@/components/css/postdetailafter.css"
 import ButtonSquare from '@/components/common/ButtonSquare.vue'
 import ProfileImage from "@/components/common/ProfileImage.vue"
 import CommentBox from "@/components/challengeroom/CommentBox.vue"
+import axios from "@/util/http-common.js";
+import { mapActions, mapState } from 'vuex'
 
 // import Vue from 'vue';
 // import CKEditor from '@ckeditor/ckeditor5-vue2';
@@ -105,12 +111,42 @@ export default {
         ProfileImage,
         CommentBox,
     },
+    // props: { //여기를 this. router. query. url에 있는 key값 바꿔줘야한다
+    //         forwardTaskNo: {
+    //             type: String,
+    //             default : ''
+    //         },
+    //     },
     data: function(){
         return{
             // 버튼에 들어갈 문구들
             // 생성: '생성',
             // 취소: '취소',
             뒤로: '돌아가기',
+            task_info:{
+                "likemembers": [
+                    "string"
+                ],
+                "likes": 0,
+                "taskContent": "string",
+                "taskDesc": "string",
+                "taskFile": "string",
+                "taskImage": "string",
+                "taskIndex": 0,
+                "taskNo": 0,
+                "userEmail": "string",
+                "userName": "string",
+                "userTerm": 0
+            },
+            like:{
+                "taskNo": 0,
+                "userEmail": "string"
+            },
+            unlike:{
+                "taskNo": 0,
+                "userEmail": "string"
+            },
+            ApiTaskNo: '',
             // CKEditor : '',
             // filename: '',
             // imageSrc: '',
@@ -120,7 +156,48 @@ export default {
             // redheart : require('../assets/redheart.png')
         }
     },
+    computed:{
+        ...mapState([
+            'userEmail',
+        ])
+    },
     methods:{
+        getTaskInfo: function(){
+            axios({
+                methods: 'get',
+                url: `/challenge/task/${this.ApiTaskNo}`,
+            })
+            .then((res) => {
+                // alert("과제 상세 정보가 들어왔습니다.");
+                console.log(res.data);
+                this.task_info = res.data;
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        },
+        ...mapActions([
+            'presslike',
+        ]),
+        taskNumbering: function(urlNo){
+            this.ApiTaskNo = urlNo;
+            // 여기에 create에 있는 함수를 바로 넣어줬다.
+        },
+        checkUser: function(){
+            // alert('삭제버튼 안보이게 할꺼야')
+            if(this.userEmail == this.task_info.userEmail) return true;
+            else false;
+        },
+        // presslike(){
+        //     document.querySelector('.like').src ="/img/redheart.20ffa944.png";
+        // },
+
+        // A함수를 만들고
+        // 클릭 시 A함수 실행
+        // A함수 안에는 이미지 변하는 함수, 통신하는 함수(mapActions함수)
+        // 페이지 reload 요청 한번 다시 하기. 리프레쉬 용
+        // getTaskInfo함수를 다시 불러라 -> 데이터 바꿔주기 좋아요 +1
+
         // sendPost(){
         //     let message = this.CKEditor.getData();
         //     alert(message);
@@ -163,6 +240,11 @@ export default {
         // }
         // }
     },
+    created: function(){
+        // alert(this.forwardTaskNo);
+        this.taskNumbering(this.$route.query.taskNo);
+        this.getTaskInfo();
+    }
     // mounted(){
     //     ClassicEditor
     //     .create( document.querySelector('#divCKEditor'))
@@ -201,10 +283,10 @@ export default {
 }
 
 .comment-img-box {
-  width: 75px;
-  height: 75px;
-  position: relative;
-  top: 17px;
-  left: -160px;
+    width: 75px;
+    height: 75px;
+    position: relative;
+    top: 17px;
+    left: -160px;
 }
 </style>

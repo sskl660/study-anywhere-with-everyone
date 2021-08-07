@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button type="button" class="btn btn-primary logout-btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
+    <button v-if="isLogin" type="button" class="btn btn-primary logout-btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
       <i class="fas fa-sign-out-alt fa-2x"></i>
     </button>
 
@@ -26,7 +26,7 @@
   
 </template>
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
   export default {
     name: 'Logout',
     components: {
@@ -34,6 +34,11 @@ import {mapActions} from 'vuex'
   methods: {
     ...mapActions([
       'logout'
+    ])
+  },
+  computed:{
+    ...mapState([
+      'isLogin'
     ])
   },
   }

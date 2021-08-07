@@ -1,34 +1,32 @@
 <template>
-  <div id="app">
-    <Header/>
-    <div class="contrainer">
-      <router-view />
+    <div id="app">
+        <Header />
+        <div class="contrainer">
+            <router-view :key="$route.fullPath" />
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import Header from '@/components/common/Header.vue'
+import Header from '@/components/common/Header.vue';
 
 export default {
-  name: 'app',
-  components: {
-    Header,
-  }
-}
+    name: 'app',
+    components: {
+        Header,
+    },
+};
 </script>
 
-
 <style>
-  #app {
+#app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-  }
+}
 
-  #nav {
+#nav {
     padding: 30px;
-  }
+}
 </style>
-

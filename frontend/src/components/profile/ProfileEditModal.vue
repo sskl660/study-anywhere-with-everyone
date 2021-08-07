@@ -28,16 +28,16 @@
             <!-- 상위의 정보입력창 -->
             <div style="display: inline-block;">
               <div class="d-flex">
-                <input class="profile-intro-input-top" type="text" placeholder="">
+                <input class="profile-intro-input-top editMbti" type="text" v-model.trim="userInfo.userMbti" placeholder="">
               </div>
               <div class="d-flex">
-                <input class="profile-intro-input" type="text" placeholder="ex) 아침형, 몰입형">
+                <input class="profile-intro-input editDevstyle" type="text" v-model.trim="userInfo.userDevstyle" placeholder="ex) 아침형, 몰입형">
               </div>
               <div class="d-flex">
-                <input class="profile-intro-input" type="text" placeholder="ex) 프론트엔드, 인공지능">
+                <input class="profile-intro-input editWishfield" type="text" v-model.trim="userInfo.userWishfield" placeholder="ex) 프론트엔드, 인공지능">
               </div>
               <div class="d-flex">
-                <input class="profile-intro-input" type="text" placeholder="ex) python 상, vue 중">
+                <input class="profile-intro-input editTechstack " type="text" v-model.trim="userInfo.userTechstack" placeholder="ex) python 상, vue 중">
               </div> 
               <div style="color:red; font-weight:600; margin-top:20px; margin-left:50px;">* 모든 항목은 12자 이내로 작성해주세요.</div>
             </div>
@@ -53,21 +53,22 @@
             <!-- 하위의 정보입력창 -->
             <div style="display: inline-block;">
               <div class="d-flex">
-                <input class="profile-long-input" type="text" placeholder="ex) 개인 깃헙 주소를 입력해주세요.">
+                <input class="profile-long-input editGit" type="text" v-model.trim="userInfo.userGit" placeholder="ex) 개인 깃헙 주소를 입력해주세요.">
               </div>
               <div class="d-flex">
-                <input class="profile-long-input" type="text" placeholder="ex) 개인 블로그 주소를 입력해주세요.">
+                <input class="profile-long-input editBlog" type="text" v-model.trim="userInfo.userBlog" placeholder="ex) 개인 블로그 주소를 입력해주세요.">
               </div>
               <div class="d-flex">
-                <input class="profile-textarea-input" type="text" placeholder="ex) 각오, 소개 등 친구들에게 하고싶은 말을 자유롭게 써주세요.">
+                <textarea class="profile-textarea-input editIntroduce" type="text" v-model.trim="userInfo.userIntroduce" placeholder="ex) 각오, 소개 등 친구들에게 하고싶은 말을 자유롭게 써주세요.">
+                </textarea>
               </div> 
-              <div style="color:red; font-weight:600; margin-top:20px; margin-right:220px;">* 소개글은 70자 이내로 작성해주세요.</div>
+              <div style="color:red; font-weight:600; margin-top:20px; margin-right:220px;">* 소개글은 100자 이내로 작성해주세요.</div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger mb-4 me-4" style="width:70px" data-bs-dismiss="modal">취소</button>
-          <button type="button" class="btn profile-submit-btn me-5 mb-4" style="width:70px; font-weight:100">등록</button>
+          <!-- <button type="button" class="btn btn-danger mb-4 me-4" style="width:70px" data-bs-dismiss="modal">취소</button> -->
+          <button @click="editSubmit" type="button" class="btn profile-submit-btn me-5 mb-4" data-bs-dismiss="modal" style="width:70px; font-weight:100">등록</button>
         </div>
       </div>
     </div>
@@ -76,6 +77,7 @@
 
 <script>
 import ProfileImage from "@/components/common/ProfileImage.vue"
+import axios from '@/util/http-common.js';
 // import "@/css/profilemodal.css";
 
 export default {
@@ -83,6 +85,56 @@ export default {
   components: {
     ProfileImage,
   },
+  props: {
+    userInfo: {
+      type: Object
+    }
+  },
+  data: function() {
+    return {
+      editProfileData: {
+        "userBlog": "",
+        "userDevstyle": "",
+        "userEmail": "",
+        "userGit": "",
+        "userImage": "",
+        "userIntroduce": "",
+        "userMbti": "",
+        "userTechstack": "",
+        "userWishfield": "",
+      }
+    }
+  },
+  methods: {
+    editSubmit: function() {
+      this.editProfileData.userBlog = document.querySelector('.editBlog').value
+      this.editProfileData.userDevstyle = document.querySelector('.editDevstyle').value
+      this.editProfileData.userEmail = this.userInfo.userEmail
+      this.editProfileData.userGit = document.querySelector('.editGit').value
+      this.editProfileData.userImage = this.userInfo.userImage
+      this.editProfileData.userIntroduce = document.querySelector('.editIntroduce').value
+      this.editProfileData.userMbti = document.querySelector('.editMbti').value
+      this.editProfileData.userTechstack = document.querySelector('.editTechstack').value
+      this.editProfileData.userWishfield = document.querySelector('.editWishfield').value
+      this.editProfile()
+      console.log('check')
+      console.log(this.editProfileData)
+    },
+    editProfile: function () {
+      axios({
+      method: 'put',
+      url: "/profile/update",
+      data: this.editProfileData
+      })
+        .then((res) => {
+          console.log(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+
+    }
+  }
 }
 </script>
 

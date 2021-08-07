@@ -1,7 +1,7 @@
 <template>
     <div class="flex_container">
         <div class="stars-box">
-            <img class="stars" src="../assets/manystar.png" alt="manystar">
+            <img class="stars" src="../assets/manystar.png" alt="manystar" />
         </div>
 
         <div class="mainbody">
@@ -12,28 +12,25 @@
                         <h1>아이유의 과제2</h1>
                     </div>
                     <div class="col Dleft flex-item">
-
                         <div id="uploadimg">
                             <div class="input-group">
                                 <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Input Image URL or  Drag & Drop or Select"
-                                v-model="filename"
-                                @dragover.prevent
-                                @dragenter.prevent
-                                @drop.prevent="onDrop">
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Input Image URL or  Drag & Drop or Select"
+                                    v-model="filename"
+                                    @dragover.prevent
+                                    @dragenter.prevent
+                                    @drop.prevent="onDrop"
+                                />
                                 <div class="input-group-append">
-                                <span class="input-group-text" @click="onClickFile"><i class="fa fa-paperclip">
-                                    </i></span>
-                                    <button
-                                    class="btn btn-outline-info"
-                                    @click="onClickUpload">Upload</button>
+                                    <span class="input-group-text" @click="onClickFile"><i class="fa fa-paperclip"> </i></span>
+                                    <button class="btn btn-outline-info" @click="onClickUpload">Upload</button>
                                 </div>
-                                <input type=file class="file-input" accept="image/*" ref="fileInput" @change="onFileChange">
+                                <input type="file" class="file-input" accept="image/*" ref="fileInput" @change="onFileChange" />
                             </div>
                             <div v-show="imageSrc" class="upload-image">
-                                <img :src="imageSrc">
+                                <img :src="imageSrc" />
                             </div>
                         </div>
                         <div id="post">
@@ -52,8 +49,9 @@
                             </div>
                         </div> -->
                         <div>
-                            <p><input type="file" id="file" class="inputfile" v-on:change="upload">
-                            <label for="file" class="input-plus">+</label>
+                            <p>
+                                <input type="file" id="file" class="inputfile" v-on:change="upload" />
+                                <label for="file" class="input-plus">+</label>
                             </p>
                             <!-- 이미지 여기서는 안보여줘도 되겠지 -->
                             <!-- <div>
@@ -70,10 +68,10 @@
                 <!-- 오른쪽 - 댓글창 -->
                 <div class="right flex-item">
                     <!-- 댓글창 맨 위 개인 프로필 -->
-                    <div id='infowriter'>
+                    <div id="infowriter">
                         <ProfileImage class="comment-img-box" />
                         <h4 id="writername">5기 아이유</h4>
-                        <hr id="line">
+                        <hr id="line" />
                     </div>
                     <div>
                         <!-- 댓글 -->
@@ -83,12 +81,10 @@
                         <!-- <div class="writecomment">  
                             <input type="text" id="send_comment" placeholder="  댓글 달기" name="send_comment" value="" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}"/>
                         </div> -->
-
                     </div>
-                    
                 </div>
             </div>
-            
+
             <div class="btn-footer">
                 <router-link to="/ChallengeRoom"><button type="button" class="btn btn-danger Pcancel_btn">취소</button></router-link>&nbsp;
                 <button type="button" class="btn btn-primary Pjoin_btn" @click="sendPost">생성</button>
@@ -97,16 +93,16 @@
             <!-- <div class="Pjoin_btn"><ButtonSquare :text="생성" @click="sendPost"/></div>
             <div class="Pcancel_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="취소"/></router-link></div> -->
             <!-- <div class="Pback_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="뒤로"/></router-link></div> -->
-            
         </div>
     </div>
 </template>
 
 <script>
-import "@/components/css/PostDetail.css"
+import '@/components/css/PostDetail.css';
 // import ButtonSquare from '@/components/common/ButtonSquare.vue'
-import ProfileImage from "@/components/common/ProfileImage.vue"
+import ProfileImage from '@/components/common/ProfileImage.vue';
 // import CommentBox from "@/components/challengeroom/CommentBox.vue"
+// import axios from "@/util/http-common.js";
 
 import Vue from 'vue';
 import CKEditor from '@ckeditor/ckeditor5-vue2';
@@ -119,9 +115,8 @@ Vue.use(CKEditor);
 // import router from '../router/index.js'
 
 // import Vue from 'vue';
-// import VueAlertify from 'vue-alertify'; 
+// import VueAlertify from 'vue-alertify';
 // Vue.use(VueAlertify);
-
 
 export default {
     name: 'PostDetail',
@@ -131,84 +126,115 @@ export default {
         ProfileImage,
         // CommentBox,
     },
-    data: function(){
-        return{
+    data: function() {
+        return {
             // 버튼에 들어갈 문구들
             // 생성: '생성',
             // 취소: '취소',
             뒤로: '돌아가기',
-            CKEditor : '',
+            CKEditor: '',
             filename: '',
             imageSrc: '',
             attachFile: false,
-            newImgSrc : '',
-        }
+            newImgSrc: '',
+            // taskno: 1,
+            // task_info:{
+            //     "likemembers": [
+            //         "string"
+            //     ],
+            //     "likes": 0,
+            //     "taskContent": "string",
+            //     "taskDesc": "string",
+            //     "taskFile": "string",
+            //     "taskImage": "string",
+            //     "taskIndex": 0,
+            //     "taskNo": 0,
+            //     "userEmail": "string",
+            //     "userName": "string"
+            // }
+        };
     },
-    methods:{
-        sendPost(){
+    methods: {
+        // getTaskInfo: function(){
+        //     axios({
+        //         methods: 'get',
+        //         url: `/challenge/task/${this.taskno}`,
+        //     })
+        //     .then((res) => {
+        //         console.log(res.data);
+        //         this.task_info = res.data;
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     })
+        // },
+
+        sendPost() {
             let message = this.CKEditor.getData();
             alert(message);
         },
 
         // 여기서부터 사진 업로드
-        onDrop (event) {
-        this.inputImageFile(event.dataTransfer.files)
+        onDrop(event) {
+            this.inputImageFile(event.dataTransfer.files);
         },
         onClickFile(event) {
-        this.$refs.fileInput.click(event)
+            this.$refs.fileInput.click(event);
         },
         onFileChange(event) {
-        this.inputImageFile(event.target.files)
+            this.inputImageFile(event.target.files);
         },
-        inputImageFile (files) {
-        if (files.length) {
-            let file = files[0]
-            if (!/^image\//.test(file.type)) {
-            alert('이미지 파일만 등록이 가능합니다')
-            return false
+        inputImageFile(files) {
+            if (files.length) {
+                let file = files[0];
+                if (!/^image\//.test(file.type)) {
+                    alert('이미지 파일만 등록이 가능합니다');
+                    return false;
+                }
+                this.filename = file.name;
+                this.preview(file);
             }
-            this.filename = file.name
-            this.preview(file)
-        }
         },
-        onClickUpload () {
-        this.preview (this.filename)
+        onClickUpload() {
+            this.preview(this.filename);
         },
-        preview (file) {
-        if (typeof file === 'string') {
-            this.imageSrc = file
-        } else {
-            let vm = this
-            let reader = new FileReader()
-            reader.onload = () => {
-            vm.imageSrc = reader.result
+        preview(file) {
+            if (typeof file === 'string') {
+                this.imageSrc = file;
+            } else {
+                let vm = this;
+                let reader = new FileReader();
+                reader.onload = () => {
+                    vm.imageSrc = reader.result;
+                };
+                reader.readAsDataURL(file);
             }
-            reader.readAsDataURL(file)
-        }
         },
         // 여기서부터 파일업로드
         // + 를 눌렀을 때 함수
-        upload(e){
+        upload(e) {
             let file = e.target.files;
             let reader = new FileReader();
 
             reader.readAsDataURL(file[0]);
-            reader.onload = e => {
+            reader.onload = (e) => {
                 this.newImgSrc = e.target.result; // 로컬에서의 이미지 경로
-            }
-        }
+            };
+        },
     },
-    mounted(){
-        ClassicEditor
-        .create( document.querySelector('#divCKEditor'))
-        .then(editor => {
-            this.CKEditor = editor;
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }
-}
+    mounted() {
+        ClassicEditor.create(document.querySelector('#divCKEditor'))
+            .then((editor) => {
+                this.CKEditor = editor;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    },
+    created: function() {
+        // this.getTaskInfo();
+    },
+};
 </script>
 
 <style>
@@ -225,7 +251,7 @@ export default {
     margin-left: 5%;
 }
 
-.thumbnail-wrapper{
+.thumbnail-wrapper {
     margin-top: 5px;
 }
 
@@ -236,11 +262,11 @@ export default {
 }
 
 .comment-img-box {
-  width: 75px;
-  height: 75px;
-  position: relative;
-  top: 17px;
-  left: -160px;
+    width: 75px;
+    height: 75px;
+    position: relative;
+    top: 17px;
+    left: -160px;
 }
 .btn-footer {
     display: flex;
@@ -248,10 +274,10 @@ export default {
     padding-top: 2px;
     border-style: none;
     margin-left: 930px;
-  }
-  .inputfile{
+}
+.inputfile {
     overflow: hidden;
     margin-top: 10px;
     margin-right: 80px;
-  }
+}
 </style>

@@ -9,6 +9,7 @@ import com.example.ssaziptest.domain.follow.FollowEntity;
 import com.example.ssaziptest.domain.group.GroupMemberRequest;
 import com.example.ssaziptest.domain.group.GroupmemberEntity;
 import com.example.ssaziptest.domain.task.BulletJournalResponse;
+import com.example.ssaziptest.domain.task.ChallengeTicketResponse;
 import com.example.ssaziptest.domain.task.TaskDetailResponse;
 import com.example.ssaziptest.domain.task.TaskEntity;
 import com.example.ssaziptest.domain.user.UserEntity;
@@ -19,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +47,20 @@ public class ChallengeService {
     @Transactional
     public int createChallenge(ChallengeCreateRequest request) {
         return challengeRepository.save(request.toEntity()).getChallengeNo();
+    }
+    public int updateChallenge(int challengeNo, ChallengeCreateRequest request){
+        ChallengeEntity challengeEntity = challengeRepository.findById(challengeNo).orElse(null);
+        challengeEntity.setChallengeName(request.getChallengeName());
+        challengeEntity.setChallengeCategory(request.getChallengeCategory());
+        challengeEntity.setChallengeLevel(request.getChallengeLevel());
+        challengeEntity.setChallengeCapacity(request.getChallengeCapacity());
+        challengeEntity.setChallengeStartdate(request.getChallengeStartdate());
+        challengeEntity.setChallengeEnddate(request.getChallengeEnddate());
+        challengeEntity.setChallengeTaskCnt(request.getChallengeTaskCnt());
+        challengeEntity.setChallengeTaskdeadlines(new ArrayList<>(Arrays.asList(request.getChallengeTaskdeadlines())));
+
+        challengeRepository.save(challengeEntity);
+        return challengeNo;
     }
 
     @Transactional
@@ -126,18 +143,60 @@ public class ChallengeService {
 
     @Transactional
     public List<BulletJournalResponse> getTaskList(int challengeno){
+        //챌린지
+        ChallengeEntity challengeEntity = challengeRepository.findById(challengeno).get();
+        //챌린지 과제들 마감 기한
+        List<LocalDate> deadlines = challengeEntity.getChallengeTaskdeadlines();
+        //챌린지에 제출 된 과제들
         List<TaskEntity> taskEntityList = taskRepository.findByTaskChallengeEntity_ChallengeNo(challengeno);
+        //그룹 멤버들
+        List<GroupmemberEntity> groupmemberEntities = groupmemberRepository.findByGroupChallengeEntity_ChallengeNo(challengeno);
+        //int membercnt = groupmemberEntities.size();
+
         List<BulletJournalResponse> bjList = new ArrayList<>();
-        for(TaskEntity taskEntity: taskEntityList){
-            BulletJournalResponse bjresponse = BulletJournalResponse.builder()
-                    .taskNo(taskEntity.getTaskNo())
-                    .taskIndex(taskEntity.getTaskIndex())
-                    .userName(taskEntity.getTaskUserEntity().getUserName())
-                    .userEmail(taskEntity.getTaskUserEntity().getUserEmail())
-                    .build();
-            bjList.add(bjresponse);
+        for(GroupmemberEntity groupmemberEntity:groupmemberEntities){
+            BulletJournalResponse response = new BulletJournalResponse();
+            Integer[] temp = new Integer[challengeEntity.getChallengeTaskCnt()];
+            for(TaskEntity taskEntity: taskEntityList){
+                if(taskEntity.getTaskUserEntity().getUserEmail() == groupmemberEntity.getGroupUserEntity().getUserEmail()){
+                    temp[taskEntity.getTaskIndex()] = taskEntity.getTaskNo();
+                }
+            }
+            for(int i=0; i<challengeEntity.getChallengeTaskCnt(); i++){
+                if(temp[i]==null){
+                    if(deadlines.get(i).isBefore(LocalDate.now())) temp[i] = -2;
+                    else temp[i] = -1;
+                }
+            }
+            response.setTaskNo(temp);
+            response.setUserEmail(groupmemberEntity.getGroupUserEntity().getUserEmail());
+            response.setUserName(groupmemberEntity.getGroupUsername());
+
+            bjList.add(response);
         }
         return bjList;
+    }
+    @Transactional
+    public ChallengeTicketResponse[] getChallengeTicket(int challengeNo){
+        ChallengeEntity challengeEntity = challengeRepository.getById(challengeNo);
+        List<TaskEntity> taskEntityList = taskRepository.findByTaskChallengeEntity_ChallengeNo(challengeNo);
+        List<LocalDate> taskDeadlines = challengeEntity.getChallengeTaskdeadlines();
+        ChallengeTicketResponse[] temp = new ChallengeTicketResponse[challengeEntity.getChallengeTaskCnt()];
+        for(int i = 0; i<challengeEntity.getChallengeTaskCnt(); i++){
+            temp[i] = new ChallengeTicketResponse();
+        }
+        int[] arr = new int[challengeEntity.getChallengeTaskCnt()];
+        for(int i = 0; i<taskDeadlines.size(); i++){
+            if(taskDeadlines.get(i).isAfter(LocalDate.now())) temp[i].setInProgress(true);
+        }
+        for(TaskEntity taskEntity: taskEntityList){
+            arr[taskEntity.getTaskIndex()]++;
+        }
+        int membercnt = groupmemberRepository.findByGroupChallengeEntity_ChallengeNo(challengeNo).size();
+        for(int i=0; i<taskDeadlines.size(); i++){
+            temp[i].setAchieveRate(100*arr[i]/membercnt);
+        }
+        return temp;
     }
 
     @Transactional
@@ -153,6 +212,7 @@ public class ChallengeService {
             taskDetailResponse.setTaskFile(taskEntity.getTaskFile());
             taskDetailResponse.setUserEmail(taskEntity.getTaskUserEntity().getUserEmail());
             taskDetailResponse.setUserName(taskEntity.getTaskUserEntity().getUserName());
+            taskDetailResponse.setUserTerm(taskEntity.getTaskUserEntity().getUserTerm());
             taskDetailResponse.setLikes(taskEntity.getTaskLikes().size());
             taskDetailResponse.setLikemembers(taskEntity.getTaskLikes());
         }

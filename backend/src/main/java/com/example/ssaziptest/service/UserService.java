@@ -1,14 +1,13 @@
 package com.example.ssaziptest.service;
 
 import com.example.ssaziptest.domain.challenge.ChallengeEntity;
+import com.example.ssaziptest.domain.file.FileEntity;
+import com.example.ssaziptest.domain.file.FileUploadRequest;
 import com.example.ssaziptest.domain.group.GroupmemberEntity;
 import com.example.ssaziptest.domain.task.TaskEntity;
 import com.example.ssaziptest.domain.task.TaskTicketResponse;
 import com.example.ssaziptest.domain.user.*;
-import com.example.ssaziptest.repository.ChallengeRepository;
-import com.example.ssaziptest.repository.GroupmemberRepository;
-import com.example.ssaziptest.repository.TaskRepository;
-import com.example.ssaziptest.repository.UserRepository;
+import com.example.ssaziptest.repository.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +34,8 @@ public class UserService {
     private ChallengeRepository challengeRepository;
     @Autowired
     private GroupmemberRepository groupmemberRepository;
+    @Autowired
+    private FileRepository fileRepository;
 
     @Transactional
     public void createUser(UserCreateRequest request){
@@ -52,6 +55,16 @@ public class UserService {
         userRepository.save(userEntity);
         return findUserById(request.getUserEmail());
     }
+//    @Transactional
+//    public void insertUserImg(FileUploadRequest request){
+//        List<FileEntity> temp = fileRepository.findByFileUseremailAndFileInfo(request.getUserEmail(), request.getFileInfo());
+//        FileEntity fileEntity = temp.get(0);
+//        fileEntity.setFileName(request.getFileName());
+//        fileEntity.setFileOriginalname(request.getFileOriginalname());
+//        fileRepository.save(fileEntity);
+//
+//    }
+
 
     @Transactional
     public boolean checkEmail(String user_email){
@@ -62,9 +75,9 @@ public class UserService {
     }
 
     @Transactional
-    public UserEntity login(String userEmail, String userPassword){
-        Optional<UserEntity> userEntity = userRepository.findUserEntityByUserEmailAndUserPassword(userEmail, userPassword);
-        return userEntity.orElse(null);
+    public UserInfoResponse login(String userEmail, String userPassword){
+        Optional<UserInfoResponse> userInfoResponse = userRepository.findUserEntityByUserEmailAndUserPassword(userEmail, userPassword);
+        return userInfoResponse.orElse(null);
     }
     @Transactional
     public UserDetailResponse findUserById(String userEmail){
@@ -105,6 +118,7 @@ public class UserService {
             ChallengeEntity challengeEntity = challengeRepository.findById(groupmemberEntity.getGroupChallengeEntity().getChallengeNo()).orElse(null);
             List<TaskEntity> taskEntities = taskRepository.findByTaskChallengeEntity_ChallengeNoAndTaskUserEntity_UserEmail(challengeEntity.getChallengeNo(),userEmail);
             taskTicketResponse.setChallengeNo(challengeEntity.getChallengeNo());
+            taskTicketResponse.setChallengeName(challengeEntity.getChallengeName());
             int taskcnt= challengeEntity.getChallengeTaskCnt();
             taskTicketResponse.setChallengeTaskCnt(taskcnt);
             Integer[] temp = new Integer[taskcnt];
@@ -112,12 +126,22 @@ public class UserService {
                 temp[taskEntity.getTaskIndex()] = taskEntity.getTaskNo();
             }
             taskTicketResponse.setTaskNo(temp);
-
+            int done = 0;
+            List<LocalDate> deadlines = challengeEntity.getChallengeTaskdeadlines();
             for(Integer in: taskTicketResponse.getTaskNo()){
-                if(in==null) taskTicketResponse.setIsComplete(false);
-                break;
+                if(in==null) {
+                    taskTicketResponse.setIsComplete(false);
+                }
+                else done++;
             }
-
+            for(int i=0; i<taskcnt; i++){
+                if(temp[i]==null){
+                    if(deadlines.get(i).isBefore(LocalDate.now())) temp[i] = -2;
+                    else temp[i] = -1;
+                }
+            }
+            taskTicketResponse.setTaskNo(temp);
+            taskTicketResponse.setAchieveRate((100*done)/taskcnt);
             taskTicketResponseList.add(taskTicketResponse);
         }
         return taskTicketResponseList;
