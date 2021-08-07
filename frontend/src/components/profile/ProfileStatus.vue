@@ -16,10 +16,10 @@
             <ul class="dropdown-menu text-center" style="background-color: #E1AF4E; border-radius: 1rem" aria-labelledby="dropdownMenuButton1">
               <div class="drop-list-title" style="">follower</div>
               <div class="drop-list">
-                <div v-for="follower in followers" :key="follower[0]">
+                <div v-for="follower in followers" :key="follower">
                   <!-- <li><a class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;" href="#">{{follower[1]}}</a></li> -->
                   <li>
-                    <router-link class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;" :to="{ name: 'Profile', query: { userEmail: follower[0] } }">
+                    <router-link class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;" :to="{ path: '/profile', query: { user: follower[0]  }}">
                       {{follower[1]}}
                     </router-link>
                   </li>
@@ -40,9 +40,9 @@
             <ul class="dropdown-menu text-center" style="background-color: #E1AF4E; border-radius: 1rem" aria-labelledby="dropdownMenuButton1">
               <div class="drop-list-title" style="">following</div>
               <div class="drop-list">
-                <div v-for="following in followings" :key="following[0]">
+                <div v-for="following in followings" :key="following">
                   <li>
-                    <router-link :to="{ name: 'Profile', query: { userEmail: following[0] } }" class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;">
+                    <router-link :to="{ path: '/profile', query: { user: following[0]  }}" class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;">
                       {{following[1]}}
                     </router-link>
                   </li>
