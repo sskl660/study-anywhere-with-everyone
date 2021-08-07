@@ -56,7 +56,6 @@ export default {
     reversedChallengeList: function () {
       return [...this.challengeList].reverse()
     },
-    
   }
 }
 </script>

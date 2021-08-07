@@ -43,6 +43,7 @@ export default {
   },
   data: function () {
     return {
+      today: new Date().getTime(),
       allList: [],
       algoList: [], // 알고리즘 챌린지
       csList: [],  // CS 챌린지
@@ -57,14 +58,21 @@ export default {
       })
         .then(res => {
           res.data.forEach(challenge => {
-            if (challenge.challengeCategory === 'ALGO') {
-              this.algoList.push(challenge)
-            }
-            if (challenge.challengeCategory === 'CS') {
-              this.csList.push(challenge)
-            }
-            if (challenge.challengeCategory === 'JOB') {
-              this.jobList.push(challenge)
+            const startDate = new Date(challenge.challengeStartdate)
+            let interval =  startDate - this.today;
+            let day = Math.ceil(interval / (1000 * 60 * 60 * 24));
+            let hour = Math.ceil((interval % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + (day - 1) * 24 - 9;
+
+            if (0 < hour) {
+              if (challenge.challengeCategory === 'ALGO') {
+                this.algoList.push(challenge)
+              }
+              if (challenge.challengeCategory === 'CS') {
+                this.csList.push(challenge)
+              }
+              if (challenge.challengeCategory === 'JOB') {
+                this.jobList.push(challenge)
+              }
             }
           })
           this.allList.push(this.algoList)
