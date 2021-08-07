@@ -14,6 +14,7 @@
   height: 250px;
   padding-top: 55px;
   margin-left: 8px;
+  cursor: pointer;
 }
 
 /* 챌린지 이름 */
@@ -26,10 +27,26 @@
 
 /* 챌린지 내용 */
 .challenge-content {
-  /* font-family: 'Noto Sans KR', sans-serif; */
-  /* font-weight: bold; */
   font-family: 'GongGothicMedium';
   text-align: left;
   margin-left: 68px;
   font-size: 16px;
+}
+
+/* 마우스 오버 시에 티켓 커지게 하기 */
+.scale {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transition: all 0.3s ease-in-out;
+}
+
+.scale:hover {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
 }

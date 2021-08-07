@@ -18,20 +18,10 @@
     <!-- 챌린지 목록 -->
     <div class="d-flex justify-content-around challenges">
       <ChallengeList 
-        title="알고리즘"
-        v-for="(idx, challenge) in algoList"
+        v-for="(challengeList, idx) in allList"
         :key="idx"
-        :challenge="challenge"/>
-      <ChallengeList 
-        title="CS"
-        v-for="(idx, challenge) in csList"
-        :key="idx"
-        :challenge="challenge"/>
-      <ChallengeList 
-        title="취업"
-        v-for="(idx, challenge) in csList"
-        :key="idx"
-        :challenge="challenge"/>
+        :challengeList="challengeList"
+        />
     </div>
 
   </div>
@@ -53,9 +43,10 @@ export default {
   },
   data: function () {
     return {
-      algoList: [],
-      csList: [],
-      jobList: [],
+      allList: [],
+      algoList: [], // 알고리즘 챌린지
+      csList: [],  // CS 챌린지
+      jobList: [], // 취업 챌린지
     }
   },
   methods: {
@@ -76,14 +67,17 @@ export default {
               this.jobList.push(challenge)
             }
           })
+          this.allList.push(this.algoList)
+          this.allList.push(this.csList)
+          this.allList.push(this.jobList)
         })
         .catch(err => {
           console.log(err)
         })
-    }
+    },
   },
   created: function () {
     this.getChallengeList()
-  }
+  },
 }
 </script>
