@@ -76,6 +76,10 @@ export default new Vuex.Store({
             console.log(state);
             alert('챌린지 가입 성공');
         },
+        // PRESSLIKE: function (state) {
+        //     console.log(state);
+        //     alert('좋아요를 눌렀습니다');
+        // }
     },
     // 젠킨스를 위한 변경사항
 
@@ -167,6 +171,22 @@ export default new Vuex.Store({
                     console.log(err);
                 });
         },
+        presslike: function ({ commit }, like) {
+            alert('좋아요 들어오니?');
+            console.log(like);
+            axios({
+                method: 'post',
+                url: '/challenge/task/like',
+                data: like,
+            })
+            .then((res) => {
+                console.log(res);
+                commit('PRESSLIKE');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        }
     },
 
     getters: {

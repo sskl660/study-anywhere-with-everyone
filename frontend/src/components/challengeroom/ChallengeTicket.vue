@@ -1,19 +1,18 @@
 <template>
-  <div class="profileticket" style="display: inline-block; d-flex">
-    <div class="ticket-container d-flex">
+  <div class="challengeticket" style="display: inline-block; d-flex">
+    <div class="chall-ticket-container d-flex">
       <!-- 티켓 오른쪽 부분 -->
-      <div class="ticket-right" style="display: inline-block"> 
-        <!-- 첫번째꺼 -->
-        <TicketSubmit v-if="this.ticket.taskNo[0]" :ticketTask="ticket.taskNo[0]"/>
-        <!-- 대각선과 위 1->2 -->
-        <TicketSubmitLeft v-if="this.ticket.taskNo[1]" :num="this.two" :ticketTask="ticket.taskNo[1]"/>
-        <!-- 대각선과 2->3 -->
-        <TicketSubmitRight v-if="this.ticket.taskNo[2]" :num="this.three" :ticketTask="ticket.taskNo[2]"/>
-        <TicketSubmitLeft v-if="this.ticket.taskNo[3]" :num="this.four" :ticketTask="ticket.taskNo[3]"/>
-        <TicketSubmitRight v-if="this.ticket.taskNo[4]" :num="this.five" :ticketTask="ticket.taskNo[4]"/>
-        <TicketSubmitLeft v-if="this.ticket.taskNo[5]" :num="this.six" :ticketTask="ticket.taskNo[5]"/>
-        <TicketSubmitRight v-if="this.ticket.taskNo[6]" :num="this.seven" :ticketTask="ticket.taskNo[6]"/>
+      <div class="chall-ticket-right" style="display: inline-block"> 
+          
+        <ChallengeSubmit v-if="ProcessRateArr[0]" :TaskTotalRate="challTicket[0]"/>
+        <ChallengeSubmitLeft v-if="ProcessRateArr[1]" :num="this.two" :TaskTotalRate="challTicket[1]"/>
+        <ChallengeSubmitRight v-if="ProcessRateArr[2]" :num="this.three" :TaskTotalRate="challTicket[2]"/>
+        <ChallengeSubmitLeft v-if="ProcessRateArr[3]" :num="this.four" :TaskTotalRate="challTicket[3]"/>
+        <ChallengeSubmitRight v-if="ProcessRateArr[4]" :num="this.five" :TaskTotalRate="challTicket[4]"/>
+        <ChallengeSubmitLeft v-if="ProcessRateArr[5]" :num="this.six" :TaskTotalRate="challTicket[5]"/>
+        <ChallengeSubmitRight v-if="ProcessRateArr[6]" :num="this.seven" :TaskTotalRate="challTicket[6]"/>
       </div>
+      <!-- {{challTicket[0].achieveRate}} -->
     </div>
   </div>
 </template>
@@ -26,42 +25,17 @@ import ChallengeSubmitRight from "@/components/challengeroom/ChallengeSubmitRigh
 export default {
   name: 'ChallengeTicket',
   props: {
-    ticket: Object,
+    challTicket:{type : Array},
+    ProcessRateArr:{type : Array},
   },
   data: function () {
     return {
-    //   task_ticket:[
-    //       {
-    //         achieveRate: 0,
-    //         inProgress: true
-    //       }
-    //   ],
-      task_ticket:[
-          {
-            achieveRate: 88, //첫번째 과제 88프로 달성
-            inProgress: true // 아직 진행중인 챌린지 -> 회색
-          },
-          {
-            achieveRate: 100,
-            inProgress: true
-          },
-          {
-            achieveRate: 12,
-            inProgress: false
-          },
-          {
-            achieveRate: 8,
-            inProgress: false
-          },
-          {
-            achieveRate: 100,
-            inProgress: true
-          },
-          {
-            achieveRate: 8,
-            inProgress: true
-          }
-      ]
+        two: "2",
+        three: "3",
+        four: "4",
+        five: "5",
+        six: "6",
+        seven: "7",
     }
   },
   components :{
@@ -69,33 +43,31 @@ export default {
     ChallengeSubmitLeft,
     ChallengeSubmitRight,
   },
+  methods:{
+      printt: function(){
+          console.log('안녕')
+          console.log(this.challTicket)
+          console.log(this.ProcessRateArr)
+      }
+  },
+  created: function() {
+      this.printt();
+  },
 }
 </script>
 
 <style>
-.profileticket {
-  background-image: url(~@/assets/ProfileTicket.png);
-  width:1280px; 
-  height:400px;
+.challengeticket {
+  background-image: url(~@/assets/ticketbody.png);
+  margin-top: 15px;
+  width:740px;
+  height: 249px;
 }
-.ticket-container {
-  position: relative;
-  width:1150px; 
-  height:300px;
-  margin-top: 40px;
-  margin-left: 50px;
-  /* background-color: rgb(225, 0, 255); */
-}
-.ticket-left{
-  width:210px; 
-  height:280px;
-}
-.ticket-right{
-  width:870px; 
+
+.chall-ticket-right{
+  width:1000px; 
   height:250px;
-  margin-left: 80px;
-  margin-top:30px;
+  margin-left: 10px;
+  margin-top:45px;
 }
-
-
 </style>
