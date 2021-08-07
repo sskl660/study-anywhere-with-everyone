@@ -15,8 +15,8 @@ public class TaskUpdateRequest {
     private int taskIndex;
     private String taskContent;
     private String taskDesc;
-    private String taskImage;
-    private String taskFile;
+    private int taskImage;
+    private int taskFile;
 
     public TaskEntity toEntity(){
         TaskEntity taskEntity = TaskEntity.builder()

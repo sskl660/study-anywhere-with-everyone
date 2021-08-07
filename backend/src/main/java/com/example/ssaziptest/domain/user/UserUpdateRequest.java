@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 public class UserUpdateRequest {
     private String userEmail;
 
-    private String userImage;
+    private int userImage;
     private String userGit;
     private String userBlog;
     private String userDevstyle;
