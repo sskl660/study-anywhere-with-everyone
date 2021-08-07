@@ -20,23 +20,6 @@
                         <h5 id="rest"></h5>
                     </div>
                 </li>
-                <!-- 가입하기 버튼을 누르면 가입완료 버튼으로 바뀌고 시간이 진행중으로 바뀐다 -->
-                <!-- <li class="changebtn" v-else>
-                    <div class="Cjoindone_btn"><ButtonRound :text="가입완료" /></div>
-                    <div class="alarm">
-                        <h5 id="rest">{{ restTime }}</h5>
-                    </div>
-                </li> -->
-                <!-- 가입완료 후 챌린지 마감시간이 지나면 진행중이 종료 바뀜 -->
-                <!-- <li class="changebtn">
-                    <div class="Cjoindone_btn"><ButtonRound :text="가입완료"/></div>
-                    <div class="alarm">
-                        <h5 style="color: #EE4748">종료</h5>
-                    </div>
-                </li> -->
-                <!-- <div class="alarm">
-                    <h4> 가입 마감까지 20 : 56 </h4>
-                </div> -->
             </div>
 
             <div class="col col-4 flex-item">
@@ -69,9 +52,11 @@
                                         <!-- 숫자, 제출 한 것 -->
                                         <router-link
                                             v-else
-                                            :to="{ name: 'PostDetailAfter', params: { forwardTaskNo: task_info[index].taskNo[taskIdx - 1] } }"
+                                            :to="{ path: '/postDetailAfter', query: { taskNo: task_info[index].taskNo[taskIdx - 1] } }"
                                         >
-                                            <div class="after">taskNO = {{ task_info[index].taskNo[taskIdx - 1] }}</div>
+                                            <div class="after">
+                                                <!-- taskNO = {{ task_info[index].taskNo[taskIdx - 1] }} -->
+                                            </div>
                                         </router-link>
                                     </td>
                                 </tr>
@@ -87,7 +72,11 @@
                         <p>{{ chall_info.challengeDesc }}</p>
                         <strong
                             >참여멤버 :
-                            <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)"> {{ name[1] }} </span>
+                            <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)" style='cursor:pointer;'>
+                                <router-link style="color:#420909; font-weight:600; text-decoration: none;" :to="{ name: 'Profile', query: { user: name[0] } }">
+                                    #{{ name[1] }} 
+                                </router-link>
+                            </span>
                         </strong>
                         <br /><br />
                         <div>
@@ -99,33 +88,21 @@
                     </div>
                 </div>
                 <div class="ChallengeTicket">
-                    <img class="ticketbody" src="../assets/ticketbody.png" alt="ticketbody" />
+                    <ChallengeTicket :challTicket="chall_ticket" :ProcessRateArr="makeArr()" />
                 </div>
             </div>
         </div>
-        <!-- 여기가 있으면 통신이 안된다 -->
-        <!-- <insert-modal v-on:call-parent-insert="closeAfterInsert"></insert-modal>
-    <detail-modal v-on:call-parent-change-to-delete="changeToDelete"></detail-modal> -->
     </div>
 </template>
 <script>
 import Title from '@/components/common/Title.vue';
 import ButtonRound from '@/components/common/ButtonRound.vue';
-// import Difficulty from '@/components/common/Difficulty'
-// import PostDetailModal from '@/components/PostDetailModal'
+import ChallengeTicket from '@/components/challengeroom/ChallengeTicket.vue';
 import '@/components/css/ChallengeRoom.css';
 import axios from '@/util/http-common.js';
 import { mapActions, mapGetters } from 'vuex';
-
-// import InsertModal from '@/components/modals/InsertModal.vue'
-// import DetailModal from '@/components/modals/DetailModal.vue';
 // import router from '../router/index.js'
-
-// import { Modal } from 'bootstrap';
-
 // import Vue from 'vue';
-// import VueAlertify from 'vue-alertify';
-// Vue.use(VueAlertify);
 
 export default {
     name: 'ChallengeRoom',
@@ -133,10 +110,7 @@ export default {
     components: {
         Title, // 타이틀 가져오기
         ButtonRound, // 둥근 버튼 가져오기
-        // Difficulty      // 난이도 가져오기
-        //PostDetailModal,
-        //InsertModal, // 작성자가 처음 과제를 제출하는 모달
-        //DetailModal, // 작성 후 보여지는 모달
+        ChallengeTicket,
     },
     data: function() {
         return {
@@ -145,12 +119,12 @@ export default {
             // 가입완료: '가입완료',
             submit: true,
             fail: false,
-            // 챌린지: '히오니의 알고 챌린지',
-            challengeno: 4,
+            challengeno: 2,
 
             //이동할 테스크 고유 넘버pk
             forwardTaskNo: -1,
-
+            // ProcessRateArr: [], 이렇게 데이터 값을 넘겨주면 안된다. 위에서 바로 메소드 함수로 접근
+            
             chall_info: {
                 challengeCapacity: 0,
                 challengeCategory: 'string',
@@ -164,57 +138,65 @@ export default {
                 challengeTaskCnt: 0,
                 challengeTaskdeadlines: ['string'],
             },
-            // task_info:[
-            //   {
-            //     "userEmail": "string",
-            //     "userName": "string"
-            //      "taskNo": [
-            //       0
-            //     ],
-            //   }
-            // ]
+
+            task_info:[
+              {
+                "userEmail": "string",
+                "userName": "string",
+                 "taskNo": [
+                  0
+                ],
+              }
+            ],
             //-1 기간 안지난 미제출(흰)
             //-2 기간 지난 미제출(빨강)
-            task_info: [
-                {
-                    userName: '이장섭',
-                    userEmail: 'jang@naver.com',
-                    taskNo: [-2, 1, 2, -1, 3, -1],
-                },
-                {
-                    userName: '차은채',
-                    userEmail: 'cha@naver.com',
-                    taskNo: [-2, 4, -1, -1, -1, -1],
-                },
-                {
-                    userName: '아이유',
-                    userEmail: 'IU-love@naver.com',
-                    taskNo: [-2, 5, -1, 6, -1, -1],
-                },
-                {
-                    userName: '아이유',
-                    userEmail: 'IU-love@naver.com',
-                    taskNo: [-1, 7, -1, -1, -1, -1],
-                },
-            ],
-            temp: {
-                challengeNo: 4,
-                userEmail: 'aaa@naver.com',
-            },
-            // 모달
-            // insertModal : null,
-            // detailModal : null
+            // task_info: [
+            //     {
+            //         userName: '이장섭',
+            //         userEmail: 'jang@naver.com',
+            //         taskNo: [-2, 1, 2, -1, 3, -1],
+            //     },
+            //     {
+            //         userName: '차은채',
+            //         userEmail: 'cha@naver.com',
+            //         taskNo: [-2, 4, -1, -1, -1, -1],
+            //     },
+            //     {
+            //         userName: '아이유',
+            //         userEmail: 'IU-love@naver.com',
+            //         taskNo: [-2, 5, -1, 6, -1, -1],
+            //     },
+            //     {
+            //         userName: '아이유',
+            //         userEmail: 'IU-love@naver.com',
+            //         taskNo: [-1, 7, -1, -1, -1, -1],
+            //     },
+            // ],
+            // temp: {
+            //     challengeNo: 4,
+            //     userEmail: 'aaa@naver.com',
+            // },
+            chall_ticket:[
+                  {
+                    achieveRate: 0,
+                    inProgress: true
+                  }
+              ],
         };
     },
     methods: {
-        // // insert
-        // showInsertModal(){
-        // this.insertModal.show();
-        // },
-
-        // closeAfterInsert(){
-        // this.insertModal.hide();
-        // },
+        makeArr: function(){
+            var ProcessRateArr = [false,false,false,false,false,false,false];
+            // console.log(ProcessRateArr)
+            for(let i = 0; i < this.chall_ticket.length; i++){
+                ProcessRateArr[i] = true;
+            }
+            console.log(ProcessRateArr)
+            // this.ProcessRateArr.push(ProcessArr[i]);
+            // ProcessArr = this.ProcessRateArr;
+            // console.log(ProcessRateArr)
+            return ProcessRateArr;
+        },
         // BJ 누르면 개인 정보로 넘어가는 통신
         getTaskInfo: function() {
             axios({
@@ -245,6 +227,20 @@ export default {
                 });
         },
 
+        // 챌린지 티켓 정보 불러오는 통신
+        getChallTicket: function(){
+            axios({
+                method: "get",
+                url: `/challenge/taskticket/${this.challengeno}`,
+            })
+            .then((res) => {
+                this.chall_ticket = res.data;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        },
+        
         countDownTimer: function(id) {
             var date = this.chall_info.challengeStartdate;
             //const countDownTimer = function (id) {
@@ -293,7 +289,7 @@ export default {
 
         nameprofile(num) {
             var email = this.chall_info.challengeGroup[num][0];
-            alert(email);
+            console.log(email);
         },
         didJoin: function() {
             var user = this.userEmail;
@@ -307,8 +303,10 @@ export default {
     },
     created: function() {
         this.getChallInfo(); //생성할 때 바로 불러줘
-        // this.getTaskInfo();
+        this.makeArr();
+        this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
+        this.getChallTicket();
     },
     computed: {
         ...mapGetters(['userEmail']),
@@ -370,13 +368,15 @@ export default {
 
 .table > :not(caption) > * > * {
     padding: 0 0;
+    border: none;
 }
 
 /* 과제 제출 전 칸 */
 .before {
-    background-color: #f9d479;
+    background-color: #ffffff;
     width: 100%;
     height: 100%;
+    border: 1px solid #dddddd;
 }
 
 /* 과제 제출 후 파란색으로 변함 */
@@ -384,6 +384,7 @@ export default {
     background-color: #1f4256;
     width: 100%;
     height: 100%;
+    border: 1px solid #dddddd;
 }
 
 /* 과제 제출 안하면 빨간색으로 변함 */
@@ -391,6 +392,7 @@ export default {
     background-color: #ee4748;
     width: 100%;
     height: 100%;
+    border: 1px solid #dddddd;
 }
 
 th {

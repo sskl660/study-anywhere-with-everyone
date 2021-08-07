@@ -177,7 +177,7 @@ export default {
         //alert("pro.vue");
         //alert('url에 쿼리는'+this.$route.query.user);
         // 생성과 동시에 유저정보 가져오기
-        this.userChoose(this.$route.query.user);
+        this.userChoose(this.$route.query.user); //쿼리에 있는 유저 키값에 있는 value값을 가져올 수 있다.
         //this.getUserInfo();
     },
 };
