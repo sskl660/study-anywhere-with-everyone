@@ -97,8 +97,8 @@
                     </div>
                 </div>
                 <div class="ChallengeTicket">
-                    <!-- <ChallengeTicket /> -->
-                    <img class="ticketbody" src="../assets/ticketbody.png" alt="ticketbody" />
+                    <ChallengeTicket :challTicket="chall_ticket" :ProcessRateArr="makeArr()" />
+                    <!-- <img class="ticketbody" src="../assets/ticketbody.png" alt="ticketbody" /> -->
                 </div>
             </div>
         </div>
@@ -139,12 +139,13 @@ export default {
             // 가입완료: '가입완료',
             submit: true,
             fail: false,
-            // 챌린지: '히오니의 알고 챌린지',
             challengeno: 4,
 
             //이동할 테스크 고유 넘버pk
             forwardTaskNo: -1,
-
+            // ProcessRateArr: [], 이렇게 데이터 값을 넘겨주면 안된다. 위에서 바로 메소드 함수로 접근
+            
+            //ProcessRateArr[0][0] 100 [0][1] true [0][2]= 계산을 해서 t/f
             chall_info: {
                 challengeCapacity: 0,
                 challengeCategory: 'string',
@@ -182,49 +183,90 @@ export default {
             //   "userName": "string"
             // }]
 
-            // task_info:[
-            //   {
-            //     "userEmail": "string",
-            //     "userName": "string"
-            //      "taskNo": [
-            //       0
-            //     ],
-            //   }
-            // ]
+            task_info:[
+              {
+                "userEmail": "string",
+                "userName": "string",
+                 "taskNo": [
+                  0
+                ],
+              }
+            ],
             //-1 기간 안지난 미제출(흰)
             //-2 기간 지난 미제출(빨강)
-            task_info: [
-                {
-                    userName: '이장섭',
-                    userEmail: 'jang@naver.com',
-                    taskNo: [-2, 1, 2, -1, 3, -1],
-                },
-                {
-                    userName: '차은채',
-                    userEmail: 'cha@naver.com',
-                    taskNo: [-2, 4, -1, -1, -1, -1],
-                },
-                {
-                    userName: '아이유',
-                    userEmail: 'IU-love@naver.com',
-                    taskNo: [-2, 5, -1, 6, -1, -1],
-                },
-                {
-                    userName: '아이유',
-                    userEmail: 'IU-love@naver.com',
-                    taskNo: [-1, 7, -1, -1, -1, -1],
-                },
-            ],
+            // task_info: [
+            //     {
+            //         userName: '이장섭',
+            //         userEmail: 'jang@naver.com',
+            //         taskNo: [-2, 1, 2, -1, 3, -1],
+            //     },
+            //     {
+            //         userName: '차은채',
+            //         userEmail: 'cha@naver.com',
+            //         taskNo: [-2, 4, -1, -1, -1, -1],
+            //     },
+            //     {
+            //         userName: '아이유',
+            //         userEmail: 'IU-love@naver.com',
+            //         taskNo: [-2, 5, -1, 6, -1, -1],
+            //     },
+            //     {
+            //         userName: '아이유',
+            //         userEmail: 'IU-love@naver.com',
+            //         taskNo: [-1, 7, -1, -1, -1, -1],
+            //     },
+            // ],
             temp: {
                 challengeNo: 4,
                 userEmail: 'aaa@naver.com',
             },
-            // 모달
-            // insertModal : null,
-            // detailModal : null
+            chall_ticket:[
+                  {
+                    achieveRate: 0,
+                    inProgress: true
+                  }
+              ],
+            // chall_ticket:[
+            //     {
+            //         achieveRate: 88, //첫번째 과제 88프로 달성
+            //         inProgress: true // 아직 진행중인 챌린지 -> 회색
+            //     },
+            //     {
+            //         achieveRate: 100,
+            //         inProgress: true
+            //     },
+            //     {
+            //         achieveRate: 12,
+            //         inProgress: false
+            //     },
+            //     {
+            //         achieveRate: 8,
+            //         inProgress: false
+            //     },
+            //     {
+            //         achieveRate: 100,
+            //         inProgress: true
+            //     },
+            //     {
+            //         achieveRate: 8,
+            //         inProgress: true
+            //     },
+            // ]
         };
     },
     methods: {
+        makeArr: function(){
+            var ProcessRateArr = [false,false,false,false,false,false,false];
+            // console.log(ProcessRateArr)
+            for(let i = 0; i < this.chall_ticket.length; i++){
+                ProcessRateArr[i] = true;
+            }
+            console.log(ProcessRateArr)
+            // this.ProcessRateArr.push(ProcessArr[i]);
+            // ProcessArr = this.ProcessRateArr;
+            // console.log(ProcessRateArr)
+            return ProcessRateArr;
+        },
         // // insert
         // showInsertModal(){
         // this.insertModal.show();
@@ -261,6 +303,20 @@ export default {
                     alert('false');
                     console.log(err);
                 });
+        },
+
+        // 챌린지 티켓 정보 불러오는 통신
+        getChallTicket: function(){
+            axios({
+                method: "get",
+                url: `/challenge/taskticket/${this.challengeno}`,
+            })
+            .then((res) => {
+                this.chall_ticket = res.data;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
         },
 
         
@@ -365,8 +421,10 @@ export default {
     },
     created: function() {
         this.getChallInfo(); //생성할 때 바로 불러줘
-        // this.getTaskInfo();
+        this.makeArr();
+        this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
+        this.getChallTicket();
     },
 };
 </script>
