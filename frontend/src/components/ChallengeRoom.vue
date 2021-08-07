@@ -52,7 +52,7 @@
                                         <!-- 숫자, 제출 한 것 -->
                                         <router-link
                                             v-else
-                                            :to="{ name: 'PostDetailAfter', params: { forwardTaskNo: task_info[index].taskNo[taskIdx - 1] } }"
+                                            :to="{ path: '/postDetailAfter', query: { taskNo: task_info[index].taskNo[taskIdx - 1] } }"
                                         >
                                             <div class="after">
                                                 <!-- taskNO = {{ task_info[index].taskNo[taskIdx - 1] }} -->
@@ -73,7 +73,7 @@
                         <strong
                             >참여멤버 :
                             <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)" style='cursor:pointer;'>
-                                <router-link style="color:#420909; font-weight:600; text-decoration: none;" :to="{ name: 'Profile', query: { userEmail: name[0] } }">
+                                <router-link style="color:#420909; font-weight:600; text-decoration: none;" :to="{ name: 'Profile', query: { user: name[0] } }">
                                     #{{ name[1] }} 
                                 </router-link>
                             </span>
@@ -119,7 +119,7 @@ export default {
             // 가입완료: '가입완료',
             submit: true,
             fail: false,
-            challengeno: 1,
+            challengeno: 2,
 
             //이동할 테스크 고유 넘버pk
             forwardTaskNo: -1,

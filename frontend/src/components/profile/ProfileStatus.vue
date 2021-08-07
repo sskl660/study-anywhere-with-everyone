@@ -44,6 +44,7 @@
                   <li>
                     <router-link :to="{ path: '/profile', query: { user: following[0]  }}" class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;">
                       {{following[1]}}
+                      <!-- 키값 : value값 -->
                     </router-link>
                   </li>
                   <!-- <li><a class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;" href="#">{{following[1]}}</a></li> -->

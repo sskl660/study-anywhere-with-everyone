@@ -71,10 +71,10 @@
                 </div>
             </div>
             
-            <button type="button" class="btn btn-danger Pdelete_btn">삭제</button>
+            <div style="float: left"><button v-if="this.checkUser()" type="button" class="btn btn-danger Pdelete_btn">삭제</button></div>
             <!-- <div class="Pjoin_btn"><ButtonSquare :text="생성" @click="sendPost"/></div>
             <div class="Pcancel_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="취소"/></router-link></div> -->
-            <div class="Pback_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="뒤로"/></router-link></div>
+            <div class="Pback_btn" style="float:right"><router-link to="/ChallengeRoom"><ButtonSquare :text="뒤로"/></router-link></div>
             
         </div>
     </div>
@@ -86,7 +86,7 @@ import ButtonSquare from '@/components/common/ButtonSquare.vue'
 import ProfileImage from "@/components/common/ProfileImage.vue"
 import CommentBox from "@/components/challengeroom/CommentBox.vue"
 import axios from "@/util/http-common.js";
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 // import Vue from 'vue';
 // import CKEditor from '@ckeditor/ckeditor5-vue2';
@@ -111,12 +111,12 @@ export default {
         ProfileImage,
         CommentBox,
     },
-    props: {
-            forwardTaskNo: {
-                type: String,
-                default : ''
-            },
-        },
+    // props: { //여기를 this. router. query. url에 있는 key값 바꿔줘야한다
+    //         forwardTaskNo: {
+    //             type: String,
+    //             default : ''
+    //         },
+    //     },
     data: function(){
         return{
             // 버튼에 들어갈 문구들
@@ -146,6 +146,7 @@ export default {
                 "taskNo": 0,
                 "userEmail": "string"
             },
+            ApiTaskNo: '',
             // CKEditor : '',
             // filename: '',
             // imageSrc: '',
@@ -155,11 +156,16 @@ export default {
             // redheart : require('../assets/redheart.png')
         }
     },
+    computed:{
+        ...mapState([
+            'userEmail',
+        ])
+    },
     methods:{
         getTaskInfo: function(){
             axios({
                 methods: 'get',
-                url: `/challenge/task/${this.forwardTaskNo}`,
+                url: `/challenge/task/${this.ApiTaskNo}`,
             })
             .then((res) => {
                 // alert("과제 상세 정보가 들어왔습니다.");
@@ -173,23 +179,25 @@ export default {
         ...mapActions([
             'presslike',
         ]),
+        taskNumbering: function(urlNo){
+            this.ApiTaskNo = urlNo;
+            // 여기에 create에 있는 함수를 바로 넣어줬다.
+        },
+        checkUser: function(){
+            // alert('삭제버튼 안보이게 할꺼야')
+            if(this.userEmail == this.task_info.userEmail) return true;
+            else false;
+        },
         // presslike(){
         //     document.querySelector('.like').src ="/img/redheart.20ffa944.png";
         // },
-        getPressLike: function(){
-            // axios({
-            //     methods: 'post',
-            //     url: `/challenge/task/like}`,
-            // })
-            // .then((res) => {
-            //     alert("좋아요를 눌렀습니다.");
-            //     console.log(res.data);
-            //     this.task_info = res.data;
-            // })
-            // .catch((err) => {
-            //     console.log(err);
-            // })
-        }
+
+        // A함수를 만들고
+        // 클릭 시 A함수 실행
+        // A함수 안에는 이미지 변하는 함수, 통신하는 함수(mapActions함수)
+        // 페이지 reload 요청 한번 다시 하기. 리프레쉬 용
+        // getTaskInfo함수를 다시 불러라 -> 데이터 바꿔주기 좋아요 +1
+
         // sendPost(){
         //     let message = this.CKEditor.getData();
         //     alert(message);
@@ -234,8 +242,8 @@ export default {
     },
     created: function(){
         // alert(this.forwardTaskNo);
+        this.taskNumbering(this.$route.query.taskNo);
         this.getTaskInfo();
-
     }
     // mounted(){
     //     ClassicEditor
