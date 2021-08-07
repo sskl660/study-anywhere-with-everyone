@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,10 +38,12 @@ public class TaskEntity {
     private String taskContent;
     @Column(name = "task_desc", length = 300)
     private String taskDesc;
+    @Lob
     @Column(name = "task_image")
-    private Integer taskImage;
+    private Blob taskImage;
+    @Lob
     @Column(name = "task_file")
-    private Integer taskFile;
+    private Blob taskFile;
     @ElementCollection
     @Column(name = "task_ikes")
     private List<String> taskLikes;
@@ -51,7 +54,7 @@ public class TaskEntity {
     List<CommentEntity> commentEntities = new ArrayList<>();
 
     @Builder
-    public TaskEntity(int taskNo, UserEntity taskUserEntity, ChallengeEntity taskChallengeEntity, int taskIndex, String taskContent, String taskDesc, int taskImage, int taskFile, List<String> taskLikes, List<CommentEntity> commentEntities) {
+    public TaskEntity(int taskNo, UserEntity taskUserEntity, ChallengeEntity taskChallengeEntity, int taskIndex, String taskContent, String taskDesc, Blob taskImage, Blob taskFile, List<String> taskLikes, List<CommentEntity> commentEntities) {
         this.taskNo = taskNo;
         this.taskUserEntity = taskUserEntity;
         this.taskChallengeEntity = taskChallengeEntity;
@@ -66,8 +69,8 @@ public class TaskEntity {
     @PrePersist
     public  void taskprePersist(){
         this.taskContent=this.taskContent==null?"":this.taskContent;
-        this.taskImage=this.taskImage==null?0:this.taskImage;
-        this.taskFile=this.taskFile==null?0:this.taskFile;
+        this.taskImage=this.taskImage==null?null:this.taskImage;
+        this.taskFile=this.taskFile==null?null:this.taskFile;
         this.taskLikes=this.taskLikes==null?new ArrayList<>():this.taskLikes;
     }
 }

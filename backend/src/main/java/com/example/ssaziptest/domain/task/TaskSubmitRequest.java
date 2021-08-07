@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.sql.Blob;
 
 @Data
 @NoArgsConstructor
@@ -16,8 +19,8 @@ public class TaskSubmitRequest {
     private int taskIndex;
     private String taskContent;
     private String taskDesc;
-    private int taskImage;
-    private int taskFile;
+//    private MultipartFile taskImage;
+//    private MultipartFile taskFile;
     private String userEmail;
     private int challengeNo;
 }
