@@ -12,7 +12,7 @@
             <div class="joinbox">
                 <!-- 가입버튼 누르기 전에는 가입하기 버튼과 가입 마감까지 남은 시간이 보여진다 -->
                 <li class="changebtn">
-                    <div v-if="!didJoin()" class="Cjoin_btn" @click="hidebtn(chall_info.challengeNo,userEmail)">
+                    <div v-if="!didJoin()&&!endJoin()" class="Cjoin_btn" @click="hidebtn(chall_info.challengeNo,userEmail)">
                         <ButtonRound :text="msg" /> 
                     </div>
                     <!-- <div class="Cjoindone_btn" v-else><ButtonRound :text="가입완료" /></div> -->
@@ -20,23 +20,6 @@
                         <h5 id="rest"></h5>
                     </div>
                 </li>
-                <!-- 가입하기 버튼을 누르면 가입완료 버튼으로 바뀌고 시간이 진행중으로 바뀐다 -->
-                <!-- <li class="changebtn" v-else>
-                    <div class="Cjoindone_btn"><ButtonRound :text="가입완료" /></div>
-                    <div class="alarm">
-                        <h5 id="rest">{{ restTime }}</h5>
-                    </div>
-                </li> -->
-                <!-- 가입완료 후 챌린지 마감시간이 지나면 진행중이 종료 바뀜 -->
-                <!-- <li class="changebtn">
-                    <div class="Cjoindone_btn"><ButtonRound :text="가입완료"/></div>
-                    <div class="alarm">
-                        <h5 style="color: #EE4748">종료</h5>
-                    </div>
-                </li> -->
-                <!-- <div class="alarm">
-                    <h4> 가입 마감까지 20 : 56 </h4>
-                </div> -->
             </div>
 
             <div class="col col-4 flex-item">
@@ -146,10 +129,11 @@ export default {
             submit: true,
             fail: false,
             // 챌린지: '히오니의 알고 챌린지',
-            challengeno: 4,
+            challengeno: 1,
 
             //이동할 테스크 고유 넘버pk
             forwardTaskNo: -1,
+            overStartdate: false,
 
             chall_info: {
                 challengeCapacity: 0,
@@ -238,6 +222,7 @@ export default {
                     this.chall_info = res.data;
                     this.chall_info.challengeStartdate += ' 23:59:59';
                     this.countDownTimer('rest', this.chall_info.challengeStartdate);
+                    this.endJoin(this.chall_info.challengeGroup.length);
                 })
                 .catch((err) => {
                     alert('false');
@@ -260,6 +245,7 @@ export default {
                 if (distDt < 0) {
                     clearInterval(timer);
                     document.getElementById(id).textContent = '모집이 종료 되었습니다!';
+                    if(!this.overStartdate)this.overStartdate=true;
                     return;
                 }
                 var days = Math.floor(distDt / _day);
@@ -304,6 +290,12 @@ export default {
             }
             return false;
         },
+        endJoin: function(membereNum){//모집기간 종료 혹은 10명 초과시 가입 종료
+            if(membereNum>9||this.overStartdate){//10이거나 오버됐으면
+                return true;
+            }
+            else return false;
+        }
     },
     created: function() {
         this.getChallInfo(); //생성할 때 바로 불러줘
