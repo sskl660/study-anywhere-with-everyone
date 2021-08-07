@@ -89,11 +89,14 @@ public class FeedService {
                     response.setFeedType(4);
                     UserEntity userEntity = userRepository.findById(feedEntity.getFeedInfo()).orElse(null);
                     Blob followerblob = userEntity.getUserImage();
-                    int bloblength2 = (int)followerblob.length();
-                    byte[] blobAsBytes2 = followerblob.getBytes(1,bloblength2);
-                    userblob.free();
+                    if(followerblob!=null){
+                        int bloblength2 = (int)followerblob.length();
+                        byte[] blobAsBytes2 = followerblob.getBytes(1,bloblength2);
+                        userblob.free();
+
+                        response.setFollowUserImage(Arrays.toString(blobAsBytes2));
+                    }
                     response.setFollowUserEmail(userEntity.getUserEmail());
-                    response.setFollowUserImage(Arrays.toString(blobAsBytes2));
                     response.setFollowerCnt(userEntity.getUserFollower());
                     response.setFollowingCnt(userEntity.getUserFollowing());
                     break;
