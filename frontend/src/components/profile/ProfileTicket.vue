@@ -5,9 +5,13 @@
         <div class="ticket-title">{{this.ticket.challengeName}}</div>
         <div class="ticket-rate">{{this.ticket.achieveRate}}%</div>
       </div>
-      <div class="ticket-right" style="display: inline-block">  
+      <!-- 티켓 오른쪽 부분 -->
+      <div class="ticket-right" style="display: inline-block"> 
+        <!-- 첫번째꺼 -->
         <TicketSubmit v-if="this.ticket.taskNo[0]" :ticketTask="ticket.taskNo[0]"/>
+        <!-- 대각선과 위 1->2 -->
         <TicketSubmitLeft v-if="this.ticket.taskNo[1]" :num="this.two" :ticketTask="ticket.taskNo[1]"/>
+        <!-- 대각선과 2->3 -->
         <TicketSubmitRight v-if="this.ticket.taskNo[2]" :num="this.three" :ticketTask="ticket.taskNo[2]"/>
         <TicketSubmitLeft v-if="this.ticket.taskNo[3]" :num="this.four" :ticketTask="ticket.taskNo[3]"/>
         <TicketSubmitRight v-if="this.ticket.taskNo[4]" :num="this.five" :ticketTask="ticket.taskNo[4]"/>
@@ -17,7 +21,9 @@
           <span>tick</span>
         </div> -->
       </div>
-      <img class="stamp" style="float:right" src="@/assets/excellent.png" alt="">
+      <img v-if="this.checkExcellent()" class="stamp" style="float:right" src="@/assets/excellent.png" alt="">
+      <img v-if="this.checkTryAgain()" class="stamp" style="float:right" src="@/assets/try.png" alt="">
+      <img v-else class="stamp" style="float:right" src="@/assets/awesome.png" alt="">
       
       <!-- <div class="ticket-right" style="display: inline-block">
         <div v-for="task in ticket.taskNo" :key="task">
@@ -48,15 +54,17 @@ export default {
       five: "5",
       six: "6",
       seven: "7",
-      ticketExist: {
-        one: false,
-        two: false,
-        three: false,
-        four: false,
-        five: false,
-        six: false,
-        seven: false,
-      }
+      excellent: false,
+      asewome: false,
+      // ticketExist: {
+      //   one: false,
+      //   two: false,
+      //   three: false,
+      //   four: false,
+      //   five: false,
+      //   six: false,
+      //   seven: false,
+      // }
     }
   },
   components :{
@@ -64,6 +72,16 @@ export default {
     TicketSubmitLeft,
     TicketSubmitRight,
   },
+  methods: {
+    checkExcellent: function () {
+      if (this.ticket.achieveRate == 100) return true;
+      else false
+    },
+    checkTryAgain: function () {
+      if (this.ticket.achieveRate == 0) return true;
+      else false
+    },
+  }
 }
 </script>
 

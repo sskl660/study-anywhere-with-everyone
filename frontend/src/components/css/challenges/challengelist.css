@@ -5,11 +5,12 @@
   width: 450px;
   height: 130px;
   border-radius: 3rem 3rem 0rem 0rem;
-  padding-top: 40px;
+  padding-top: 50px;
 }
 
 /* 챌린지 목록 제목 */
 .challenge-title {
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 35px;
   font-weight: bold;
   color: white;
@@ -20,6 +21,7 @@
 /* 챌린지 목록 컨테이너 */
 .challenge-list-container {
   background-color:rgba(255,255,255, 0.2);
+  padding-top: 10px;
   margin-bottom: 100px;
   width: 450px;
   height: 1000px;

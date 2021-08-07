@@ -59,13 +59,18 @@ export default {
   },
   methods: {
     ...mapActions([
-      'login'
+      'login',
     ]),
   },
 }
 </script>
 
 <style scoped>
+  /* 폰트 설정 */
+  * {
+    font-family: "Noto Sans KR", sans-serif;
+  }
+
   /* 로그인 버튼 */
   .login-btn {
     color: #1C84C4;
@@ -105,7 +110,6 @@ export default {
 
   /* 모달창 크기 */
   .login-content {
-    font-family: "Noto Sans KR", sans-serif;
     background-color: #99b7ff;
     border-radius: 1rem;
     margin-top: 350px;

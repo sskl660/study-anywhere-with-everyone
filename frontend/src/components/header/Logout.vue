@@ -55,8 +55,8 @@ import {mapActions, mapState} from 'vuex'
     width: 60px;
     height: 60px;
     border-radius: 75px;
-    margin-top: 30px;
-    margin-left: 30px;
+    top: 30px;
+    left: 30px;
     padding-left: 15px;
     cursor: pointer;
     border-style: none;
