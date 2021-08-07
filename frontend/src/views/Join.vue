@@ -97,30 +97,11 @@ export default {
             /* API로 보낼 회원 정보 데이터. v-model을 통해 input 태그에서 값을 받는다. */
             credentials: {
                 userEmail: '',
-                // {
-                //     type: String,
-                //     default: '',
-                // },
-                userName: {
-                    type: String,
-                    default: '',
-                },
-                userGraduated: {
-                    type: Boolean,
-                    default: false,
-                },
-                userNumber: {
-                    type: String,
-                    default: '',
-                },
-                userPassword: {
-                    type: String,
-                    default: '',
-                },
-                userTerm: {
-                    type: Number,
-                    default: '',
-                },
+                userName: '',
+                userGraduated: false,
+                userNumber: null,
+                userPassword: '',
+                userTerm: null,
             },
             accessCode: null,
             joinFlag: false,

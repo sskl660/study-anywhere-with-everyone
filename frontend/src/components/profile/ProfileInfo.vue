@@ -3,7 +3,7 @@
     <!-- id 카드 -->
     <!-- <div>{{userInfo.userName}}</div> -->
     
-    <IdCard style="display:inline-block" :userInfo="userInfo"/>
+    <IdCard style="display:inline-block" :userInfo="userInfo" :followers="followers" :followings="followings"/>
     <!-- 프로필 정보 우측의 컨테이너 -->
     <div class="profile-info" style="display:inline-block" >
       <!-- 상단의 챌린지수, 팔로워수, 팔로잉수 -->

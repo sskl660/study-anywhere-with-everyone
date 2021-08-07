@@ -12,7 +12,9 @@
             <div class="joinbox">
                 <!-- 가입버튼 누르기 전에는 가입하기 버튼과 가입 마감까지 남은 시간이 보여진다 -->
                 <li class="changebtn">
-                    <div class="Cjoin_btn" @click="hidebtn(temp)"><ButtonRound :text="msg" /></div>
+                    <div v-if="!didJoin()" class="Cjoin_btn" @click="hidebtn(chall_info.challengeNo,userEmail)">
+                        <ButtonRound :text="msg" /> 
+                    </div>
                     <!-- <div class="Cjoindone_btn" v-else><ButtonRound :text="가입완료" /></div> -->
                     <div class="alarm">
                         <h5 id="rest"></h5>
@@ -53,6 +55,7 @@
                                     <th scope="col">과제7</th>
                                 </tr>
                             </thead>
+                            <!-- 블렛 저널 테이블 바디 -->
                             <tbody>
                                 <tr v-for="(person, index) in chall_info.challengeGroup" :key="person">
                                     <th scope="row" style="background-color: #b7beda">{{ person[1] }}</th>
@@ -68,13 +71,12 @@
                                             v-else
                                             :to="{ name: 'PostDetailAfter', params: { forwardTaskNo: task_info[index].taskNo[taskIdx - 1] } }"
                                         >
-                                            <div class="after">
-                                                <!-- taskNO = {{ task_info[index].taskNo[taskIdx - 1] }} -->
-                                            </div>
+                                            <div class="after">taskNO = {{ task_info[index].taskNo[taskIdx - 1] }}</div>
                                         </router-link>
                                     </td>
                                 </tr>
                             </tbody>
+                            <!-- 블렛 저널 테이블 바디 -->
                         </table>
                     </div>
                 </div>
@@ -102,17 +104,19 @@
                 </div>
             </div>
         </div>
+        <!-- 여기가 있으면 통신이 안된다 -->
+        <!-- <insert-modal v-on:call-parent-insert="closeAfterInsert"></insert-modal>
+    <detail-modal v-on:call-parent-change-to-delete="changeToDelete"></detail-modal> -->
     </div>
 </template>
 <script>
 import Title from '@/components/common/Title.vue';
 import ButtonRound from '@/components/common/ButtonRound.vue';
-import ChallengeTicket from '@/components/challengeroom/ChallengeTicket.vue';
 // import Difficulty from '@/components/common/Difficulty'
 // import PostDetailModal from '@/components/PostDetailModal'
 import '@/components/css/ChallengeRoom.css';
 import axios from '@/util/http-common.js';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 // import InsertModal from '@/components/modals/InsertModal.vue'
 // import DetailModal from '@/components/modals/DetailModal.vue';
@@ -130,7 +134,10 @@ export default {
     components: {
         Title, // 타이틀 가져오기
         ButtonRound, // 둥근 버튼 가져오기
-        ChallengeTicket, // 챌린지 티켓 가져오기
+        // Difficulty      // 난이도 가져오기
+        //PostDetailModal,
+        //InsertModal, // 작성자가 처음 과제를 제출하는 모달
+        //DetailModal, // 작성 후 보여지는 모달
     },
     data: function() {
         return {
@@ -158,30 +165,7 @@ export default {
                 challengeStartdate: 'string',
                 challengeTaskCnt: 0,
                 challengeTaskdeadlines: ['string'],
-
-                // challengeNo: 1,
-                // challengeName: 'SSA.ZIP',
-                // challengeCategory: 'Algorithm',
-                // challengeLevel: 3,
-                // challengeCapacity: 6,
-                // challengeStartdate: '2021-08-19',
-                // challengeEnddate: '2021-08-30',
-                // challengeDesc: '히오니의 알고리즘 챌린지',
-                // challengeTaskCnt: 7,
-                // challengeTaskdeadlines: ['2021-08-01', '2021-08-02', '2021-08-03'],
-                // challengeGroup: [
-                //     ['123', '주인공'],
-                //     ['456', '제발좀'],
-                //     ['789', '김이름'],
-                // ],
             },
-            // 과제 블럭 하나씩 이전 버전
-            // task_info:[{
-            //   "taskIndex": 0, // 몇번째 과제인지
-            //   "taskNo": 0, // 고유값. 과제 페이지로 넘어갈 때 사용
-            //   "userEmail": "string",
-            //   "userName": "string"
-            // }]
 
             task_info:[
               {
@@ -350,74 +334,36 @@ export default {
             }
             timer = setInterval(showRemaining, 1000);
         },
+            ...mapActions({
+                // import 해주는 느낌
+                joinChall:'joinChallenge'
+            }),
         // 가입하기 버튼 눌렀을 때
-        hidebtn(temp) {
-            // this.beforejoin=false;
+        hidebtn: function(chall_No, user) {
             this.msg = '가입완료';
-            console.log(this.msg);
+            console.log("가입완료");
+            //alert(chall_No + ' ' + user);
             // document.getElementById('Cjoin_btn').style.backgroundColor = '#f9d479';
             document.querySelector('.Cjoin_btn .btn-light').style.backgroundColor = '#f9d479';
             // 여기에다가 로직을 작성해야한다
-            alert('버튼 작동 확인');
-            this.joinchall(temp); // email이랑 챌린지 번호 전송
+            var info =[chall_No,user]
+            this.joinChall(info); // email이랑 챌린지 번호 전송
+            this.$router.go();
         },
 
         nameprofile(num) {
             var email = this.chall_info.challengeGroup[num][0];
             alert(email);
         },
-        // bj 블럭의 과제 블럭을 눌렀을 때
-        //     taskblock(email, index){
-        //       // var email = this.chall_info.challengeGroup[];
-        //       // var index = this.
-        //       let taskno = -1;
-        //       for( let n = 0; n < this.chall_info.challengeTaskCnt; n++){
-        //         if(this.task_info[n].userEmail == email & this.task_info[n].taskIndex == index){
-        //           taskno = this.task_info[n].taskNo;
-        //           this.submit = !this.submit;
-        //         }
-
-        //       if(taskno != -1){ // 과제 제출 했을 경우
-        //         alert(taskno)
-
-        //         this.submit = true;
-        //         console.log(!this.submit)
-        //         // submit == true;
-        //       }
-
-        //       // alert(email + ' ' + index + '' + taskno);
-        //     }
-        // },
-        taskblock(email, idx) {
-            // var email = this.chall_info.challengeGroup[];
-            // var index = this.
-            // let taskno = 0;
-            // for (let n = 0; n < this.chall_info.challengeTaskCnt; n++) {
-            //     // taskno 고유값 뽑아내기
-            //     // 과제 제출 했을 경우
-            //     if ((this.task_info[n].userEmail == email) & (this.task_info[n].taskNo[n] != -1) & (this.task_info[n].taskNo[n] != -2)) {
-            //         taskno = this.task_info[n].taskNo[n];
-            //         alert(taskno);
-            //         // this.submit = !this.submit;
-            //     }
-            //     // 기간 안지난 미제출 : 노랑
-            //     if (this.task_info[n].taskNo[n] == -1) {
-            //         alert(this.task_info[n].taskNo[n]);
-            //         // this.submit = true;
-            //         // console.log(!this.submit)
-            //         // submit == true;
-            //     }
-            //     // 기간 지난 미제출 : 빨강
-            //     if (this.task_info[n].taskNo[n] == -2) {
-            //         alert(this.task_info[n].taskNo[n]);
-            //     }
-            //     // alert(email + ' ' + index + '' + taskno);
-            // }
+        didJoin: function() {
+            var user = this.userEmail;
+            for (let i = 0; i < this.chall_info.challengeGroup.length; i++) {
+                if (user == this.chall_info.challengeGroup[i][0]) {
+                    return true;
+                }
+            }
+            return false;
         },
-        ...mapActions([
-            // import 해주는 느낌
-            'joinchall',
-        ]),
     },
     created: function() {
         this.getChallInfo(); //생성할 때 바로 불러줘
@@ -425,6 +371,9 @@ export default {
         this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
         this.getChallTicket();
+    },
+    computed: {
+        ...mapGetters(['userEmail']),
     },
 };
 </script>
@@ -483,15 +432,13 @@ export default {
 
 .table > :not(caption) > * > * {
     padding: 0 0;
-    border-bottom-width: 0px;
 }
 
 /* 과제 제출 전 칸 */
 .before {
-    background-color: #ffffff;
+    background-color: #f9d479;
     width: 100%;
     height: 100%;
-    border: 1px solid #dddddd;
 }
 
 /* 과제 제출 후 파란색으로 변함 */
@@ -499,7 +446,6 @@ export default {
     background-color: #1f4256;
     width: 100%;
     height: 100%;
-    border: 1px solid #dddddd;
 }
 
 /* 과제 제출 안하면 빨간색으로 변함 */
@@ -507,7 +453,6 @@ export default {
     background-color: #ee4748;
     width: 100%;
     height: 100%;
-    border: 1px solid #dddddd;
 }
 
 th {

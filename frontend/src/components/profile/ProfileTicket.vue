@@ -21,7 +21,9 @@
           <span>tick</span>
         </div> -->
       </div>
-      <img class="stamp" style="float:right" src="@/assets/excellent.png" alt="">
+      <img v-if="this.checkExcellent()" class="stamp" style="float:right" src="@/assets/excellent.png" alt="">
+      <img v-if="this.checkTryAgain()" class="stamp" style="float:right" src="@/assets/try.png" alt="">
+      <img v-else class="stamp" style="float:right" src="@/assets/awesome.png" alt="">
       
       <!-- <div class="ticket-right" style="display: inline-block">
         <div v-for="task in ticket.taskNo" :key="task">
@@ -52,15 +54,17 @@ export default {
       five: "5",
       six: "6",
       seven: "7",
-      ticketExist: {
-        one: false,
-        two: false,
-        three: false,
-        four: false,
-        five: false,
-        six: false,
-        seven: false,
-      }
+      excellent: false,
+      asewome: false,
+      // ticketExist: {
+      //   one: false,
+      //   two: false,
+      //   three: false,
+      //   four: false,
+      //   five: false,
+      //   six: false,
+      //   seven: false,
+      // }
     }
   },
   components :{
@@ -68,6 +72,16 @@ export default {
     TicketSubmitLeft,
     TicketSubmitRight,
   },
+  methods: {
+    checkExcellent: function () {
+      if (this.ticket.achieveRate == 100) return true;
+      else false
+    },
+    checkTryAgain: function () {
+      if (this.ticket.achieveRate == 0) return true;
+      else false
+    },
+  }
 }
 </script>
 
