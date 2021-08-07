@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div class="d-flex justify-content-center">
     <div class="join-container">
       
@@ -18,86 +17,6 @@
         <!-- 중복체크 버튼 -->
         <div class="check-button" @click="emailcheck(credentials.userEmail)">
           <ButtonSquare text="중복체크"/>
-=======
-    <div class="d-flex justify-content-center">
-        <div class="join-container">
-            <!-- 계정 등록 -->
-            <p>계정 등록</p>
-            <div class="d-flex email-container">
-                <label for="email" class="input-label">이메일</label>
-                <input
-                    type="text"
-                    id="email"
-                    class="account-input email-input"
-                    placeholder="40글자 이내로 입력해주세요."
-                    v-model="credentials.userEmail"
-                />
-                <!-- 중복체크 버튼 -->
-                <div class="check-button" @click="emailcheck(credentials.userEmail)">
-                    <ButtonSquare text="중복체크" />
-                </div>
-            </div>
-            <div>
-                <label for="password" class="input-label">비밀번호</label>
-                <input
-                    type="text"
-                    id="password"
-                    class="account-input password-input"
-                    placeholder="8 이상 16 이하 글자수로 입력해주세요."
-                    v-model="credentials.userPassword"
-                />
-            </div>
-            <div>
-                <label for="password-confirm" class="input-label">비밀번호 확인</label>
-                <input type="text" id="password-confirm" class="account-input password-confirm-input" />
-            </div>
-            <br />
-
-            <!-- 싸집 이미지 -->
-            <div class="eggs-container">
-                <img class="eggs" src="../assets/eggs.png" alt="eggs" />
-            </div>
-
-            <!-- 정보 등록 -->
-            <p>정보 등록</p>
-            <div class="d-flex justify-content-center">
-                <div>
-                    <label for="name" class="input-label name-label">이름</label>
-                    <input
-                        type="text"
-                        id="name"
-                        class="info-input name-input"
-                        placeholder="8글자 이내로 입력해주세요."
-                        v-model="credentials.userName"
-                    />
-                </div>
-                <div>
-                    <label for="phone" class="input-label">전화번호</label>
-                    <input type="text" id="phone" class="info-input phone-input" placeholder="ex) 01012345678" v-model="credentials.userNumber" />
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-center last-row-input">
-                <div>
-                    <label for="grade" class="input-label">기수</label>
-                    <input type="number" id="grade" class="info-input grade-input" v-model="credentials.userTerm" />
-                </div>
-                <div class="d-flex">
-                    <label for="code" class="input-label">참여코드</label>
-                    <input type="text" id="code" class="info-input code-input" v-model="accessCode" />
-                    <!-- 참여코드 확인 버튼 -->
-                    <div class="check-button" @click="codeCheck(accessCode)">
-                        <ButtonSquare text="확인" />
-                    </div>
-                </div>
-            </div>
-            <br />
-
-            <!-- 가입 버튼 -->
-            <div class="join-button" @click="join(credentials)">
-                <ButtonRound text="가입하기" />
-            </div>
->>>>>>> 51ee7ca57fb508906f5faf1fe2edf6fcf73a45da
         </div>
       </div>
       <div>
