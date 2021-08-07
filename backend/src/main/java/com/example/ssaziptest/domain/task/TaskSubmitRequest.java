@@ -16,8 +16,8 @@ public class TaskSubmitRequest {
     private int taskIndex;
     private String taskContent;
     private String taskDesc;
-    private String taskImage;
-    private String taskFile;
+    private int taskImage;
+    private int taskFile;
     private String userEmail;
     private int challengeNo;
 }

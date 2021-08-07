@@ -55,7 +55,7 @@ public class UserEntity {
     @Column(name = "user_totalcomplete")
     private Integer userTotalcomplete;
     @Column(name = "user_image")
-    private String userImage;
+    private Integer userImage;
     @Column(name = "user_git")
     private String userGit;
     @Column(name = "user_blog")
@@ -94,7 +94,7 @@ public class UserEntity {
     @PrePersist
     public void prePersist(){
         this.userTotalcomplete=this.userTotalcomplete==null?0:this.userTotalcomplete;
-        this.userImage=this.userImage==null?"":this.userImage;
+        this.userImage=this.userImage==null?0:this.userImage;
         this.userGit=this.userGit==null?"":this.userGit;
         this.userBlog=this.userBlog==null?"":this.userBlog;
         this.userDevstyle=this.userDevstyle==null?"":this.userDevstyle;
@@ -121,7 +121,7 @@ public class UserEntity {
 //    }
 
     @Builder
-    public UserEntity(String userEmail, String userName, String userPassword, String userNumber, int userTerm, boolean userGraduated, LocalDateTime userJoindate, Integer userTotalcomplete, String userImage, String userGit, String userBlog, String userDevstyle, String userMbti, String userWishfield, String userIntroduce, String userTechstack, int userTotaltime, int userWeektime, int userWeekcomplete, int userFollower, int userFollowing) {
+    public UserEntity(String userEmail, String userName, String userPassword, String userNumber, int userTerm, boolean userGraduated, LocalDateTime userJoindate, Integer userTotalcomplete, Integer userImage, String userGit, String userBlog, String userDevstyle, String userMbti, String userWishfield, String userIntroduce, String userTechstack, int userTotaltime, int userWeektime, int userWeekcomplete, int userFollower, int userFollowing) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;

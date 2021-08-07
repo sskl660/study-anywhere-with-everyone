@@ -22,7 +22,6 @@ public class FileService {
     public int fileUpload(FileUploadRequest request){
 
         FileEntity fileEntity = FileEntity.builder()
-                .fileName(request.getFileName())
                 .fileUseremail(request.getUserEmail())
                 .fileData(request.getFileData())
                 .build();
@@ -35,7 +34,6 @@ public class FileService {
         FileEntity file = fileRepository.findById(fileNo).get();
         FileInfoResponse fileInfoResponse = FileInfoResponse.builder()
                 .fileNo(fileNo)
-                .fileName(file.getFileName())
                 .userEmail(file.getFileUseremail())
                 .build();
         return fileInfoResponse;
