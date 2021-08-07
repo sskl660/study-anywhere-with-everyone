@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Blob;
+
 @Data
 @NoArgsConstructor
 public class UserDetailResponse {
@@ -16,7 +18,7 @@ public class UserDetailResponse {
     private boolean userGraduated;
    // private String userJoindate;
     private Integer userTotalcomplete;
-    private Integer userImage;
+    private String userImage;
     private String userGit;
     private String userBlog;
     private String userDevstyle;
@@ -31,7 +33,7 @@ public class UserDetailResponse {
     private Integer userFollowing;
 
     @Builder
- public UserDetailResponse(String userEmail, String userName, String userNumber, int userTerm, boolean userGraduated, Integer userTotalcomplete, Integer userImage, String userGit, String userBlog, String userDevstyle, String userMbti, String userWishfield, String userIntroduce, String userTechstack, Integer userTotaltime, Integer userWeektime, Integer userWeekcomplete, Integer userFollower, Integer userFollowing) {
+ public UserDetailResponse(String userEmail, String userName, String userNumber, int userTerm, boolean userGraduated, Integer userTotalcomplete, String userImage, String userGit, String userBlog, String userDevstyle, String userMbti, String userWishfield, String userIntroduce, String userTechstack, Integer userTotaltime, Integer userWeektime, Integer userWeekcomplete, Integer userFollower, Integer userFollowing) {
   this.userEmail = userEmail;
   this.userName = userName;
   this.userNumber = userNumber;

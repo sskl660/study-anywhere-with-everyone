@@ -11,12 +11,12 @@ import java.time.LocalDateTime;
 public class CommentListResponse {
     private String userEmail;
     private String userName;
-    private int userImage;
+    private String userImage;
     private String commentContent;
     private LocalDateTime commentDate;
 
     @Builder
-    public CommentListResponse(String userEmail, String userName, int userImage, String commentContent, LocalDateTime commentDate) {
+    public CommentListResponse(String userEmail, String userName, String userImage, String commentContent, LocalDateTime commentDate) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userImage = userImage;

@@ -18,7 +18,7 @@ public class FeedListResponse {
     /*이벤트 발생 유저 정보*/
     private String userEmail;
     private String userName;
-    private int userImage;
+    private String userImage;
 
     /*챌린지 가입or완주 소식 정보*/
     private int challengeNo;
@@ -32,14 +32,14 @@ public class FeedListResponse {
     private int galaxyMemberCnt;
     /*팔로우 소식 정보*/
     private String followUserEmail;
-    private int followUserImage;
+    private String followUserImage;
     private int followerCnt;
     private int followingCnt;
     /*이벤트 발생 시각*/
     private LocalDateTime eventtime;
 
     @Builder
-    public FeedListResponse(String userEmail, String userName, int userImage, int challengeNo, String challengeName, String challengeDesc, LocalDate challengeStartdate, LocalDate challengeEnddate, int challengeMemberCnt, String galaxyComment, int galaxyMemberCnt, String followUserEmail, int followUserImage, int followerCnt, int followingCnt, LocalDateTime eventtime) {
+    public FeedListResponse(String userEmail, String userName, String userImage, int challengeNo, String challengeName, String challengeDesc, LocalDate challengeStartdate, LocalDate challengeEnddate, int challengeMemberCnt, String galaxyComment, int galaxyMemberCnt, String followUserEmail, String followUserImage, int followerCnt, int followingCnt, LocalDateTime eventtime) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userImage = userImage;

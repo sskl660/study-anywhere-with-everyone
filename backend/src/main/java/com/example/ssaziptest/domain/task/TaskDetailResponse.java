@@ -13,8 +13,8 @@ public class TaskDetailResponse {
     private int taskIndex;
     private String taskContent;
     private String taskDesc;
-    private int taskImage;
-    private int taskFile;
+    private String taskImage;
+    private String taskFile;
     private String userEmail;
     private String userName;
     private int userTerm;
@@ -22,7 +22,7 @@ public class TaskDetailResponse {
     private List<String> likemembers;
 
     @Builder
-    public TaskDetailResponse(int taskNo, int taskIndex, String taskContent, String taskDesc, int taskImage, int taskFile, String userEmail, String userName, int userTerm, int likes, List<String> likemembers) {
+    public TaskDetailResponse(int taskNo, int taskIndex, String taskContent, String taskDesc, String taskImage, String taskFile, String userEmail, String userName, int userTerm, int likes, List<String> likemembers) {
         this.taskNo = taskNo;
         this.taskIndex = taskIndex;
         this.taskContent = taskContent;

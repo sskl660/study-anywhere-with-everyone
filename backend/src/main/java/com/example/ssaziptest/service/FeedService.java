@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Blob;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -32,15 +34,20 @@ public class FeedService {
     private UserRepository userRepository;
 
     @Transactional
-    public List<FeedListResponse> getChallengeFeeds(String userEmail){
+    public List<FeedListResponse> getChallengeFeeds(String userEmail) throws Exception{
         List<FeedEntity> feedEntities = feedRepository.findByFeedOwner(userEmail);
         List<FeedListResponse> responses = new ArrayList<>();
 
         for(FeedEntity feedEntity:feedEntities){
+            Blob userblob = feedEntity.getFeedUserEntity().getUserImage();
+            int bloblength = (int)userblob.length();
+            byte[] blobAsBytes = userblob.getBytes(1,bloblength);
+            userblob.free();
+
             FeedListResponse response = FeedListResponse.builder()
                     .userEmail(feedEntity.getFeedUserEntity().getUserEmail())
                     .userName(feedEntity.getFeedUserEntity().getUserName())
-                    .userImage(feedEntity.getFeedUserEntity().getUserImage())
+                    .userImage(Arrays.toString(blobAsBytes))
                     .eventtime(feedEntity.getFeedEventtime())
                     .build();
 
@@ -78,10 +85,15 @@ public class FeedService {
                     break;
                 //팔로우
                 case 4:
+
                     response.setFeedType(4);
                     UserEntity userEntity = userRepository.findById(feedEntity.getFeedInfo()).orElse(null);
+                    Blob followerblob = userEntity.getUserImage();
+                    int bloblength2 = (int)followerblob.length();
+                    byte[] blobAsBytes2 = followerblob.getBytes(1,bloblength2);
+                    userblob.free();
                     response.setFollowUserEmail(userEntity.getUserEmail());
-                    response.setFollowUserImage(userEntity.getUserImage());
+                    response.setFollowUserImage(Arrays.toString(blobAsBytes2));
                     response.setFollowerCnt(userEntity.getUserFollower());
                     response.setFollowingCnt(userEntity.getUserFollowing());
                     break;

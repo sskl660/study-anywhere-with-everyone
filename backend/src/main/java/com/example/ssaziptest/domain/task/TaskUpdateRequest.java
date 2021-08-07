@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Blob;
+
 @Data
 @NoArgsConstructor
 public class TaskUpdateRequest {
@@ -15,15 +17,16 @@ public class TaskUpdateRequest {
     private int taskIndex;
     private String taskContent;
     private String taskDesc;
-    private int taskImage;
-    private int taskFile;
+//    private Blob taskImage;
+//    private Blob taskFile;
 
     public TaskEntity toEntity(){
         TaskEntity taskEntity = TaskEntity.builder()
                 .taskNo(taskNo)
                 .taskIndex(taskIndex).taskContent(taskContent)
-                .taskDesc(taskDesc).taskImage(taskImage)
-                .taskFile(taskFile)
+                .taskDesc(taskDesc)
+//                .taskImage(taskImage)
+//                .taskFile(taskFile)
                 .build();
         return taskEntity;
     }
