@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="backgroundColor: red">
         <div v-if="isLogin">
             <quick-menu
                 :menu-count="getCount"
@@ -18,19 +18,19 @@
 
 <script>
 import quickMenu from 'vue-quick-menu';
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 export default {
     name: 'Navbar',
 
-    data() {
-        return {
+    data: function() {
+        return{
             count: 4,
             icons: ['fa fa-home', 'fa fa-address-card', 'fa fa-flag', 'fa fa-rocket'],
             list: [
                 { isLink: true, url: '/' },
-                { isLink: true, url: '/profilemy' },
+                { isLink: true, url: { path: '/profile', query: { user: 'myProfile'} } },
                 { isLink: true, url: '/challenges' },
-                { isLink: true, url: '/challengeroom'},
+                { isLink: true, url: '/challengeroom' },
             ],
             backgroundColor: '#F9D479',
             color: '#EE4748',
@@ -42,7 +42,7 @@ export default {
         quickMenu: quickMenu,
     },
     computed: {
-        ...mapState(['isLogin']),
+        ...mapGetters(['isLogin']),
     },
 };
 </script>
