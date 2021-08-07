@@ -30,8 +30,13 @@
                     </div>
 
                     <div class="like-box">
-                        <img @click="presslike()" class="like" src="../assets/grayheart.png" alt="likeU">
+                        <img @click="presslike(like)" class="like" src="../assets/grayheart.png" alt="likeU">
                     </div>
+
+                    <!-- <div class="like-box">
+                        <img @click="presslike()" class="like" src="../assets/redheart.png" alt="likeU">
+                    </div> -->
+
                     <div class="like-num">
                         <h6><strong>{{task_info.likes + " 명"}}</strong>이 좋아합니다</h6>
                     </div>
@@ -67,7 +72,6 @@
             </div>
             
             <button type="button" class="btn btn-danger Pdelete_btn">삭제</button>
-
             <!-- <div class="Pjoin_btn"><ButtonSquare :text="생성" @click="sendPost"/></div>
             <div class="Pcancel_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="취소"/></router-link></div> -->
             <div class="Pback_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="뒤로"/></router-link></div>
@@ -82,6 +86,7 @@ import ButtonSquare from '@/components/common/ButtonSquare.vue'
 import ProfileImage from "@/components/common/ProfileImage.vue"
 import CommentBox from "@/components/challengeroom/CommentBox.vue"
 import axios from "@/util/http-common.js";
+import { mapActions } from 'vuex'
 
 // import Vue from 'vue';
 // import CKEditor from '@ckeditor/ckeditor5-vue2';
@@ -118,7 +123,6 @@ export default {
             // 생성: '생성',
             // 취소: '취소',
             뒤로: '돌아가기',
-            //taskno: 1,
             task_info:{
                 "likemembers": [
                     "string"
@@ -133,7 +137,15 @@ export default {
                 "userEmail": "string",
                 "userName": "string",
                 "userTerm": 0
-            }
+            },
+            like:{
+                "taskNo": 0,
+                "userEmail": "string"
+            },
+            unlike:{
+                "taskNo": 0,
+                "userEmail": "string"
+            },
             // CKEditor : '',
             // filename: '',
             // imageSrc: '',
@@ -150,7 +162,7 @@ export default {
                 url: `/challenge/task/${this.forwardTaskNo}`,
             })
             .then((res) => {
-                alert("과제 상세 정보가 들어왔습니다.");
+                // alert("과제 상세 정보가 들어왔습니다.");
                 console.log(res.data);
                 this.task_info = res.data;
             })
@@ -158,8 +170,25 @@ export default {
                 console.log(err);
             })
         },
-        presslike(){
-            document.querySelector('.like').src ="/img/redheart.20ffa944.png";
+        ...mapActions([
+            'presslike',
+        ]),
+        // presslike(){
+        //     document.querySelector('.like').src ="/img/redheart.20ffa944.png";
+        // },
+        getPressLike: function(){
+            // axios({
+            //     methods: 'post',
+            //     url: `/challenge/task/like}`,
+            // })
+            // .then((res) => {
+            //     alert("좋아요를 눌렀습니다.");
+            //     console.log(res.data);
+            //     this.task_info = res.data;
+            // })
+            // .catch((err) => {
+            //     console.log(err);
+            // })
         }
         // sendPost(){
         //     let message = this.CKEditor.getData();
@@ -204,7 +233,7 @@ export default {
         // }
     },
     created: function(){
-                alert(this.forwardTaskNo);
+        // alert(this.forwardTaskNo);
         this.getTaskInfo();
 
     }
@@ -246,10 +275,10 @@ export default {
 }
 
 .comment-img-box {
-  width: 75px;
-  height: 75px;
-  position: relative;
-  top: 17px;
-  left: -160px;
+    width: 75px;
+    height: 75px;
+    position: relative;
+    top: 17px;
+    left: -160px;
 }
 </style>
