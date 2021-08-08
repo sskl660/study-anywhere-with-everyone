@@ -121,19 +121,8 @@ export default {
             // 가입완료: '가입완료',
             submit: true,
             fail: false,
-<<<<<<< HEAD
-            challengeno: 1,
-            ApiChallNo: '',
-=======
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            challengeno: 6,
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
->>>>>>> b098f4ed0543dd2f7bbb02a6e31d86301ba97736
-
+            challengeno: '',
+            
             //이동할 테스크 고유 넘버pk
             forwardTaskNo: -1,
             // ProcessRateArr: [], 이렇게 데이터 값을 넘겨주면 안된다. 위에서 바로 메소드 함수로 접근
@@ -239,14 +228,7 @@ export default {
                     console.log(err);
                 });
         },
-
-<<<<<<< HEAD
-        challNumbering: function(urlNo){
-            this.ApiChallNo = urlNo;
-        },
         
-=======
->>>>>>> b098f4ed0543dd2f7bbb02a6e31d86301ba97736
         countDownTimer: function(id) {
             var date = this.chall_info.challengeStartdate;
             //const countDownTimer = function (id) {
@@ -290,9 +272,8 @@ export default {
             this.msg = '가입완료';
             console.log('가입완료');
             //alert(chall_No + ' ' + user);
-            // document.getElementById('Cjoin_btn').style.backgroundColor = '#f9d479';
             document.querySelector('.Cjoin_btn .btn-light').style.backgroundColor = '#f9d479';
-            // 여기에다가 로직을 작성해야한다
+
             var info = [chall_No, user];
             //alert(this.overMember() + ' ' + this.overTime() + ' ' + this.didJoin() + ' ');
             this.joinChall(info); // email이랑 챌린지 번호 전송
@@ -332,7 +313,6 @@ export default {
     created: function() {
         this.challengeno=this.$route.query.cn;
         this.getChallInfo(); //생성할 때 바로 불러줘
-        this.challNumbering(this.$route.query.challengeNo);
         this.makeArr();
         this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);

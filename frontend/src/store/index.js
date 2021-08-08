@@ -127,15 +127,6 @@ export default new Vuex.Store({
         setToken: function({ commit }) {
             commit('SET_TOKEN');
         },
-        // 댓글 기능
-        // action은 mutation을 호출하고 mutations는 state값을 가져온다.
-        addComment: function({ commit }, commentItem) {
-            commit('ADD_COMMENT', commentItem);
-        },
-        // 위의 것 축약형
-        // addComment(context, commentItem) {
-        //   context.commit('ADD_COMMENT', commentItem);
-        //   }
         //이메일 체크
         emailcheck: function({ commit }, email) {
             axios({
@@ -203,21 +194,28 @@ export default new Vuex.Store({
                 console.log(err);
             });
         },
-        // 좋아요 취소
-        pressunlike: function ({ commit }, like) {
+        // 댓글 보내기
+        leaveMessage: function ({ commit }, msg) {
+            // alert('댓글 들어오니?');
+            // console.log('여기는 store')
+            // console.log(msg);
             axios({
-                method: 'delete',
-                url: '/challenge/task/unlike',
-                data: like,
+                method: 'post',
+                url: '/comment',
+                data: msg,
             })
             .then((res) => {
                 console.log(res);
-                // commit('PRESSUNLIKE');
             })
             .catch((err) => {
                 console.log(err);
             });
-        }
+        },
+        // 댓글 기능
+        // action은 mutation을 호출하고 mutations는 state값을 가져온다.
+        addMessage: function({ commit }, commentItem) {
+            commit('ADD_COMMENT', commentItem);
+        },
     },
 
     getters: {

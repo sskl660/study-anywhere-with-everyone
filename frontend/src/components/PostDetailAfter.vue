@@ -62,7 +62,7 @@
                     <div>
                         <!-- 댓글 -->
                         <div>
-                            <CommentBox style="d-flex justify-content-center" />
+                            <CommentBox style="d-flex justify-content-center" :taskInfo="task_info" />
                         </div>
                         <!-- <div class="writecomment">  
                             <input type="text" id="send_comment" placeholder="  댓글 달기" name="send_comment" value="" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}"/>
@@ -77,9 +77,11 @@
                 <button v-if="checkUser()" class="btn btn-danger d-flex align-items-center">
                     <div>삭제</div>
                 </button>&nbsp;
-                <button class="btn btn-warning d-flex align-items-center"><router-link :to="{ path: '/challengeRoom', query: { ChallNo: chall_info.challengeNo } }" style="text-decoration: none; color: #ffffff">
-                    <div>뒤로가기</div>
-                </router-link></button>
+                <button class="btn btn-warning d-flex align-items-center" @click="goBack()">
+                    <!-- <router-link :to="{ path: '/challengeRoom', query: { cn: chall_info.challengeNo } }" style="text-decoration: none; color: #ffffff"> -->
+                    <div style="text-decoration: none; color: #ffffff">뒤로가기</div>
+                <!-- </router-link> -->
+                </button>
             </div>
             
             <!-- <div class="d-flex" style="margin-left: 700px"> -->
@@ -107,8 +109,6 @@ import { mapActions, mapState } from 'vuex'
 
 // Vue.use(CKEditor);
 
-// import InsertModal from '@/components/modals/InsertModal.vue'
-// import DetailModal from '@/components/modals/DetailModal.vue';
 // import router from '../router/index.js'
 
 // import Vue from 'vue';
@@ -132,9 +132,6 @@ export default {
     //     },
     data: function(){
         return{
-            // 버튼에 들어갈 문구들
-            // 생성: '생성',
-            // 취소: '취소',
             뒤로: '돌아가기',
             task_info:{
                 "likemembers": [
@@ -166,8 +163,6 @@ export default {
             // imageSrc: '',
             // attachFile: false,
             // isShowing : true,
-            // grayheart : require('../assets/grayheart.png'),
-            // redheart : require('../assets/redheart.png')
         }
     },
     computed:{
@@ -212,9 +207,7 @@ export default {
                 return false;
             }
         },
-        // presslike(){
-        //     document.querySelector('.like').src ="/img/redheart.20ffa944.png";
-        // },
+        // 좋아요
         sendLike: function(like){
             document.querySelector('.like-img').style.color ="red";
             this.like.userEmail = this.userEmail;
@@ -224,21 +217,8 @@ export default {
             alert('좋아요');
             this.heart = true;
             console.log(like);
-
-            // if(document.querySelector('.like-img').style.color =="red"){
-            //     document.querySelector('.like-img').style.color =="black";
-            //     this.pressunlike(like);
-            //     this.task_info.likes --;
-            //     alert('좋아요 취소');
-            // }
-            // else{
-            //     document.querySelector('.like-img').style.color =="red";
-            //     this.pressunlike(like);
-            //     this.task_info.likes ++;
-            //     alert('좋아요')
-            // }
-
         },
+        // 좋아요 취소
         sendUnLike: function(like){
             document.querySelector('.like-img').style.color ="black";
             this.like.userEmail = this.userEmail;
@@ -248,14 +228,12 @@ export default {
             alert('좋아요 취소');
             this.heart = false;
             console.log(like);
-        }
-
-        // A함수를 만들고
-        // 클릭 시 A함수 실행
-        // A함수 안에는 이미지 변하는 함수, 통신하는 함수(mapActions함수)
-        // 페이지 reload 요청 한번 다시 하기. 리프레쉬 용
-        // getTaskInfo함수를 다시 불러라 -> 데이터 바꿔주기 좋아요 +1
-
+        },
+        // 뒤로가기
+        goBack: function(){
+            // alert('goBack function')
+            this.$router.go(-1);
+        },
         // sendPost(){
         //     let message = this.CKEditor.getData();
         //     alert(message);
@@ -368,4 +346,7 @@ export default {
     font-size: 8px;
 }
 
+i.fa.fa-paperclip {
+    font-size: 24px;
+}
 </style>
