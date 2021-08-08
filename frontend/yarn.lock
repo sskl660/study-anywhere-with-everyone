@@ -8712,9 +8712,9 @@
   "version" "2.3.4"
 
 "vue-loader-v16@npm:vue-loader@^16.1.0":
-  "integrity" "sha512-nL1bDhfMAZgTVmVkOXQaK/WJa9zFDLM9vKHbh5uGv6HeH1TmZrXMWUEVhUrACT38XPhXM4Awtjj25EvhChEgXw=="
-  "resolved" "https://registry.npmjs.org/vue-loader/-/vue-loader-16.4.1.tgz"
-  "version" "16.4.1"
+  "integrity" "sha512-WXh+7AgFxGTgb5QAkQtFeUcHNIEq3PGVQ8WskY5ZiFbWBkOwcCPRs4w/2tVyTbh2q6TVRlO3xfvIukUtjsu62A=="
+  "resolved" "https://registry.npmjs.org/vue-loader/-/vue-loader-16.5.0.tgz"
+  "version" "16.5.0"
   dependencies:
     "chalk" "^4.1.0"
     "hash-sum" "^2.0.0"
