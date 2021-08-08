@@ -4,10 +4,7 @@ import com.example.ssaziptest.domain.challenge.ChallengeListResponse;
 import com.example.ssaziptest.domain.feed.FeedEntity;
 import com.example.ssaziptest.domain.follow.FollowEntity;
 import com.example.ssaziptest.domain.group.GroupmemberEntity;
-import com.example.ssaziptest.domain.task.LikeRequest;
-import com.example.ssaziptest.domain.task.TaskEntity;
-import com.example.ssaziptest.domain.task.TaskSubmitRequest;
-import com.example.ssaziptest.domain.task.TaskUpdateRequest;
+import com.example.ssaziptest.domain.task.*;
 import com.example.ssaziptest.domain.user.UserEntity;
 import com.example.ssaziptest.repository.*;
 import lombok.AllArgsConstructor;
@@ -23,6 +20,7 @@ import javax.transaction.Transactional;
 import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -101,6 +99,20 @@ public class TaskService {
         List<String> list = taskEntity.getTaskLikes();
         list.remove(request.getUserEmail());
         taskEntity.setTaskLikes(list);
+    }
+    @Transactional
+    public TaskLikeCheckResponse likeCheck(String user_email, int task_no){
+        Optional<TaskEntity> taskEntity = taskRepository.findById(task_no);
+        List<String> list = taskEntity.get().getTaskLikes();
+        TaskLikeCheckResponse taskLikeCheckResponse =new TaskLikeCheckResponse();
+        if(list.contains(user_email)){//존재시 true 리턴
+            taskLikeCheckResponse.setUserLikeFlag(true);
+            return taskLikeCheckResponse;
+        }
+        else {
+            taskLikeCheckResponse.setUserLikeFlag(false);
+            return taskLikeCheckResponse;
+        }
     }
 
     //@Scheduled(cron = "0 * * * * *")
