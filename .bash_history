@@ -1,41 +1,3 @@
-cd ..
-mkdir database
-cd ~
-ls
-git add .
-git commit -m "Software basic plan upload"
-git config --global user.email "sskl600@naver.com"
-git config --global user.name "Kimtaehyun"
-git commit -m "Software basic plan upload"
-git push
-git status
-git add .
-git status
-git commit -m "enroll config"
-git push
-git status
-git log
-netstat -nap | grap 8080
-netstat -nap | grep 8080
-sudo vi /etc/ssh/sshd_config
-sudo install apt-get
-install apt-get
-apt-get
-ls
-cd ~
-ls
-git pull
-git add .
-git commit -m "update ERD"
-git push
-cd ~
-git pull
-git add .
-git commit -m "upload SSAZIPsql"
-git push
-cd ~
-ls
-git pull
 cd frontend/
 ls
 git add .
@@ -498,3 +460,41 @@ cd ~
 git pull
 git stash
 git pull
+cd ~
+git add .
+git commit -am "fix(Dockerfile) : downgrade dockerfile"
+git pull
+git push
+git pull
+git branch
+git branch -d chat
+git branch -D chat
+git branch
+git branch chat
+git checkout chat
+cd ~
+git pull
+pwd
+git pull
+git pull --setupstream-to=origin/<branch> chat
+git pull --setupstream-to=origin/master chat
+git pull origin master
+cd ~
+git add .
+git commit -am "save"
+cd ~
+ls
+cd ~
+git pull
+git status
+git add .
+git commit -am "update status"
+git status
+git checkout chat
+git pull master
+git pull origin master
+git status
+git add .
+git status
+git commit -am "fix conflict"
+git status

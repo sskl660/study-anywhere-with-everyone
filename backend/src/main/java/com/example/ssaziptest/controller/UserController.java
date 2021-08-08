@@ -162,13 +162,14 @@ public class UserController {
 //        return fileno;
     }
 
-//    @GetMapping(value = "viewimage/{fileno}")
-//    public String getByteImg(@PathVariable(name = "fileno") int fileno) throws Exception{
-//        Blob blob = fileRepository.getById(fileno).getFileData();
-//        int bloblength = (int)blob.length();
-//        byte[] blobAsBytes = blob.getBytes(1,bloblength);
-//        blob.free();
-//        return Arrays.toString(blobAsBytes);
-//    }
+    @GetMapping(value = "viewimage/{useremail}")
+    public String getByteImg(@PathVariable(name = "useremail") String useremail) throws Exception{
+        //Blob blob = fileRepository.getById(fileno).getFileData();
+        Blob blob = userRepository.getById(useremail).getUserImage();
+        int bloblength = (int)blob.length();
+        byte[] blobAsBytes = blob.getBytes(1,bloblength);
+        blob.free();
+        return Arrays.toString(blobAsBytes);
+    }
 
 }

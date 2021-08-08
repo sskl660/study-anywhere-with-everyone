@@ -41,13 +41,23 @@
                             <tbody>
                                 <tr v-for="(person, index) in chall_info.challengeGroup" :key="person">
                                     <th scope="row" style="background-color: #b7beda">{{ person[1] }}</th>
-                                    <td v-for="taskIdx in chall_info.challengeTaskCnt" :key="taskIdx" @click="taskblock(person[0], taskIdx - 1)">
-                                        <!-- 제출 할 수 있는 아이들 -->
-                                        <router-link to="/postDetail" v-if="task_info[index].taskNo[taskIdx - 1] == -1">
+                                    <td v-for="taskIdx in chall_info.challengeTaskCnt" :key="taskIdx">
+                                        <!-- 내가 제출 할 수 있는 아이들 -->
+                                        <router-link
+                                            :to="{ path: '/postDetail', query: { idx:taskIdx-1, cn:chall_info.challengeNo } }"
+                                            v-if="task_info[index].taskNo[taskIdx - 1] == -1 && task_info[index].userEmail == userEmail"
+                                        >
                                             <div class="before"></div>
                                         </router-link>
+                                        <!-- 제출가능이지만 내꺼가 아닌 아이들 -->
+                                        <div
+                                            class="before"
+                                            v-else-if="task_info[index].taskNo[taskIdx - 1] == -1 && task_info[index].userEmail != userEmail"
+                                        ></div>
+
                                         <!-- -2, 마감기간 지난 미제출 -->
                                         <div v-else-if="task_info[index].taskNo[taskIdx - 1] == -2" class="fail"></div>
+
                                         <!-- 숫자, 제출 한 것 -->
                                         <router-link
                                             v-else
@@ -145,7 +155,7 @@ export default {
                 {
                     userEmail: 'string',
                     userName: 'string',
-                    taskNo: [0],
+                    taskNo: [0], //여러개가 리스트로
                 },
             ],
             chall_ticket: [
@@ -156,6 +166,7 @@ export default {
             ],
             overStartDate: false, //가입 오버 타입 여부
             over: null,
+            myTask: false,
         };
     },
 
@@ -193,16 +204,17 @@ export default {
             })
                 .then((res) => {
                     this.chall_info = res.data;
-                    var startD=new Date(this.chall_info.challengeStartdate);
-                    var pre=new Date();
+                    var startD = new Date(this.chall_info.challengeStartdate);
+                    var pre = new Date();
                     //var present = new Date().getFullYear()+"-0"+(new Date().getMonth()+1)+ "-"+new Date().getDate();
                     //alert(startD.getFullYear()-pre.getFullYear());
                     //alert(startD.getFullYear()-pre.getFullYear()+startD.getMonth()-pre.getMonth()+startD.getDate()-pre.getDate());
-                    if(startD.getFullYear()-pre.getFullYear()+startD.getMonth()-pre.getMonth()+startD.getDate()-pre.getDate()<0) this.overTime(true);
+                    if (startD.getFullYear() - pre.getFullYear() + startD.getMonth() - pre.getMonth() + startD.getDate() - pre.getDate() < 0)
+                        this.overTime(true);
                     //alert(pre.getFullYear());
                     //alert(new this.chall_info.challengeStartdate);
                     //alert(new Date(present)-new Date(this.chall_info.challengeStartdate));
-                    
+
                     this.chall_info.challengeStartdate += ' 23:59:59';
                     this.countDownTimer('rest');
                     // if(new Date(this.chall_info.challengeStartdate+' 23:59:59')>new Date()){
@@ -306,12 +318,12 @@ export default {
                 return true;
             } else return false;
         },
-        makeTrue: function(){
-            this.overStartDate=true;
+        makeTrue: function() {
+            this.overStartDate = true;
         },
     },
     created: function() {
-        this.challengeno=this.$route.query.cn;
+        this.challengeno = this.$route.query.cn;
         this.getChallInfo(); //생성할 때 바로 불러줘
         this.makeArr();
         this.getTaskInfo();
@@ -331,6 +343,7 @@ export default {
         //     return this.overStartDate;
         // },
     },
+    mounted: {},
 };
 </script>
 <style scoped>
