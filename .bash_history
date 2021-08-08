@@ -1,8 +1,3 @@
-sudo vi /etc/ssh/sshd_config
-sudo install apt-get
-install apt-get
-apt-get
-ls
 cd ~
 ls
 git pull
@@ -498,3 +493,8 @@ git pull
 git pull --setupstream-to=origin/<branch> chat
 git pull --setupstream-to=origin/master chat
 git pull origin master
+cd ~
+git add .
+git commit -am "save"
+cd ~
+ls
