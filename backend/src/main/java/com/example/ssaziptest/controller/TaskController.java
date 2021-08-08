@@ -47,7 +47,7 @@ public class TaskController {
             byte[] contents = img.getBytes();
             Blob imgblob = new SerialBlob(contents);
             taskEntity.setTaskImage(imgblob);
-        }
+        }else System.out.println("img가 null이래");
         if(file!=null){
             byte[] contents = file.getBytes();
             Blob fileblob = new SerialBlob(contents);
