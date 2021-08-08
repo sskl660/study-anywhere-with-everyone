@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.rowset.serial.SerialBlob;
 import java.sql.Blob;
+import java.util.Arrays;
 
 
 @Api(tags = {"5.Task"})
@@ -54,7 +55,7 @@ public class TaskController {
             byte[] contents = img.getBytes();
             Blob imgblob = new SerialBlob(contents);
             taskEntity.setTaskImage(imgblob);
-        }
+        }else System.out.println("img가 null이래");
         if(file!=null){
             byte[] contents = file.getBytes();
             Blob fileblob = new SerialBlob(contents);
@@ -76,6 +77,27 @@ public class TaskController {
     @DeleteMapping(value = "/{taskno}")
     public void deleteTask(@PathVariable("taskno") int taskno){
         taskService.deleteTask(taskno);
+    }
+
+    /*과제 이미지 조회*/
+    @GetMapping(value = "img/{taskno}")
+    public String getTaskByteImg(@PathVariable(name = "taskno") int taskno) throws Exception{
+        //Blob blob = fileRepository.getById(fileno).getFileData();
+        Blob blob = taskRepository.getById(taskno).getTaskImage();
+        int bloblength = (int)blob.length();
+        byte[] blobAsBytes = blob.getBytes(1,bloblength);
+        blob.free();
+        return Arrays.toString(blobAsBytes);
+    }
+    /*과제 파일 조회*/
+    @GetMapping(value = "file/{taskno}")
+    public byte[] getTaskByteFile(@PathVariable(name = "taskno") int taskno) throws Exception{
+        //Blob blob = fileRepository.getById(fileno).getFileData();
+        Blob blob = taskRepository.getById(taskno).getTaskFile();
+        int bloblength = (int)blob.length();
+        byte[] blobAsBytes = blob.getBytes(1,bloblength);
+        blob.free();
+        return blobAsBytes;
     }
 
     /*좋아요*/
