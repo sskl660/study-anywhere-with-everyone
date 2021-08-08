@@ -82,7 +82,7 @@
                         </strong>
                         <br /><br />
                         <div>
-                            <strong> 난이도: </strong
+                            <strong> 난이도 : </strong
                             ><span v-for="level in chall_info.challengeLevel" :key="level"
                                 ><img src="../assets/star.png" alt="levelstar" id="levelstar"
                             /></span>
