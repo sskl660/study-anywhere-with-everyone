@@ -25,7 +25,7 @@
                                 />
                                 <div class="input-group-append">
                                     <span class="input-group-text" @click="onClickFile"><i class="fa fa-paperclip"> </i></span>
-                                    <button class="btn btn-outline-info" @click="onClickUpload">Upload</button>
+                                    <!-- <button class="btn btn-outline-info" @click="onClickUpload">Upload</button> -->
                                 </div>
                                 <input type="file" class="file-input" accept="image/*" ref="fileInput" @change="onFileChange" />
                             </div>
@@ -85,10 +85,22 @@
                 </div>
             </div>
 
-            <div class="btn-footer">
+            <div style="margin-left:907px; margin-top:7px;" class="d-flex">
+                <button class="btn btn-danger d-flex align-items-center">
+                    <router-link to="/ChallengeRoom" style="text-decoration: none; color: #ffffff">
+                    <div>취소</div>
+                    </router-link>
+                </button>&nbsp;
+                <button class="btn btn-primary d-flex align-items-center" @click="sendPost">
+                    <div>생성</div>
+                </button>
+            </div>
+
+
+            <!-- <div class="btn-footer">
                 <router-link to="/ChallengeRoom"><button type="button" class="btn btn-danger Pcancel_btn">취소</button></router-link>&nbsp;
                 <button type="button" class="btn btn-primary Pjoin_btn" @click="sendPost">생성</button>
-            </div>
+            </div> -->
 
             <!-- <div class="Pjoin_btn"><ButtonSquare :text="생성" @click="sendPost"/></div>
             <div class="Pcancel_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="취소"/></router-link></div> -->
@@ -279,5 +291,17 @@ export default {
     overflow: hidden;
     margin-top: 10px;
     margin-right: 80px;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #4c67aa;
+    border-color: #4c67aa;
+    height: 80%;
+    font-size: 8px;
+}
+
+.input-group-text{
+    font-size: 1.5rem;
 }
 </style>

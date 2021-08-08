@@ -80,7 +80,7 @@
                         </strong>
                         <br /><br />
                         <div>
-                            <strong> 난이도: </strong
+                            <strong> 난이도 : </strong
                             ><span v-for="level in chall_info.challengeLevel" :key="level"
                                 ><img src="../assets/star.png" alt="levelstar" id="levelstar"
                             /></span>
@@ -119,7 +119,7 @@ export default {
             // 가입완료: '가입완료',
             submit: true,
             fail: false,
-            challengeno: 2,
+            challengeno: 1,
 
             //이동할 테스크 고유 넘버pk
             forwardTaskNo: -1,
@@ -139,39 +139,39 @@ export default {
                 challengeTaskdeadlines: ['string'],
             },
 
-            task_info:[
-              {
-                "userEmail": "string",
-                "userName": "string",
-                 "taskNo": [
-                  0
-                ],
-              }
-            ],
+            // task_info:[
+            //   {
+            //     "userEmail": "string",
+            //     "userName": "string",
+            //      "taskNo": [
+            //       0
+            //     ],
+            //   }
+            // ],
             //-1 기간 안지난 미제출(흰)
             //-2 기간 지난 미제출(빨강)
-            // task_info: [
-            //     {
-            //         userName: '이장섭',
-            //         userEmail: 'jang@naver.com',
-            //         taskNo: [-2, 1, 2, -1, 3, -1],
-            //     },
-            //     {
-            //         userName: '차은채',
-            //         userEmail: 'cha@naver.com',
-            //         taskNo: [-2, 4, -1, -1, -1, -1],
-            //     },
-            //     {
-            //         userName: '아이유',
-            //         userEmail: 'IU-love@naver.com',
-            //         taskNo: [-2, 5, -1, 6, -1, -1],
-            //     },
-            //     {
-            //         userName: '아이유',
-            //         userEmail: 'IU-love@naver.com',
-            //         taskNo: [-1, 7, -1, -1, -1, -1],
-            //     },
-            // ],
+            task_info: [
+                {
+                    userName: '이장섭',
+                    userEmail: 'jang@naver.com',
+                    taskNo: [-2, 1, 2, -1, 3, -1],
+                },
+                {
+                    userName: '차은채',
+                    userEmail: 'cha@naver.com',
+                    taskNo: [-2, 4, -1, -1, -1, -1],
+                },
+                {
+                    userName: '아이유',
+                    userEmail: 'IU-love@naver.com',
+                    taskNo: [-2, 5, -1, 6, -1, -1],
+                },
+                {
+                    userName: '아이유',
+                    userEmail: 'IU-love@naver.com',
+                    taskNo: [-1, 7, -1, -1, -1, -1],
+                },
+            ],
             // temp: {
             //     challengeNo: 4,
             //     userEmail: 'aaa@naver.com',
@@ -304,7 +304,7 @@ export default {
     created: function() {
         this.getChallInfo(); //생성할 때 바로 불러줘
         this.makeArr();
-        this.getTaskInfo();
+        // this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
         this.getChallTicket();
     },
