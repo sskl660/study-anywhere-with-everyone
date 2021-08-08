@@ -9,7 +9,7 @@
                 <!-- 왼쪽 - 과제 설명란 -->
                 <div class="left flex-item">
                     <div class="col Tleft flex-item">
-                        <h1>{{task_info.userName + " 과제" + task_info.taskIndex}}</h1>
+                        <h1>{{task_info.userName + " 과제" + (task_info.taskIndex+1)}}</h1>
                         <!-- 작성자가 보이는 부분 -->
                     </div>
                     <div class="col Dleft flex-item">
@@ -30,7 +30,9 @@
                     </div>
 
                     <div class="like-box">
-                        <img @click="presslike(like)" class="like" src="../assets/grayheart.png" alt="likeU">
+                        <i v-show="!heart" class="fas fa-heart like-img" @click="sendLike(like)" style='cursor:pointer;'></i>
+                        <i v-show="heart" class="fas fa-heart like-img" @click="sendUnLike(like)" style='cursor:pointer; color:red'></i>
+                        <!-- <img @click="sendLike(like)" class="like-img" src="../assets/redheart.png" alt="likeU"> -->
                     </div>
 
                     <!-- <div class="like-box">
@@ -70,12 +72,23 @@
                     
                 </div>
             </div>
+
+            <div style="margin-left:876px; margin-top:7px;" class="d-flex">
+                <button v-if="checkUser()" class="btn btn-danger d-flex align-items-center">
+                    <div>삭제</div>
+                </button>&nbsp;
+                <button class="btn btn-warning d-flex align-items-center"><router-link :to="{ path: '/challengeRoom', query: { ChallNo: chall_info.challengeNo } }" style="text-decoration: none; color: #ffffff">
+                    <div>뒤로가기</div>
+                </router-link></button>
+            </div>
             
-            <div style="float: left"><button v-if="this.checkUser()" type="button" class="btn btn-danger Pdelete_btn">삭제</button></div>
-            <!-- <div class="Pjoin_btn"><ButtonSquare :text="생성" @click="sendPost"/></div>
-            <div class="Pcancel_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="취소"/></router-link></div> -->
-            <div class="Pback_btn" style="float:right"><router-link to="/ChallengeRoom"><ButtonSquare :text="뒤로"/></router-link></div>
-            
+            <!-- <div class="d-flex" style="margin-left: 700px"> -->
+                <!-- <button v-if="this.checkUser()" type="button" class="btn btn-danger Pdelete_btn">삭제</button> -->
+                <!-- <div class="Pjoin_btn"><ButtonSquare :text="생성" @click="sendPost"/></div>
+                <div class="Pcancel_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="취소"/></router-link></div> -->
+                <!-- <button type="button" ><router-link to="/ChallengeRoom">뒤로가기</router-link></button> -->
+                <!-- <div class="Pback_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="뒤로"/></router-link></div> -->
+            <!-- </div> -->
         </div>
     </div>
 </template>
@@ -147,6 +160,7 @@ export default {
                 "userEmail": "string"
             },
             ApiTaskNo: '',
+            heart : '',
             // CKEditor : '',
             // filename: '',
             // imageSrc: '',
@@ -171,6 +185,7 @@ export default {
                 // alert("과제 상세 정보가 들어왔습니다.");
                 console.log(res.data);
                 this.task_info = res.data;
+                console.log(this.task_info)
             })
             .catch((err) => {
                 console.log(err);
@@ -178,6 +193,7 @@ export default {
         },
         ...mapActions([
             'presslike',
+            'pressunlike',
         ]),
         taskNumbering: function(urlNo){
             this.ApiTaskNo = urlNo;
@@ -185,12 +201,54 @@ export default {
         },
         checkUser: function(){
             // alert('삭제버튼 안보이게 할꺼야')
-            if(this.userEmail == this.task_info.userEmail) return true;
-            else false;
+            console.log(this.task_info.userEmail)
+            console.log(this.userEmail)
+            if(this.userEmail === this.task_info.userEmail) {
+                // alert('true');
+                return true;
+            }
+            else {
+                // alert('false');
+                return false;
+            }
         },
         // presslike(){
         //     document.querySelector('.like').src ="/img/redheart.20ffa944.png";
         // },
+        sendLike: function(like){
+            document.querySelector('.like-img').style.color ="red";
+            this.like.userEmail = this.userEmail;
+            this.like.taskNo = this.task_info.taskNo;
+            this.presslike(like);
+            this.task_info.likes ++;
+            alert('좋아요');
+            this.heart = true;
+            console.log(like);
+
+            // if(document.querySelector('.like-img').style.color =="red"){
+            //     document.querySelector('.like-img').style.color =="black";
+            //     this.pressunlike(like);
+            //     this.task_info.likes --;
+            //     alert('좋아요 취소');
+            // }
+            // else{
+            //     document.querySelector('.like-img').style.color =="red";
+            //     this.pressunlike(like);
+            //     this.task_info.likes ++;
+            //     alert('좋아요')
+            // }
+
+        },
+        sendUnLike: function(like){
+            document.querySelector('.like-img').style.color ="black";
+            this.like.userEmail = this.userEmail;
+            this.like.taskNo = this.task_info.taskNo;
+            this.pressunlike(like);
+            this.task_info.likes --;
+            alert('좋아요 취소');
+            this.heart = false;
+            console.log(like);
+        }
 
         // A함수를 만들고
         // 클릭 시 A함수 실행
@@ -289,4 +347,25 @@ export default {
     top: 17px;
     left: -160px;
 }
+
+.btn-warning {
+    color: #ffffff;
+    background-color: #f0b756;
+    border-color: #f0b756;
+    height: 80%;
+    font-size: 8px;
+}
+
+.btn-warning:hover {
+  color: #ffffff;
+  background-color: #f0b756;
+  border-color: #f0b756;
+}
+
+.btn-danger{
+    height: 80%;
+    font-size: 10px;
+    font-size: 8px;
+}
+
 </style>

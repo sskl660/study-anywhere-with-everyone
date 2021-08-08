@@ -80,7 +80,7 @@
                         </strong>
                         <br /><br />
                         <div>
-                            <strong> 난이도: </strong
+                            <strong> 난이도 : </strong
                             ><span v-for="level in chall_info.challengeLevel" :key="level"
                                 ><img src="../assets/star.png" alt="levelstar" id="levelstar"
                             /></span>
@@ -119,7 +119,8 @@ export default {
             // 가입완료: '가입완료',
             submit: true,
             fail: false,
-            challengeno: 2,
+            challengeno: 1,
+            ApiChallNo: '',
 
             //이동할 테스크 고유 넘버pk
             forwardTaskNo: -1,
@@ -240,6 +241,10 @@ export default {
                 console.log(err);
             });
         },
+
+        challNumbering: function(urlNo){
+            this.ApiChallNo = urlNo;
+        },
         
         countDownTimer: function(id) {
             var date = this.chall_info.challengeStartdate;
@@ -303,6 +308,7 @@ export default {
     },
     created: function() {
         this.getChallInfo(); //생성할 때 바로 불러줘
+        this.challNumbering(this.$route.query.challengeNo);
         this.makeArr();
         this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
