@@ -5,7 +5,7 @@ import com.example.ssaziptest.domain.file.FileUploadRequest;
 import com.example.ssaziptest.domain.follow.FollowRequest;
 import com.example.ssaziptest.domain.task.TaskTicketResponse;
 import com.example.ssaziptest.domain.user.*;
-import com.example.ssaziptest.service.FileService;
+import com.example.ssaziptest.repository.UserRepository;
 import com.example.ssaziptest.service.FollowService;
 import com.example.ssaziptest.service.UserService;
 import io.swagger.annotations.Api;
@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,7 @@ public class UserController {
     @Autowired
     private FollowService followService;
     @Autowired
-    private FileService fileService;
+    private UserRepository userRepository;
 
     /*회원가입*/
     @ApiOperation(value = "회원 가입")
@@ -118,10 +119,10 @@ public class UserController {
         return new ResponseEntity<>(list,HttpStatus.OK);
     }
 
-    @ApiOperation(value = "파일업로드 테스트")
-    @PostMapping(value = "fileupload")
+    @ApiOperation(value = "유저 프로필 업로드")
+    @PostMapping(value = "profile/upload/{useremail}")
     //@ModelAttribute FileUploadRequest request
-    public int blobTest(@RequestParam("file") MultipartFile file) throws IOException, SQLException {
+    public void uploadUserProfile(@RequestParam("file") MultipartFile file, @PathVariable(name = "useremail") String userEmail) throws IOException, SQLException {
 //        Map<String, Object> param = new HashMap<>();
 //        String filename = file.getOriginalFilename();
 //        byte[] bytes;
@@ -151,8 +152,23 @@ public class UserController {
         FileUploadRequest request = FileUploadRequest.builder()
                 .fileData(blob)
                 .fileName(file.getName())
+                .userEmail(userEmail)
                 .build();
 
-        return fileService.fileUpload(request);
+//        int fileno = fileService.fileUpload(request);
+        UserEntity userEntity = userRepository.getById(userEmail);
+        userEntity.setUserImage(blob);
+        userRepository.save(userEntity);
+//        return fileno;
     }
+
+//    @GetMapping(value = "viewimage/{fileno}")
+//    public String getByteImg(@PathVariable(name = "fileno") int fileno) throws Exception{
+//        Blob blob = fileRepository.getById(fileno).getFileData();
+//        int bloblength = (int)blob.length();
+//        byte[] blobAsBytes = blob.getBytes(1,bloblength);
+//        blob.free();
+//        return Arrays.toString(blobAsBytes);
+//    }
+
 }
