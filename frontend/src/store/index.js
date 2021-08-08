@@ -171,9 +171,10 @@ export default new Vuex.Store({
                     console.log(err);
                 });
         },
+        // 좋아요
         presslike: function ({ commit }, like) {
-            alert('좋아요 들어오니?');
-            console.log(like);
+            // alert('좋아요 들어오니?');
+            // console.log(like);
             axios({
                 method: 'post',
                 url: '/challenge/task/like',
@@ -181,7 +182,22 @@ export default new Vuex.Store({
             })
             .then((res) => {
                 console.log(res);
-                commit('PRESSLIKE');
+                // commit('PRESSLIKE');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        },
+        // 좋아요 취소
+        pressunlike: function ({ commit }, like) {
+            axios({
+                method: 'delete',
+                url: '/challenge/task/unlike',
+                data: like,
+            })
+            .then((res) => {
+                console.log(res);
+                // commit('PRESSUNLIKE');
             })
             .catch((err) => {
                 console.log(err);

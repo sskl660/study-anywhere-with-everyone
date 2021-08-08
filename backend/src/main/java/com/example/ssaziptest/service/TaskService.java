@@ -4,10 +4,7 @@ import com.example.ssaziptest.domain.challenge.ChallengeListResponse;
 import com.example.ssaziptest.domain.feed.FeedEntity;
 import com.example.ssaziptest.domain.follow.FollowEntity;
 import com.example.ssaziptest.domain.group.GroupmemberEntity;
-import com.example.ssaziptest.domain.task.LikeRequest;
-import com.example.ssaziptest.domain.task.TaskEntity;
-import com.example.ssaziptest.domain.task.TaskSubmitRequest;
-import com.example.ssaziptest.domain.task.TaskUpdateRequest;
+import com.example.ssaziptest.domain.task.*;
 import com.example.ssaziptest.domain.user.UserEntity;
 import com.example.ssaziptest.repository.*;
 import lombok.AllArgsConstructor;
@@ -16,10 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.sql.rowset.serial.SerialBlob;
 import javax.transaction.Transactional;
+import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -43,9 +44,9 @@ public class TaskService {
     @Autowired
     private  FeedRepository feedRepository;
 
-
+/*
     @Transactional
-    public void submitTask(TaskSubmitRequest request){
+    public void submitTask(Blob img,Blob file, TaskSubmitRequest request) throws Exception{
 
         TaskEntity taskEntity = TaskEntity.builder()
                 .taskUserEntity(userRepository.getById(request.getUserEmail()))
@@ -53,13 +54,16 @@ public class TaskService {
                 .taskIndex(request.getTaskIndex())
                 .taskContent(request.getTaskContent())
                 .taskDesc(request.getTaskDesc())
-                .taskImage(request.getTaskImage())
-                .taskFile(request.getTaskFile())
+                .taskImage(img)
+                .taskFile(file)
                 .build();
+
         taskRepository.save(taskEntity);
 
         //System.out.println(challengeRepository.getById(request.getChallengeNo()).getChallengeTaskdeadlines().get(0));
     }
+
+ */
 
     @Transactional
     public void updateTask(TaskUpdateRequest request){
@@ -70,8 +74,8 @@ public class TaskService {
         taskEntity.setTaskIndex(requestEntity.getTaskIndex());
         taskEntity.setTaskContent(requestEntity.getTaskContent());
         taskEntity.setTaskDesc(requestEntity.getTaskDesc());
-        taskEntity.setTaskImage(request.getTaskImage());
-        taskEntity.setTaskFile(request.getTaskFile());
+//        taskEntity.setTaskImage(request.getTaskImage());
+//        taskEntity.setTaskFile(request.getTaskFile());
         taskRepository.save(taskEntity);
     }
 
@@ -95,6 +99,20 @@ public class TaskService {
         List<String> list = taskEntity.getTaskLikes();
         list.remove(request.getUserEmail());
         taskEntity.setTaskLikes(list);
+    }
+    @Transactional
+    public TaskLikeCheckResponse likeCheck(String user_email, int task_no){
+        Optional<TaskEntity> taskEntity = taskRepository.findById(task_no);
+        List<String> list = taskEntity.get().getTaskLikes();
+        TaskLikeCheckResponse taskLikeCheckResponse =new TaskLikeCheckResponse();
+        if(list.contains(user_email)){//존재시 true 리턴
+            taskLikeCheckResponse.setUserLikeFlag(true);
+            return taskLikeCheckResponse;
+        }
+        else {
+            taskLikeCheckResponse.setUserLikeFlag(false);
+            return taskLikeCheckResponse;
+        }
     }
 
     //@Scheduled(cron = "0 * * * * *")

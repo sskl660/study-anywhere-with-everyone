@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,7 +59,6 @@ public class ChallengeService {
         challengeEntity.setChallengeEnddate(request.getChallengeEnddate());
         challengeEntity.setChallengeTaskCnt(request.getChallengeTaskCnt());
         challengeEntity.setChallengeTaskdeadlines(new ArrayList<>(Arrays.asList(request.getChallengeTaskdeadlines())));
-
         challengeRepository.save(challengeEntity);
         return challengeNo;
     }
@@ -200,16 +200,28 @@ public class ChallengeService {
     }
 
     @Transactional
-    public TaskDetailResponse getTaskDetail(int taskNo){
+    public TaskDetailResponse getTaskDetail(int taskNo) throws Exception{
         TaskEntity taskEntity = taskRepository.findById(taskNo).orElse(null);
         TaskDetailResponse taskDetailResponse = new TaskDetailResponse();
         if(taskEntity!=null){
+            if(taskEntity.getTaskImage()!=null){
+                Blob blob = taskEntity.getTaskImage();
+                int bloblength = (int)blob.length();
+                byte[] blobAsBytes = blob.getBytes(1,bloblength);
+                blob.free();
+                taskDetailResponse.setTaskImage(Arrays.toString(blobAsBytes));
+            }
+            if(taskEntity.getTaskFile()!=null){
+                Blob blob = taskEntity.getTaskFile();
+                int bloblength = (int)blob.length();
+                byte[] blobAsBytes = blob.getBytes(1,bloblength);
+                blob.free();
+                taskDetailResponse.setTaskFile(Arrays.toString(blobAsBytes));
+            }
             taskDetailResponse.setTaskNo(taskNo);
             taskDetailResponse.setTaskIndex(taskEntity.getTaskIndex());
             taskDetailResponse.setTaskContent(taskEntity.getTaskContent());
             taskDetailResponse.setTaskDesc(taskEntity.getTaskDesc());
-            taskDetailResponse.setTaskImage(taskEntity.getTaskImage());
-            taskDetailResponse.setTaskFile(taskEntity.getTaskFile());
             taskDetailResponse.setUserEmail(taskEntity.getTaskUserEntity().getUserEmail());
             taskDetailResponse.setUserName(taskEntity.getTaskUserEntity().getUserName());
             taskDetailResponse.setUserTerm(taskEntity.getTaskUserEntity().getUserTerm());
