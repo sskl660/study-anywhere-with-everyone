@@ -17,11 +17,12 @@
                                 <input
                                     type="text"
                                     class="form-control"
-                                    placeholder="Input Image URL or  Drag & Drop or Select"
+                                    placeholder="과제 인증 사진을 올려주세요"
                                     v-model="filename"
                                     @dragover.prevent
                                     @dragenter.prevent
                                     @drop.prevent="onDrop"
+                                    accept=".png"
                                 />
                                 <div class="input-group-append">
                                     <span class="input-group-text" @click="onClickFile"><i class="fa fa-paperclip"> </i></span>
@@ -217,7 +218,7 @@ export default {
     },
     created: function() {
         this.challengeNo = this.$route.query.cn;
-        this.idx = this.$route.query.idx;
+        this.idx = (this.$route.query.idx+1);
     },
     computed: {
         ...mapGetters(['userName', 'userTerm']),

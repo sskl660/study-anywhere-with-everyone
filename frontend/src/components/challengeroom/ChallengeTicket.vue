@@ -51,7 +51,7 @@ export default {
       }
   },
   created: function() {
-      this.printt();
+      // this.printt();
   },
 }
 </script>

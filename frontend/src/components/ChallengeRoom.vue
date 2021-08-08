@@ -44,7 +44,7 @@
                                     <td v-for="taskIdx in chall_info.challengeTaskCnt" :key="taskIdx">
                                         <!-- 내가 제출 할 수 있는 아이들 -->
                                         <router-link
-                                            :to="{ path: '/postDetail', query: { idx:taskIdx-1, cn:chall_info.challengeNo } }"
+                                            :to="{ path: '/postDetail', query: { idx: taskIdx - 1, cn: chall_info.challengeNo } }"
                                             v-if="task_info[index].taskNo[taskIdx - 1] == -1 && task_info[index].userEmail == userEmail"
                                         >
                                             <div class="before"></div>
@@ -89,6 +89,7 @@
                                     #{{ name[1] }}
                                 </router-link>
                             </span>
+                            [정원]{{chall_info.challengeGroup.length}}/{{chall_info.challengeCapacity}} 
                         </strong>
                         <br /><br />
                         <div>
@@ -131,14 +132,7 @@ export default {
             // 가입완료: '가입완료',
             submit: true,
             fail: false,
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             challengeno: 6,
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             //이동할 테스크 고유 넘버pk
             forwardTaskNo: -1,
             // ProcessRateArr: [], 이렇게 데이터 값을 넘겨주면 안된다. 위에서 바로 메소드 함수로 접근
@@ -183,10 +177,6 @@ export default {
             for (let i = 0; i < this.chall_ticket.length; i++) {
                 ProcessRateArr[i] = true;
             }
-            console.log(ProcessRateArr);
-            // this.ProcessRateArr.push(ProcessArr[i]);
-            // ProcessArr = this.ProcessRateArr;
-            // console.log(ProcessRateArr)
             return ProcessRateArr;
         },
         // BJ 누르면 개인 정보로 넘어가는 통신
@@ -259,6 +249,7 @@ export default {
             function showRemaining() {
                 var now = new Date();
                 var distDt = _vDate - now - 1;
+                document.getElementById(id).textContent = '';
                 if (distDt < 0) {
                     clearInterval(timer);
                     if (!this.overStartDate) {
@@ -336,6 +327,7 @@ export default {
         this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
         this.getChallTicket();
+        document.getElementById(id).textContent = '';
     },
     watch: {
         // overStartDate: function() {
