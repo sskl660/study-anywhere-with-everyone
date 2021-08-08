@@ -47,15 +47,23 @@ export default {
         };
       }
     },
-    getImage: function (e) {
+    getImage: function(e) {
       //주의: BLOB 파일 용량 제한은 64kb까지임.. ->  ㅡ
-      http.get("/viewimage/3").then((response) => {
-        console.log(response.data);
+      http.get("/viewimage/youhhi0509@naver.com").then((response) => {
+        console.log(response.data.toString());
         var imgsrc =
           "data:image/png;base64," +
           btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
 
         document.getElementById("image").src = imgsrc;
+      });
+      http.get("/profile/info/youhhi0509@naver.com").then((response) => {
+        console.log(response.data);
+        var imgsrc =
+          "data:image/png;base64," +
+          btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
+
+        // document.getElementById("image").src = imgsrc;
       });
     },
   },
