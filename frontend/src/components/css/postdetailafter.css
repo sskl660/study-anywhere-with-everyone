@@ -168,6 +168,13 @@ img {
 .like-img {
   width: 90%;
   height: 80%;
+  /* margin-top: -49px; */
+  margin-left: 7%;
+}
+
+.fa-heart:before {
+  content: "\f004";
+  font-size: 35px;
 }
 
 .like-num {

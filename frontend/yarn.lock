@@ -4882,6 +4882,11 @@
     "jsprim" "^1.2.2"
     "sshpk" "^1.7.0"
 
+"http@^0.0.1-security":
+  "integrity" "sha512-RnDvP10Ty9FxqOtPZuxtebw1j4L/WiqNMDtuc1YMH1XQm5TgDRaR1G9u8upL6KD1bXHSp9eSXo/ED+8Q7FAr+g=="
+  "resolved" "https://registry.npmjs.org/http/-/http-0.0.1-security.tgz"
+  "version" "0.0.1-security"
+
 "https-browserify@^1.0.0":
   "integrity" "sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM="
   "resolved" "https://registry.npmjs.org/https-browserify/-/https-browserify-1.0.0.tgz"

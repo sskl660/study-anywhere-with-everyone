@@ -128,6 +128,7 @@ export default {
         })
         .then((response) => {
           // console.log(formData.getAll);
+          console.log('이미지 성공!')
         })
         .catch((error) => {
           // for (var pair of this.formData.entries()) {

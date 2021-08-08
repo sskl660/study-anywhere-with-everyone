@@ -33,7 +33,7 @@ export default {
                 { isLink: true, url: '/' },
                 { isLink: true, url: { path: '/profile', query: { user: 'myProfile'} } },
                 { isLink: true, url: '/challenges' },
-                { isLink: true, url: '/challengeroom'},
+                { isLink: true, url: '/Galaxy'},
             ],
             backgroundColor: '#F9D479',
             color: '#EE4748',
