@@ -10,6 +10,8 @@ import com.example.ssaziptest.repository.UserRepository;
 import com.example.ssaziptest.service.TaskService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.sql.rowset.serial.SerialBlob;
 import java.sql.Blob;
 
+
 @Api(tags = {"5.Task"})
 @RestController
 @RequestMapping(value = "/challenge/task")
 public class TaskController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TaskController.class);
+
     @Autowired
     private TaskService taskService;
     @Autowired
@@ -84,4 +89,14 @@ public class TaskController {
     public void unlike(@RequestBody LikeRequest request){
         taskService.unlike(request);
     }
+
+    /*좋아요 조회*/
+    @ApiOperation(value = "좋아요 여부")
+    @GetMapping(value = "/like/{user_email}/{task_no}")
+    public ResponseEntity<TaskLikeCheckResponse> likeCheck(@PathVariable("user_email") String user_email, @PathVariable("task_no") int task_no)throws Exception{
+        LOGGER.info(user_email+ " "+ task_no);
+        TaskLikeCheckResponse taskLikeCheckResponse=taskService.likeCheck(user_email,task_no);
+        return ResponseEntity.ok(taskLikeCheckResponse);
+    }
+
 }
