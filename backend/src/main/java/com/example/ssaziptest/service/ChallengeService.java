@@ -58,7 +58,6 @@ public class ChallengeService {
         challengeEntity.setChallengeEnddate(request.getChallengeEnddate());
         challengeEntity.setChallengeTaskCnt(request.getChallengeTaskCnt());
         challengeEntity.setChallengeTaskdeadlines(new ArrayList<>(Arrays.asList(request.getChallengeTaskdeadlines())));
-
         challengeRepository.save(challengeEntity);
         return challengeNo;
     }
