@@ -98,14 +98,14 @@ export default {
 
         document.getElementById("image").src = imgsrc;
       });
-      http.get("/profile/info/youhhi0509@naver.com").then((response) => {
-        console.log(response.data);
-        var imgsrc =
-          "data:image/png;base64," +
-          btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
+      // http.get("/profile/info/youhhi0509@naver.com").then((response) => {
+      //   console.log(response.data);
+      //   var imgsrc =
+      //     "data:image/png;base64," +
+      //     btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
 
-        // document.getElementById("image").src = imgsrc;
-      });
+      //   // document.getElementById("image").src = imgsrc;
+      // });
     },
     submitForm() {
       var frm = new FormData();
@@ -126,6 +126,7 @@ export default {
         })
         .then((response) => {
           // console.log(formData.getAll);
+          console.log('이미지 성공!')
         })
         .catch((error) => {
           // for (var pair of this.formData.entries()) {
