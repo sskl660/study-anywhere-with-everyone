@@ -39,17 +39,19 @@ public class FeedService {
         List<FeedListResponse> responses = new ArrayList<>();
 
         for(FeedEntity feedEntity:feedEntities){
-            Blob userblob = feedEntity.getFeedUserEntity().getUserImage();
-            int bloblength = (int)userblob.length();
-            byte[] blobAsBytes = userblob.getBytes(1,bloblength);
-            userblob.free();
 
             FeedListResponse response = FeedListResponse.builder()
                     .userEmail(feedEntity.getFeedUserEntity().getUserEmail())
                     .userName(feedEntity.getFeedUserEntity().getUserName())
-                    .userImage(Arrays.toString(blobAsBytes))
                     .eventtime(feedEntity.getFeedEventtime())
                     .build();
+            Blob userblob = feedEntity.getFeedUserEntity().getUserImage();
+            if(userblob!=null){
+                int bloblength = (int)userblob.length();
+                byte[] blobAsBytes = userblob.getBytes(1,bloblength);
+                userblob.free();
+                response.setUserImage(Arrays.toString(blobAsBytes));
+            }
 
             switch (feedEntity.getFeedType()){
                 //챌린지 가입
@@ -85,7 +87,6 @@ public class FeedService {
                     break;
                 //팔로우
                 case 4:
-
                     response.setFeedType(4);
                     UserEntity userEntity = userRepository.findById(feedEntity.getFeedInfo()).orElse(null);
                     Blob followerblob = userEntity.getUserImage();

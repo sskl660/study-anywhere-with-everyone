@@ -37,15 +37,18 @@ public class CommentService {
         List<CommentListResponse> list = new ArrayList<>();
         for(CommentEntity commentEntity: commentEntities){
             Blob blob = commentEntity.getCommentUserEntity().getUserImage();
-            int bloblength = (int)blob.length();
-            byte[] blobAsBytes = blob.getBytes(1,bloblength);
+
             CommentListResponse response = CommentListResponse.builder()
                     .userEmail(commentEntity.getCommentUserEntity().getUserEmail())
                     .userName(commentEntity.getCommentUserEntity().getUserName())
-                    .userImage(Arrays.toString(blobAsBytes))
                     .commentContent(commentEntity.getCommentContent())
                     .commentDate(commentEntity.getCommentDate())
                     .build();
+            if(blob!=null){
+                int bloblength = (int)blob.length();
+                byte[] blobAsBytes = blob.getBytes(1,bloblength);
+                response.setUserImage(Arrays.toString(blobAsBytes));
+            }
             list.add(response);
         }
         return list;
