@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import http from ".././util/http-common.js";
+import http from '.././util/http-common.js';
 
 export default {
   data() {
@@ -69,10 +69,10 @@ export default {
       challengeno: 0,
       taskfile: new File(),
       taskimg: new File(),
-      taskcontent: "",
-      taskdesc: "",
+      taskcontent: '',
+      taskdesc: '',
       taskindex: 0,
-      useremail: "",
+      useremail: '',
       // formData: new FormData(),
     };
   },
@@ -84,7 +84,7 @@ export default {
         let itemImage = this.$refs.uploadItemImage; //img dom 접근
         itemImage.src = window.URL.createObjectURL(image.files[0]); //img src에 blob주소 변환
         this.itemImageInfo.uploadImages = itemImage.src; //이미지 주소 data 변수에 바인딩해서 나타내게 처리
-        itemImage.width = "100"; // 이미지 넓이
+        itemImage.width = '100'; // 이미지 넓이
         itemImage.onload = () => {
           window.URL.revokeObjectURL(this.src); //나중에 반드시 해제해주어야 메모리 누수가 안생김.
         };
@@ -92,13 +92,13 @@ export default {
     },
     getImage: function(e) {
       //주의: BLOB 파일 용량 제한은 64kb까지임.. ->  ㅡ
-      http.get("/viewimage/youhhi0509@naver.com").then((response) => {
+      http.get('/viewimage/youhhi0509@naver.com').then((response) => {
         console.log(response.data);
         var imgsrc =
-          "data:image/png;base64," +
+          'data:image/png;base64,' +
           btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
 
-        document.getElementById("image").src = imgsrc;
+        document.getElementById('image').src = imgsrc;
       });
       // http.get("/profile/info/youhhi0509@naver.com").then((response) => {
       //   console.log(response.data);
@@ -111,19 +111,19 @@ export default {
     },
     submitForm() {
       var frm = new FormData();
-      var tfile = document.getElementById("taskfile");
-      var timg = document.getElementById("taskimg");
-      frm.append("challengeNo", this.challengeno);
-      frm.append("file", tfile.files[0]);
-      frm.append("img", timg.files[0]);
-      frm.append("taskContent", this.taskcontent);
-      frm.append("taskDesc", this.taskdesc);
-      frm.append("taskIndex", this.taskindex);
-      frm.append("userEmail", this.useremail);
+      var tfile = document.getElementById('taskfile');
+      var timg = document.getElementById('taskimg');
+      frm.append('challengeNo', this.challengeno);
+      frm.append('file', tfile.files[0]);
+      frm.append('img', timg.files[0]);
+      frm.append('taskContent', this.taskcontent);
+      frm.append('taskDesc', this.taskdesc);
+      frm.append('taskIndex', this.taskindex);
+      frm.append('userEmail', this.useremail);
       http
-        .post("/challenge/task", frm, {
+        .post('/challenge/task', frm, {
           header: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         })
         .then((response) => {
