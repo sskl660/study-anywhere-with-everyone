@@ -217,7 +217,7 @@ export default {
             this.like.taskNo = this.task_info.taskNo;
             this.presslike(like);
             this.task_info.likes++;
-            alert('좋아요');
+            //alert('좋아요');
             this.heart = true;
             console.log(like);
 
@@ -240,7 +240,7 @@ export default {
             this.like.taskNo = this.task_info.taskNo;
             this.pressunlike(like);
             this.task_info.likes--;
-            alert('좋아요 취소');
+            // alert('좋아요 취소');
             this.heart = false;
             console.log(like);
         },

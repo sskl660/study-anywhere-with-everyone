@@ -219,5 +219,11 @@ export default new Vuex.Store({
         userEmail: function(state) {
             return state.userEmail;
         },
+        userTerm: function (state) {
+            return state.userTerm;
+        },
+        userName: function (state) {
+            return state.userName;
+        }
     },
 });
