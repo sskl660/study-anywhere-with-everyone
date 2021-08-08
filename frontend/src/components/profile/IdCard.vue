@@ -20,11 +20,11 @@
           프로필편집
         </button>
         <!-- 계정주인이 아니고 팔로워 중에 한명이면 -->
-        <button v-else-if="this.checkFollow()" type="button" class="btn profile-edit-btn" data-bs-target="#profileEditModal">
+        <button v-else-if="this.checkFollow()" @click="cancelFollow()" type="button" class="btn profile-edit-btn" >
           언팔로우
         </button>
         <!-- 계정주인이 아니고 팔로워 중에 한명도 아니면 -->
-        <button v-else type="button" class="btn profile-edit-btn" data-bs-target="#profileEditModal">
+        <button v-else @click="makeFollow()" type="button" class="btn profile-edit-btn" >
           팔로우
         </button>
       </p>
@@ -50,6 +50,7 @@
 <script>
 import ProfileImage from "@/components/common/ProfileImage.vue"
 import { mapState } from 'vuex'
+import axios from "@/util/http-common.js";
 // import ButtonSquare from '@/components/common/ButtonSquare.vue'
 export default {
   name: 'IdCard',
@@ -59,31 +60,11 @@ export default {
   },
   data: function () {
     return {
-      followers: []
-      // 버튼에 들어갈 문구들
-      // owner: false,
-      // follow: false,
-      // unfollow: false,
-    }
-  },
-  methods: {
-    // 로그인한 사용자가 계정주인이면 true
-    checkOwner: function () {
-      // console.log('곰돌이??')
-      // console.log(this.userEmail)
-      // console.log(this.followers)
-      if (this.userEmail == this.userInfo.userEmail) return true;
-      else false;
-    },
-    // 로그인한 사용자가 계정주인이 아닌데 팔로워 중에 한명이라면 true
-    checkFollow: function () {
-      for (var i in this.followers) {
-        // console.log('찾아')
-        // console.log(i)
-        if (this.userEmail == this.followers[i][0]) return true;
-        else false;
+      followers: [],
+      follow: {
+        "followFollower": "",
+        "userEmail": "",
       }
-      
     }
   },
   props: {
@@ -97,14 +78,70 @@ export default {
       type: Array
     }
   },
+  methods: {
+    // 로그인한 사용자가 계정주인이면 true
+    checkOwner: function () {
+      // console.log(this.userInfo.userEmail) // 팔로우 당하는 사람
+      // console.log(this.userEmail) // 팔로우 요청하는 사람
+      if (this.userEmail == this.userInfo.userEmail) return true;
+      else false;
+    },
+    // 로그인한 사용자가 계정주인이 아닌데 팔로워 중에 한명이라면 true
+    checkFollow: function () {
+      for (var i in this.followers) {
+        if (this.userEmail == this.followers[i][0]) return true;
+        else false;
+      }
+    },
+    // 팔로우 요청시 필요한 데이터 넣어주는 함수
+    doFollow: function() {
+      console.log('왜 안되냐고')
+      this.follow.followFollower = this.userEmail; //팔로우 요청하는 사람
+      this.follow.userEmail = this.userInfo.userEmail;  // 팔로우 당하는 사람
+      console.log('1'+this.userInfo.userEmail)
+      console.log('2'+this.userEmail) 
+      console.log(this.follow)
+    },
+    makeFollow: function () {
+      axios({
+          method: 'post',
+          url: '/follow',
+          data: this.follow,
+        })
+          .then((res) => {
+              console.log(res.data)
+              this.$router.go()
+          })
+          .catch((err) => {
+              console.log(err);
+          });
+    },
+    cancelFollow: function () {
+      axios({
+          method: 'delete',
+          // 프로필계정 주인: 팔로우하는 사람
+          url: `/follow/${this.userInfo.userEmail}/${this.userEmail}`,
+        })
+          .then((res) => {
+              console.log('유저팔로우!!');
+              console.log(res.data)
+              this.$router.go()
+          })
+          .catch((err) => {
+              console.log(err);
+          });
+    }
+  },
   computed: {
     ...mapState([
       'userEmail',
-    ])
+    ]),
   },
   created:function() {
     this.checkOwner();
-    this.checkFollower();
+  },
+  updated: function () {
+    this.doFollow();
   }
 }
 </script>
