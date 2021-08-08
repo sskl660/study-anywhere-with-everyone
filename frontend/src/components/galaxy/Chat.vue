@@ -148,8 +148,8 @@ export default {
     // 소켓 연결
     socketConnect() {
       // 요청 서버 URL을 작성한다.
-      const serverURL = 'http://localhost:8080/ssazip';
-      // const serverURL = 'http://13.125.119.76:8080/ssazip';
+      // const serverURL = 'http://localhost:8080/ssazip';
+      const serverURL = 'http://13.125.119.76:8080/ssazip';
       // 소켓을 이용하여 Server와 연결한다.
       let socket = new SockJS(serverURL);
       // 소켓 정보를 stompClient 변수에 할당한다.
