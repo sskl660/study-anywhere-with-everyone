@@ -1,13 +1,22 @@
 package com.example.ssaziptest.controller;
 
 import com.example.ssaziptest.domain.task.LikeRequest;
+import com.example.ssaziptest.domain.task.TaskEntity;
 import com.example.ssaziptest.domain.task.TaskSubmitRequest;
 import com.example.ssaziptest.domain.task.TaskUpdateRequest;
+import com.example.ssaziptest.repository.ChallengeRepository;
+import com.example.ssaziptest.repository.TaskRepository;
+import com.example.ssaziptest.repository.UserRepository;
 import com.example.ssaziptest.service.TaskService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.sql.rowset.serial.SerialBlob;
+import java.sql.Blob;
 
 @Api(tags = {"5.Task"})
 @RestController
@@ -15,12 +24,37 @@ import org.springframework.web.bind.annotation.*;
 public class TaskController {
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private TaskRepository taskRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private ChallengeRepository challengeRepository;
 
     /*과제 제출*/
     @ApiOperation(value = "과제 제출")
-    @PostMapping(value = "")
-    public void submitTask(@RequestBody TaskSubmitRequest request){
-        taskService.submitTask(request);
+    @PostMapping(value = "", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public void submitTask(@ModelAttribute("request") TaskSubmitRequest request, MultipartFile img, MultipartFile file) throws Exception{
+
+        TaskEntity taskEntity = TaskEntity.builder()
+                .taskUserEntity(userRepository.getById(request.getUserEmail()))
+                .taskChallengeEntity(challengeRepository.getById(request.getChallengeNo()))
+                .taskIndex(request.getTaskIndex())
+                .taskContent(request.getTaskContent())
+                .taskDesc(request.getTaskDesc())
+                .build();
+        if(img!=null){
+            byte[] contents = img.getBytes();
+            Blob imgblob = new SerialBlob(contents);
+            taskEntity.setTaskImage(imgblob);
+        }
+        if(file!=null){
+            byte[] contents = file.getBytes();
+            Blob fileblob = new SerialBlob(contents);
+            taskEntity.setTaskFile(fileblob);
+        }
+
+        taskRepository.save(taskEntity);
     }
 
     /*과제 수정*/
