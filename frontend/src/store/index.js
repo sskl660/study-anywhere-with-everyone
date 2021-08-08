@@ -89,132 +89,145 @@ export default new Vuex.Store({
     },
   },
   // 젠킨스를 위한 변경사항
-
-  actions: {
-    // 회원가입
-    join: function({ commit }, credentials) {
-      axios({
-        method: 'post',
-        url: '/signup',
-        data: credentials,
-      })
-        .then((res) => {
-          console.log(res);
-          commit('JOIN');
-        })
-        .catch((err) => {
-          console.log('actionerr');
-          console.log(err);
-        });
-    },
-    // 로그인
-    login: function({ commit }, credentials) {
-      axios({
-        method: 'post',
-        url: '/login',
-        data: credentials,
-      })
-        .then((res) => {
-          console.log('로그인 통신 성공');
-          console.log(credentials);
-          console.log(res.data.userInfoResponse);
-          commit('LOGIN', res.data.accessToken);
-          commit('SET_TOKEN', res.data.userInfoResponse);
-        })
-        .catch((err) => {
-          alert('계정이나 인터넷을 확인해주세요');
-          console.log(err);
-        });
-    },
-    // 로그아웃
-    logout: function({ commit }) {
-      commit('LOGOUT');
-    },
-    // 토큰 부여
-    setToken: function({ commit }) {
-      commit('SET_TOKEN');
-    },
-    // 댓글 기능
-    // action은 mutation을 호출하고 mutations는 state값을 가져온다.
-    addComment: function({ commit }, commentItem) {
-      commit('ADD_COMMENT', commentItem);
-    },
-    // 위의 것 축약형
-    // addComment(context, commentItem) {
-    //   context.commit('ADD_COMMENT', commentItem);
-    //   }
-    //이메일 체크
-    emailcheck: function({ commit }, email) {
-      axios({
-        method: 'get',
-        url: `/signup/check/${email}`,
-      })
-        .then((res) => {
-          console.log(email);
-          commit('EMAIL_CHECK', res.data);
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-          alert('잠시후 다시 시도 해주세요');
-        });
-    },
-    // 챌린지 가입
-    joinChallenge: function({ commit }, info) {
-      axios({
-        method: 'post',
-        url: '/challenge/join',
-        data: { challengeNo: info[0], userEmail: info[1] },
-      })
-        .then((res) => {
-          // 통신이 넘어오는 것
-          console.log(res);
-          commit('JOIN_CHALL');
-          // commit('JOIN_CHALL', res.data); //res는 백엔드에서 넘겨주는 response, res.data는 body부분
-          alert('챌린지 가입이 완료되었습니다!');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    // 좋아요
+    actions: {
+        // 회원가입
+        join: function({ commit }, credentials) {
+            axios({
+                method: 'post',
+                url: '/signup',
+                data: credentials,
+            })
+                .then((res) => {
+                    console.log(res);
+                    commit('JOIN');
+                })
+                .catch((err) => {
+                    console.log('actionerr');
+                    console.log(err);
+                });
+        },
+        // 로그인
+        login: function({ commit }, credentials) {
+            axios({
+                method: 'post',
+                url: '/login',
+                data: credentials,
+            })
+                .then((res) => {
+                    console.log('로그인 통신 성공');
+                    console.log(credentials);
+                    console.log(res.data.userInfoResponse);
+                    commit('LOGIN', res.data.accessToken);
+                    commit('SET_TOKEN', res.data.userInfoResponse);
+                })
+                .catch((err) => {
+                    alert('계정이나 인터넷을 확인해주세요');
+                    console.log(err);
+                });
+        },
+        // 로그아웃
+        logout: function({ commit }) {
+            commit('LOGOUT');
+        },
+        // 토큰 부여
+        setToken: function({ commit }) {
+            commit('SET_TOKEN');
+        },
+        //이메일 체크
+        emailcheck: function({ commit }, email) {
+            axios({
+                method: 'get',
+                url: `/signup/check/${email}`,
+            })
+                .then((res) => {
+                    console.log(email);
+                    commit('EMAIL_CHECK', res.data);
+                    console.log(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    alert('잠시후 다시 시도 해주세요');
+                });
+        },
+        // 챌린지 가입
+        joinChallenge: function({ commit },info) {
+            axios({
+                method: 'post',
+                url: '/challenge/join',
+                data: {challengeNo: info[0],
+                userEmail: info[1]},
+            })
+                .then((res) => {
+                    // 통신이 넘어오는 것
+                    console.log(res);
+                    commit('JOIN_CHALL');
+                    // commit('JOIN_CHALL', res.data); //res는 백엔드에서 넘겨주는 response, res.data는 body부분
+                    alert('챌린지 가입이 완료되었습니다!');
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        // 좋아요
     presslike: function({ commit }, like) {
-      // alert('좋아요 들어오니?');
-      // console.log(like);
-      axios({
-        method: 'post',
-        url: '/challenge/task/like',
-        data: like,
-      })
-        .then((res) => {
-          console.log(res);
-          console.log(commit);
-          // commit('PRESSLIKE');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    // 좋아요 취소
-    pressunlike: function({ commit }, like) {
-      axios({
-        method: 'delete',
-        url: '/challenge/task/unlike',
-        data: like,
-      })
-        .then((res) => {
-          console.log(res);
-          console.log(commit);
-          // commit('PRESSUNLIKE');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    // 채팅 타입 변경
-    changeChatType: function({ commit }, chatType) {
-      commit('CHANGE_CHAT_TYPE', chatType);
-    },
+        // alert('좋아요 들어오니?');
+        // console.log(like);
+        axios({
+            method: 'post',
+            url: '/challenge/task/like',
+            data: like,
+            })
+            .then((res) => {
+                console.log(res);
+                console.log(commit);
+                // commit('PRESSLIKE');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        },
+        // 좋아요 취소
+        pressunlike: function({ commit }, like) {
+            axios({
+            method: 'delete',
+            url: '/challenge/task/unlike',
+            data: like,
+            })
+            .then((res) => {
+                console.log(res);
+                console.log(commit);
+                // commit('PRESSUNLIKE');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        },
+        // 댓글 보내기
+        leaveMessage: function ({ commit }, msg) {
+            // alert('댓글 들어오니?');
+            // console.log('여기는 store')
+            // console.log(msg);
+            axios({
+                method: 'post',
+                url: '/comment',
+                data: msg,
+            })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        },
+        // 댓글 기능
+        // action은 mutation을 호출하고 mutations는 state값을 가져온다.
+        addMessage: function({ commit }, commentItem) {
+            commit('ADD_COMMENT', commentItem);
+        },
+        // 채팅 타입 변경
+        changeChatType: function({ commit }, chatType) {
+        commit('CHANGE_CHAT_TYPE', chatType);
+        },
   },
 
   getters: {
