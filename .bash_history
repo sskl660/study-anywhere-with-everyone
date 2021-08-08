@@ -1,16 +1,3 @@
-cd ..
-mkdir database
-cd ~
-ls
-git add .
-git commit -m "Software basic plan upload"
-git config --global user.email "sskl600@naver.com"
-git config --global user.name "Kimtaehyun"
-git commit -m "Software basic plan upload"
-git push
-git status
-git add .
-git status
 git commit -m "enroll config"
 git push
 git status
@@ -498,3 +485,16 @@ cd ~
 git pull
 git stash
 git pull
+cd ~
+git config --system core.longpaths true
+git pull origin backend
+git pull f839a6257c71a66d0faee4e426d9970d40c3662c
+git stash
+git checkout master
+git branch -d backend 
+git stash list
+git stash drop
+git stash drop
+git stash drop
+git stash drop
+git stash drop
