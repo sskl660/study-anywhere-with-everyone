@@ -15,11 +15,13 @@ export default new Vuex.Store({
     userEmail: null,
     userName: null,
     userTerm: null,
+    // Galaxy 관련
+    chatType: null, // 채팅창 타입(Algo, CS, Job)
   },
   // state를 유지하기 위해
   plugins: [
     createPersistedState({
-      paths: ['userEmail', 'userName', 'isLogin', 'userTerm', 'config', 'comments'],
+      paths: ['userEmail', 'userName', 'isLogin', 'userTerm', 'config', 'comments', 'chatType'],
     }),
   ],
   mutations: {
@@ -80,6 +82,11 @@ export default new Vuex.Store({
     //     console.log(state);
     //     alert('좋아요를 눌렀습니다');
     // }
+    // 채팅창 타입 변경
+    CHANGE_CHAT_TYPE(state, chatType) {
+      state.chatType = chatType;
+      console.log('채팅 변경');
+    },
   },
   // 젠킨스를 위한 변경사항
 
@@ -204,6 +211,10 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
+    // 채팅 타입 변경
+    changeChatType: function({ commit }, chatType) {
+      commit('CHANGE_CHAT_TYPE', chatType);
+    },
   },
 
   getters: {
@@ -225,6 +236,9 @@ export default new Vuex.Store({
     },
     userTerm: function(state) {
       return state.userTerm;
+    },
+    chatType: function(state) {
+      return state.chatType;
     },
   },
 });

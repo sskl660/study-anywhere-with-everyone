@@ -1,17 +1,3 @@
-cd ~
-ls
-git pull
-git add .
-git commit -m "update ERD"
-git push
-cd ~
-git pull
-git add .
-git commit -m "upload SSAZIPsql"
-git push
-cd ~
-ls
-git pull
 cd frontend/
 ls
 git add .
@@ -498,3 +484,17 @@ git add .
 git commit -am "save"
 cd ~
 ls
+cd ~
+git pull
+git status
+git add .
+git commit -am "update status"
+git status
+git checkout chat
+git pull master
+git pull origin master
+git status
+git add .
+git status
+git commit -am "fix conflict"
+git status

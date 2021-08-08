@@ -2,21 +2,35 @@
 <!-- 채팅창 CSS 입히기-->
 <template>
   <div>
-    <div class="chat-room-wrap" v-if="stompClient">
-      <input
-        type="text"
-        v-model="message"
-        class="blocked mr-2"
-        ref="user-name-input"
-        @keyup.enter="sendMessage"
-        placeholder="메세지를 입력하세요!"
-      />
-    </div>
-    <div v-if="re">
-      <p v-for="(obj, index) in receivedMessages" :key="index">
-        {{ index }}
-        {{ userTerm }}기 {{ userName }} {{ obj.content }}
-      </p>
+    <div>
+      <div v-if="chatType == 1">
+        <h1 style="color:orange">Algo 채팅방 입니다.</h1>
+        <p v-for="(obj, index) in receivedMessagesAlgo" :key="index" style="color:white">
+          {{ userTerm }}기 {{ userName }} : {{ obj.content }}
+        </p>
+      </div>
+      <div v-else-if="chatType == 2">
+        <h1 style="color:orange">CS 채팅방 입니다.</h1>
+        <p v-for="(obj, index) in receivedMessagesCS" :key="index" style="color:white">
+          {{ userTerm }}기 {{ userName }} : {{ obj.content }}
+        </p>
+      </div>
+      <div v-else>
+        <h1 style="color:orange">Job 채팅방 입니다.</h1>
+        <p v-for="(obj, index) in receivedMessagesJob" :key="index" style="color:white">
+          {{ userTerm }}기 {{ userName }} : {{ obj.content }}
+        </p>
+      </div>
+      <div class="chat-room-wrap" v-if="stompClient">
+        <input
+          type="text"
+          v-model="message"
+          class="blocked mr-2"
+          ref="user-name-input"
+          @keyup.enter="sendMessage"
+          placeholder="메세지를 입력하세요!"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -36,7 +50,9 @@ export default {
       idx: '',
       message: '',
       stompClient: null,
-      receivedMessages: [],
+      receivedMessagesAlgo: [],
+      receivedMessagesCS: [],
+      receivedMessagesJob: [],
     };
   },
   mounted() {
@@ -67,7 +83,14 @@ export default {
         };
         // 해당 Endpoint로 메세지를 전송한다.
         // Destination, header, body로 구성된다.
-        this.stompClient.send('/galaxy/chat.send', {}, JSON.stringify(sendMessage));
+        // 채팅 Type에 따라서 다르게 보낸다.
+        if (this.chatType == 1) {
+          this.stompClient.send('/galaxy/chat/send/algo', {}, JSON.stringify(sendMessage));
+        } else if (this.chatType == 2) {
+          this.stompClient.send('/galaxy/chat/send/cs', {}, JSON.stringify(sendMessage));
+        } else if (this.chatType == 3) {
+          this.stompClient.send('/galaxy/chat/send/job', {}, JSON.stringify(sendMessage));
+        }
         // 메세지를 전송하였으므로 변수를 초기화 시켜준다.
         this.message = '';
       }
@@ -84,14 +107,24 @@ export default {
       } else if (receiveMessage.type === 'LEAVE') {
         receiveMessage.content = receiveMessage.sender + this.exitMessage[this.idx];
       }
+      console.log(receiveMessage.room + 'this');
 
-      this.receivedMessages.push(receiveMessage);
+      if (this.chatType == 1) {
+        this.receivedMessagesAlgo.push(receiveMessage);
+      } else if (this.chatType == 2) {
+        this.receivedMessagesCS.push(receiveMessage);
+      } else if (this.chatType == 3) {
+        this.receivedMessagesJob.push(receiveMessage);
+      }
+      // this.receivedMessages.push(receiveMessage);
     },
 
     onConnected() {
       // 해당 브로커가 중개하는 채널(/topic/public)로 연결(구독)한다.
       // destination, 보내고자하는 메세지(call back 함수)를 넣어줄 수 있다.
-      this.stompClient.subscribe('/topic/public', this.onMessageReceived);
+      this.stompClient.subscribe('/topic/algo', this.onMessageReceived);
+      this.stompClient.subscribe('/topic/cs', this.onMessageReceived);
+      this.stompClient.subscribe('/topic/job', this.onMessageReceived);
       // 메세지를 해당 경로로 전송한다.
       this.stompClient.send(
         '/galaxy/chat.addUser',
@@ -115,8 +148,8 @@ export default {
     // 소켓 연결
     socketConnect() {
       // 요청 서버 URL을 작성한다.
-      //   const serverURL = 'http://localhost:8080/ssazip';
-      const serverURL = 'http://13.125.119.76:8080/ssazip';
+      const serverURL = 'http://localhost:8080/ssazip';
+      // const serverURL = 'http://13.125.119.76:8080/ssazip';
       // 소켓을 이용하여 Server와 연결한다.
       let socket = new SockJS(serverURL);
       // 소켓 정보를 stompClient 변수에 할당한다.
@@ -143,7 +176,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['userName', 'userTerm']),
+    ...mapGetters(['userName', 'userTerm', 'chatType']),
   },
 };
 </script>
