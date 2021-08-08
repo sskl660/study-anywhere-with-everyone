@@ -1,8 +1,6 @@
 package com.example.ssaziptest.service;
 
 import com.example.ssaziptest.domain.challenge.ChallengeEntity;
-import com.example.ssaziptest.domain.file.FileEntity;
-import com.example.ssaziptest.domain.file.FileUploadRequest;
 import com.example.ssaziptest.domain.group.GroupmemberEntity;
 import com.example.ssaziptest.domain.task.TaskEntity;
 import com.example.ssaziptest.domain.task.TaskTicketResponse;
@@ -12,13 +10,12 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
-import java.io.File;
+import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,17 +31,17 @@ public class UserService {
     private ChallengeRepository challengeRepository;
     @Autowired
     private GroupmemberRepository groupmemberRepository;
-    @Autowired
-    private FileRepository fileRepository;
 
     @Transactional
     public void createUser(UserCreateRequest request){
         userRepository.save(request.toEntity());
     }
     @Transactional
-    public UserDetailResponse updateUser(UserUpdateRequest request){
+    public UserDetailResponse updateUser(UserUpdateRequest request) throws Exception{
+//        byte[] contents = file.getBytes();
+//        Blob blob = new SerialBlob(contents);
         UserEntity userEntity = userRepository.findById(request.getUserEmail()).orElse(null);
-        userEntity.setUserImage(request.getUserImage());
+//        userEntity.setUserImage(blob);
         userEntity.setUserGit(request.getUserGit());
         userEntity.setUserBlog(request.getUserBlog());
         userEntity.setUserDevstyle(request.getUserDevstyle());
@@ -80,9 +77,11 @@ public class UserService {
         return userInfoResponse.orElse(null);
     }
     @Transactional
-    public UserDetailResponse findUserById(String userEmail){
+    public UserDetailResponse findUserById(String userEmail) throws Exception{
         UserEntity userEntity = userRepository.findById(userEmail).orElse(null);
         if(userEntity!=null){
+
+
             UserDetailResponse userDetailResponse = UserDetailResponse.builder()
                     .userEmail(userEntity.getUserEmail())
                     .userName(userEntity.getUserName())
@@ -90,7 +89,6 @@ public class UserService {
                     .userTerm(userEntity.getUserTerm())
                     .userGraduated(userEntity.getUserGraduated())
                     .userTotalcomplete(userEntity.getUserTotalcomplete())
-                    .userImage(userEntity.getUserImage())
                     .userGit(userEntity.getUserGit())
                     .userBlog(userEntity.getUserBlog())
                     .userDevstyle(userEntity.getUserDevstyle())
@@ -104,6 +102,13 @@ public class UserService {
                     .userFollower(userEntity.getUserFollower())
                     .userFollowing(userEntity.getUserFollowing())
                     .build();
+            if (userEntity.getUserImage() != null) {
+                Blob blob = userEntity.getUserImage();
+                int bloblength = (int)blob.length();
+                byte[] blobAsBytes = blob.getBytes(1,bloblength);
+                blob.free();
+                userDetailResponse.setUserImage(Arrays.toString(blobAsBytes));
+            }
             return userDetailResponse;
         }
         return null;

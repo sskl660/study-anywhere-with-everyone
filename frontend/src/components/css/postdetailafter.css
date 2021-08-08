@@ -75,9 +75,10 @@
   color: #ffffff;
   background-color: #f53535;
   border-color: #f53535;
-  margin-left: 855px;
+  /* margin-left: 830px; */
   margin-top: -63px;
   width: 400px;
+  display: inline-block;
 }
 
 button.btn.btn-danger.Pdelete_btn {
@@ -180,4 +181,9 @@ img {
   position: absolute;
   margin-top: -49px;
   margin-left: 7%;
+}
+
+.fa-heart:before {
+  content: "\f004";
+  font-size: 35px;
 }
