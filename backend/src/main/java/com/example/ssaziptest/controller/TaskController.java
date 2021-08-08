@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.sql.rowset.serial.SerialBlob;
 import java.sql.Blob;
+import java.util.Arrays;
 
 @Api(tags = {"5.Task"})
 @RestController
@@ -71,6 +72,27 @@ public class TaskController {
         taskService.deleteTask(taskno);
     }
 
+    /*과제 이미지 조회*/
+    @GetMapping(value = "img/{taskno}")
+    public String getTaskByteImg(@PathVariable(name = "taskno") int taskno) throws Exception{
+        //Blob blob = fileRepository.getById(fileno).getFileData();
+        Blob blob = taskRepository.getById(taskno).getTaskImage();
+        int bloblength = (int)blob.length();
+        byte[] blobAsBytes = blob.getBytes(1,bloblength);
+        blob.free();
+        return Arrays.toString(blobAsBytes);
+    }
+    /*과제 파일 조회*/
+    @GetMapping(value = "file/{taskno}")
+    public byte[] getTaskByteFile(@PathVariable(name = "taskno") int taskno) throws Exception{
+        //Blob blob = fileRepository.getById(fileno).getFileData();
+        Blob blob = taskRepository.getById(taskno).getTaskFile();
+        int bloblength = (int)blob.length();
+        byte[] blobAsBytes = blob.getBytes(1,bloblength);
+        blob.free();
+        return blobAsBytes;
+    }
+
     /*좋아요*/
     @ApiOperation(value = "좋아요")
     @PostMapping(value = "/like")
@@ -84,4 +106,6 @@ public class TaskController {
     public void unlike(@RequestBody LikeRequest request){
         taskService.unlike(request);
     }
+
+
 }

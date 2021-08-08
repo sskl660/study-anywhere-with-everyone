@@ -55,6 +55,8 @@
       </div>
       <button type="submit">Submit</button>
     </form>
+
+    <a href="javascript:void(0);" v-on:click="download()">다운로드</a>
   </div>
 </template>
 
@@ -98,14 +100,14 @@ export default {
 
         document.getElementById("image").src = imgsrc;
       });
-      http.get("/profile/info/youhhi0509@naver.com").then((response) => {
-        console.log(response.data);
-        var imgsrc =
-          "data:image/png;base64," +
-          btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
+      // http.get("/profile/info/youhhi0509@naver.com").then((response) => {
+      //   console.log(response.data);
+      //   var imgsrc =
+      //     "data:image/png;base64," +
+      //     btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
 
-        // document.getElementById("image").src = imgsrc;
-      });
+      //   // document.getElementById("image").src = imgsrc;
+      // });
     },
     submitForm() {
       var frm = new FormData();
@@ -132,6 +134,21 @@ export default {
           //   console.log(pair[0] + "," + pair[1]);
           // }
           console.log(error);
+        });
+    },
+    download() {
+      http
+        .get("/challenge/task/file/11", { responseType: "blob" })
+        .then(({ data }) => {
+          const url = window.URL.createObjectURL(new Blob([data], { type: "image/png" }));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "aaa.png");
+          document.body.appendChild(link);
+          link.click();
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
   },
