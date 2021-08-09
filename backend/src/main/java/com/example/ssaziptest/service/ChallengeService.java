@@ -234,8 +234,8 @@ public class ChallengeService {
 
     @Transactional
     public List<ChallengeListResponse> searchChallenges(String keyword){
-        List<ChallengeEntity> challengeEntities = challengeRepository.findByChallengeName(keyword);
-        List<GroupmemberEntity> groupmemberEntities = groupmemberRepository.findByGroupUsername(keyword);
+        List<ChallengeEntity> challengeEntities = challengeRepository.findByChallengeNameContaining(keyword);
+        List<GroupmemberEntity> groupmemberEntities = groupmemberRepository.findByGroupUsernameContaining(keyword);
         for(GroupmemberEntity groupmemberEntity:groupmemberEntities){
             ChallengeEntity challengeEntity = challengeRepository.findById(groupmemberEntity.getGroupChallengeEntity().getChallengeNo()).orElse(null);
             challengeEntities.add(challengeEntity);
