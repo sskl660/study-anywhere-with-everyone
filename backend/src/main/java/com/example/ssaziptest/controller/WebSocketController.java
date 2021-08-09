@@ -28,6 +28,22 @@ public class WebSocketController {
         template.convertAndSend("/topic/chat/algo", message);
         // Client는 해당 주소를 SUBSCIBE하고 있다가 메세지를 화면에 출력!
     }
+    // 해당 경로로 메세지 발행 요청!
+    @MessageMapping("/chat/send/cs")
+    public void message2(ChatVO message) {
+        // 해당 경로로 메세지 브로드 캐스팅!
+        // 즉, 해당 경로는 채팅방을 구분하는 값이 된다!
+        template.convertAndSend("/topic/chat/cs", message);
+        // Client는 해당 주소를 SUBSCIBE하고 있다가 메세지를 화면에 출력!
+    }
+    // 해당 경로로 메세지 발행 요청!
+    @MessageMapping("/chat/send/job")
+    public void message3(ChatVO message) {
+        // 해당 경로로 메세지 브로드 캐스팅!
+        // 즉, 해당 경로는 채팅방을 구분하는 값이 된다!
+        template.convertAndSend("/topic/chat/job", message);
+        // Client는 해당 주소를 SUBSCIBE하고 있다가 메세지를 화면에 출력!
+    }
 
 
 //    @MessageMapping("/chat/send/algo")
