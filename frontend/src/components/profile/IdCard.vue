@@ -5,14 +5,15 @@
       <!-- 프로필카드 이미지 -->
       <!-- <ProfileImage class="profile-img-box" :imgData="this.imgData"/> -->
       <img id="image" class="profile-img-default" src="" alt="" >
+      <!-- <img  class="profile-img-default" src="/img/ssazip.43ffb363.png" alt="" > -->
       <!-- 깃헙 아이콘. 블로그 아이콘 클릭시 해당 링크로 이동 -->
       <div>
         <form @submit.prevent="submitForm" class="form" enctype="multipart/form-data">
           <div>
             <input style="display:none" type="file" ref="taskimg" name="taskimg" id="taskimg"/>
           </div>
-          <button @click="profileShow()" class="profile-img-btn" id="shownbtn">사진 업로드</button>
-          <button type="submit">Submit</button>
+          <!-- <button @click="profileShow()" class="profile-img-btn" id="shownbtn">사진 업로드</button>
+          <button type="submit">Submit</button> -->
         </form>
         <!-- <img style="width:100px;height:100px;" id="image" src="" alt=""> -->
         <!-- <button @click="getImage()">버튼</button> -->
@@ -49,10 +50,10 @@
       </div>
       <!-- 유저정보 -->
       <div align="left" style="display: inline-block; margin-left:30px;">
-        <p>{{userInfo.userMbti}}</p>
-        <p>{{userInfo.userDevstyle}}</p>
-        <p>{{userInfo.userWishfield}}</p>
-        <p>{{userInfo.userTechstack}}</p>  
+        <p>  &nbsp;{{userInfo.userMbti}}</p>
+        <p>  &nbsp;{{userInfo.userDevstyle}}</p>
+        <p>  &nbsp;{{userInfo.userWishfield}}</p>
+        <p>  &nbsp;{{userInfo.userTechstack}}</p>  
       </div>
  
     </div>
@@ -109,12 +110,13 @@ export default {
     },
     // 팔로우 요청시 필요한 데이터 넣어주는 함수
     doFollow: function() {
-      console.log('왜 안되냐고')
+      // console.log('왜 안되냐고')
       this.follow.followFollower = this.userEmail; //팔로우 요청하는 사람
       this.follow.userEmail = this.userInfo.userEmail;  // 팔로우 당하는 사람
-      console.log('1'+this.userInfo.userEmail)
-      console.log('2'+this.userEmail) 
-      console.log(this.follow)
+      // console.log(this.userInfo)
+      // console.log('1'+this.userInfo.userEmail)
+      // console.log('2'+this.userEmail) 
+      // console.log(this.follow)
     },
     makeFollow: function () {
       axios({
@@ -137,8 +139,8 @@ export default {
           url: `/follow/${this.userInfo.userEmail}/${this.userEmail}`,
         })
           .then((res) => {
-              console.log('유저팔로우!!');
-              console.log(res.data)
+              // console.log('유저팔로우!!');
+              // console.log(res.data)
               this.$router.go()
           })
           .catch((err) => {
@@ -151,23 +153,35 @@ export default {
     },
     getImage: function(e) {
       //주의: BLOB 파일 용량 제한은 64kb까지임.. ->  ㅡ
-      http.get(`/viewimage/${this.userInfo.userEmail}`).then((response) => {
-        console.log('이미지성공')
-        console.log(response.data);
+      http.get(`/viewimage/${this.userInfo.userEmail}`)
+      .then((response) => {
+        // console.log('이미지성공')
+        // console.log(response.data);
         var imgsrc =
           "data:image/png;base64," +
           btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
         document.getElementById("image").src = imgsrc;
         this.imgData=imgsrc;
+        // console.log("야압")
+        // console.log(imgsrc)
+      })
+      .catch((error) => {
+        // console.log("이미지없음")
+        // console.log(this.imgsrc);
+        if (this.imgsrc == null) {
+          // console.log("얍")
+          document.getElementById("image").src = "/img/ssazip.43ffb363.png"
+        }
       });
     },
+    
     submitForm() {
       var frm = new FormData();
       var timg = document.getElementById("taskimg");
       frm.append("file", timg.files[0]);
       frm.append("useremail", this.userInfo.userEmail);
-      console.log('이미지!!')
-      console.log(this.userInfo.userEmail)
+      // console.log('이미지!!')
+      // console.log(this.userInfo.userEmail)
       http
         .post(`/profile/upload/${this.userInfo.userEmail}`, frm, {
           header: {

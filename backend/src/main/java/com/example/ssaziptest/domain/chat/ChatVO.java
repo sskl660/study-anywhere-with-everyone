@@ -1,6 +1,5 @@
-package com.example.ssaziptest.domain.vo;
+package com.example.ssaziptest.domain.chat;
 
-import com.example.ssaziptest.domain.enums.MessageType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,9 @@ import lombok.NoArgsConstructor;
 public class ChatVO {
 
     // 현재 상태를 저장한다(입장, 퇴장, 채팅 중)
-    private MessageType type;
+//    private MessageType type;
+    // 채팅 방
+    private String roomId;
     // 채팅 내용
     private String content;
     // 보낸 사람

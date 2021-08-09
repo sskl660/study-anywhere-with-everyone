@@ -1,69 +1,3 @@
-cd frontend/
-ls
-git add .
-git commit -m "dockerfile added"
-git push
-git config --system --unset credential.helper
-git config --system --unset credential.helper
-cd ~
-git add .
-ls
-git pull
-6607asasas!
-git pull
-git commit -m "test pipeline"
-git push
-git commit -am "pipeline test2"
-git push
-git commit -am "pipeline test3"
-git push
-git commit -am "SUCCESSgit push!"
-git commit -am "SUCCESSgit commit -am "SUCCESSgit push!"!"
-git commit -am "SUCCESS..!"
-git push
-git config --global user.name "taehyunKim
-"
-git config --global user.emial sskl600@naver.com
-git pull
-cd ~/.ssh
-cd ~./ssh
-mkdir ~/.ssh
-chmod 700 ~/.ssh
-cd ~/.ssh
-ssh-keygen -t rsa -b 4096 -C "GitHub Email@example.com"
-ls -al
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa
-cd ~
-git pull
-git clone https://lab.ssafy.com/s05-webmobile2-sub2/S05P12A307.git
-6607asasas!
-ls
-rm -rf S05P12A307/
-git commit -am "test"
-git push
-cat ~/.ssh/id_rsa.pub
-git push
-git remote remove origin
-git remote add origin git@lab.ssafy.com:s05-webmobile2-sub2/S05P12A307.git
-git pull
-git status
-ls
-git commit -am "test"
-git add .
-git commit -am "test"
-git push
-git push --set-upstream origin master
-git push --set-upstream origin master
-git push
-git push --set-upstream origin mastergit@lab.ssafy.com:s05-webmobile2-sub2/S05P12A307.git
-~/.ssh/config
-vi ~/.ssh/config
-cat ~/.ssh/config
-ls ~/.ssh/config
-cd ~/.ssh/config
-git config credentail.helper store
-git config credential.helper cache
 git pull
 vi ~/.ssh/config
 git remote remove origin
@@ -498,3 +432,69 @@ git add .
 git status
 git commit -am "fix conflict"
 git status
+cd ~
+git add .
+git commit -am "update(Chat) : update chat type change demo"
+git pull
+git pull origin master
+git pull origin master
+git add .
+git commit -am "merge master branch"
+git pull origin master
+git status
+git add .
+git commit -am "merge master"
+git push
+git push --set-upstream origin chat
+git pull origin master
+git status
+git add .
+git commit -am "fix(URL) : fix Server URL"
+git status
+git push
+git pull master
+git pull origin master
+git status
+git add .
+git status
+git add .
+git commit -am "update(chat)"
+git pull origin master
+cd ~
+git pull origin master
+git add .
+git commit -am "update(chat) : update chat server"
+git pull origin master
+git status
+git add .
+git commit -am "manage conflict"
+git status
+git push
+git status
+git add .
+git commit -am "chatype change demo"
+git pull origin master
+git status
+git add .
+git commit -am "merge"
+git push
+git add .
+git commit -am "fix URL"
+git pull origin master
+git status
+git add .
+git commit -am "merge"
+git push
+git commit -am "update(Chat) : test demo"
+git pull origin master
+git status
+git add .
+git commit -am "merge"
+git push
+git commit -am "update change chat type"
+git pull origin amster
+git pull origin master
+git status
+git add .
+git commit -am "merge"
+git push
