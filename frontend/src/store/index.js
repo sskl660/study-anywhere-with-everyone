@@ -71,7 +71,11 @@ export default new Vuex.Store({
     EMAIL_CHECK(state, returnflag) {
       // state는 기본값. 그냥 써주기 // returnflag는 res.data(t인지 f인지 들어있는 정보)
       state.emailposi = returnflag; // 저장해주고 값 바꿔주기
-      alert('중복체크 완료' + returnflag);
+      if (!returnflag) {
+        alert('이메일이 중복 됩니다!');
+      } else {
+        alert('중복체크 완료!');
+      }
     },
     JOIN_CHALL(state) {
       // state에서 사용하는 변수는 클라이언트가 사용하는 변수들.
