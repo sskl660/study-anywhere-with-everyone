@@ -1,36 +1,36 @@
 <template>
-  <div>
-    <!-- 상단 문구 -->
-    <h1 class="display-4 message">Coming Soon...</h1>
+    <div>
+        <!-- 상단 문구 -->
+        <h1 class="display-4 message">Coming Soon...</h1>
 
-    <!-- flexbox를 이용해 위치 조정 -->
-    <div class="d-flex justify-content-center welcome-container">
-      <div>
-        <!-- 별 구현 -->
-        <div class="star1-box">
-          <img class="star1" src="../assets/star.png" alt="star" />
-        </div>
-        <div class="star2-box">
-          <img class="star2" src="../assets/star.png" alt="star" />
-        </div>
-        <div class="star3-box">
-          <img class="star3" src="../assets/star.png" alt="star" />
-        </div>
+        <!-- flexbox를 이용해 위치 조정 -->
+        <div class="d-flex justify-content-center welcome-container">
+            <div>
+                <!-- 별 구현 -->
+                <div class="star1-box">
+                    <img class="star1" src="../assets/star.png" alt="star" />
+                </div>
+                <div class="star2-box">
+                    <img class="star2" src="../assets/star.png" alt="star" />
+                </div>
+                <div class="star3-box">
+                    <img class="star3" src="../assets/star.png" alt="star" />
+                </div>
 
-        <!-- SSAZIP 구현 -->
-        <img class="ssazip" src="../assets/ssazip.png" alt="ssazip" />
+                <!-- SSAZIP 구현 -->
+                <img class="ssazip" src="../assets/ssazip.png" alt="ssazip" />
 
-        <!-- 로그인, 회원가입 버튼 -->
-        <div class="d-flex menu">
-          <div class="login-btn"><LoginModal text="Login" /></div>
-          <div class="join-btn">
-            <router-link to="/join"><ButtonRound text="Join"/></router-link>
-          </div>
+                <!-- 로그인, 회원가입 버튼 -->
+                <div class="d-flex menu">
+                    <div class="login-btn"><LoginModal text="Login" /></div>
+                    <div class="join-btn">
+                        <router-link to="/join"><ButtonRound text="Join"/></router-link>
+                    </div>
+                </div>
+                <div><GalaxyEntranceModal /></div>
+            </div>
         </div>
-        <div><GalaxyEntranceModal /></div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -38,40 +38,56 @@ import ButtonRound from '@/components/common/ButtonRound';
 import LoginModal from '@/components/welcome/LoginModal';
 import '@/views/css/welcome.css';
 import GalaxyEntranceModal from '@/components/galaxy/GalaxyEntrance';
-
+import { mapGetters } from 'vuex';
 export default {
-  name: 'Welcome',
-  components: {
-    ButtonRound, // 둥근 버튼을 가져옴
-    LoginModal, // 로그인 모달을 가져옴
-    GalaxyEntranceModal,
-  },
+    name: 'Welcome',
+    components: {
+        ButtonRound, // 둥근 버튼을 가져옴
+        LoginModal, // 로그인 모달을 가져옴
+        GalaxyEntranceModal,
+    },
+    methods: {
+        //로그인 상태라면 챌린지(임시) 페이지로 이동
+        logined: function() {
+            // alert(this.isLogin);
+            if (this.isLogin) {
+                //alert(this.isLogin);
+                this.$router.push({ path: '/challenges' });
+            }
+        },
+    },
+    created: function() {
+        this.logined();
+    },
+    computed: {
+        ...mapGetters(['isLogin']),
+    },
 };
 </script>
 
 <style scoped>
 /* 로그인과 회원가입 버튼을 감싸는 부분 */
 .menu {
-  padding-right: 0px;
+    padding-right: 0px;
 }
 
 /* 회원가입 버튼 */
 .join-btn .btn-light {
-  color: #ffffff;
-  background-color: #1c84c4;
-  border-color: #1c84c4;
-  font-size: 25px;
-  font-weight: bold;
-  width: 180px;
-  height: 60px;
-  margin-left: 90px;
+    color: #ffffff;
+    background-color: #1c84c4;
+    border-color: #1c84c4;
+    font-size: 25px;
+    font-weight: bold;
+    width: 180px;
+    height: 60px;
+    margin-left: 90px;
 }
 
 /* 회원가입 버튼 색 변경 방지 */
 .join-btn .btn-light:hover {
-  color: #ffffff;
-  background-color: #1c84c4;
-  border-color: #1c84c4;
+    color: #ffffff;
+    background-color: #1c84c4;
+    border-color: #1c84c4;
 }
 
 .btn-check:checked + .btn-light,
@@ -79,8 +95,8 @@ export default {
 .btn-light:active,
 .btn-light.active,
 .show > .btn-light.dropdown-toggle {
-  color: #ffffff;
-  background-color: #1c84c4;
-  border-color: #1c84c4;
+    color: #ffffff;
+    background-color: #1c84c4;
+    border-color: #1c84c4;
 }
 </style>
