@@ -110,10 +110,10 @@ export default {
     },
     // 팔로우 요청시 필요한 데이터 넣어주는 함수
     doFollow: function() {
-      console.log('왜 안되냐고')
+      // console.log('왜 안되냐고')
       this.follow.followFollower = this.userEmail; //팔로우 요청하는 사람
       this.follow.userEmail = this.userInfo.userEmail;  // 팔로우 당하는 사람
-      console.log(this.userInfo)
+      // console.log(this.userInfo)
       // console.log('1'+this.userInfo.userEmail)
       // console.log('2'+this.userEmail) 
       // console.log(this.follow)
@@ -139,8 +139,8 @@ export default {
           url: `/follow/${this.userInfo.userEmail}/${this.userEmail}`,
         })
           .then((res) => {
-              console.log('유저팔로우!!');
-              console.log(res.data)
+              // console.log('유저팔로우!!');
+              // console.log(res.data)
               this.$router.go()
           })
           .catch((err) => {
@@ -155,15 +155,15 @@ export default {
       //주의: BLOB 파일 용량 제한은 64kb까지임.. ->  ㅡ
       http.get(`/viewimage/${this.userInfo.userEmail}`)
       .then((response) => {
-        console.log('이미지성공')
-        console.log(response.data);
+        // console.log('이미지성공')
+        // console.log(response.data);
         var imgsrc =
           "data:image/png;base64," +
           btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
         document.getElementById("image").src = imgsrc;
         this.imgData=imgsrc;
-        console.log("야압")
-        console.log(imgsrc)
+        // console.log("야압")
+        // console.log(imgsrc)
       })
       .catch((error) => {
         // console.log("이미지없음")
@@ -180,8 +180,8 @@ export default {
       var timg = document.getElementById("taskimg");
       frm.append("file", timg.files[0]);
       frm.append("useremail", this.userInfo.userEmail);
-      console.log('이미지!!')
-      console.log(this.userInfo.userEmail)
+      // console.log('이미지!!')
+      // console.log(this.userInfo.userEmail)
       http
         .post(`/profile/upload/${this.userInfo.userEmail}`, frm, {
           header: {
