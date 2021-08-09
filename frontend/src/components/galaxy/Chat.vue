@@ -40,6 +40,7 @@
 import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { mapGetters } from 'vuex';
+import { chatURL } from '@/util/http-common.js';
 
 export default {
   name: 'App',
@@ -122,9 +123,9 @@ export default {
     onConnected() {
       // 해당 브로커가 중개하는 채널(/topic/public)로 연결(구독)한다.
       // destination, 보내고자하는 메세지(call back 함수)를 넣어줄 수 있다.
-      this.stompClient.subscribe('/topic/algo', this.onMessageReceived);
-      this.stompClient.subscribe('/topic/cs', this.onMessageReceived);
-      this.stompClient.subscribe('/topic/job', this.onMessageReceived);
+      this.stompClient.subscribe('/topic/chat/algo', this.onMessageReceived);
+      // this.stompClient.subscribe('/topic/cs', this.onMessageReceived);
+      // this.stompClient.subscribe('/topic/job', this.onMessageReceived);
       // 메세지를 해당 경로로 전송한다.
       this.stompClient.send(
         '/galaxy/chat.addUser',
@@ -149,9 +150,9 @@ export default {
     socketConnect() {
       // 요청 서버 URL을 작성한다.
       // const serverURL = 'http://localhost:8080/ssazip';
-      const serverURL = 'http://13.125.119.76:8080/ssazip';
+      // const serverURL = 'http://13.125.119.76:8080/ssazip';
       // 소켓을 이용하여 Server와 연결한다.
-      let socket = new SockJS(serverURL);
+      let socket = new SockJS(chatURL);
       // 소켓 정보를 stompClient 변수에 할당한다.
       this.stompClient = Stomp.over(socket);
       // header, connectCallback, errorCallback을 connect 메서드에 입력한다.
