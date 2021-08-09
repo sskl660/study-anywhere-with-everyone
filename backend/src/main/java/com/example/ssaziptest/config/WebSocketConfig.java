@@ -7,7 +7,7 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
 @Configuration
-@EnableWebSocketMessageBroker // websocket 활성화
+@EnableWebSocketMessageBroker // STOMP websocket 활성화
 // 메세지를 중개 및 라우팅하는 브로커를 설정한다.
 // registerStompEndPoints(Client 등록), configureMessageBroker(메세지 브로드캐스팅) 두 가지를 오버라이딩 해야한다.
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
@@ -27,7 +27,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         // setApplicationDestinationPrefixes는 브로드 캐스팅의 시작 주소(접두사)를 설정한다.
-        // enableSimpleBroker는 해당 메세지 주솟값을 받아서 처리하는 Broker를 활성화 시키는 함수이다(여기서는 /topic).
-        registry.setApplicationDestinationPrefixes("/galaxy").enableSimpleBroker("/topic");
+         registry.setApplicationDestinationPrefixes("/galaxy");
+        // enableSimpleBroker는 해당 메세지 주솟값을 담당하여 처리하는 Broker를 활성화 시키는 함수이다(여기서는 /topic).
+        registry.enableSimpleBroker("/topic");
     }
 }

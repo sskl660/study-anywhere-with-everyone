@@ -59,7 +59,6 @@ public class ChallengeService {
         challengeEntity.setChallengeEnddate(request.getChallengeEnddate());
         challengeEntity.setChallengeTaskCnt(request.getChallengeTaskCnt());
         challengeEntity.setChallengeTaskdeadlines(new ArrayList<>(Arrays.asList(request.getChallengeTaskdeadlines())));
-
         challengeRepository.save(challengeEntity);
         return challengeNo;
     }
@@ -234,8 +233,8 @@ public class ChallengeService {
 
     @Transactional
     public List<ChallengeListResponse> searchChallenges(String keyword){
-        List<ChallengeEntity> challengeEntities = challengeRepository.findByChallengeName(keyword);
-        List<GroupmemberEntity> groupmemberEntities = groupmemberRepository.findByGroupUsername(keyword);
+        List<ChallengeEntity> challengeEntities = challengeRepository.findByChallengeNameContaining(keyword);
+        List<GroupmemberEntity> groupmemberEntities = groupmemberRepository.findByGroupUsernameContaining(keyword);
         for(GroupmemberEntity groupmemberEntity:groupmemberEntities){
             ChallengeEntity challengeEntity = challengeRepository.findById(groupmemberEntity.getGroupChallengeEntity().getChallengeNo()).orElse(null);
             challengeEntities.add(challengeEntity);

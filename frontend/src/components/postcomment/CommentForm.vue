@@ -1,34 +1,55 @@
 <template>
   <div>
-      <input type="text" id="send_comment" placeholder="  댓글 달기" v-model.trim="commentOpinion" @keypress.enter="addOpinion"/>&nbsp;
-      <button type="button" class="btn btn-primary sendbtn" @click="addOpinion" id="sendbtn">전송</button>
+      <input type="text" class="sendMsg" id="send_comment" placeholder="  댓글 달기" v-model.trim="commentContent" @keypress.enter="addComment(leaveMsg)"/>&nbsp;
+      <button type="button" class="btn btn-primary sendbtn" @click="addComment(leaveMsg)" id="sendbtn">전송</button>
   </div>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+
 export default {
     name: 'CommentForm',
+    props:{
+        taskInfo:{
+            type : Array
+        },
+    },
     data(){
         return{
-            commentOpinion: '',
+            commentContent: '',
+            leaveMsg:{
+                "commentContent": "string",
+                "taskNo": 0,
+                "userEmail": "string"
+            },
         }
     },
+    computed:{
+        ...mapState([
+            'userEmail',
+        ])
+    },
     methods:{
-        addOpinion(){
-            const opinionItem = {
-                opinion: this.commentOpinion,
-                completed: false,
-            };
-            if (this.commentOpinion)
-                //actions가 가지고 있는 함수 호출 하려면 dispatch를 해야한다.
-                // action같은 경우는 일반적인 메소드와 똑같이 사용할 것이다.
-                this.$store.dispatch('addComment', opinionItem);
-                // store가 가지고 있는 mutations를 호출하는 것
-                // 첫번째 인자값으로 mutations의 이름을 가져간다
-                // mutation은 state를 관리하기 때문에 mutation이 가지는 메소드 이름은 대문자
-                //this.$store.commit('ADD_COMMENT', opinionItem);
-                // this.$store.state.comments.push(opinionItem);
-            this.commentOpinion = '';
+        ...mapActions([
+            'leaveMessage',
+        ]),
+        addComment: function(leaveMsg){
+            this.leaveMsg.userEmail = this.userEmail;
+            console.log(this.leaveMsg.taskNo);
+            console.log(this.taskInfo);
+            this.leaveMsg.taskNo = this.taskInfo.taskNo;
+            this.leaveMsg.commentContent = document.querySelector('.sendMsg').value
+
+            if(this.leaveMsg.commentContent == ''){
+                return false;
+            }
+
+            console.log('메시지 들어오니?')
+            console.log(this.commentContent)
+
+            this.leaveMessage(leaveMsg);
+            this.$router.go();
         },
     }
 }

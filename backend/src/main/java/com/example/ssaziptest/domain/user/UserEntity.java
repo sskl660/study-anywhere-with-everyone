@@ -57,7 +57,7 @@ public class UserEntity {
     @Column(name = "user_totalcomplete")
     private Integer userTotalcomplete;
     @Lob
-    @Column(name = "user_image")
+    @Column(name = "user_image", columnDefinition = "")
     private Blob userImage;
     @Column(name = "user_git")
     private String userGit;

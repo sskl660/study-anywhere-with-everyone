@@ -1,7 +1,7 @@
 <template>
   <div>
     <button v-if="isLogin" type="button" class="btn btn-primary logout-btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
-      <i class="fas fa-sign-out-alt fa-2x"></i>
+      <i class="fas fa-sign-out-alt fa-flip-horizontal fa-2x"></i>
     </button>
 
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
@@ -57,7 +57,7 @@ import {mapActions, mapState} from 'vuex'
     border-radius: 75px;
     top: 30px;
     left: 30px;
-    padding-left: 15px;
+    padding-right: 15px;
     cursor: pointer;
     border-style: none;
     box-shadow: none;

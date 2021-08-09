@@ -41,13 +41,23 @@
                             <tbody>
                                 <tr v-for="(person, index) in chall_info.challengeGroup" :key="person">
                                     <th scope="row" style="background-color: #b7beda">{{ person[1] }}</th>
-                                    <td v-for="taskIdx in chall_info.challengeTaskCnt" :key="taskIdx" @click="taskblock(person[0], taskIdx - 1)">
-                                        <!-- 제출 할 수 있는 아이들 -->
-                                        <router-link to="/postDetail" v-if="task_info[index].taskNo[taskIdx - 1] == -1">
+                                    <td v-for="taskIdx in chall_info.challengeTaskCnt" :key="taskIdx">
+                                        <!-- 내가 제출 할 수 있는 아이들 -->
+                                        <router-link
+                                            :to="{ path: '/postDetail', query: { idx: taskIdx - 1, cn: chall_info.challengeNo } }"
+                                            v-if="task_info[index].taskNo[taskIdx - 1] == -1 && task_info[index].userEmail == userEmail"
+                                        >
                                             <div class="before"></div>
                                         </router-link>
+                                        <!-- 제출가능이지만 내꺼가 아닌 아이들 -->
+                                        <div
+                                            class="before"
+                                            v-else-if="task_info[index].taskNo[taskIdx - 1] == -1 && task_info[index].userEmail != userEmail"
+                                        ></div>
+
                                         <!-- -2, 마감기간 지난 미제출 -->
                                         <div v-else-if="task_info[index].taskNo[taskIdx - 1] == -2" class="fail"></div>
+
                                         <!-- 숫자, 제출 한 것 -->
                                         <router-link
                                             v-else
@@ -79,6 +89,7 @@
                                     #{{ name[1] }}
                                 </router-link>
                             </span>
+                            [정원]{{chall_info.challengeGroup.length}}/{{chall_info.challengeCapacity}} 
                         </strong>
                         <br /><br />
                         <div>
@@ -121,14 +132,8 @@ export default {
             // 가입완료: '가입완료',
             submit: true,
             fail: false,
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            challengeno: 6,
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+            challengeno: '',
+            
             //이동할 테스크 고유 넘버pk
             forwardTaskNo: -1,
             // ProcessRateArr: [], 이렇게 데이터 값을 넘겨주면 안된다. 위에서 바로 메소드 함수로 접근
@@ -151,7 +156,7 @@ export default {
                 {
                     userEmail: 'string',
                     userName: 'string',
-                    taskNo: [0],
+                    taskNo: [0], //여러개가 리스트로
                 },
             ],
             chall_ticket: [
@@ -162,6 +167,7 @@ export default {
             ],
             overStartDate: false, //가입 오버 타입 여부
             over: null,
+            myTask: false,
         };
     },
 
@@ -172,10 +178,6 @@ export default {
             for (let i = 0; i < this.chall_ticket.length; i++) {
                 ProcessRateArr[i] = true;
             }
-            console.log(ProcessRateArr);
-            // this.ProcessRateArr.push(ProcessArr[i]);
-            // ProcessArr = this.ProcessRateArr;
-            // console.log(ProcessRateArr)
             return ProcessRateArr;
         },
         // BJ 누르면 개인 정보로 넘어가는 통신
@@ -199,16 +201,17 @@ export default {
             })
                 .then((res) => {
                     this.chall_info = res.data;
-                    var startD=new Date(this.chall_info.challengeStartdate);
-                    var pre=new Date();
+                    var startD = new Date(this.chall_info.challengeStartdate);
+                    var pre = new Date();
                     //var present = new Date().getFullYear()+"-0"+(new Date().getMonth()+1)+ "-"+new Date().getDate();
                     //alert(startD.getFullYear()-pre.getFullYear());
                     //alert(startD.getFullYear()-pre.getFullYear()+startD.getMonth()-pre.getMonth()+startD.getDate()-pre.getDate());
-                    if(startD.getFullYear()-pre.getFullYear()+startD.getMonth()-pre.getMonth()+startD.getDate()-pre.getDate()<0) this.overTime(true);
+                    if (startD.getFullYear() - pre.getFullYear() + startD.getMonth() - pre.getMonth() + startD.getDate() - pre.getDate() < 0)
+                        this.overTime(true);
                     //alert(pre.getFullYear());
                     //alert(new this.chall_info.challengeStartdate);
                     //alert(new Date(present)-new Date(this.chall_info.challengeStartdate));
-                    
+
                     this.chall_info.challengeStartdate += ' 23:59:59';
                     this.countDownTimer('rest');
                     // if(new Date(this.chall_info.challengeStartdate+' 23:59:59')>new Date()){
@@ -234,7 +237,7 @@ export default {
                     console.log(err);
                 });
         },
-
+        
         countDownTimer: function(id) {
             var date = this.chall_info.challengeStartdate;
             //const countDownTimer = function (id) {
@@ -245,6 +248,7 @@ export default {
             var _day = _hour * 24;
             var timer;
             function showRemaining() {
+                if(document.getElementById(id)==null) return;
                 var now = new Date();
                 var distDt = _vDate - now - 1;
                 if (distDt < 0) {
@@ -254,7 +258,7 @@ export default {
                         //this.overStartDate = true;
                         //alert('overs');
                     }
-                    document.getElementById(id).textContent = '모집이 종료 되었습니다!' + this.overStartDate;
+                    document.getElementById(id).textContent = '챌린지를 완주하세요!';
                     return;
                 }
                 var days = Math.floor(distDt / _day);
@@ -262,7 +266,7 @@ export default {
                 var minutes = Math.floor((distDt % _hour) / _minute);
                 var seconds = Math.floor((distDt % _minute) / _second);
                 //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
-                document.getElementById(id).textContent = '마감까지 ' + days + '일 ';
+                document.getElementById(id).textContent = '시작까지 ' + days + '일 ';
                 document.getElementById(id).textContent += hours + '시간 ';
                 document.getElementById(id).textContent += minutes + '분 ';
                 document.getElementById(id).textContent += seconds + '초';
@@ -278,9 +282,8 @@ export default {
             this.msg = '가입완료';
             console.log('가입완료');
             //alert(chall_No + ' ' + user);
-            // document.getElementById('Cjoin_btn').style.backgroundColor = '#f9d479';
             document.querySelector('.Cjoin_btn .btn-light').style.backgroundColor = '#f9d479';
-            // 여기에다가 로직을 작성해야한다
+
             var info = [chall_No, user];
             //alert(this.overMember() + ' ' + this.overTime() + ' ' + this.didJoin() + ' ');
             this.joinChall(info); // email이랑 챌린지 번호 전송
@@ -313,17 +316,18 @@ export default {
                 return true;
             } else return false;
         },
-        makeTrue: function(){
-            this.overStartDate=true;
+        makeTrue: function() {
+            this.overStartDate = true;
         },
     },
     created: function() {
-        this.challengeno=this.$route.query.cn;
+        this.challengeno = this.$route.query.cn;
         this.getChallInfo(); //생성할 때 바로 불러줘
         this.makeArr();
         this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
         this.getChallTicket();
+        document.getElementById(id).textContent = '';
     },
     watch: {
         // overStartDate: function() {
@@ -338,6 +342,7 @@ export default {
         //     return this.overStartDate;
         // },
     },
+    mounted: {},
 };
 </script>
 <style scoped>

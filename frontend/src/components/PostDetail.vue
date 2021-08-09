@@ -9,7 +9,7 @@
                 <!-- 왼쪽 - 과제 설명란 -->
                 <div class="left flex-item">
                     <div class="col Tleft flex-item">
-                        <h1>아이유의 과제2</h1>
+                        <h1>{{ userName }}의 {{ idx }}번째 과제</h1>
                     </div>
                     <div class="col Dleft flex-item">
                         <div id="uploadimg">
@@ -17,11 +17,14 @@
                                 <input
                                     type="text"
                                     class="form-control"
-                                    placeholder="Input Image URL or  Drag & Drop or Select"
+                                    placeholder="마우스로 과제 인증 사진을 끌어오세요"
                                     v-model="filename"
                                     @dragover.prevent
                                     @dragenter.prevent
                                     @drop.prevent="onDrop"
+
+                                    @change="onFileSelected"
+
                                 />
                                 <div class="input-group-append">
                                     <span class="input-group-text" @click="onClickFile"><i class="fa fa-paperclip"> </i></span>
@@ -70,7 +73,7 @@
                     <!-- 댓글창 맨 위 개인 프로필 -->
                     <div id="infowriter">
                         <ProfileImage class="comment-img-box" />
-                        <h4 id="writername">5기 아이유</h4>
+                        <h4 id="writername">{{ userTerm }}기 {{ userName }}</h4>
                         <hr id="line" />
                     </div>
                     <div>
@@ -86,16 +89,15 @@
             </div>
 
             <div style="margin-left:907px; margin-top:7px;" class="d-flex">
-                <button class="btn btn-danger d-flex align-items-center">
-                    <router-link to="/ChallengeRoom" style="text-decoration: none; color: #ffffff">
-                    <div>취소</div>
-                    </router-link>
+                <button class="btn btn-danger d-flex align-items-center" @click="goBack()">
+                    <!-- <router-link to="/ChallengeRoom" style="text-decoration: none; color: #ffffff"> -->
+                    <div style="text-decoration: none; color: #ffffff">취소</div>
+                    <!-- </router-link> -->
                 </button>&nbsp;
                 <button class="btn btn-primary d-flex align-items-center" @click="sendPost">
                     <div>생성</div>
                 </button>
             </div>
-
 
             <!-- <div class="btn-footer">
                 <router-link to="/ChallengeRoom"><button type="button" class="btn btn-danger Pcancel_btn">취소</button></router-link>&nbsp;
@@ -115,7 +117,7 @@ import '@/components/css/PostDetail.css';
 import ProfileImage from '@/components/common/ProfileImage.vue';
 // import CommentBox from "@/components/challengeroom/CommentBox.vue"
 // import axios from "@/util/http-common.js";
-
+import { mapGetters } from 'vuex';
 import Vue from 'vue';
 import CKEditor from '@ckeditor/ckeditor5-vue2';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -149,38 +151,18 @@ export default {
             imageSrc: '',
             attachFile: false,
             newImgSrc: '',
-            // taskno: 1,
-            // task_info:{
-            //     "likemembers": [
-            //         "string"
-            //     ],
-            //     "likes": 0,
-            //     "taskContent": "string",
-            //     "taskDesc": "string",
-            //     "taskFile": "string",
-            //     "taskImage": "string",
-            //     "taskIndex": 0,
-            //     "taskNo": 0,
-            //     "userEmail": "string",
-            //     "userName": "string"
-            // }
+            idx: '',
+
+            challengeno: 0,
+      taskfile: new File(),
+      taskimg: new File(),
+      taskcontent: '',
+      taskdesc: '',
+      taskindex: 0,
+      useremail: '',
         };
     },
     methods: {
-        // getTaskInfo: function(){
-        //     axios({
-        //         methods: 'get',
-        //         url: `/challenge/task/${this.taskno}`,
-        //     })
-        //     .then((res) => {
-        //         console.log(res.data);
-        //         this.task_info = res.data;
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     })
-        // },
-
         sendPost() {
             let message = this.CKEditor.getData();
             alert(message);
@@ -233,6 +215,10 @@ export default {
                 this.newImgSrc = e.target.result; // 로컬에서의 이미지 경로
             };
         },
+        goBack: function(){
+            // alert('goBack function')
+            this.$router.go(-1);
+        },
     },
     mounted() {
         ClassicEditor.create(document.querySelector('#divCKEditor'))
@@ -244,7 +230,11 @@ export default {
             });
     },
     created: function() {
-        // this.getTaskInfo();
+        this.challengeNo = this.$route.query.cn;
+        this.idx = (Number)(this.$route.query.idx)+1;
+    },
+    computed: {
+        ...mapGetters(['userName', 'userTerm']),
     },
 };
 </script>
@@ -301,7 +291,7 @@ export default {
     font-size: 8px;
 }
 
-.input-group-text{
+.input-group-text {
     font-size: 1.5rem;
 }
 </style>

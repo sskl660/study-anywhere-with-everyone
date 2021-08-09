@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Welcome from '../views/Welcome.vue';
 import Join from '../views/Join.vue';
+import HomeFeed from '../views/HomeFeed.vue';
 import Challenges from '../views/Challenges.vue';
 import Profile from '../views/Profile.vue';
 import ProfileMy from '../views/ProfileMy.vue';
@@ -30,6 +31,11 @@ const routes = [
     component: Challenges,
   },
   {
+    path: '/homefeed',
+    name: 'HomeFeed',
+    component: HomeFeed,
+  },
+  {
     path: '/profilemy',
     name: 'ProfileMy',
     component: ProfileMy,
@@ -44,6 +50,7 @@ const routes = [
     path: '/challengeRoom',
     name: 'ChallengeRoom',
     component: ChallengeRoom,
+    props: true,
   },
   {//제출 안한과제 -> 내꺼일때만 들어기짐
     path: '/postDetail',
