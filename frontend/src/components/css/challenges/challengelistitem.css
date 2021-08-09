@@ -33,6 +33,11 @@
   font-size: 16px;
 }
 
+.challenge-star {
+  /* color: gold; */
+  color: #FFED47;
+}
+
 /* 마우스 오버 시에 티켓 커지게 하기 */
 .scale {
   transform: scale(1);

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Welcome from '../views/Welcome.vue';
 import Join from '../views/Join.vue';
+import HomeFeed from '../views/HomeFeed.vue';
 import Challenges from '../views/Challenges.vue';
 import Profile from '../views/Profile.vue';
 import ProfileMy from '../views/ProfileMy.vue';
@@ -28,6 +29,11 @@ const routes = [
     path: '/challenges',
     name: 'Challenges',
     component: Challenges,
+  },
+  {
+    path: '/homefeed',
+    name: 'HomeFeed',
+    component: HomeFeed,
   },
   {
     path: '/profilemy',
