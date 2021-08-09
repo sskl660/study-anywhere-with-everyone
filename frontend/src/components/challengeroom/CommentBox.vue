@@ -1,16 +1,17 @@
 <template>
     <div>
         <div class="commentblock">
-            <CommentList/>
+            <CommentList />
         </div>
         <div class="commentform">
-            <CommentForm/>
+            <CommentForm :taskInfo="taskInfo"/>
         </div>
     </div>
 </template>
 <script>
 import CommentForm from '@/components/postcomment/CommentForm';
 import CommentList from '@/components/postcomment/CommentList';
+// import { mapActions } from 'vuex';
 
 export default {
     name : 'CommentBox',
@@ -18,10 +19,10 @@ export default {
         CommentForm,
         CommentList,
     },
-    data: function(){
-        return{
-            
-        }
+    props:{
+        taskInfo:{
+            type : Array
+        },
     },
 }
 

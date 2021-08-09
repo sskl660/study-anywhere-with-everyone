@@ -50,6 +50,7 @@ const routes = [
     path: '/challengeRoom',
     name: 'ChallengeRoom',
     component: ChallengeRoom,
+    props: true,
   },
   {//제출 안한과제 -> 내꺼일때만 들어기짐
     path: '/postDetail',

@@ -3,7 +3,8 @@
 
     <!-- 챌린지 티켓 디자인 -->
     <div class="d-flex justify-content-center">
-      <div class="challenge scale">
+      <div class="challenge scale" @click="moveToChallenge(challenge.challengeNo)">
+        <!-- <router-link :to="{path:'/challengeRoom'}"> -->
         <div class="challenge-name">{{ challenge.challengeName }}</div>
         <div class="challenge-content challenge-level">
           난이도 : 
@@ -42,7 +43,10 @@ export default {
       let interval =  this.deadline - this.today;
       let day = Math.ceil(interval / (1000 * 60 * 60 * 24));
       this.hour = Math.ceil((interval % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + (day - 1) * 24 - 9;
-    }
+    },
+    moveToChallenge: function(chall_no) {
+      this.$router.push({path:'/challengeRoom',query:{cn:chall_no}});
+    },
   },
   created: function () {
     this.remainTime()

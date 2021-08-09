@@ -7,7 +7,7 @@
   height: 780px;
   pointer-events: auto;
   background-color: #99b7ff;
-  background-clip: padding-box;
+  /* background-clip: padding-box; */
   /* border: 1px solid rgba(0, 0, 0, 0.2); */
   border-radius: 1rem;
   outline: 0;
@@ -75,22 +75,27 @@
   color: #ffffff;
   background-color: #f53535;
   border-color: #f53535;
-  margin-left: 855px;
+  /* margin-left: 830px; */
   margin-top: -63px;
   width: 400px;
+  display: inline-block;
 }
 
 button.btn.btn-danger.Pdelete_btn {
   width: 60px;
-  margin-left: 89%;
+  margin-left: 79%;
 }
 
-.Pback_btn .btn-light {
+.Pback_btn {
   color: #ffffff;
   background-color: #f1c069;
   border-color: #f1c069;
-  margin-right: 80%;
-  margin-top: -67px;
+  /* margin-top: 735px; */
+  margin-left: 383px;
+  right: 10px;
+  position: absolute;
+  /* position: fixed;
+  display: inline-block; */
 }
 
 .Pdelete_btn .btn-secondary:hover {
@@ -155,17 +160,30 @@ img {
   position: absolute;
   margin-top: -60px;
   margin-left: 2%;
-  width: 50px;
   height: 50px;
+  width: 50px;
+  margin-top: -58px;
 }
 
-.like {
+.like-img {
   width: 90%;
   height: 80%;
+  /* margin-top: -49px; */
+  margin-left: 7%;
+}
+
+.fa-heart:before {
+  content: "\f004";
+  font-size: 35px;
 }
 
 .like-num {
   position: absolute;
   margin-top: -49px;
   margin-left: 7%;
+}
+
+.fa-heart:before {
+  content: "\f004";
+  font-size: 35px;
 }

@@ -4,6 +4,7 @@ import com.example.ssaziptest.domain.comment.CommentEntity;
 import com.example.ssaziptest.domain.feed.FeedEntity;
 import com.example.ssaziptest.domain.group.GroupmemberEntity;
 import com.example.ssaziptest.domain.task.TaskEntity;
+
 import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +56,9 @@ public class UserEntity {
     //초기 null
     @Column(name = "user_totalcomplete")
     private Integer userTotalcomplete;
-    @Column(name = "user_image")
-    private String userImage;
+    @Lob
+    @Column(name = "user_image", columnDefinition = "")
+    private Blob userImage;
     @Column(name = "user_git")
     private String userGit;
     @Column(name = "user_blog")
@@ -93,8 +96,9 @@ public class UserEntity {
 
     @PrePersist
     public void prePersist(){
+        //blob null주의..
         this.userTotalcomplete=this.userTotalcomplete==null?0:this.userTotalcomplete;
-        this.userImage=this.userImage==null?"":this.userImage;
+        this.userImage=this.userImage==null?null:this.userImage;
         this.userGit=this.userGit==null?"":this.userGit;
         this.userBlog=this.userBlog==null?"":this.userBlog;
         this.userDevstyle=this.userDevstyle==null?"":this.userDevstyle;
@@ -121,7 +125,7 @@ public class UserEntity {
 //    }
 
     @Builder
-    public UserEntity(String userEmail, String userName, String userPassword, String userNumber, int userTerm, boolean userGraduated, LocalDateTime userJoindate, Integer userTotalcomplete, String userImage, String userGit, String userBlog, String userDevstyle, String userMbti, String userWishfield, String userIntroduce, String userTechstack, int userTotaltime, int userWeektime, int userWeekcomplete, int userFollower, int userFollowing) {
+    public UserEntity(String userEmail, String userName, String userPassword, String userNumber, int userTerm, boolean userGraduated, LocalDateTime userJoindate, Integer userTotalcomplete, Blob userImage, String userGit, String userBlog, String userDevstyle, String userMbti, String userWishfield, String userIntroduce, String userTechstack, int userTotaltime, int userWeektime, int userWeekcomplete, int userFollower, int userFollowing) {
         this.userEmail = userEmail;
         this.userName = userName;
         this.userPassword = userPassword;

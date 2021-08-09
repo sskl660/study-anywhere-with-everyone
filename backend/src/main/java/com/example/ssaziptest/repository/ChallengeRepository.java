@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ChallengeRepository extends JpaRepository<ChallengeEntity, Integer> {
     List<ChallengeEntity> findByChallengeName(String keyword);
+    List<ChallengeEntity> findByChallengeNameContaining(String keyword);
 }
