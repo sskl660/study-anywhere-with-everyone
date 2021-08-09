@@ -72,9 +72,12 @@
                 <div class="right flex-item">
                     <!-- 댓글창 맨 위 개인 프로필 -->
                     <div id="infowriter">
-                        <ProfileImage class="comment-img-box" />
-                        <h4 id="writername">{{ userTerm }}기 {{ userName }}</h4>
-                        <hr id="line" />
+                        <!-- <ProfileImage class="comment-img-box" /> -->
+                        <div class="comment-text-box">
+                            <h3>🔥 <strong>{{ userName }}</strong> 오늘도 화이팅!!! 🔥</h3>
+                        </div>
+                        <!-- <h4 id="writername" class="comment-img-box">{{ userTerm }}기 {{ userName }}</h4> -->
+                        <hr id="line" style="margin-top: 12px"/>
                     </div>
                     <div>
                         <!-- 댓글 -->
@@ -263,12 +266,14 @@ export default {
     max-width: 100%;
 }
 
-.comment-img-box {
-    width: 75px;
-    height: 75px;
+.comment-text-box {
+    margin-top: 15px;
+    width: 90%;
+    height: 55px;
+    margin-left: 22px;
     position: relative;
-    top: 17px;
-    left: -160px;
+    background-color: lightsteelblue;
+    border-radius: 33px;
 }
 .btn-footer {
     display: flex;
@@ -293,5 +298,9 @@ export default {
 
 .input-group-text {
     font-size: 1.5rem;
+}
+
+h3{
+    padding-top: 11px;
 }
 </style>

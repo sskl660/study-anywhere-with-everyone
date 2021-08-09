@@ -61,6 +61,7 @@ import {mapActions, mapState} from 'vuex'
     cursor: pointer;
     border-style: none;
     box-shadow: none;
+    z-index: 5;
   }
 
   .logout-btn:hover {
