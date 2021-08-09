@@ -219,9 +219,9 @@ export default {
         },
 
         // 이미지 가져오기
-        getProfileImage: function(e) {
-            console.log('프로필 사진 가져오기')
-            http.get(`/viewimage/${this.userEmail}`).then((response) => {
+        getProfileImage: function() {
+            console.log('프로필 사진 가져오기 여기!!')
+            http.get(`/viewimage/${this.task_info.userEmail}`).then((response) => {
             console.log("과제 창 이미지성공");
             var imgsrc =
             "data:image/png;base64," +
@@ -275,12 +275,11 @@ export default {
     created: function() {
         // alert(this.forwardTaskNo);
         this.taskNumbering(this.$route.query.taskNo);
-        this.getProfileImage();
         this.getTaskInfo();
-        
     },
-    updated: function(){
+    updated: function(){ // 랜더링이 다 끝난 뒤에 들어오는 것
         this.getLikeInfo();
+        this.getProfileImage();
     },    
     // mounted(){
     //     ClassicEditor
@@ -326,7 +325,7 @@ export default {
     top: 17px;
     left: -160px;
     border-radius: 30%;
-    border: 4px outset #99b7ff;
+    border: 3px outset #99b7ff;
 }
 
 .btn-warning {
