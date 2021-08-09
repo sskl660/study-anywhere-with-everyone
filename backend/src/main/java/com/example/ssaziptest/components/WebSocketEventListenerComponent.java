@@ -1,7 +1,6 @@
 package com.example.ssaziptest.components;
 
-import com.example.ssaziptest.domain.enums.MessageType;
-import com.example.ssaziptest.domain.vo.ChatVO;
+import com.example.ssaziptest.domain.chat.ChatVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class WebSocketEventListenerComponent {
             logger.info("User Disconnected : " + username);
 
             ChatVO chat = new ChatVO();
-            chat.setType(MessageType.LEAVE);
+//            chat.setType(MessageType.LEAVE);
             chat.setSender(username);
 
             messagingTemplate.convertAndSend("/topic/public", chat);

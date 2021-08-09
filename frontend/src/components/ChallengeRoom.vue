@@ -44,7 +44,7 @@
                                     <td v-for="taskIdx in chall_info.challengeTaskCnt" :key="taskIdx">
                                         <!-- 내가 제출 할 수 있는 아이들 -->
                                         <router-link
-                                            :to="{ path: '/postDetail', query: { idx:taskIdx-1, cn:chall_info.challengeNo } }"
+                                            :to="{ path: '/postDetail', query: { idx: taskIdx - 1, cn: chall_info.challengeNo } }"
                                             v-if="task_info[index].taskNo[taskIdx - 1] == -1 && task_info[index].userEmail == userEmail"
                                         >
                                             <div class="before"></div>
@@ -89,6 +89,7 @@
                                     #{{ name[1] }}
                                 </router-link>
                             </span>
+                            [정원]{{chall_info.challengeGroup.length}}/{{chall_info.challengeCapacity}} 
                         </strong>
                         <br /><br />
                         <div>
@@ -177,10 +178,6 @@ export default {
             for (let i = 0; i < this.chall_ticket.length; i++) {
                 ProcessRateArr[i] = true;
             }
-            console.log(ProcessRateArr);
-            // this.ProcessRateArr.push(ProcessArr[i]);
-            // ProcessArr = this.ProcessRateArr;
-            // console.log(ProcessRateArr)
             return ProcessRateArr;
         },
         // BJ 누르면 개인 정보로 넘어가는 통신
@@ -251,6 +248,7 @@ export default {
             var _day = _hour * 24;
             var timer;
             function showRemaining() {
+                if(document.getElementById(id)==null) return;
                 var now = new Date();
                 var distDt = _vDate - now - 1;
                 if (distDt < 0) {
@@ -260,7 +258,7 @@ export default {
                         //this.overStartDate = true;
                         //alert('overs');
                     }
-                    document.getElementById(id).textContent = '모집이 종료 되었습니다!' + this.overStartDate;
+                    document.getElementById(id).textContent = '챌린지를 완주하세요!';
                     return;
                 }
                 var days = Math.floor(distDt / _day);
@@ -268,7 +266,7 @@ export default {
                 var minutes = Math.floor((distDt % _hour) / _minute);
                 var seconds = Math.floor((distDt % _minute) / _second);
                 //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
-                document.getElementById(id).textContent = '마감까지 ' + days + '일 ';
+                document.getElementById(id).textContent = '시작까지 ' + days + '일 ';
                 document.getElementById(id).textContent += hours + '시간 ';
                 document.getElementById(id).textContent += minutes + '분 ';
                 document.getElementById(id).textContent += seconds + '초';
@@ -329,6 +327,7 @@ export default {
         this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
         this.getChallTicket();
+        document.getElementById(id).textContent = '';
     },
     watch: {
         // overStartDate: function() {
