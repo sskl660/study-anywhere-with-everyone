@@ -31,12 +31,7 @@
                     <div class="like-box">
                         <i v-show="!heart" class="fas fa-heart like-img" @click="sendLike(like)" style="cursor:pointer;"></i>
                         <i v-show="heart" class="fas fa-heart like-img" @click="sendUnLike(like)" style="cursor:pointer; color:red"></i>
-                        <!-- <img @click="sendLike(like)" class="like-img" src="../assets/redheart.png" alt="likeU"> -->
                     </div>
-
-                    <!-- <div class="like-box">
-                        <img @click="presslike()" class="like" src="../assets/redheart.png" alt="likeU">
-                    </div> -->
 
                     <div class="like-num">
                         <h6>
@@ -44,13 +39,6 @@
                             >이 좋아합니다
                         </h6>
                     </div>
-
-                    <!-- <div class="like-box">
-                        <img v-if="isShowing" :src="grayheart" alt="likeU" class="like" @click="isShowing = !isShowing">
-                    </div> -->
-                    <!-- <div class="like-box">
-                        <img class="like" src="../assets/redheart.png" alt="likeU">
-                    </div> -->
                 </div>
 
                 <!-- 오른쪽 - 댓글창 -->
@@ -66,9 +54,6 @@
                         <div>
                             <CommentBox style="d-flex justify-content-center" :taskInfo="task_info" />
                         </div>
-                        <!-- <div class="writecomment">  
-                            <input type="text" id="send_comment" placeholder="  댓글 달기" name="send_comment" value="" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}"/>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -78,19 +63,9 @@
                     <div>삭제</div>
                 </button>&nbsp;
                 <button class="btn btn-warning d-flex align-items-center" @click="goBack()">
-                    <!-- <router-link :to="{ path: '/challengeRoom', query: { cn: chall_info.challengeNo } }" style="text-decoration: none; color: #ffffff"> -->
                     <div style="text-decoration: none; color: #ffffff">뒤로가기</div>
-                <!-- </router-link> -->
                 </button>
             </div>
-
-            <!-- <div class="d-flex" style="margin-left: 700px"> -->
-            <!-- <button v-if="this.checkUser()" type="button" class="btn btn-danger Pdelete_btn">삭제</button> -->
-            <!-- <div class="Pjoin_btn"><ButtonSquare :text="생성" @click="sendPost"/></div>
-                <div class="Pcancel_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="취소"/></router-link></div> -->
-            <!-- <button type="button" ><router-link to="/ChallengeRoom">뒤로가기</router-link></button> -->
-            <!-- <div class="Pback_btn"><router-link to="/ChallengeRoom"><ButtonSquare :text="뒤로"/></router-link></div> -->
-            <!-- </div> -->
         </div>
     </div>
 </template>
@@ -159,7 +134,6 @@ export default {
             // filename: '',
             // imageSrc: '',
             // attachFile: false,
-            // isShowing : true,
         }
     },
     computed: {
@@ -245,12 +219,6 @@ export default {
                 });
         },
 
-        // A함수를 만들고
-        // 클릭 시 A함수 실행
-        // A함수 안에는 이미지 변하는 함수, 통신하는 함수(mapActions함수)
-        // 페이지 reload 요청 한번 다시 하기. 리프레쉬 용
-        // getTaskInfo함수를 다시 불러라 -> 데이터 바꿔주기 좋아요 +1
-
         // sendPost(){
         //     let message = this.CKEditor.getData();
         //     alert(message);
@@ -301,7 +269,8 @@ export default {
     updated: function(){
         this.getLikeInfo();
 
-    },    // mounted(){
+    },    
+    // mounted(){
     //     ClassicEditor
     //     .create( document.querySelector('#divCKEditor'))
     //     .then(editor => {
