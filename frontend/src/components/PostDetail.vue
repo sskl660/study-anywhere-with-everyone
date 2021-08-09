@@ -17,11 +17,14 @@
                                 <input
                                     type="text"
                                     class="form-control"
-                                    placeholder="Input Image URL or  Drag & Drop or Select"
+                                    placeholder="마우스로 과제 인증 사진을 끌어오세요"
                                     v-model="filename"
                                     @dragover.prevent
                                     @dragenter.prevent
                                     @drop.prevent="onDrop"
+
+                                    @change="onFileSelected"
+
                                 />
                                 <div class="input-group-append">
                                     <span class="input-group-text" @click="onClickFile"><i class="fa fa-paperclip"> </i></span>
@@ -149,7 +152,14 @@ export default {
             attachFile: false,
             newImgSrc: '',
             idx: '',
-            challengeNo: 1,
+
+            challengeno: 0,
+      taskfile: new File(),
+      taskimg: new File(),
+      taskcontent: '',
+      taskdesc: '',
+      taskindex: 0,
+      useremail: '',
         };
     },
     methods: {
@@ -221,7 +231,7 @@ export default {
     },
     created: function() {
         this.challengeNo = this.$route.query.cn;
-        this.idx = this.$route.query.idx;
+        this.idx = (Number)(this.$route.query.idx)+1;
     },
     computed: {
         ...mapGetters(['userName', 'userTerm']),

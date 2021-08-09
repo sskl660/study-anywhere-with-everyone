@@ -8,3 +8,7 @@ export default axios.create({
     'Content-type': 'application/json',
   },
 });
+
+// 채팅 URL
+export const chatURL = 'http://13.125.119.76:8080/ssazip'; // 백엔드 서버
+// export const chatURL = 'http://localhost:8080/ssazip'; // 로컬 서버

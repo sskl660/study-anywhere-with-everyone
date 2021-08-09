@@ -1,7 +1,19 @@
-<template> </template>
+<template>
+  <div class="d-flex justify-content-between">
+    <FeedList/>
+    <Winners/>
+  </div>
+</template>
 
 <script>
-export default {};
-</script>
+import FeedList from '@/components/homefeed/FeedList'
+import Winners from '@/components/homefeed/Winners'
 
-<style></style>
+export default {
+  name: 'HomeFeed',
+  components: {
+    FeedList,
+    Winners,
+  }
+}
+</script>

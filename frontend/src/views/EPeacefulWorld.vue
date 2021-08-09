@@ -31,11 +31,11 @@
       </div>
       <div>
         <span>file</span>
-        <input type="file" ref="taskfile" name="taskfile" id="taskfile" @change="taskfileSelect" />
+        <input type="file" ref="taskfile" name="taskfile" id="taskfile"  />
       </div>
       <div>
         <span>img</span>
-        <input type="file" ref="taskimg" name="taskimg" id="taskimg" @change="taskimgSelect" />
+        <input type="file" ref="taskimg" name="taskimg" id="taskimg" />
       </div>
       <div>
         <span>taskContent</span>
@@ -128,6 +128,7 @@ export default {
         })
         .then((response) => {
           // console.log(formData.getAll);
+          console.log('이미지 성공!')
         })
         .catch((error) => {
           // for (var pair of this.formData.entries()) {

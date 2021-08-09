@@ -1,24 +1,18 @@
 <template>
-    <div class="">
-        <div v-for="comment in showMsg" :key="comment">
-            <div class="commentline">
-                <ProfileImage class="comment-profile" />
-                <h6 id="comment-writer">{{comment.userName}}</h6>
-                <div id="comment-opinion">{{ comment.commentContent }}</div>
-            </div>
-        </div>
-    </div>
+  <div class="">
+      <div v-for="(comment, index) in showMsg" :key="comment">
+        <CommentListItem :comment="comment" :index="index"/>
+      </div>
+  </div>
 </template>
 
 <script>
-import ProfileImage from "@/components/common/ProfileImage.vue"
-import axios from '@/util/http-common.js';
+import CommentListItem from '@/components/postcomment/CommentListItem';
+import axios from "@/util/http-common.js";
 
 export default {
     name: 'CommentList',
-    components:{
-        ProfileImage,
-    },
+    components : { CommentListItem },
     data(){
         return{
             showMsg:[
@@ -43,7 +37,7 @@ export default {
             })
             .then((res) => {
                 this.showMsg = res.data;
-                console.log('getShowMsg res 성공')
+                console.log('getShowMsg 성공')
                 // console.log(this.showMsg)
                 // console.log(res.data)
             })
@@ -54,32 +48,13 @@ export default {
         },
     },
     created: function(){
-        this.getShowMsg();
         this.$route.query.taskNo;
+        this.getShowMsg();
     }
 }
+
 </script>
 
 <style scoped>
-.commentline{
-    text-align: left;
-    margin-bottom: 25px;
-}
 
-.comment-profile {
-  width: 50px;
-  height: 50px;
-  position: relative;
-}
-
-#comment-writer {
-    margin-left: 59px;
-    margin-top: -45px;
-    margin-bottom: 20px;
-}
-
-#comment-opinion{
-    margin-left: 60px;
-    margin-top: -20px;
-}
 </style>
