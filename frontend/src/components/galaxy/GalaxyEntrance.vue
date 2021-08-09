@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- 로그인 버튼 -->
+    <!-- 갤럭시 입장 버튼 -->
     <button
       type="button"
       class="btn btn-danger login-btn"
@@ -11,7 +11,7 @@
       Hello Galaxy!
     </button>
 
-    <!-- 로그인 모달창 -->
+    <!-- 갤럭시 입장 모달창 -->
     <div
       class="modal fade"
       id="GalaxyEntranceModal"
