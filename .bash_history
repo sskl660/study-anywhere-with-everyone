@@ -1,41 +1,3 @@
-cd ~./ssh
-mkdir ~/.ssh
-chmod 700 ~/.ssh
-cd ~/.ssh
-ssh-keygen -t rsa -b 4096 -C "GitHub Email@example.com"
-ls -al
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa
-cd ~
-git pull
-git clone https://lab.ssafy.com/s05-webmobile2-sub2/S05P12A307.git
-6607asasas!
-ls
-rm -rf S05P12A307/
-git commit -am "test"
-git push
-cat ~/.ssh/id_rsa.pub
-git push
-git remote remove origin
-git remote add origin git@lab.ssafy.com:s05-webmobile2-sub2/S05P12A307.git
-git pull
-git status
-ls
-git commit -am "test"
-git add .
-git commit -am "test"
-git push
-git push --set-upstream origin master
-git push --set-upstream origin master
-git push
-git push --set-upstream origin mastergit@lab.ssafy.com:s05-webmobile2-sub2/S05P12A307.git
-~/.ssh/config
-vi ~/.ssh/config
-cat ~/.ssh/config
-ls ~/.ssh/config
-cd ~/.ssh/config
-git config credentail.helper store
-git config credential.helper cache
 git pull
 vi ~/.ssh/config
 git remote remove origin
@@ -498,3 +460,41 @@ git status
 git add .
 git commit -am "update(chat)"
 git pull origin master
+cd ~
+git pull origin master
+git add .
+git commit -am "update(chat) : update chat server"
+git pull origin master
+git status
+git add .
+git commit -am "manage conflict"
+git status
+git push
+git status
+git add .
+git commit -am "chatype change demo"
+git pull origin master
+git status
+git add .
+git commit -am "merge"
+git push
+git add .
+git commit -am "fix URL"
+git pull origin master
+git status
+git add .
+git commit -am "merge"
+git push
+git commit -am "update(Chat) : test demo"
+git pull origin master
+git status
+git add .
+git commit -am "merge"
+git push
+git commit -am "update change chat type"
+git pull origin amster
+git pull origin master
+git status
+git add .
+git commit -am "merge"
+git push
