@@ -1,15 +1,18 @@
 <template>
     <div style="backgroundColor: red">
         <div v-if="isLogin">
+            <!-- 에러 로그 제거를 위해 아래 퀵메뉴에서 뺀 아이 -->
+                            <!-- :menu-count="getCount" -->
+                <!-- @process="print" -->
+                <!-- :is-open-new-tab="getIsOpenNewTab" -->
+
             <quick-menu
-                :menu-count="getCount"
+            :menu-count=count 
                 :icon-class="icons"
                 :menu-url-list="list"
                 :background-color="backgroundColor"
                 :color="color"
                 :position="position"
-                :is-open-new-tab="getIsOpenNewTab"
-                @process="print"
             >
             </quick-menu>
         </div>
