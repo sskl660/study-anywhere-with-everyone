@@ -43,10 +43,6 @@ export default {
                 this.title = '취업';
             }
         },
-        moveToChallenge: function() {
-            alert('뚜둥');
-            router.push({path:'/challengeRoom', query:{}})
-        },
     },
     created: function() {
         this.getTitle();
@@ -56,5 +52,5 @@ export default {
             return [...this.challengeList].reverse();
         },
     },
-};
+}
 </script>
