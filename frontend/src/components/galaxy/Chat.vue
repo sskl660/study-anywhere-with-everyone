@@ -124,14 +124,11 @@ export default {
       // 해당 브로커가 중개하는 채널(/topic/public)로 연결(구독)한다.
       // destination, 보내고자하는 메세지(call back 함수)를 넣어줄 수 있다.
       if (this.chatType == 1) {
-        this.stompClient.unsubscribe();
         this.stompClient.subscribe('/topic/chat/algo', this.onMessageReceived);
       } else if (this.chatType == 2) {
         console.log('sub2');
-        this.stompClient.unsubscribe();
         this.stompClient.subscribe('/topic/chat/cs', this.onMessageReceived);
       } else {
-        this.stompClient.unsubscribe();
         this.stompClient.subscribe('/topic/chat/job', this.onMessageReceived);
       }
       // 메세지를 해당 경로로 전송한다.
@@ -157,7 +154,7 @@ export default {
     // 소켓 연결
     socketConnect() {
       // 소켓을 이용하여 Server와 연결한다.
-      let socket = new SockJS(chatURL);
+      var socket = new SockJS(chatURL);
       // 소켓 정보를 stompClient 변수에 할당한다.
       this.stompClient = Stomp.over(socket);
       // header, connectCallback, errorCallback을 connect 메서드에 입력한다.
@@ -167,15 +164,15 @@ export default {
     // 소켓 연결 해제
     socketDisconnect() {
       // 서버의 엔드포인트로 해당 메세지를 전송한다.
-      this.stompClient.send(
-        '/galaxy/chat.send',
-        {},
-        JSON.stringify({
-          content: '',
-          sender: this.userName,
-          type: 'LEAVE',
-        })
-      );
+      // this.stompClient.send(
+      //   '/galaxy/chat.send',
+      //   {},
+      //   JSON.stringify({
+      //     content: '',
+      //     sender: this.userName,
+      //     type: 'LEAVE',
+      //   })
+      // );
       // 연결을 종료한다.
       this.stompClient.disconnect(this.onDisconnected);
     },
@@ -183,24 +180,12 @@ export default {
 
   computed: {
     ...mapGetters(['userName', 'userTerm', 'chatType']),
-    changeTopic: function() {
-      console.log('changed!!!!');
-      if (this.chatType == 1) {
-        this.stompClient.unsubscribe();
-        this.stompClient.connect('', this.onConnected, this.onError);
-      } else if (this.chatType == 2) {
-        this.stompClient.unsubscribe();
-        this.stompClient.connect('', this.onConnected, this.onError);
-      } else if (this.chatType == 3) {
-        this.stompClient.unsubscribe();
-        this.stompClient.connect('', this.onConnected, this.onError);
-      }
-      return null;
-    },
   },
   watch: {
-    chatType: function(val) {
-      this.onConnected();
+    chatType: function() {
+      // this.socketDisconnect();
+      this.stompClient.disconnect();
+      this.socketConnect();
     },
   },
 };
