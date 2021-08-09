@@ -45,7 +45,7 @@
                 <div class="right flex-item">
                     <!-- 댓글창 맨 위 개인 프로필 -->
                     <div id="infowriter">
-                        <ProfileImage class="comment-img-box" />
+                        <img id="profileimage" class="comment-img-box" src="" alt="" />
                         <h4 id="writername">{{ task_info.userTerm }} 기 {{ task_info.userName }}</h4>
                         <hr id="line" />
                     </div>
@@ -73,9 +73,9 @@
 <script>
 import '@/components/css/postdetailafter.css';
 import ButtonSquare from '@/components/common/ButtonSquare.vue';
-import ProfileImage from '@/components/common/ProfileImage.vue';
 import CommentBox from '@/components/challengeroom/CommentBox.vue';
 import axios from '@/util/http-common.js';
+import http from "@/util/http-common.js";
 import { mapActions, mapState } from 'vuex';
 
 // import Vue from 'vue';
@@ -95,8 +95,7 @@ export default {
     components: {
         // Title,          // 타이틀 가져오기
         ButtonSquare, // 둥근 버튼 가져오기
-        ProfileImage,
-        CommentBox,
+        CommentBox, // 댓글 구현하기
     },
     // props: { //여기를 this. router. query. url에 있는 key값 바꿔줘야한다
     //         forwardTaskNo: {
@@ -219,6 +218,18 @@ export default {
                 });
         },
 
+        // 이미지 가져오기
+        getProfileImage: function(e) {
+            console.log('프로필 사진 가져오기')
+            http.get(`/viewimage/${this.userEmail}`).then((response) => {
+            console.log("과제 창 이미지성공");
+            var imgsrc =
+            "data:image/png;base64," +
+            btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
+            document.getElementById("profileimage").src = imgsrc;
+            // this.comment.userImage = imgsrc;
+            });
+        },
         // sendPost(){
         //     let message = this.CKEditor.getData();
         //     alert(message);
@@ -264,11 +275,12 @@ export default {
     created: function() {
         // alert(this.forwardTaskNo);
         this.taskNumbering(this.$route.query.taskNo);
+        this.getProfileImage();
         this.getTaskInfo();
+        
     },
     updated: function(){
         this.getLikeInfo();
-
     },    
     // mounted(){
     //     ClassicEditor
@@ -313,6 +325,8 @@ export default {
     position: relative;
     top: 17px;
     left: -160px;
+    border-radius: 30%;
+    border: 4px outset #99b7ff;
 }
 
 .btn-warning {
