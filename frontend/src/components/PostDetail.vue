@@ -89,11 +89,11 @@
             </div>
 
             <div style="margin-left:907px; margin-top:7px;" class="d-flex">
-                <button class="btn btn-danger d-flex align-items-center">
-                    <router-link to="/ChallengeRoom" style="text-decoration: none; color: #ffffff">
-                        <div>취소</div>
-                    </router-link></button
-                >&nbsp;
+                <button class="btn btn-danger d-flex align-items-center" @click="goBack()">
+                    <!-- <router-link to="/ChallengeRoom" style="text-decoration: none; color: #ffffff"> -->
+                    <div style="text-decoration: none; color: #ffffff">취소</div>
+                    <!-- </router-link> -->
+                </button>&nbsp;
                 <button class="btn btn-primary d-flex align-items-center" @click="sendPost">
                     <div>생성</div>
                 </button>
