@@ -33,8 +33,13 @@
   font-size: 16px;
 }
 
+/* 챌린지 내용 */
+.challenge-end {
+  color: red;
+}
+
+/* 난이도 별 */
 .challenge-star {
-  /* color: gold; */
   color: #FFED47;
 }
 

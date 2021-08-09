@@ -8,7 +8,8 @@
       onfocus="this.placeholder=''" 
       onblur="this.placeholder='챌린지명이나 참여자를 검색할 수 있습니다.'"
       v-model="keyword"
-      @keyup.enter="getSearchResult(keyword)">
+      @keyup.enter="onSearch(keyword)"
+      >
 
     <!-- 검색 버튼 -->
     <div class="search-box">
@@ -21,7 +22,7 @@
 </template>
 
 <script>
-import "@/components/css/common/searchbar.css";
+import "@/components/css/challenges/searchbar.css";
 import axios from '@/util/http-common.js';
 
 export default {
@@ -32,19 +33,21 @@ export default {
     }
   },
   methods: {
-    getSearchResult: function (keyword) {
+    onSearch: function (keyword) {
       axios({
         method: 'get',
         url: `/challengelist/${keyword}`
       })
         .then(res => {
-          console.log(keyword)
-          console.log(res)
+          this.$emit('search', res.data)
         })
         .catch(err => {
           console.log(err)
         })
-    }
+    },
+    test: function () {
+      console.log(1)
+    },
   }
 }
 </script>

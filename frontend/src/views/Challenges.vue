@@ -10,7 +10,7 @@
     </div>
 
     <!-- 검색바 -->
-    <SearchBar/>
+    <SearchBar @search="getSearchResult"/>
 
     <!-- 챌린지 모달 -->
     <ChallengeModal/>
@@ -58,23 +58,17 @@ export default {
       })
         .then(res => {
           res.data.forEach(challenge => {
-            const startDate = new Date(challenge.challengeStartdate)
-            let interval =  startDate - this.today;
-            let day = Math.ceil(interval / (1000 * 60 * 60 * 24));
-            let hour = Math.ceil((interval % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + (day - 1) * 24 - 9;
-
-            if (0 < hour) {
-              if (challenge.challengeCategory === 'ALGO') {
-                this.algoList.push(challenge)
-              }
-              if (challenge.challengeCategory === 'CS') {
-                this.csList.push(challenge)
-              }
-              if (challenge.challengeCategory === 'JOB') {
-                this.jobList.push(challenge)
-              }
+            if (challenge.challengeCategory === 'ALGO') {
+              this.algoList.push(challenge)
+            }
+            if (challenge.challengeCategory === 'CS') {
+              this.csList.push(challenge)
+            }
+            if (challenge.challengeCategory === 'JOB') {
+              this.jobList.push(challenge)
             }
           })
+
           this.allList.push(this.algoList)
           this.allList.push(this.csList)
           this.allList.push(this.jobList)
@@ -83,6 +77,27 @@ export default {
           console.log(err)
         })
     },
+    getSearchResult: function (searchResult) {
+      this.allList.splice(0);
+      this.algoList.splice(0);
+      this.csList.splice(0);
+      this.jobList.splice(0);
+
+      searchResult.forEach(challenge => {
+        if (challenge.challengeCategory === 'ALGO') {
+          this.algoList.push(challenge)
+        }
+        if (challenge.challengeCategory === 'CS') {
+          this.csList.push(challenge)
+        }
+        if (challenge.challengeCategory === 'JOB') {
+          this.jobList.push(challenge)
+        }
+      })
+      this.allList.push(this.algoList)
+      this.allList.push(this.csList)
+      this.allList.push(this.jobList)
+    }
   },
   created: function () {
     this.getChallengeList()
