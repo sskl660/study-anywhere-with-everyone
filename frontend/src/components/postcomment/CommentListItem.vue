@@ -18,9 +18,9 @@ export default {
     methods:{
         // 이미지 가져오기
         getProfileImage: function(e) {
-            console.log('프로필 사진 가져오기')
-            console.log(this.comment.userEmail);
-            console.log(this.index);
+            // console.log('프로필 사진 가져오기')
+            // console.log(this.comment.userEmail);
+            // console.log(this.index);
             http.get(`/viewimage/${this.comment.userEmail}`).then((response) => {
             console.log("이미지성공");
             var imgsrc =
@@ -28,6 +28,11 @@ export default {
             btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
             document.getElementById(`msgimage${this.index}`).src = imgsrc;
             // this.comment.userImage = imgsrc;
+            })
+            .catch((error) => {
+                if (this.imgsrc == null) {
+                document.getElementById(`msgimage${this.index}`).src = "/img/ssazip.43ffb363.png"
+                }
             });
         },
     },
