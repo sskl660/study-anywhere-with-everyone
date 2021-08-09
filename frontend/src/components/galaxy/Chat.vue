@@ -123,9 +123,17 @@ export default {
     onConnected() {
       // 해당 브로커가 중개하는 채널(/topic/public)로 연결(구독)한다.
       // destination, 보내고자하는 메세지(call back 함수)를 넣어줄 수 있다.
-      this.stompClient.subscribe('/topic/chat/algo', this.onMessageReceived);
-      this.stompClient.subscribe('/topic/chat/cs', this.onMessageReceived);
-      this.stompClient.subscribe('/topic/chat/job', this.onMessageReceived);
+      if (this.chatType == 1) {
+        this.stompClient.unsubscribe();
+        this.stompClient.subscribe('/topic/chat/algo', this.onMessageReceived);
+      } else if (this.chatType == 2) {
+        console.log('sub2');
+        this.stompClient.unsubscribe();
+        this.stompClient.subscribe('/topic/chat/cs', this.onMessageReceived);
+      } else {
+        this.stompClient.unsubscribe();
+        this.stompClient.subscribe('/topic/chat/job', this.onMessageReceived);
+      }
       // 메세지를 해당 경로로 전송한다.
       this.stompClient.send(
         '/galaxy/chat.addUser',
@@ -175,6 +183,25 @@ export default {
 
   computed: {
     ...mapGetters(['userName', 'userTerm', 'chatType']),
+    changeTopic: function() {
+      console.log('changed!!!!');
+      if (this.chatType == 1) {
+        this.stompClient.unsubscribe();
+        this.stompClient.connect('', this.onConnected, this.onError);
+      } else if (this.chatType == 2) {
+        this.stompClient.unsubscribe();
+        this.stompClient.connect('', this.onConnected, this.onError);
+      } else if (this.chatType == 3) {
+        this.stompClient.unsubscribe();
+        this.stompClient.connect('', this.onConnected, this.onError);
+      }
+      return null;
+    },
+  },
+  watch: {
+    chatType: function(val) {
+      this.onConnected();
+    },
   },
 };
 </script>
