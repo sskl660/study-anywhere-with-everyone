@@ -8,7 +8,7 @@
       <!-- 티켓 오른쪽 부분 -->
       <div class="ticket-right" style="display: inline-block"> 
         <!-- 첫번째꺼 -->
-        <TicketSubmit v-if="this.ticket.taskNo[0]" :ticketTask="ticket.taskNo[0]"/>
+        <TicketSubmit v-if="this.ticket.taskNo[0]" :num="this.one" :ticketTask="ticket.taskNo[0]"/>
         <!-- 대각선과 위 1->2 -->
         <TicketSubmitLeft v-if="this.ticket.taskNo[1]" :num="this.two" :ticketTask="ticket.taskNo[1]"/>
         <!-- 대각선과 2->3 -->
@@ -55,12 +55,13 @@ export default {
   },
   data: function () {
     return {
-      two: "2",
-      three: "3",
-      four: "4",
-      five: "5",
-      six: "6",
-      seven: "7",
+      one: 1,
+      two: 2,
+      three: 3,
+      four: 4,
+      five: 5,
+      six: 6,
+      seven: 7,
       excellent: false,
       asewome: false,
       tryagain:false,
