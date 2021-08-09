@@ -30,7 +30,7 @@ export default {
             count: 4,
             icons: ['fa fa-home', 'fa fa-address-card', 'fa fa-flag', 'fa fa-rocket'],
             list: [
-                { isLink: true, url: '/' },
+                { isLink: true, url: '/homefeed' },
                 { isLink: true, url: { path: '/profile', query: { user: 'myProfile'} } },
                 { isLink: true, url: '/challenges' },
                 { isLink: true, url: '/Galaxy'},

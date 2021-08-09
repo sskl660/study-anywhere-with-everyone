@@ -43,15 +43,6 @@ export default {
                 this.title = '취업';
             }
         },
-        moveToChallenge: function() {
-            alert('뚜둥');
-            router.push({ path: '/challengeRoom', query: {} });
-            ////////////////////////////
-            ////////////////////////////
-            //여기 뭔지 아시는 분은 장섭에게
-            ////////////////////////////
-            ////////////////////////////
-        },
     },
     created: function() {
         this.getTitle();
@@ -61,5 +52,5 @@ export default {
             return [...this.challengeList].reverse();
         },
     },
-};
+}
 </script>
