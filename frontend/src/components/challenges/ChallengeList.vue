@@ -6,7 +6,7 @@
         </div>
 
         <!-- 챌린지 티켓 -->
-        <div class="challenge-list-container" >
+        <div class="challenge-list-container">
             <ChallengeListItem v-for="(challenge, idx) in reversedChallengeList" :key="idx" :challenge="challenge" />
         </div>
     </div>
@@ -43,10 +43,6 @@ export default {
                 this.title = '취업';
             }
         },
-        moveToChallenge: function() {
-            alert('뚜둥');
-            router.push({path:'/challengeRoom', query:{}})
-        },
     },
     created: function() {
         this.getTitle();
@@ -56,5 +52,5 @@ export default {
             return [...this.challengeList].reverse();
         },
     },
-};
+}
 </script>

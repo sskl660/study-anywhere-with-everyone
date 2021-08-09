@@ -22,13 +22,6 @@
               </div>
             </form>
           </div>
-          <!-- 로그인 상태 유지 체크 부분 -->
-          <div class="form-check check-part">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label check-label" for="flexCheckDefault">
-              로그인 상태 유지
-            </label>
-          </div>
           <!-- 모달창 내부 로그인 버튼 -->
           <div class="modal-footer login-footer">
             <button type="button" class="btn btn-light login-button" data-bs-dismiss="modal" @click="login(credentials)">로그인</button>
@@ -134,24 +127,6 @@ export default {
   .login-footer {
     padding-top: 0px;
     border-style: none;
-  }
-
-  /* 체크 부분 */
-  .check-part {
-    width: 115px;
-    margin-left: 120px;
-    padding: 0px;
-  }
-
-  /* 체크 부분 특수효과 제거 */
-  .form-control:focus {
-    outline: none;
-    box-shadow: none;
-  }
-
-  .form-check-input:focus {
-    outline: none;
-    box-shadow: none;
   }
 
   /* 모달창 내부 로그인 버튼 */
