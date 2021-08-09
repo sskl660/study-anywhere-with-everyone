@@ -1,9 +1,10 @@
 <template>
-  <img class="profile-img-default" src="@/assets/profile-img.jpg" alt="" >
+  <img class="profile-img-default" src="{@/assets/profile-img.jpg}" alt="" >
 </template>
 
 <script>
 export default {
+  name: 'ProfileImage',
 
 }
 </script>
