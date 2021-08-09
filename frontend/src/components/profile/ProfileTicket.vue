@@ -2,7 +2,7 @@
   <div class="profileticket" style="display: inline-block; d-flex">
     <div class="ticket-container d-flex">
       <div class="ticket-left" style="display: inline-block">
-        <div class="ticket-title">{{this.ticket.challengeName}}</div>
+        <div  @click="profileToChallenge()" class="ticket-title">{{this.ticket.challengeName}}</div>
         <div class="ticket-rate">{{this.ticket.achieveRate}}%</div>
       </div>
       <!-- 티켓 오른쪽 부분 -->
@@ -21,9 +21,16 @@
           <span>tick</span>
         </div> -->
       </div>
+
       <img v-if="this.checkExcellent()" class="stamp" style="float:right" src="@/assets/excellent.png" alt="">
       <img v-if="this.checkTryAgain()" class="stamp" style="float:right" src="@/assets/try.png" alt="">
-      <img v-else class="stamp" style="float:right" src="@/assets/awesome.png" alt="">
+      <img v-if="this.checkAwesome()" class="stamp" style="float:right" src="@/assets/awesome.png" alt="">
+      <!-- 챌린지 끝나야 도장찍히게 해야하나? -->
+      <!-- <div v-if="this.checkFinish()">
+        <img v-if="this.checkExcellent()" class="stamp" style="float:right" src="@/assets/excellent.png" alt="">
+        <img v-if="this.checkTryAgain()" class="stamp" style="float:right" src="@/assets/try.png" alt="">
+        <img v-if="this.checkAwesome()" class="stamp" style="float:right" src="@/assets/awesome.png" alt="">
+      </div> -->
       
       <!-- <div class="ticket-right" style="display: inline-block">
         <div v-for="task in ticket.taskNo" :key="task">
@@ -56,6 +63,7 @@ export default {
       seven: "7",
       excellent: false,
       asewome: false,
+      tryagain:false,
       // ticketExist: {
       //   one: false,
       //   two: false,
@@ -81,6 +89,25 @@ export default {
       if (this.ticket.achieveRate == 0) return true;
       else false
     },
+    checkAwesome: function () {
+      if (100> this.ticket.achieveRate && this.ticket.achieveRate>0) return true;
+      else false
+    },
+    checkFinish: function () {
+      console.log("check!!!!!")
+      console.log(this.ticket)
+      for (var task in this.ticket.taskNo) {
+        console.log(task)
+        if (task==-2) return false
+        else true
+        console.log(완료)
+      }
+      console.log("완료여부")
+      console.log(this.ticket)
+    },
+    profileToChallenge: function() {
+      this.$router.push({path:'/challengeRoom',query:{cn:this.ticket.challengeNo}});
+    }
   }
 }
 </script>
