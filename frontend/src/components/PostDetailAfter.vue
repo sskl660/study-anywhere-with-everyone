@@ -74,13 +74,13 @@
             </div>
 
             <div style="margin-left:876px; margin-top:7px;" class="d-flex">
-                <button v-if="checkUser()" class="btn btn-danger d-flex align-items-center">
-                    <div>삭제</div>
-                </button>&nbsp;
+                <button v-if="checkUser()" class="btn btn-danger d-flex align-items-center" @click="erazeTask()">
+                    <div>삭제</div></button
+                >&nbsp;
                 <button class="btn btn-warning d-flex align-items-center" @click="goBack()">
                     <!-- <router-link :to="{ path: '/challengeRoom', query: { cn: chall_info.challengeNo } }" style="text-decoration: none; color: #ffffff"> -->
                     <div style="text-decoration: none; color: #ffffff">뒤로가기</div>
-                <!-- </router-link> -->
+                    <!-- </router-link> -->
                 </button>
             </div>
 
@@ -129,8 +129,8 @@ export default {
     //             default : ''
     //         },
     //     },
-    data: function(){
-        return{
+    data: function() {
+        return {
             뒤로: '돌아가기',
             task_info: {
                 likemembers: ['string'],
@@ -153,14 +153,15 @@ export default {
                 taskNo: 0,
                 userEmail: 'string',
             },
-            ApiTaskNo: '',
-            heart: '',
+            task_No: 0,
+            heart: false,
+            chall_no: 0,
             // CKEditor : '',
             // filename: '',
             // imageSrc: '',
             // attachFile: false,
             // isShowing : true,
-        }
+        };
     },
     computed: {
         ...mapState(['userEmail']),
@@ -169,7 +170,7 @@ export default {
         getTaskInfo: function() {
             axios({
                 methods: 'get',
-                url: `/challenge/task/${this.ApiTaskNo}`,
+                url: `/challenge/task/${this.$route.query.taskNo}`,
             })
                 .then((res) => {
                     // alert("과제 상세 정보가 들어왔습니다.");
@@ -178,6 +179,10 @@ export default {
                     console.log(res.data);
                     this.task_info = res.data;
                     console.log(this.task_info);
+                    if(this.task_info.taskNo==0){
+                        alert("없는 과제 입니다.");
+                    this.$router.push({path: '/homefeed'});
+                    }
                 })
                 .catch((err) => {
                     console.log('getTaskInfo err로그');
@@ -185,14 +190,7 @@ export default {
                 });
         },
         ...mapActions(['presslike', 'pressunlike']),
-        taskNumbering: function(urlNo) {
-            this.ApiTaskNo = urlNo;
-            // 여기에 create에 있는 함수를 바로 넣어줬다.
-        },
         checkUser: function() {
-            // alert('삭제버튼 안보이게 할꺼야')
-            console.log(this.task_info.userEmail);
-            console.log(this.userEmail);
             if (this.userEmail === this.task_info.userEmail) {
                 // alert('true');
                 return true;
@@ -202,8 +200,8 @@ export default {
             }
         },
         // 좋아요
-        sendLike: function(like){
-            document.querySelector('.like-img').style.color ="red";
+        sendLike: function(like) {
+            document.querySelector('.like-img').style.color = 'red';
             this.like.userEmail = this.userEmail;
             this.like.taskNo = this.task_info.taskNo;
             this.presslike(like);
@@ -213,8 +211,8 @@ export default {
             console.log(like);
         },
         // 좋아요 취소
-        sendUnLike: function(like){
-            document.querySelector('.like-img').style.color ="black";
+        sendUnLike: function(like) {
+            document.querySelector('.like-img').style.color = 'black';
             this.like.userEmail = this.userEmail;
             this.like.taskNo = this.task_info.taskNo;
             this.pressunlike(like);
@@ -224,25 +222,49 @@ export default {
             console.log(like);
         },
         // 뒤로가기
-        goBack: function(){
+        goBack: function() {
             // alert('goBack function')
             this.$router.go(-1);
         },
         getLikeInfo: function() {
-            console.log(' res로그');
             axios({
                 method: 'get',
-                url: `challenge/task/like/${this.userEmail}/${this.task_info.taskNo}`,
+                url: `challenge/task/like/${this.userEmail}/${this.$route.query.taskNo}`,
             })
                 .then((res) => {
                     console.log('getLikeInfo res로그');
                     console.log(res.data.userLikeFlag);
-                    this.heart = res.data.userLikeFlag;
+                    this.heart=res.data.userLikeFlag;
                 })
                 .catch((err) => {
                     console.log('getLikeInfo err로그');
                     console.log(err);
                 });
+        },
+        erazeTask: function() {
+            if (confirm('정말 삭제하시겠습니까??') == true) {
+                //확인
+                // document.form.submit();
+                axios({
+                    method: 'delete',
+                    url: `/challenge/task/${this.task_No}`,
+                })
+                    .then((res) => {
+                        console.log('erazeTask res로그 삭제성공');
+                        console.log(this.$route.query.taskNo+"번호 삭제");
+                        this.$router.go(-1);
+//                        this.$router.push({ path: '/challengeRoom', query: { cn: this.chall_no } });
+                    })
+                    .catch((err) => {
+                        console.log('erazeTask err로그');                        
+                        console.log(this.chall_no+"삭제시도");
+                        console.log(this.$route.query.taskNo+"번호 삭제 시도");
+                        console.log(err);
+                    });
+            } else {
+                //취소
+                return;
+            }
         },
 
         // A함수를 만들고
@@ -295,13 +317,13 @@ export default {
     },
     created: function() {
         // alert(this.forwardTaskNo);
-        this.taskNumbering(this.$route.query.taskNo);
+        this.task_No=this.$route.query.taskNo;
+        this.chall_no = this.$route.query.cn;
         this.getTaskInfo();
     },
-    updated: function(){
+    updated: function() {
         this.getLikeInfo();
-
-    },    // mounted(){
+    }, // mounted(){
     //     ClassicEditor
     //     .create( document.querySelector('#divCKEditor'))
     //     .then(editor => {
