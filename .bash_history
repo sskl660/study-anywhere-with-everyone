@@ -1,31 +1,3 @@
-cd frontend/
-ls
-git add .
-git commit -m "dockerfile added"
-git push
-git config --system --unset credential.helper
-git config --system --unset credential.helper
-cd ~
-git add .
-ls
-git pull
-6607asasas!
-git pull
-git commit -m "test pipeline"
-git push
-git commit -am "pipeline test2"
-git push
-git commit -am "pipeline test3"
-git push
-git commit -am "SUCCESSgit push!"
-git commit -am "SUCCESSgit commit -am "SUCCESSgit push!"!"
-git commit -am "SUCCESS..!"
-git push
-git config --global user.name "taehyunKim
-"
-git config --global user.emial sskl600@naver.com
-git pull
-cd ~/.ssh
 cd ~./ssh
 mkdir ~/.ssh
 chmod 700 ~/.ssh
@@ -498,3 +470,31 @@ git add .
 git status
 git commit -am "fix conflict"
 git status
+cd ~
+git add .
+git commit -am "update(Chat) : update chat type change demo"
+git pull
+git pull origin master
+git pull origin master
+git add .
+git commit -am "merge master branch"
+git pull origin master
+git status
+git add .
+git commit -am "merge master"
+git push
+git push --set-upstream origin chat
+git pull origin master
+git status
+git add .
+git commit -am "fix(URL) : fix Server URL"
+git status
+git push
+git pull master
+git pull origin master
+git status
+git add .
+git status
+git add .
+git commit -am "update(chat)"
+git pull origin master
