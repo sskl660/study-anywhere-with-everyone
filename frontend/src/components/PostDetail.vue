@@ -17,12 +17,14 @@
                                 <input
                                     type="text"
                                     class="form-control"
-                                    placeholder="과제 인증 사진을 올려주세요"
+                                    placeholder="마우스로 과제 인증 사진을 끌어오세요"
                                     v-model="filename"
                                     @dragover.prevent
                                     @dragenter.prevent
                                     @drop.prevent="onDrop"
-                                    accept=".png"
+
+                                    @change="onFileSelected"
+
                                 />
                                 <div class="input-group-append">
                                     <span class="input-group-text" @click="onClickFile"><i class="fa fa-paperclip"> </i></span>
@@ -87,19 +89,11 @@
             </div>
 
             <div style="margin-left:907px; margin-top:7px;" class="d-flex">
-<<<<<<< HEAD
-                <button class="btn btn-danger d-flex align-items-center" @click="goBack()">
-                    <!-- <router-link to="/ChallengeRoom" style="text-decoration: none; color: #ffffff"> -->
-                    <div style="text-decoration: none; color: #ffffff">취소</div>
-                    <!-- </router-link> -->
-                </button>&nbsp;
-=======
                 <button class="btn btn-danger d-flex align-items-center">
                     <router-link to="/ChallengeRoom" style="text-decoration: none; color: #ffffff">
                         <div>취소</div>
                     </router-link></button
                 >&nbsp;
->>>>>>> 85d6355022a26eb2b3e75d4988194eb44fbadcf9
                 <button class="btn btn-primary d-flex align-items-center" @click="sendPost">
                     <div>생성</div>
                 </button>
@@ -158,7 +152,14 @@ export default {
             attachFile: false,
             newImgSrc: '',
             idx: '',
-            challengeNo: 1,
+
+            challengeno: 0,
+      taskfile: new File(),
+      taskimg: new File(),
+      taskcontent: '',
+      taskdesc: '',
+      taskindex: 0,
+      useremail: '',
         };
     },
     methods: {
@@ -230,7 +231,7 @@ export default {
     },
     created: function() {
         this.challengeNo = this.$route.query.cn;
-        this.idx = (this.$route.query.idx+1);
+        this.idx = (Number)(this.$route.query.idx)+1;
     },
     computed: {
         ...mapGetters(['userName', 'userTerm']),

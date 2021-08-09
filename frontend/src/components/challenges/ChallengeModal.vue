@@ -329,7 +329,7 @@ export default {
                     var info = [res.data, this.userEmail];
                     this.joinChall(info);
                     console.log('챌린지 생성 완료' + res.data + ' ' + this.userEmail + '로가입신청');
-                    this.$router.push({ name: 'ChallengeRoom', query: { cn: res.data } });
+                    this.$({ name: 'ChallengeRoom', query: { cn: res.data } });
                 })
                 .catch((err) => {
                     alert('챌린지 생성에 실패하였습니다.');

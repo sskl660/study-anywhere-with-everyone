@@ -6,7 +6,7 @@
         </div>
 
         <!-- 챌린지 티켓 -->
-        <div class="challenge-list-container" >
+        <div class="challenge-list-container">
             <ChallengeListItem v-for="(challenge, idx) in reversedChallengeList" :key="idx" :challenge="challenge" />
         </div>
     </div>
@@ -45,7 +45,12 @@ export default {
         },
         moveToChallenge: function() {
             alert('뚜둥');
-            router.push({path:'/challengeRoom', query:{}})
+            router.push({ path: '/challengeRoom', query: {} });
+            ////////////////////////////
+            ////////////////////////////
+            //여기 뭔지 아시는 분은 장섭에게
+            ////////////////////////////
+            ////////////////////////////
         },
     },
     created: function() {

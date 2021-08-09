@@ -248,9 +248,9 @@ export default {
             var _day = _hour * 24;
             var timer;
             function showRemaining() {
+                if(document.getElementById(id)==null) return;
                 var now = new Date();
                 var distDt = _vDate - now - 1;
-                document.getElementById(id).textContent = '';
                 if (distDt < 0) {
                     clearInterval(timer);
                     if (!this.overStartDate) {
@@ -258,7 +258,7 @@ export default {
                         //this.overStartDate = true;
                         //alert('overs');
                     }
-                    document.getElementById(id).textContent = '모집이 종료 되었습니다!' + this.overStartDate;
+                    document.getElementById(id).textContent = '챌린지를 완주하세요!';
                     return;
                 }
                 var days = Math.floor(distDt / _day);
