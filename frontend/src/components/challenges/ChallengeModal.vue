@@ -361,7 +361,7 @@ export default {
             })
                 .then((res) => {
                     console.log(res);
-                    var info = [res.ㅋ, this.userEmail];
+                    var info = [res.data, this.userEmail];
                     this.joinChall(info);
                     console.log('챌린지 생성 완료' + res.data + ' ' + this.userEmail + '로가입신청');
                     this.$router.push({ name: 'ChallengeRoom', query: { cn: res.data } });
