@@ -67,7 +67,7 @@
                                         <!-- 숫자, 제출 한 것 -->
                                         <router-link
                                             v-else
-                                            :to="{ path: '/postDetailAfter', query: { taskNo: task_info[index].taskNo[taskIdx - 1] } }"
+                                            :to="{ path: '/postDetailAfter', query: { taskNo: task_info[index].taskNo[taskIdx - 1], cn: chall_info.challengeNo } }"
                                         >
                                             <div class="after">
                                                 <!-- taskNO = {{ task_info[index].taskNo[taskIdx - 1] }} -->
@@ -95,7 +95,7 @@
                                     #{{ name[1] }}
                                 </router-link>
                             </span>
-                            [정원]{{chall_info.challengeGroup.length}}/{{chall_info.challengeCapacity}} 
+                            [정원]{{ chall_info.challengeGroup.length }}/{{ chall_info.challengeCapacity }}
                         </strong>
                         <br /><br />
                         <div>
@@ -103,6 +103,9 @@
                             ><span v-for="level in chall_info.challengeLevel" :key="level"
                                 ><img src="../assets/star.png" alt="levelstar" id="levelstar"
                             /></span>
+                        </div>
+                        <div>
+                            <div v-for="(task, index) in chall_info.challengeTaskdeadlines" :key="task">{{ index+1 }} 번째 과제 : {{ task }} 까지</div>
                         </div>
                     </div>
                 </div>
@@ -138,8 +141,8 @@ export default {
             // 가입완료: '가입완료',
             submit: true,
             fail: false,
-            challengeno: '',
-            
+            challengeno: 'string',
+
             //이동할 테스크 고유 넘버pk
             forwardTaskNo: -1,
             // ProcessRateArr: [], 이렇게 데이터 값을 넘겨주면 안된다. 위에서 바로 메소드 함수로 접근
@@ -225,7 +228,7 @@ export default {
                     // }
                 })
                 .catch((err) => {
-                    alert('정보부르기 실패');
+                    console.log('정보부르기 실패');
                     console.log(err);
                 });
         },
@@ -243,8 +246,8 @@ export default {
                     console.log(err);
                 });
         },
-        
-        countDownTimer: function(id) {
+
+        countDownTimer: function(rest) {
             var date = this.chall_info.challengeStartdate;
             //const countDownTimer = function (id) {
             var _vDate = new Date(date); // 전달 받은 일자
@@ -254,17 +257,17 @@ export default {
             var _day = _hour * 24;
             var timer;
             function showRemaining() {
-                if(document.getElementById(id)==null) return;
+                if (document.getElementById(rest) == null) return;
                 var now = new Date();
                 var distDt = _vDate - now - 1;
                 if (distDt < 0) {
-                    clearInterval(timer);
+                    clearInterval(rest);
                     if (!this.overStartDate) {
                         makeTrue();
                         //this.overStartDate = true;
                         //alert('overs');
                     }
-                    document.getElementById(id).textContent = '챌린지를 완주하세요!';
+                    document.getElementById(rest).textContent = '챌린지를 완주하세요!';
                     return;
                 }
                 var days = Math.floor(distDt / _day);
@@ -272,10 +275,10 @@ export default {
                 var minutes = Math.floor((distDt % _hour) / _minute);
                 var seconds = Math.floor((distDt % _minute) / _second);
                 //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
-                document.getElementById(id).textContent = '시작까지 ' + days + '일 ';
-                document.getElementById(id).textContent += hours + '시간 ';
-                document.getElementById(id).textContent += minutes + '분 ';
-                document.getElementById(id).textContent += seconds + '초';
+                document.getElementById(rest).textContent = '시작까지 ' + days + '일 ';
+                document.getElementById(rest).textContent += hours + '시간 ';
+                document.getElementById(rest).textContent += minutes + '분 ';
+                document.getElementById(rest).textContent += seconds + '초';
             }
             timer = setInterval(showRemaining, 1000);
         },
@@ -336,13 +339,13 @@ export default {
         this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
         this.getChallTicket();
-        document.getElementById(id).textContent = '';
+        //document.getElementById(id).textContent = '';
     },
     watch: {
         // overStartDate: function() {
         //     alert('overStartDate');
         //     this.over = true;
-        //},
+        //},     
     },
     computed: {
         ...mapGetters(['userEmail']),

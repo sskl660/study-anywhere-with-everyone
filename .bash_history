@@ -1,21 +1,3 @@
-git pull
-vi ~/.ssh/config
-git remote remove origin
-git remote remove origin https://lab.ssafy.com/s05-webmobile2-sub2/S05P12A307.git
-git remote add origin 
-git remote add origin 
-git remote add origin https://lab.ssafy.com/s05-webmobile2-sub2/S05P12A307.git
-git pull
-git config credential.helper store --global
-git pull
-git config credential.helper store
-git config credential.helper cache
-git config credential.helper 'cache --timeout=3600'
-git config credential.helper store --global
-git pull
-git commit -am "test"
-git add .
-git commit -m "test"
 git push
 git push --set-upstream origin master
 git push --set-upstream origin master
@@ -498,3 +480,21 @@ git status
 git add .
 git commit -am "merge"
 git push
+git clone https://lab.ssafy.com/s05-webmobile2-sub1/S05P1A3072.git
+cd ~
+git checkout master
+git status
+git add .
+git commit -am "save things"
+git checkout master
+git status
+git status
+git add .
+git pull origin master
+git status
+git add .
+git commit -am "merge origin master"
+git status
+git branch join
+git status
+git checkout join
