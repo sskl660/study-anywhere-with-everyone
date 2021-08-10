@@ -63,7 +63,7 @@ public class WebSocketController {
 //        // 즉, 누가 보낸 것인지 정보를 담는다.
 //        headerAccessor.getSessionAttributes().put("username", chatVO.getSender());
 //        return chatVO;
-//    }
+//    } 
 
 //    @MessageMapping("/chat/send/cs")
 //    @SendTo("/topic/cs")
