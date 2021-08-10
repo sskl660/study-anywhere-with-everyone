@@ -50,7 +50,7 @@ public class TaskEntity {
 //    @Column(name = "task_deadline")
 //    private String taskDeadline;
 
-    @OneToMany(mappedBy = "commentTaskEntity")
+    @OneToMany(mappedBy = "commentTaskEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     List<CommentEntity> commentEntities = new ArrayList<>();
 
     @Builder

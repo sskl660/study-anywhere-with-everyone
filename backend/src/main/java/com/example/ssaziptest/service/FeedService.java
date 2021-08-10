@@ -45,13 +45,13 @@ public class FeedService {
                     .userName(feedEntity.getFeedUserEntity().getUserName())
                     .eventtime(feedEntity.getFeedEventtime())
                     .build();
-            Blob userblob = feedEntity.getFeedUserEntity().getUserImage();
-            if(userblob!=null){
-                int bloblength = (int)userblob.length();
-                byte[] blobAsBytes = userblob.getBytes(1,bloblength);
-                userblob.free();
-                response.setUserImage(Arrays.toString(blobAsBytes));
-            }
+//            Blob userblob = feedEntity.getFeedUserEntity().getUserImage();
+//            if(userblob!=null){
+//                int bloblength = (int)userblob.length();
+//                byte[] blobAsBytes = userblob.getBytes(1,bloblength);
+//                userblob.free();
+//                response.setUserImage(Arrays.toString(blobAsBytes));
+//            }
 
             switch (feedEntity.getFeedType()){
                 //챌린지 가입
@@ -89,14 +89,14 @@ public class FeedService {
                 case 4:
                     response.setFeedType(4);
                     UserEntity userEntity = userRepository.findById(feedEntity.getFeedInfo()).orElse(null);
-                    Blob followerblob = userEntity.getUserImage();
-                    if(followerblob!=null){
-                        int bloblength2 = (int)followerblob.length();
-                        byte[] blobAsBytes2 = followerblob.getBytes(1,bloblength2);
-                        userblob.free();
-
-                        response.setFollowUserImage(Arrays.toString(blobAsBytes2));
-                    }
+//                    Blob followerblob = userEntity.getUserImage();
+//                    if(followerblob!=null){
+//                        int bloblength2 = (int)followerblob.length();
+//                        byte[] blobAsBytes2 = followerblob.getBytes(1,bloblength2);
+//                        followerblob.free();
+//
+//                        response.setFollowUserImage(Arrays.toString(blobAsBytes2));
+//                    }
                     response.setFollowUserEmail(userEntity.getUserEmail());
                     response.setFollowerCnt(userEntity.getUserFollower());
                     response.setFollowingCnt(userEntity.getUserFollowing());
