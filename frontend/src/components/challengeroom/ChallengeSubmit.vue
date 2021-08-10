@@ -7,7 +7,7 @@ export default {
   name: 'ChallengeSubmit',
   props: {
   TaskTotalRate: {
-      type: Array,
+      type: [],
     }
   },
   methods: {

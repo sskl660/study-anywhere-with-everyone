@@ -9,63 +9,56 @@
                 <!-- 왼쪽 - 과제 설명란 -->
                 <div class="left flex-item">
                     <div class="col Tleft flex-item">
-                        <h1>{{ userName }}의 {{ idx }}번째 과제</h1>
+                        <h1>{{ userName }}의 {{ Number(idx) + 1 }}번째 과제</h1>
                     </div>
                     <div class="col Dleft flex-item">
-                        <div id="uploadimg">
-                            <div class="input-group">
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="마우스로 과제 인증 사진을 끌어오세요"
-                                    v-model="filename"
-                                    @dragover.prevent
-                                    @dragenter.prevent
-                                    @drop.prevent="onDrop"
-
-                                    @change="onFileSelected"
-
-                                />
-                                <div class="input-group-append">
-                                    <span class="input-group-text" @click="onClickFile"><i class="fa fa-paperclip"> </i></span>
-                                    <!-- <button class="btn btn-outline-info" @click="onClickUpload">Upload</button> -->
+                        <form @submit.prevent="submitForm" class="form" enctype="multipart/form-data">
+                            <div id="uploadimg">
+                                <div class="input-group">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="마우스로 과제 인증 사진을 끌어오세요"
+                                        v-model="taskimg"
+                                        @dragover.prevent
+                                        @dragenter.prevent
+                                        @drop.prevent="onDrop"
+                                    />
+                                    <!-- accept=".png"
+                                    @change="onFileChange" -->
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" @click="onClickFile"><i class="fa fa-paperclip"> </i></span>
+                                    </div>
+                                    <input type="file" class="file-input" accept="image/*" ref="fileInput" id="taskimgId" @change="onFileChange" />
                                 </div>
-                                <input type="file" class="file-input" accept="image/*" ref="fileInput" @change="onFileChange" />
-                            </div>
-                            <div v-show="imageSrc" class="upload-image">
-                                <img :src="imageSrc" />
-                            </div>
-                        </div>
-                        <div id="post">
-                            <div id="divCKEditor" class="writepost"></div>
-                        </div>
-                        <!-- 여기서부터 파일업로드 -->
-                        <!-- <div>
-                            <div class="form-check mb-3">
-                                <input v-model="attachFile" class="form-check-input" type="checkbox" value="" id="chkFileUploadInsert">
-                                <label class="form-check-label" for="chkFileUploadInsert">파일 추가</label>
-                            </div>
-                            <div class="mb-3" v-show="attachFile" id="imgFileUploadInsertWrapper">
-                                <div id="imgFileUploadInsertThumbnail" class="thumbnail-wrapper">
-                                    <img v-for="(file, index) in fileList" v-bind:src="file" v-bind:key="index">
+                                <div v-show="taskimg" class="upload-image">
+                                    <img :src="taskimg" />
                                 </div>
                             </div>
-                        </div> -->
-                        <div>
-                            <p>
-                                <input type="file" id="file" class="inputfile" v-on:change="upload" />
-                                <label for="file" class="input-plus">+</label>
-                            </p>
-                            <!-- 이미지 여기서는 안보여줘도 되겠지 -->
-                            <!-- <div>
-                                <p><img v-bind:src="newImgSrc"></p>
-                            </div> -->
-                        </div>
+                            <div id="post">
+                                <div id="divCKEditor" class="writepost">
+                                    <html
+                                        placeholder="<h3>과제 내용을 작성 해 주세요.&nbsp;</h3>
+                                    <ul><li>친구들에게 보일 과제 설명입니다.
+                                    </li><li>이미지를 위에 올리면 바로 볼 수 있습니다.</li>
+                                    <li>이미지가 아니라면 아래 ‘파일 선택’ 이용해 주세요.</li></ul>"
+                                    >
+                                        <!-- <h3>과제 내용을 작성 해 주세요.&nbsp;</h3>
+                                    <ul><li>친구들에게 보일 과제 설명입니다.
+                                    </li><li>이미지를 위에 올리면 바로 볼 수 있습니다.</li>
+                                    <li>이미지가 아니라면 아래 ‘파일 선택’ 이용해 주세요.</li></ul> -->
+                                    </html>
+                                </div>
+                            </div>
+                            <div>
+                                <p>
+                                    <input type="file" id="taskfileId" class="inputfile" v-on:change="upload" />
+                                    <label for="taskfileId" class="input-plus">+</label>
+                                </p>
+                            </div>
+                            <button style="display:none" type="submit" id="submitId"></button>
+                        </form>
                     </div>
-
-                    <!-- <div class="like-box">
-                        <img class="like" src="../assets/grayheart.png" alt="likeU">
-                    </div> -->
                 </div>
 
                 <!-- 오른쪽 - 댓글창 -->
@@ -74,20 +67,19 @@
                     <div id="infowriter">
                         <!-- <ProfileImage class="comment-img-box" /> -->
                         <div class="comment-text-box">
-                            <h3>🔥 <strong>{{ userName }}</strong> 오늘도 화이팅!!! 🔥</h3>
+                            <h3>
+                                🔥 <strong>{{ userTerm }}기 {{ userName }}</strong> 오늘도 화이팅!!! 🔥
+                            </h3>
                         </div>
-                        <!-- <h4 id="writername" class="comment-img-box">{{ userTerm }}기 {{ userName }}</h4> -->
-                        <hr id="line" style="margin-top: 12px"/>
+                        <h3></h3>
+                        <hr id="line" />
+                        "해당 과제는 {{ chall_info.challengeTaskdeadlines[idx] }} 까지입니다"
+                        <br />
+                        <br />
+                        <hr id="line" />
+                        {{ chall_info.challengeDesc }} <br />
                     </div>
-                    <div>
-                        <!-- 댓글 -->
-                        <!-- <div>
-                            <CommentBox style="d-flex justify-content-center" />
-                        </div> -->
-                        <!-- <div class="writecomment">  
-                            <input type="text" id="send_comment" placeholder="  댓글 달기" name="send_comment" value="" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}"/>
-                        </div> -->
-                    </div>
+                    <div></div>
                 </div>
             </div>
 
@@ -95,9 +87,9 @@
                 <button class="btn btn-danger d-flex align-items-center" @click="goBack()">
                     <!-- <router-link to="/ChallengeRoom" style="text-decoration: none; color: #ffffff"> -->
                     <div style="text-decoration: none; color: #ffffff">취소</div>
-                    <!-- </router-link> -->
-                </button>&nbsp;
-                <button class="btn btn-primary d-flex align-items-center" @click="sendPost">
+                    <!-- </router-link> --></button
+                >&nbsp;
+                <button class="btn btn-primary d-flex align-items-center" @click="clickerSubmit()">
                     <div>생성</div>
                 </button>
             </div>
@@ -119,21 +111,13 @@ import '@/components/css/PostDetail.css';
 // import ButtonSquare from '@/components/common/ButtonSquare.vue'
 import ProfileImage from '@/components/common/ProfileImage.vue';
 // import CommentBox from "@/components/challengeroom/CommentBox.vue"
-// import axios from "@/util/http-common.js";
+import axios from '@/util/http-common.js';
 import { mapGetters } from 'vuex';
 import Vue from 'vue';
 import CKEditor from '@ckeditor/ckeditor5-vue2';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 Vue.use(CKEditor);
-
-// import InsertModal from '@/components/modals/InsertModal.vue'
-// import DetailModal from '@/components/modals/DetailModal.vue';
-// import router from '../router/index.js'
-
-// import Vue from 'vue';
-// import VueAlertify from 'vue-alertify';
-// Vue.use(VueAlertify);
 
 export default {
     name: 'PostDetail',
@@ -145,41 +129,91 @@ export default {
     },
     data: function() {
         return {
-            // 버튼에 들어갈 문구들
-            // 생성: '생성',
-            // 취소: '취소',
-            뒤로: '돌아가기',
             CKEditor: '',
-            filename: '',
-            imageSrc: '',
+            taskimg: '',
             attachFile: false,
             newImgSrc: '',
-            idx: '',
-
+            idx: 0,
             challengeno: 0,
-      taskfile: new File(),
-      taskimg: new File(),
-      taskcontent: '',
-      taskdesc: '',
-      taskindex: 0,
-      useremail: '',
+            taskcontent: '',
+            taskdesc: '',
+            taskindex: 0,
+            chall_info: {
+                challengeCapacity: 0,
+                challengeCategory: 'string',
+                challengeDesc: 'string',
+                challengeEnddate: 'string',
+                challengeGroup: [['string']],
+                challengeLevel: 0,
+                challengeName: 'string',
+                challengeNo: 0,
+                challengeStartdate: 'string',
+                challengeTaskCnt: 0,
+                challengeTaskdeadlines: ['string'],
+            },
         };
     },
     methods: {
-        sendPost() {
+        submitForm() {
             let message = this.CKEditor.getData();
-            alert(message);
+            if (message == '' || message == null) {
+                alert('글을 작성해주세요');
+                return;
+            }
+            var frm = new FormData();
+            var timg = document.getElementById('taskimgId');
+            var tfile = document.getElementById('taskfileId');
+            //파일 첨부 여부와 사이즈 검색
+            if (timg.files.length != 0) {
+                if (timg.files[0].size > 1024 * 64) {
+                    // 용량 초과시 경고후 해당 파일의 용량도 보여줌
+                    alert(
+                        '64kb 이하 이미지만 등록할 수 있습니다.\n\n' + '현재파일 용량 : ' + Math.round((timg.files[0].size / 1024) * 100) / 100 + 'KB'
+                    );
+                    return;
+                } else {
+                    console.log('이미지 탑승');
+                    frm.append('img', timg.files[0]);
+                }
+            }
+            if (tfile.files.length != 0) {
+                console.log('파일 탑승');
+                if (tfile.files[0].size > 1024 * 64) {
+                    alert(
+                        '64kb 이하 첨부파일만 등록할 수 있습니다.\n\n' +
+                            '현재파일 용량 : ' +
+                            Math.round((tfile.files[0].size / 1024) * 100) / 100 +
+                            'KB'
+                    );
+                    return;
+                } else {
+                    frm.append('file', tfile.files[0]);
+                }
+            }
+            frm.append('taskContent', message);
+            frm.append('challengeNo', this.challengeno);
+            frm.append('taskIndex', this.idx);
+            frm.append('userEmail', this.userEmail);
+            axios
+                .post('/challenge/task', frm, {
+                    header: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
+                .then((response) => {
+                    console.log('과제 제출 성공!');
+                    alert('과제 제출이 성공하였습니다.');
+                    this.$router.push({ path: '/challengeRoom', query: { cn: this.challengeno } });
+                })
+                .catch((error) => {
+                    console.log('과제 제출 실패!');
+                    console.log(error);
+                });
         },
 
         // 여기서부터 사진 업로드
         onDrop(event) {
             this.inputImageFile(event.dataTransfer.files);
-        },
-        onClickFile(event) {
-            this.$refs.fileInput.click(event);
-        },
-        onFileChange(event) {
-            this.inputImageFile(event.target.files);
         },
         inputImageFile(files) {
             if (files.length) {
@@ -188,21 +222,34 @@ export default {
                     alert('이미지 파일만 등록이 가능합니다');
                     return false;
                 }
-                this.filename = file.name;
+
+                if (file.size > 1024 * 64) {
+                    // 용량 초과시 경고후 해당 파일의 용량도 보여줌
+                    alert('64kb 이하 이미지만 등록할 수 있습니다.\n\n' + '현재파일 용량 : ' + Math.round((file.size / 1024) * 100) / 100 + 'KB');
+                    return;
+                }
+
+                this.taskimg = file.name;
                 this.preview(file);
             }
         },
+        onClickFile(event) {
+            this.$refs.fileInput.click(event);
+        },
+        onFileChange(event) {
+            this.inputImageFile(event.target.files);
+        },
         onClickUpload() {
-            this.preview(this.filename);
+            this.preview(this.taskimg);
         },
         preview(file) {
             if (typeof file === 'string') {
-                this.imageSrc = file;
+                this.taskimg = file;
             } else {
                 let vm = this;
                 let reader = new FileReader();
                 reader.onload = () => {
-                    vm.imageSrc = reader.result;
+                    vm.taskimg = reader.result;
                 };
                 reader.readAsDataURL(file);
             }
@@ -218,13 +265,34 @@ export default {
                 this.newImgSrc = e.target.result; // 로컬에서의 이미지 경로
             };
         },
-        goBack: function(){
+        goBack: function() {
             // alert('goBack function')
             this.$router.go(-1);
         },
+        getChallInfo: function() {
+            axios({
+                methods: 'get',
+                url: `/challenge/info/${this.challengeno}`,
+            })
+                .then((res) => {
+                    this.chall_info = res.data;
+                    console.log('페이지 로드 성공');
+                    console.log(res);
+                })
+                .catch((err) => {
+                    alert('정보부르기 실패');
+                    console.log(err);
+                });
+        },
+        clickerSubmit: function() {
+            document.getElementById('submitId').click();
+        },
     },
     mounted() {
-        ClassicEditor.create(document.querySelector('#divCKEditor'))
+        ClassicEditor.create(document.querySelector('#divCKEditor'), {
+            placeholder:
+                '친구들에게 보일 과제 설명입니다.'
+        })
             .then((editor) => {
                 this.CKEditor = editor;
             })
@@ -233,11 +301,12 @@ export default {
             });
     },
     created: function() {
-        this.challengeNo = this.$route.query.cn;
-        this.idx = (Number)(this.$route.query.idx)+1;
+        this.challengeno = this.$route.query.cn;
+        this.idx = Number(this.$route.query.idx);
+        this.getChallInfo();
     },
     computed: {
-        ...mapGetters(['userName', 'userTerm']),
+        ...mapGetters(['userName', 'userTerm', 'userEmail']),
     },
 };
 </script>
@@ -300,7 +369,7 @@ export default {
     font-size: 1.5rem;
 }
 
-h3{
+h3 {
     padding-top: 11px;
 }
 </style>
