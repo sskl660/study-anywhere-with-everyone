@@ -28,7 +28,6 @@
                                     @change="onFileChange" -->
                                     <div class="input-group-append">
                                         <span class="input-group-text" @click="onClickFile"><i class="fa fa-paperclip"> </i></span>
-                                        <!-- <button class="btn btn-outline-info" @click="onClickUpload">Upload</button> -->
                                     </div>
                                     <input type="file" class="file-input" accept="image/*" ref="fileInput" id="taskimgId" @change="onFileChange" />
                                 </div>
@@ -37,64 +36,50 @@
                                 </div>
                             </div>
                             <div id="post">
-                                <div id="divCKEditor" class="writepost"></div>
-                            </div>
-                            <!-- 여기서부터 파일업로드 -->
-                            <!-- <div>
-                            <div class="form-check mb-3">
-                                <input v-model="attachFile" class="form-check-input" type="checkbox" value="" id="chkFileUploadInsert">
-                                <label class="form-check-label" for="chkFileUploadInsert">파일 추가</label>
-                            </div>
-                            <div class="mb-3" v-show="attachFile" id="imgFileUploadInsertWrapper">
-                                <div id="imgFileUploadInsertThumbnail" class="thumbnail-wrapper">
-                                    <img v-for="(file, index) in fileList" v-bind:src="file" v-bind:key="index">
+                                <div id="divCKEditor" class="writepost">
+                                    <html
+                                        placeholder="<h3>과제 내용을 작성 해 주세요.&nbsp;</h3>
+                                    <ul><li>친구들에게 보일 과제 설명입니다.
+                                    </li><li>이미지를 위에 올리면 바로 볼 수 있습니다.</li>
+                                    <li>이미지가 아니라면 아래 ‘파일 선택’ 이용해 주세요.</li></ul>"
+                                    >
+                                        <!-- <h3>과제 내용을 작성 해 주세요.&nbsp;</h3>
+                                    <ul><li>친구들에게 보일 과제 설명입니다.
+                                    </li><li>이미지를 위에 올리면 바로 볼 수 있습니다.</li>
+                                    <li>이미지가 아니라면 아래 ‘파일 선택’ 이용해 주세요.</li></ul> -->
+                                    </html>
                                 </div>
                             </div>
-                        </div> -->
                             <div>
                                 <p>
                                     <input type="file" id="taskfileId" class="inputfile" v-on:change="upload" />
                                     <label for="taskfileId" class="input-plus">+</label>
                                 </p>
-                                <!-- 이미지 여기서는 안보여줘도 되겠지 -->
-                                <!-- <div>
-                                <p><img v-bind:src="newImgSrc"></p>
-                            </div> -->
                             </div>
                             <button style="display:none" type="submit" id="submitId"></button>
                         </form>
                     </div>
-                    <!-- <div class="like-box">
-                        <img class="like" src="../assets/grayheart.png" alt="likeU">
-                    </div> -->
                 </div>
 
                 <!-- 오른쪽 - 댓글창 -->
                 <div class="right flex-item">
                     <!-- 댓글창 맨 위 개인 프로필 -->
                     <div id="infowriter">
-                        <ProfileImage class="comment-img-box" />
-                        <h4 id="writername">{{ userTerm }}기 {{ userName }}</h4>
+                        <!-- <ProfileImage class="comment-img-box" /> -->
+                        <div class="comment-text-box">
+                            <h3>
+                                🔥 <strong>{{ userTerm }}기 {{ userName }}</strong> 오늘도 화이팅!!! 🔥
+                            </h3>
+                        </div>
+                        <h3></h3>
                         <hr id="line" />
-                        <h3>
-                            🔥 <strong>{{ userName }}</strong> 오늘도 화이팅!!! 🔥
-                        </h3>
                         "해당 과제는 {{ chall_info.challengeTaskdeadlines[idx] }} 까지입니다"
                         <br />
                         <br />
                         <hr id="line" />
                         {{ chall_info.challengeDesc }} <br />
-                        <hr id="line" style="margin-top: 12px" />
                     </div>
-                    <div>
-                        <!-- 댓글 -->
-                        <!-- <div>
-                            <CommentBox style="d-flex justify-content-center" />
-                        </div> -->
-                        <!-- <div class="writecomment">  
-                            <input type="text" id="send_comment" placeholder="  댓글 달기" name="send_comment" value="" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}"/>
-                        </div> -->
-                    </div>
+                    <div></div>
                 </div>
             </div>
 
@@ -133,14 +118,6 @@ import CKEditor from '@ckeditor/ckeditor5-vue2';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 Vue.use(CKEditor);
-
-// import InsertModal from '@/components/modals/InsertModal.vue'
-// import DetailModal from '@/components/modals/DetailModal.vue';
-// import router from '../router/index.js'
-
-// import Vue from 'vue';
-// import VueAlertify from 'vue-alertify';
-// Vue.use(VueAlertify);
 
 export default {
     name: 'PostDetail',
@@ -213,7 +190,7 @@ export default {
                     frm.append('file', tfile.files[0]);
                 }
             }
-            frm.append('taskDesc', message);
+            frm.append('taskContent', message);
             frm.append('challengeNo', this.challengeno);
             frm.append('taskIndex', this.idx);
             frm.append('userEmail', this.userEmail);
@@ -312,7 +289,10 @@ export default {
         },
     },
     mounted() {
-        ClassicEditor.create(document.querySelector('#divCKEditor'))
+        ClassicEditor.create(document.querySelector('#divCKEditor'), {
+            placeholder:
+                '친구들에게 보일 과제 설명입니다.'
+        })
             .then((editor) => {
                 this.CKEditor = editor;
             })

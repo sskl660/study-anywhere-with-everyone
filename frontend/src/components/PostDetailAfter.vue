@@ -13,34 +13,33 @@
                         <!-- 작성자가 보이는 부분 -->
                     </div>
                     <div class="col Dleft flex-item">
-                        <div id="uploadimg">
+                        <div v-show="imgFlag" id="uploadimg">
                             <!-- 업로드 된 사진이 보이는 부분 -->
-                            <div v-show="!image" class="upload-image">
+                            <div class="upload-image">
                                 <img id="image" src="" />
                                 <!-- <div v-show="imageSrc" class="upload-image">
                                 <img :src="imageSrc" /> -->
                             </div>
                         </div>
-                        <div id="post" v-html="task_info.taskDesc"></div>
+                        <div id="post" style="text-align:left; padding: 30px" v-html="task_info.taskContent"></div>
 
                         <div v-if="task_info.taskFile">
                             <a href="javascript:void(0);" v-on:click="download()">첨부파일 다운로드</a>
-
-                            <!-- 파일 다운로드 하는 부분 -->
                         </div>
                     </div>
+                        <div id="whoru" style="backgoround-color:red">
+                            <div class="like-box">
+                                <i v-show="!heart" class="fas fa-heart like-img" @click="sendLike(like)" style="cursor:pointer;"></i>
+                                <i v-show="heart" class="fas fa-heart like-img" @click="sendUnLike(like)" style="cursor:pointer; color:red"></i>
+                            </div>
 
-                    <div class="like-box">
-                        <i v-show="!heart" class="fas fa-heart like-img" @click="sendLike(like)" style="cursor:pointer;"></i>
-                        <i v-show="heart" class="fas fa-heart like-img" @click="sendUnLike(like)" style="cursor:pointer; color:red"></i>
-                    </div>
-
-                    <div class="like-num">
-                        <h6>
-                            <strong>{{ task_info.likes + ' 명' }}</strong
-                            >이 좋아합니다
-                        </h6>
-                    </div>
+                            <div class="like-num">
+                                <h6>
+                                    <strong>{{ task_info.likes + ' 명' }}</strong
+                                    >이 좋아합니다
+                                </h6>
+                            </div>
+                        </div>
                 </div>
 
                 <!-- 오른쪽 - 댓글창 -->
@@ -132,6 +131,7 @@ export default {
             task_No: 0,
             heart: false,
             chall_no: 0,
+            imgFlag: false,
             // CKEditor : '',
             // filename: '',
             // imageSrc: '',
@@ -150,7 +150,6 @@ export default {
                 .then((res) => {
                     // alert("과제 상세 정보가 들어왔습니다.");
                     console.log('getTaskInfo res로그');
-
                     console.log(res.data);
                     this.task_info = res.data;
                     console.log(this.task_info);
@@ -244,14 +243,12 @@ export default {
 
         // 이미지 가져오기
         getProfileImage: function() {
-            console.log('프로필 사진 가져오기 여기!!')
+            console.log('프로필 사진 가져오기 여기!!');
             http.get(`/viewimage/${this.task_info.userEmail}`).then((response) => {
-            console.log("과제 창 이미지성공");
-            var imgsrc =
-            "data:image/png;base64," +
-            btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
-            document.getElementById("profileimage").src = imgsrc;
-            // this.comment.userImage = imgsrc;
+                console.log('과제 창 이미지성공');
+                var imgsrc = 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
+                document.getElementById('profileimage').src = imgsrc;
+                // this.comment.userImage = imgsrc;
             });
         },
         getTaskImg: function() {
@@ -264,15 +261,18 @@ export default {
                     console.log(response.data);
                     var imgsrc = 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
                     document.getElementById('image').src = imgsrc;
-                    this.imgData = imgsrc;
-                    console.log(imgsrc);
+                    this.imgFlag = true;
+                    // this.imgData = imgsrc;
+                    // console.log(imgsrc);
                 })
                 .catch((error) => {
                     // console.log("이미지없음")
                     // console.log(this.imgsrc);
                     if (this.imgsrc == null) {
                         // console.log("얍")
-                        document.getElementById('image').src = '/img/ssazip.43ffb363.png';
+                        this.imgFlag = false;
+                        //  document.getElementById('image') = null;
+                        //  document.getElementById('image').src = '/img/ssazip.43ffb363.png';
                     }
                 });
         },
@@ -344,10 +344,11 @@ export default {
         this.getTaskInfo();
         this.getTaskImg();
     },
-    updated: function(){ // 랜더링이 다 끝난 뒤에 들어오는 것
+    updated: function() {
+        // 랜더링이 다 끝난 뒤에 들어오는 것
         this.getLikeInfo();
         this.getProfileImage();
-    },    
+    },
     // mounted(){
     //     ClassicEditor
     //     .create( document.querySelector('#divCKEditor'))
