@@ -23,7 +23,6 @@
                                         @dragover.prevent
                                         @dragenter.prevent
                                         @drop.prevent="onDrop"
-                                        
                                     />
                                     <!-- accept=".png"
                                     @change="onFileChange" -->
@@ -54,8 +53,8 @@
                         </div> -->
                             <div>
                                 <p>
-                                    <input type="file" id="file" class="inputfile" v-on:change="upload" />
-                                    <label for="file" class="input-plus">+</label>
+                                    <input type="file" id="taskfileId" class="inputfile" v-on:change="upload" />
+                                    <label for="taskfileId" class="input-plus">+</label>
                                 </p>
                                 <!-- 이미지 여기서는 안보여줘도 되겠지 -->
                                 <!-- <div>
@@ -149,21 +148,12 @@ export default {
     },
     data: function() {
         return {
-            // 버튼에 들어갈 문구들
-            // 생성: '생성',
-            // 취소: '취소',
-            뒤로: '돌아가기',
             CKEditor: '',
             taskimg: '',
-            //imageSrc: '',
             attachFile: false,
-
             newImgSrc: '',
             idx: 0,
-
             challengeno: 0,
-            // taskfile: new File(),
-            //taskimg: '', //new File(),
             taskcontent: '',
             taskdesc: '',
             taskindex: 0,
@@ -184,51 +174,58 @@ export default {
     },
     methods: {
         submitForm() {
-            alert('폼실행');
             let message = this.CKEditor.getData();
             if (message == '' || message == null) {
                 alert('글을 작성해주세요');
                 return;
             }
-            //alert(this.CKEditor.getData());
-            //console.log(this.CKEditor.getData());
             var frm = new FormData();
-            //var tfile = document.getElementBy
-            // Id('taskfile');
             var timg = document.getElementById('taskimgId');
-            //var timg = this.taskimg;
-            console.log(timg.files);
-            //frm.append('file', tfile.files[0]);
-            if (timg.files != null) {
-                // alert("파일없는데?")
-                console.log('이미지 탑승');
-                frm.append('img', timg.files[0]);
+            var tfile = document.getElementById('taskfileId');
+            //파일 첨부 여부와 사이즈 검색
+            if (timg.files.length != 0) {
+                if (timg.files[0].size > 1024 * 64) {
+                    // 용량 초과시 경고후 해당 파일의 용량도 보여줌
+                    alert(
+                        '64kb 이하 이미지만 등록할 수 있습니다.\n\n' + '현재파일 용량 : ' + Math.round((timg.files[0].size / 1024) * 100) / 100 + 'KB'
+                    );
+                    return;
+                } else {
+                    console.log('이미지 탑승');
+                    frm.append('img', timg.files[0]);
+                }
             }
-            //frm.append('taskContent', message);
+            if (tfile.files.length != 0) {
+                console.log('파일 탑승');
+                if (tfile.files[0].size > 1024 * 64) {
+                    alert(
+                        '64kb 이하 첨부파일만 등록할 수 있습니다.\n\n' +
+                            '현재파일 용량 : ' +
+                            Math.round((tfile.files[0].size / 1024) * 100) / 100 +
+                            'KB'
+                    );
+                    return;
+                } else {
+                    frm.append('file', tfile.files[0]);
+                }
+            }
             frm.append('taskDesc', message);
             frm.append('challengeNo', this.challengeno);
             frm.append('taskIndex', this.idx);
             frm.append('userEmail', this.userEmail);
-            console.log('보내는 값');
-            console.log(frm.getAll('img'));
-            axios.post('/challenge/task', frm, {
-                header: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            })
+            axios
+                .post('/challenge/task', frm, {
+                    header: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
                 .then((response) => {
-                    // console.log(formData.getAll);
                     console.log('과제 제출 성공!');
-                    alert("과제 제출이 성공하였습니다.")
-                                            this.$router.push({ path: '/challengeRoom', query: { cn: this.challengeno } });
-
+                    alert('과제 제출이 성공하였습니다.');
+                    this.$router.push({ path: '/challengeRoom', query: { cn: this.challengeno } });
                 })
                 .catch((error) => {
-                    // for (var pair of this.formData.entries()) {
-                    //   console.log(pair[0] + "," + pair[1]);
-                    // }
-                                        console.log('과제 제출 실패!');
-
+                    console.log('과제 제출 실패!');
                     console.log(error);
                 });
         },
@@ -244,6 +241,13 @@ export default {
                     alert('이미지 파일만 등록이 가능합니다');
                     return false;
                 }
+
+                if (file.size > 1024 * 64) {
+                    // 용량 초과시 경고후 해당 파일의 용량도 보여줌
+                    alert('64kb 이하 이미지만 등록할 수 있습니다.\n\n' + '현재파일 용량 : ' + Math.round((file.size / 1024) * 100) / 100 + 'KB');
+                    return;
+                }
+
                 this.taskimg = file.name;
                 this.preview(file);
             }

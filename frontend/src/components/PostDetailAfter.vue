@@ -15,15 +15,17 @@
                     <div class="col Dleft flex-item">
                         <div id="uploadimg">
                             <!-- 업로드 된 사진이 보이는 부분 -->
-                            <div v-show="imageSrc" class="upload-image">
-                                <img :src="imageSrc" />
+                            <div v-show="!image" class="upload-image">
+                                <img id="image" src="" />
+                                <!-- <div v-show="imageSrc" class="upload-image">
+                                <img :src="imageSrc" /> -->
                             </div>
                         </div>
-                        <div id="post">
-                            {{ task_info.taskDesc }}
-                        </div>
+                        <div id="post" v-html="task_info.taskDesc"></div>
 
-                        <div>
+                        <div v-if="task_info.taskFile">
+                            <a href="javascript:void(0);" v-on:click="download()">첨부파일 다운로드</a>
+
                             <!-- 파일 다운로드 하는 부분 -->
                         </div>
                     </div>
@@ -75,7 +77,7 @@ import '@/components/css/postdetailafter.css';
 import ButtonSquare from '@/components/common/ButtonSquare.vue';
 import CommentBox from '@/components/challengeroom/CommentBox.vue';
 import axios from '@/util/http-common.js';
-import http from "@/util/http-common.js";
+import http from '@/util/http-common.js';
 import { mapActions, mapState } from 'vuex';
 
 // import Vue from 'vue';
@@ -152,9 +154,9 @@ export default {
                     console.log(res.data);
                     this.task_info = res.data;
                     console.log(this.task_info);
-                    if(this.task_info.taskNo==0){
-                        alert("없는 과제 입니다.");
-                    this.$router.push({path: '/homefeed'});
+                    if (this.task_info.taskNo == 0) {
+                        alert('없는 과제 입니다.');
+                        this.$router.push({ path: '/homefeed' });
                     }
                 })
                 .catch((err) => {
@@ -207,7 +209,7 @@ export default {
                 .then((res) => {
                     console.log('getLikeInfo res로그');
                     console.log(res.data.userLikeFlag);
-                    this.heart=res.data.userLikeFlag;
+                    this.heart = res.data.userLikeFlag;
                 })
                 .catch((err) => {
                     console.log('getLikeInfo err로그');
@@ -224,14 +226,14 @@ export default {
                 })
                     .then((res) => {
                         console.log('erazeTask res로그 삭제성공');
-                        console.log(this.$route.query.taskNo+"번호 삭제");
+                        console.log(this.$route.query.taskNo + '번호 삭제');
                         this.$router.go(-1);
-//                        this.$router.push({ path: '/challengeRoom', query: { cn: this.chall_no } });
+                        //                        this.$router.push({ path: '/challengeRoom', query: { cn: this.chall_no } });
                     })
                     .catch((err) => {
-                        console.log('erazeTask err로그');                        
-                        console.log(this.chall_no+"삭제시도");
-                        console.log(this.$route.query.taskNo+"번호 삭제 시도");
+                        console.log('erazeTask err로그');
+                        console.log(this.chall_no + '삭제시도');
+                        console.log(this.$route.query.taskNo + '번호 삭제 시도');
                         console.log(err);
                     });
             } else {
@@ -242,15 +244,53 @@ export default {
 
         // 이미지 가져오기
         getProfileImage: function(e) {
-            console.log('프로필 사진 가져오기')
+            console.log('프로필 사진 가져오기');
             http.get(`/viewimage/${this.userEmail}`).then((response) => {
-            console.log("과제 창 이미지성공");
-            var imgsrc =
-            "data:image/png;base64," +
-            btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
-            document.getElementById("profileimage").src = imgsrc;
-            // this.comment.userImage = imgsrc;
+                console.log('과제 창 이미지성공');
+                var imgsrc = 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
+                document.getElementById('profileimage').src = imgsrc;
+                // this.comment.userImage = imgsrc;
             });
+        },
+        getTaskImg: function() {
+            console.log('getTaskImg 요청됨' + this.task_No);
+            //주의: BLOB 파일 용량 제한은 64kb까지임.. ->  ㅡ
+            axios
+                .get(`/challenge/task/img/${this.task_No}`)
+                .then((response) => {
+                    console.log('이미지소환성공');
+                    console.log(response.data);
+                    var imgsrc = 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
+                    document.getElementById('image').src = imgsrc;
+                    this.imgData = imgsrc;
+                    console.log(imgsrc);
+                })
+                .catch((error) => {
+                    // console.log("이미지없음")
+                    // console.log(this.imgsrc);
+                    if (this.imgsrc == null) {
+                        // console.log("얍")
+                        document.getElementById('image').src = '/img/ssazip.43ffb363.png';
+                    }
+                });
+        },
+        download() {
+            console.log(this.task_No + '번호 첨부파일 다운 요청');
+            axios
+                .get(`/challenge/task/file/${this.task_No}`, { responseType: 'blob' })
+                .then(({ data }) => {
+                    console.log('다운로드 통신 성공');
+                    const url = window.URL.createObjectURL(new Blob([data], { type: 'image/png' }));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'ssazip_challenge.png');
+                    document.body.appendChild(link);
+                    link.click();
+                })
+                .catch((err) => {
+                    console.log('다운로드 통신 실패');
+                    console.log(err);
+                });
         },
         // sendPost(){
         //     let message = this.CKEditor.getData();
@@ -296,15 +336,15 @@ export default {
     },
     created: function() {
         // alert(this.forwardTaskNo);
-        this.task_No=this.$route.query.taskNo;
+        this.task_No = this.$route.query.taskNo;
         this.chall_no = this.$route.query.cn;
         this.getProfileImage();
         this.getTaskInfo();
-        
+        this.getTaskImg();
     },
     updated: function() {
         this.getLikeInfo();
-    },    
+    },
     // mounted(){
     //     ClassicEditor
     //     .create( document.querySelector('#divCKEditor'))

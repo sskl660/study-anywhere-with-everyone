@@ -330,13 +330,13 @@ export default {
         this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
         this.getChallTicket();
-        document.getElementById(id).textContent = '';
+        //document.getElementById(id).textContent = '';
     },
     watch: {
         // overStartDate: function() {
         //     alert('overStartDate');
         //     this.over = true;
-        //},
+        //},     
     },
     computed: {
         ...mapGetters(['userEmail']),
