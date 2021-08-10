@@ -243,13 +243,15 @@ export default {
         },
 
         // 이미지 가져오기
-        getProfileImage: function(e) {
-            console.log('프로필 사진 가져오기');
-            http.get(`/viewimage/${this.userEmail}`).then((response) => {
-                console.log('과제 창 이미지성공');
-                var imgsrc = 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
-                document.getElementById('profileimage').src = imgsrc;
-                // this.comment.userImage = imgsrc;
+        getProfileImage: function() {
+            console.log('프로필 사진 가져오기 여기!!')
+            http.get(`/viewimage/${this.task_info.userEmail}`).then((response) => {
+            console.log("과제 창 이미지성공");
+            var imgsrc =
+            "data:image/png;base64," +
+            btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
+            document.getElementById("profileimage").src = imgsrc;
+            // this.comment.userImage = imgsrc;
             });
         },
         getTaskImg: function() {
@@ -342,9 +344,10 @@ export default {
         this.getTaskInfo();
         this.getTaskImg();
     },
-    updated: function() {
+    updated: function(){ // 랜더링이 다 끝난 뒤에 들어오는 것
         this.getLikeInfo();
-    },
+        this.getProfileImage();
+    },    
     // mounted(){
     //     ClassicEditor
     //     .create( document.querySelector('#divCKEditor'))
@@ -389,7 +392,7 @@ export default {
     top: 17px;
     left: -160px;
     border-radius: 30%;
-    border: 4px outset #99b7ff;
+    border: 3px outset #99b7ff;
 }
 
 .btn-warning {
