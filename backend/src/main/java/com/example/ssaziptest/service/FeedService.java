@@ -100,6 +100,7 @@ public class FeedService {
 //                        response.setFollowUserImage(Arrays.toString(blobAsBytes2));
 //                    }
                     response.setFollowUserEmail(userEntity.getUserEmail());
+                    response.setFollowUserName(userEntity.getUserName());
                     response.setFollowerCnt(userEntity.getUserFollower());
                     response.setFollowingCnt(userEntity.getUserFollowing());
                     break;
