@@ -215,7 +215,7 @@ export default {
                     //alert(new this.chall_info.challengeStartdate);
                     //alert(new Date(present)-new Date(this.chall_info.challengeStartdate));
 
-                    this.chall_info.challengeStartdate += ' 23:59:59';
+                    this.chall_info.challengeStartdate += ' 00:00:01';
                     this.countDownTimer('rest');
                     // if(new Date(this.chall_info.challengeStartdate+' 23:59:59')>new Date()){
                     //     this.overStartdate=true;
@@ -256,11 +256,11 @@ export default {
                 var distDt = _vDate - now - 1;
                 if (distDt < 0) {
                     clearInterval(rest);
-                    if (!this.overStartDate) {
-                        makeTrue();
-                        //this.overStartDate = true;
-                        //alert('overs');
-                    }
+                    // if (!this.overStartDate) {
+                    //     makeTrue();
+                    //     //this.overStartDate = true;
+                    //     //alert('overs');
+                    // }
                     document.getElementById(rest).textContent = '챌린지를 완주하세요!';
                     return;
                 }
