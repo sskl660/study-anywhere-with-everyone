@@ -32,7 +32,7 @@ public class FeedEntity {
     @JoinColumn(name = "fk_user_feed_email")
     private UserEntity feedUserEntity;
 
-    //challenge, follow, galaxy no든 email이든 가지고있기
+    //challenge, follow, galaxy no든 email이든 가지고있기. galaxy: message
     @Column(name = "feed_info")
     private String feedInfo;
 
