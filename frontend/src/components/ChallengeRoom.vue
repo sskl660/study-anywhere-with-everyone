@@ -12,12 +12,18 @@
             <div class="joinbox">
                 <!-- 가입버튼 누르기 전에는 가입하기 버튼과 가입 마감까지 남은 시간이 보여진다 -->
                 <li class="changebtn">
+                    <!-- 가입하기 버튼 -->
                     <div v-if="!overTime() && !didJoin() && !overMember()" class="Cjoin_btn" @click="hidebtn(chall_info.challengeNo, userEmail)">
                         <ButtonRound :text="msg" />
                     </div>
+                    <!-- 마감 시간 -->
                     <div class="alarm">
                         <h5 id="rest"></h5>
                     </div>
+                    <!-- 목록으로 이동 버튼 -->
+                    <button type="button" class="btn btn-primary goChallenge" @click="goBack()">
+                        목록으로 이동
+                    </button>
                 </li>
             </div>
 
@@ -289,7 +295,10 @@ export default {
             this.joinChall(info); // email이랑 챌린지 번호 전송
             this.$router.go();
         },
-
+        goBack: function(){
+            // alert('goBack function')
+            this.$router.go(-1);
+        },
         nameprofile(num) {
             var email = this.chall_info.challengeGroup[num][0];
             console.log(email);
@@ -435,4 +444,29 @@ th {
     width: 45px;
     height: 45px;
 }
+
+/* .goChallenge{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1F3E52;
+    background-color: #F9D479;
+    width: 60px;
+    height: 60px;
+    border-radius: 75px;
+    top: 30px;
+    left: 1630px;
+    padding-right: 15px;
+    cursor: pointer;
+    border-style: none;
+    box-shadow: none;
+    z-index: 5;
+}
+
+.goChallenge:hover{
+    color: #1F3E52;
+    background-color: #DDDDDD;
+    border-color: #DDDDDD;
+} */
 </style>
