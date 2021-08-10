@@ -13,7 +13,7 @@ export default {
       type: String,
     },
     TaskTotalRate: {
-      type: Array,
+      type: [],
     }
   },
   methods: {
