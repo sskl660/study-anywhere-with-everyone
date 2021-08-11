@@ -4,34 +4,61 @@
   <div>
     <div>
       <div v-if="chatType == 1">
-        <h1 style="color:orange">Algo 채팅방 입니다.</h1>
-        <p v-for="(obj, index) in receivedMessagesAlgo" :key="index" style="color:white">
-          {{ obj.sender }} : {{ obj.content }}
-        </p>
+        <div id="roomNameAlgo"><h3 style="color:white">Algo 채팅방 입니다.</h3></div>
+        <div id="roomBox">
+
+          <div v-for="(obj, index) in receivedMessagesAlgo" :key="index">
+            <div v-if="!Me">
+              <div id="Cname"><strong>{{ obj.sender }}</strong></div> 
+              <div id="Ctext">{{ obj.content }}</div>
+            </div>
+
+            <div v-else>
+              <div id="CMname"><strong>{{ obj.sender }}</strong></div> 
+              <div id="CMtext">{{ obj.content }}</div>
+            </div>
+          </div>
+
+        </div>
       </div>
+
       <div v-else-if="chatType == 2">
-        <h1 style="color:orange">CS 채팅방 입니다.</h1>
-        <p v-for="(obj, index) in receivedMessagesCS" :key="index" style="color:white">
-          {{ obj.sender }} : {{ obj.content }}
-        </p>
+        <div id="roomNameCS"><h3 style="color:white">CS 채팅방 입니다.</h3></div>
+        <div id="roomBox">
+
+          <div v-for="(obj, index) in receivedMessagesCS" :key="index">
+            <div v-if="!Me">
+              <div id="Cname"><strong>{{ obj.sender }}</strong></div> 
+              <div id="Ctext">{{ obj.content }}</div>
+            </div>
+            <div v-else>
+              <div id="CMname"><strong>{{ obj.sender }}</strong></div> 
+              <div id="CMtext">{{ obj.content }}</div>
+            </div>
+          </div>
+
+        </div>
       </div>
       <div v-else>
-        <h1 style="color:orange">Job 채팅방 입니다.</h1>
-        <p v-for="(obj, index) in receivedMessagesJob" :key="index" style="color:white">
-          <!-- <b-avatar variant="info"></b-avatar> -->
-          {{ obj.sender }}
-          <b-alert show variant="light">{{ obj.content }}</b-alert>
-        </p>
+        <div id="roomNameJob"><h3 style="color:white">Job 채팅방 입니다.</h3></div>
+        <div id="roomBox">
+
+          <div v-for="(obj, index) in receivedMessagesJob" :key="index">
+            <div v-if="!Me">
+              <div id="Cname"><strong>{{ obj.sender }}</strong></div>
+              <div id="Ctext">{{ obj.content }}</div>
+            </div>
+
+            <div v-else>
+              <div id="CMname"><strong>{{ obj.sender }}</strong></div>
+              <div id="CMtext">{{ obj.content }}</div>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="chat-room-wrap" v-if="stompClient">
-        <input
-          type="text"
-          v-model="message"
-          class="blocked mr-2"
-          ref="user-name-input"
-          @keyup.enter="sendMessage"
-          placeholder="메세지를 입력하세요!"
-        />
+      <div>
+        <input type="text" v-model="message" class="blocked mr-2 sendChat" ref="user-name-input" id="send_chat" placeholder="  메세지를 입력하세요!" @keyup.enter="sendMessage"/>&nbsp;
       </div>
     </div>
   </div>
@@ -56,6 +83,7 @@ export default {
       receivedMessagesAlgo: [],
       receivedMessagesCS: [],
       receivedMessagesJob: [],
+      Me: true,
     };
   },
   mounted() {
@@ -97,6 +125,14 @@ export default {
         // 메세지를 전송하였으므로 변수를 초기화 시켜준다.
         this.message = '';
       }
+
+      // 사용자 이메일 비교해서 나 인지 구분하기
+      // if(this.receivedMessages.sender.userName == this.userName){
+      //   this.Me = true;
+      // }
+      // else{
+      //   this.Me = false
+      // }
     },
 
     // 메세지를 받는 함수.
@@ -163,4 +199,109 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+#roomNameAlgo{
+  position: fixed;
+  background-color: #CC922C;
+  width: 430px;
+  border-radius: 20px;
+  margin-left: 3%;
+  padding-bottom: 4px;
+  padding-top: 3px;
+  right: 45px;
+}
+
+#roomNameCS{
+  position: fixed;
+  background-color: #C52E1E;
+  width: 430px;
+  border-radius: 20px;
+  margin-left: 3%;
+  padding-bottom: 4px;
+  padding-top: 3px;
+  right: 45px;
+}
+
+#roomNameJob{
+  position: fixed;
+  background-color: #32479C;
+  width: 430px;
+  border-radius: 20px;
+  margin-left: 3%;
+  padding-bottom: 4px;
+  padding-top: 3px;
+  right: 45px;
+}
+
+#roomBox{
+  width: 400px;
+  height: 610px;
+  margin-left: 6%;
+  overflow: scroll;
+  position: absolute;
+  margin-top: 72px;
+}
+
+#send_chat{
+  width: 430px;
+  height: 55px;
+  border-radius: 20px;
+  margin-top: 10px;
+  position: fixed;
+  bottom: 28px;
+  right: 45px;
+}
+
+input {
+  border: 3px solid #1C84C4;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 3px 2px #1C84C4;
+}
+
+#Cname{
+  text-align: left;
+  color: black;
+  font-size: 1.1rem;
+  margin-top: 5px;
+}
+
+#Ctext{
+  text-align: left;
+  color: black;
+  background-color: white;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 10px;
+  width: 70%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-left: 10px;
+}
+
+#CMname{
+  text-align: right;
+  color: black;
+  font-size: 1.1rem;
+  margin-top: 5px;
+}
+
+#CMtext{
+  text-align: right;
+  color: black;
+  background-color: #F1C069;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 10px;
+  width: 70%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-left: 110px;
+}
+</style>
