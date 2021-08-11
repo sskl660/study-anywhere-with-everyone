@@ -134,12 +134,12 @@ public class UserService {
             taskTicketResponse.setTaskNo(temp);
             int done = 0;
             List<LocalDate> deadlines = challengeEntity.getChallengeTaskdeadlines();
-//            for(Integer in: taskTicketResponse.getTaskNo()){
+            for(Integer in: taskTicketResponse.getTaskNo()){
 //                if(in==null) {
 //                    taskTicketResponse.setIsComplete(false);
 //                }
-//                else done++;
-//            }
+                if(in!=null) done++;
+            }
             LocalDate enddate = challengeEntity.getChallengeEnddate();
             taskTicketResponse.setIsComplete(enddate.isBefore(LocalDate.now())?true:false);
             for(int i=0; i<taskcnt; i++){
