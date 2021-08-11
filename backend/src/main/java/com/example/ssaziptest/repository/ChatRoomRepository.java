@@ -1,6 +1,6 @@
 package com.example.ssaziptest.repository;
 
-import com.example.ssaziptest.domain.chat.ChatRoomDTO;
+import com.example.ssaziptest.domain.chat.ChatParticipantDTO;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -8,27 +8,27 @@ import java.util.*;
 
 @Repository
 public class ChatRoomRepository {
-    private Map<String, ChatRoomDTO> chatRoomDTOMap;
+    private Map<String, ChatParticipantDTO> chatRoomDTOMap;
 
     @PostConstruct
     private void init() {
         chatRoomDTOMap = new LinkedHashMap<>();
     }
 
-    public List<ChatRoomDTO> findAllRooms() {
+    public List<ChatParticipantDTO> findAllRooms() {
         // 채팅방 생성 순서 최근 순으로 반환
-        List<ChatRoomDTO> result = new ArrayList<>(chatRoomDTOMap.values());
+        List<ChatParticipantDTO> result = new ArrayList<>(chatRoomDTOMap.values());
         Collections.reverse(result);
 
         return result;
     }
 
-    public ChatRoomDTO findRoomById(String id) {
+    public ChatParticipantDTO findRoomById(String id) {
         return chatRoomDTOMap.get(id);
     }
 
-    public ChatRoomDTO createChatRoomDTO(String name) {
-        ChatRoomDTO room = ChatRoomDTO.create(name);
+    public ChatParticipantDTO createChatRoomDTO(String name) {
+        ChatParticipantDTO room = ChatParticipantDTO.create(name);
         chatRoomDTOMap.put(room.getRoomId(), room);
 
         return room;

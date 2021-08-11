@@ -1,23 +1,36 @@
 package com.example.ssaziptest.controller;
 
 import com.example.ssaziptest.domain.chat.ChatVO;
+import com.example.ssaziptest.domain.chat.ParticipantDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class WebSocketController {
     // 특정 브로커에게 메세지를 전달
     private final SimpMessagingTemplate template;
+    // 채팅 참여 리스트
+    private List<ParticipantDTO> participants = new ArrayList<ParticipantDTO>();
 
-    // Client가 메세지를 Send할 수 있는 경로.
-    // WebSocketConfig에서 설정한 prefix와 경로가 병합된다. 즉, /galaxy/chat...과 같이 Client는 경로를 설정해주어야한다.
-    @MessageMapping("/chat/enter/algo")
-    public void enter(ChatVO message) {
-        message.setContent(message.getSender() + "님이 채팅방에 참여하였습니다.");
-        template.convertAndSend("/topic/chat/algo" + message.getRoomId(), message);
+    // 접속, 재접속시에는 현재 참자가를 지우고 다시 참가자 리스트를 보낸다.
+    @MessageMapping("/chat/enter")
+    public void enter(ParticipantDTO part) {
+        participants.remove(part);
+        participants.add(part);
+        template.convertAndSend("/topic/part", participants);
+    }
+
+    // 퇴장 시에는 현재 참가자를 제거한다.
+    @MessageMapping("/chat/exit")
+    public void exit(ParticipantDTO part) {
+        participants.remove(part);
+        template.convertAndSend("/topic/part", participants);
     }
 
     // 해당 경로로 메세지 발행 요청!

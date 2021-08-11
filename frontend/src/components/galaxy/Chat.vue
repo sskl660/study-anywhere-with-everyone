@@ -4,6 +4,10 @@
   <div>
     <div>
       <div v-if="chatType == 'algo'">
+        <div>{{ participants.length }}</div>
+        <div v-for="(obj, index) in participants" :key="index">
+          {{ obj.partTerm }} {{ obj.partName }} : {{ obj.partEmail }}
+        </div>
         <div id="roomNameAlgo"><h3 style="color:white">Algo 채팅방 입니다.</h3></div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesAlgo" :key="index">
@@ -92,11 +96,17 @@ export default {
       exitMessage: [],
       idx: '',
       message: '',
+      // 소켓 연결
       stompClient: null,
+      // 메세지 내용 저장
       receivedMessagesAlgo: [],
       receivedMessagesCS: [],
       receivedMessagesJob: [],
-      Me: true,
+      participants: [],
+      // 참여자 정보 전달 채널
+      partChannel: null,
+      // 대화 채널
+      channel: null,
     };
   },
   mounted() {
@@ -150,6 +160,7 @@ export default {
     onMessageReceived(payload) {
       // String 객체를 JSON으로 변환한다.
       const receiveMessage = JSON.parse(payload.body);
+      // console.log(receiveMessage);
 
       // this.idx = Math.floor(Math.random() * 3);
       // 채팅 입장, 퇴장에 따라서 메세지를 다르게 파싱하여 전송한다.
@@ -159,6 +170,10 @@ export default {
       //   receiveMessage.content = receiveMessage.sender + this.exitMessage[this.idx];
       // }
       // console.log(receiveMessage.room + 'this');
+      if (receiveMessage[0].partEmail != null) {
+        this.participants = receiveMessage;
+        console.log(this.participants);
+      }
 
       if (this.chatType == 'algo') {
         this.receivedMessagesAlgo.push(receiveMessage);
@@ -187,7 +202,41 @@ export default {
     onConnected() {
       // 해당 브로커가 중개하는 채널(/topic/public)로 연결(구독)한다.
       // destination, 보내고자하는 메세지(call back 함수)를 넣어줄 수 있다.
-      this.stompClient.subscribe('/topic/chat/' + this.chatType, this.onMessageReceived);
+      // 참여자 정보를 알려줄 채널
+      this.partChannel = this.stompClient.subscribe('/topic/part', this.onMessageReceived);
+
+      // 대화방 입장 시 기본 채널은 Algo 채팅방으로 설정된다.
+      this.channel = this.stompClient.subscribe(
+        '/topic/chat/' + this.chatType,
+        this.onMessageReceived
+      );
+      console.log(this.channel + 'here');
+
+      this.stompClient.send(
+        '/galaxy/chat/enter',
+        {},
+        JSON.stringify({
+          partEmail: this.userEmail,
+          partTerm: this.userTerm,
+          partName: this.userName,
+        })
+      );
+    },
+
+    // 소켓 연결 해제, 대화 채널 이탈.
+    socketDisconnect() {
+      console.log('dis!!!!');
+      this.stompClient.send(
+        '/galaxy/chat/exit',
+        {},
+        JSON.stringify({
+          partEmail: this.userEmail,
+          partTerm: this.userTerm,
+          partName: this.userName,
+        })
+      );
+
+      this.stompClient.disconnect();
     },
   },
 
@@ -196,8 +245,15 @@ export default {
   },
   watch: {
     chatType: function() {
-      this.stompClient.disconnect();
-      this.socketConnect();
+      // 구독 취소
+      this.channel.unsubscribe();
+      // 재 구독
+      this.channel = this.stompClient.subscribe(
+        '/topic/chat/' + this.chatType,
+        this.onMessageReceived
+      );
+      // this.stompClient.disconnect();
+      // this.socketConnect();
     },
   },
 };
