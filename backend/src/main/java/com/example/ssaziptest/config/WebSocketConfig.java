@@ -19,7 +19,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         // setAlloewdOrigins를 이용하여 CORS를 예방한다.
         // SockJS를 활용한다.
         // withSockJS를 사용하면 WebSocket의 형태로 연결이 지속되기 어려운 경우, HTTP를 사용해서 연결을 지속 시켜준다.
-        registry.addEndpoint("/ssazip").setAllowedOriginPatterns("*").withSockJS();
+        // 요청을 받을 경로 : export const chatURL = 'http://13.125.119.76:8080/ssazip'; // 백엔드 서버를 프론트에서
+        registry.addEndpoint("/ssazip").setAllowedOriginPatterns("*").withSockJS();//sockJs 라이브러리 연결 매끄럽게
     }
 
 
@@ -27,8 +28,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         // setApplicationDestinationPrefixes는 브로드 캐스팅의 시작 주소(접두사)를 설정한다.
-         registry.setApplicationDestinationPrefixes("/galaxy");
+        registry.setApplicationDestinationPrefixes("/galaxy");//대화 보낼 방 선택 연결
         // enableSimpleBroker는 해당 메세지 주솟값을 담당하여 처리하는 Broker를 활성화 시키는 함수이다(여기서는 /topic).
-        registry.enableSimpleBroker("/topic");
+        registry.enableSimpleBroker("/topic");//브로드 캐스 할 주소! 클라이언트에서 구독하면 된다
     }
 }
