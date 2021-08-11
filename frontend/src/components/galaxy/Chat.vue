@@ -4,20 +4,18 @@
   <div>
     <div>
       <div v-if="chatType == 'algo'">
-        <div>{{ participants.length }}</div>
-        <div v-for="(obj, index) in participants" :key="index">
-          {{ obj.partTerm }} {{ obj.partName }} : {{ obj.partEmail }}
-        </div>
         <div id="roomNameAlgo"><h3 style="color:white">Algo 채팅방 입니다.</h3></div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesAlgo" :key="index">
-            <div v-if="obj.senderId != userEmail" id="chatboxleft">
+            <div v-if="obj.senderId == ''">
+              <div id="CMtext">{{ obj.content }}</div>
+            </div>
+            <div v-else-if="obj.senderId != userEmail">
               <div id="Cname">
                 <strong>{{ obj.sender }}</strong>
               </div>
               <div id="Ctext">{{ obj.content }}</div>
             </div>
-
             <div v-else id="chatboxright">
               <div id="CMname">
                 <strong>{{ obj.sender }}</strong>
@@ -32,7 +30,10 @@
         <div id="roomNameCS"><h3 style="color:white">CS 채팅방 입니다.</h3></div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesCS" :key="index">
-            <div v-if="obj.senderId != userEmail" id="chatboxleft">
+            <div v-if="obj.senderId == ''">
+              <div id="CMtext">{{ obj.content }}</div>
+            </div>
+            <div v-else-if="obj.senderId != userEmail">
               <div id="Cname">
                 <strong>{{ obj.sender }}</strong>
               </div>
@@ -51,7 +52,10 @@
         <div id="roomNameJob"><h3 style="color:white">Job 채팅방 입니다.</h3></div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesJob" :key="index">
-            <div v-if="obj.senderId != userEmail" id="chatboxleft">
+            <div v-if="obj.senderId == ''">
+              <div id="CMtext">{{ obj.content }}</div>
+            </div>
+            <div v-else-if="obj.senderId != userEmail">
               <div id="Cname">
                 <strong>{{ obj.sender }}</strong>
               </div>
@@ -128,8 +132,8 @@ export default {
   },
   methods: {
     // 자동 스크롤
-    scrollDown(){
-      var scrollbox = document.getElementById("roomBox");
+    scrollDown() {
+      var scrollbox = document.getElementById('roomBox');
       scrollbox.scrollTop = scrollbox.scrollHeight;
     },
     // 메세지 전송하는 함수.
@@ -160,6 +164,7 @@ export default {
     onMessageReceived(payload) {
       // String 객체를 JSON으로 변환한다.
       const receiveMessage = JSON.parse(payload.body);
+      // console.log(receiveMessage.constructor.name + 'zzz');
       // console.log(receiveMessage);
 
       // this.idx = Math.floor(Math.random() * 3);
@@ -170,9 +175,19 @@ export default {
       //   receiveMessage.content = receiveMessage.sender + this.exitMessage[this.idx];
       // }
       // console.log(receiveMessage.room + 'this');
-      if (receiveMessage[0].partEmail != null) {
+
+      // 참가자라면 참여 메세지만 출력하기
+      if (receiveMessage.constructor.name == 'Array') {
         this.participants = receiveMessage;
-        console.log(this.participants);
+        return;
+      }
+      console.log(receiveMessage);
+
+      if (receiveMessage.sender == '') {
+        this.receivedMessagesAlgo.push(receiveMessage);
+        this.receivedMessagesCS.push(receiveMessage);
+        this.receivedMessagesJob.push(receiveMessage);
+        return;
       }
 
       if (this.chatType == 'algo') {
@@ -225,7 +240,6 @@ export default {
 
     // 소켓 연결 해제, 대화 채널 이탈.
     socketDisconnect() {
-      console.log('dis!!!!');
       this.stompClient.send(
         '/galaxy/chat/exit',
         {},
@@ -321,13 +335,13 @@ input:focus {
   box-shadow: 0 0 3px 2px #1c84c4;
 }
 
-#chatboxright{
+#chatboxright {
   padding-top: 1%;
   padding-bottom: 1%;
   text-align: right;
 }
 
-#chatboxleft{
+#chatboxleft {
   padding-top: 1%;
   padding-bottom: 1%;
   text-align: left;
@@ -341,13 +355,13 @@ input:focus {
 }
 
 #Ctext {
-  display: inline-block; 
-  word-break:break-all; 
+  display: inline-block;
+  word-break: break-all;
   max-width: 75%;
-  padding: 10px; 
-  border-radius: 5px; 
-  background-color: white; 
-  color: #555; 
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+  color: #555;
   margin-top: 5px;
   margin-bottom: 5px;
   padding-top: 2%;
@@ -362,14 +376,14 @@ input:focus {
   margin-top: 5px;
 }
 
-#CMtext{
-  display: inline-block; 
-  word-break:break-all; 
+#CMtext {
+  display: inline-block;
+  word-break: break-all;
   max-width: 75%;
-  padding: 10px; 
-  border-radius: 5px; 
-  background-color: #f1c069; 
-  color: #555; 
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f1c069;
+  color: #555;
   margin-top: 5px;
   margin-bottom: 5px;
   padding-top: 2%;
@@ -377,6 +391,4 @@ input:focus {
   margin-right: 2%;
   text-align: left;
 }
-
-
 </style>
