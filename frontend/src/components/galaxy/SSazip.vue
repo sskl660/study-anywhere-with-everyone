@@ -607,7 +607,7 @@ export default {
                     false
                 );
             }
-             start();
+            start();
 
             window.addEventListener('load', start, false);
             window.addEventListener('resize', win, false);
