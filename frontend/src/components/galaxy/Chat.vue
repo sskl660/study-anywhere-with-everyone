@@ -3,13 +3,14 @@
 <template>
   <div>
     <div>
-      <div v-if="chatType == 1">
+      <div v-if="chatType == 'algo'">
         <h1 style="color:orange">Algo 채팅방 입니다.</h1>
         <p v-for="(obj, index) in receivedMessagesAlgo" :key="index" style="color:white">
+          {{ obj.senderId }}
           {{ obj.sender }} : {{ obj.content }}
         </p>
       </div>
-      <div v-else-if="chatType == 2">
+      <div v-else-if="chatType == 'cs'">
         <h1 style="color:orange">CS 채팅방 입니다.</h1>
         <p v-for="(obj, index) in receivedMessagesCS" :key="index" style="color:white">
           {{ obj.sender }} : {{ obj.content }}
@@ -80,6 +81,7 @@ export default {
       if (this.message.trim() && this.stompClient) {
         // 메세지 형식을 정의한다(JSON).
         const sendMessage = {
+          senderId: this.userEmail,
           sender: this.userTerm + '기 ' + this.userName,
           content: this.message.trim(),
         };
@@ -87,13 +89,11 @@ export default {
         // 해당 Endpoint로 메세지를 전송한다.
         // Destination, header, body로 구성된다.
         // 채팅 Type에 따라서 다르게 보낸다.
-        if (this.chatType == 1) {
-          this.stompClient.send('/galaxy/chat/send/algo', {}, JSON.stringify(sendMessage));
-        } else if (this.chatType == 2) {
-          this.stompClient.send('/galaxy/chat/send/cs', {}, JSON.stringify(sendMessage));
-        } else if (this.chatType == 3) {
-          this.stompClient.send('/galaxy/chat/send/job', {}, JSON.stringify(sendMessage));
-        }
+        this.stompClient.send(
+          '/galaxy/chat/send/' + this.chatType,
+          {},
+          JSON.stringify(sendMessage)
+        );
         // 메세지를 전송하였으므로 변수를 초기화 시켜준다.
         this.message = '';
       }
@@ -104,20 +104,20 @@ export default {
       // String 객체를 JSON으로 변환한다.
       const receiveMessage = JSON.parse(payload.body);
 
-      this.idx = Math.floor(Math.random() * 3);
+      // this.idx = Math.floor(Math.random() * 3);
       // 채팅 입장, 퇴장에 따라서 메세지를 다르게 파싱하여 전송한다.
-      if (receiveMessage.type === 'JOIN') {
-        receiveMessage.content = receiveMessage.sender + this.enterMessage[this.idx];
-      } else if (receiveMessage.type === 'LEAVE') {
-        receiveMessage.content = receiveMessage.sender + this.exitMessage[this.idx];
-      }
-      console.log(receiveMessage.room + 'this');
+      // if (receiveMessage.type === 'JOIN') {
+      //   receiveMessage.content = receiveMessage.sender + this.enterMessage[this.idx];
+      // } else if (receiveMessage.type === 'LEAVE') {
+      //   receiveMessage.content = receiveMessage.sender + this.exitMessage[this.idx];
+      // }
+      // console.log(receiveMessage.room + 'this');
 
-      if (this.chatType == 1) {
+      if (this.chatType == 'algo') {
         this.receivedMessagesAlgo.push(receiveMessage);
-      } else if (this.chatType == 2) {
+      } else if (this.chatType == 'cs') {
         this.receivedMessagesCS.push(receiveMessage);
-      } else if (this.chatType == 3) {
+      } else if (this.chatType == 'job') {
         this.receivedMessagesJob.push(receiveMessage);
       }
     },
@@ -140,19 +140,12 @@ export default {
     onConnected() {
       // 해당 브로커가 중개하는 채널(/topic/public)로 연결(구독)한다.
       // destination, 보내고자하는 메세지(call back 함수)를 넣어줄 수 있다.
-      if (this.chatType == 1) {
-        this.stompClient.subscribe('/topic/chat/algo', this.onMessageReceived);
-      } else if (this.chatType == 2) {
-        console.log('sub2');
-        this.stompClient.subscribe('/topic/chat/cs', this.onMessageReceived);
-      } else {
-        this.stompClient.subscribe('/topic/chat/job', this.onMessageReceived);
-      }
+      this.stompClient.subscribe('/topic/chat/' + this.chatType, this.onMessageReceived);
     },
   },
 
   computed: {
-    ...mapGetters(['userName', 'userTerm', 'chatType']),
+    ...mapGetters(['userEmail', 'userName', 'userTerm', 'chatType']),
   },
   watch: {
     chatType: function() {
