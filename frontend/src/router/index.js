@@ -11,6 +11,7 @@ import PostDetail from '../components/PostDetail.vue';
 import PostDetailAfter from '../components/PostDetailAfter.vue';
 import EPeacefulWorld from '../views/EPeacefulWorld.vue';
 import Galaxy from '../views/Galaxy.vue';
+import SSazip from '../views/SSazip.vue';
 
 Vue.use(VueRouter);
 
@@ -73,6 +74,11 @@ const routes = [
     path: '/Galaxy',
     name: 'Galaxy',
     component: Galaxy,
+  },
+  {
+    path: '/SSazip',
+    name: 'SSazip',
+    component: SSazip,
   },
   // {
   //   path: '/about',

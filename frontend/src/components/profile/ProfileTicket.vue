@@ -21,10 +21,11 @@
           <span>tick</span>
         </div> -->
       </div>
-
-      <img v-if="this.checkExcellent()" class="stamp" style="float:right" src="@/assets/excellent.png" alt="">
-      <img v-if="this.checkTryAgain()" class="stamp" style="float:right" src="@/assets/try.png" alt="">
-      <img v-if="this.checkAwesome()" class="stamp" style="float:right" src="@/assets/awesome.png" alt="">
+      <div v-if="this.ticket.isComplete">
+        <img v-if="this.checkExcellent()" class="stamp" style="float:right" src="@/assets/excellent.png" alt="">
+        <img v-if="this.checkTryAgain()" class="stamp" style="float:right" src="@/assets/try.png" alt="">
+        <img v-if="this.checkAwesome()" class="stamp" style="float:right" src="@/assets/awesome.png" alt="">
+      </div>
       <!-- 챌린지 끝나야 도장찍히게 해야하나? -->
       <!-- <div v-if="this.checkFinish()">
         <img v-if="this.checkExcellent()" class="stamp" style="float:right" src="@/assets/excellent.png" alt="">
@@ -83,6 +84,8 @@ export default {
   },
   methods: {
     checkExcellent: function () {
+      console.log("완료여부")
+      console.log(this.ticket)
       if (this.ticket.achieveRate == 100) return true;
       else false
     },
