@@ -2,6 +2,7 @@
 <!-- Galaxy CSS 적용-->
 <template>
   <div class="">
+    <SSazip/>
     <div class="">
       <div><ChatTab /></div>
     </div>
@@ -15,14 +16,25 @@
 <script>
 import Chat from '@/components/galaxy/Chat.vue';
 import ChatTab from '@/components/galaxy/ChatTab.vue';
+import SSazip from '@/components/galaxy/SSazip.vue'
 
 export default {
   name: 'Galaxy',
   components: {
     Chat,
     ChatTab,
+    SSazip,
   },
+  
+  // updated: function() {
+  //   this.$router.go()
+  // }
+  // connected: function(){
+  //   this.$router.go()
+  // }
 };
+
+
 </script>
 
 <style>

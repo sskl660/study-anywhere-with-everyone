@@ -1,14 +1,56 @@
 <template>
   <div>
+    <div style="display:block;position:absolute;top:0px;left:0px;height:100%;width:100%;background:transparent;overflow:hidden;visibility:hidden;">
+        <!-- <svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">
+            <line id="vec" x1="0" y1="0" x2="0" y2="0" stroke="#ff0000" stroke-width="1.5" stroke-dasharray="3,3">
+            </line>
+        </svg>
+        <div style="display: block;position: fixed;margin: 4px;top:0;right:0;border-radius:5px;height: 30px;width: 130px;padding: 5px;background-color:#ee0000;text-align: center;font: italic bold 16px verdana;color: #fff;line-height: 30px;letter-spacing: 0.5px;cursor:default;z-index: 1000;-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;visibility:visible;">
+                Gravity 
+            <input type="radio" style="cursor:pointer;" name="c" id="but1" checked="">
+            <input type="radio" style="cursor:pointer;" name="c" id="but2">
+        </div> -->
+        <SmallSSazip/>
+
+        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+        <!-- <div id="ssazip" class="ssazip" ></div>
+        <div id="ssazip" class="ssazip" ></div>
+        <div id="ssazip" class="ssazip" ></div> -->
+
+        <!-- <div class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(58.3333px, 71.3118px, 0px) rotate(22.5deg); visibility: visible;"></div>
+        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(0.919939px, 883.738px, 0px) rotate(22.5deg); visibility: visible;" >
+        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(0.733644px, 527.097px, 0px) rotate(22.5deg); visibility: visible;" >
+        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(35.2363px, 428.654px, 0px) rotate(22.5deg); visibility: visible;" >
+        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(12.3529px, 664.658px, 0px) rotate(22.5deg); visibility: visible;" >
+        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(85.9478px, 172.158px, 0px) rotate(22.5deg); visibility: visible;" >
+        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(37.6068px, 604.655px, 0px) rotate(22.5deg); visibility: visible;" >
+        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(28.6233px, 806.046px, 0px) rotate(22.5deg); visibility: visible;" >
+        <img class="ssazip"  style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(22.3951px, 737.06px, 0px) rotate(22.5deg); visibility: visible;" >
+        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(73.7086px, 846.587px, 0px) rotate(22.5deg); visibility: visible;" > -->
+    </div>
   </div>
 </template>
 
 <script>
+import SmallSSazip from "@/components/galaxy/SmallSSazip.vue"
 // import gravity from "@/components/temporary/gravity.js"
 // import $ from 'jquery';
 
 export default {
   name: "SSazip",
+  components:{
+      SmallSSazip
+  },
   methods:{
     gravity:function(){
                 /*
@@ -16,7 +58,7 @@ export default {
         Straight JavaScript!
         kurt.grigg@yahoo.co.uk
         */
-        var numberOfBalls = 15;
+        var numberOfBalls = 10;
         var ballVelocity = 2;
         var ballHardness = 0.85;
         var wallHardness = 0.50;
@@ -43,54 +85,54 @@ export default {
             return false;
         }
 
-        window.addEventListener('mousedown', function(e) {
-            if (!e) {e = window.event;}
-            m.down = true;
-            m.x1 = m.x2 = e.pageX - scrl(1);
-            m.y1 = m.y2 = e.pageY - scrl(0);
+        // window.addEventListener('mousedown', function(e) {
+        //     if (!e) {e = window.event;}
+        //     m.down = true;
+        //     m.x1 = m.x2 = e.pageX - scrl(1);
+        //     m.y1 = m.y2 = e.pageY - scrl(0);
 
-            d.body.style.cursor = 'crosshair';
-            d.getElementById('svg').style.visibility = 'visible';
-            d.getElementById('vec').setAttribute('x1', m.x1);
-            d.getElementById('vec').setAttribute('y1', m.y1);
-        }, false);
+        //     d.body.style.cursor = 'crosshair';
+        //     d.getElementById('svg').style.visibility = 'visible';
+        //     d.getElementById('vec').setAttribute('x1', m.x1);
+        //     d.getElementById('vec').setAttribute('y1', m.y1);
+        // }, false);
 
-        window.addEventListener("mousemove", function(e) {
-            if (!e) {e = window.event;}
-            if (m.down) {
-                m.x2 = e.pageX - scrl(1);
-                m.y2 = e.pageY - scrl(0);
-            }
-            else {
-                m.x1 = m.x2 = e.pageX - scrl(1);
-                m.y1 = m.y2 = e.pageY - scrl(0);
-            }
-            d.getElementById('vec').setAttribute('x2', m.x2);
-            d.getElementById('vec').setAttribute('y2', m.y2);
-        }, false);
+        // window.addEventListener("mousemove", function(e) {
+        //     if (!e) {e = window.event;}
+        //     if (m.down) {
+        //         m.x2 = e.pageX - scrl(1);
+        //         m.y2 = e.pageY - scrl(0);
+        //     }
+        //     else {
+        //         m.x1 = m.x2 = e.pageX - scrl(1);
+        //         m.y1 = m.y2 = e.pageY - scrl(0);
+        //     }
+        //     d.getElementById('vec').setAttribute('x2', m.x2);
+        //     d.getElementById('vec').setAttribute('y2', m.y2);
+        // }, false);
 
-        window.addEventListener("mouseup", function(e) {
-            if (!e) {e = window.event;}
-            if (m.down) {
-                m.down = false;
-                d.body.style.cursor = 'default';
-                d.getElementById('svg').style.visibility = 'hidden';
+        // window.addEventListener("mouseup", function(e) {
+        //     if (!e) {e = window.event;}
+        //     if (m.down) {
+        //         m.down = false;
+        //         d.body.style.cursor = 'default';
+        //         d.getElementById('svg').style.visibility = 'hidden';
 
-                var dx = (m.x1 - m.x2);
-                var dy = (m.y1 - m.y2);
-                var dist =  Math.sqrt(dx * dx + dy * dy);
+        //         var dx = (m.x1 - m.x2);
+        //         var dy = (m.y1 - m.y2);
+        //         var dist =  Math.sqrt(dx * dx + dy * dy);
 
-                var f = (drop)?1:0.3;
+        //         var f = (drop)?1:0.3;
 
-                var nvx = (dx / dist * -(dist * force)) * f;
-                var nvy = (dy / dist * -(dist * force)) * f;
+        //         var nvx = (dx / dist * -(dist * force)) * f;
+        //         var nvy = (dy / dist * -(dist * force)) * f;
 
-                // 드래그해서 공 생성
-                // if (!exempt && dist > 0) {
-                //     createBall(m.y1,m.x1,nvy,nvx);
-                // }
-            }
-        }, false);
+        //         // 드래그해서 공 생성
+        //         // if (!exempt && dist > 0) {
+        //         //     createBall(m.y1,m.x1,nvy,nvx);
+        //         // }
+        //     }
+        // }, false);
 
         function scrl(a) {
             var y, x;
@@ -155,39 +197,43 @@ export default {
 
         function createBall(y,x,nvy,nvx) {
             var r = minRadius + Math.random() * maxRadius|0;
-            var ball = d.createElement('div');
+            // r: 알들의 크기
+            // var r =50;
+            var ball = d.getElementById("ssazip");
             ball.setAttribute('style', 'display:block;'
+                // +'src: url(~@/assets/sszip.png);'
                 +'position:absolute;'
                 +'height:'+r+'px;'
                 +'width:'+r+'px;'
                 +'top:0px;left:0px;'
-                +'background-color:'+randomColour()+';'
+                // +'background-color:'+randomColour()+';'
                 +'border-radius:50%;'
                 +'box-shadow:inset 0 0 '+xy(1,r)+'px '+xy(1,r)+'px rgba(0,0,0,0.2),'
                 +'inset 0 -'+xy(25,r)+'px '+xy(50,r)+'px rgba(0,0,0,0.4);'
                 +'opacity:1.0;');
+            // ball.src = "@/asset"
+            // var glass = d.createElement('div');
+            // glass.setAttribute('style', 'display: block;'
+            //     +'position:absolute;'
+            //     +'height:'+xy(100)+'px;'
+            //     +'width:'+xy(100)+'px;'
+            //     +'margin:auto;top:0;bottom:0;left:0;right:0;'
+            // +'border-radius:50%;');
 
-            var glass = d.createElement('div');
-            glass.setAttribute('style', 'display: block;'
-                +'position:absolute;'
-                +'height:'+xy(100)+'px;'
-                +'width:'+xy(100)+'px;'
-                +'margin:auto;top:0;bottom:0;left:0;right:0;'
-            +'border-radius:50%;');
-
-            var shine = d.createElement('div');
-            shine.setAttribute('style', 'display:block;'
-        +'position:absolute;'
-                +'margin:auto;'
-                +'top:2%;'
-                +'left:0;right:0;'
-        +'border-radius:50%;'
-        +'width:72%;'
-        +'height:54%;'
-        +'background-image:linear-gradient(to bottom, rgba(255,255,255,0.9) 2%, '
-                +'rgba(255,255,255,0.7) 30%, transparent 100%);');
-            glass.appendChild(shine);
-            ball.appendChild(glass);
+        // 공 빛나는 부분
+        //     var shine = d.createElement('div');
+        //     shine.setAttribute('style', 'display:block;'
+        // +'position:absolute;'
+        //         +'margin:auto;'
+        //         +'top:2%;'
+        //         +'left:0;right:0;'
+        // +'border-radius:50%;'
+        // +'width:72%;'
+        // +'height:54%;'
+        // +'background-image:linear-gradient(to bottom, rgba(255,255,255,0.9) 2%, '
+        //         +'rgba(255,255,255,0.7) 30%, transparent 100%);');
+        //     glass.appendChild(shine);
+        //     ball.appendChild(glass);
 
             setTimeout(function() {
                 ball.style.visibility = 'visible';
@@ -268,7 +314,7 @@ export default {
 
         function zeroGravityBorderCollisions() {
             for (var i = 0; i < balls.length; i++) {
-                b = ballCoords[i];
+                const b = ballCoords[i];
                 if (b.x > w - b.r) {
                     b.x = w - b.r;
                     b.vx *= -1;
@@ -506,7 +552,22 @@ export default {
   }, 
   created: function() {
       this.gravity()
+      window.off('gravity')
+  },
+  destroyed: function() {
+      this.$router.go()
+      setTimeout(function(){
+      },3000)
   }
+//   beforeRouteLeave(to, from, next) { 
+//     //   this.$router.go()
+//     //   const answer = window.confirm('데이터 저장이 되지 않았습니다. 이 페이지를 나가시겠습니까?') 
+//     //   if (answer) { next(); this.$router.go() } else { next(false) 
+//       // false를 추가한 경우 페이지 이동을 하지 않음 
+//     // } 
+// }
+
+
 
 }
 </script>
