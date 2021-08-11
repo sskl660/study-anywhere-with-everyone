@@ -13,32 +13,33 @@
                         <!-- 작성자가 보이는 부분 -->
                     </div>
                     <div class="col Dleft flex-item">
-                        <div v-show="imgFlag" id="uploadimg">
-                            <!-- 업로드 된 사진이 보이는 부분 -->
-                            <div class="upload-image">
-                                <img id="image" src="" />
-                                <!-- <div v-show="imageSrc" class="upload-image">
-                                <img :src="imageSrc" /> -->
+                        <div class="Ddleft">
+                            <div v-show="imgFlag" id="uploadimg">
+                                <!-- 업로드 된 사진이 보이는 부분 -->
+                                <div class="upload-image">
+                                    <img id="image" src="" />
+                                    <!-- <div v-show="imageSrc" class="upload-image">
+                                    <img :src="imageSrc" /> -->
+                                </div>
                             </div>
-                        </div>
-                        <div id="post" style="text-align:left; padding: 30px" v-html="task_info.taskContent"></div>
-
-                        <div v-if="task_info.taskFile">
-                            <a href="javascript:void(0);" v-on:click="download()">첨부파일 다운로드</a>
+                            <div id="post" style="text-align:left; padding: 30px" v-html="task_info.taskContent"></div>
                         </div>
                     </div>
-                        <div id="whoru" style="backgoround-color:red">
+                        <div id="whoru" style="backgoround-color:red margin-top : 8px">
                             <div class="like-box">
                                 <i v-show="!heart" class="fas fa-heart like-img" @click="sendLike(like)" style="cursor:pointer;"></i>
                                 <i v-show="heart" class="fas fa-heart like-img" @click="sendUnLike(like)" style="cursor:pointer; color:red"></i>
                             </div>
 
                             <div class="like-num">
-                                <h6>
+                                <h6 style="margin-top : 10px">
                                     <strong>{{ task_info.likes + ' 명' }}</strong
                                     >이 좋아합니다
                                 </h6>
                             </div>
+                        </div>
+                        <div v-if="task_info.taskFile" id="filedownload">
+                            <a href="javascript:void(0);" v-on:click="download()" style="text-decoration: none; color: #blue;"><strong>첨부파일 다운로드</strong></a>
                         </div>
                 </div>
 
@@ -47,7 +48,7 @@
                     <!-- 댓글창 맨 위 개인 프로필 -->
                     <div id="infowriter">
                         <img id="profileimage" class="comment-img-box" src="" alt="" />
-                        <h4 id="writername">{{ task_info.userTerm }} 기 {{ task_info.userName }}</h4>
+                        <h4 id="writername" style="color:black">{{ task_info.userTerm }} 기 {{ task_info.userName }}</h4>
                         <hr id="line" />
                     </div>
                     <div>
@@ -249,7 +250,14 @@ export default {
                 var imgsrc = 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
                 document.getElementById('profileimage').src = imgsrc;
                 // this.comment.userImage = imgsrc;
-            });
+            })
+            .catch((error) => {
+                    // console.log("이미지없음")
+                    // console.log(this.imgsrc);
+                    if (this.imgsrc == null) {
+                        document.getElementById('profileimage').src = '/img/ssazip.43ffb363.png';
+                    }
+                });;
         },
         getTaskImg: function() {
             console.log('getTaskImg 요청됨' + this.task_No);
@@ -294,47 +302,6 @@ export default {
                     console.log(err);
                 });
         },
-        // sendPost(){
-        //     let message = this.CKEditor.getData();
-        //     alert(message);
-        // },
-
-        // // 여기서부터 사진 업로드
-        // onDrop (event) {
-        // this.inputImageFile(event.dataTransfer.files)
-        // },
-        // onClickFile(event) {
-        // this.$refs.fileInput.click(event)
-        // },
-        // onFileChange(event) {
-        // this.inputImageFile(event.target.files)
-        // },
-        // inputImageFile (files) {
-        // if (files.length) {
-        //     let file = files[0]
-        //     if (!/^image\//.test(file.type)) {
-        //     alert('이미지 파일만 등록이 가능합니다')
-        //     return false
-        //     }
-        //     this.filename = file.name
-        //     this.preview(file)
-        // }
-        // },
-        // onClickUpload () {
-        // this.preview (this.filename)
-        // },
-        // preview (file) {
-        // if (typeof file === 'string') {
-        //     this.imageSrc = file
-        // } else {
-        //     let vm = this
-        //     let reader = new FileReader()
-        //     reader.onload = () => {
-        //     vm.imageSrc = reader.result
-        //     }
-        //     reader.readAsDataURL(file)
-        // }
-        // }
     },
     created: function() {
         // alert(this.forwardTaskNo);
@@ -349,16 +316,6 @@ export default {
         this.getLikeInfo();
         this.getProfileImage();
     },
-    // mounted(){
-    //     ClassicEditor
-    //     .create( document.querySelector('#divCKEditor'))
-    //     .then(editor => {
-    //         this.CKEditor = editor;
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
-    // }
 };
 </script>
 
@@ -419,4 +376,15 @@ export default {
 i.fa.fa-paperclip {
     font-size: 24px;
 }
+
+#filedownload{
+    position: absolute;
+    margin-top: -42px;
+    margin-left: 32%;
+}
+
+element.style {
+    margin-top: 10px;
+}
+
 </style>
