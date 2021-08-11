@@ -127,12 +127,12 @@ export default {
       }
 
       // 사용자 이메일 비교해서 나 인지 구분하기
-      // if(this.receivedMessages.sender.userName == this.userName){
-      //   this.Me = true;
-      // }
-      // else{
-      //   this.Me = false
-      // }
+      if(this.receivedMessages.sender.userName == this.userName){
+        this.Me = true;
+      }
+      else{
+        this.Me = false
+      }
     },
 
     // 메세지를 받는 함수.
@@ -291,7 +291,7 @@ input:focus {
 }
 
 #CMtext{
-  text-align: right;
+  text-align: left;
   color: black;
   background-color: #F1C069;
   margin-top: 5px;
