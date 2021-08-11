@@ -7,15 +7,18 @@
         <div id="roomNameAlgo"><h3 style="color:white">Algo 채팅방 입니다.</h3><span id="participant">{{this.participants.length}} 명 참여 중</span></div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesAlgo" :key="index">
+            <!-- 입퇴장 -->
             <div v-if="obj.senderId === null" id="chatboxcome">
               <div id="Ccome">{{ obj.content }}</div>
             </div>
+            <!-- 남이 보낸거 -->
             <div v-else-if="obj.senderId != userEmail" id="chatboxleft">
               <div id="Cname">
                 <strong>{{ obj.sender }}</strong>
               </div>
               <div id="Ctext">{{ obj.content }}</div>
             </div>
+            <!-- 내가 보낸거 -->
             <div v-else id="chatboxright">
               <div id="CMname">
                 <strong>{{ obj.sender }}</strong>
