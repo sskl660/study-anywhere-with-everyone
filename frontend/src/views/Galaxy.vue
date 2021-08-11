@@ -1,9 +1,14 @@
 <!-- Galaxy 템플릿에 맞게 배치-->
 <!-- Galaxy CSS 적용-->
 <template>
-  <div>
-    <div><ChatTab /></div>
-    <div><Chat /></div>
+  <div class="">
+    <div class="">
+      <div><ChatTab /></div>
+    </div>
+    <div class="GalaxyChat">
+      <div><Chat /></div>
+    </div>
+    
   </div>
 </template>
 
@@ -20,4 +25,19 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+.GalaxyChat{
+  background-color: #B7BEDA;
+  width: 460px;
+  height: 780px;
+  border-radius: 20px;
+
+  position: fixed;
+  /* justify-content: center;
+  align-items: center; */
+  bottom: 15px;
+  right: 30px;
+  padding-top: 10px;
+}
+</style>
