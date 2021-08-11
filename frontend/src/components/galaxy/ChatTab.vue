@@ -1,30 +1,25 @@
 <!-- 채팅 Tab CSS 수정-->
 <template>
-  <div>
-    <button
-      type="button"
-      class="btn btn-danger mb-4 me-4"
-      style="width:100px"
+  <div class="GalaxyTab">
+    <img
+      src="@/assets/algo.png"
+      style="width:80px; cursor: pointer;"
       @click="changeChatType(1)"
     >
-      알고리즘
-    </button>
-    <button
-      type="button"
-      class="btn btn-danger mb-4 me-4"
-      style="width:100px"
+    &nbsp;
+    <img
+      src="@/assets/cs.png"
+      style="width:80px; cursor: pointer;"
       @click="changeChatType(2)"
     >
-      CS
-    </button>
-    <button
-      type="button"
-      class="btn btn-danger mb-4 me-4"
-      style="width: 100px"
+      <!-- <h4>CS</h4> -->
+      &nbsp;
+    <img
+      src="@/assets/job.png"
+      style="width: 80px; cursor: pointer;"
       @click="changeChatType(3)"
     >
-      취업
-    </button>
+      <!-- <h4>Job</h4> -->
   </div>
 </template>
 
@@ -42,4 +37,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+h4{
+  color: #ffffff;
+}
+
+.GalaxyTab{
+  padding-top: 48px;
+  width: 20%;
+  margin-left: 72%;
+}
+</style>

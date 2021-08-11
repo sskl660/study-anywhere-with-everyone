@@ -12,18 +12,19 @@
             <div class="joinbox">
                 <!-- 가입버튼 누르기 전에는 가입하기 버튼과 가입 마감까지 남은 시간이 보여진다 -->
                 <li class="changebtn">
+                    <!-- 목록으로 이동 버튼 -->
+                    <div class="goChallenge" @click="goBack()">
+                        <ButtonRound :text="cmsg" />
+                    </div>
+                    &nbsp;
                     <!-- 가입하기 버튼 -->
                     <div v-if="!overTime() && !didJoin() && !overMember()" class="Cjoin_btn" @click="hidebtn(chall_info.challengeNo, userEmail)">
                         <ButtonRound :text="msg" />
-                    </div>
+                    </div>  
                     <!-- 마감 시간 -->
                     <div class="alarm">
                         <h5 id="rest"></h5>
                     </div>
-                    <!-- 목록으로 이동 버튼 -->
-                    <button type="button" class="btn btn-primary goChallenge" @click="goBack()">
-                        목록으로 이동
-                    </button>
                 </li>
             </div>
 
@@ -85,27 +86,29 @@
                 <div class="ChallengeDetail">
                     <div class="Cdetail">
                         <p>{{ chall_info.challengeDesc }}</p>
+
+                        <div>
+                            <div v-for="(task, index) in chall_info.challengeTaskdeadlines" :key="task">{{ index+1 }} 번째 과제 : {{ task }} 까지</div>
+                        </div>
+                        <br /><br />
                         <strong
                             >참여멤버 :
                             <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)" style="cursor:pointer;">
                                 <router-link
-                                    style="color:#420909; font-weight:600; text-decoration: none;"
+                                    style="color:#blue; font-weight:600; text-decoration: none;"
                                     :to="{ name: 'Profile', query: { user: name[0] } }"
                                 >
                                     #{{ name[1] }}
                                 </router-link>
                             </span>
-                            [정원]{{ chall_info.challengeGroup.length }}/{{ chall_info.challengeCapacity }}
+                            &nbsp; [정원]{{ chall_info.challengeGroup.length }}/{{ chall_info.challengeCapacity }}
                         </strong>
-                        <br /><br />
+                        <br>
                         <div>
                             <strong> 난이도 : </strong
                             ><span v-for="level in chall_info.challengeLevel" :key="level"
                                 ><img src="../assets/star.png" alt="levelstar" id="levelstar"
                             /></span>
-                        </div>
-                        <div>
-                            <div v-for="(task, index) in chall_info.challengeTaskdeadlines" :key="task">{{ index+1 }} 번째 과제 : {{ task }} 까지</div>
                         </div>
                     </div>
                 </div>
@@ -137,7 +140,8 @@ export default {
     data: function() {
         return {
             // 버튼에 들어갈 문구들
-            msg: '가입하기',
+            msg: '가입',
+            cmsg: '목록',
             // 가입완료: '가입완료',
             submit: true,
             fail: false,
@@ -288,7 +292,7 @@ export default {
         }),
         // 가입하기 버튼 눌렀을 때
         hidebtn: function(chall_No, user) {
-            this.msg = '가입완료';
+            this.msg = '완료';
             console.log('가입완료');
             //alert(chall_No + ' ' + user);
             document.querySelector('.Cjoin_btn .btn-light').style.backgroundColor = '#f9d479';
@@ -365,10 +369,10 @@ export default {
     /* border-color: #99b7ff; */
     font-size: 25px;
     font-weight: bold;
-    width: 171px;
+    width: 100px;
     height: 54px;
     margin-right: 69%;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     border-style: none;
 }
 
@@ -382,7 +386,20 @@ export default {
     width: 171px;
     height: 54px;
     margin-right: 69%;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.goChallenge .btn-light{
+    color: #1f4256;
+    background-color: #E1AF4E;
+    border-color: #E1AF4E;
+    font-size: 25px;
+    font-weight: bold;
+    width: 100px;
+    height: 54px;
+    margin-right: 99%;
+    margin-bottom: 10px;
+    border-style: none;
 }
 
 .alarm {
@@ -447,29 +464,4 @@ th {
     width: 45px;
     height: 45px;
 }
-
-/* .goChallenge{
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #1F3E52;
-    background-color: #F9D479;
-    width: 60px;
-    height: 60px;
-    border-radius: 75px;
-    top: 30px;
-    left: 1630px;
-    padding-right: 15px;
-    cursor: pointer;
-    border-style: none;
-    box-shadow: none;
-    z-index: 5;
-}
-
-.goChallenge:hover{
-    color: #1F3E52;
-    background-color: #DDDDDD;
-    border-color: #DDDDDD;
-} */
 </style>
