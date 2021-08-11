@@ -4,13 +4,13 @@
   <div>
     <div>
       <div v-if="chatType == 'algo'">
-        <div id="roomNameAlgo"><h3 style="color:white">Algo 채팅방 입니다.</h3></div>
+        <div id="roomNameAlgo"><h3 style="color:white">Algo 채팅방 입니다.</h3><span id="participant">{{this.participants.length}} 명 참여 중</span></div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesAlgo" :key="index">
-            <div v-if="obj.senderId == ''">
-              <div id="CMtext">{{ obj.content }}</div>
+            <div v-if="obj.senderId === null" id="chatboxcome">
+              <div id="Ccome">{{ obj.content }}</div>
             </div>
-            <div v-else-if="obj.senderId != userEmail">
+            <div v-else-if="obj.senderId != userEmail" id="chatboxleft">
               <div id="Cname">
                 <strong>{{ obj.sender }}</strong>
               </div>
@@ -27,13 +27,13 @@
       </div>
 
       <div v-else-if="chatType == 'cs'">
-        <div id="roomNameCS"><h3 style="color:white">CS 채팅방 입니다.</h3></div>
+        <div id="roomNameCS"><h3 style="color:white">CS 채팅방 입니다.</h3><span id="participant">{{this.participants.length}} 명 참여 중</span></div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesCS" :key="index">
-            <div v-if="obj.senderId == ''">
-              <div id="CMtext">{{ obj.content }}</div>
+            <div v-if="obj.senderId === null" id="chatboxcome">
+              <div id="Ccome">{{ obj.content }}</div>
             </div>
-            <div v-else-if="obj.senderId != userEmail">
+            <div v-else-if="obj.senderId != userEmail" id="chatboxleft">
               <div id="Cname">
                 <strong>{{ obj.sender }}</strong>
               </div>
@@ -48,14 +48,15 @@
           </div>
         </div>
       </div>
+
       <div v-else>
-        <div id="roomNameJob"><h3 style="color:white">Job 채팅방 입니다.</h3></div>
+        <div id="roomNameJob"><h3 style="color:white">Job 채팅방 입니다.</h3><span id="participant">{{this.participants.length}} 명 참여 중</span></div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesJob" :key="index">
-            <div v-if="obj.senderId == ''">
-              <div id="CMtext">{{ obj.content }}</div>
+            <div v-if="obj.senderId === null" id="chatboxcome">
+              <div id="Ccome">{{ obj.content }}</div>
             </div>
-            <div v-else-if="obj.senderId != userEmail">
+            <div v-else-if="obj.senderId != userEmail" id="chatboxleft">
               <div id="Cname">
                 <strong>{{ obj.sender }}</strong>
               </div>
@@ -106,7 +107,7 @@ export default {
       receivedMessagesAlgo: [],
       receivedMessagesCS: [],
       receivedMessagesJob: [],
-      participants: [],
+      participants: [], // length. 참여자수, 이메일 userEmail
       // 참여자 정보 전달 채널
       partChannel: null,
       // 대화 채널
@@ -135,6 +136,7 @@ export default {
     scrollDown() {
       var scrollbox = document.getElementById('roomBox');
       scrollbox.scrollTop = scrollbox.scrollHeight;
+      console.log(this.participants.length)
     },
     // 메세지 전송하는 함수.
     sendMessage() {
@@ -336,6 +338,11 @@ input:focus {
   box-shadow: 0 0 3px 2px #1c84c4;
 }
 
+#chatboxcome{
+  padding-top: 1%;
+  padding-bottom: 1%;
+  text-align: center;
+}
 #chatboxright {
   padding-top: 1%;
   padding-bottom: 1%;
@@ -362,7 +369,7 @@ input:focus {
   padding: 10px;
   border-radius: 5px;
   background-color: white;
-  color: #555;
+  color: black;
   margin-top: 5px;
   margin-bottom: 5px;
   padding-top: 2%;
@@ -383,8 +390,8 @@ input:focus {
   max-width: 75%;
   padding: 10px;
   border-radius: 5px;
-  background-color: #f1c069;
-  color: #555;
+  background-color: #F6D77F;
+  color: black;
   margin-top: 5px;
   margin-bottom: 5px;
   padding-top: 2%;
@@ -392,4 +399,30 @@ input:focus {
   margin-right: 2%;
   text-align: left;
 }
+
+#Ccome{
+  display: inline-block;
+  word-break: break-all;
+  max-width: 75%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #555;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  font-size: 14px;
+}
+
+#participant{
+  font-size: 19px;
+    position: absolute;
+    margin-top: -99px;
+    margin-left: 121px;
+    position: fixed;
+    color: white;
+}
+
 </style>
