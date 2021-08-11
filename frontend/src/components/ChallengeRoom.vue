@@ -12,10 +12,16 @@
             <div class="joinbox">
                 <!-- 가입버튼 누르기 전에는 가입하기 버튼과 가입 마감까지 남은 시간이 보여진다 -->
                 <li class="changebtn">
-                    <!-- <div v-if="!overTime() && !didJoin() && !overMember()" class="Cjoin_btn" @click="hidebtn(chall_info.challengeNo, userEmail)"> -->
+                    <!-- 목록으로 이동 버튼 -->
+                    <div class="goChallenge" @click="goBack()">
+                        <ButtonRound :text="cmsg" />
+                    </div>
+                    &nbsp;
+                    <!-- 가입하기 버튼 -->
                     <div v-if="!overStartDate && !didJoin() && !overMember()" class="Cjoin_btn" @click="hidebtn(chall_info.challengeNo, userEmail)">
                         <ButtonRound :text="msg" />
-                    </div>
+                    </div>  
+                    <!-- 마감 시간 -->
                     <div class="alarm">
                         <h5 id="rest"></h5>
                     </div>
@@ -83,29 +89,29 @@
                 <div class="ChallengeDetail">
                     <div class="Cdetail">
                         <p>{{ chall_info.challengeDesc }}</p>
+
+                        <div>
+                            <div v-for="(task, index) in chall_info.challengeTaskdeadlines" :key="task">{{ index+1 }} 번째 과제 : {{ task }} 까지</div>
+                        </div>
+                        <br /><br />
                         <strong
                             >참여멤버 :
                             <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)" style="cursor:pointer;">
                                 <router-link
-                                    style="color:#420909; font-weight:600; text-decoration: none;"
+                                    style="color:#blue; font-weight:600; text-decoration: none;"
                                     :to="{ name: 'Profile', query: { user: name[0] } }"
                                 >
                                     #{{ name[1] }}<span v-if="index == 0"> 팀장님 </span>
                                 </router-link>
                             </span>
-                            [정원]{{ chall_info.challengeGroup.length }}/{{ chall_info.challengeCapacity }}
+                            &nbsp; [정원]{{ chall_info.challengeGroup.length }}/{{ chall_info.challengeCapacity }}
                         </strong>
-                        <br /><br />
+                        <br>
                         <div>
                             <strong> 난이도 : </strong
                             ><span v-for="level in chall_info.challengeLevel" :key="level"
                                 ><img src="../assets/star.png" alt="levelstar" id="levelstar"
                             /></span>
-                        </div>
-                        <div>
-                            <div v-for="(task, index) in chall_info.challengeTaskdeadlines" :key="task">
-                                {{ index + 1 }} 번째 과제 : {{ task }} 까지
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -143,7 +149,8 @@ export default {
     data: function() {
         return {
             // 버튼에 들어갈 문구들
-            msg: '가입하기',
+            msg: '가입',
+            cmsg: '목록',
             // 가입완료: '가입완료',
             submit: true,
             fail: false,
@@ -344,7 +351,10 @@ export default {
             this.joinChall(info); // email이랑 챌린지 번호 전송
             this.$router.go();
         },
-
+        goBack: function(){
+            // alert('goBack function')
+            this.$router.go(-1);
+        },
         nameprofile(num) {
             var email = this.chall_info.challengeGroup[num][0];
             console.log(email);
@@ -421,10 +431,10 @@ export default {
     /* border-color: #99b7ff; */
     font-size: 25px;
     font-weight: bold;
-    width: 171px;
+    width: 100px;
     height: 54px;
     margin-right: 69%;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     border-style: none;
 }
 
@@ -438,7 +448,20 @@ export default {
     width: 171px;
     height: 54px;
     margin-right: 69%;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.goChallenge .btn-light{
+    color: #1f4256;
+    background-color: #E1AF4E;
+    border-color: #E1AF4E;
+    font-size: 25px;
+    font-weight: bold;
+    width: 100px;
+    height: 54px;
+    margin-right: 99%;
+    margin-bottom: 10px;
+    border-style: none;
 }
 
 .alarm {

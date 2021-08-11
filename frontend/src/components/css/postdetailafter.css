@@ -34,10 +34,20 @@
   background-color: #ffffff;
   margin-right: 50px;
   box-shadow: 8px 8px 8px #4c67aa;
+  /* overflow: scroll; */
+}
+
+/* .Dleft::-webkit-scrollbar {
+  display: none;
+} */
+
+.Ddleft {
+  width: 100%;
+  height: 92%;
   overflow: scroll;
 }
 
-.Dleft::-webkit-scrollbar {
+.Ddleft::-webkit-scrollbar {
   display: none;
 }
 
@@ -110,13 +120,13 @@ button.btn.btn-danger.Pdelete_btn {
   border-color: #f0b756;
 }
 
-.writepost {
+#writepost {
   width: auto;
   height: 330px !important;
   resize: none;
   overflow: hidden;
   background-color: #e7eeff;
-  margin-top: 200px;
+  /* margin-top: 200px; */
 }
 
 #uploadimg {
@@ -159,11 +169,10 @@ img {
 }
 .like-box {
   position: absolute;
-  margin-top: -60px;
   margin-left: 2%;
   height: 50px;
   width: 50px;
-  margin-top: -58px;
+  margin-top: -49px;
 }
 
 .like-img {
