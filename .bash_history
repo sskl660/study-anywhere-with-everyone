@@ -1,20 +1,3 @@
-git pull
-git push
-git clone https://lab.ssafy.com/s05-webmobile2-sub2/S05P12A307.git
-git clone https://lab.ssafy.com/s05-webmobile2-sub2/S05P12A307.git
-cd ~
-git commit -am "happy good morning"
-git push
-git branch docker
-git branch
-git checkout docker
-ls
-git branch challenge origin/challenge
-git branch challenge origin/master
-git bransh origin
-git branch origin
-git branch -r
-git push origin docker
 git branch origin
 git branch -r
 git branch challenge
@@ -498,3 +481,20 @@ git branch chat
 git checkout chat
 git status
 cd ~
+cd ~
+git add .
+git commit -am "update(Chat) : update chat"
+git pull origin master
+git status
+git add .
+git commit -am "update(Chat) : update chat divide sender type:
+"
+git status
+git push
+git push --set-upstream origin chat
+git commit -am "fix URL"
+git pull origin master
+git status
+git add .
+git commit -am "merge"
+git push
