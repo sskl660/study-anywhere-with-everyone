@@ -16,7 +16,7 @@ export default new Vuex.Store({
     userName: null,
     userTerm: null,
     // Galaxy 관련
-    chatType: 1, // 채팅창 타입(Algo, CS, Job)
+    chatType: 'algo', // 채팅창 타입(Algo, CS, Job)
   },
   // state를 유지하기 위해
   plugins: [
@@ -88,7 +88,13 @@ export default new Vuex.Store({
     // }
     // 채팅창 타입 변경
     CHANGE_CHAT_TYPE(state, chatType) {
-      state.chatType = chatType;
+      if (chatType == 1) {
+        state.chatType = 'algo';
+      } else if (chatType == 2) {
+        state.chatType = 'cs';
+      } else if (chatType == 3) {
+        state.chatType = 'job';
+      }
       console.log('채팅 변경');
     },
   },

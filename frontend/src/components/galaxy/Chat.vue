@@ -3,35 +3,75 @@
 <template>
   <div>
     <div>
-      <div v-if="chatType == 1">
-        <h1 style="color:orange">Algo 채팅방 입니다.</h1>
-        <p v-for="(obj, index) in receivedMessagesAlgo" :key="index" style="color:white">
-          {{ obj.sender }} : {{ obj.content }}
-        </p>
+      <div v-if="chatType == 'algo'">
+        <div id="roomNameAlgo"><h3 style="color:white">Algo 채팅방 입니다.</h3></div>
+        <div id="roomBox">
+          <div v-for="(obj, index) in receivedMessagesAlgo" :key="index">
+            <div v-if="obj.senderId != userEmail">
+              <div id="Cname">
+                <strong>{{ obj.sender }}</strong>
+              </div>
+              <div id="Ctext">{{ obj.content }}</div>
+            </div>
+
+            <div v-else>
+              <div id="CMname">
+                <strong>{{ obj.sender }}</strong>
+              </div>
+              <div id="CMtext">{{ obj.content }}</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div v-else-if="chatType == 2">
-        <h1 style="color:orange">CS 채팅방 입니다.</h1>
-        <p v-for="(obj, index) in receivedMessagesCS" :key="index" style="color:white">
-          {{ obj.sender }} : {{ obj.content }}
-        </p>
+
+      <div v-else-if="chatType == 'cs'">
+        <div id="roomNameCS"><h3 style="color:white">CS 채팅방 입니다.</h3></div>
+        <div id="roomBox">
+          <div v-for="(obj, index) in receivedMessagesCS" :key="index">
+            <div v-if="obj.senderId != userEmail">
+              <div id="Cname">
+                <strong>{{ obj.sender }}</strong>
+              </div>
+              <div id="Ctext">{{ obj.content }}</div>
+            </div>
+            <div v-else>
+              <div id="CMname">
+                <strong>{{ obj.sender }}</strong>
+              </div>
+              <div id="CMtext">{{ obj.content }}</div>
+            </div>
+          </div>
+        </div>
       </div>
       <div v-else>
-        <h1 style="color:orange">Job 채팅방 입니다.</h1>
-        <p v-for="(obj, index) in receivedMessagesJob" :key="index" style="color:white">
-          <!-- <b-avatar variant="info"></b-avatar> -->
-          {{ obj.sender }}
-          <b-alert show variant="light">{{ obj.content }}</b-alert>
-        </p>
+        <div id="roomNameJob"><h3 style="color:white">Job 채팅방 입니다.</h3></div>
+        <div id="roomBox">
+          <div v-for="(obj, index) in receivedMessagesJob" :key="index">
+            <div v-if="obj.senderId != userEmail">
+              <div id="Cname">
+                <strong>{{ obj.sender }}</strong>
+              </div>
+              <div id="Ctext">{{ obj.content }}</div>
+            </div>
+            <div v-else>
+              <div id="CMname">
+                <strong>{{ obj.sender }}</strong>
+              </div>
+              <div id="CMtext">{{ obj.content }}</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="chat-room-wrap" v-if="stompClient">
+      <div>
         <input
           type="text"
           v-model="message"
-          class="blocked mr-2"
+          class="blocked mr-2 sendChat"
           ref="user-name-input"
+          id="send_chat"
+          placeholder="  메세지를 입력하세요!"
           @keyup.enter="sendMessage"
-          placeholder="메세지를 입력하세요!"
-        />
+        />&nbsp;
       </div>
     </div>
   </div>
@@ -56,6 +96,7 @@ export default {
       receivedMessagesAlgo: [],
       receivedMessagesCS: [],
       receivedMessagesJob: [],
+      Me: true,
     };
   },
   mounted() {
@@ -80,6 +121,7 @@ export default {
       if (this.message.trim() && this.stompClient) {
         // 메세지 형식을 정의한다(JSON).
         const sendMessage = {
+          senderId: this.userEmail,
           sender: this.userTerm + '기 ' + this.userName,
           content: this.message.trim(),
         };
@@ -87,16 +129,22 @@ export default {
         // 해당 Endpoint로 메세지를 전송한다.
         // Destination, header, body로 구성된다.
         // 채팅 Type에 따라서 다르게 보낸다.
-        if (this.chatType == 1) {
-          this.stompClient.send('/galaxy/chat/send/algo', {}, JSON.stringify(sendMessage));
-        } else if (this.chatType == 2) {
-          this.stompClient.send('/galaxy/chat/send/cs', {}, JSON.stringify(sendMessage));
-        } else if (this.chatType == 3) {
-          this.stompClient.send('/galaxy/chat/send/job', {}, JSON.stringify(sendMessage));
-        }
+        this.stompClient.send(
+          '/galaxy/chat/send/' + this.chatType,
+          {},
+          JSON.stringify(sendMessage)
+        );
         // 메세지를 전송하였으므로 변수를 초기화 시켜준다.
         this.message = '';
       }
+
+      // 사용자 이메일 비교해서 나 인지 구분하기
+      // if(this.receivedMessages.sender.userName == this.userName){
+      //   this.Me = true;
+      // }
+      // else{
+      //   this.Me = false
+      // }
     },
 
     // 메세지를 받는 함수.
@@ -104,20 +152,20 @@ export default {
       // String 객체를 JSON으로 변환한다.
       const receiveMessage = JSON.parse(payload.body);
 
-      this.idx = Math.floor(Math.random() * 3);
+      // this.idx = Math.floor(Math.random() * 3);
       // 채팅 입장, 퇴장에 따라서 메세지를 다르게 파싱하여 전송한다.
-      if (receiveMessage.type === 'JOIN') {
-        receiveMessage.content = receiveMessage.sender + this.enterMessage[this.idx];
-      } else if (receiveMessage.type === 'LEAVE') {
-        receiveMessage.content = receiveMessage.sender + this.exitMessage[this.idx];
-      }
-      console.log(receiveMessage.room + 'this');
+      // if (receiveMessage.type === 'JOIN') {
+      //   receiveMessage.content = receiveMessage.sender + this.enterMessage[this.idx];
+      // } else if (receiveMessage.type === 'LEAVE') {
+      //   receiveMessage.content = receiveMessage.sender + this.exitMessage[this.idx];
+      // }
+      // console.log(receiveMessage.room + 'this');
 
-      if (this.chatType == 1) {
+      if (this.chatType == 'algo') {
         this.receivedMessagesAlgo.push(receiveMessage);
-      } else if (this.chatType == 2) {
+      } else if (this.chatType == 'cs') {
         this.receivedMessagesCS.push(receiveMessage);
-      } else if (this.chatType == 3) {
+      } else if (this.chatType == 'job') {
         this.receivedMessagesJob.push(receiveMessage);
       }
     },
@@ -140,19 +188,12 @@ export default {
     onConnected() {
       // 해당 브로커가 중개하는 채널(/topic/public)로 연결(구독)한다.
       // destination, 보내고자하는 메세지(call back 함수)를 넣어줄 수 있다.
-      if (this.chatType == 1) {
-        this.stompClient.subscribe('/topic/chat/algo', this.onMessageReceived);
-      } else if (this.chatType == 2) {
-        console.log('sub2');
-        this.stompClient.subscribe('/topic/chat/cs', this.onMessageReceived);
-      } else {
-        this.stompClient.subscribe('/topic/chat/job', this.onMessageReceived);
-      }
+      this.stompClient.subscribe('/topic/chat/' + this.chatType, this.onMessageReceived);
     },
   },
 
   computed: {
-    ...mapGetters(['userName', 'userTerm', 'chatType']),
+    ...mapGetters(['userEmail', 'userName', 'userTerm', 'chatType']),
   },
   watch: {
     chatType: function() {
@@ -163,4 +204,109 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+#roomNameAlgo {
+  position: fixed;
+  background-color: #cc922c;
+  width: 430px;
+  border-radius: 20px;
+  margin-left: 3%;
+  padding-bottom: 4px;
+  padding-top: 3px;
+  right: 45px;
+}
+
+#roomNameCS {
+  position: fixed;
+  background-color: #c52e1e;
+  width: 430px;
+  border-radius: 20px;
+  margin-left: 3%;
+  padding-bottom: 4px;
+  padding-top: 3px;
+  right: 45px;
+}
+
+#roomNameJob {
+  position: fixed;
+  background-color: #32479c;
+  width: 430px;
+  border-radius: 20px;
+  margin-left: 3%;
+  padding-bottom: 4px;
+  padding-top: 3px;
+  right: 45px;
+}
+
+#roomBox {
+  width: 400px;
+  height: 610px;
+  margin-left: 6%;
+  overflow: scroll;
+  position: absolute;
+  margin-top: 72px;
+}
+
+#send_chat {
+  width: 430px;
+  height: 55px;
+  border-radius: 20px;
+  margin-top: 10px;
+  position: fixed;
+  bottom: 28px;
+  right: 45px;
+}
+
+input {
+  border: 3px solid #1c84c4;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 3px 2px #1c84c4;
+}
+
+#Cname {
+  text-align: left;
+  color: black;
+  font-size: 1.1rem;
+  margin-top: 5px;
+}
+
+#Ctext {
+  text-align: left;
+  color: black;
+  background-color: white;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 10px;
+  width: 70%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-left: 10px;
+}
+
+#CMname {
+  text-align: right;
+  color: black;
+  font-size: 1.1rem;
+  margin-top: 5px;
+}
+
+#CMtext {
+  text-align: right;
+  color: black;
+  background-color: #f1c069;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 10px;
+  width: 70%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-left: 110px;
+}
+</style>
