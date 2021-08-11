@@ -1,6 +1,6 @@
 <template>
-    <div id="par">
-        <div id="ssazipSpace"
+    <div >
+        <div 
             style="display:block;position:absolute;top:0px;left:0px;height:100%;width:100%;background:transparent;overflow:hidden;visibility:hidden;"
         >
             <!-- <svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">
@@ -174,7 +174,7 @@ export default {
                 }
                 return typeof ballColour == 'undefined' || ballColour == '' ? 'rgb(' + rgb.toString() + ')' : ballColour;
             }
-            
+
             function win() {
                 var ddw = d.documentElement.clientWidth;
                 var ddh = d.documentElement.clientHeight;
@@ -186,7 +186,6 @@ export default {
 
             var con = d.createElement('div');
             con.setAttribute("id", "newDivSpace");
-            this.ccc=con;
             con.setAttribute(
                 'style',
                 'display:block;' +
@@ -608,18 +607,15 @@ export default {
                     false
                 );
             }
-            //this.giveme =
-            start();
+             start();
 
-            //window.addEventListener('DOMContentLoaded', start, false);
-            //this.giveme=
             window.addEventListener('load', start, false);
             window.addEventListener('resize', win, false);
             window.addEventListener('scroll', iniscrl, false);
         },
     },
     created: function() {
-        this.gravity();
+       // this.gravity();
     },
     mounted: function() {
         this.gravity();

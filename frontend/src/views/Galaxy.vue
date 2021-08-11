@@ -26,7 +26,7 @@ export default {
   },
       beforeRouteLeave(to, from, next) {
         document.getElementById('newDivSpace').remove();
-        document.getElementById('newDivSpace').remove();
+        //document.getElementById('newDivSpace').remove();
         next();
     },
   // updated: function() {
