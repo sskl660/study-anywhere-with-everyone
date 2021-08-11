@@ -260,6 +260,7 @@ export default {
     ...mapGetters(['userEmail', 'userName', 'userTerm', 'chatType']),
   },
   watch: {
+    // 대화방을 바꿀때! 연결을 한번 끊고 (구독만 끊기는 안되더라..) 재연결
     chatType: function() {
       // 구독 취소
       this.channel.unsubscribe();

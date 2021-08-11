@@ -21,5 +21,6 @@ public class ChatVO {
     private String content;
     // 보낸 사람
     private String sender;
+    // 보낸 이메일
     private String senderId;
 }

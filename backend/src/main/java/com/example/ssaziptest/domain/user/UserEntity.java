@@ -59,7 +59,7 @@ public class UserEntity {
     @Lob
     @Column(name = "user_image", columnDefinition = "")
     private Blob userImage;
-    @Column(name = "user_git")
+    @Column(name = "user_git", length = 20971520)
     private String userGit;
     @Column(name = "user_blog")
     private String userBlog;

@@ -14,8 +14,8 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String> {
     Optional<UserInfoResponse> findUserEntityByUserEmailAndUserPassword(String userEmail, String userPasswordㅣ);
-    List<UserEntity> findTop5ByOrderByUserWeekcomplete();
-    List<UserEntity> findTop5ByOrderByUserWeektime();
+    List<UserEntity> findTop5ByOrderByUserWeekcompleteDesc();
+    List<UserEntity> findTop5ByOrderByUserWeektimeDesc();
 
     @Query(nativeQuery = true, value = "select * from user where user_graduated = true order by rand() limit 3")
     List<UserEntity> findRandomGraduates();
