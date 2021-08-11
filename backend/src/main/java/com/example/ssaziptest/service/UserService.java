@@ -8,6 +8,7 @@ import com.example.ssaziptest.domain.user.*;
 import com.example.ssaziptest.repository.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -102,13 +103,13 @@ public class UserService {
                     .userFollower(userEntity.getUserFollower())
                     .userFollowing(userEntity.getUserFollowing())
                     .build();
-            if (userEntity.getUserImage() != null) {
-                Blob blob = userEntity.getUserImage();
-                int bloblength = (int)blob.length();
-                byte[] blobAsBytes = blob.getBytes(1,bloblength);
-                blob.free();
-                userDetailResponse.setUserImage(Arrays.toString(blobAsBytes));
-            }
+//            if (userEntity.getUserImage() != null) {
+//                Blob blob = userEntity.getUserImage();
+//                int bloblength = (int)blob.length();
+//                byte[] blobAsBytes = blob.getBytes(1,bloblength);
+//                blob.free();
+//                userDetailResponse.setUserImage(Arrays.toString(blobAsBytes));
+//            }
             return userDetailResponse;
         }
         return null;
@@ -133,12 +134,14 @@ public class UserService {
             taskTicketResponse.setTaskNo(temp);
             int done = 0;
             List<LocalDate> deadlines = challengeEntity.getChallengeTaskdeadlines();
-            for(Integer in: taskTicketResponse.getTaskNo()){
-                if(in==null) {
-                    taskTicketResponse.setIsComplete(false);
-                }
-                else done++;
-            }
+//            for(Integer in: taskTicketResponse.getTaskNo()){
+//                if(in==null) {
+//                    taskTicketResponse.setIsComplete(false);
+//                }
+//                else done++;
+//            }
+            LocalDate enddate = challengeEntity.getChallengeEnddate();
+            taskTicketResponse.setIsComplete(enddate.isBefore(LocalDate.now())?true:false);
             for(int i=0; i<taskcnt; i++){
                 if(temp[i]==null){
                     if(deadlines.get(i).isBefore(LocalDate.now())) temp[i] = -2;

@@ -132,7 +132,8 @@ button.btn.btn-danger.Pdelete_btn {
 .upload-image {
   padding-top: 1rem;
   width: 200px;
-  height: 200px;
+  /* height: 200px; */
+  height: auto;
 }
 
 img {
