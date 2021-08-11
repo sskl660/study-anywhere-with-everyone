@@ -80,7 +80,6 @@ export default new Vuex.Store({
     JOIN_CHALL(state) {
       // state에서 사용하는 변수는 클라이언트가 사용하는 변수들.
       console.log(state);
-      alert('챌린지 가입 성공');
     },
     // PRESSLIKE: function (state) {
     //     console.log(state);
@@ -165,7 +164,6 @@ export default new Vuex.Store({
           console.log(res);
           commit('JOIN_CHALL');
           // commit('JOIN_CHALL', res.data); //res는 백엔드에서 넘겨주는 response, res.data는 body부분
-          alert('챌린지 가입이 완료되었습니다!');
         })
         .catch((err) => {
           console.log(err);

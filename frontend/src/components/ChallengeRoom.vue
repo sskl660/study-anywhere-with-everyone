@@ -126,14 +126,14 @@ import { mapActions, mapGetters } from 'vuex';
 // import router from '../router/index.js'
 // import Vue from 'vue';
 
-    // var vm = new Vue({
-        
-    //         el: '#test',
-    //         data: model
-    //     }),
+// var vm = new Vue({
+
+//         el: '#test',
+//         data: model
+//     }),
 export default {
     name: 'ChallengeRoom',
-    clocker:null,
+    clocker: null,
     // el: 'goprofile',
     components: {
         Title, // 타이틀 가져오기
@@ -183,15 +183,14 @@ export default {
             overStartDate: false, //가입 오버 타입 여부
             over: null,
             myTask: false,
-            counter:'',
+            counter: '',
             timerStopFlag: false,
 
-            second : 1000,
-            minute : this.second * 60,
-            hour : this.minute * 60,
-            day : this.hour * 24,
-            vDate : '',
-
+            second: 1000,
+            minute: this.second * 60,
+            hour: this.minute * 60,
+            day: this.hour * 24,
+            vDate: '',
         };
     },
 
@@ -228,25 +227,13 @@ export default {
                     this.chall_info = res.data;
                     var startD = new Date(this.chall_info.challengeStartdate);
                     var pre = new Date();
-                    //var present = new Date().getFullYear()+"-0"+(new Date().getMonth()+1)+ "-"+new Date().getDate();
-                    //alert(startD.getFullYear()-pre.getFullYear());
-                    //alert(startD.getFullYear()-pre.getFullYear()+startD.getMonth()-pre.getMonth()+startD.getDate()-pre.getDate());
-                    if (startD.getFullYear() - pre.getFullYear() + startD.getMonth() - pre.getMonth() + startD.getDate() - pre.getDate() < 0){
-                        console.log(startD.getFullYear() - pre.getFullYear() + startD.getMonth() - pre.getMonth() + startD.getDate() - pre.getDate());
+                    if (startD.getFullYear() - pre.getFullYear() + startD.getMonth() - pre.getMonth() + startD.getDate() - pre.getDate() < 0) {
                         this.makeTrue();
                         this.overTime(true);
                     }
-                    //alert(pre.getFullYear());
-                    //alert(new this.chall_info.challengeStartdate);
-                    //alert(new Date(present)-new Date(this.chall_info.challengeStartdate));
-
+                
                     this.chall_info.challengeStartdate += ' 00:00:01';
-                    console.log(this.chall_info.challengeStartdate);
-                    console.log(new Date(this.chall_info.challengeStartdate));
                     this.countDownTimer();
-                    // if(new Date(this.chall_info.challengeStartdate+' 23:59:59')>new Date()){
-                    //     this.overStartdate=true;
-                    // }
                 })
                 .catch((err) => {
                     console.log('정보부르기 실패');
@@ -281,7 +268,7 @@ export default {
             this.hour = this.minute * 60;
             this.day = this.hour * 24;
             //var timer;
-            console.log("abcd");
+            console.log('abcd');
             //var t=this.showRemaining(_vDate,_second,_minute,_hour,_day);
             //timer=setInterval(this.showRemaining(),1000);
             // if(rest=='stopTimer') {
@@ -322,48 +309,28 @@ export default {
             //     document.getElementById(rest).textContent += minutes + '분 ';
             //     document.getElementById(rest).textContent += seconds + '초';
             // }
-                    //timer = setInterval(showRemaining, 1000);
+            //timer = setInterval(showRemaining, 1000);
             // timer = setTimeout(showRemaining, 1000);
         },
         async showRemaining() {
-                // if(this.timerStopFlag) {
-                //     console.log("stoptimerrrr");
-                //                         clearInterval(timer);
-                //                         return;
-                // }
-                let now = new Date();
-                // if (document.getElementById("rest") == null) {
-                //     // clearInterval(timer);
-                //     console.log("123")
-                //     return;
-                // }
+            let now = new Date();
+            let distDt = this.vDate - now - 1;
+            if (distDt < 0) {
+                clearInterval(this.clocker);
+                console.log('챌린지마감');
+                document.getElementById('rest').textContent = '챌린지를 완주하세요!';
+                return;
+            }
+            var days = Math.floor(distDt / this.day);
+            var hours = Math.floor((distDt % this.day) / this.hour);
+            var minutes = Math.floor((distDt % this.hour) / this.minute);
+            var seconds = Math.floor((distDt % this.minute) / this.second);
+            document.getElementById('rest').textContent = '시작까지 ' + days + '일 ';
+            document.getElementById('rest').textContent += hours + '시간 ';
+            document.getElementById('rest').textContent += minutes + '분 ';
+            document.getElementById('rest').textContent += seconds + '초';
+        },
 
-                // console.log(_vDate+"  _vDate");
-                // _vDate-=1000;
-                let distDt = this.vDate- now - 1;
-                // var distDt = _vDate - now - 1;
-                console.log(distDt+"  distDt");
-                if (distDt < 0) {
-                    // clearInterval(this.showRemaining);
-                    clearInterval(this.clocker);
-                    
-                    console.log('챌린지완주여부');
-                    //clearTimeout(timer);
-                    document.getElementById("rest").textContent = '챌린지를 완주하세요!';
-                    return;
-                }
-                var days = Math.floor(distDt / this.day);
-                console.log(this.day);
-                console.log(days);
-                var hours = Math.floor((distDt % this.day) / this.hour);
-                var minutes = Math.floor((distDt % this.hour) / this.minute);
-                var seconds = Math.floor((distDt % this.minute) / this.second);
-                document.getElementById("rest").textContent = '시작까지 ' + days + '일 ';
-                document.getElementById("rest").textContent += hours + '시간 ';
-                document.getElementById("rest").textContent += minutes + '분 ';
-                document.getElementById("rest").textContent += seconds + '초';
-            },
-            
         ...mapActions({
             // import 해주는 느낌
             joinChall: 'joinChallenge',
@@ -371,11 +338,9 @@ export default {
         // 가입하기 버튼 눌렀을 때
         hidebtn: function(chall_No, user) {
             this.msg = '가입완료';
-            //alert(chall_No + ' ' + user);
             document.querySelector('.Cjoin_btn .btn-light').style.backgroundColor = '#f9d479';
 
             var info = [chall_No, user];
-            //alert(this.overMember() + ' ' + this.overTime() + ' ' + this.didJoin() + ' ');
             this.joinChall(info); // email이랑 챌린지 번호 전송
             this.$router.go();
         },
@@ -396,25 +361,23 @@ export default {
         },
         overMember: function() {
             //모집기간 종료 혹은 10명 초과시 가입 종료
-            //alert(this.overStartdate);
             if (this.chall_info.challengeGroup.length >= this.chall_info.challengeCapacity) return true;
             else return false;
         },
         overTime: function(flag) {
             if (flag) {
-                //alert("타임옹바")
                 return true;
             } else return false;
         },
         makeTrue: function() {
             this.overStartDate = true;
         },
-        timerSpt:function(){
-            console.log("timerSpt");
-            clearInterval(this.showRemaining());
-            // clearInterval(timer);
-            //clearInterval(this.timer);
-        }
+        // timerSpt:function(){
+        //     console.log("timerSpt");
+        //     clearInterval(this.showRemaining());
+        //     // clearInterval(timer);
+        //     //clearInterval(this.timer);
+        // }
     },
     updated: {},
     created: function() {
@@ -426,48 +389,28 @@ export default {
         this.getChallTicket();
         //document.getElementById(id).textContent = '';
     },
-    watch: {
-        // overStartDate: function() {
-        //     alert('overStartDate');
-        //     this.over = true;
-        //},
-        // $route(to, from) {
-        //     if (to.path != from.path) {
-        //         alert("페이지 이동");
-        //         /* router path가 변경될 때마다 서버로 접근로그를 저장한다. */
-        //         clearInterval(timer);
-        //     }
-        // },
-    },
+    watch: {},
     beforeRouteLeave(to, from, next) {
-                clearInterval(this.clocker);
+        clearInterval(this.clocker);
 
         // if (this.canLeaveSite) next();
-        // else 
+        // else
         // if (confirm('이 사이트에서 나가시겠습니까?\n변경사항이 저장되지 않을 수 있습니다.')) {
         //     console.log("나가마");
         //     //this.timerStopFlag=true;
         //     //countDownTimer();
         //    // this.timerSpt();
         //     //clearInterval(this.showRemaining);
-            
-            next();
+
+        next();
         // }
     },
     computed: {
         ...mapGetters(['userEmail']),
-        // newover: function() {
-        //     alert('newover');
-        //     return this.overStartDate;
-        // },
     },
     mounted() {
-        this.clocker=setInterval(this.showRemaining,1000);
-        //clearInterval(this.showRemaining);
+        this.clocker = setInterval(this.showRemaining, 1000);
     },
-    // destroyed(){
-    //     clearInterval(this.clocker);
-    // },
 };
 </script>
 <style scoped>
@@ -502,6 +445,7 @@ export default {
     color: #e92828;
     margin-left: 10px;
     margin-top: 20px;
+    height: 24px;
 }
 
 /* .joinbox{
