@@ -9,7 +9,6 @@
     <div class="GalaxyChat">
       <div><Chat /></div>
     </div>
-    
   </div>
 </template>
 
