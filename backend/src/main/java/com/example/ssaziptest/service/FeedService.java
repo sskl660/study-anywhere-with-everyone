@@ -3,11 +3,10 @@ package com.example.ssaziptest.service;
 import com.example.ssaziptest.domain.challenge.ChallengeEntity;
 import com.example.ssaziptest.domain.feed.FeedListResponse;
 import com.example.ssaziptest.domain.feed.FeedEntity;
+import com.example.ssaziptest.domain.feed.GalaxyEntryRequest;
+import com.example.ssaziptest.domain.follow.FollowEntity;
 import com.example.ssaziptest.domain.user.UserEntity;
-import com.example.ssaziptest.repository.ChallengeRepository;
-import com.example.ssaziptest.repository.FeedRepository;
-import com.example.ssaziptest.repository.GroupmemberRepository;
-import com.example.ssaziptest.repository.UserRepository;
+import com.example.ssaziptest.repository.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +31,8 @@ public class FeedService {
     private GroupmemberRepository groupmemberRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private FollowRepository followRepository;
 
     @Transactional
     public List<FeedListResponse> getChallengeFeeds(String userEmail) throws Exception{
@@ -56,7 +57,8 @@ public class FeedService {
             switch (feedEntity.getFeedType()){
                 //챌린지 가입
                 case 1:
-                    ChallengeEntity challengeEntity = challengeRepository.findById(Integer.parseInt(feedEntity.getFeedInfo())).orElse(null);
+                   // System.out.println(feedEntity.getFeedType()+": "+Integer.parseInt(feedEntity.getFeedInfo()));
+                    ChallengeEntity challengeEntity = challengeRepository.getById(Integer.parseInt(feedEntity.getFeedInfo()));
                     response.setFeedType(1);
                     response.setChallengeNo(Integer.parseInt(feedEntity.getFeedInfo()));
                     response.setChallengeName(challengeEntity.getChallengeName());
@@ -82,7 +84,7 @@ public class FeedService {
                 case 3:
                     //갤럭시 구현 후 결정
                     response.setFeedType(3);
-                    response.setGalaxyComment("");
+                    response.setGalaxyComment(feedEntity.getFeedInfo());
                     response.setGalaxyMemberCnt(0);
                     break;
                 //팔로우
@@ -98,6 +100,7 @@ public class FeedService {
 //                        response.setFollowUserImage(Arrays.toString(blobAsBytes2));
 //                    }
                     response.setFollowUserEmail(userEntity.getUserEmail());
+                    response.setFollowUserName(userEntity.getUserName());
                     response.setFollowerCnt(userEntity.getUserFollower());
                     response.setFollowingCnt(userEntity.getUserFollowing());
                     break;
@@ -106,5 +109,20 @@ public class FeedService {
         }
 
         return responses;
+    }
+
+    @Transactional
+    public void sendGalaxyEntranceMessage(GalaxyEntryRequest request){
+        List<FollowEntity> followEntities = followRepository.findByFollowUserEntity_UserEmail(request.getUserEmail());
+        //팔로워들한테 다 save
+        for(FollowEntity followEntity1: followEntities) {
+            FeedEntity feedEntity = FeedEntity.builder()
+                    .feedType(3)
+                    .feedOwner(followEntity1.getFollowFollower())
+                    .feedUserEntity(userRepository.getById(request.getUserEmail()))
+                    .feedInfo(request.getMessage())
+                    .build();
+            feedRepository.save(feedEntity);
+        }
     }
 }
