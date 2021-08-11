@@ -4,21 +4,28 @@
   <div>
     <div>
       <div v-if="chatType == 'algo'">
-        <div>{{ participants.length }}</div>
-        <div v-for="(obj, index) in participants" :key="index">
-          {{ obj.partTerm }} {{ obj.partName }} : {{ obj.partEmail }}
-        </div>
         <div id="roomNameAlgo"><h3 style="color:white">Algo 채팅방 입니다.</h3></div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesAlgo" :key="index">
-            <div v-if="obj.senderId != userEmail">
+            <div v-if="obj.senderId == '입장'">
+              <div id="CMname">
+                <!-- <strong>{{ obj.sender }}</strong> -->
+              </div>
+              <div id="CMtext">{{ obj.content }}</div>
+            </div>
+            <div v-else-if="obj.senderId == '퇴장'">
+              <div id="CMname">
+                <!-- <strong>{{ obj.sender }}</strong> -->
+              </div>
+              <div id="CMtext">{{ obj.content }}</div>
+            </div>
+            <div v-else-if="obj.senderId != userEmail">
               <div id="Cname">
                 <strong>{{ obj.sender }}</strong>
               </div>
               <div id="Ctext">{{ obj.content }}</div>
             </div>
-
-            <div v-else>
+            <div v-else-if="obj.senderId == userEmail">
               <div id="CMname">
                 <strong>{{ obj.sender }}</strong>
               </div>
@@ -153,6 +160,7 @@ export default {
     onMessageReceived(payload) {
       // String 객체를 JSON으로 변환한다.
       const receiveMessage = JSON.parse(payload.body);
+      // console.log(receiveMessage.constructor.name + 'zzz');
       // console.log(receiveMessage);
 
       // this.idx = Math.floor(Math.random() * 3);
@@ -163,9 +171,17 @@ export default {
       //   receiveMessage.content = receiveMessage.sender + this.exitMessage[this.idx];
       // }
       // console.log(receiveMessage.room + 'this');
-      if (receiveMessage[0].partEmail != null) {
+
+      // 참가자라면 참여 메세지만 출력하기
+      if (receiveMessage.constructor.name == 'Array') {
         this.participants = receiveMessage;
-        console.log(this.participants);
+        return;
+      }
+      console.log(receiveMessage);
+
+      if (receiveMessage.sender == '') {
+        this.receivedMessagesAlgo.push(receiveMessage);
+        return;
       }
 
       if (this.chatType == 'algo') {
@@ -218,7 +234,6 @@ export default {
 
     // 소켓 연결 해제, 대화 채널 이탈.
     socketDisconnect() {
-      console.log('dis!!!!');
       this.stompClient.send(
         '/galaxy/chat/exit',
         {},
