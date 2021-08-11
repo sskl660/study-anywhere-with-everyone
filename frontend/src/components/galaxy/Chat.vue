@@ -7,16 +7,7 @@
         <div id="roomNameAlgo"><h3 style="color:white">Algo 채팅방 입니다.</h3></div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesAlgo" :key="index">
-            <div v-if="obj.senderId == '입장'">
-              <div id="CMname">
-                <!-- <strong>{{ obj.sender }}</strong> -->
-              </div>
-              <div id="CMtext">{{ obj.content }}</div>
-            </div>
-            <div v-else-if="obj.senderId == '퇴장'">
-              <div id="CMname">
-                <!-- <strong>{{ obj.sender }}</strong> -->
-              </div>
+            <div v-if="obj.senderId == ''">
               <div id="CMtext">{{ obj.content }}</div>
             </div>
             <div v-else-if="obj.senderId != userEmail">
@@ -25,7 +16,7 @@
               </div>
               <div id="Ctext">{{ obj.content }}</div>
             </div>
-            <div v-else-if="obj.senderId == userEmail">
+            <div v-else id="chatboxright">
               <div id="CMname">
                 <strong>{{ obj.sender }}</strong>
               </div>
@@ -39,13 +30,16 @@
         <div id="roomNameCS"><h3 style="color:white">CS 채팅방 입니다.</h3></div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesCS" :key="index">
-            <div v-if="obj.senderId != userEmail">
+            <div v-if="obj.senderId == ''">
+              <div id="CMtext">{{ obj.content }}</div>
+            </div>
+            <div v-else-if="obj.senderId != userEmail">
               <div id="Cname">
                 <strong>{{ obj.sender }}</strong>
               </div>
               <div id="Ctext">{{ obj.content }}</div>
             </div>
-            <div v-else>
+            <div v-else id="chatboxright">
               <div id="CMname">
                 <strong>{{ obj.sender }}</strong>
               </div>
@@ -58,13 +52,16 @@
         <div id="roomNameJob"><h3 style="color:white">Job 채팅방 입니다.</h3></div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesJob" :key="index">
-            <div v-if="obj.senderId != userEmail">
+            <div v-if="obj.senderId == ''">
+              <div id="CMtext">{{ obj.content }}</div>
+            </div>
+            <div v-else-if="obj.senderId != userEmail">
               <div id="Cname">
                 <strong>{{ obj.sender }}</strong>
               </div>
               <div id="Ctext">{{ obj.content }}</div>
             </div>
-            <div v-else>
+            <div v-else id="chatboxright">
               <div id="CMname">
                 <strong>{{ obj.sender }}</strong>
               </div>
@@ -130,8 +127,15 @@ export default {
     this.exitMessage.push('님 다음에 또 만나요!');
     this.exitMessage.push('님 다음에도 화이팅!');
   },
-
+  updated() {
+    this.scrollDown();
+  },
   methods: {
+    // 자동 스크롤
+    scrollDown() {
+      var scrollbox = document.getElementById('roomBox');
+      scrollbox.scrollTop = scrollbox.scrollHeight;
+    },
     // 메세지 전송하는 함수.
     sendMessage() {
       // 메세지가 존재하고, 연결 정보가 유지되는 경우
@@ -181,6 +185,8 @@ export default {
 
       if (receiveMessage.sender == '') {
         this.receivedMessagesAlgo.push(receiveMessage);
+        this.receivedMessagesCS.push(receiveMessage);
+        this.receivedMessagesJob.push(receiveMessage);
         return;
       }
 
@@ -329,6 +335,18 @@ input:focus {
   box-shadow: 0 0 3px 2px #1c84c4;
 }
 
+#chatboxright {
+  padding-top: 1%;
+  padding-bottom: 1%;
+  text-align: right;
+}
+
+#chatboxleft {
+  padding-top: 1%;
+  padding-bottom: 1%;
+  text-align: left;
+}
+
 #Cname {
   text-align: left;
   color: black;
@@ -337,18 +355,18 @@ input:focus {
 }
 
 #Ctext {
-  text-align: left;
-  color: black;
+  display: inline-block;
+  word-break: break-all;
+  max-width: 75%;
+  padding: 10px;
+  border-radius: 5px;
   background-color: white;
+  color: #555;
   margin-top: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   padding-top: 2%;
   padding-bottom: 2%;
-  border-radius: 10px;
-  width: 70%;
-  padding-left: 5%;
-  padding-right: 5%;
-  margin-left: 10px;
+  margin-left: 2%;
 }
 
 #CMname {
@@ -359,17 +377,18 @@ input:focus {
 }
 
 #CMtext {
-  text-align: right;
-  color: black;
+  display: inline-block;
+  word-break: break-all;
+  max-width: 75%;
+  padding: 10px;
+  border-radius: 5px;
   background-color: #f1c069;
+  color: #555;
   margin-top: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   padding-top: 2%;
   padding-bottom: 2%;
-  border-radius: 10px;
-  width: 70%;
-  padding-left: 5%;
-  padding-right: 5%;
-  margin-left: 110px;
+  margin-right: 2%;
+  text-align: left;
 }
 </style>

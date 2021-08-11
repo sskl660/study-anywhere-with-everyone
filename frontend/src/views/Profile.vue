@@ -91,10 +91,10 @@ export default {
                 .then((res) => {
                     console.log('유저정보 통신 성공');
                     this.user_info = res.data;
-                    console.log(this.user_info);
+                    // console.log(this.user_info);
                     this.getTitle(this.user_info.userName); //타이틀 내용 채워주기
-                    console.log('follower');
-                    console.log(this.followings);
+                    // console.log('follower');
+                    // console.log(this.followings);
                     // console.log('follower')
                     // console.log(this.userEmail)
                 })
