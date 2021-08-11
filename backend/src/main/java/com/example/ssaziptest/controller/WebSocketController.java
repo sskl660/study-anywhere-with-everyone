@@ -28,6 +28,8 @@ public class WebSocketController {
         template.convertAndSend("/topic/chat/algo", message);
         // Client는 해당 주소를 SUBSCIBE하고 있다가 메세지를 화면에 출력!
     }
+    ///chat/send/algo 받아서 /topic/chat/algo로 보내기!
+
     // 해당 경로로 메세지 발행 요청!
     @MessageMapping("/chat/send/cs")
     public void message2(ChatVO message) {
