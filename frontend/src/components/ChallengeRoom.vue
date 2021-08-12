@@ -112,6 +112,7 @@
                             ><span v-for="level in chall_info.challengeLevel" :key="level"
                                 ><img src="../assets/star.png" alt="levelstar" id="levelstar"
                             /></span>
+                            <br><br>
                         </div>
                     </div>
                 </div>
@@ -344,7 +345,7 @@ export default {
         }),
         // 가입하기 버튼 눌렀을 때
         hidebtn: function(chall_No, user) {
-            this.msg = '가입완료';
+            this.msg = '완료';
             document.querySelector('.Cjoin_btn .btn-light').style.backgroundColor = '#f9d479';
 
             var info = [chall_No, user];

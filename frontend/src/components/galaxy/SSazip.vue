@@ -12,8 +12,8 @@
                 <input type="radio" style="cursor:pointer;" name="c" id="but2">
             </div>
             <div v-for="(idx, ssazip_num) in temp_galaxy_data" :key=" ssazip_num">
-                <SmallSSazip :idx="idx"/>
-            </div>   
+                <SmallSSazip @click="tmpClicker()" :idx="idx"/>
+            </div>
             <!-- <img id="ssazip" src="@/assets/ssazip.png" style="width:50px" >   -->
             <div id="ssazip">
                 <img  src="@/assets/ssazip.png" style="width:80px; height:80px" >
@@ -37,11 +37,6 @@ export default {
     components: {
         SmallSSazip,
     },
-    data: function(){
-        return {
-            temp_galaxy_data: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-        }
-    },
     giveme: null,
     ccc: null,
     data() {
@@ -53,6 +48,7 @@ export default {
             partChannel: null,
             // 상위 5명
             ranker: [],
+            temp_galaxy_data: [0, 1, 2, 3, 4, 5, 6, 7, 8],
         };
     },
     created: function() {
@@ -67,7 +63,10 @@ export default {
         ...mapGetters(['participantsVuex']),
     },
     methods: {
-        // 소켓 연결
+        tmpClicker(param){
+            alert(param);
+        }   ,
+             // 소켓 연결
         socketConnect() {
             // 소켓을 이용하여 Server와 연결한다.
             var socket = new SockJS(chatURL);
