@@ -86,6 +86,7 @@ export default {
 .graduate-name {
     font-family: 'NanumSquareRound';
     cursor: pointer;
+    font-weight: bold;
 }
 
 .graduate-name:hover {

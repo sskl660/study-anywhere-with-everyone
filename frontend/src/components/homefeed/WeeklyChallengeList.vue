@@ -90,6 +90,7 @@ export default {
     width: 100px;
     margin-top: 1px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .challenger-name:hover {

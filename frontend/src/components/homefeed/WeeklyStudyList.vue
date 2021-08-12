@@ -94,6 +94,7 @@ export default {
     text-align: left;
     width: 100px;
     margin-top: 1px;
+    font-weight: bold;
 }
 
 .galaxy-member-name:hover {
