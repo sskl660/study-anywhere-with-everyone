@@ -1,44 +1,69 @@
 <template>
-  <div>
-    <div style="display:block;position:absolute;top:0px;left:0px;height:100%;width:100%;background:transparent;overflow:hidden;visibility:hidden;">
-        <!-- <svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">
-            <line id="vec" x1="0" y1="0" x2="0" y2="0" stroke="#ff0000" stroke-width="1.5" stroke-dasharray="3,3">
-            </line>
-        </svg>
-        <div style="display: block;position: fixed;margin: 4px;top:0;right:0;border-radius:5px;height: 30px;width: 130px;padding: 5px;background-color:#ee0000;text-align: center;font: italic bold 16px verdana;color: #fff;line-height: 30px;letter-spacing: 0.5px;cursor:default;z-index: 1000;-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;visibility:visible;">
-                Gravity 
-            <input type="radio" style="cursor:pointer;" name="c" id="but1" checked="">
-            <input type="radio" style="cursor:pointer;" name="c" id="but2">
-        </div> -->
-        <SmallSSazip/>
+    <div>
+        <div style="display:block;position:absolute;top:0px;left:0px;height:100%;width:100%;background:transparent;overflow:hidden;visibility:hidden;">
+            <!-- <svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">
+                <line id="vec" x1="0" y1="0" x2="0" y2="0" stroke="#ff0000" stroke-width="1.5" stroke-dasharray="3,3">
+                </line>
+            </svg>
+            <div style="display: block;position: fixed;margin: 4px;top:0;right:0;border-radius:5px;height: 30px;width: 130px;padding: 5px;background-color:#ee0000;text-align: center;font: italic bold 16px verdana;color: #fff;line-height: 30px;letter-spacing: 0.5px;cursor:default;z-index: 1000;-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;visibility:visible;">
+                    Gravity 
+                <input type="radio" style="cursor:pointer;" name="c" id="but1" checked="">
+                <input type="radio" style="cursor:pointer;" name="c" id="but2">
+            </div> -->
+            <SmallSSazip id="ssazip"/>
+            <SmallSSazip id="ssazip"/>
+            <!-- Button trigger modal -->
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+            </button> -->
 
-        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
-        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
-        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
-        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
-        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
-        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
-        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
-        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
-        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
-        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
-        <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
-        <!-- <div id="ssazip" class="ssazip" ></div>
-        <div id="ssazip" class="ssazip" ></div>
-        <div id="ssazip" class="ssazip" ></div> -->
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <!-- <div class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(58.3333px, 71.3118px, 0px) rotate(22.5deg); visibility: visible;"></div>
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(0.919939px, 883.738px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(0.733644px, 527.097px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(35.2363px, 428.654px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(12.3529px, 664.658px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(85.9478px, 172.158px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(37.6068px, 604.655px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(28.6233px, 806.046px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip"  style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(22.3951px, 737.06px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(73.7086px, 846.587px, 0px) rotate(22.5deg); visibility: visible;" > -->
+            <!-- <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" > -->
+            <!-- <div id="ssazip" class="ssazip" ></div>
+            <div id="ssazip" class="ssazip" ></div>
+            <div id="ssazip" class="ssazip" ></div> -->
+
+            <!-- <div class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(58.3333px, 71.3118px, 0px) rotate(22.5deg); visibility: visible;"></div>
+            <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(0.919939px, 883.738px, 0px) rotate(22.5deg); visibility: visible;" >
+            <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(0.733644px, 527.097px, 0px) rotate(22.5deg); visibility: visible;" >
+            <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(35.2363px, 428.654px, 0px) rotate(22.5deg); visibility: visible;" >
+            <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(12.3529px, 664.658px, 0px) rotate(22.5deg); visibility: visible;" >
+            <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(85.9478px, 172.158px, 0px) rotate(22.5deg); visibility: visible;" >
+            <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(37.6068px, 604.655px, 0px) rotate(22.5deg); visibility: visible;" >
+            <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(28.6233px, 806.046px, 0px) rotate(22.5deg); visibility: visible;" >
+            <img class="ssazip"  style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(22.3951px, 737.06px, 0px) rotate(22.5deg); visibility: visible;" >
+            <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(73.7086px, 846.587px, 0px) rotate(22.5deg); visibility: visible;" > -->
+        <!-- </div> -->
     </div>
-  </div>
 </template>
 
 <script>
@@ -196,9 +221,9 @@ export default {
 
 
         function createBall(y,x,nvy,nvx) {
-            var r = minRadius + Math.random() * maxRadius|0;
+            // var r = minRadius + Math.random() * maxRadius|0;
             // r: 알들의 크기
-            // var r =50;
+            var r =50;
             var ball = d.getElementById("ssazip");
             ball.setAttribute('style', 'display:block;'
                 // +'src: url(~@/assets/sszip.png);'
@@ -573,6 +598,9 @@ export default {
 </script>
 
 <style>
+.banana {
+    background-image: url(/img/ssazip.43ffb363.png);
+}
 /* Nothing here needed for app */
 
 /* html{

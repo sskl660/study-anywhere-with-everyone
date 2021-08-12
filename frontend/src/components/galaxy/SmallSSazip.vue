@@ -1,5 +1,6 @@
 <template>
-  <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" >
+  <img id="ssazip" src="@/assets/ssazip.png" >
+  
 </template>
 
 <script>
