@@ -45,9 +45,6 @@ export default {
           console.log(err)
         })
     },
-    test: function () {
-      console.log(1)
-    },
   }
 }
 </script>
