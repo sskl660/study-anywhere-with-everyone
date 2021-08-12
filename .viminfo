@@ -11,10 +11,10 @@
 # hlsearch on (H) or off (h):
 ~h
 # 명령 행 히스토리 (새것부터 오래된 것 순):
+:wq!
+|2,0,1628754556,,"wq!"
 :q
 |2,0,1628742765,,"q"
-:wq!
-|2,0,1628677861,,"wq!"
 :wq
 |2,0,1628491971,,"wq"
 
@@ -29,28 +29,34 @@
 # 레지스터:
 
 # 파일 마크:
-'0  1  0  ~/.git/COMMIT_EDITMSG
-|4,48,1,0,1628742765,"~/.git/COMMIT_EDITMSG"
-'1  1  0  ~/.git/MERGE_MSG
-|4,49,1,0,1628677861,"~/.git/MERGE_MSG"
+'0  6  6  ~/.git/MERGE_MSG
+|4,48,6,6,1628754556,"~/.git/MERGE_MSG"
+'1  1  0  ~/.git/COMMIT_EDITMSG
+|4,49,1,0,1628742765,"~/.git/COMMIT_EDITMSG"
 '2  1  0  ~/.git/MERGE_MSG
-|4,50,1,0,1628644604,"~/.git/MERGE_MSG"
+|4,50,1,0,1628677861,"~/.git/MERGE_MSG"
 '3  1  0  ~/.git/MERGE_MSG
-|4,51,1,0,1628528102,"~/.git/MERGE_MSG"
+|4,51,1,0,1628677861,"~/.git/MERGE_MSG"
 '4  1  0  ~/.git/MERGE_MSG
-|4,52,1,0,1628528102,"~/.git/MERGE_MSG"
+|4,52,1,0,1628644604,"~/.git/MERGE_MSG"
 '5  1  0  ~/.git/MERGE_MSG
-|4,53,1,0,1628527771,"~/.git/MERGE_MSG"
+|4,53,1,0,1628644604,"~/.git/MERGE_MSG"
 '6  1  0  ~/.git/MERGE_MSG
-|4,54,1,0,1628527771,"~/.git/MERGE_MSG"
+|4,54,1,0,1628528102,"~/.git/MERGE_MSG"
 '7  1  0  ~/.git/MERGE_MSG
-|4,55,1,0,1628527771,"~/.git/MERGE_MSG"
+|4,55,1,0,1628528102,"~/.git/MERGE_MSG"
 '8  1  0  ~/.git/MERGE_MSG
-|4,56,1,0,1628527771,"~/.git/MERGE_MSG"
+|4,56,1,0,1628528102,"~/.git/MERGE_MSG"
 '9  1  0  ~/.git/MERGE_MSG
-|4,57,1,0,1628511290,"~/.git/MERGE_MSG"
+|4,57,1,0,1628528102,"~/.git/MERGE_MSG"
 
 # 점프목록 (새것이 먼저):
+-'  6  6  ~/.git/MERGE_MSG
+|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
+-'  1  0  ~/.git/MERGE_MSG
+|4,39,1,0,1628754553,"~/.git/MERGE_MSG"
+-'  1  0  ~/.git/COMMIT_EDITMSG
+|4,39,1,0,1628742765,"~/.git/COMMIT_EDITMSG"
 -'  1  0  ~/.git/COMMIT_EDITMSG
 |4,39,1,0,1628742765,"~/.git/COMMIT_EDITMSG"
 -'  1  0  ~/.git/MERGE_MSG
@@ -189,6 +195,8 @@
 |4,39,8,15,1627987024,"~/.git/MERGE_MSG"
 -'  8  15  ~/.git/MERGE_MSG
 |4,39,8,15,1627987024,"~/.git/MERGE_MSG"
+-'  8  15  ~/.git/MERGE_MSG
+|4,39,8,15,1627987024,"~/.git/MERGE_MSG"
 -'  1  0  ~/.git/MERGE_MSG
 |4,39,1,0,1627987009,"~/.git/MERGE_MSG"
 -'  1  0  ~/.git/MERGE_MSG
@@ -197,14 +205,6 @@
 |4,39,1,0,1627976441,"~/.git/MERGE_MSG"
 -'  1  0  ~/.git/MERGE_MSG
 |4,39,1,0,1627976441,"~/.git/MERGE_MSG"
--'  1  0  ~/.ssh/config
-|4,39,1,0,1627494080,"~/.ssh/config"
--'  1  0  ~/.ssh/config
-|4,39,1,0,1627494080,"~/.ssh/config"
--'  1  0  ~/.ssh/config
-|4,39,1,0,1627494080,"~/.ssh/config"
--'  1  0  ~/.ssh/config
-|4,39,1,0,1627494080,"~/.ssh/config"
 -'  1  0  ~/.ssh/config
 |4,39,1,0,1627494080,"~/.ssh/config"
 -'  1  0  ~/.ssh/config
@@ -254,17 +254,17 @@
 
 # 파일내의 마크 히스토리 (새것부터 오래된 순):
 
+> ~/.git/MERGE_MSG
+	*	1628754555	0
+	"	6	6
+	^	6	7
+	.	6	7
+	+	8	15
+	+	6	7
+
 > ~/.git/COMMIT_EDITMSG
 	*	1628742764	0
 	"	1	0
-
-> ~/.git/MERGE_MSG
-	*	1628677860	0
-	"	1	0
-	^	6	8
-	.	6	8
-	+	8	15
-	+	6	8
 
 > ~/.ssh/config
 	*	1627494078	0
