@@ -1,12 +1,3 @@
-git stash list
-git stash apply
-git checkout master
-git stash
-git merge docker master
-git status
-git log
-git diff
-git status
 git commit add .
 git add .
 git status
@@ -496,5 +487,14 @@ git add.
 git status
 git add .
 git commit -am "merge"
+git status
+git push
+cd ~
+git commit -am "update(chat) : update ranker list show all"
+git status
+git pull origin master
+git status
+git add .
+git commit -am "merge with master"
 git status
 git push
