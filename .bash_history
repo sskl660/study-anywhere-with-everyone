@@ -1,29 +1,3 @@
-git branch origin
-git branch -r
-git branch challenge
-git barnch
-git branch
-git rm branch origin
-git push origin challenge
-git branch -r
-git push origin --delete docker
-git branch -r
-git push origin docker
-git branch -r
-git branch
-git branch -d origin
-git branch
-ls
-git commit -m "docker nginx running update"
-git add .
-git commit -m "docker nginx running update"
-git push
-git push --set-upstream origin docker
-git push
-git branch -r
-git merge origin/master origin/docker
-git checkout master
-git pull
 git commit -am "test nginx running in jenkins"
 git push
 git pull
@@ -498,3 +472,29 @@ git status
 git add .
 git commit -am "merge"
 git push
+cd ~
+git add .
+git commit -am "update(Chat) : update count participants"
+git status
+git pull origin master
+git status
+git add .
+git commit -am "merge"
+git status
+git push
+git add .
+git commit -am "update(Chat) : update enter, exit Message function"
+git pull origin master
+git commit -am "update(Chat) : update enter, exit Message function!"
+git status
+git pull origin master
+git status
+git push
+git commit -am "fix URL"
+git status
+git pull origin master
+git status
+git push
+git stash
+git stash drop
+git stash list

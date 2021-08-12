@@ -7,6 +7,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +29,18 @@ public class WebSocketController {
     // 접속, 재접속시에는 현재 참자가를 지우고 다시 참가자 리스트를 보낸다.
     @MessageMapping("/chat/enter")
     public void enter(ParticipantDTO part) {
-        participants.remove(part);
+        for(int i = 0; i < participants.size(); i++){
+            if(participants.get(i).getPartEmail().equals(part.getPartEmail())){
+                participants.remove(i);
+                break;
+            }
+        }
+//        part.setEnterTime(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        part.setEnterTime(LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute(), now.getSecond()));
         participants.add(part);
         template.convertAndSend("/topic/part", participants);
         ChatVO enterMessage = new ChatVO();
-//        enterMessage.setSenderId("입장");
         enterMessage.setContent(part.getPartName() + randEnter[(int) (Math.random() * randEnter.length)]);
         template.convertAndSend("/topic/chat/algo", enterMessage);
         template.convertAndSend("/topic/chat/cs", enterMessage);
@@ -42,10 +50,14 @@ public class WebSocketController {
     // 퇴장 시에는 현재 참가자를 제거한다.
     @MessageMapping("/chat/exit")
     public void exit(ParticipantDTO part) {
-        participants.remove(part);
+        for(int i = 0; i < participants.size(); i++){
+            if(participants.get(i).getPartEmail().equals(part.getPartEmail())){
+                participants.remove(i);
+                break;
+            }
+        }
         template.convertAndSend("/topic/part", participants);
         ChatVO exitMessage = new ChatVO();
-//        exitMessage.setSenderId("퇴장");
         exitMessage.setContent(part.getPartName() + randExit[(int) (Math.random() * randExit.length)]);
         template.convertAndSend("/topic/chat/algo", exitMessage);
         template.convertAndSend("/topic/chat/cs", exitMessage);
