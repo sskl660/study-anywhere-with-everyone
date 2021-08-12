@@ -1,9 +1,15 @@
 <template>
   <div>
     <div class="weeklyStudy">
-        <h3 style="margin-bottom: 20px; padding-top:20px"><strong>주간 랜각공 TOP5 👑</strong></h3>
-        <div v-for="(galaxy, index) in weeklyStudy" :key="galaxy" class="d-flex justify-content-left wsList">
-            {{index+1}}&nbsp;&nbsp; {{galaxy.userName}}
+        <h3 class="study-title d-flex align-items-center">
+            <strong>
+                주간 갤럭시 TOP5
+            </strong>
+            <img class="crown" src="../../assets/crown.png" alt="crown"/>
+        </h3>
+        <div v-for="(galaxy, index) in weeklyStudy" :key="index" class="d-flex justify-content-start wsList">
+            <span class="fw-bold">{{index+1}}</span> &nbsp;&nbsp;
+            <span class="galaxy-member-name" @click="moveToProfile(galaxy.userEmail)">{{galaxy.userName}}</span>
         </div>
     </div>
   </div>
@@ -16,13 +22,7 @@ export default {
     name: 'WeeklyStudyList',
     data(){
         return{
-            weeklyStudy:[
-                {
-                    "userEmail": "string",
-                    "userName": "string",
-                    "week": 0
-                }
-            ]
+            weeklyStudy: null
         }
     },
     methods:{
@@ -33,13 +33,13 @@ export default {
             })
             .then((res) => {
                 this.weeklyStudy = res.data;
-                console.log('getWeeklyStudy 성공')
-                console.log(res.data)
             })
             .catch((err) => {
-                console.log('getWeeklyStudy 에러')
                 console.log(err);
             });
+        },
+        moveToProfile: function(email) {
+            this.$router.push({path: '/profile', query: {user: email}});
         },
     },
     created: function(){
@@ -48,20 +48,61 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+@font-face {
+  font-family: 'NanumSquareRound';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+    font-family: "Noto Sans KR", sans-serif;
+}
+
 .weeklyStudy{
     background-color: #B7BEDA;
-    /* justify-content: center; */
     width: 80%;
     border-radius: 33px;
     margin-top: 30px;
     margin-left: 57px;
-    height: 270px;
+    height: 280px;
+}
+
+.study-title {
+    text-align: left;
+    margin-left: 50px;
+    margin-bottom: 10px; 
+    padding-top:20px
 }
 
 .wsList{
-    font-size: 25px;
+    font-family: 'NanumSquareRound';
+    font-size: 23px;
     margin-left: 50px;
-    margin-bottom: 7px;
+    margin-bottom: 10px;
+}
+
+.crown {
+    margin-left: 5px;
+    width: 50px;
+}
+
+.galaxy-member-name {
+    font-family: 'NanumSquareRound';
+    cursor: pointer;
+    text-align: left;
+    width: 100px;
+    margin-top: 1px;
+    font-weight: bold;
+}
+
+.galaxy-member-name:hover {
+    color: #1C84C4;
+}
+
+.crown {
+    margin-left: 5px;
+    width: 50px;
 }
 </style>

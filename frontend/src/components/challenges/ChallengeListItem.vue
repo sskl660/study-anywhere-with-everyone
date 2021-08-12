@@ -4,7 +4,6 @@
     <!-- 챌린지 티켓 디자인 -->
     <div class="d-flex justify-content-center">
       <div class="challenge scale" @click="moveToChallenge(challenge.challengeNo)">
-        <!-- <router-link :to="{path:'/challengeRoom'}"> -->
         <div class="challenge-name">{{ challenge.challengeName }}</div>
         <div class="challenge-content challenge-level">
           난이도 : 

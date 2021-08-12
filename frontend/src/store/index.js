@@ -34,7 +34,7 @@ export default new Vuex.Store({
     LOGIN: function(state, token) {
       localStorage.setItem('jwt', token);
       state.isLogin = true;
-      router.push({ name: 'Challenges' }); // 페이지 이동도 가능
+      router.push({ name: 'HomeFeed' }); // 페이지 이동도 가능
     },
     // 로그아웃
     LOGOUT: function(state) {

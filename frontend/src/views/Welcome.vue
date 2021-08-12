@@ -8,26 +8,26 @@
             <div>
                 <!-- 별 구현 -->
                 <div class="star1-box">
-                    <img class="star1" src="../assets/star.png" alt="star" />
+                    <img class="star1" src="../assets/star.png" alt="star"/>
                 </div>
                 <div class="star2-box">
-                    <img class="star2" src="../assets/star.png" alt="star" />
+                    <img class="star2" src="../assets/star.png" alt="star"/>
                 </div>
                 <div class="star3-box">
-                    <img class="star3" src="../assets/star.png" alt="star" />
+                    <img class="star3" src="../assets/star.png" alt="star"/>
                 </div>
 
                 <!-- SSAZIP 구현 -->
-                <img class="ssazip" src="../assets/ssazip.png" alt="ssazip" />
+                <img class="ssazip" src="../assets/ssazip.png" alt="ssazip"/>
 
                 <!-- 로그인, 회원가입 버튼 -->
                 <div class="d-flex menu">
-                    <div class="login-btn"><LoginModal text="Login" /></div>
+                    <div class="login-btn"><LoginModal text="Login"/></div>
                     <div class="join-btn">
                         <router-link to="/join"><ButtonRound text="Join"/></router-link>
                     </div>
                 </div>
-                <div><GalaxyEntranceModal /></div>
+                <!-- <div><GalaxyEntranceModal/></div> -->
             </div>
         </div>
     </div>
@@ -37,14 +37,14 @@
 import ButtonRound from '@/components/common/ButtonRound';
 import LoginModal from '@/components/welcome/LoginModal';
 import '@/views/css/welcome.css';
-import GalaxyEntranceModal from '@/components/galaxy/GalaxyEntrance';
+// import GalaxyEntranceModal from '@/components/galaxy/GalaxyEntrance';
 import { mapGetters } from 'vuex';
 export default {
     name: 'Welcome',
     components: {
         ButtonRound, // 둥근 버튼을 가져옴
         LoginModal, // 로그인 모달을 가져옴
-        GalaxyEntranceModal,
+        // GalaxyEntranceModal,
     },
     methods: {
         //로그인 상태라면 챌린지(임시) 페이지로 이동

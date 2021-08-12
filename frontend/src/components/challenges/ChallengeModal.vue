@@ -437,10 +437,10 @@ export default {
 
 .challenge-content {
     width: 800px;
-    height: 855px;
+    height: 815px;
     margin-top: 80px;
     margin-left: 560px;
-    padding: 50px 70px 40px 70px;
+    padding: 50px 70px 20px 70px;
     border-radius: 40px;
     overflow-y: scroll;
     background-color: #99B7FF;
@@ -483,11 +483,17 @@ label {
 }
 
 textarea {
-    height: 235px;
+    height: 200px;
     border-style: none;
 }
 
+.modal-body {
+    padding-bottom: 0px;
+}
+
 .modal-footer {
+    padding-top: 15px;
+    margin-bottom: 10px;
     border-style: none;
 }
 
@@ -614,6 +620,7 @@ textarea {
     background-color: #1C84C4;
     border-style: none;
     border-radius: 0.7rem;
+    margin-top: 5px;
 }
 
 .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
@@ -643,6 +650,7 @@ textarea {
     background-color: #F53535;
     border-style: none;
     border-radius: 0.7rem;
+    margin-top: 5px;
 }
 
 .btn-check:checked + .btn-warning:focus, .btn-check:active + .btn-warning:focus, .btn-warning:active:focus, .btn-warning.active:focus, .show > .btn-warning.dropdown-toggle:focus {
