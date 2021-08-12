@@ -11,6 +11,7 @@ import com.example.ssaziptest.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class RankService {
 
     @Transactional
     public List<RankResponse> galaxytop5(){
-        List<GalaxyTopEntity> galaxyTopEntities = galaxyTopRepository.findAll();
+        List<GalaxyTopEntity> galaxyTopEntities = galaxyTopRepository.findAll(Sort.by(Sort.Direction.DESC,"galaxytopWeektime"));
         List<RankResponse> responses = new ArrayList<>();
         for(GalaxyTopEntity galaxyTopEntity: galaxyTopEntities){
             RankResponse response = RankResponse.builder()
@@ -48,7 +49,7 @@ public class RankService {
     }
     @Transactional
     public List<RankResponse> challengetop5(){
-        List<ChallengeTopEntity> challengeTopEntities = challengeTopRepository.findAll();
+        List<ChallengeTopEntity> challengeTopEntities = challengeTopRepository.findAll(Sort.by(Sort.Direction.DESC,"challengetopWeekcnt"));
         List<RankResponse> responses = new ArrayList<>();
         for(ChallengeTopEntity challengeTopEntity: challengeTopEntities){
             RankResponse response = RankResponse.builder()
@@ -78,8 +79,8 @@ public class RankService {
     @Transactional
     public void runEveryMonday(){
         galaxyTopRepository.deleteAll();
-        List<UserEntity> galaxyTop5 = userRepository.findTop5ByOrderByUserWeektime();
-        List<UserEntity> challengeTop5 = userRepository.findTop5ByOrderByUserWeekcomplete();
+        List<UserEntity> galaxyTop5 = userRepository.findTop5ByOrderByUserWeektimeDesc();
+        List<UserEntity> challengeTop5 = userRepository.findTop5ByOrderByUserWeekcompleteDesc();
         for(UserEntity userEntity:galaxyTop5){
             GalaxyTopEntity galaxyTopEntity = GalaxyTopEntity.builder()
                     .galaxytopEmail(userEntity.getUserEmail())
@@ -90,6 +91,7 @@ public class RankService {
         }
         challengeTopRepository.deleteAll();
         for(UserEntity userEntity:challengeTop5){
+            System.out.println(userEntity.getUserWeekcomplete());
             ChallengeTopEntity challengeTopEntity = ChallengeTopEntity.builder()
                     .challengetopEmail(userEntity.getUserEmail())
                     .challengetopName(userEntity.getUserName())
