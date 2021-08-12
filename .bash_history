@@ -1,43 +1,3 @@
-git commit -am "test nginx running in jenkins"
-git push
-git pull
-git commit -am "test nginx runing in jenkins"
-git push
-cd ~
-ls
-git pull
-git push
-git status
-git add .
-git status
-git log
-git pull
-git checkout docker
-git status
-git stath
-git stash
-git stash list
-git checkout docker
-ls
-git remote
-git remote branch
-git branch
-git pull
-git pull
-ls
-git pull master
-git pull origin
-ls
-git merge docker master
-ls
-git stash drop
-git stash drop
-git stash
-git stash list
-git stash apply
-git commit add .
-git merge docker master
-ls
 git stash list
 git stash apply
 git checkout master
@@ -498,3 +458,43 @@ git push
 git stash
 git stash drop
 git stash list
+cd ~
+git status
+git add .
+git commit -am "save"
+git status
+git pull origin master
+git pull origin master
+git status
+git stash
+git status
+git merge origin master
+git staus
+git status
+git pull origin master
+git log
+git revert 4290851deb0b899c7a189b1ab86a22335df6d8d0
+git status
+git add .
+git commit -am "save"
+git status
+git pull origin master
+git commit -am "update(chat) : update chat participant item - enter time"
+git status
+git pull origin master
+git status
+git push
+git commit -am "fix URL"
+git status
+git push
+git status
+git commit -am "update(Chat) : update count ranker, order by participants name"
+git status
+git pull origin master
+git status
+git add.
+git status
+git add .
+git commit -am "merge"
+git status
+git push
