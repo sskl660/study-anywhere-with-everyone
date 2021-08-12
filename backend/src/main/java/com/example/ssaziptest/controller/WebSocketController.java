@@ -35,7 +35,6 @@ public class WebSocketController {
                 break;
             }
         }
-//        part.setEnterTime(LocalDateTime.now());
         LocalDateTime now = LocalDateTime.now();
         part.setEnterTime(LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute(), now.getSecond()));
         participants.add(part);

@@ -239,6 +239,8 @@ export default {
       partChannel: null,
       // 대화 채널
       channel: null,
+      // 상위 5명
+      ranker: [],
     };
   },
   mounted() {
@@ -284,12 +286,29 @@ export default {
     // 메세지를 받는 함수.
     onMessageReceived(payload) {
       // String 객체를 JSON으로 변환한다.
-      const receiveMessage = JSON.parse(payload.body);
-      console.log(receiveMessage);
+      let receiveMessage = JSON.parse(payload.body);
 
       // 참가자라면 참여 메세지만 출력하기
       if (receiveMessage.constructor.name == 'Array') {
+        // 입장 시간을 기준으로 랭킹 정렬(5명만).
+        this.ranker = receiveMessage
+          .sort(function(a, b) {
+            return new Date(a.enterTime) - new Date(b.enterTime);
+          })
+          .slice(0, 5);
+        console.log(this.ranker);
+
+        // 이름 순으로 참여자 정렬
+        receiveMessage.sort(function(a, b) {
+          return a.partName > b.partName ? 1 : -1;
+        });
         this.participants = receiveMessage;
+        console.log(this.participants);
+
+        /////////////////////////////////////////////////////////
+        // 여기까지가 참여자 목록이 갱신된 지점입니다.////////////
+        ////////////////////////////////////////////////////////
+
         return;
       }
 
