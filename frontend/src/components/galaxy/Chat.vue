@@ -217,7 +217,7 @@
 // 해당 모듈들을 포함한다.
 import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
-import { mapActions, mapGetters,  } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { chatURL } from '@/util/http-common.js';
 
 export default {
@@ -306,7 +306,7 @@ export default {
                 /////////////////////////////////////////////////////////
                 // 여기까지가 참여자 목록이 갱신된 지점입니다.////////////
                 ////////////////////////////////////////////////////////
-                
+
                 return;
             }
 

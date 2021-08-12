@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     checkMiss: function (ticketTask) {
-      if(ticketTask == -1) return true;
+      if(ticketTask == -2) return true;
       else false;
     },
     checkSubmit: function (ticketTask) {
