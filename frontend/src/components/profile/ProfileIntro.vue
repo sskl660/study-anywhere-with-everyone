@@ -39,7 +39,7 @@ export default {
   position: relative;
   top: 30px;
   width: 460px;
-  height: 300px;
+  height: 200px;
   color: white;
 }
 

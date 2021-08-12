@@ -621,11 +621,12 @@ input:focus {
 /* linkseven */
 /* linkone */
 a {
-  text-transform: uppercase;
-  color: rgb(15, 14, 14);
-  text-decoration: none;
-  position: relative;
-  display: block;
+    text-transform: uppercase;
+    color: rgb(15, 14, 14);
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
 }
 .link-1 a:before,
 .link-1 a:after {
