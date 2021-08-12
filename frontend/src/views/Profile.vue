@@ -1,11 +1,16 @@
 <template>
     <div>
         <!-- <p>{{this.user_info}}</p> -->
-        <div class="profile-info-continer">
+        <div class="profile-info-container">
             <!-- 타이틀도 추후에 bg-img로 바꿔주기 -->
             <Title style="display: inline-block" :text="this.profileTitle" />
             <!-- 프로필 상단의 카드와 팔로워, 각오 소개글 -->
             <ProfileInfo class="id-container" :userInfo="newUserInfo" :followers="followers" :followings="followings" />
+        </div>
+        <div class="d-flex justify-content-center mt-3" style="height:100px;">
+            <div class="ticket-line" style="color:#e1af4e;font-size:30px;line-height:80px;">
+                내 챌린지 과제제출 현황
+            </div>
         </div>
         <!-- 프로필 티켓 -->
         <div v-for="ticket in task_tickets" :key="ticket.challengeNo">
@@ -190,8 +195,8 @@ export default {
     position: relative;
     top: 60px;
 }
-.profile-info-continer {
-    height: 570px;
+.profile-info-container {
+    height: 530px;
 }
 .profile-edit-btn {
     background-color: #e1af4e !important;
@@ -199,5 +204,12 @@ export default {
     color: #420909 !important;
     font-weight: bold !important;
     margin-left: 10px;
+}
+.ticket-line {
+  background-image: url(~@/assets/ticket-line.png);
+  width:1280px; 
+  height:100px;
+  /* position: relative;
+  left:310px; */
 }
 </style>

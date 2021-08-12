@@ -10,9 +10,10 @@ export default {
       type: Object,
     }
   },
+  // -2: 기간지나고 안낸거 / -1: 기간안지나고 안낸거
   methods: {
     checkMiss: function (ticketTask) {
-      if(ticketTask == -1) return true;
+      if(ticketTask == -2) return true;
       else false;
     },
     checkSubmit: function (ticketTask) {
