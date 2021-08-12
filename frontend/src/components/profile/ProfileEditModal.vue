@@ -100,10 +100,10 @@
                 <input class="profile-long-input editBlog" type="text" :value="userInfo.userBlog" placeholder="ex) 개인 블로그 주소를 입력해주세요.">
               </div>
               <div class="d-flex">
-                <textarea class="profile-textarea-input editIntroduce" type="text" maxlength="250" :value="userInfo.userIntroduce" placeholder="ex) 각오, 소개 등 친구들에게 하고싶은 말을 자유롭게 써주세요.">
+                <textarea class="profile-textarea-input editIntroduce" type="text" maxlength="200" :value="userInfo.userIntroduce" placeholder="ex) 각오, 소개 등 친구들에게 하고싶은 말을 자유롭게 써주세요.">
                 </textarea>
               </div> 
-              <div style="color:red; font-weight:600; margin-top:20px; margin-right:220px;">* 소개글은 250자 이내로 작성해주세요.</div>
+              <div style="color:red; font-weight:600; margin-top:20px; margin-right:220px;">* 소개글은 200자 이내로 작성해주세요.</div>
             </div>
           </div>
         </div>
