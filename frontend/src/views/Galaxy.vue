@@ -29,6 +29,12 @@ export default {
         //document.getElementById('newDivSpace').remove();
         next();
     },
+  // methods:{
+  //   createSSazipContainer: function () {
+  //     const SSazipCon = document.getElementById('newDivSpace')
+  //     SSazipCon.style = "width:500px;"
+  //   }
+  // }
   // updated: function() {
   //   this.$router.go()
   // }
