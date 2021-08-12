@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.sql.Blob;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -153,6 +155,16 @@ public class UserService {
             taskTicketResponseList.add(taskTicketResponse);
         }
         return taskTicketResponseList;
+    }
+
+    @Transactional
+    public void accumulateGalaxyTime(String userEmail, LocalDateTime startTime){
+        LocalDateTime endTime = LocalDateTime.now();
+        int accumSecond = (int) ChronoUnit.SECONDS.between(startTime,endTime);
+        UserEntity userEntity = userRepository.getById(userEmail);
+        userEntity.setUserTotaltime(userEntity.getUserTotaltime()+accumSecond);
+        userEntity.setUserWeektime(userEntity.getUserWeektime()+accumSecond);
+        userRepository.save(userEntity);
     }
 
     //jwt

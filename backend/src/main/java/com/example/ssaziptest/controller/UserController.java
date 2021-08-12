@@ -3,6 +3,7 @@ package com.example.ssaziptest.controller;
 import com.example.ssaziptest.common.util.JwtTokenUtil;
 import com.example.ssaziptest.domain.feed.FeedListResponse;
 import com.example.ssaziptest.domain.feed.GalaxyEntryRequest;
+import com.example.ssaziptest.domain.feed.GalaxyExitRequest;
 import com.example.ssaziptest.domain.file.FileUploadRequest;
 import com.example.ssaziptest.domain.follow.FollowRequest;
 import com.example.ssaziptest.domain.task.TaskTicketResponse;
@@ -27,6 +28,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -177,6 +180,7 @@ public class UserController {
 //        return fileno;
     }
 
+    @ApiOperation(value = "유저 프로필 조회")
     @GetMapping(value = "viewimage/{useremail}")
     public String getByteImg(@PathVariable(name = "useremail") String useremail) throws Exception {
         //Blob blob = fileRepository.getById(fileno).getFileData();
@@ -189,8 +193,15 @@ public class UserController {
 
     @ApiOperation(value = "galaxy 입장")
     @PostMapping("/galaxy/entry")
-    public void getFeedLists(@RequestBody GalaxyEntryRequest request) throws Exception {
+    public void enterGalaxy(@RequestBody GalaxyEntryRequest request) throws Exception {
         feedService.sendGalaxyEntranceMessage(request);
+    }
+
+    @ApiOperation(value = "galaxy 퇴장")
+    @PostMapping("/galaxy/exit")
+    public void exitGalaxy(@RequestBody GalaxyExitRequest request) throws Exception {
+        LocalDateTime dateTime = LocalDateTime.parse(request.getStartTime(), DateTimeFormatter.ISO_DATE_TIME);
+        userService.accumulateGalaxyTime(request.getUserEmail(), dateTime);
     }
 
 }
