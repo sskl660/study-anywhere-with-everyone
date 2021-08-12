@@ -44,9 +44,16 @@ public class TaskController {
     @PostMapping(value = "", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public void submitTask(@ModelAttribute("request") TaskSubmitRequest request, MultipartFile img, MultipartFile file) throws Exception{
 
+        String filename = file.getOriginalFilename();
+
+//        System.out.println(filename);
+//        System.out.println(file.getContentType());
+
         TaskEntity taskEntity = TaskEntity.builder()
                 .taskUserEntity(userRepository.getById(request.getUserEmail()))
                 .taskChallengeEntity(challengeRepository.getById(request.getChallengeNo()))
+                .taskFileName(filename)
+                .taskFileType(file.getContentType())
                 .taskIndex(request.getTaskIndex())
                 .taskContent(request.getTaskContent())
                 .taskDesc(request.getTaskDesc())

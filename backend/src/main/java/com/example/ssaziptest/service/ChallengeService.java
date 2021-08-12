@@ -211,19 +211,21 @@ public class ChallengeService {
                 blob.free();
                 taskDetailResponse.setTaskImage(Arrays.toString(blobAsBytes));
             }
-//            if(taskEntity.getTaskFile()!=null){
+            if(taskEntity.getTaskFile()!=null){
 //                Blob blob = taskEntity.getTaskFile();
 //                int bloblength = (int)blob.length();
 //                byte[] blobAsBytes = blob.getBytes(1,bloblength);
 //                blob.free();
 //                taskDetailResponse.setTaskFile(Arrays.toString(blobAsBytes));
-//                taskz
-//            }
+                taskDetailResponse.setTaskFile("file exists");
+            }
 //            taskDetailResponse.setTaskFileName();
             taskDetailResponse.setTaskNo(taskNo);
             taskDetailResponse.setTaskIndex(taskEntity.getTaskIndex());
             taskDetailResponse.setTaskContent(taskEntity.getTaskContent());
             taskDetailResponse.setTaskDesc(taskEntity.getTaskDesc());
+            taskDetailResponse.setTaskFileName(taskEntity.getTaskFileName());
+            taskDetailResponse.setTaskFileType(taskEntity.getTaskFileType());
             taskDetailResponse.setUserEmail(taskEntity.getTaskUserEntity().getUserEmail());
             taskDetailResponse.setUserName(taskEntity.getTaskUserEntity().getUserName());
             taskDetailResponse.setUserTerm(taskEntity.getTaskUserEntity().getUserTerm());
