@@ -1,10 +1,3 @@
-git commit -am "test nginx running in jenkins"
-git push
-git pull
-git commit -am "test nginx runing in jenkins"
-git push
-cd ~
-ls
 git pull
 git push
 git status
@@ -498,3 +491,10 @@ git push
 git stash
 git stash drop
 git stash list
+cd ~
+git status
+git add .
+git commit -am "save"
+git pull origin master
+git status
+git add .

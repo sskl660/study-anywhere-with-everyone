@@ -7,6 +7,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +30,11 @@ public class WebSocketController {
     @MessageMapping("/chat/enter")
     public void enter(ParticipantDTO part) {
         participants.remove(part);
+        // 시간
+        part.setEnterTime(LocalDate.now());
         participants.add(part);
         template.convertAndSend("/topic/part", participants);
         ChatVO enterMessage = new ChatVO();
-//        enterMessage.setSenderId("입장");
         enterMessage.setContent(part.getPartName() + randEnter[(int) (Math.random() * randEnter.length)]);
         template.convertAndSend("/topic/chat/algo", enterMessage);
         template.convertAndSend("/topic/chat/cs", enterMessage);
