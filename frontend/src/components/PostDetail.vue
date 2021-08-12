@@ -77,7 +77,7 @@
                         <br />
                         <br />
                         <hr id="line" />
-                        {{ chall_info.challengeDesc }} <br />
+                        <div style="margin-left:30px; margin-right:25px; text-align:left">{{ chall_info.challengeDesc }}</div> <br />
                     </div>
                     <div></div>
                 </div>
@@ -121,12 +121,6 @@ Vue.use(CKEditor);
 
 export default {
     name: 'PostDetail',
-    components: {
-        // Title,          // 타이틀 가져오기
-        // ButtonSquare,    // 둥근 버튼 가져오기
-        ProfileImage,
-        // CommentBox,
-    },
     data: function() {
         return {
             CKEditor: '',

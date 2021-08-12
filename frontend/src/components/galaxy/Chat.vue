@@ -619,7 +619,8 @@ a {
     color: rgb(15, 14, 14);
     text-decoration: none;
     position: relative;
-    display: block;
+    display: inline-block;
+    cursor: pointer;
 }
 .link-1 a:before,
 .link-1 a:after {
