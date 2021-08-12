@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 // 채팅 정보를 담아서 전달할 VO. VO는 Read Only의 성격을 갖는다.
 public class ChatVO {
 
-    // 현재 상태를 저장한다(입장, 퇴장, 채팅 중)
+//    현재 상태를 저장한다(입장, 퇴장, 채팅 중)
 //    private MessageType type;
     // 채팅 방
     private String roomId;
@@ -21,4 +21,6 @@ public class ChatVO {
     private String content;
     // 보낸 사람
     private String sender;
+    // 보낸 이메일
+    private String senderId;
 }

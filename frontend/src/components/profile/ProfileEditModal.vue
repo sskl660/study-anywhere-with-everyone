@@ -68,16 +68,17 @@
             <!-- 상위의 정보입력창 -->
             <div style="display: inline-block;">
               <div class="d-flex">
-                <input class="profile-intro-input-top editMbti" maxlength="4" type="text" v-model="userInfo.userMbti" placeholder="">
+                <!-- v-model="userInfo.userMbti" 이런식으로 구현하면 바로 적용이되지만 등록시 수정이되게 하면 느려진다 ㅠ -->
+                <input class="profile-intro-input-top editMbti" maxlength="4" type="text" :value="userInfo.userMbti" placeholder="">
               </div>
               <div class="d-flex">
-                <input class="profile-intro-input editDevstyle" maxlength="12" type="text" v-model="userInfo.userDevstyle" placeholder="ex) 아침형, 몰입형">
+                <input class="profile-intro-input editDevstyle" maxlength="12" type="text" :value="userInfo.userDevstyle" placeholder="ex) 아침형, 몰입형">
               </div>
               <div class="d-flex">
-                <input class="profile-intro-input editWishfield" maxlength="12" type="text" v-model="userInfo.userWishfield" placeholder="ex) 프론트엔드, 인공지능">
+                <input class="profile-intro-input editWishfield" maxlength="12" type="text" :value="userInfo.userWishfield" placeholder="ex) 프론트엔드, 인공지능">
               </div>
               <div class="d-flex">
-                <input class="profile-intro-input editTechstack " maxlength="12" type="text" v-model="userInfo.userTechstack" placeholder="ex) python 상, vue 중">
+                <input class="profile-intro-input editTechstack " maxlength="12" type="text" :value="userInfo.userTechstack" placeholder="ex) python 상, vue 중">
               </div> 
               <div style="color:red; font-weight:600; margin-top:20px; margin-left:50px;">* 모든 항목은 12자 이내로 작성해주세요.</div>
             </div>
@@ -93,13 +94,13 @@
             <!-- 하위의 정보입력창 -->
             <div style="display: inline-block;">
               <div class="d-flex">
-                <input class="profile-long-input editGit" type="text" v-model.trim="userInfo.userGit" placeholder="ex) 개인 깃헙 주소를 입력해주세요.">
+                <input class="profile-long-input editGit" type="text" :value="userInfo.userGit" placeholder="ex) 개인 깃헙 주소를 입력해주세요.">
               </div>
               <div class="d-flex">
-                <input class="profile-long-input editBlog" type="text" v-model.trim="userInfo.userBlog" placeholder="ex) 개인 블로그 주소를 입력해주세요.">
+                <input class="profile-long-input editBlog" type="text" :value="userInfo.userBlog" placeholder="ex) 개인 블로그 주소를 입력해주세요.">
               </div>
               <div class="d-flex">
-                <textarea class="profile-textarea-input editIntroduce" type="text" maxlength="250" v-model.trim="userInfo.userIntroduce" placeholder="ex) 각오, 소개 등 친구들에게 하고싶은 말을 자유롭게 써주세요.">
+                <textarea class="profile-textarea-input editIntroduce" type="text" maxlength="250" :value="userInfo.userIntroduce" placeholder="ex) 각오, 소개 등 친구들에게 하고싶은 말을 자유롭게 써주세요.">
                 </textarea>
               </div> 
               <div style="color:red; font-weight:600; margin-top:20px; margin-right:220px;">* 소개글은 250자 이내로 작성해주세요.</div>
@@ -163,6 +164,7 @@ export default {
       console.log('check')
       console.log(this.editProfileData)
       document.getElementById("uploadSubmit").click();
+      this.$router.go()
     },
     editProfile: function () {
       axios({

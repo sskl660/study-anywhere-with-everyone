@@ -70,6 +70,11 @@ export default {
           btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
         document.getElementById("msgimage").src = imgsrc;
         this.showMsg.userImage = imgsrc;
+      })
+      .catch((error) => {
+          if (this.imgsrc == null) {
+              document.getElementById('image').src = '/img/ssazip.43ffb363.png';
+          }
       });
     },
     // getProfileImage: function(e) {

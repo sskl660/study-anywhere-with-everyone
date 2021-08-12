@@ -130,6 +130,7 @@ export default {
           })
           .catch((err) => {
               console.log(err);
+              this.$router.go()
           });
     },
     cancelFollow: function () {
@@ -145,6 +146,7 @@ export default {
           })
           .catch((err) => {
               console.log(err);
+              this.$router.go()
           });
     },
     profileShow: function ( ){

@@ -39,11 +39,13 @@ public class TaskEntity {
     @Column(name = "task_desc", length = 300)
     private String taskDesc;
     @Lob
-    @Column(name = "task_image")
+    @Column(name = "task_image", length = 20971520)
     private Blob taskImage;
     @Lob
-    @Column(name = "task_file")
+    @Column(name = "task_file", length = 20971520)
     private Blob taskFile;
+    @Column(name = "task_file_name")
+    private String taskFileName;
     @ElementCollection
     @Column(name = "task_ikes")
     private List<String> taskLikes;
@@ -54,7 +56,7 @@ public class TaskEntity {
     List<CommentEntity> commentEntities = new ArrayList<>();
 
     @Builder
-    public TaskEntity(int taskNo, UserEntity taskUserEntity, ChallengeEntity taskChallengeEntity, int taskIndex, String taskContent, String taskDesc, Blob taskImage, Blob taskFile, List<String> taskLikes, List<CommentEntity> commentEntities) {
+    public TaskEntity(int taskNo, UserEntity taskUserEntity, ChallengeEntity taskChallengeEntity, int taskIndex, String taskContent, String taskDesc, Blob taskImage, Blob taskFile,String taskFileName, List<String> taskLikes, List<CommentEntity> commentEntities) {
         this.taskNo = taskNo;
         this.taskUserEntity = taskUserEntity;
         this.taskChallengeEntity = taskChallengeEntity;
@@ -63,6 +65,7 @@ public class TaskEntity {
         this.taskDesc = taskDesc;
         this.taskImage = taskImage;
         this.taskFile = taskFile;
+        this.taskFileName = taskFileName;
         this.taskLikes = taskLikes;
         this.commentEntities = commentEntities;
     }

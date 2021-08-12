@@ -12,9 +12,16 @@
             <div class="joinbox">
                 <!-- 가입버튼 누르기 전에는 가입하기 버튼과 가입 마감까지 남은 시간이 보여진다 -->
                 <li class="changebtn">
-                    <div v-if="!overTime() && !didJoin() && !overMember()" class="Cjoin_btn" @click="hidebtn(chall_info.challengeNo, userEmail)">
-                        <ButtonRound :text="msg" />
+                    <!-- 목록으로 이동 버튼 -->
+                    <div class="goChallenge" @click="goBack()">
+                        <ButtonRound :text="cmsg" />
                     </div>
+                    &nbsp;
+                    <!-- 가입하기 버튼 -->
+                    <div v-if="!overStartDate && !didJoin() && !overMember()" class="Cjoin_btn" @click="hidebtn(chall_info.challengeNo, userEmail)">
+                        <ButtonRound :text="msg" />
+                    </div>  
+                    <!-- 마감 시간 -->
                     <div class="alarm">
                         <h5 id="rest"></h5>
                     </div>
@@ -61,7 +68,10 @@
                                         <!-- 숫자, 제출 한 것 -->
                                         <router-link
                                             v-else
-                                            :to="{ path: '/postDetailAfter', query: { taskNo: task_info[index].taskNo[taskIdx - 1], cn: chall_info.challengeNo } }"
+                                            :to="{
+                                                path: '/postDetailAfter',
+                                                query: { taskNo: task_info[index].taskNo[taskIdx - 1], cn: chall_info.challengeNo },
+                                            }"
                                         >
                                             <div class="after">
                                                 <!-- taskNO = {{ task_info[index].taskNo[taskIdx - 1] }} -->
@@ -79,27 +89,29 @@
                 <div class="ChallengeDetail">
                     <div class="Cdetail">
                         <p>{{ chall_info.challengeDesc }}</p>
+
+                        <div>
+                            <div v-for="(task, index) in chall_info.challengeTaskdeadlines" :key="task">{{ index+1 }} 번째 과제 : {{ task }} 까지</div>
+                        </div>
+                        <br /><br />
                         <strong
                             >참여멤버 :
                             <span v-for="(name, index) in chall_info.challengeGroup" :key="name" @click="nameprofile(index)" style="cursor:pointer;">
                                 <router-link
-                                    style="color:#420909; font-weight:600; text-decoration: none;"
+                                    style="color:#blue; font-weight:600; text-decoration: none;"
                                     :to="{ name: 'Profile', query: { user: name[0] } }"
                                 >
-                                    #{{ name[1] }}
+                                    #{{ name[1] }}<span v-if="index == 0"> 팀장님 </span>
                                 </router-link>
                             </span>
-                            [정원]{{ chall_info.challengeGroup.length }}/{{ chall_info.challengeCapacity }}
+                            &nbsp; [정원]{{ chall_info.challengeGroup.length }}/{{ chall_info.challengeCapacity }}
                         </strong>
-                        <br /><br />
+                        <br>
                         <div>
                             <strong> 난이도 : </strong
                             ><span v-for="level in chall_info.challengeLevel" :key="level"
                                 ><img src="../assets/star.png" alt="levelstar" id="levelstar"
                             /></span>
-                        </div>
-                        <div>
-                            <div v-for="(task, index) in chall_info.challengeTaskdeadlines" :key="task">{{ index+1 }} 번째 과제 : {{ task }} 까지</div>
                         </div>
                     </div>
                 </div>
@@ -120,9 +132,15 @@ import { mapActions, mapGetters } from 'vuex';
 // import router from '../router/index.js'
 // import Vue from 'vue';
 
+// var vm = new Vue({
+
+//         el: '#test',
+//         data: model
+//     }),
 export default {
     name: 'ChallengeRoom',
-    el: 'goprofile',
+    clocker: null,
+    // el: 'goprofile',
     components: {
         Title, // 타이틀 가져오기
         ButtonRound, // 둥근 버튼 가져오기
@@ -131,7 +149,8 @@ export default {
     data: function() {
         return {
             // 버튼에 들어갈 문구들
-            msg: '가입하기',
+            msg: '가입',
+            cmsg: '목록',
             // 가입완료: '가입완료',
             submit: true,
             fail: false,
@@ -171,6 +190,14 @@ export default {
             overStartDate: false, //가입 오버 타입 여부
             over: null,
             myTask: false,
+            counter: '',
+            timerStopFlag: false,
+
+            second: 1000,
+            minute: this.second * 60,
+            hour: this.minute * 60,
+            day: this.hour * 24,
+            vDate: '',
         };
     },
 
@@ -203,23 +230,17 @@ export default {
                 url: `/challenge/info/${this.challengeno}`,
             })
                 .then((res) => {
+                    console.log('챌린지 정보 부르기 성공');
                     this.chall_info = res.data;
                     var startD = new Date(this.chall_info.challengeStartdate);
                     var pre = new Date();
-                    //var present = new Date().getFullYear()+"-0"+(new Date().getMonth()+1)+ "-"+new Date().getDate();
-                    //alert(startD.getFullYear()-pre.getFullYear());
-                    //alert(startD.getFullYear()-pre.getFullYear()+startD.getMonth()-pre.getMonth()+startD.getDate()-pre.getDate());
-                    if (startD.getFullYear() - pre.getFullYear() + startD.getMonth() - pre.getMonth() + startD.getDate() - pre.getDate() < 0)
+                    if (startD.getFullYear() - pre.getFullYear() + startD.getMonth() - pre.getMonth() + startD.getDate() - pre.getDate() < 0) {
+                        this.makeTrue();
                         this.overTime(true);
-                    //alert(pre.getFullYear());
-                    //alert(new this.chall_info.challengeStartdate);
-                    //alert(new Date(present)-new Date(this.chall_info.challengeStartdate));
-
-                    this.chall_info.challengeStartdate += ' 23:59:59';
-                    this.countDownTimer('rest');
-                    // if(new Date(this.chall_info.challengeStartdate+' 23:59:59')>new Date()){
-                    //     this.overStartdate=true;
-                    // }
+                    }
+                
+                    this.chall_info.challengeStartdate += ' 00:00:01';
+                    this.countDownTimer();
                 })
                 .catch((err) => {
                     console.log('정보부르기 실패');
@@ -241,41 +262,82 @@ export default {
                 });
         },
 
-        countDownTimer: function(rest) {
-            var date = this.chall_info.challengeStartdate;
-            //const countDownTimer = function (id) {
-            var _vDate = new Date(date); // 전달 받은 일자
-            var _second = 1000;
-            var _minute = _second * 60;
-            var _hour = _minute * 60;
-            var _day = _hour * 24;
-            var timer;
-            function showRemaining() {
-                if (document.getElementById(rest) == null) return;
-                var now = new Date();
-                var distDt = _vDate - now - 1;
-                if (distDt < 0) {
-                    clearInterval(rest);
-                    if (!this.overStartDate) {
-                        makeTrue();
-                        //this.overStartDate = true;
-                        //alert('overs');
-                    }
-                    document.getElementById(rest).textContent = '챌린지를 완주하세요!';
-                    return;
-                }
-                var days = Math.floor(distDt / _day);
-                var hours = Math.floor((distDt % _day) / _hour);
-                var minutes = Math.floor((distDt % _hour) / _minute);
-                var seconds = Math.floor((distDt % _minute) / _second);
-                //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
-                document.getElementById(rest).textContent = '시작까지 ' + days + '일 ';
-                document.getElementById(rest).textContent += hours + '시간 ';
-                document.getElementById(rest).textContent += minutes + '분 ';
-                document.getElementById(rest).textContent += seconds + '초';
-            }
-            timer = setInterval(showRemaining, 1000);
+        countDownTimer: function() {
+            let date = this.chall_info.challengeStartdate;
+            this.vDate = new Date(date); // 전달 받은 일자
+            // let _vDate = new Date(date); // 전달 받은 일자
+            // var _second = 1000;
+            // var _minute = _second * 60;
+            // var _hour = _minute * 60;
+            // var _day = _hour * 24;
+            this.second = 1000;
+            this.minute = this.second * 60;
+            this.hour = this.minute * 60;
+            this.day = this.hour * 24;
+            //var timer;
+            console.log('abcd');
+            //var t=this.showRemaining(_vDate,_second,_minute,_hour,_day);
+            //timer=setInterval(this.showRemaining(),1000);
+            // if(rest=='stopTimer') {
+            //     clearInterval(timer);
+            // }
+            // function showRemaining() {
+            //     // if(this.timerStopFlag) {
+            //     //     console.log("stoptimerrrr");
+            //     //                         clearInterval(timer);
+            //     //                         return;
+            //     // }
+            //     let now = new Date();
+            //     if (document.getElementById(rest) == null) {
+            //         // clearInterval(timer);
+            //         return;
+            //     }
+            //     console.log(date);
+
+            //     // console.log(_vDate+"  _vDate");
+            //     // _vDate-=1000;
+            //     let distDt = _vDate - now - 1;
+            //     // var distDt = _vDate - now - 1;
+            //     // console.log(distDt+"  distDt");
+            //     if (distDt < 0) {
+            //         clearInterval(timer);
+            //         console.log('챌린지완주여부');
+            //         //clearTimeout(timer);
+            //         document.getElementById(rest).textContent = '챌린지를 완주하세요!';
+            //         return;
+            //     }
+            //     var days = Math.floor(distDt / _day);
+            //     console.log(days);
+            //     var hours = Math.floor((distDt % _day) / _hour);
+            //     var minutes = Math.floor((distDt % _hour) / _minute);
+            //     var seconds = Math.floor((distDt % _minute) / _second);
+            //     document.getElementById(rest).textContent = '시작까지 ' + days + '일 ';
+            //     document.getElementById(rest).textContent += hours + '시간 ';
+            //     document.getElementById(rest).textContent += minutes + '분 ';
+            //     document.getElementById(rest).textContent += seconds + '초';
+            // }
+            //timer = setInterval(showRemaining, 1000);
+            // timer = setTimeout(showRemaining, 1000);
         },
+        async showRemaining() {
+            let now = new Date();
+            let distDt = this.vDate - now - 1;
+            if (distDt < 0) {
+                clearInterval(this.clocker);
+                console.log('챌린지마감');
+                document.getElementById('rest').textContent = '챌린지를 완주하세요!';
+                return;
+            }
+            var days = Math.floor(distDt / this.day);
+            var hours = Math.floor((distDt % this.day) / this.hour);
+            var minutes = Math.floor((distDt % this.hour) / this.minute);
+            var seconds = Math.floor((distDt % this.minute) / this.second);
+            document.getElementById('rest').textContent = '시작까지 ' + days + '일 ';
+            document.getElementById('rest').textContent += hours + '시간 ';
+            document.getElementById('rest').textContent += minutes + '분 ';
+            document.getElementById('rest').textContent += seconds + '초';
+        },
+
         ...mapActions({
             // import 해주는 느낌
             joinChall: 'joinChallenge',
@@ -283,16 +345,16 @@ export default {
         // 가입하기 버튼 눌렀을 때
         hidebtn: function(chall_No, user) {
             this.msg = '가입완료';
-            console.log('가입완료');
-            //alert(chall_No + ' ' + user);
             document.querySelector('.Cjoin_btn .btn-light').style.backgroundColor = '#f9d479';
 
             var info = [chall_No, user];
-            //alert(this.overMember() + ' ' + this.overTime() + ' ' + this.didJoin() + ' ');
             this.joinChall(info); // email이랑 챌린지 번호 전송
             this.$router.go();
         },
-
+        goBack: function(){
+            // alert('goBack function')
+            this.$router.go(-1);
+        },
         nameprofile(num) {
             var email = this.chall_info.challengeGroup[num][0];
             console.log(email);
@@ -309,20 +371,25 @@ export default {
         },
         overMember: function() {
             //모집기간 종료 혹은 10명 초과시 가입 종료
-            //alert(this.overStartdate);
             if (this.chall_info.challengeGroup.length >= this.chall_info.challengeCapacity) return true;
             else return false;
         },
         overTime: function(flag) {
             if (flag) {
-                //alert("타임옹바")
                 return true;
             } else return false;
         },
         makeTrue: function() {
             this.overStartDate = true;
         },
+        // timerSpt:function(){
+        //     console.log("timerSpt");
+        //     clearInterval(this.showRemaining());
+        //     // clearInterval(timer);
+        //     //clearInterval(this.timer);
+        // }
     },
+    updated: {},
     created: function() {
         this.challengeno = this.$route.query.cn;
         this.getChallInfo(); //생성할 때 바로 불러줘
@@ -332,20 +399,28 @@ export default {
         this.getChallTicket();
         //document.getElementById(id).textContent = '';
     },
-    watch: {
-        // overStartDate: function() {
-        //     alert('overStartDate');
-        //     this.over = true;
-        //},     
+    watch: {},
+    beforeRouteLeave(to, from, next) {
+        clearInterval(this.clocker);
+
+        // if (this.canLeaveSite) next();
+        // else
+        // if (confirm('이 사이트에서 나가시겠습니까?\n변경사항이 저장되지 않을 수 있습니다.')) {
+        //     console.log("나가마");
+        //     //this.timerStopFlag=true;
+        //     //countDownTimer();
+        //    // this.timerSpt();
+        //     //clearInterval(this.showRemaining);
+
+        next();
+        // }
     },
     computed: {
         ...mapGetters(['userEmail']),
-        // newover: function() {
-        //     alert('newover');
-        //     return this.overStartDate;
-        // },
     },
-    mounted: {},
+    mounted() {
+        this.clocker = setInterval(this.showRemaining, 1000);
+    },
 };
 </script>
 <style scoped>
@@ -356,10 +431,10 @@ export default {
     /* border-color: #99b7ff; */
     font-size: 25px;
     font-weight: bold;
-    width: 171px;
+    width: 100px;
     height: 54px;
     margin-right: 69%;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     border-style: none;
 }
 
@@ -373,13 +448,27 @@ export default {
     width: 171px;
     height: 54px;
     margin-right: 69%;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.goChallenge .btn-light{
+    color: #1f4256;
+    background-color: #E1AF4E;
+    border-color: #E1AF4E;
+    font-size: 25px;
+    font-weight: bold;
+    width: 100px;
+    height: 54px;
+    margin-right: 99%;
+    margin-bottom: 10px;
+    border-style: none;
 }
 
 .alarm {
     color: #e92828;
     margin-left: 10px;
     margin-top: 20px;
+    height: 24px;
 }
 
 /* .joinbox{

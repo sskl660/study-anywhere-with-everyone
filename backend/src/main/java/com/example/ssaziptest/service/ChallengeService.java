@@ -187,7 +187,7 @@ public class ChallengeService {
         }
         int[] arr = new int[challengeEntity.getChallengeTaskCnt()];
         for(int i = 0; i<taskDeadlines.size(); i++){
-            if(taskDeadlines.get(i).isAfter(LocalDate.now())) temp[i].setInProgress(true);
+            if(taskDeadlines.get(i).isAfter(LocalDate.now().minusDays(1))) temp[i].setInProgress(true);
         }
         for(TaskEntity taskEntity: taskEntityList){
             arr[taskEntity.getTaskIndex()]++;
@@ -211,13 +211,15 @@ public class ChallengeService {
                 blob.free();
                 taskDetailResponse.setTaskImage(Arrays.toString(blobAsBytes));
             }
-            if(taskEntity.getTaskFile()!=null){
-                Blob blob = taskEntity.getTaskFile();
-                int bloblength = (int)blob.length();
-                byte[] blobAsBytes = blob.getBytes(1,bloblength);
-                blob.free();
-                taskDetailResponse.setTaskFile(Arrays.toString(blobAsBytes));
-            }
+//            if(taskEntity.getTaskFile()!=null){
+//                Blob blob = taskEntity.getTaskFile();
+//                int bloblength = (int)blob.length();
+//                byte[] blobAsBytes = blob.getBytes(1,bloblength);
+//                blob.free();
+//                taskDetailResponse.setTaskFile(Arrays.toString(blobAsBytes));
+//                taskz
+//            }
+//            taskDetailResponse.setTaskFileName();
             taskDetailResponse.setTaskNo(taskNo);
             taskDetailResponse.setTaskIndex(taskEntity.getTaskIndex());
             taskDetailResponse.setTaskContent(taskEntity.getTaskContent());
