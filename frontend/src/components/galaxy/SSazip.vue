@@ -12,8 +12,10 @@
             <input type="radio" style="cursor:pointer;" name="c" id="but1" checked="">
             <input type="radio" style="cursor:pointer;" name="c" id="but2">
         </div> -->
-            <SmallSSazip />
+            <!-- <SmallSSazip /> -->
 
+            <!-- <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" /> -->
+            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
             <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
             <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
             <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
