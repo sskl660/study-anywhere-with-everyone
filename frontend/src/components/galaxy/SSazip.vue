@@ -1,6 +1,6 @@
 <template>
-    <div >
-        <div 
+    <div>
+        <div
             style="display:block;position:absolute;top:0px;left:0px;height:100%;width:100%;background:transparent;overflow:hidden;visibility:hidden;"
         >
             <!-- <svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">
@@ -42,6 +42,7 @@
         <img class="ssazip"  style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(22.3951px, 737.06px, 0px) rotate(22.5deg); visibility: visible;" >
         <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(73.7086px, 846.587px, 0px) rotate(22.5deg); visibility: visible;" > -->
         </div>
+<div v-for="user in participantsVuex" :key=user>{{user}}</div>
     </div>
 </template>
 
@@ -49,6 +50,9 @@
 import SmallSSazip from '@/components/galaxy/SmallSSazip.vue';
 // import gravity from "@/components/temporary/gravity.js"
 // import $ from 'jquery';
+import { Stomp } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'SSazip',
@@ -56,10 +60,149 @@ export default {
         SmallSSazip,
     },
     giveme: null,
-    ccc:null,
+    ccc: null,
+    data() {
+        return {
+            // 소켓 연결
+            stompClient: null,
+            participants: [], // length. 참여자수, 이메일 userEmail
+            // 참여자 정보 전달 채널
+            partChannel: null,
+            // 상위 5명
+            ranker: [],
+        };
+    },
+    created: function() {
+        // this.gravity();
+    },
+    mounted: function() {
+        //this.participants=participantsVuex;
+        this.gravity();
+        // this.socketConnect();
+    },
+    computed: {
+        ...mapGetters(['participantsVuex']),
+    },
     methods: {
-        gravity: function() {
+        // 소켓 연결
+        socketConnect() {
+            // 소켓을 이용하여 Server와 연결한다.
+            var socket = new SockJS(chatURL);
+            // 소켓 정보를 stompClient 변수에 할당한다.
+            this.stompClient = Stomp.over(socket);
+            // header, connectCallback, errorCallback을 connect 메서드에 입력한다.
+            this.stompClient.connect('', this.onConnected, this.onError);
+        },
 
+        // 소켓 연결하며 대화 채널 구독
+        onConnected() {
+            // 해당 브로커가 중개하는 채널(/topic/public)로 연결(구독)한다.
+            // destination, 보내고자하는 메세지(call back 함수)를 넣어줄 수 있다.
+            // 참여자 정보를 알려줄 채널
+            this.partChannel = this.stompClient.subscribe('/topic/part', this.onMessageReceived);
+
+            // // 대화방 입장 시 기본 채널은 Algo 채팅방으로 설정된다.
+            // this.channel = this.stompClient.subscribe('/topic/chat/' + this.chatType, this.onMessageReceived);
+
+            this.stompClient.send(
+                '/galaxy/chat/enter',
+                {},
+                JSON.stringify({
+                    partEmail: this.userEmail,
+                    partTerm: this.userTerm,
+                    partName: this.userName,
+                })
+            );
+        },
+        onError(error) {
+            console.log(error);
+        },
+        // 메세지 전송하는 함수.
+        sendMessage() {
+            // 메세지가 존재하고, 연결 정보가 유지되는 경우
+            if (this.message.trim() && this.stompClient) {
+                // 메세지 형식을 정의한다(JSON).
+                const sendMessage = {
+                    senderId: this.userEmail,
+                    sender: this.userTerm + '기 ' + this.userName,
+                    content: this.message.trim(),
+                };
+
+                // 해당 Endpoint로 메세지를 전송한다.
+                // Destination, header, body로 구성된다.
+                // 채팅 Type에 따라서 다르게 보낸다.
+                this.stompClient.send('/galaxy/chat/send/' + this.chatType, {}, JSON.stringify(sendMessage));
+                // 메세지를 전송하였으므로 변수를 초기화 시켜준다.
+                this.message = '';
+            }
+        },
+
+        // 메세지를 받는 함수.
+        onMessageReceived(payload) {
+            // String 객체를 JSON으로 변환한다.
+            let receiveMessage = JSON.parse(payload.body);
+
+            // 참가자라면 참여 메세지만 출력하기
+            if (receiveMessage.constructor.name == 'Array') {
+                // 입장 시간을 기준으로 랭킹 정렬(5명만).
+                this.ranker = receiveMessage
+                    .sort(function(a, b) {
+                        return new Date(a.enterTime) - new Date(b.enterTime);
+                    })
+                    .slice(0, 5);
+                console.log(this.ranker);
+
+                // 이름 순으로 참여자 정렬
+                receiveMessage.sort(function(a, b) {
+                    return a.partName > b.partName ? 1 : -1;
+                });
+                this.participants = receiveMessage;
+                console.log(this.participants);
+
+                /////////////////////////////////////////////////////////
+                // 여기까지가 참여자 목록이 갱신된 지점입니다.////////////
+                ////////////////////////////////////////////////////////
+
+                return;
+            }
+
+            if (receiveMessage.sender == '') {
+                this.receivedMessagesAlgo.push(receiveMessage);
+                this.receivedMessagesCS.push(receiveMessage);
+                this.receivedMessagesJob.push(receiveMessage);
+                return;
+            }
+
+            if (this.chatType == 'algo') {
+                this.receivedMessagesAlgo.push(receiveMessage);
+            } else if (this.chatType == 'cs') {
+                this.receivedMessagesCS.push(receiveMessage);
+            } else if (this.chatType == 'job') {
+                this.receivedMessagesJob.push(receiveMessage);
+            }
+        },
+
+        // 소켓 연결 해제, 대화 채널 이탈.
+        socketDisconnect() {
+            this.stompClient.send(
+                '/galaxy/chat/exit',
+                {},
+                JSON.stringify({
+                    partEmail: this.userEmail,
+                    partTerm: this.userTerm,
+                    partName: this.userName,
+                })
+            );
+
+            this.stompClient.disconnect();
+        },
+        toProfile(senderId) {
+            // this.$router.push({name: 'routeName', query: {user: "senderId"}, target="_blank"});
+            let routeData = this.$router.resolve({ name: 'Profile', query: { user: senderId } });
+            window.open(routeData.href, '_blank');
+        },
+
+        gravity: function() {
             /*
         Play Balls 2 (full page version).
         Straight JavaScript!
@@ -92,7 +235,6 @@ export default {
             var m = { down: false, x1: 0, y1: 0, x2: 0, y2: 0 };
 
             document.oncontextmenu = function() {
-
                 return false;
             };
 
@@ -153,7 +295,6 @@ export default {
             }
 
             function iniscrl() {
-
                 con.style.top = cony + scrl(0) + 'px';
                 con.style.left = conx + scrl(1) + 'px';
             }
@@ -187,7 +328,7 @@ export default {
             }
 
             var con = d.createElement('div');
-            con.setAttribute("id", "newDivSpace");
+            con.setAttribute('id', 'newDivSpace');
             con.setAttribute(
                 'style',
                 'display:block;' +
@@ -615,12 +756,6 @@ export default {
             window.addEventListener('resize', win, false);
             window.addEventListener('scroll', iniscrl, false);
         },
-    },
-    created: function() {
-       // this.gravity();
-    },
-    mounted: function() {
-        this.gravity();
     },
 };
 </script>
