@@ -2,7 +2,12 @@
   <div>
     <div class="d-flex justify-content-center feed-container">
       <div class="feed">
-        <FeedListItem/>
+        <FeedListItem
+          v-for="(feed, idx) in feedList" 
+          :key="idx" 
+          :feed="feed"
+          :idx="idx"
+        />
       </div>
     </div>
   </div>
@@ -18,6 +23,11 @@ export default {
   components: {
     FeedListItem
   },
+  data: function () {
+    return {
+      feedList: null
+    }
+  },
   methods: {
     getFeedList: function (useremail) {
       axios({
@@ -25,16 +35,14 @@ export default {
         url: `/feed/${useremail}`
       })
         .then(res => {
-          console.log('피드 불러오기')
-          console.log(res)
+          this.feedList = res.data.reverse()
         })
         .catch(err => {
           console.log(err)
         })
-    }
+    },
   },
   created: function() {
-    console.log(this.userEmail)
     this.getFeedList(this.userEmail)
   },
   computed: {
@@ -46,15 +54,17 @@ export default {
 </script>
 
 <style scoped>
-  .feed {
-    width: 1000px;
-    height: 800px;
-    border-radius: 20px;
-    background-color:rgba(255,255,255, 0.2);
-    margin-top: 130px;
-  }
+.feed {
+  width: 950px;
+  height: 800px;
+  border-radius: 30px;
+  background-color:rgba(255,255,255, 0.2);
+  margin-top: 120px;
+  padding-top: 80px;
+  overflow-y: scroll;
+}
 
-  .feed-container {
-    width: 1300px;
-  }
+.feed-container {
+  width: 1300px;
+}
 </style>
