@@ -247,14 +247,6 @@ export default {
   destroyed() {
     this.socketDisconnect();
   },
-  created() {
-    this.enterMessage.push('님이 입장하셨습니다!');
-    this.enterMessage.push('님이 공부하러 오셨어요!');
-    this.enterMessage.push('님 오늘도 화이팅!');
-    this.exitMessage.push('님이 퇴장하셨습니다!');
-    this.exitMessage.push('님 다음에 또 만나요!');
-    this.exitMessage.push('님 다음에도 화이팅!');
-  },
   updated() {
     this.scrollDown();
   },
@@ -293,24 +285,13 @@ export default {
     onMessageReceived(payload) {
       // String 객체를 JSON으로 변환한다.
       const receiveMessage = JSON.parse(payload.body);
-      // console.log(receiveMessage.constructor.name + 'zzz');
-      // console.log(receiveMessage);
-
-      // this.idx = Math.floor(Math.random() * 3);
-      // 채팅 입장, 퇴장에 따라서 메세지를 다르게 파싱하여 전송한다.
-      // if (receiveMessage.type === 'JOIN') {
-      //   receiveMessage.content = receiveMessage.sender + this.enterMessage[this.idx];
-      // } else if (receiveMessage.type === 'LEAVE') {
-      //   receiveMessage.content = receiveMessage.sender + this.exitMessage[this.idx];
-      // }
-      // console.log(receiveMessage.room + 'this');
+      console.log(receiveMessage);
 
       // 참가자라면 참여 메세지만 출력하기
       if (receiveMessage.constructor.name == 'Array') {
         this.participants = receiveMessage;
         return;
       }
-      console.log(receiveMessage);
 
       if (receiveMessage.sender == '') {
         this.receivedMessagesAlgo.push(receiveMessage);
@@ -354,7 +335,6 @@ export default {
         '/topic/chat/' + this.chatType,
         this.onMessageReceived
       );
-      console.log(this.channel + 'here');
 
       this.stompClient.send(
         '/galaxy/chat/enter',
@@ -382,7 +362,6 @@ export default {
       this.stompClient.disconnect();
     },
     toProfile(senderId) {
-      console.log(senderId);
       // this.$router.push({name: 'routeName', query: {user: "senderId"}, target="_blank"});
       let routeData = this.$router.resolve({ name: 'Profile', query: { user: senderId } });
       window.open(routeData.href, '_blank');
