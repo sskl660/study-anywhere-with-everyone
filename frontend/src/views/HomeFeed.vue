@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-between homefeed">
     <FeedList/>
     <Winners/>
   </div>
@@ -14,6 +14,6 @@ export default {
   components: {
     FeedList,
     Winners,
-  }
+  },
 }
 </script>
