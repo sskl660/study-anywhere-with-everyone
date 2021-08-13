@@ -40,6 +40,13 @@ public class FollowService {
         followerEntity.setUserFollowing(followerEntity.getUserFollowing()+1);
         userRepository.save(userEntity);
         userRepository.save(followerEntity);
+        FeedEntity fentity = FeedEntity.builder()
+                .feedType(5)
+                .feedOwner(userEntity.getUserEmail())
+                .feedUserEntity(followerEntity)
+                .feedInfo(request.getFollowFollower())
+                .build();
+        feedRepository.save(fentity);
 
         List<FollowEntity> followEntities = followRepository.findByFollowUserEntity_UserEmail(request.getFollowFollower());
         //팔로워들한테 다 save

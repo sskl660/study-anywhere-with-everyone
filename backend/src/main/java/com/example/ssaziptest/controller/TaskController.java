@@ -44,7 +44,12 @@ public class TaskController {
     @PostMapping(value = "", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public void submitTask(@ModelAttribute("request") TaskSubmitRequest request, MultipartFile img, MultipartFile file) throws Exception{
 
-        String filename = file.getOriginalFilename();
+        String filename = null;
+        String contentType = null;
+        if(file!=null) {
+            filename = file.getOriginalFilename();
+            contentType = file.getContentType();
+        }
 
 //        System.out.println(filename);
 //        System.out.println(file.getContentType());
@@ -53,7 +58,7 @@ public class TaskController {
                 .taskUserEntity(userRepository.getById(request.getUserEmail()))
                 .taskChallengeEntity(challengeRepository.getById(request.getChallengeNo()))
                 .taskFileName(filename)
-                .taskFileType(file.getContentType())
+                .taskFileType(contentType)
                 .taskIndex(request.getTaskIndex())
                 .taskContent(request.getTaskContent())
                 .taskDesc(request.getTaskDesc())
@@ -91,20 +96,26 @@ public class TaskController {
     public String getTaskByteImg(@PathVariable(name = "taskno") int taskno) throws Exception{
         //Blob blob = fileRepository.getById(fileno).getFileData();
         Blob blob = taskRepository.getById(taskno).getTaskImage();
-        int bloblength = (int)blob.length();
-        byte[] blobAsBytes = blob.getBytes(1,bloblength);
-        blob.free();
-        return Arrays.toString(blobAsBytes);
+        if(blob!=null){
+            int bloblength = (int)blob.length();
+            byte[] blobAsBytes = blob.getBytes(1,bloblength);
+            blob.free();
+            return Arrays.toString(blobAsBytes);
+        }
+        return "noImage";
     }
     /*과제 파일 조회*/
     @GetMapping(value = "file/{taskno}")
     public byte[] getTaskByteFile(@PathVariable(name = "taskno") int taskno) throws Exception{
         //Blob blob = fileRepository.getById(fileno).getFileData();
         Blob blob = taskRepository.getById(taskno).getTaskFile();
-        int bloblength = (int)blob.length();
-        byte[] blobAsBytes = blob.getBytes(1,bloblength);
-        blob.free();
-        return blobAsBytes;
+        if(blob!=null){
+            int bloblength = (int)blob.length();
+            byte[] blobAsBytes = blob.getBytes(1,bloblength);
+            blob.free();
+            return blobAsBytes;
+        }
+        else return null;
     }
 
     /*좋아요*/
