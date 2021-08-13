@@ -1,11 +1,3 @@
-git commit add .
-git add .
-git status
-git add .
-git branch
-git commit -am "merge"
-git status
-ls
 cd backend/
 ls
 git config core.autocrlf false
@@ -498,3 +490,11 @@ git add .
 git commit -am "merge with master"
 git status
 git push
+cd ~
+git status
+git add .
+git commit -am "save"
+git pull origin master
+git status
+git add .
+git commit -am "merge"
