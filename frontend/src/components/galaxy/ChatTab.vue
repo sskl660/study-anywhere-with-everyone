@@ -46,7 +46,7 @@ h4 {
 }
 
 .GalaxyTab {
-    padding-top: 48px;
+    margin-top: -542px;
     width: 20%;
     margin-left: 75%;
 }
