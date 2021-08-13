@@ -1,7 +1,3 @@
-cd backend/
-ls
-git config core.autocrlf false
-git pull
 git pull
 git add .
 git status
@@ -498,3 +494,7 @@ git pull origin master
 git status
 git add .
 git commit -am "merge"
+cd ~
+git status
+git commit -am "save"
+git pull origin master

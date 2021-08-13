@@ -1,12 +1,12 @@
 <template>
   <div id="ssazip">
     <img :src="ssazip_pics[snum]" style="width:50px" />
-    <!-- <img style="display:none" src="@/assets/ssazip.png" alt="" />
+    <img style="display:none" src="@/assets/ssazip.png" alt="" />
     <img style="display:none" src="@/assets/ssazip_mint.png" alt="" />
     <img style="display:none" src="@/assets/ssazip_orange.png" alt="" />
     <img style="display:none" src="@/assets/ssazip_purple.png" alt="" />
     <img style="display:none" src="@/assets/ssazip_yellow.png" alt="" />
-    <img style="display:none" src="@/assets/ssazip_red.png" alt="" /> -->
+    <img style="display:none" src="@/assets/ssazip_red.png" alt="" />
     <span style="color:#fff">권희은</span>
   </div>
 </template>
