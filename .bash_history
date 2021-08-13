@@ -1,22 +1,3 @@
-git pull
-git add .
-git status
-git commit -am "update(Dockerfile) : update Dockerfile"
-git push
-git merge origin docker
-git checkout master
-git merge master docker
-git status
-git push
-git push --set-upstream origin master
-git pull
-git pull origin master
-git push
-git push --set-upstream origin master
-ls
-git pull
-git add .
-git commit -am "update(Dockerfile) : update Dockerfile"
 git push
 git pull
 git commit -am "update(Dockerfile) : update Dockerfile"
@@ -498,3 +479,22 @@ cd ~
 git status
 git commit -am "save"
 git pull origin master
+cd ~
+git status
+git add .
+git commit -am "save"
+git pull origin master
+git status
+git status
+git add commit -am "update(Etc) : update and fix others"
+git commit -am "update(Etc) : update and fix others"
+git status
+git pull origin master
+git status
+git push
+git commit -am "fix URL"
+git pull origin master
+git status
+git commit -am "merge
+"
+git push
