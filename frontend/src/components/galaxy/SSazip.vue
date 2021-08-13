@@ -1,26 +1,50 @@
 <template>
     <div>
-        <div style="display:block;position:absolute;top:0px;left:0px;height:100%;width:100%;background:transparent;overflow:hidden;visibility:hidden;">
+        <div id="">
+            <!-- style="display:block;position:absolute;top:0px;left:0px;height:100%;width:100%;background:transparent;overflow:hidden;visibility:hidden;" -->
+
+
             <!-- <svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">
                 <line id="vec" x1="0" y1="0" x2="0" y2="0" stroke="#ff0000" stroke-width="1.5" stroke-dasharray="3,3">
                 </line>
             </svg> -->
             <!-- <div id="gravitybtn" style="display: block;position: fixed;margin: 4px;top:0;right:0;border-radius:5px;height: 30px;width: 130px;padding: 5px; background-color:#fff;text-align: center;font: italic bold 16px verdana;color: #fff;line-height: 30px;letter-spacing: 0.5px;cursor:default;z-index: 1000;-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;visibility:visible;"> -->
             <div id="gravitybtn">
-                    Gravity 
-                <input type="radio"  name="c" id="but1" checked="">
-                <input type="radio" style="cursor:pointer;" name="c" id="but2">
+                Gravity
+                <input type="radio" name="c" id="but1" checked="" />
+                <input type="radio" style="cursor:pointer;" name="c" id="but2" />
             </div>
-            <div v-for="(idx, ssazip_num) in temp_galaxy_data" :key=" ssazip_num">
-                <SmallSSazip @click="tmpClicker()" :idx="idx"/>
+
+            <!-- <div v-for="(idx, ssazip_num) in temp_galaxy_data" :key="ssazip_num">
+                <SmallSSazip />
+                </div> -->
+            <div v-for="sazibi in participantsVuex" :key="sazibi">
+                <!-- <SmallSSazip :sazibi="sazibi" /> -->
             </div>
+
+            <!-- <div v-for="(idx,index) in participantsVuex" :key="index"> -->
+            <!-- {{index}} -->
+
+            <!-- <div v-for="(idx, ssazip_num) in participantsVuex" :key="ssazip_num"> -->
+            <!-- <SmallSSazip /> -->
+            <!-- <SmallSSazip @click="tmpClicker(zibi)" :idx="ssazip_num"/> -->
+            <!-- <SmallSSazip @click="tmpClicker(zibi)" :idx="zibi"/> -->
+            <!-- </div> -->
             <!-- <img id="ssazip" src="@/assets/ssazip.png" style="width:50px" >   -->
-            <div id="ssazip">
+            <!-- <div id="ssazip">
                 <img  src="@/assets/ssazip.png" style="width:80px; height:80px" >
                 <span style="color:#fff;"><i class="fas fa-star"></i>나<i class="fas fa-star"></i></span>
-            </div>
+            </div> -->
+            <!-- <div style="background-color:white" v-for="(zibi) in participantsVuex" :key=" zibi">
+                {{zibi}}
+                    <img id="ssazip" src="@/assets/ssazip.png" style="width:50px" >
+            </div> -->
+            <div style="color:red" v-for="(user,index) in participantsVuex" :key="index">{{ user }} 323</div>
         </div>
-<div v-for="user in participantsVuex" :key=user>{{user}}</div>
+        <!-- <img id="ssazip" src="@/assets/ssazip.png" style="width:50px" /> -->
+        <!-- 
+        <div v-for="user in participants" :key="user">{{ user }}123</div>
+        <div v-for="user in participantsVuex" :key="user">{{ user }}  123</div> -->
     </div>
 </template>
 
@@ -28,8 +52,6 @@
 import SmallSSazip from '@/components/galaxy/SmallSSazip.vue';
 // import gravity from "@/components/temporary/gravity.js"
 // import $ from 'jquery';
-import { Stomp } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -48,148 +70,49 @@ export default {
             partChannel: null,
             // 상위 5명
             ranker: [],
-            temp_galaxy_data: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+            temp_galaxy_data: [0, 1, 2, 4, 12, 6],
         };
     },
     created: function() {
         // this.gravity();
+        // this.participants=this.participantsVuex;
     },
     mounted: function() {
-        //this.participants=participantsVuex;
-        this.gravity();
+        // while(document.getElementById('ssazip'))document.getElementById('ssazip').remove();
+        // this.gravity();
+        // this.participants=this.participantsVuex;
         // this.socketConnect();
+    },
+    beforeUpdate: function() {
+        console.log('bf');
+    },
+    updated: function() {
+        console.log('updated');
+        //document.getElementById('newDivSpace').remove();
+        this.gravity();
+        // this.participants=this.participantsVuex;
+        // this.gravity();
     },
     computed: {
         ...mapGetters(['participantsVuex']),
     },
     methods: {
-        tmpClicker(param){
+        tmpClicker(param) {
             alert(param);
-        }   ,
-             // 소켓 연결
-        socketConnect() {
-            // 소켓을 이용하여 Server와 연결한다.
-            var socket = new SockJS(chatURL);
-            // 소켓 정보를 stompClient 변수에 할당한다.
-            this.stompClient = Stomp.over(socket);
-            // header, connectCallback, errorCallback을 connect 메서드에 입력한다.
-            this.stompClient.connect('', this.onConnected, this.onError);
-        },
-
-        // 소켓 연결하며 대화 채널 구독
-        onConnected() {
-            // 해당 브로커가 중개하는 채널(/topic/public)로 연결(구독)한다.
-            // destination, 보내고자하는 메세지(call back 함수)를 넣어줄 수 있다.
-            // 참여자 정보를 알려줄 채널
-            this.partChannel = this.stompClient.subscribe('/topic/part', this.onMessageReceived);
-
-            // // 대화방 입장 시 기본 채널은 Algo 채팅방으로 설정된다.
-            // this.channel = this.stompClient.subscribe('/topic/chat/' + this.chatType, this.onMessageReceived);
-
-            this.stompClient.send(
-                '/galaxy/chat/enter',
-                {},
-                JSON.stringify({
-                    partEmail: this.userEmail,
-                    partTerm: this.userTerm,
-                    partName: this.userName,
-                })
-            );
-        },
-        onError(error) {
-            console.log(error);
-        },
-        // 메세지 전송하는 함수.
-        sendMessage() {
-            // 메세지가 존재하고, 연결 정보가 유지되는 경우
-            if (this.message.trim() && this.stompClient) {
-                // 메세지 형식을 정의한다(JSON).
-                const sendMessage = {
-                    senderId: this.userEmail,
-                    sender: this.userTerm + '기 ' + this.userName,
-                    content: this.message.trim(),
-                };
-
-                // 해당 Endpoint로 메세지를 전송한다.
-                // Destination, header, body로 구성된다.
-                // 채팅 Type에 따라서 다르게 보낸다.
-                this.stompClient.send('/galaxy/chat/send/' + this.chatType, {}, JSON.stringify(sendMessage));
-                // 메세지를 전송하였으므로 변수를 초기화 시켜준다.
-                this.message = '';
-            }
-        },
-
-        // 메세지를 받는 함수.
-        onMessageReceived(payload) {
-            // String 객체를 JSON으로 변환한다.
-            let receiveMessage = JSON.parse(payload.body);
-
-            // 참가자라면 참여 메세지만 출력하기
-            if (receiveMessage.constructor.name == 'Array') {
-                // 입장 시간을 기준으로 랭킹 정렬(5명만).
-                this.ranker = receiveMessage
-                    .sort(function(a, b) {
-                        return new Date(a.enterTime) - new Date(b.enterTime);
-                    })
-                    .slice(0, 5);
-                console.log(this.ranker);
-
-                // 이름 순으로 참여자 정렬
-                receiveMessage.sort(function(a, b) {
-                    return a.partName > b.partName ? 1 : -1;
-                });
-                this.participants = receiveMessage;
-                console.log(this.participants);
-
-                /////////////////////////////////////////////////////////
-                // 여기까지가 참여자 목록이 갱신된 지점입니다.////////////
-                ////////////////////////////////////////////////////////
-
-                return;
-            }
-
-            if (receiveMessage.sender == '') {
-                this.receivedMessagesAlgo.push(receiveMessage);
-                this.receivedMessagesCS.push(receiveMessage);
-                this.receivedMessagesJob.push(receiveMessage);
-                return;
-            }
-
-            if (this.chatType == 'algo') {
-                this.receivedMessagesAlgo.push(receiveMessage);
-            } else if (this.chatType == 'cs') {
-                this.receivedMessagesCS.push(receiveMessage);
-            } else if (this.chatType == 'job') {
-                this.receivedMessagesJob.push(receiveMessage);
-            }
-        },
-
-        // 소켓 연결 해제, 대화 채널 이탈.
-        socketDisconnect() {
-            this.stompClient.send(
-                '/galaxy/chat/exit',
-                {},
-                JSON.stringify({
-                    partEmail: this.userEmail,
-                    partTerm: this.userTerm,
-                    partName: this.userName,
-                })
-            );
-
-            this.stompClient.disconnect();
-        },
-        toProfile(senderId) {
-            // this.$router.push({name: 'routeName', query: {user: "senderId"}, target="_blank"});
-            let routeData = this.$router.resolve({ name: 'Profile', query: { user: senderId } });
-            window.open(routeData.href, '_blank');
         },
 
         gravity: function() {
+            console.log('gravity');
+            console.log(this.participantsVuex);
+            // while(document.getElementById('ssazip'))
+            //  document.getElementById('newDivSpace').remove();
             /*
         Play Balls 2 (full page version).
         Straight JavaScript!
         kurt.grigg@yahoo.co.uk
         */
+
+            var partList = this.participantsVuex;
             var numberOfBalls = 50;
             var ballVelocity = 2; //2
             var ballHardness = 0.85;
@@ -312,38 +235,60 @@ export default {
                 // w = window.innerWidth - scrollBarRight - 1;
             }
 
-            var con = d.createElement('div');
-            con.setAttribute('id', 'newDivSpace');
-            con.setAttribute(
-                'style',
-                'display:block;' +
-                    'position:absolute;' +
-                    'top:0px;left:0px;' +
-                    'height:100%;width:100%;' +
-                    'background:transparent;' +
-                    'overflow:hidden;' +
-                    'visibility:hidden;'
-            );
+            if (!document.getElementById('newDivSpace')) {
+                //처음이라면
+                console.log("=================make newDivSpace=========================================");
+                var con = d.createElement('div');
+                 con.setAttribute('id', 'newDivSpace');
+                con.setAttribute(
+                    'style',
+                    'display:block;' +
+                        'position:absolute;' +
+                        'top:0px;left:0px;' +
+                        'height:100%;width:100%;' +
+                        'background:transparent;' +
+                        'overflow:hidden;' +
+                        'visibility:hidden;'
+                );
 
-            con.innerHTML +=
-                '<svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"' +
-                ' style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">' +
-                '<line id="vec" x1="0" y1="0" x2="0" y2="0" stroke="' +
-                vectorLineColour +
-                '" stroke-width="1.5" stroke-dasharray="3,3">' +
-                '</svg>';
+                con.innerHTML +=
+                    '<svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"' +
+                    ' style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">' +
+                    '<line id="vec" x1="0" y1="0" x2="0" y2="0" stroke="' +
+                    vectorLineColour +
+                    '" stroke-width="1.5" stroke-dasharray="3,3">' +
+                    '</svg>';
 
-            d.body.appendChild(con);
+                d.body.appendChild(con);
+            } else {
+                //처음아니라면
+                var con = document.getElementById('newDivSpace');
+                console.log("=============================stay DivSpace==========================");
+                console.log(con);
+                // con.removeChild(d.getElementById('ssazip'));
+            }
 
             function xy(a, s) {
                 return (a * s) / 100;
             }
 
-            function createBall(y, x, nvy, nvx) {
+            function createBall(y, x, idx, nvy, nvx) {
                 // var r = (minRadius + Math.random() * maxRadius) | 0;
                 // r: 알들의 크기
-                var r =50;
-                var ball = d.getElementById('ssazip');
+                var r = 50;
+                // var newball=document.createElement('img');
+                // newball.setAttribute('id',this.)
+                console.log('createBall');
+                console.log(y);
+                console.log(x);
+                console.log(nvy);
+                console.log(nvx);
+                console.log(idx);
+
+                console.log(partList);
+                console.log(partList[idx].partEmail);
+                //이메일을 가지는 엘리먼트로 속성 지정
+                var ball = d.getElementById(`ssazip${partList[idx].partEmail}`);
                 ball.setAttribute(
                     'style',
                     'display:block;' +
@@ -398,14 +343,53 @@ export default {
                     ball.style.visibility = 'visible';
                 }, 50);
 
-                con.appendChild(ball);
-                balls.push(ball);
-                ballAttr(r, y, x, nvy, nvx);
+                console.log("chno")
+
+            var tmp=[1,2,3];
+                console.log('con')
+                console.log(con)
+                console.log('con.childNodes')
+                console.log(con.childNodes)
+                console.log('con.children')
+                console.log(con.children)
+                var list =con.childNodes;
+                console.log(partList[idx].partEmail)
+                console.log(list[0].toString())
+                console.log(tmp.toString())
+                console.log("포함여부를 위한 콘솔");
+                // console.log(document.getElementById(`div#ssazip${partList[idx].partEmail}`).contains(con.childNodes));
+                // if (!con.childNodes.contains(`ssazip${partList[idx].partEmail}`)) {
+                    // console.log(con.hasChildNodes(`div#ssazip${partList[idx].partEmail}`));
+                    console.log('con.children.namedItem(`ssazip${partList[idx].partEmail}`)');
+                    console.log(con.children.namedItem(`ssazip${partList[idx].partEmail}`));
+                    console.log('con.children.namedItem("gravitybtn")');
+                    console.log(con.children.namedItem('gravitybtn'));
+                    // if (document.getElementById(`div#ssazip${partList[idx].partEmail}`).contains(con.children)) {
+                    if (con.children.namedItem(`ssazip${partList[idx].partEmail}`)!=null) {
+                    console.log("있던거네 일단 삭제함요")
+                    console.log("있던거네 일단 패스함요")
+                    console.log(con.children.namedItem(`ssazip${partList[idx].partEmail}`))
+                    // con.removeChild(con.children.namedItem(`ssazip${partList[idx].partEmail}`));
+                    // con.removeChild(ball);
+                }
+                // if (!document.getElementById(`ssazip${partList[idx].partEmail}`).contains(con)) {
+                else{
+                    console.log("공이없다 추가한다링");
+                    con.appendChild(ball);
+                    
+                    console.log('balls');
+                    console.log(balls);
+                    console.log(balls.length);
+                    ballAttr(r, y, x, nvy, nvx);
+                    balls.push(ball);
+                    console.log(balls.length);
+                }
+                // }
             }
 
             // 중력 무중력 조작기
             // var gravCon = d.createElement('div');
-            var gravCon = d.getElementById("gravitybtn");
+            var gravCon = d.getElementById('gravitybtn');
             gravCon.setAttribute(
                 'style',
                 'display: block;' +
@@ -688,9 +672,83 @@ export default {
 
             function start() {
                 win();
-                for (var i = 0; i < numberOfBalls; i++) {
-                    createBall(Math.random() * h, Math.random() * w);
+                // for (var i = 0; i < numberOfBalls; i++) {
+                //     if(document.getElementById(`ssazip${this.participants[i].partEmail}`)){
+                //         document.getElementById(`ssazip${this.participants[i].partEmail}`).remove();
+                //     }
+                // }
+
+                // for (var i = 0; i < numberOfBalls; i++) {
+                    console.log('balls.length');
+                    console.log(balls.length);
+                    console.log('con.childNodes.length');
+                    console.log( (con.childNodes.length)-2);
+                    console.log( (con.childNodes));
+                    console.log('partList.length');
+                    console.log(partList.length);
+                    console.log(partList);
+                    var num=(con.childNodes.length-2);
+                    if(num==0) num= partList.length;
+                for (var i = 0; i < num; i++) {//만들 공 갯수
+                    // if(document.getElementById(`ssazip${this.participants[i].partEmail}`)) continue;
+                    console.log('numberOfBalls');
+                    console.log(i);
+
+                    if(con.childNodes.length!=2&&    con.childNodes.length-2>partList.length){//참가자보다 싸집이들이 많으면 삭제가 필요하다
+                    console.log('con.childNodes');
+                    console.log(con.childNodes);
+                        for(var j=0;j<con.childNodes.length;j++){//기존 싸집이를 돌리면서
+                            console.log('con.childNodes[j]');
+                            console.log(con.childNodes[j]);
+                            if(con.childNodes[j].id=='svg'||con.childNodes[j].id=='gravitybtn'){
+                            console.log('con.childNodes[j]패스');
+                            console.log(con.childNodes[j]);
+                            continue;
+                            }
+                            console.log('partList');
+                            console.log(partList);
+                            var flag=false;
+                            for(var k=0;k<partList.length;k++){//새 참여자 리스트에 있나 없나
+                            console.log('k');
+                            console.log(k);
+                            console.log('partList[k]');
+                            console.log(partList[k].partEmail);
+                            var email=partList[k].partEmail;
+                                if(email==con.childNodes[j].id){//있음 다행
+                                    // balls.pop(j);
+                                    // console.log('balls');
+                                    // console.log(balls);
+                                    // console.log('balls[j].partEmail');
+                                    // console.log(balls[j].partEmail);
+                                    break;
+                                }
+                                if(k==partList.length-1){//다 검사해봤느데 없다?
+                                    console.log("없는데?")
+                                    console.log(con.childNodes[j])
+                                    console.log(con.children[j])
+                                    console.log(con.childNodes[j].id)
+                                    console.log(con.children.namedItem(`${con.childNodes[j].id}`))
+                                    con.removeChild(con.children.namedItem(`${con.childNodes[j].id}`));
+                                    flag=true;
+                                }
+                            }
+                            if(flag) break;
+                        }
+                        return;
+                    }
+
+                    // con.removeChild(ball);
+                    createBall(Math.random() * h, Math.random() * w, i);
                 }
+
+                    // console.log(participants)
+                    // console.log(this.participants)
+                    // console.log(participantsVuex)
+                    // console.log(this.participantsVuex);
+
+                    // console.log(parts)
+                    // createBall(Math.random() * h, Math.random() * w, "123");
+                // }
                 run();
                 d.getElementById('but2').addEventListener(
                     'click',
@@ -737,9 +795,10 @@ export default {
                     false
                 );
             }
+
             start();
 
-            window.addEventListener('load', start, false);
+            //window.addEventListener('load', start, false);
             window.addEventListener('resize', win, false);
             window.addEventListener('scroll', iniscrl, false);
         },

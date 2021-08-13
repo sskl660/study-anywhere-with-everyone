@@ -1,7 +1,7 @@
 <template>
-  <div id="ssazip">
+  <div :id="'ssazip' + sazibi.partEmail">
     <img :src="ssazip_pics[snum]" style="width:50px" >
-    <span style="color:#fff">권희은</span>
+    <span style="color:#fff">{{sazibi.partName}}</span>
   </div>
 </template>
 
@@ -9,8 +9,10 @@
 export default {
   name: 'SmallSSazip',
   props: {
-    idx : Number,
-  },
+    // idx : Number,
+    // idx : [],
+    sazibi:{},
+    },
   data: function (){
     return {
       ssazip_pics: [
@@ -26,7 +28,8 @@ export default {
   },
   methods: {
     getnum: function () {
-      const num = parseInt(this.idx % 6)
+      // const num = parseInt(this.idx % 6)
+      const num = (Math.random() % 6)
       this.snum = num
     }
   },
