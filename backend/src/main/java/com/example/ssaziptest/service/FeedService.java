@@ -87,7 +87,7 @@ public class FeedService {
                     response.setGalaxyComment(feedEntity.getFeedInfo());
                     response.setGalaxyMemberCnt(0);
                     break;
-                //팔로우
+                //팔로잉한 사용자들의 팔로우 활동
                 case 4:
                     response.setFeedType(4);
                     UserEntity userEntity = userRepository.findById(feedEntity.getFeedInfo()).orElse(null);
@@ -103,6 +103,15 @@ public class FeedService {
                     response.setFollowUserName(userEntity.getUserName());
                     response.setFollowerCnt(userEntity.getUserFollower());
                     response.setFollowingCnt(userEntity.getUserFollowing());
+                    break;
+                //상대방이 나를 팔로우
+                case 5:
+                    response.setFeedType(5);
+                    UserEntity userEntity2 = userRepository.findById(feedEntity.getFeedInfo()).orElse(null);
+                    response.setFollowUserEmail(userEntity2.getUserEmail());
+                    response.setFollowUserName(userEntity2.getUserName());
+                    response.setFollowerCnt(userEntity2.getUserFollower());
+                    response.setFollowingCnt(userEntity2.getUserFollowing());
                     break;
             }
             responses.add(response);

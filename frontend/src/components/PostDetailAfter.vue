@@ -147,6 +147,8 @@ export default {
         taskContent: "string",
         taskDesc: "string",
         taskFile: "string",
+        taskFileName: "string",
+        taskFileType: "string",
         taskImage: "string",
         taskIndex: 0,
         taskNo: 0,
@@ -335,11 +337,11 @@ export default {
         .then(({ data }) => {
           console.log("다운로드 통신 성공");
           const url = window.URL.createObjectURL(
-            new Blob([data], { type: "image/png" })
+            new Blob([data], { type: this.task_info.taskFileType })
           );
           const link = document.createElement("a");
           link.href = url;
-          link.setAttribute("download", "ssazip_challenge.png");
+          link.setAttribute("download", this.task_info.taskFileName);
           document.body.appendChild(link);
           link.click();
         })

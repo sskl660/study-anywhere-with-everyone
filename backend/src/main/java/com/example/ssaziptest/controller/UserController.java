@@ -185,10 +185,18 @@ public class UserController {
     public String getByteImg(@PathVariable(name = "useremail") String useremail) throws Exception {
         //Blob blob = fileRepository.getById(fileno).getFileData();
         Blob blob = userRepository.getById(useremail).getUserImage();
-        int bloblength = (int) blob.length();
-        byte[] blobAsBytes = blob.getBytes(1, bloblength);
-        blob.free();
-        return Arrays.toString(blobAsBytes);
+        if(blob!=null){
+            int bloblength = (int) blob.length();
+            byte[] blobAsBytes = blob.getBytes(1, bloblength);
+            blob.free();
+            return Arrays.toString(blobAsBytes);
+        }else {
+            Blob adminblob = userRepository.getById("admin@ssazip.com").getUserImage();
+            int bloblength = (int) adminblob.length();
+            byte[] blobAsBytes = adminblob.getBytes(1, bloblength);
+            adminblob.free();
+            return Arrays.toString(blobAsBytes);
+        }
     }
 
     @ApiOperation(value = "galaxy 입장")
