@@ -12,6 +12,7 @@
         <ChallengeSubmitLeft v-if="ProcessRateArr[5]" :num="this.six" :TaskTotalRate="challTicket[5]"/>
         <ChallengeSubmitRight v-if="ProcessRateArr[6]" :num="this.seven" :TaskTotalRate="challTicket[6]"/>
       </div>
+      <span id="ment" style="font-weight:bold;">모든 사람이 해당 과제를 제출해야 도장이 찍힙니다😉</span>
       <!-- {{challTicket[0].achieveRate}} -->
     </div>
   </div>
@@ -69,5 +70,14 @@ export default {
   height:250px;
   margin-left: 10px;
   margin-top:45px;
+}
+
+#ment{
+  color: white;
+  font-size: 16px;
+  position: absolute;
+  margin-top: 240px;
+  margin-left: 360px;
+  position: fixed;
 }
 </style>

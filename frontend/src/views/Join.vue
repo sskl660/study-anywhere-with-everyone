@@ -84,7 +84,7 @@
         </div>
 
         <h6 v-if="error.userName == 'notValid'" style="color:red">
-          이름의 길이는 1자 이상, 8자 이하입니다.
+          이름의 길이는 1자 이상, 3자 이하입니다.
         </h6>
 
         <div>
@@ -165,10 +165,10 @@ export default {
         userEmail: '',
         userName: '',
         userGraduated: false,
-        userNumber: null,
+        userNumber: '',
         userPassword: '',
         userPasswordConfirm: '',
-        userTerm: null,
+        userTerm: '',
       },
       error: {
         userEmail: false,
@@ -232,8 +232,8 @@ export default {
       // 비밀번호 확인 통과
       else this.error.userPasswordConfirm = true;
 
-      // 이름의 길이가 1자 이상, 8자 이하인가?
-      if (this.credentials.userName.length <= 0 || this.credentials.userName.length > 8) {
+      // 이름의 길이가 1자 이상, 3자 이하인가?
+      if (this.credentials.userName.length <= 0 || this.credentials.userName.length > 3) {
         this.error.userName = 'notValid';
         return;
       }

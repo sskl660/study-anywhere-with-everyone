@@ -1,8 +1,8 @@
 <template>
-  <div class="profileticket" style="display: inline-block; d-flex">
-    <div class="ticket-container d-flex">
+  <div class="profileticket profile-ticket-scale" style="display: inline-block; d-flex">
+    <div class="ticket-container d-flex" @click="profileToChallenge()">
       <div class="ticket-left" style="display: inline-block">
-        <div  @click="profileToChallenge()" class="ticket-title">{{this.ticket.challengeName}}</div>
+        <div class="ticket-title">{{this.ticket.challengeName}}</div>
         <div class="ticket-rate">{{this.ticket.achieveRate}}%</div>
       </div>
       <!-- 티켓 오른쪽 부분 -->
@@ -160,5 +160,21 @@ export default {
   width:400px;
   height: 330px;
 }
+.profile-ticket-scale {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
 
+.profile-ticket-scale:hover {
+  transform: scale(1.05);
+  -webkit-transform: scale(1.);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}
 </style>

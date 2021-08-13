@@ -1,44 +1,24 @@
 <template>
-    <div >
-        <div 
-            style="display:block;position:absolute;top:0px;left:0px;height:100%;width:100%;background:transparent;overflow:hidden;visibility:hidden;"
-        >
+    <div>
+        <div style="display:block;position:absolute;top:0px;left:0px;height:100%;width:100%;background:transparent;overflow:hidden;visibility:hidden;">
             <!-- <svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">
-            <line id="vec" x1="0" y1="0" x2="0" y2="0" stroke="#ff0000" stroke-width="1.5" stroke-dasharray="3,3">
-            </line>
-        </svg>
-        <div style="display: block;position: fixed;margin: 4px;top:0;right:0;border-radius:5px;height: 30px;width: 130px;padding: 5px;background-color:#ee0000;text-align: center;font: italic bold 16px verdana;color: #fff;line-height: 30px;letter-spacing: 0.5px;cursor:default;z-index: 1000;-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;visibility:visible;">
-                Gravity 
-            <input type="radio" style="cursor:pointer;" name="c" id="but1" checked="">
-            <input type="radio" style="cursor:pointer;" name="c" id="but2">
-        </div> -->
-            <SmallSSazip />
-
-            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
-            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
-            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
-            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
-            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
-            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
-            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
-            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
-            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
-            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
-            <img id="ssazip" class="ssazip" src="@/assets/ssazip.png" />
-            <!-- <div id="ssazip" class="ssazip" ></div>
-        <div id="ssazip" class="ssazip" ></div>
-        <div id="ssazip" class="ssazip" ></div> -->
-
-            <!-- <div class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(58.3333px, 71.3118px, 0px) rotate(22.5deg); visibility: visible;"></div>
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(0.919939px, 883.738px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(0.733644px, 527.097px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(35.2363px, 428.654px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(12.3529px, 664.658px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(85.9478px, 172.158px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(37.6068px, 604.655px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(28.6233px, 806.046px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip"  style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(22.3951px, 737.06px, 0px) rotate(22.5deg); visibility: visible;" >
-        <img class="ssazip" style="display: block; position: absolute; height: 50px; width: 50px; top: 0px; left: 0px; border-radius: 50%; box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0.5px 0.5px inset, rgba(0, 0, 0, 0.4) 0px -12.5px 25px inset; opacity: 1; transform: translate3d(73.7086px, 846.587px, 0px) rotate(22.5deg); visibility: visible;" > -->
+                <line id="vec" x1="0" y1="0" x2="0" y2="0" stroke="#ff0000" stroke-width="1.5" stroke-dasharray="3,3">
+                </line>
+            </svg> -->
+            <!-- <div id="gravitybtn" style="display: block;position: fixed;margin: 4px;top:0;right:0;border-radius:5px;height: 30px;width: 130px;padding: 5px; background-color:#fff;text-align: center;font: italic bold 16px verdana;color: #fff;line-height: 30px;letter-spacing: 0.5px;cursor:default;z-index: 1000;-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;visibility:visible;"> -->
+            <div id="gravitybtn">
+                    Gravity 
+                <input type="radio"  name="c" id="but1" checked="">
+                <input type="radio" style="cursor:pointer;" name="c" id="but2">
+            </div>
+            <div v-for="(idx, ssazip_num) in temp_galaxy_data" :key=" ssazip_num">
+                <SmallSSazip :idx="idx"/>
+            </div>   
+            <!-- <img id="ssazip" src="@/assets/ssazip.png" style="width:50px" >   -->
+            <div id="ssazip">
+                <img  src="@/assets/ssazip.png" style="width:80px; height:80px" >
+                <span style="color:#fff;"><i class="fas fa-star"></i>나<i class="fas fa-star"></i></span>
+            </div>
         </div>
     </div>
 </template>
@@ -46,12 +26,16 @@
 <script>
 import SmallSSazip from '@/components/galaxy/SmallSSazip.vue';
 // import gravity from "@/components/temporary/gravity.js"
-// import $ from 'jquery';
 
 export default {
     name: 'SSazip',
     components: {
         SmallSSazip,
+    },
+    data: function(){
+        return {
+            temp_galaxy_data: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+        }
     },
     giveme: null,
     ccc:null,
@@ -63,8 +47,8 @@ export default {
         Straight JavaScript!
         kurt.grigg@yahoo.co.uk
         */
-            var numberOfBalls = 10;
-            var ballVelocity = 2;
+            var numberOfBalls = 50;
+            var ballVelocity = 2; //2
             var ballHardness = 0.85;
             var wallHardness = 0.5;
             var floorHardness = 0.6;
@@ -180,8 +164,11 @@ export default {
                 var ddh = d.documentElement.clientHeight;
                 var scrollBarRight = typeof ddw == 'number' ? window.innerWidth - ddw : 0;
                 var scrollBarBottom = typeof ddh == 'number' ? window.innerHeight - ddh : 0;
+                // 채팅방 가리지 않게 만들기
                 h = window.innerHeight - scrollBarBottom - 1;
-                w = window.innerWidth - scrollBarRight - 1;
+                w = window.innerWidth - scrollBarRight - 500;
+                // h = window.innerHeight - scrollBarBottom - 1;
+                // w = window.innerWidth - scrollBarRight - 1;
             }
 
             var con = d.createElement('div');
@@ -212,9 +199,9 @@ export default {
             }
 
             function createBall(y, x, nvy, nvx) {
-                var r = (minRadius + Math.random() * maxRadius) | 0;
+                // var r = (minRadius + Math.random() * maxRadius) | 0;
                 // r: 알들의 크기
-                // var r =50;
+                var r =50;
                 var ball = d.getElementById('ssazip');
                 ball.setAttribute(
                     'style',
@@ -275,22 +262,24 @@ export default {
                 ballAttr(r, y, x, nvy, nvx);
             }
 
-            var gravCon = d.createElement('div');
+            // 중력 무중력 조작기
+            // var gravCon = d.createElement('div');
+            var gravCon = d.getElementById("gravitybtn");
             gravCon.setAttribute(
                 'style',
                 'display: block;' +
                     'position: fixed;' +
                     'margin: 4px;' +
-                    'top:0;right:0;' +
+                    'top:35px; left:450px;' +
                     'border-radius:5px;' +
-                    'height: 30px;' +
+                    'height: 45px;' +
                     'width: 130px;' +
                     'padding: 5px;' +
-                    'background-color:#ee0000;' +
+                    'background-color:#F1C069;' +
                     'text-align: center;' +
                     'font: italic bold 16px verdana;' +
-                    'color: #fff;' +
-                    'line-height: 30px;' +
+                    'color: #1C84C4;' +
+                    'line-height: 35px;' +
                     'letter-spacing: 0.5px;' +
                     'cursor:default;' +
                     'z-index: 1000;' +
@@ -299,7 +288,7 @@ export default {
             );
 
             gravCon.innerHTML =
-                'Gravity <input type="radio" style="cursor:pointer;" name="c" id="but1" checked>' +
+                '중력 ON!!! <input type="radio" style="cursor:pointer;" name="c" id="but1" checked>' +
                 '<input type="radio" style="cursor:pointer;"name="c" id="but2">';
 
             con.appendChild(gravCon);
@@ -624,6 +613,9 @@ export default {
 </script>
 
 <style>
+.banana {
+    background-image: url(/img/ssazip.43ffb363.png);
+}
 /* Nothing here needed for app */
 
 /* html{

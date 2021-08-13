@@ -3,6 +3,7 @@
 <template>
   <div id="ds" class="">
     <SSazip id="asd"/>
+    <SSazipRank id="galaxyRank"/>
     <div class="">
       <div><ChatTab /></div>
     </div>
@@ -15,7 +16,8 @@
 <script>
 import Chat from '@/components/galaxy/Chat.vue';
 import ChatTab from '@/components/galaxy/ChatTab.vue';
-import SSazip from '@/components/galaxy/SSazip.vue'
+import SSazip from '@/components/galaxy/SSazip.vue';
+import SSazipRank from '@/components/galaxy/SSazipRank.vue';
 
 export default {
   name: 'Galaxy',
@@ -23,12 +25,19 @@ export default {
     Chat,
     ChatTab,
     SSazip,
+    SSazipRank,
   },
       beforeRouteLeave(to, from, next) {
         document.getElementById('newDivSpace').remove();
         //document.getElementById('newDivSpace').remove();
         next();
     },
+  // methods:{
+  //   createSSazipContainer: function () {
+  //     const SSazipCon = document.getElementById('newDivSpace')
+  //     SSazipCon.style = "width:500px;"
+  //   }
+  // }
   // updated: function() {
   //   this.$router.go()
   // }
