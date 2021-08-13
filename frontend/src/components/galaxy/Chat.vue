@@ -2,6 +2,40 @@
 <!-- 채팅창 CSS 입히기-->
 <template>
   <div>
+    <div class="participantList" id="participantbox">
+
+        <span class="dropdown">
+              <div class="drop-list-title" style="">참여자 목록</div>
+              <div class="drop-list">
+                <div v-for="user in this.participants" :key="user">
+                  <div class="image-box" @click="toProfile(user.partEmail)">
+                    <div class="content">{{ user.partTerm }} 기 {{ user.partName }}</div>
+                  </div>
+                </div>
+                <!-- <p>3기 김예시</p>
+                 <p>3기 김예시</p>
+                  <p>3기 김예시</p>
+                   <p>3기 김예시</p>
+                    <p>3기 김예시</p>
+                     <p>3기 김예시</p>
+                      <p>3기 김예시</p>
+                       <p>3기 김예시</p>
+                        <p>3기 김예시</p>
+                         <p>3기 김예시</p>
+                          <p>3기 김예시</p>
+                           <p>3기 김예시</p>
+                            <p>3기 김예시</p>
+                             <p>3기 김예시</p>
+                              <p>3기 김예시</p>
+                               <p>3기 김예시</p>
+                                <p>3기 김예시</p>
+                                 <p>3기 김예시</p>
+                                  <p>3기 김예시</p> -->
+              </div>
+            <!-- </ul> -->
+          </span>
+
+      </div>
     <div>
       <div v-if="chatType == 'algo'">
         <!-- <div class="dropdown">
@@ -24,7 +58,8 @@
           </div> -->
         <div id="roomNameAlgo">
           <h3 style="color:white">Algo 채팅방 입니다.</h3>
-          <span class="dropdown" id="participant">
+          <span id="participant">{{ this.participants.length }} 명 참여 중</span>
+          <!-- <span class="dropdown" id="participant">
             <button
               class="btn pt-0 pb-0"
               style="height:30px; text-align:center; font-weight:bold; color:white; "
@@ -34,8 +69,8 @@
               aria-expanded="false"
             >
               {{ this.participants.length }} 명 참여 중
-            </button>
-            <ul
+            </button> -->
+            <!-- <ul
               class="dropdown-menu text-center"
               style=" background-color: rgba(255,255,255,0.5);     border-radius: 15px;
 "
@@ -44,16 +79,13 @@
               <div class="drop-list-title" style="">참여자 목록</div>
               <div class="drop-list">
                 <div v-for="user in this.participants" :key="user">
-                  <!-- <li style="border-bottom:0.5px solid gray" @click="toProfile(user.partEmail)">
-                                        {{ user.partTerm }} 기 {{ user.partName }}
-                                    </li> -->
                   <li class="image-box" @click="toProfile(user.partEmail)">
                     <div class="content">{{ user.partTerm }} 기 {{ user.partName }}</div>
                   </li>
                 </div>
               </div>
-            </ul>
-          </span>
+            </ul> -->
+          <!-- </span> -->
         </div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesAlgo" :key="index">
@@ -84,38 +116,7 @@
       <div v-else-if="chatType == 'cs'">
         <div id="roomNameCS">
           <h3 style="color:white">CS 채팅방 입니다.</h3>
-          <!-- <span id="participant">{{ this.participants.length }} 명 참여 중</span> -->
-          <!-- 추가부분 -->
-          <span class="dropdown" id="participant">
-            <button
-              class="btn pt-0 pb-0"
-              style="height:30px; text-align:center; font-weight:bold; color:white; "
-              type="button"
-              id="dropdownMenuButton2"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              {{ this.participants.length }} 명 참여 중
-            </button>
-            <ul
-              class="dropdown-menu text-center"
-              style=" background-color: rgba(255,255,255,0.5);  border-radius: 15px;"
-              aria-labelledby="dropdownMenuButton2"
-            >
-              <div class="drop-list-title" style="">참여자 목록</div>
-              <div class="drop-list">
-                <div v-for="user in this.participants" :key="user">
-                  <!-- <li style="border-bottom:0.5px solid gray" @click="toProfile(user.partEmail)">
-                                        {{ user.partTerm }} 기 {{ user.partName }}
-                                    </li> -->
-                  <li class="image-box" @click="toProfile(user.partEmail)">
-                    <div class="content">{{ user.partTerm }} 기 {{ user.partName }}</div>
-                  </li>
-                </div>
-              </div>
-            </ul>
-          </span>
-          <!-- 추가부분 -->
+          <span id="participant">{{ this.participants.length }} 명 참여 중</span>
         </div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesCS" :key="index">
@@ -143,38 +144,7 @@
       <div v-else>
         <div id="roomNameJob">
           <h3 style="color:white">Job 채팅방 입니다.</h3>
-          <!-- <span id="participant">{{ this.participants.length }} 명 참여 중</span> -->
-          <!-- 추가부분 -->
-          <span class="dropdown" id="participant">
-            <button
-              class="btn pt-0 pb-0"
-              style="height:30px; text-align:center; font-weight:bold; color:white; "
-              type="button"
-              id="dropdownMenuButton2"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              {{ this.participants.length }} 명 참여 중
-            </button>
-            <ul
-              class="dropdown-menu text-center"
-              style=" background-color: rgba(255,255,255,0.5);  border-radius: 15px;"
-              aria-labelledby="dropdownMenuButton2"
-            >
-              <div class="drop-list-title" style="">참여자 목록</div>
-              <div class="drop-list">
-                <div v-for="user in this.participants" :key="user">
-                  <!-- <li style="border-bottom:0.5px solid gray" @click="toProfile(user.partEmail)">
-                                        {{ user.partTerm }} 기 {{ user.partName }}
-                                    </li> -->
-                  <li class="image-box" @click="toProfile(user.partEmail)">
-                    <div class="content">{{ user.partTerm }} 기 {{ user.partName }}</div>
-                  </li>
-                </div>
-              </div>
-            </ul>
-          </span>
-          <!-- 추가부분 -->
+          <span id="participant">{{ this.participants.length }} 명 참여 중</span>
         </div>
         <div id="roomBox">
           <div v-for="(obj, index) in receivedMessagesJob" :key="index">
@@ -546,12 +516,13 @@ input:focus {
 }
 
 #participant {
-  font-size: 19px;
+  font-size: 18px;
   position: absolute;
   margin-top: -99px;
   margin-left: 121px;
   position: fixed;
   color: white;
+  font-weight: bold;
 }
 
 /* 목록호버링을 위한 */
@@ -561,7 +532,7 @@ input:focus {
   /* padding: 20px; */
   padding: 3%;
   /* background: skyblue; */
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   position: relative;
   cursor: pointer;
 }
@@ -583,20 +554,21 @@ input:focus {
   position: relative;
   z-index: 2;
   background: none;
+  font-weight: bold;
 }
 .image-box .content::after,
 .image-box .content::before {
-  content: '';
+  /* content: '';
   display: block;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 0%;
-  height: 0%;
+  height: 0%; */
   border-color: rgb(46, 45, 100);
-  border-width: 1px;
-  transition: 0.5s;
+  /* border-width: 1px;
+  transition: 0.5s; */
 }
 .image-box .content::after {
   height: 100%;
@@ -655,6 +627,38 @@ a {
   transition: all 0.2s ease;
 }
 
+.participantList{
+  position: absolute;
+  margin-left: -170px;
+}
+
+#participantbox{
+    background-color: rgba(255,255,255,0.2);
+    padding-right: 17px;
+    padding-left: 17px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 20px;
+    max-height: 770px;
+
+}
+.drop-list-title{
+  background-color: #F1C069;
+  border-radius: 33px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.drop-list{
+  border-radius: 10px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-left: 0px;
+  max-height: 700px;
+  overflow: scroll;
+}
 /* .link-6 a:hover {
   -webkit-transform: scale(1.05);
      -moz-transform: scale(1.05);
