@@ -6,7 +6,16 @@
       <!-- @process="print" -->
       <!-- :is-open-new-tab="getIsOpenNewTab" -->
 
-      <quick-menu
+      <QuickMenu
+        :menu-count="count"
+        :icon-class="icons"
+        :menu-url-list="list"
+        :background-color="backgroundColor"
+        :color="color"
+        :position="position"
+      />
+
+      <!-- <quick-menu
         :menu-count="count"
         :icon-class="icons"
         :menu-url-list="list"
@@ -14,13 +23,14 @@
         :color="color"
         :position="position"
       >
-      </quick-menu>
+      </quick-menu> -->
     </div>
   </div>
 </template>
 
 <script>
-import quickMenu from 'vue-quick-menu';
+// import quickMenu from 'vue-quick-menu';
+import QuickMenu from '@/components/header/QuickMenu'
 import { mapGetters } from 'vuex';
 export default {
   name: 'Navbar',
@@ -41,8 +51,14 @@ export default {
       isOpenNewTab: false,
     };
   },
+  methods: {
+    one: function () {
+      console.log(1)
+    }
+  },
   components: {
-    quickMenu: quickMenu,
+    // quickMenu: quickMenu,
+    QuickMenu
   },
   computed: {
     ...mapGetters(['isLogin']),
@@ -84,8 +100,8 @@ export default {
       position: absolute;
       left: 0px;
       top: 0px;
-      width: 60px;
-      height: 60px;
+      width: 65px;
+      height: 65px;
       -webkit-transform: rotate(180deg);
       -moz-transform: rotate(180deg);
       -ms-transform: rotate(180deg);
@@ -102,9 +118,9 @@ export default {
         height: 4.5px !important;
         background: #1f4256 !important;
         position: absolute;
-        top: 35%;
+        top: 40%;
         margin-top: -1.5px;
-        left: 16px;
+        left: 21px;
         -webkit-transform-origin: 0% 50%;
         -moz-transform-origin: 0% 50%;
         -ms-transform-origin: 0% 50%;
@@ -157,7 +173,6 @@ export default {
         outline: none;
         font-size: 30px;
         margin-top: 12px;
-        // background:transparent;
         color: #1f4256;
         &:before {
           vertical-align: middle;

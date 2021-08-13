@@ -63,7 +63,7 @@ const routes = [
     name: 'PostDetailAfter',
     component: PostDetailAfter,
     // true로 설정하면 데이터를 props로도 받습니다.
-    props: true
+    props: true,
   },
   {
     path: '/EPeacefulWorld',
@@ -80,14 +80,6 @@ const routes = [
   //   name: 'SSazip',
   //   component: SSazip,
   // },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
 ];
 
 const router = new VueRouter({
@@ -97,3 +89,16 @@ const router = new VueRouter({
 });
 
 export default router;
+
+router.beforeEach(function (to, from, next) {
+  // 1. JWT 토큰을 가져온다.
+  const token = localStorage.getItem('jwt'); 
+  // 2. JWT 토큰이 있거나, 웰컴 페이지이거나, 회원가입 페이지일 경우에는 접근 가능
+  // 3. 이외의 경우에는 로그인해야 접근 가능. 토큰이 없으면 경고창을 띄운 뒤 웰컴 페이지로 이동.
+  if (token || to.name === 'Welcome' ||  to.name === 'Join') {
+    next();
+  } else {
+    alert('로그인 해주세요!');
+    next('/')
+  }
+});

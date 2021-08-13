@@ -27,7 +27,7 @@
                         <router-link to="/join"><ButtonRound text="Join"/></router-link>
                     </div>
                 </div>
-                <!-- <div><GalaxyEntranceModal/></div> -->
+                <div><GalaxyEntranceModal/></div>
             </div>
         </div>
     </div>
@@ -37,14 +37,14 @@
 import ButtonRound from '@/components/common/ButtonRound';
 import LoginModal from '@/components/welcome/LoginModal';
 import '@/views/css/welcome.css';
-// import GalaxyEntranceModal from '@/components/galaxy/GalaxyEntrance';
+import GalaxyEntranceModal from '@/components/galaxy/GalaxyEntrance';
 import { mapGetters } from 'vuex';
 export default {
     name: 'Welcome',
     components: {
         ButtonRound, // 둥근 버튼을 가져옴
         LoginModal, // 로그인 모달을 가져옴
-        // GalaxyEntranceModal,
+        GalaxyEntranceModal,
     },
     methods: {
         //로그인 상태라면 챌린지(임시) 페이지로 이동
