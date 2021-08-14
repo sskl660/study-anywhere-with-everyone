@@ -12,27 +12,7 @@
                     <div class="content">{{ user.partTerm }} 기 {{ user.partName }}</div>
                   </div>
                 </div>
-                <!-- <p>3기 김예시</p>
-                 <p>3기 김예시</p>
-                  <p>3기 김예시</p>
-                   <p>3기 김예시</p>
-                    <p>3기 김예시</p>
-                     <p>3기 김예시</p>
-                      <p>3기 김예시</p>
-                       <p>3기 김예시</p>
-                        <p>3기 김예시</p>
-                         <p>3기 김예시</p>
-                          <p>3기 김예시</p>
-                           <p>3기 김예시</p>
-                            <p>3기 김예시</p>
-                             <p>3기 김예시</p>
-                              <p>3기 김예시</p>
-                               <p>3기 김예시</p>
-                                <p>3기 김예시</p>
-                                 <p>3기 김예시</p>
-                                  <p>3기 김예시</p> -->
               </div>
-            <!-- </ul> -->
           </span>
 
       </div>
@@ -180,6 +160,7 @@
         />&nbsp;
       </div>
     </div>
+    <SSazipRank id="galaxyRank" :ranker="ranker" />
   </div>
 </template>
 
@@ -189,9 +170,13 @@ import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { mapGetters } from 'vuex';
 import { chatURL } from '@/util/http-common.js';
+import SSazipRank from '@/components/galaxy/SSazipRank.vue';
 
 export default {
   name: 'App',
+  components:{
+    SSazipRank
+  },
   data() {
     return {
       enterMessage: [],

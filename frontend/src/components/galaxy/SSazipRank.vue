@@ -2,15 +2,12 @@
   <div class="SSazipRank" style="display: inline-block; d-flex">
     <div class="ssazipRank-container d-flex">
         <div class="TopFive d-flex" style="display: inline-block">
-            <img id="oneTop" src="~@/assets/ssazip_purple.png" alt="">
-            <img id="one" src="~@/assets/onetop.png" alt="">
-            <img id="oneKing" src="~@/assets/kingone.png" alt="">
-
-
-            <!-- <div class="rank-star-left-one" style="color:#F9D479">1</div> -->
+            <img id="oneTop" src="~@/assets/topone.png" alt="">
+            <!-- <img id="one" src="~@/assets/onetop.png" alt="">
+            <img id="oneKing" src="~@/assets/kingone.png" alt=""> -->
 
             <div class="rank-star-left-one">
-                <ul>
+                <ul id="shiny">
                     <li></li>
                     <li></li>
                     <li></li>
@@ -21,14 +18,12 @@
                 </ul>
             </div>
 
-            <img id="twoTop" src="~@/assets/ssazip_mint.png" alt="">
-            <img id="two" src="~@/assets/twotop.png" alt="">
-            <img id="twoKing" src="~@/assets/kingtwo.png" alt="">
-
-            <!-- <div class="rank-star-right-one" style="color:#F9D479">1</div> -->
+            <img id="twoTop" src="~@/assets/toptwo.png" alt="">
+            <!-- <img id="two" src="~@/assets/twotop.png" alt="">
+            <img id="twoKing" src="~@/assets/kingtwo.png" alt=""> -->
 
             <div class="rank-star-right-one">
-                <ul>
+                <ul id="shiny">
                     <li></li>
                     <li></li>
                     <li></li>
@@ -39,14 +34,12 @@
                 </ul>
             </div>
 
-            <img id="threeTop" src="~@/assets/ssazip_red.png" alt="">
-            <img id="three" src="~@/assets/threetop.png" alt="">
-            <img id="threeKing" src="~@/assets/kingthree.png" alt="">
-
-            <!-- <div class="rank-star-left-two" style="color:#F9D479">1</div> -->
+            <img id="threeTop" src="~@/assets/topthree.png" alt="">
+            <!-- <img id="three" src="~@/assets/threetop.png" alt=""> -->
+            <!-- <img id="threeKing" src="~@/assets/kingthree.png" alt=""> -->
 
             <div class="rank-star-left-two">
-                <ul>
+                <ul id="shiny">
                     <li></li>
                     <li></li>
                     <li></li>
@@ -57,13 +50,11 @@
                 </ul>
             </div>
 
-            <img id="fourTop" src="~@/assets/ssazip_yellow.png" alt="">
-            <img id="fourKing" src="~@/assets/kingfour.png" alt="">
-            
-            <!-- <div class="rank-star-right-two" style="color:#F9D479">1</div> -->
+            <img id="fourTop" src="~@/assets/topfour.png" alt="">
+            <!-- <img id="fourKing" src="~@/assets/kingfour.png" alt=""> -->
 
             <div class="rank-star-right-two">
-                <ul>
+                <ul id="shiny">
                     <li></li>
                     <li></li>
                     <li></li>
@@ -74,37 +65,41 @@
                 </ul>
             </div>
 
-            <img id="fiveTop" src="~@/assets/ssazip_orange.png" alt="">
-            <img id="fiveKing" src="~@/assets/kingfive.png" alt="">
+            <img id="fiveTop" src="~@/assets/topfive.png" alt="">
+            <!-- <img id="fiveKing" src="~@/assets/kingfive.png" alt=""> -->
+        </div>
+        <div>
+            <div id="first" v-if="ranker[0]"><span>{{this.ranker[0].partName}}</span></div>
+            <div id="second" v-if="ranker[1]"><span>{{this.ranker[1].partName}}</span></div>
+            <div id="third" v-if="ranker[2]"><span>{{this.ranker[2].partName}}</span></div>
+            <div id="forth" v-if="ranker[3]"><span>{{this.ranker[3].partName}}</span></div>
+            <div id="fifth" v-if="ranker[4]"><span>{{this.ranker[4].partName}}</span></div>
         </div>
     </div>
   </div>
 </template>
 
-<script>
+<script scoped>
 export default {
   name: 'SSazipRank',
   props: {
-    // challTicket:{type : Array},
-    // ProcessRateArr:{type : Array},
+    ranker:{
+        type : Array
+    }
   },
   data: function () {
     return {
         
     }
   },
-  components :{
-    
-  },
   methods:{
       printt: function(){
           console.log('안녕')
-          console.log(this.challTicket)
-          console.log(this.ProcessRateArr)
+          console.log(this.ranker)
       }
   },
   created: function() {
-      // this.printt();
+      this.printt();
   },
 }
 </script>
@@ -123,16 +118,22 @@ export default {
   margin-top:45px;
 } */
 
-.TopFive.d-flex{
-    /* position: relative; */
+/* galaxy.vue에서 컴포넌트 만들때 */
+/* .TopFive.d-flex{
     padding-top: 300px;
     margin-left: -700px;
+    position: relative;
+} */
+
+.TopFive.d-flex{
+    padding-top: 125px;
+    margin-left: -1400px;
     position: relative;
 }
 
 #oneTop{
-    width: 123px;
-    height: 140px;
+    width: 125px;
+    height: 180px;
     margin-left: 20px;
     margin-top: 30px;
     transform:rotate(20deg);
@@ -140,34 +141,41 @@ export default {
 }
 
 #twoTop{
-    width: 115px;
-    height: 130px;
-    margin-top: -120px;
-    margin-left: 60px;
+    width: 117px;
+    height: 150px;
+    /* margin-top: -120px;
+    margin-left: 60px; */
+    margin-top: -140px;
+    margin-left: 80px;
     transform:rotate(20deg);
     filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
 }
 
 #threeTop{
-    width: 95px;
+    /* width: 95px;
     height: 119px;
+    margin-top: 100px;
+    transform:rotate(20deg);
+    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0)); */
+    width: 97px;
+    height: 135px;
     margin-top: 100px;
     transform:rotate(20deg);
     filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
 }
 
 #fourTop{
-    width: 99px;
+    width: 90px;
     height: 110px;
-    margin-top: -30px;
-    margin-left: 65px;
+    margin-top: -25px;
+    margin-left: 68px;
     transform:rotate(20deg);
     filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
 }
 
 #fiveTop{
-    width: 90px;
-    height: 100px;
+    width: 85px;
+    height: 102px;
     margin-top: 190px;
     transform:rotate(20deg);
     filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
@@ -181,18 +189,6 @@ export default {
     z-index: -1;
 }
 
-/* .rank-star-left-one {
-    width: 5px;
-    height: 128px;
-    background-color: #f9d479;
-    transform: rotate(53deg);
-    position: relative;
-    top: -40px;
-    left: 29px;
-    z-index: -1;
-    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
-} */
-
 .rank-star-left-two {
     transform: rotate(-40deg);
     position: relative;
@@ -200,17 +196,6 @@ export default {
     left: 32px;
     z-index: -1;
 }
-/* .rank-star-left-two {
-    width: 5px;
-    height: 120px;
-    background-color: #f9d479;
-    transform: rotate(53deg);
-    position: relative;
-    top: 30px;
-    left: 32px;
-    z-index: -1;
-    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
-} */
 
 .rank-star-right-one {
     transform: rotate(65deg);
@@ -220,39 +205,15 @@ export default {
     z-index: -1;
 }
 
-/* .rank-star-right-one {
-    width: 5px;
-    height: 145px;
-    background-color: #f9d479;
-    transform: rotate(-24deg);
-    position: relative;
-    top: -5px;
-    left: -10px;
-    z-index: -1;
-    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
-} */
-
 .rank-star-right-two {
     transform: rotate(65deg);
     position: relative;
-    top: -35px;
-    left: -22px;
+    top: -15px;
+    left: -15px;
     z-index: -1;
 }
 
-/* .rank-star-right-two {
-    width: 5px;
-    height: 169px;
-    background-color: #f9d479;
-    transform: rotate(-24deg);
-    position: relative;
-    top: 63px;
-    left: -10px;
-    z-index: -1;
-    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
-} */
-
-#one{
+/* #one{
     position: absolute;
     width: 62px;
     height: 67px;
@@ -260,9 +221,9 @@ export default {
     margin-left: 65px;
     transform:rotate(20deg);
     filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
-}
+} */
 
-#two{
+/* #two{
     position: absolute;
     width: 52px;
     height: 62px;
@@ -270,8 +231,7 @@ export default {
     margin-left: 260px;
     transform:rotate(20deg);
     filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
-    /* z-index: 5; */
-}
+} */
 
 #three{
     position: absolute;
@@ -283,7 +243,7 @@ export default {
     filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
 }
 
-#oneKing{
+/* #oneKing{
     position: absolute;
     width: 80px;
     height: 80px;
@@ -291,8 +251,8 @@ export default {
     margin-left: 75px;
     transform:rotate(20deg);
     filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
-}
-
+} */
+/* 
 #twoKing{
     position: absolute;
     width: 65px;
@@ -301,7 +261,7 @@ export default {
     margin-left: 255px;
     transform:rotate(20deg);
     filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
-}
+} */
 
 #threeKing{
     position: absolute;
@@ -333,7 +293,7 @@ export default {
     filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
 }
 
-ul{
+#shiny {
   position:absolute;
   top:50%;
   left:50%;
@@ -343,7 +303,7 @@ ul{
   display:flex;
   
 }
-ul li{
+#shiny li{
   list-style:none;
   width:40px;
   height:40px;
@@ -363,46 +323,117 @@ ul li{
     }
   }
 
-ul li:nth-child(1){
+#shiny li:nth-child(1){
   animation-delay:-1.4s;
   background:#ffff00;
   box-shadow:0 0 50px #ffff00;
   
 }
-ul li:nth-child(2){
+#shiny li:nth-child(2){
   animation-delay:-1.2s;
   background:#76ff03;
   box-shadow:0 0 50px #76ff03;
   
 }
-ul li:nth-child(3){
+#shiny li:nth-child(3){
   animation-delay:-1s;
   background:#f06292;
   box-shadow:0 0 50px #f06292;
   
 }
-ul li:nth-child(4){
+#shiny li:nth-child(4){
   animation-delay:-0.8s;
   background:#4fc3f7;
   box-shadow:0 0 50px #4fc3f7;
   
 }
-ul li:nth-child(5){
+#shiny li:nth-child(5){
   animation-delay:-0.6s;
   background:#ba68c8;
   box-shadow:0 0 50px #ba68c8;
   
 }
-ul li:nth-child(6){
+#shiny li:nth-child(6){
   animation-delay:-0.4s;
   background:#f57c00;
   box-shadow:0 0 50px #f57c00;
   
 }
-ul li:nth-child(7){
+#shiny li:nth-child(7){
   animation-delay:-0.2s;
   background:#673ab7;
   box-shadow:0 0 50px #673ab7;
   
+}
+
+#first{
+    /* position: absolute;
+    margin-left: -645px;
+    margin-top: 285px;
+    transform:rotate(20deg);
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0)); */
+    position: absolute;
+    margin-left: -655px;
+    margin-top: 324px;
+    transform:rotate(20deg);
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
+}
+
+#second{
+    /* position: absolute;
+    margin-left: -440px;
+    margin-top: 135px;
+    transform:rotate(20deg);
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0)); */
+    position: absolute;
+    margin-left: -445px;
+    margin-top: 130px;
+    transform:rotate(20deg);
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
+}
+
+#third{
+    position: absolute;
+    margin-left: -355px;
+    margin-top: 350px;
+    transform:rotate(20deg);
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
+}
+
+#forth{
+    position: absolute;
+    margin-left: -175px;
+    margin-top: 205px;
+    transform:rotate(20deg);
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
+}
+
+#fifth{
+    position: absolute;
+    margin-left: -90px;
+    margin-top: 410px;
+    transform:rotate(20deg);
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
 }
 </style>

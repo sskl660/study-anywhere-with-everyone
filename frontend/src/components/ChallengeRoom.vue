@@ -47,7 +47,7 @@
                             <!-- 블렛 저널 테이블 바디 -->
                             <tbody>
                                 <tr v-for="(person, index) in chall_info.challengeGroup" :key="person">
-                                    <th scope="row" style="background-color: #b7beda">{{ person[1] }}</th>
+                                    <th scope="row" style="background-color: #b7beda"><span class="namepoint">{{ person[1] }}</span></th>
                                     <td v-for="taskIdx in chall_info.challengeTaskCnt" :key="taskIdx">
                                         <!-- 내가 제출 할 수 있는 아이들 -->
                                         <router-link
@@ -527,5 +527,22 @@ th {
 #levelstar {
     width: 45px;
     height: 45px;
+}
+
+th{
+    position: relative;
+    /* display: inline-block; */
+}
+
+.namepoint{
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 0; */
+    /* transform: translateY(-50%); */
+    /* width: 50%; */
+    /* font-size: 25px; */
+    /* color: #ffffff; */
+    /* font-weight: 900; */
+    text-align: center;
 }
 </style>

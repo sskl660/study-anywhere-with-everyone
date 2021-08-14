@@ -99,4 +99,5 @@ export default {
     background-color: #1c84c4;
     border-color: #1c84c4;
 }
+
 </style>
