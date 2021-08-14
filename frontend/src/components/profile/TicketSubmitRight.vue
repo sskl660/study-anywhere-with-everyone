@@ -10,10 +10,10 @@ export default {
   name: 'TicketSubmitRight',
   props: {
     num: {
-      type: String,
+      type: Number,
     },
     ticketTask: {
-      type: Object,
+      type: Number,
     }
   },
   methods: {

@@ -5,8 +5,8 @@
       <Logout/>
     </div>
     <div class="d-flex" style="position:relative; z-index:2; width:1750px">
-      <div v-if="isLogin" class="greeting" style="display:inline-block;">{{this.userName}}님 환영합니다</div>
-      <div v-else class="greeting2" style="display:inline-block;">SSazip에 오신 것을 환영합니다</div>
+      <!-- <div v-if="isLogin" class="greeting" style="display:inline-block;">{{this.userName}}님 환영합니다</div>
+      <div v-else class="greeting2" style="display:inline-block;">SSazip에 오신 것을 환영합니다</div> -->
       <Navbar style="display:inline-block"/>
     </div>
   </div>
