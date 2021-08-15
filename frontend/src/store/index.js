@@ -241,6 +241,7 @@ export default new Vuex.Store({
     changeChatType: function({ commit }, chatType) {
       commit('CHANGE_CHAT_TYPE', chatType);
     },
+    // 갤럭시방 참가자 관리
     setPart: function ({ commit }, participants){
       commit('SET_PARTICIPANTS', participants);
     }

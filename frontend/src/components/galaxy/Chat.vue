@@ -6,7 +6,7 @@
             <span class="dropdown">
                 <div class="drop-list-title" style="">참여자 목록</div>
                 <div class="drop-list">
-                    <div v-for="(user,index) in this.participants" :key="index">
+                    <div v-for="(user, index) in this.participants" :key="index">
                         <div class="image-box" @click="toProfile(user.partEmail)">
                             <div class="content">{{ user.partTerm }} 기 {{ user.partName }}</div>
                         </div>
@@ -236,30 +236,31 @@ export default {
             let receiveMessage = JSON.parse(payload.body);
 
             // 참가자라면 참여 메세지만 출력하기
-                      if (receiveMessage.constructor.name == 'Array') {
-                        // 입장 시간을 기준으로 랭킹 정렬(5명만).
-                        this.ranker = JSON.parse(
-                          JSON.stringify(
-                            receiveMessage.sort(function(a, b) {
-                              // console.log(a.getTime);
-                              // return a.getTime() - b.getTime();
-                              return new Date(a.enterTime) - new Date(b.enterTime);
-                            })
-                          )
-                        );
-                        // console.log(this.participants);
-                        console.log(this.ranker);
-                
-                        // 이름 순으로 참여자 정렬
+            if (receiveMessage.constructor.name == 'Array') {
+                // 입장 시간을 기준으로 랭킹 정렬(5명만).
+                this.ranker = JSON.parse(
+                    JSON.stringify(
                         receiveMessage.sort(function(a, b) {
-                          return a.partName > b.partName ? 1 : -1;
-                        });
-                        this.participants = receiveMessage;
-                        console.log(this.participants);
-                
-                        /////////////////////////////////////////////////////////
-                        // 여기까지가 참여자 목록이 갱신된 지점입니다.////////////
-                        ////////////////////////////////////////////////////////
+                            // console.log(a.getTime);
+                            // return a.getTime() - b.getTime();
+                            return new Date(a.enterTime) - new Date(b.enterTime);
+                        })
+                    )
+                );
+                // console.log(this.participants);
+                console.log(this.ranker);
+
+                // 이름 순으로 참여자 정렬
+                receiveMessage.sort(function(a, b) {
+                    return a.partName > b.partName ? 1 : -1;
+                });
+                this.participants = receiveMessage;
+                console.log(this.participants);
+                this.setPart(this.participants);
+
+                /////////////////////////////////////////////////////////
+                // 여기까지가 참여자 목록이 갱신된 지점입니다.////////////
+                ////////////////////////////////////////////////////////
 
                 return;
             }
@@ -549,12 +550,12 @@ input:focus {
 /* linkseven */
 /* linkone */
 a {
-  text-transform: uppercase;
-  color: rgb(15, 14, 14);
-  text-decoration: none;
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
+    text-transform: uppercase;
+    color: rgb(15, 14, 14);
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
 }
 .link-1 a:before,
 .link-1 a:after {
@@ -584,35 +585,35 @@ a {
 }
 
 .participantList {
-  position: absolute;
-  margin-left: -170px;
+    position: absolute;
+    margin-left: -170px;
 }
 
 #participantbox {
-  background-color: rgba(255, 255, 255, 0.2);
-  padding-right: 17px;
-  padding-left: 17px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  border-radius: 20px;
-  max-height: 770px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding-right: 17px;
+    padding-left: 17px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 20px;
+    max-height: 770px;
 }
 .drop-list-title {
-  background-color: #f1c069;
-  border-radius: 33px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  margin-bottom: 8px;
-  font-size: 18px;
+    background-color: #f1c069;
+    border-radius: 33px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    font-size: 18px;
 }
 
 .drop-list {
-  border-radius: 10px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  margin-left: 0px;
-  max-height: 700px;
-  overflow: scroll;
+    border-radius: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-left: 0px;
+    max-height: 700px;
+    overflow: scroll;
 }
 /* .link-6 a:hover {
   -webkit-transform: scale(1.05);
