@@ -11,13 +11,20 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.MultipartFilter;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.MultipartConfigElement;
+import java.util.TimeZone;
 
 //Entity에서 EntityListeners(AuditingEntityListener.class) 하고 이 EnableJpaAuditing 추가 안하면 CreatedDate 안먹음
 @EnableJpaAuditing
 @SpringBootApplication(exclude = {MultipartAutoConfiguration.class})
 @EnableScheduling
 public class SsaziPtestApplication {
+
+    @PostConstruct
+    void started() {
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(SsaziPtestApplication.class, args);

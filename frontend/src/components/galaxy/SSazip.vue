@@ -1,52 +1,169 @@
 <template>
     <div>
-        <div style="display:block;position:absolute;top:0px;left:0px;height:100%;width:100%;background:transparent;overflow:hidden;visibility:hidden;">
+        <div>
+            <!-- style="display:block;position:absolute;top:0px;left:0px;height:100%;width:100%;background:transparent;overflow:hidden;visibility:hidden;" -->
+
             <!-- <svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">
                 <line id="vec" x1="0" y1="0" x2="0" y2="0" stroke="#ff0000" stroke-width="1.5" stroke-dasharray="3,3">
                 </line>
             </svg> -->
             <!-- <div id="gravitybtn" style="display: block;position: fixed;margin: 4px;top:0;right:0;border-radius:5px;height: 30px;width: 130px;padding: 5px; background-color:#fff;text-align: center;font: italic bold 16px verdana;color: #fff;line-height: 30px;letter-spacing: 0.5px;cursor:default;z-index: 1000;-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;visibility:visible;"> -->
             <div id="gravitybtn">
-                    Gravity 
-                <input type="radio"  name="c" id="but1" checked="">
-                <input type="radio" style="cursor:pointer;" name="c" id="but2">
+                Gravity
+                <input type="radio" name="c" id="but1" checked="" />
+                <input type="radio" style="cursor:pointer;" name="c" id="but2" />
             </div>
-            <div v-for="(idx, ssazip_num) in temp_galaxy_data" :key=" ssazip_num">
-                <SmallSSazip :idx="idx"/>
-            </div>   
+
+            <!-- <div v-for="(idx, ssazip_num) in temp_galaxy_data" :key="ssazip_num">
+                <SmallSSazip />
+                </div> -->
+            <div id="oldPlace">
+                <!-- <div v-for="(sazibi, index) in participantsVuex" :key="index"> -->
+                <!-- <SmallSSazip :sazibi="sazibi" /> -->
+                <!-- <div :id="'ssazip' + sazibi.partEmail">
+                        <img src="/img/ssazip.43ffb363.png" style="width:50px" />
+                        <span style="color:#fff">{{ sazibi }}</span>
+                    </div>
+                </div> -->
+            </div>
+
+            <!-- <div v-for="(idx,index) in participantsVuex" :key="index"> -->
+            <!-- {{index}} -->
+
+            <!-- <div v-for="(idx, ssazip_num) in participantsVuex" :key="ssazip_num"> -->
+            <!-- <SmallSSazip /> -->
+            <!-- <SmallSSazip @click="tmpClicker(zibi)" :idx="ssazip_num"/> -->
+            <!-- <SmallSSazip @click="tmpClicker(zibi)" :idx="zibi"/> -->
+            <!-- </div> -->
             <!-- <img id="ssazip" src="@/assets/ssazip.png" style="width:50px" >   -->
-            <div id="ssazip">
+            <!-- <div id="ssazip">
                 <img  src="@/assets/ssazip.png" style="width:80px; height:80px" >
                 <span style="color:#fff;"><i class="fas fa-star"></i>나<i class="fas fa-star"></i></span>
-            </div>
+            </div> -->
+            <!-- <div style="background-color:white" v-for="(zibi) in participantsVuex" :key=" zibi">
+                {{zibi}}
+                    <img id="ssazip" src="@/assets/ssazip.png" style="width:50px" >
+            </div> -->
+            <div style="color:red" v-for="(user, index) in participantsVuex" :key="index"></div>
         </div>
+        <!-- <img id="ssazip" src="@/assets/ssazip.png" style="width:50px" /> -->
+        <!-- 
+        <div v-for="user in participants" :key="user">{{ user }}123</div>
+        <div v-for="user in participantsVuex" :key="user">{{ user }}  123</div> -->
     </div>
 </template>
 
 <script>
 import SmallSSazip from '@/components/galaxy/SmallSSazip.vue';
 // import gravity from "@/components/temporary/gravity.js"
+// import $ from 'jquery';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'SSazip',
+    clocker: null,
     components: {
         SmallSSazip,
     },
-    data: function(){
-        return {
-            temp_galaxy_data: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-        }
-    },
     giveme: null,
-    ccc:null,
-    methods: {
-        gravity: function() {
+    ccc: null,
+    data() {
+        return {
+            // 소켓 연결
+            stompClient: null,
+            ani: '',
+            participants: [], // length. 참여자수, 이메일 userEmail
+            beforeParts: [],
+            beforeBalls: [],
+            beforeBallCoords: [],
+            // 참여자 정보 전달 채널
+            partChannel: null,
+            // 상위 5명
+            ranker: [],
+            temp_galaxy_data: [0, 1, 2, 4, 12, 6],
+        };
+    },
+    created: function() {
+        // this.gravity();
+        // this.participants=this.participantsVuex;
+    },
+    beforeRouteLeave(to, from, next) {
+        clearInterval(this.clocker);
 
+        next();
+        // }
+    },
+    mounted: function() {
+        // while(document.getElementById('ssazip'))document.getElementById('ssazip').remove();
+        // this.gravity();
+        // this.participants=this.participantsVuex;
+        // this.socketConnect();
+        //         var cell = document.getElementById("asd");
+        //    while ( cell.hasChildNodes() ) { console.log("!!!!!@!#!@#!@#@!!#####")
+        //        cell.removeChild( cell.firstChild ); }
+    },
+    beforeUpdate: function() {
+        console.log('bf');
+        console.log(document.getElementById('newDivSpace'));
+    },
+    updated: function() {
+        this.gravity();
+        console.log('updated');
+        this.clocker = setInterval(this.showRemaining, 1000);
+        // cancelAnimationFrame(this.ani);
+        //document.getElementById('newDivSpace').remove();
+        // this.participants=this.participantsVuex;
+        // this.gravity();
+    },
+    computed: {
+        ...mapGetters(['participantsVuex']),
+    },
+    methods: {
+        profileF(senderId) {
+            let routeData = this.$router.resolve({ name: 'Profile', query: { user: senderId } });
+            window.open(routeData.href, '_blank');
+        },
+        async showRemaining() {
+            let now = new Date();
+            for (var i = 0; i < this.participantsVuex.length; i++) {
+                var date = this.participantsVuex[i].enterTime;
+                var vDate = new Date(date); // 전달 받은 일자
+                vDate -= new Date().setTime(9);
+                var second = 1000;
+                var minute = second * 60;
+                var hour = minute * 60;
+                var day = hour * 24;
+
+                let distDt = now - vDate - 1;
+                // var days = Math.floor(distDt /day);
+                // var hours = Math.floor((distDt % day) / hour);
+                var hours = Math.floor(distDt / hour);
+                var minutes = Math.floor((distDt % hour) / minute);
+                var seconds = Math.floor((distDt % minute) / second);
+                // document.getElementById(this.participantsVuex[i].partEmail).textContent = days + '일 ';
+                document.getElementById(this.participantsVuex[i].partEmail).textContent = hours + '시간';
+                document.getElementById(this.participantsVuex[i].partEmail).textContent += minutes + '분';
+                document.getElementById(this.participantsVuex[i].partEmail).textContent += seconds + '초 공부 중';
+            }
+        },
+        tmpClicker(param) {
+            alert(param);
+        },
+
+        gravity: function() {
+            console.log('gravity');
+            console.log(this.participantsVuex);
+            // console.log(document.getElementById('newDivSpace'));
+            // while(document.getElementById('ssazip'))
+            //  document.getElementById('newDivSpace').remove();
             /*
         Play Balls 2 (full page version).
         Straight JavaScript!
         kurt.grigg@yahoo.co.uk
         */
+
+            var partList = this.participantsVuex;
+            var beforeList = this.beforeParts;
             var numberOfBalls = 50;
             var ballVelocity = 2; //2
             var ballHardness = 0.85;
@@ -62,8 +179,8 @@ export default {
             var then = performance.now();
             var h,
                 w,
-                balls = [],
-                ballCoords = [];
+                balls = this.beforeBalls,
+                ballCoords = this.beforeBallCoords;
             var cony = 0;
             var conx = 0;
             var d = document;
@@ -74,7 +191,6 @@ export default {
             var m = { down: false, x1: 0, y1: 0, x2: 0, y2: 0 };
 
             document.oncontextmenu = function() {
-
                 return false;
             };
 
@@ -135,7 +251,6 @@ export default {
             }
 
             function iniscrl() {
-
                 con.style.top = cony + scrl(0) + 'px';
                 con.style.left = conx + scrl(1) + 'px';
             }
@@ -171,8 +286,47 @@ export default {
                 // w = window.innerWidth - scrollBarRight - 1;
             }
 
-            var con = d.createElement('div');
-            con.setAttribute("id", "newDivSpace");
+            // ///기존의 새로  생성하는 new div space code
+            // if (!document.getElementById('newDivSpace')) {
+            //     //처음이라면
+            //     console.log('=================make newDivSpace=========================================');
+            //     var con = d.createElement('div');
+            //     con.setAttribute('id', 'newDivSpace');
+            //     con.setAttribute(
+            //         'style',
+            //         'display:block;' +
+            //             'position:absolute;' +
+            //             'top:0px;left:0px;' +
+            //             'height:100%;width:100%;' +
+            //             'background:transparent;' +
+            //             'overflow:hidden;' +
+            //             'visibility:hidden;'
+            //     );
+
+            //     con.innerHTML +=
+            //         '<svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"' +
+            //         ' style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">' +
+            //         '<line id="vec" x1="0" y1="0" x2="0" y2="0" stroke="' +
+            //         vectorLineColour +
+            //         '" stroke-width="1.5" stroke-dasharray="3,3">' +
+            //         '</svg>';
+
+            //     d.body.appendChild(con);
+            // } else {
+            //     //처음아니라면
+            //     var con = document.getElementById('newDivSpace');
+            //     console.log('=============================stay DivSpace==========================');
+            //     console.log(con);
+            //     // con.removeChild(d.getElementById('ssazip'));
+            // }
+
+            ///try new
+
+            console.log('=================use oldDivSpace=========================================');
+            // console.log('=================make newDivSpace=========================================');
+            // var con = d.createElement('div');
+            var con = document.getElementById('oldPlace');
+
             con.setAttribute(
                 'style',
                 'display:block;' +
@@ -192,79 +346,185 @@ export default {
                 '" stroke-width="1.5" stroke-dasharray="3,3">' +
                 '</svg>';
 
-            d.body.appendChild(con);
-
             function xy(a, s) {
                 return (a * s) / 100;
             }
-
-            function createBall(y, x, nvy, nvx) {
+            // console.log('만들공간인 oldDiv의 상태입니다');
+            // console.log(con);
+            /////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////
+            function createBall(y, x, idx, newOneIdx, nvy, nvx) {
                 // var r = (minRadius + Math.random() * maxRadius) | 0;
                 // r: 알들의 크기
-                var r =50;
-                var ball = d.getElementById('ssazip');
-                ball.setAttribute(
-                    'style',
-                    'display:block;' +
-                        // +'src: url(~@/assets/sszip.png);'
-                        'position:absolute;' +
-                        'height:' +
-                        r +
-                        'px;' +
-                        'width:' +
-                        r +
-                        'px;' +
-                        'top:0px;left:0px;' +
-                        // +'background-color:'+randomColour()+';'
-                        'border-radius:50%;' +
-                        'box-shadow:inset 0 0 ' +
-                        xy(1, r) +
-                        'px ' +
-                        xy(1, r) +
-                        'px rgba(0,0,0,0.2),' +
-                        'inset 0 -' +
-                        xy(25, r) +
-                        'px ' +
-                        xy(50, r) +
-                        'px rgba(0,0,0,0.4);' +
-                        'opacity:1.0;'
-                );
-                // ball.src = "@/asset"
-                // var glass = d.createElement('div');
-                // glass.setAttribute('style', 'display: block;'
-                //     +'position:absolute;'
-                //     +'height:'+xy(100)+'px;'
-                //     +'width:'+xy(100)+'px;'
-                //     +'margin:auto;top:0;bottom:0;left:0;right:0;'
-                // +'border-radius:50%;');
+                var r = 50;
+                // var newball=document.createElement('img');
+                // newball.setAttribute('id',this.)
+                console.log('idx in partList');
+                console.log(idx);
+                if (newOneIdx != -1) {
+                    idx = newOneIdx;
+                    console.log('추가인원생성 예정');
+                }
 
-                // 공 빛나는 부분
-                //     var shine = d.createElement('div');
-                //     shine.setAttribute('style', 'display:block;'
-                // +'position:absolute;'
-                //         +'margin:auto;'
-                //         +'top:2%;'
-                //         +'left:0;right:0;'
-                // +'border-radius:50%;'
-                // +'width:72%;'
-                // +'height:54%;'
-                // +'background-image:linear-gradient(to bottom, rgba(255,255,255,0.9) 2%, '
-                //         +'rgba(255,255,255,0.7) 30%, transparent 100%);');
-                //     glass.appendChild(shine);
-                //     ball.appendChild(glass);
+                console.log('------------create Ball--------------');
+                console.log('con 이란 생성전 싸집이공간');
+                console.log(JSON.parse(JSON.stringify(con.childElementCount)));
+
+                console.log('참여자 목록');
+                console.log(JSON.parse(JSON.stringify(partList)));
+                console.log('생성할 참여자');
+                console.log(partList[idx].partEmail);
+                //이메일을 가지는 엘리먼트로 속성 지정
+                //////////oldDiv
+                // console.log('idx==newIdx')
+                // console.log(idx==newIdx)
+                // if (deathIdx != -1 && d.getElementById(`ssazip${beforeList[idx]}`) != null) {
+                //     console.log(partList[idx].partEmail);
+                //     console.log('삭제');
+                //     var ball = d.getElementById(`ssazip${beforeList[idx]}`);
+                //     ball.parentNode.removeChild(ball);
+                //     balls.splice(idx, 1);
+                //     ballCoords.splice(idx, 1);
+                //     return;
+                // } else
+
+                if (d.getElementById(`ssazip${partList[idx].partEmail}`) != null) {
+                    console.log(partList[idx].partEmail);
+                    console.log('는 있던 친구네!');
+                    var ball = d.getElementById(`ssazip${partList[idx].partEmail}`);
+                }
+                // var ball = d.getElementById(`ssazip${partList[idx].partEmail}`);
+                else {
+                    var ball = d.createElement('div');
+                    console.log(partList[idx].partEmail);
+                    console.log('는 새로 생성 할 친구네!');
+                    const num = parseInt(Math.random() * 5);
+                    var ssazip_pics = [
+                        '/img/ssazip.43ffb363.png',
+                        '/img/ssazip_mint.3c829d99.png',
+                        '/img/ssazip_orange.6b3c93af.png',
+                        '/img/ssazip_purple.fe37cc0a.png',
+                        '/img/ssazip_red.d0a2d170.png',
+                        '/img/ssazip_yellow.137c1665.png',
+                    ];
+                    // var nowDate = new Date();
+                    // var count = nowDate - partList[idx].enterTime;
+                    ball.setAttribute('id', `ssazip${partList[idx].partEmail}`);
+                    //@click="profileF(`+partList[idx].partEmail+`)"
+                    ball.innerHTML +=
+                        `<img src="` +
+                        ssazip_pics[num] +
+                        `" style="width:50px" />
+                            <span class="" style=" color:#fff; width:150px"> ${partList[idx].partName} <br/>
+<div style="width:160px" id="` +
+                        partList[idx].partEmail +
+                        `"></div>  </span>
+                            `;
+
+                    // var cell = document.getElementById('oldPlace');
+
+                    // if ( idx==partList.length-1) {
+                    //     console.log("삭제한다요")
+                    //     var cell = document.getElementById("oldPlace");
+                    // while ( cell.hasChildNodes() ) { cell.removeChild( cell.firstChild ); }
+                    //     }
+                    // if (ball == null) {
+                    //     console.log('새로운 컨포넌트 생성!!ㅣㅏㅁ누이ㅏㄴㅁ우');
+                    //     console.log(partList[idx]);
+                    //     // ball=d.createElement("SmallSSazip",{type: rops:{ssazibi:partList[idx]}})
+                    // }
+
+                    ball.setAttribute(
+                        'style',
+                        'display:block;' +
+                            // +'src: url(~@/assets/sszip.png);'
+                            'position:absolute;' +
+                            'height:' +
+                            r +
+                            'px;' +
+                            'width:' +
+                            r +
+                            'px;' +
+                            'top:0px;left:0px;' +
+                            // +'background-color:'+randomColour()+';'
+                            'border-radius:50%;' +
+                            'box-shadow:inset 0 0 ' +
+                            xy(1, r) +
+                            'px ' +
+                            xy(1, r) +
+                            'px rgba(0,0,0,0.2),' +
+                            'inset 0 -' +
+                            xy(25, r) +
+                            'px ' +
+                            xy(50, r) +
+                            'px rgba(0,0,0,0.4);' +
+                            'opacity:1.0;'
+                    );
+                }
+                console.log('xy');
+                console.log(xy);
+                // }
 
                 setTimeout(function() {
                     ball.style.visibility = 'visible';
                 }, 50);
 
-                con.appendChild(ball);
-                balls.push(ball);
-                ballAttr(r, y, x, nvy, nvx);
+                // console.log('con');
+                // console.log(con);
+
+                // console.log('con.childNodes');
+                // console.log(con.childNodes);
+                // console.log('con.children');
+                // console.log(con.children);
+                // // console.log('포함여부를 위한 콘솔');
+                // // console.log(document.getElementById(`div#ssazip${partList[idx].partEmail}`).contains(con.childNodes));
+                // // if (!con.childNodes.contains(`ssazip${partList[idx].partEmail}`)) {
+                // // console.log(con.hasChildNodes(`div#ssazip${partList[idx].partEmail}`));
+                // console.log('con.children.namedItem(`ssazip${partList[idx].partEmail}`)');
+                // console.log(con.children.namedItem(`ssazip${partList[idx].partEmail}`));
+                // console.log('con.children.namedItem("gravitybtn")');
+                // console.log(con.children.namedItem('gravitybtn'));
+                // if (document.getElementById(`div#ssazip${partList[idx].partEmail}`).contains(con.children)) {
+                // if (con.children.namedItem(`ssazip${partList[idx].partEmail}`) != null) {
+                //     // console.log('있던거네 일단 삭제함요');
+                //     console.log('있던거네 일단 패스함요');
+                //     console.log(con.children.namedItem(`ssazip${partList[idx].partEmail}`));
+                //     // con.removeChild(con.children.namedItem(`ssazip${partList[idx].partEmail}`));
+                //     // con.removeChild(ball);
+                // }
+                // //
+                // else {
+                if (!document.getElementById(`ssazip${partList[idx].partEmail}`)) {
+                    //&&!document.getElementById(`ssazip${partList[idx].partEmail}`).contains(con)) {
+                    console.log('공이없다 추가한다링');
+                    console.log(JSON.parse(JSON.stringify(ballCoords)));
+
+                    con.appendChild(ball);
+                    console.log(nvy);
+                    ballAttr(r, y, x, nvy, nvx, idx);
+                    balls.splice(idx, 0, ball);
+                    console.log('con 이란 생성 후 싸집이공간');
+                    //                     console.log(JSON.parse(JSON.stringify(balls[0])));
+                    // console.log(JSON.parse(JSON.stringify(ballCoords[0])));
+                    // console.log(JSON.parse(JSON.stringify(con.childNodes[0])));
+                } else {
+                    console.log('있던거네');
+                    balls.splice(idx, 1, ball);
+                    // console.log(JSON.parse(JSON.stringify(balls[0])));
+                    // console.log(JSON.parse(JSON.stringify(ballCoords[0])));
+                }
+                for (var i = 0; i < balls.length; i++) {
+                    console.log(JSON.parse(JSON.stringify(balls[i].id)));
+                }
             }
 
             // 중력 무중력 조작기
             // var gravCon = d.createElement('div');
-            var gravCon = d.getElementById("gravitybtn");
+            var gravCon = d.getElementById('gravitybtn');
             gravCon.setAttribute(
                 'style',
                 'display: block;' +
@@ -293,10 +553,12 @@ export default {
 
             con.appendChild(gravCon);
 
-            function ballAttr(rad, y, x, nvy, nvx) {
-                if (balls.length > numberOfBalls) {
-                    newBall = true;
-                }
+            function ballAttr(rad, y, x, nvy, nvx, idx) {
+                console.log('ballAttr');
+
+                // if (balls.length < numberOfBalls) {
+                newBall = false;
+                // }
 
                 var zx = newBall ? x - nvx : 0;
                 var zy = newBall ? y - nvy : 0;
@@ -316,8 +578,12 @@ export default {
                     vx: vex,
                     vy: vey,
                 };
+                console.log('ballCoords');
+                console.log(ballCoords);
 
-                ballCoords.push(b);
+                // ballCoords.push(b);
+                ballCoords.splice(idx, 0, b);
+                console.log(ballCoords);
             }
 
             function animate() {
@@ -328,6 +594,7 @@ export default {
                         var b = ballCoords[i];
                         b.x += b.vx;
                         b.y += b.vy;
+
                         b.px = b.x - (50 * b.vx) / 100;
                         b.py = b.y - (50 * b.vy) / 100;
                     }
@@ -464,7 +731,7 @@ export default {
                 }
             }
 
-            function gravity() {
+            function gravityF() {
                 for (var i = 0; i < balls.length; i++) {
                     var b = ballCoords[i];
                     b.ay += gameGravity;
@@ -497,6 +764,19 @@ export default {
                     b.ay = 0;
                 }
             }
+            function faccelerate(delta) {
+                console.log('faccelerate');
+                for (var i = 0; i < balls.length; i++) {
+                    var b = ballCoords[i];
+
+                    b.x += b.ax * delta * delta;
+                    b.y += b.ay * delta * delta;
+                    console.log('-------------------aaaaccccc-------------');
+
+                    b.ax = 0;
+                    b.ay = 0;
+                }
+            }
 
             function assignToHTML() {
                 for (var i = 0; i < balls.length; i++) {
@@ -519,8 +799,26 @@ export default {
                 for (var i = 0; i < steps; i++) {
                     if (drop) {
                         //Thanks to Florian Boesch for this anti-jitter doubling trick.
-                        gravity();
+                        gravityF();
                         accelerate(delta);
+                        collisions(false);
+                        zeroGravityBorderCollisions();
+                        inertia(delta);
+                        collisions(true);
+                        gravityBorderCollisions();
+                    }
+                }
+            }
+            function fstep() {
+                console.log('fstep');
+
+                var steps = 2;
+                var delta = 1 / steps;
+                for (var i = 0; i < steps; i++) {
+                    if (drop) {
+                        //Thanks to Florian Boesch for this anti-jitter doubling trick.
+                        gravity();
+                        faccelerate(delta);
                         collisions(false);
                         zeroGravityBorderCollisions();
                         inertia(delta);
@@ -533,6 +831,20 @@ export default {
             function run() {
                 var now = performance.now();
                 if (now - then > milliSeconds) {
+                    for (var i = 0; i < ballCoords.length; i++) {
+                        if (ballCoords[i].vx > 0.6) {
+                            ballCoords[i].vx = 0.5;
+                        }
+                        if (ballCoords[i].vy > 0.6) {
+                            ballCoords[i].vy = 0.5;
+                        }
+                        if (ballCoords[i].vx < -0.6) {
+                            ballCoords[i].vx = -0.5;
+                        }
+                        if (ballCoords[i].vy < -0.6) {
+                            ballCoords[i].vy < -0.5;
+                        }
+                    }
                     animate();
                     if (!drop) {
                         collisions(true);
@@ -544,13 +856,212 @@ export default {
                 }
                 window.requestAnimationFrame(run);
             }
+            function firstrun() {
+                console.log('first');
+                console.log(balls);
+                console.log(ballCoords);
 
+                var now = performance.now();
+                if (now - then > milliSeconds) {
+                    animate();
+                    if (!drop) {
+                        collisions(true);
+                        zeroGravityBorderCollisions();
+                    }
+                    fstep();
+                    assignToHTML();
+                    then = performance.now();
+                }
+                window.requestAnimationFrame(run);
+            }
+
+            //=========================================================================
+            //=========================================================================
+            //=========================================================================
+            //=========================================================================
+            //=========================================================================
+            //=========================================================================
+            //=========================================================================
+            //=========================================================================
             function start() {
                 win();
-                for (var i = 0; i < numberOfBalls; i++) {
-                    createBall(Math.random() * h, Math.random() * w);
+
+                console.log('---------------------startFuntion------------');
+                console.log('partList  신 참여자 리스트');
+                console.log(JSON.parse(JSON.stringify(partList)));
+                console.log('partList.length 신 참여자 수');
+                console.log(partList.length);
+                console.log('beforeList 이전 참여자 리스트(이메일)');
+                console.log(JSON.parse(JSON.stringify(beforeList)));
+                console.log('beforeList.leng 이전참여자 수');
+                console.log(beforeList.length);
+                console.log('balls.length 기존 볼, 갯수');
+                console.log(JSON.parse(JSON.stringify(balls)));
+                console.log(balls.length);
+                console.log('con.childNodes 싸집이 공간');
+                console.log(JSON.parse(JSON.stringify(con.childNodes)));
+                console.log('con.childNodes.length-2 싸집이 갯수???');
+                console.log(con.childNodes.length - 2);
+                console.log('=========================================');
+
+                // var num = con.childNodes.length - 2;
+                // if (num == 0) num = partList.length;
+                var num = partList.length;
+
+                ///old
+                var newOneIdx = -1;
+                var deathIdx = -1;
+                if (partList.length - 1 == beforeList.length) {
+                    //입장 상황이다
+                    console.log('-----new one enter situ!!-----');
+                    for (var i = 0; i < partList.length; i++) {
+                        if (!beforeList.includes(partList[i].partEmail)) {
+                            newOneIdx = i; //partList에서 newOndIdx는 새로운 참가자
+                            break;
+                        }
+                    }
+
+                    //     for(var i =0;i<balls.length;i++)
+                    //     ballAttr(50, Math.random() * h,Math.random() * w, 0, 0);
+
+                    //     for (var i = 0; i < partList.length; i++) {
+                    //         if (!beforeList.includes(partList[i].partEmail)) {
+                    //             console.log('새로운거잖아???');
+                    //             console.log('partList에서 인덱스' + i);
+                    //             console.log(partList[i]);
+                    //             createBall(Math.random() * h, Math.random() * w, i);
+                    //         }
+                    //     }
+                } else if (partList.length == beforeList.length - 1) {
+                    //퇴장 상황
+                    console.log('-----Erazze situ!!!-----');
+                    var tmp = [];
+                    for (var i = 0; i < partList.length; i++) {
+                        tmp.push(partList[i].partEmail);
+                    }
+                    for (var i = 0; i < beforeList.length; i++) {
+                        if (!tmp.includes(beforeList[i])) {
+                            deathIdx = i;
+                            // beforeList에서 deathIdx는 죽은인원의 인덱스;
+                            break;
+                        }
+                    }
+                    console.log('-----삭제전 ball, ballCo-----');
+                    console.log(balls);
+                    console.log(ballCoords);
+                    balls.splice(deathIdx, 1);
+                    ballCoords.splice(deathIdx, 1);
+                    console.log('-----삭제후 ball, ballco-----');
+                    console.log(balls);
+                    console.log(ballCoords);
+                    console.log('-----삭제전 con-----');
+                    var er = d.getElementById(`ssazip${beforeList[deathIdx]}`);
+                    console.log(er.parentNode);
+                    er.parentNode.removeChild(er);
+                    console.log('-----삭제 후 con-----');
+                    console.log(d.getElementById('oldPlace'));
                 }
-                run();
+                if (newOneIdx != -1) {
+                    console.log('new ball cre');
+                    createBall(Math.random() * h, Math.random() * w, -1, newOneIdx);
+                }
+                for (var k = 0; k < num; k++) {
+                    console.log('-----default ballmaker 초기나 이전 공-----');
+                    console.log(k + '번째');
+                    //만들 공 갯수
+                    // if(document.getElementById(`ssazip${this.participants[i].partEmail}`)) continue;
+                    if (newOneIdx != -1 && k == newOneIdx) {
+                        console.log(k + '는 새로운친구야 패스');
+                        continue;
+                    }
+                    // if (deathIdx != -1 && i == deathIdx) continue;
+                    createBall(Math.random() * h, Math.random() * w, k, -1);
+                }
+                // if (deathIdx != -1) {
+                //     console.log('era ball');
+                //     createBall(Math.random() * h, Math.random() * w, i, newOneIdx, deathIdx);
+                // }
+
+                // for (var i = 0; i < num; i++) {
+                //     //만들 공 갯수
+                //     // if(document.getElementById(`ssazip${this.participants[i].partEmail}`)) continue;
+                //     console.log('-----ballmaker-----');
+                //     console.log(i);
+
+                //     // if (con.childNodes.length != 2 && con.childNodes.length - 2 > partList.length) {
+                //     //     //참가자보다 싸집이들이 많으면 삭제가 필요하다
+                //     //     console.log('----Eraze Ball-----');
+                //     //     console.log('con.childNodes');
+                //     //     console.log(con.childNodes);
+                //     //     for (var j = 0; j < con.childNodes.length; j++) {
+                //     //         //기존 싸집이를 돌리면서
+                //     //         console.log(j + '번째 싸집이');
+                //     //         console.log('con.childNodes[j]');
+                //     //         console.log(con.childNodes[j]);
+                //     //         if (con.childNodes[j].id == 'svg' || con.childNodes[j].id == 'gravitybtn') {
+                //     //             console.log('con.childNodes[j]패스');
+                //     //             console.log(con.childNodes[j]);
+                //     //             continue;
+                //     //         }
+                //     //         console.log('partList');
+                //     //         console.log(partList);
+                //     //         var erazeCompletedflag = false;
+                //     //         for (var k = 0; k < partList.length; k++) {
+                //     //             //새 참여자 리스트에 있나 없나
+                //     //             // console.log('k');
+                //     //             console.log(k + '번째 참여자');
+                //     //             console.log('partList[k].partEmail');
+                //     //             console.log(partList[k].partEmail);
+                //     //             var email = 'ssazip' + partList[k].partEmail;
+                //     //             if (email == con.childNodes[j].id) {
+                //     //                 //있음 다행
+                //     //                 // balls.pop(j);
+                //     //                 // console.log('balls');
+                //     //                 // console.log(balls);
+                //     //                 // console.log('balls[j].partEmail');
+                //     //                 // console.log(balls[j].partEmail);
+                //     //                 //일치하는게 있다 탐색 중지
+                //     //                 console.log('일치하는게 있다 탐색 중지');
+                //     //                 break;
+                //     //             }
+                //     //             if (k == partList.length - 1) {
+                //     //                 //다 검사해봤느데 없다?
+                //     //                 console.log('없는데?');
+                //     //                 console.log(con.childNodes[j]);
+                //     //                 console.log(con.children[j]);
+                //     //                 console.log(con.childNodes[j].id);
+                //     //                 console.log(con.children.namedItem(`${con.childNodes[j].id}`));
+                //     //                 con.removeChild(con.children.namedItem(`${con.childNodes[j].id}`));
+                //     //                 erazeCompletedflag = true;
+                //     //             }
+                //     //         }
+                //     //         if (erazeCompletedflag) break;
+                //     //     }
+                //     //     // var cell = document.getElementById('asd');
+                //     //     // console.log('싸집이 지우고 ㄴ123121ㅓㅏㅟㅏㅜ');
+                //     //     // while (cell.hasChildNodes()) {
+                //     //     //     cell.removeChild(cell.firstChild);
+                //     //     // }
+                //     //     break;
+                //     // }
+
+                //     // con.removeChild(ball);
+
+                //     createBall(Math.random() * h, Math.random() * w, i);
+                // }
+
+                // console.log(participants)
+                // console.log(this.participants)
+                // console.log(participantsVuex)
+                // console.log(this.participantsVuex);
+
+                // console.log(parts)
+                // createBall(Math.random() * h, Math.random() * w, "123");
+                // }
+                console.log('-----------------------run------------------');
+                console.log(JSON.parse(JSON.stringify(balls)));
+                console.log(JSON.parse(JSON.stringify(ballCoords)));
+                firstrun();
                 d.getElementById('but2').addEventListener(
                     'click',
                     function() {
@@ -595,19 +1106,28 @@ export default {
                     },
                     false
                 );
+
+                // var cell = document.getElementById('asd');
+                //     console.log(cell);
+                // while (cell.hasChildNodes()) {
+                //     console.log('!!!!!@!#!@#!@#@!!#####');
+                //     cell.removeChild(cell.firstChild);
+                // }
             }
+
             start();
 
-            window.addEventListener('load', start, false);
+            this.beforeParts = [];
+            for (var i = 0; i < partList.length; i++) {
+                this.beforeParts.push(partList[i].partEmail);
+            }
+            this.beforeBalls = balls.slice();
+            this.beforeBallCoords = ballCoords.slice();
+
+            //window.addEventListener('load', start, false);
             window.addEventListener('resize', win, false);
             window.addEventListener('scroll', iniscrl, false);
         },
-    },
-    created: function() {
-       // this.gravity();
-    },
-    mounted: function() {
-        this.gravity();
     },
 };
 </script>
