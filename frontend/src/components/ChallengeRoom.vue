@@ -47,7 +47,7 @@
                             <!-- 블렛 저널 테이블 바디 -->
                             <tbody>
                                 <tr v-for="(person, index) in chall_info.challengeGroup" :key="person">
-                                    <th scope="row" style="background-color: #b7beda"><span class="namepoint">{{ person[1] }}</span></th>
+                                    <th scope="row" style="background-color: #b7beda"><div class="namepoint d-flex align-items-center justify-content-center"><div>{{ person[1] }}</div></div></th>
                                     <td v-for="taskIdx in chall_info.challengeTaskCnt" :key="taskIdx">
                                         <!-- 내가 제출 할 수 있는 아이들 -->
                                         <router-link
@@ -120,6 +120,10 @@
                     <ChallengeTicket :challTicket="chall_ticket" :ProcessRateArr="makeArr()" />
                 </div>
             </div>
+        </div>
+        <div class="tutorial">
+            <img id="explain" src="../assets/challengetutorialssazip.png" alt="">
+            <!-- <img id="tuter" src="../assets/ssazip.png" alt=""> -->
         </div>
     </div>
 </template>
@@ -543,6 +547,21 @@ th{
     /* font-size: 25px; */
     /* color: #ffffff; */
     /* font-weight: 900; */
-    text-align: center;
+    height: 100%;
+}
+
+#tuter{
+    width: 50px;
+    height: 63px;
+    position: relative;
+    margin-left: -3730px;
+    margin-top: 750px;
+}
+#explain{
+    width: 150px;
+    height: 311px;
+    position: relative;
+    margin-left: -3625px;
+    margin-top: 503px;
 }
 </style>

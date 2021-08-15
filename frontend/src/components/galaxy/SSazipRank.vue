@@ -406,8 +406,8 @@ export default {
 
 #third{
     position: absolute;
-    margin-left: -355px;
-    margin-top: 350px;
+    margin-left: -345px;
+    margin-top: 353px;
     transform:rotate(20deg);
     font-weight: bold;
     color: white;
