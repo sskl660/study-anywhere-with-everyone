@@ -35,9 +35,8 @@ public class WebSocketController {
                 break;
             }
         }
-//        LocalDateTime now = LocalDateTime.now();
-//        part.setEnterTime(LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute(), now.getSecond()));
-        part.setEnterTime(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        part.setEnterTime(LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute(), now.getSecond()));
         participants.add(part);
         template.convertAndSend("/topic/part", participants);
         ChatVO enterMessage = new ChatVO();
