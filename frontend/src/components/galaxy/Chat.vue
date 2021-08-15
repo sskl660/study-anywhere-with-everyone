@@ -259,11 +259,16 @@ export default {
       // 참가자라면 참여 메세지만 출력하기
       if (receiveMessage.constructor.name == 'Array') {
         // 입장 시간을 기준으로 랭킹 정렬(5명만).
-        this.ranker = receiveMessage.sort(function(a, b) {
-          // console.log(a.getTime);
-          // return a.getTime() - b.getTime();
-          return new Date(a.enterTime) - new Date(b.enterTime);
-        });
+        this.ranker = JSON.parse(
+          JSON.stringify(
+            receiveMessage.sort(function(a, b) {
+              // console.log(a.getTime);
+              // return a.getTime() - b.getTime();
+              return new Date(a.enterTime) - new Date(b.enterTime);
+            })
+          )
+        );
+        // console.log(this.participants);
         console.log(this.ranker);
 
         // 이름 순으로 참여자 정렬
