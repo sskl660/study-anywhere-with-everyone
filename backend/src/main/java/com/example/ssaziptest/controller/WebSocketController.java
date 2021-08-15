@@ -29,17 +29,15 @@ public class WebSocketController {
     // 접속, 재접속시에는 현재 참자가를 지우고 다시 참가자 리스트를 보낸다.
     @MessageMapping("/chat/enter")
     public void enter(ParticipantDTO part) {
-        if(part.getPartEmail() == null) {
-            return;
-        }
         for(int i = 0; i < participants.size(); i++){
             if(participants.get(i).getPartEmail().equals(part.getPartEmail())){
                 participants.remove(i);
                 break;
             }
         }
-        LocalDateTime now = LocalDateTime.now();
-        part.setEnterTime(LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute(), now.getSecond()));
+//        LocalDateTime now = LocalDateTime.now();
+//        part.setEnterTime(LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute(), now.getSecond()));
+        part.setEnterTime(LocalDateTime.now());
         participants.add(part);
         template.convertAndSend("/topic/part", participants);
         ChatVO enterMessage = new ChatVO();
