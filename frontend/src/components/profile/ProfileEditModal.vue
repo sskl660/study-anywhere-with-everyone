@@ -14,7 +14,7 @@
           <div class="profile-edit-upper-container d-flex justify-content-between">
             <div style="display: inline-block;">
               <!-- 내프로필 이미지 떠있는 곳 -->
-              <img id="modalimage" class="profile-img-default apple" src="" alt="" >
+              <img id="modalimage" class="profile-img-default apple" style="width:168px" src="" alt="" >
               <!-- <img class="profile-img-default apple" src="@/assets/ssazip.png" alt="" > -->
               <!-- <ProfileImage class="profile-edit-img-box" /> -->
               <!-- 프로필 미리보기 -->
@@ -55,6 +55,8 @@
                 </form>
                 <!-- 사진업로드를 클릭하면 함수를 실행하여 taskimg가 눌려서 사진업로드 창이 뜬다. -->
                 <button @click="profileShow()" class="btn profile-img-edit-btn" id="shownbtn">사진 업로드</button>
+                <div style="color:red; font-weight:600; margin-top:15px;">*100KB 이하 이미지 등록</div>
+
                 <!-- <button type="button" class="btn profile-img-edit-btn" id="uploadProfile">사진 업로드</button> -->
               </div>
             </div>
@@ -161,8 +163,6 @@ export default {
       this.editProfileData.userTechstack = document.querySelector('.editTechstack').value
       this.editProfileData.userWishfield = document.querySelector('.editWishfield').value
       this.editProfile()
-      console.log('check')
-      console.log(this.editProfileData)
       document.getElementById("uploadSubmit").click();
       this.$router.go()
     },
@@ -173,20 +173,16 @@ export default {
       data: this.editProfileData
       })
         .then((res) => {
-          console.log(res.data)
+          // console.log(res.data)
         })
         .catch((err) => {
-          console.log(err)
+          // console.log(err)
         })
 
     },
     getImage: function(e) {
       //주의: BLOB 파일 용량 제한은 64kb까지임.. ->  ㅡ
-      console.log('모달')
-      console.log(this.userInfo)
       http.get(`/viewimage/${this.userInfo.userEmail}`).then((response) => {
-        console.log('이미지성공')
-        console.log(response.data);
         var imgsrc =
           "data:image/png;base64," +
           btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
@@ -194,25 +190,21 @@ export default {
         this.imgData=imgsrc;
       })
       .catch((error) => {
-        console.log("이미지없음")
-        console.log(this.imgsrc);
-        if (this.imgsrc == null) {
-          console.log("호이")
-          document.getElementById("modalimage").src = "/img/ssazip.43ffb363.png"
-        }
+        // if (this.imgsrc == null) {
+        //   document.getElementById("modalimage").src = "/img/ssazip.43ffb363.png"
+        // }
       });
     },
     profileShow: function ( ){
       document.getElementById("uploadItemFile").click();
-      // document.getElementById("uploadItemFile").click();
     },
     submitForm() {
       var frm = new FormData();
       var timg = document.getElementById("uploadItemFile");
       frm.append("file", timg.files[0]);
       frm.append("useremail", this.userInfo.userEmail);
-      console.log('이미지!!')
-      console.log(this.userInfo.userEmail)
+      // console.log('이미지!!')
+      // console.log(this.userInfo.userEmail)
       http
         .post(`/profile/upload/${this.userInfo.userEmail}`, frm, {
           header: {
@@ -220,23 +212,20 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response);
           this.$router.go()
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
     },
     onFileSelected(event) {
       this.default=false // 미리보기가 뜨면 기존의 프사이미지는 안뜸
-      console.log(this.preview)
       this.preview=true
-      console.log(this.preview)
       let image = event.target;
       if (image.files[0]) {
         let itemImage = this.$refs.uploadItemImage; //img dom 접근
         itemImage.src = window.URL.createObjectURL(image.files[0]); //img src에 blob주소 변환
-        this.itemImageInfo.uploadImages = itemImage.src; //이미지 주소 data 변수에 바인딩해서 나타내게 처리
+        // this.itemImageInfo.uploadImages = itemImage.src; //이미지 주소 data 변수에 바인딩해서 나타내게 처리
         itemImage.width = '100'; // 이미지 넓이
         itemImage.onload = () => {
           window.URL.revokeObjectURL(this.src); //나중에 반드시 해제해주어야 메모리 누수가 안생김.      
@@ -358,7 +347,7 @@ export default {
 }
 .apple {
   position: absolute;
-  left:80px;
-  top: -3px;
+  left:81.5px;
+  top: -3.6px;
 }
 </style>
