@@ -408,15 +408,6 @@ export default {
     beforeRouteLeave(to, from, next) {
         clearInterval(this.clocker);
 
-        // if (this.canLeaveSite) next();
-        // else
-        // if (confirm('이 사이트에서 나가시겠습니까?\n변경사항이 저장되지 않을 수 있습니다.')) {
-        //     console.log("나가마");
-        //     //this.timerStopFlag=true;
-        //     //countDownTimer();
-        //    // this.timerSpt();
-        //     //clearInterval(this.showRemaining);
-
         next();
         // }
     },

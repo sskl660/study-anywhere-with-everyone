@@ -28,10 +28,12 @@ export default {
     // SSazipRank,
   },
       beforeRouteLeave(to, from, next) {
-        document.getElementById('newDivSpace').remove();
+        if(document.getElementById('newDivSpace'))
+          document.getElementById('newDivSpace').remove();
         //document.getElementById('newDivSpace').remove();
         next();
     },
+
   // methods:{
   //   createSSazipContainer: function () {
   //     const SSazipCon = document.getElementById('newDivSpace')
