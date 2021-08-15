@@ -1,21 +1,3 @@
-git pull master
-git status
-git add .
-git commit -am "update(Dockerfile) : update Dockerfile"
-git push
-git pull
-git push
-git pull
-git commit -am "update(Dockerfile) : update Dockerfile"
-git push
-git pull
-git status
-git add .
-git commit -am "update properties"
-git push 
-git add .
-git commit -am "update Properties"
-git push
 git commit -am "update Properties"
 git push
 git pull
@@ -497,4 +479,22 @@ git status
 git pull origin master
 git status
 git commit -am "merge"
+git push
+cd ~
+git status
+git commit -am "save"
+git pull origin master
+git status
+git commit -am "update date time"
+git status
+git pull origin master
+git status
+git push
+git status
+git commit -am "update deep copy issue"
+git pull origin master
+git status
+git add .
+git commit -am "merge"
+git status
 git push
