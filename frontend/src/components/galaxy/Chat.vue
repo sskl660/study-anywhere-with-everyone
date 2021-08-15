@@ -210,6 +210,7 @@ export default {
     this.scrollDown();
   },
   methods: {
+    ...mapActions(['setPart']),
     // 자동 스크롤
     scrollDown() {
       var scrollbox = document.getElementById('roomBox');
@@ -517,6 +518,9 @@ input:focus {
     z-index: 2;
     background: none;
     font-weight: bold;
+    
+    padding: 3%;
+    cursor: pointer;
 }
 .image-box .content::after,
 .image-box .content::before {
