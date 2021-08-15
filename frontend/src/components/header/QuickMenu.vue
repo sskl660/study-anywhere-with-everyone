@@ -185,66 +185,66 @@ export default{
       return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16)
     },
     galaxyEntranceModal () {
-      console.log(this.$router)
-      this.$router.go(-1)
-      swal({
-        title: '갤럭시에 오신 것을 환영합니다!',
-        text: '상태메시지를 입력해주세요.',
-        icon: "/img/star.5dee8d8d.png",
-        content: {
-          element: "input",
-          attributes: {
-            placeholder: '메시지는 20자 이내로 작성해주세요.'
+      if (window.location.pathname != '/Galaxy') {
+        this.$router.go(-1)
+        swal({
+          title: '갤럭시에 오신 것을 환영합니다!',
+          text: '상태메시지를 입력해주세요.',
+          icon: "/img/star.5dee8d8d.png",
+          content: {
+            element: "input",
+            attributes: {
+              placeholder: '메시지는 20자 이내로 작성해주세요.'
+            }
+          },
+          button: {
+            text: '입장',
+            closeModal: false
           }
-        },
-        button: {
-          text: '입장',
-          closeModal: false
-        }
-      })
-        .then(message => {
-          if (!message) {
-            return swal({
-              text: '메시지는 필수 입력사항입니다!',
-              button: {
-                text: '확인',
-              }
-            })
-          }
-
-          if (20 < message.length) {
-            return swal({
-              text: '메시지는 20자 이내여야 합니다!',
-              button: {
-                text: '확인',
-              }
-            })
-          }
-
-          const userInfo = {
-            message: message,
-            userEmail: this.userEmail
-          } 
-
-          axios({
-            method: 'post',
-            url: '/galaxy/entry',
-            data: userInfo
-          })
-            .then(res => {
-              this.getMessage(message)
-              this.$router.push({path: '/Galaxy'})
-            })
-            .catch(err => {
-              console.log(err)
-            })
-
-          swal.close()
         })
+          .then(message => {
+            if (!message) {
+              return swal({
+                text: '메시지는 필수 입력사항입니다!',
+                button: {
+                  text: '확인',
+                }
+              })
+            }
+
+            if (20 < message.length) {
+              return swal({
+                text: '메시지는 20자 이내여야 합니다!',
+                button: {
+                  text: '확인',
+                }
+              })
+            }
+
+            const userInfo = {
+              message: message,
+              userEmail: this.userEmail
+            } 
+
+            axios({
+              method: 'post',
+              url: '/galaxy/entry',
+              data: userInfo
+            })
+              .then(res => {
+                this.getMessage(message)
+                this.$router.push({path: '/Galaxy'})
+              })
+              .catch(err => {
+                console.log(err)
+              })
+
+            swal.close()
+          })
         .catch(err => {
           console.log(err)
         })
-        
+      }
     },
     ...mapActions([
       'getMessage',

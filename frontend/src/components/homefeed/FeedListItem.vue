@@ -165,6 +165,11 @@ export default {
   components: {
     ButtonSquare
   },
+  data: function () {
+    return {
+      imgsrc: ''
+    }
+  },
   methods: {
     getMyImage: function() {
       http.get(`/viewimage/${this.feed.userEmail}`)
@@ -174,9 +179,7 @@ export default {
           btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
         document.getElementById(`my-image${this.idx}`).src = imgsrc;
       })
-      .catch((error) => {
-        console.log(error)
-      });
+      .catch((error) => {});
     },
     getFollowerImage: function() {
       http.get(`/viewimage/${this.feed.followUserEmail}`)
@@ -186,9 +189,7 @@ export default {
           btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
         document.getElementById(`follower-image${this.idx}`).src = imgsrc;
       })
-      .catch((error) => {
-        console.log(error)
-      });
+      .catch((error) => {});
     },
     moveToChallenge: function(challNo) {
       this.$router.push({path: '/challengeRoom', query: {cn: challNo}});
@@ -214,11 +215,12 @@ export default {
       var day = date.getDate();
       day = day < 10 ? '0' + day.toString() : day.toString()
 
-      var hour = date.getHours() + 9
-      if (24 <= hour) {
-        day = (parseInt(day) + 1).toString()
-        hour -= 24
-      }
+      // var hour = date.getHours() + 9
+      // if (24 <= hour) {
+      //   day = (parseInt(day) + 1).toString()
+      //   hour -= 24
+      // }
+      var hour = date.getHours()
       hour = hour < 10 ? '0' + hour.toString() : hour.toString()
 
       var minites = date.getMinutes()
@@ -237,7 +239,7 @@ export default {
       let hour = Math.ceil((interval % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + (day - 1) * 24 - 9;
 
       return hour
-    }
+    },
   }
 }
 </script>
