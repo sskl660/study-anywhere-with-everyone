@@ -84,12 +84,14 @@ export default {
         };
     },
     created: function() {
+        clearInterval(this.clocker);
+
         // this.gravity();
         // this.participants=this.participantsVuex;
     },
-    beforeRouteLeave(to, from, next) {
+    destroyed(to, from, next) {
         clearInterval(this.clocker);
-
+        alert("나가니")
         next();
         // }
     },
@@ -286,42 +288,6 @@ export default {
                 // w = window.innerWidth - scrollBarRight - 1;
             }
 
-            // ///기존의 새로  생성하는 new div space code
-            // if (!document.getElementById('newDivSpace')) {
-            //     //처음이라면
-            //     console.log('=================make newDivSpace=========================================');
-            //     var con = d.createElement('div');
-            //     con.setAttribute('id', 'newDivSpace');
-            //     con.setAttribute(
-            //         'style',
-            //         'display:block;' +
-            //             'position:absolute;' +
-            //             'top:0px;left:0px;' +
-            //             'height:100%;width:100%;' +
-            //             'background:transparent;' +
-            //             'overflow:hidden;' +
-            //             'visibility:hidden;'
-            //     );
-
-            //     con.innerHTML +=
-            //         '<svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"' +
-            //         ' style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">' +
-            //         '<line id="vec" x1="0" y1="0" x2="0" y2="0" stroke="' +
-            //         vectorLineColour +
-            //         '" stroke-width="1.5" stroke-dasharray="3,3">' +
-            //         '</svg>';
-
-            //     d.body.appendChild(con);
-            // } else {
-            //     //처음아니라면
-            //     var con = document.getElementById('newDivSpace');
-            //     console.log('=============================stay DivSpace==========================');
-            //     console.log(con);
-            //     // con.removeChild(d.getElementById('ssazip'));
-            // }
-
-            ///try new
-
             console.log('=================use oldDivSpace=========================================');
             // console.log('=================make newDivSpace=========================================');
             // var con = d.createElement('div');
@@ -349,8 +315,7 @@ export default {
             function xy(a, s) {
                 return (a * s) / 100;
             }
-            // console.log('만들공간인 oldDiv의 상태입니다');
-            // console.log(con);
+
             /////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////
@@ -378,19 +343,7 @@ export default {
                 console.log(JSON.parse(JSON.stringify(partList)));
                 console.log('생성할 참여자');
                 console.log(partList[idx].partEmail);
-                //이메일을 가지는 엘리먼트로 속성 지정
-                //////////oldDiv
-                // console.log('idx==newIdx')
-                // console.log(idx==newIdx)
-                // if (deathIdx != -1 && d.getElementById(`ssazip${beforeList[idx]}`) != null) {
-                //     console.log(partList[idx].partEmail);
-                //     console.log('삭제');
-                //     var ball = d.getElementById(`ssazip${beforeList[idx]}`);
-                //     ball.parentNode.removeChild(ball);
-                //     balls.splice(idx, 1);
-                //     ballCoords.splice(idx, 1);
-                //     return;
-                // } else
+
 
                 if (d.getElementById(`ssazip${partList[idx].partEmail}`) != null) {
                     console.log(partList[idx].partEmail);
@@ -424,19 +377,6 @@ export default {
                         partList[idx].partEmail +
                         `"></div>  </span>
                             `;
-
-                    // var cell = document.getElementById('oldPlace');
-
-                    // if ( idx==partList.length-1) {
-                    //     console.log("삭제한다요")
-                    //     var cell = document.getElementById("oldPlace");
-                    // while ( cell.hasChildNodes() ) { cell.removeChild( cell.firstChild ); }
-                    //     }
-                    // if (ball == null) {
-                    //     console.log('새로운 컨포넌트 생성!!ㅣㅏㅁ누이ㅏㄴㅁ우');
-                    //     console.log(partList[idx]);
-                    //     // ball=d.createElement("SmallSSazip",{type: rops:{ssazibi:partList[idx]}})
-                    // }
 
                     ball.setAttribute(
                         'style',
@@ -473,31 +413,7 @@ export default {
                     ball.style.visibility = 'visible';
                 }, 50);
 
-                // console.log('con');
-                // console.log(con);
 
-                // console.log('con.childNodes');
-                // console.log(con.childNodes);
-                // console.log('con.children');
-                // console.log(con.children);
-                // // console.log('포함여부를 위한 콘솔');
-                // // console.log(document.getElementById(`div#ssazip${partList[idx].partEmail}`).contains(con.childNodes));
-                // // if (!con.childNodes.contains(`ssazip${partList[idx].partEmail}`)) {
-                // // console.log(con.hasChildNodes(`div#ssazip${partList[idx].partEmail}`));
-                // console.log('con.children.namedItem(`ssazip${partList[idx].partEmail}`)');
-                // console.log(con.children.namedItem(`ssazip${partList[idx].partEmail}`));
-                // console.log('con.children.namedItem("gravitybtn")');
-                // console.log(con.children.namedItem('gravitybtn'));
-                // if (document.getElementById(`div#ssazip${partList[idx].partEmail}`).contains(con.children)) {
-                // if (con.children.namedItem(`ssazip${partList[idx].partEmail}`) != null) {
-                //     // console.log('있던거네 일단 삭제함요');
-                //     console.log('있던거네 일단 패스함요');
-                //     console.log(con.children.namedItem(`ssazip${partList[idx].partEmail}`));
-                //     // con.removeChild(con.children.namedItem(`ssazip${partList[idx].partEmail}`));
-                //     // con.removeChild(ball);
-                // }
-                // //
-                // else {
                 if (!document.getElementById(`ssazip${partList[idx].partEmail}`)) {
                     //&&!document.getElementById(`ssazip${partList[idx].partEmail}`).contains(con)) {
                     console.log('공이없다 추가한다링');
