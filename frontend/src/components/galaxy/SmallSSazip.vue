@@ -1,5 +1,5 @@
 <template>
-  <div id="ssazip">
+  <div :id="'ssazip'+sazibi.partEmail">
     <img :src="ssazip_pics[snum]" style="width:50px" />
     <img style="display:none" src="@/assets/ssazip.png" alt="" />
     <img style="display:none" src="@/assets/ssazip_mint.png" alt="" />
@@ -7,7 +7,7 @@
     <img style="display:none" src="@/assets/ssazip_purple.png" alt="" />
     <img style="display:none" src="@/assets/ssazip_yellow.png" alt="" />
     <img style="display:none" src="@/assets/ssazip_red.png" alt="" />
-    <span style="color:#fff">권희은</span>
+    <span style="color:#fff">{{sazibi}}</span>
   </div>
 </template>
 
@@ -35,7 +35,7 @@ export default {
   methods: {
     getnum: function () {
       // const num = parseInt(this.idx % 6)
-      const num = (Math.random() % 6)
+      const num = parseInt(Math.random()*5)
       this.snum = num
     }
   },

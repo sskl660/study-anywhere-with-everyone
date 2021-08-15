@@ -1,42 +1,19 @@
 <!-- 메세지 입력창 하단으로 배치-->
 <!-- 채팅창 CSS 입히기-->
 <template>
-  <div>
-    <div class="participantList" id="participantbox">
-
-        <span class="dropdown">
-              <div class="drop-list-title" style="">참여자 목록</div>
-              <div class="drop-list">
-                <div v-for="user in this.participants" :key="user">
-                  <div class="image-box" @click="toProfile(user.partEmail)">
-                    <div class="content">{{ user.partTerm }} 기 {{ user.partName }}</div>
-                  </div>
-                </div>
-                <!-- <p>3기 김예시</p>
-                 <p>3기 김예시</p>
-                  <p>3기 김예시</p>
-                   <p>3기 김예시</p>
-                    <p>3기 김예시</p>
-                     <p>3기 김예시</p>
-                      <p>3기 김예시</p>
-                       <p>3기 김예시</p>
-                        <p>3기 김예시</p>
-                         <p>3기 김예시</p>
-                          <p>3기 김예시</p>
-                           <p>3기 김예시</p>
-                            <p>3기 김예시</p>
-                             <p>3기 김예시</p>
-                              <p>3기 김예시</p>
-                               <p>3기 김예시</p>
-                                <p>3기 김예시</p>
-                                 <p>3기 김예시</p>
-                                  <p>3기 김예시</p> -->
-              </div>
-            <!-- </ul> -->
-          </span>
-
-      </div>
     <div>
+        <div class="participantList" id="participantbox">
+            <span class="dropdown">
+                <div class="drop-list-title" style="">참여자 목록</div>
+                <div class="drop-list">
+                    <div v-for="(user,index) in this.participants" :key="index">
+                        <div class="image-box" @click="toProfile(user.partEmail)">
+                            <div class="content">{{ user.partTerm }} 기 {{ user.partName }}</div>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
         <div>
             <div v-if="chatType == 'algo'">
                 <!-- <div class="dropdown">
@@ -57,10 +34,10 @@
               </div>              
             </ul>
           </div> -->
-        <div id="roomNameAlgo">
-          <h3 style="color:white">Algo 채팅방 입니다.</h3>
-          <span id="participant">{{ this.participants.length }} 명 참여 중</span>
-          <!-- <span class="dropdown" id="participant">
+                <div id="roomNameAlgo">
+                    <h3 style="color:white">Algo 채팅방 입니다.</h3>
+                    <span id="participant">{{ this.participants.length }} 명 참여 중</span>
+                    <!-- <span class="dropdown" id="participant">
             <button
               class="btn pt-0 pb-0"
               style="height:30px; text-align:center; font-weight:bold; color:white; "
@@ -71,7 +48,7 @@
             >
               {{ this.participants.length }} 명 참여 중
             </button> -->
-            <!-- <ul
+                    <!-- <ul
               class="dropdown-menu text-center"
               style=" background-color: rgba(255,255,255,0.5);     border-radius: 15px;
 "
@@ -86,79 +63,90 @@
                 </div>
               </div>
             </ul> -->
-          <!-- </span> -->
-        </div>
-        <div id="roomBox">
-          <div v-for="(obj, index) in receivedMessagesAlgo" :key="index">
-            <!-- 입퇴장 -->
-            <div v-if="obj.senderId === null" id="chatboxcome">
-              <div id="Ccome">{{ obj.content }}</div>
-            </div>
-            <!-- 남이 보낸거 -->
-            <div v-else-if="obj.senderId != userEmail" id="chatboxleft">
-              <div id="Cname">
-                <a class="link-1"
-                  ><strong @click="toProfile(obj.senderId)">{{ obj.sender }}</strong></a
-                >
-              </div>
-              <div id="Ctext">{{ obj.content }}</div>
-            </div>
-            <!-- 내가 보낸거 -->
-            <div v-else id="chatboxright">
-              <div id="CMname">
-                <strong>{{ obj.sender }}</strong>
-              </div>
-              <div id="CMtext">{{ obj.content }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
+                    <!-- </span> -->
+                </div>
 
-      <div v-else-if="chatType == 'cs'">
-        <div id="roomNameCS">
-          <h3 style="color:white">CS 채팅방 입니다.</h3>
-          <span id="participant">{{ this.participants.length }} 명 참여 중</span>
-        </div>
-        <div id="roomBox">
-          <div v-for="(obj, index) in receivedMessagesCS" :key="index">
-            <div v-if="obj.senderId === null" id="chatboxcome">
-              <div id="Ccome">{{ obj.content }}</div>
-            </div>
-            <div v-else-if="obj.senderId != userEmail" id="chatboxleft">
-              <div id="Cname">
-                <a class="link-1">
-                  <strong @click="toProfile(obj.senderId)">{{ obj.sender }}</strong></a
-                >
-              </div>
-              <div id="Ctext">{{ obj.content }}</div>
-            </div>
-            <div v-else id="chatboxright">
-              <div id="CMname">
-                <strong>{{ obj.sender }}</strong>
-              </div>
-              <div id="CMtext">{{ obj.content }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
+                <div id="roomBox">
+                    <div v-for="(obj, index) in receivedMessagesAlgo" :key="index">
+                        <!-- 입퇴장 -->
+                        <div v-if="obj.senderId === null" id="chatboxcome">
+                            <div id="Ccome">{{ obj.content }}</div>
+                        </div>
+                        <!-- 남이 보낸거 -->
+                        <div v-else-if="obj.senderId != userEmail" id="chatboxleft">
+                            <div id="Cname">
+                                <a class="link-1"
+                                    ><strong @click="toProfile(obj.senderId)">{{ obj.sender }}</strong>
+                                </a>
+                            </div>
+                            <div id="Ctext">{{ obj.content }}</div>
+                        </div>
 
-      <div v-else>
-        <div id="roomNameJob">
-          <h3 style="color:white">Job 채팅방 입니다.</h3>
-          <span id="participant">{{ this.participants.length }} 명 참여 중</span>
-        </div>
-        <div id="roomBox">
-          <div v-for="(obj, index) in receivedMessagesJob" :key="index">
-            <div v-if="obj.senderId === null" id="chatboxcome">
-              <div id="Ccome">{{ obj.content }}</div>
+                        <!-- 내가 보낸거 -->
+                        <div v-else id="chatboxright">
+                            <div id="CMname">
+                                <strong>{{ obj.sender }}</strong>
+                            </div>
+                            <div id="CMtext">{{ obj.content }}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div v-else-if="obj.senderId != userEmail" id="chatboxleft">
-              <div id="Cname">
-                <a class="link-1">
-                  <strong @click="toProfile(obj.senderId)">{{ obj.sender }}</strong></a
-                >
-              </div>
-              <div id="Ctext">{{ obj.content }}</div>
+
+            <div v-else-if="chatType == 'cs'">
+                <div id="roomNameCS">
+                    <h3 style="color:white">CS 채팅방 입니다.</h3>
+                    <span id="participant">{{ this.participants.length }} 명 참여 중</span>
+                </div>
+                <div id="roomBox">
+                    <div v-for="(obj, index) in receivedMessagesCS" :key="index">
+                        <div v-if="obj.senderId === null" id="chatboxcome">
+                            <div id="Ccome">{{ obj.content }}</div>
+                        </div>
+                        <div v-else-if="obj.senderId != userEmail" id="chatboxleft">
+                            <div id="Cname">
+                                <a class="link-1">
+                                    <strong @click="toProfile(obj.senderId)">{{ obj.sender }}</strong></a
+                                >
+                            </div>
+                            <div id="Ctext">{{ obj.content }}</div>
+                        </div>
+                        <div v-else id="chatboxright">
+                            <div id="CMname">
+                                <strong>{{ obj.sender }}</strong>
+                            </div>
+                            <div id="CMtext">{{ obj.content }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-else>
+                <div id="roomNameJob">
+                    <h3 style="color:white">Job 채팅방 입니다.</h3>
+                    <span id="participant">{{ this.participants.length }} 명 참여 중</span>
+                </div>
+                <div id="roomBox">
+                    <div v-for="(obj, index) in receivedMessagesJob" :key="index">
+                        <div v-if="obj.senderId === null" id="chatboxcome">
+                            <div id="Ccome">{{ obj.content }}</div>
+                        </div>
+                        <div v-else-if="obj.senderId != userEmail" id="chatboxleft">
+                            <div id="Cname">
+                                <a class="link-1">
+                                    <strong @click="toProfile(obj.senderId)">{{ obj.sender }}</strong></a
+                                >
+                            </div>
+                            <div id="Ctext">{{ obj.content }}</div>
+                        </div>
+                        <div v-else id="chatboxright">
+                            <div id="CMname">
+                                <strong>{{ obj.sender }}</strong>
+                            </div>
+                            <div id="CMtext">{{ obj.content }}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div>
                 <input
@@ -502,27 +490,27 @@ input:focus {
 }
 
 #participant {
-  font-size: 18px;
-  position: absolute;
-  margin-top: -99px;
-  margin-left: 121px;
-  position: fixed;
-  color: white;
-  font-weight: bold;
+    font-size: 18px;
+    position: absolute;
+    margin-top: -99px;
+    margin-left: 121px;
+    position: fixed;
+    color: white;
+    font-weight: bold;
 }
 
 /* 목록호버링을 위한 */
 .image-box {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 2;
-  background: none;
-  font-weight: bold;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    background: none;
+    font-weight: bold;
 }
 .image-box .content::after,
 .image-box .content::before {
-  /* content: '';
+    /* content: '';
   display: block;
   position: absolute;
   left: 50%;
@@ -530,8 +518,8 @@ input:focus {
   transform: translate(-50%, -50%);
   width: 0%;
   height: 0%; */
-  border-color: rgb(46, 45, 100);
-  /* border-width: 1px;
+    border-color: rgb(46, 45, 100);
+    /* border-width: 1px;
   transition: 0.5s; */
 }
 .image-box .content::after {
@@ -591,37 +579,36 @@ a {
     transition: all 0.2s ease;
 }
 
-.participantList{
-  position: absolute;
-  margin-left: -170px;
+.participantList {
+    position: absolute;
+    margin-left: -170px;
 }
 
-#participantbox{
-    background-color: rgba(255,255,255,0.2);
+#participantbox {
+    background-color: rgba(255, 255, 255, 0.2);
     padding-right: 17px;
     padding-left: 17px;
     padding-top: 15px;
     padding-bottom: 15px;
     border-radius: 20px;
     max-height: 770px;
-
 }
-.drop-list-title{
-  background-color: #F1C069;
-  border-radius: 33px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  margin-bottom: 8px;
-  font-size: 18px;
+.drop-list-title {
+    background-color: #f1c069;
+    border-radius: 33px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    font-size: 18px;
 }
 
-.drop-list{
-  border-radius: 10px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  margin-left: 0px;
-  max-height: 700px;
-  overflow: scroll;
+.drop-list {
+    border-radius: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-left: 0px;
+    max-height: 700px;
+    overflow: scroll;
 }
 /* .link-6 a:hover {
   -webkit-transform: scale(1.05);
