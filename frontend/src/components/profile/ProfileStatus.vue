@@ -16,7 +16,7 @@
             <ul class="dropdown-menu text-center" style="background-color: #E1AF4E; border-radius: 1rem" aria-labelledby="dropdownMenuButton1">
               <div class="drop-list-title" style="">follower</div>
               <div class="drop-list">
-                <div v-for="follower in followers" :key="follower">
+                <div v-for="(follower, idx) in followers" :key="idx">
                   <!-- <li><a class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;" href="#">{{follower[1]}}</a></li> -->
                   <li>
                     <router-link class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;" :to="{ path: '/profile', query: { user: follower[0]  }}">
@@ -40,7 +40,7 @@
             <ul class="dropdown-menu text-center" style="background-color: #E1AF4E; border-radius: 1rem" aria-labelledby="dropdownMenuButton1">
               <div class="drop-list-title" style="">following</div>
               <div class="drop-list">
-                <div v-for="following in followings" :key="following">
+                <div v-for="(following, idx) in followings" :key="idx">
                   <li>
                     <router-link :to="{ path: '/profile', query: { user: following[0]  }}" class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;">
                       {{following[1]}}
@@ -75,24 +75,6 @@ export default {
       type: Array
     }
   },
-  methods: {
-    followerList: function () {
-      // console.log('cpzm')
-      // console.log(this.userInfo)
-      // console.log(this.followers)
-    },
-    followingList: function () {
-      console.log('cpzsssm')
-      // console.log(this.userInfo.userFollowing)
-      console.log(this.followings)
-    }
-  },
-  created:function (){
-    //alert('profile status')
-     this.followerList()
-     this.followingList()
-  },
- 
 }
 </script>
 
@@ -104,6 +86,7 @@ export default {
   border-radius: 1rem;
   margin-top: 5px;
   margin-left:10px;
+  box-shadow:3px 4px 4px #665b46;
 }
 .profile-status-info {
   width: 420px;

@@ -74,7 +74,7 @@ export default {
   },
   data: function () {
     return {
-      followers: [],
+      // followers: [],
       follow: {
         "followFollower": "",
         "userEmail": "",
@@ -96,8 +96,6 @@ export default {
   methods: {
     // 로그인한 사용자가 계정주인이면 true
     checkOwner: function () {
-      // console.log(this.userInfo.userEmail) // 팔로우 당하는 사람
-      // console.log(this.userEmail) // 팔로우 요청하는 사람
       if (this.userEmail == this.userInfo.userEmail) return true;
       else false;
     },
@@ -110,13 +108,8 @@ export default {
     },
     // 팔로우 요청시 필요한 데이터 넣어주는 함수
     doFollow: function() {
-      // console.log('왜 안되냐고')
       this.follow.followFollower = this.userEmail; //팔로우 요청하는 사람
       this.follow.userEmail = this.userInfo.userEmail;  // 팔로우 당하는 사람
-      // console.log(this.userInfo)
-      // console.log('1'+this.userInfo.userEmail)
-      // console.log('2'+this.userEmail) 
-      // console.log(this.follow)
     },
     makeFollow: function () {
       axios({
@@ -125,11 +118,10 @@ export default {
           data: this.follow,
         })
           .then((res) => {
-              console.log(res.data)
               this.$router.go()
           })
           .catch((err) => {
-              console.log(err);
+              // console.log(err);
               this.$router.go()
           });
     },
@@ -140,12 +132,10 @@ export default {
           url: `/follow/${this.userInfo.userEmail}/${this.userEmail}`,
         })
           .then((res) => {
-              // console.log('유저팔로우!!');
-              // console.log(res.data)
               this.$router.go()
           })
           .catch((err) => {
-              console.log(err);
+              // console.log(err);
               this.$router.go()
           });
     },
@@ -157,23 +147,16 @@ export default {
       //주의: BLOB 파일 용량 제한은 64kb까지임.. ->  ㅡ
       http.get(`/viewimage/${this.userInfo.userEmail}`)
       .then((response) => {
-        // console.log('이미지성공')
-        // console.log(response.data);
         var imgsrc =
           "data:image/png;base64," +
           btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
         document.getElementById("image").src = imgsrc;
         this.imgData=imgsrc;
-        // console.log("야압")
-        // console.log(imgsrc)
       })
       .catch((error) => {
-        // console.log("이미지없음")
-        // console.log(this.imgsrc);
-        if (this.imgsrc == null) {
-          // console.log("얍")
-          document.getElementById("image").src = "/img/ssazip.43ffb363.png"
-        }
+        // if (this.imgsrc == null) {
+        //   document.getElementById("image").src = "/img/ssazip.43ffb363.png"
+        // }
       });
     },
     
@@ -182,8 +165,6 @@ export default {
       var timg = document.getElementById("taskimg");
       frm.append("file", timg.files[0]);
       frm.append("useremail", this.userInfo.userEmail);
-      // console.log('이미지!!')
-      // console.log(this.userInfo.userEmail)
       http
         .post(`/profile/upload/${this.userInfo.userEmail}`, frm, {
           header: {
@@ -191,11 +172,9 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response);
           this.$router.go()
         })
         .catch((error) => {
-          console.log(error);
         });
       },
   },
@@ -226,7 +205,6 @@ export default {
 .idcard{
   width:600px;
   height:350px;
-  /* position:relative; */
   background-image: url(~@/assets/card2.png);
 }
 /* id카드 프로필 이미지 */
@@ -263,6 +241,7 @@ p {
   color: #fff;
   margin-left: 5px;
   margin-top: 20px;
+  box-shadow:3px 3px 10px #3e479b;
 }
 .profile-img-default {
   border-radius: 70%;
