@@ -3,7 +3,7 @@
 <template>
   <div id="ds" class="">
     <SSazip id="asd"/>
-    <SSazipRank id="galaxyRank"/>
+    <!-- <SSazipRank id="galaxyRank"/> -->
     <div class="">
       <div><ChatTab /></div>
     </div>
@@ -21,6 +21,7 @@ import SSazipRank from '@/components/galaxy/SSazipRank.vue';
 import swal from 'sweetalert';
 import axios from '@/util/http-common.js';
 import { mapActions } from 'vuex'
+// import SSazipRank from '@/components/galaxy/SSazipRank.vue';
 
 export default {
   name: 'Galaxy',
@@ -28,14 +29,12 @@ export default {
     Chat,
     ChatTab,
     SSazip,
-    SSazipRank,
+    // SSazipRank,
   },
   beforeRouteLeave(to, from, next) {
      if(document.getElementById('newDivSpace')) {
        document.getElementById('newDivSpace').remove();
      }
-          
-    document.getElementById('newDivSpace').remove();
     swal({
       title: '정말 갤럭시 방을 나가시겠어요?',
       buttons: {

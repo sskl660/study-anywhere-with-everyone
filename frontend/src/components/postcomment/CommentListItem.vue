@@ -30,9 +30,9 @@ export default {
             // this.comment.userImage = imgsrc;
             })
             .catch((error) => {
-                if (this.imgsrc == null) {
-                document.getElementById(`msgimage${this.index}`).src = "/img/ssazip.43ffb363.png"
-                }
+                // if (this.imgsrc == null) {
+                // document.getElementById(`msgimage${this.index}`).src = "/img/ssazip.43ffb363.png"
+                // }
             });
         },
     },
