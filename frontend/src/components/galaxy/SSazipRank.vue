@@ -69,11 +69,26 @@
             <!-- <img id="fiveKing" src="~@/assets/kingfive.png" alt=""> -->
         </div>
         <div>
-            <div id="first" v-if="ranker[0]"><span>{{this.ranker[0].partName}}</span></div>
-            <div id="second" v-if="ranker[1]"><span>{{this.ranker[1].partName}}</span></div>
-            <div id="third" v-if="ranker[2]"><span>{{this.ranker[2].partName}}</span></div>
-            <div id="forth" v-if="ranker[3]"><span>{{this.ranker[3].partName}}</span></div>
-            <div id="fifth" v-if="ranker[4]"><span>{{this.ranker[4].partName}}</span></div>
+            <div v-if="ranker[0]">
+                <span id="firstTime">{{this.ranker[0].enterTime.substring(5,19)}}</span>
+                <span id="first">{{this.ranker[0].partName}}</span>
+            </div>
+            <div v-if="ranker[1]">
+                <span id="secondTime">{{this.ranker[1].enterTime.substring(5,19)}}</span>
+                <span id="second" >{{this.ranker[1].partName}}</span>
+            </div>
+            <div v-if="ranker[2]">
+                <span id="thirdTime">{{this.ranker[2].enterTime.substring(5,19)}}</span>
+                <span id="third">{{this.ranker[2].partName}}</span>
+            </div>
+            <div v-if="ranker[3]">
+                <span id="forthTime">{{this.ranker[3].enterTime.substring(5,19)}}</span>
+                <span id="forth" >{{this.ranker[3].partName}}</span>
+            </div>
+            <div v-if="ranker[4]">
+                <span id="fifthTime">{{this.ranker[4].enterTime.substring(5,19)}}</span>
+                <span id="fifth" >{{this.ranker[4].partName}}</span>
+            </div>
         </div>
     </div>
   </div>
@@ -94,8 +109,8 @@ export default {
   },
   methods:{
       printt: function(){
-          console.log('안녕')
-          console.log(this.ranker)
+          console.log('여기 확인 좀 해주소')
+          console.log(this.ranker[1].enterTime.substring(5,19))
       }
   },
   created: function() {
@@ -395,7 +410,7 @@ export default {
     font-size: 20px;
     filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0)); */
     position: absolute;
-    margin-left: -445px;
+    margin-left: -440px;
     margin-top: 130px;
     transform:rotate(20deg);
     font-weight: bold;
@@ -417,7 +432,7 @@ export default {
 
 #forth{
     position: absolute;
-    margin-left: -175px;
+    margin-left: -176px;
     margin-top: 205px;
     transform:rotate(20deg);
     font-weight: bold;
@@ -434,6 +449,58 @@ export default {
     font-weight: bold;
     color: white;
     font-size: 20px;
+    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
+}
+
+#firstTime{
+    position: absolute;
+    /* margin-left: -655px; 
+    margin-top: 360px; */
+    margin-left: -685px;
+    margin-top: 350px;
+    transform:rotate(20deg);
+    color: white;
+    font-size: 15px;
+    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
+}
+
+#secondTime{
+    position: absolute;
+    margin-left: -470px;
+    margin-top: 156px;
+    transform:rotate(20deg);
+    color: white;
+    font-size: 15px;
+    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
+}
+
+#thirdTime{
+    position: absolute;
+    margin-left: -380px;
+    margin-top: 378px;
+    transform:rotate(20deg);
+    color: white;
+    font-size: 15px;
+    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
+}
+
+#forthTime{
+    position: absolute;
+    margin-left: -207px;
+    margin-top: 230px;
+    transform:rotate(20deg);
+    color: white;
+    font-size: 15px;
+    filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
+}
+
+#fifthTime{
+    position: absolute;
+    margin-left: -123px;
+    margin-top: 435px;
+    transform:rotate(20deg);
+    color: white;
+    font-size: 15px;
     filter: drop-shadow(0 0 0.75rem rgb(255, 217, 0));
 }
 </style>
