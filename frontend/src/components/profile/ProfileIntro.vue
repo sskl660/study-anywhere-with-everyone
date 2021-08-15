@@ -11,7 +11,7 @@ export default {
   name: "ProfileIntro",
   props: {
     userIntroduce: {
-      type: Object
+      type: String
     }
   },
   data: function () {

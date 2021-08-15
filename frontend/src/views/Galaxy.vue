@@ -31,6 +31,10 @@ export default {
     SSazipRank,
   },
   beforeRouteLeave(to, from, next) {
+     if(document.getElementById('newDivSpace')) {
+       document.getElementById('newDivSpace').remove();
+     }
+          
     document.getElementById('newDivSpace').remove();
     swal({
       title: '정말 갤럭시 방을 나가시겠어요?',

@@ -19,6 +19,7 @@ export default new Vuex.Store({
     // Galaxy 관련
     message: null, // 입장 메시지
     chatType: 'algo', // 채팅창 타입(Algo, CS, Job)
+    participantsVuex:[],
   },
   // state를 유지하기 위해
   plugins: [
@@ -101,7 +102,12 @@ export default new Vuex.Store({
     // 메시지 가져와서 저장하기
     GET_MESSAGE(state, msg) {
       state.message = msg
-    }
+    },
+    SET_PARTICIPANTS(state, payload) {
+      console.log("SET_PARTICIPANTS mutation working" + payload);
+      console.log(payload);
+      state.participantsVuex = payload;
+    },
   },
   // 젠킨스를 위한 변경사항
   actions: {
@@ -239,6 +245,10 @@ export default new Vuex.Store({
     // 입장 메시지 가져오기
     getMessage: function ({ commit }, msg) {
       commit('GET_MESSAGE', msg)
+    },
+    // 갤럭시방 참가자 관리
+    setPart: function ({ commit }, participants){
+      commit('SET_PARTICIPANTS', participants);
     }
   },
 
@@ -267,6 +277,9 @@ export default new Vuex.Store({
     },
     message: function(state) {
       return state.message;
+    },
+    participantsVuex: function (state) {
+      return state.participantsVuex;
     }
   },
 });

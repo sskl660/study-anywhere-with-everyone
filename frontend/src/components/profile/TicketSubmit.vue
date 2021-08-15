@@ -1,14 +1,14 @@
 <template>
-  <div class="ticket-round" style="display:inline-block" :class="{'miss': checkMiss(ticketTask), 'submit': checkSubmit(ticketTask)}">1</div>
+  <div class="ticket-round" style="display:inline-block;" :class="{'miss': checkMiss(ticketTask), 'submit': checkSubmit(ticketTask)}">1</div>
 </template>
 
 <script>
 export default {
   name: 'TicketSubmit',
   props: {
-  ticketTask: {
-      type: Object,
-    }
+    ticketTask: {
+        type: Number,
+      }
   },
   // -2: 기간지나고 안낸거 / -1: 기간안지나고 안낸거
   methods: {
@@ -39,8 +39,10 @@ export default {
 }
 .miss {
   background-color: #EE4748 ;
+   box-shadow:1px 3px 10px #5a1f24;
 }
 .submit {
   background-color: #5974B3;
+  box-shadow:3px 3px 10px #3e479b;
 }
 </style>
