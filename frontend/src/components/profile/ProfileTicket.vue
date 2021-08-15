@@ -17,28 +17,12 @@
         <TicketSubmitRight v-if="this.ticket.taskNo[4]" :num="this.five" :ticketTask="ticket.taskNo[4]"/>
         <TicketSubmitLeft v-if="this.ticket.taskNo[5]" :num="this.six" :ticketTask="ticket.taskNo[5]"/>
         <TicketSubmitRight v-if="this.ticket.taskNo[6]" :num="this.seven" :ticketTask="ticket.taskNo[6]"/>
-        <!-- <div v-for="task in ticket.taskNo" :key="task">
-          <span>tick</span>
-        </div> -->
       </div>
       <div v-if="this.ticket.isComplete">
         <img v-if="this.checkExcellent()" class="stamp" style="float:right" src="@/assets/excellent.png" alt="">
         <img v-if="this.checkTryAgain()" class="stamp" style="float:right" src="@/assets/try.png" alt="">
         <img v-if="this.checkAwesome()" class="stamp" style="float:right" src="@/assets/awesome.png" alt="">
       </div>
-      <!-- 챌린지 끝나야 도장찍히게 해야하나? -->
-      <!-- <div v-if="this.checkFinish()">
-        <img v-if="this.checkExcellent()" class="stamp" style="float:right" src="@/assets/excellent.png" alt="">
-        <img v-if="this.checkTryAgain()" class="stamp" style="float:right" src="@/assets/try.png" alt="">
-        <img v-if="this.checkAwesome()" class="stamp" style="float:right" src="@/assets/awesome.png" alt="">
-      </div> -->
-      
-      <!-- <div class="ticket-right" style="display: inline-block">
-        <div v-for="task in ticket.taskNo" :key="task">
-          <span>tick</span>
-        </div>
-        <div>과제들</div>
-      </div> -->
     </div>
     
   </div>
@@ -66,15 +50,6 @@ export default {
       excellent: false,
       asewome: false,
       tryagain:false,
-      // ticketExist: {
-      //   one: false,
-      //   two: false,
-      //   three: false,
-      //   four: false,
-      //   five: false,
-      //   six: false,
-      //   seven: false,
-      // }
     }
   },
   components :{
@@ -84,8 +59,6 @@ export default {
   },
   methods: {
     checkExcellent: function () {
-      console.log("완료여부")
-      console.log(this.ticket)
       if (this.ticket.achieveRate == 100) return true;
       else false
     },
@@ -98,16 +71,10 @@ export default {
       else false
     },
     checkFinish: function () {
-      console.log("check!!!!!")
-      console.log(this.ticket)
       for (var task in this.ticket.taskNo) {
-        console.log(task)
         if (task==-2) return false
         else true
-        console.log(완료)
       }
-      console.log("완료여부")
-      console.log(this.ticket)
     },
     profileToChallenge: function() {
       this.$router.push({path:'/challengeRoom',query:{cn:this.ticket.challengeNo}});

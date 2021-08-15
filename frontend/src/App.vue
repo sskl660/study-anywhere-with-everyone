@@ -1,9 +1,7 @@
 <template>
     <div id="app">
         <Header />
-        <div class="contrainer">
-            <router-view :key="$route.fullPath" />
-        </div>
+        <router-view :key="$route.fullPath" />
     </div>
 </template>
 vue
