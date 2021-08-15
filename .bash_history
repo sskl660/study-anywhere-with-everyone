@@ -1,11 +1,3 @@
-git push
-git pull
-git commit -am "update(Dockerfile) : update Dockerfile"
-git push
-ls
-git pull master
-cd ..
-ls -a
 git pull master
 git status
 git add .
@@ -497,4 +489,12 @@ git pull origin master
 git status
 git commit -am "merge
 "
+git push
+cd ~
+git status
+git commit -am "update socker logic"
+git status
+git pull origin master
+git status
+git commit -am "merge"
 git push
