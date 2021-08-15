@@ -46,10 +46,8 @@ export default {
     methods: {
         //로그인 상태라면 챌린지(임시) 페이지로 이동
         logined: function() {
-            // alert(this.isLogin);
             if (this.isLogin) {
-                //alert(this.isLogin);
-                this.$router.push({ path: '/challenges' });
+                this.$router.push({ path: '/homefeed' });
             }
         },
     },

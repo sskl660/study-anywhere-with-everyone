@@ -3,7 +3,7 @@
 
     <div v-for="(n, key) in menuCount" class="sub-menu" :key="n" :style="getSubMenu(n-1)">
       <div v-if="menuUrlList[n-1].url === ''">
-        <div class="sub-sub-menu">
+        <div class="sub-sub-menu" @click="galaxyEntranceModal()">
           <router-link v-if="menuUrlList[n-1].isLink" :to="menuUrlList[n-1].url" :target="openNewTab" :style="subMenuStyle" @mouseover.stop="mouseEnterSubMenu" @mouseout.stop="mouseOutSubMenu">
             <i :class="iconClass[n-1]" ref="icon"></i>
           </router-link>
@@ -36,6 +36,8 @@
 
 <script>
 import swal from 'sweetalert';
+import axios from '@/util/http-common.js';
+import { mapActions, mapGetters } from 'vuex'
 
 export default{
   name:'quickMenu',
@@ -105,7 +107,10 @@ export default{
     },
     isLeft(){
       return !!~this.position.toLowerCase().indexOf('left')
-    }
+    },
+    ...mapGetters([
+      'userEmail',
+    ])
   },
   data(){
     return{
@@ -180,8 +185,70 @@ export default{
       return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16)
     },
     galaxyEntranceModal () {
-      swal("Hello world!");
-    }
+      console.log(this.$router)
+      this.$router.go(-1)
+      swal({
+        title: '갤럭시에 오신 것을 환영합니다!',
+        text: '상태메시지를 입력해주세요.',
+        icon: "/img/star.5dee8d8d.png",
+        content: {
+          element: "input",
+          attributes: {
+            placeholder: '메시지는 20자 이내로 작성해주세요.'
+          }
+        },
+        button: {
+          text: '입장',
+          closeModal: false
+        }
+      })
+        .then(message => {
+          if (!message) {
+            return swal({
+              text: '메시지는 필수 입력사항입니다!',
+              button: {
+                text: '확인',
+              }
+            })
+          }
+
+          if (20 < message.length) {
+            return swal({
+              text: '메시지는 20자 이내여야 합니다!',
+              button: {
+                text: '확인',
+              }
+            })
+          }
+
+          const userInfo = {
+            message: message,
+            userEmail: this.userEmail
+          } 
+
+          axios({
+            method: 'post',
+            url: '/galaxy/entry',
+            data: userInfo
+          })
+            .then(res => {
+              this.getMessage(message)
+              this.$router.push({path: '/Galaxy'})
+            })
+            .catch(err => {
+              console.log(err)
+            })
+
+          swal.close()
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        
+    },
+    ...mapActions([
+      'getMessage',
+    ])
   },
 }
 </script>

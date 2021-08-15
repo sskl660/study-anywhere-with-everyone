@@ -175,9 +175,7 @@ export default {
         document.getElementById(`my-image${this.idx}`).src = imgsrc;
       })
       .catch((error) => {
-        if (this.imgsrc == null) {
-          document.getElementById(`my-image${this.idx}`).src = "/img/ssazip.43ffb363.png"
-        }
+        console.log(error)
       });
     },
     getFollowerImage: function() {
@@ -189,9 +187,7 @@ export default {
         document.getElementById(`follower-image${this.idx}`).src = imgsrc;
       })
       .catch((error) => {
-        if (this.imgsrc == null) {
-          document.getElementById(`follower-image${this.idx}`).src = "/img/ssazip.43ffb363.png"
-        }
+        console.log(error)
       });
     },
     moveToChallenge: function(challNo) {
