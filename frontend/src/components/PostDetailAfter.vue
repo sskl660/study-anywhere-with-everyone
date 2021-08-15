@@ -283,7 +283,7 @@ export default {
       http
         .get(`/viewimage/${this.task_info.userEmail}`)
         .then((response) => {
-          console.log("과제 창 이미지성공");
+        //   console.log("과제 창 이미지성공");
           var imgsrc =
             "data:image/png;base64," +
             btoa(
@@ -295,10 +295,10 @@ export default {
         .catch((error) => {
           // console.log("이미지없음")
           // console.log(this.imgsrc);
-          if (this.imgsrc == null) {
-            document.getElementById("profileimage").src =
-              "/img/ssazip.43ffb363.png";
-          }
+        //   if (this.imgsrc == null) {
+        //     document.getElementById("profileimage").src =
+        //       "/img/ssazip.43ffb363.png";
+        //   }
         });
     },
     getTaskImg: function () {
@@ -309,6 +309,10 @@ export default {
         .then((response) => {
           console.log("이미지소환성공");
           console.log(response.data);
+          if(response.data == 'noImage'){
+              console.log('여기 확인!!')
+              return // 이미지가 없으면 이미지 불러오기 중단시키기
+          }
           var imgsrc =
             "data:image/png;base64," +
             btoa(
@@ -317,18 +321,20 @@ export default {
           document.getElementById("image").src = imgsrc;
           this.imgFlag = true;
           // this.imgData = imgsrc;
-          // console.log(imgsrc);
+        //   console.log('여기보세요!!!!!!!!!!')
+        //   console.log(imgsrc);
+          
         })
-        .catch((error) => {
+        // .catch((error) => {
           // console.log("이미지없음")
           // console.log(this.imgsrc);
-          if (this.imgsrc == null) {
+        //   if (this.imgsrc == null) {
             // console.log("얍")
-            this.imgFlag = false;
+            // this.imgFlag = false;
             //  document.getElementById('image') = null;
             //  document.getElementById('image').src = '/img/ssazip.43ffb363.png';
-          }
-        });
+        //   }
+        // });
     },
     download() {
       console.log(this.task_No + "번호 첨부파일 다운 요청");
