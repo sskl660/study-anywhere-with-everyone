@@ -3,16 +3,15 @@
 <template>
   <div>
     <div class="participantList" id="participantbox">
-
-        <span class="dropdown">
-              <div class="drop-list-title" style="">참여자 목록</div>
-              <div class="drop-list">
-                <div v-for="user in this.participants" :key="user">
-                  <div class="image-box" @click="toProfile(user.partEmail)">
-                    <div class="content">{{ user.partTerm }} 기 {{ user.partName }}</div>
-                  </div>
-                </div>
-                <!-- <p>3기 김예시</p>
+      <span class="dropdown">
+        <div class="drop-list-title" style="">참여자 목록</div>
+        <div class="drop-list">
+          <div v-for="user in this.participants" :key="user">
+            <div class="image-box" @click="toProfile(user.partEmail)">
+              <div class="content">{{ user.partTerm }} 기 {{ user.partName }}</div>
+            </div>
+          </div>
+          <!-- <p>3기 김예시</p>
                  <p>3기 김예시</p>
                   <p>3기 김예시</p>
                    <p>3기 김예시</p>
@@ -31,11 +30,10 @@
                                 <p>3기 김예시</p>
                                  <p>3기 김예시</p>
                                   <p>3기 김예시</p> -->
-              </div>
-            <!-- </ul> -->
-          </span>
-
-      </div>
+        </div>
+        <!-- </ul> -->
+      </span>
+    </div>
     <div>
       <div v-if="chatType == 'algo'">
         <!-- <div class="dropdown">
@@ -70,7 +68,7 @@
             >
               {{ this.participants.length }} 명 참여 중
             </button> -->
-            <!-- <ul
+          <!-- <ul
               class="dropdown-menu text-center"
               style=" background-color: rgba(255,255,255,0.5);     border-radius: 15px;
 "
@@ -262,6 +260,8 @@ export default {
       if (receiveMessage.constructor.name == 'Array') {
         // 입장 시간을 기준으로 랭킹 정렬(5명만).
         this.ranker = receiveMessage.sort(function(a, b) {
+          // console.log(a.getTime);
+          // return a.getTime() - b.getTime();
           return new Date(a.enterTime) - new Date(b.enterTime);
         });
         console.log(this.ranker);
@@ -593,12 +593,12 @@ input:focus {
 /* linkseven */
 /* linkone */
 a {
-    text-transform: uppercase;
-    color: rgb(15, 14, 14);
-    text-decoration: none;
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
+  text-transform: uppercase;
+  color: rgb(15, 14, 14);
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
 }
 .link-1 a:before,
 .link-1 a:after {
@@ -627,23 +627,22 @@ a {
   transition: all 0.2s ease;
 }
 
-.participantList{
+.participantList {
   position: absolute;
   margin-left: -170px;
 }
 
-#participantbox{
-    background-color: rgba(255,255,255,0.2);
-    padding-right: 17px;
-    padding-left: 17px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-radius: 20px;
-    max-height: 770px;
-
+#participantbox {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding-right: 17px;
+  padding-left: 17px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 20px;
+  max-height: 770px;
 }
-.drop-list-title{
-  background-color: #F1C069;
+.drop-list-title {
+  background-color: #f1c069;
   border-radius: 33px;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -651,7 +650,7 @@ a {
   font-size: 18px;
 }
 
-.drop-list{
+.drop-list {
   border-radius: 10px;
   padding-top: 8px;
   padding-bottom: 8px;
