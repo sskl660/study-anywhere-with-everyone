@@ -1,15 +1,3 @@
-git commit -am "update Properties"
-git push
-git pull
-cd ~
-ls
-git pull
-git commit -am "update properties"
-git add .
-git push
-git commit -am "update properties"
-git push
-git commit -am "update properties"
 git push
 git add .
 git commit -am "update Dockerfile"
@@ -498,3 +486,15 @@ git add .
 git commit -am "merge"
 git status
 git push
+cd ~
+git status
+git add .
+git commit -am "save"
+git pull origin master
+git stash
+git status
+git stash drop
+git stash list
+git status
+git stash drop
+git stash list
