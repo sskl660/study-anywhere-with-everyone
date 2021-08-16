@@ -1,21 +1,3 @@
-git commit -am "update properties"
-git push
-git pull
-git add ..
-git status
-git pull
-git add .
-git push
-git pull
-git push
-git add .
-git commit -am "update CORS"
-git push
-git pull
-git commit -am "update CORS"
-git push
-cd ~
-git pull
 git status
 git add .
 git commit -am "update properties"
@@ -498,3 +480,21 @@ git commit -am "merge"
 cd ~
 git status
 git commit -am "save"
+cd ~
+ls
+cd exec/
+ls
+vi README.md
+git status
+git add .
+git commit -am "upload porting guide, Architectures"
+git status
+git pull origin master
+git status
+git add .
+git commit -am "merge"
+git push
+ls
+cd ..
+ls
+vi README.md
