@@ -150,7 +150,8 @@
 
 # ⚙Project Architecture
 
-- ER-Diagram 1, 2 ⇒ https://drive.google.com/file/d/14gTkbjaci8I0HUJZfaLf-nSaZJLiHl5p/view?usp=sharing![ERDiagram](./assets/ERDiagram.png)
+- ER-Diagram 1, 2 ⇒ https://drive.google.com/file/d/14gTkbjaci8I0HUJZfaLf-nSaZJLiHl5p/view?usp=sharing
+  ![ERDiagram](./assets/ERDiagram.png)
 
 <br>
 
@@ -158,17 +159,20 @@
 
 <br>
 
-- Wireframe 1, 2 ⇒ https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=17%3A2![Wireframe1](./assetsWireframe1.PNG)
+- Wireframe 1, 2 ⇒ https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=17%3A2
+  ![Wireframe1](./assets/Wireframe1.PNG)
 
   ![Wireframe2](./assets/Wireframe2.PNG)
 
 <br>
 
-- Prototype ⇒ https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=1%3A2![Prototype](./assets/Prototype.PNG)
+- Prototype ⇒ https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=1%3A2
+  ![Prototype](./assets/Prototype.PNG)
 
 <br>
 
-- Component Architecture ⇒ https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=1%3A2![ComponentArchitecture](./assets/ComponentArchitecture.PNG)
+- Component Architecture ⇒ https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=1%3A2
+  ![ComponentArchitecture](./assets/ComponentArchitecture.PNG)
 
 <br>
 
