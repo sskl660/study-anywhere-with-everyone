@@ -1,5 +1,6 @@
 # Description
 > Study Anywhere With Everyone
+<br>
 ![VISION of SSAZIP](https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307/-/blob/master/assets/images/SSAzip_vision.PNG "VISION of SSAZIP")
 
 <br><br><br>
