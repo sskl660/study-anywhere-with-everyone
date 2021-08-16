@@ -1,5 +1,6 @@
 # Description
 > Study Anywhere With Everyone
+! https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307/-/blob/master/assets/images/SSAzip_vision.PNG
 
 <br><br><br>
 
@@ -81,6 +82,7 @@
 - 문서 : Notion
 - 디자인 : Figma
 
+<br><br>
 
 ## Etc
 - Wireframe : https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=17%3A2
