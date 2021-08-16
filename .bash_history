@@ -1,10 +1,4 @@
 git push
-git add .
-git commit -am "update Dockerfile"
-git status
-git diff
-git log
-git push
 git commit -am "update Dockerfile"
 git push
 git commit -am "update properties"
@@ -498,3 +492,9 @@ git stash list
 git status
 git stash drop
 git stash list
+cd ~
+git status
+git commit -am "save"
+git pull origin master
+git status
+git commit -am "merge"
