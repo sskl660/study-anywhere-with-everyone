@@ -1,7 +1,24 @@
 # Description
-> Study Anywhere With Everyone
+- Vision of SSAZIP	
+  ![VISION of SSAZIP](./assets/vision.png "VISION of SSAZIP")
+
 <br>
-![VISION of SSAZIP](./assets/vision.png "VISION of SSAZIP")
+
+- What is SSAZIP?
+
+  > SSAZIP은 IT 교육생이 자유롭게 스터디를 구성하고, 함께 공부할 수 있는 웹 서비스 환경을 제공합니다.
+
+<br>
+
+- Challenge-type study system.
+
+  > 추가 바람
+
+<br>
+
+- Real-time self coding study system
+
+  > 추가 바람
 
 <br><br><br>
 
@@ -71,11 +88,6 @@
 
 <br><br>
 
-## API 설계 확인
-- http://13.125.119.76:8080/swagger-ui.html
-
-<br><br>
-
 ## 사용 협업 툴
 - 회의 : Webex, Zoom, Discord
 - 이슈 트래킹 : JIRA
@@ -89,3 +101,4 @@
 - Wireframe : https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=17%3A2
 - Prototype & Component Architecture : https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=1%3A2
 - ER Diagram : https://drive.google.com/file/d/14gTkbjaci8I0HUJZfaLf-nSaZJLiHl5p/view?usp=sharing
+- API Architecture : http://13.125.119.76:8080/swagger-ui.html
