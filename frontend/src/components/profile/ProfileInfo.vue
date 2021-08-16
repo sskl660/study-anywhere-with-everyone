@@ -1,8 +1,6 @@
 <template>
   <div class="d-flex justify-content-center">
-    <!-- id 카드 -->
-    <!-- <div>{{userInfo.userName}}</div> -->
-    
+    <!-- id 카드 --> 
     <IdCard style="display:inline-block" :userInfo="userInfo" :followers="followers" :followings="followings"/>
     <!-- 프로필 정보 우측의 컨테이너 -->
     <div class="profile-info" style="display:inline-block" >
