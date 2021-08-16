@@ -459,6 +459,7 @@ input:focus {
     padding-top: 2%;
     padding-bottom: 2%;
     margin-left: 2%;
+    font-family: 'BBTreeGB';
 }
 
 #CMname {
@@ -482,6 +483,7 @@ input:focus {
     padding-bottom: 2%;
     margin-right: 2%;
     text-align: left;
+    font-family: 'BBTreeGB';
 }
 
 #Ccome {

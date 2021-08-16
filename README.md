@@ -241,7 +241,6 @@
 > ./gradlew build
 
 ### Compiles and hot-reloads for development
-- On ./build/libs
 > java -jar SSAZIPtest-0.0.1-SNAPSHOT.jar
 
 <br><br><br>
