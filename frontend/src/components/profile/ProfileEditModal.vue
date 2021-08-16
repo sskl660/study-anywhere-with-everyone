@@ -14,12 +14,7 @@
           <div class="profile-edit-upper-container d-flex justify-content-between">
             <div style="display: inline-block;">
               <!-- 내프로필 이미지 떠있는 곳 -->
-              <img id="modalimage" class="profile-img-default apple" style="width:168px" src="" alt="" >
-              <!-- <img class="profile-img-default apple" src="@/assets/ssazip.png" alt="" > -->
-              <!-- <ProfileImage class="profile-edit-img-box" /> -->
-              <!-- 프로필 미리보기 -->
-              <!-- class="item-file-image" -->
-              
+              <img id="modalimage" class="profile-img-default apple" style="width:168px" src="" alt="" >             
               <!-- 프로필 편집 -->
               <div>
                 <form @submit.prevent="submitForm" class="form" enctype="multipart/form-data">
@@ -39,25 +34,12 @@
                         </div>
                       </label>
                     </div>
-                    <!-- <button v-on:click="getImage()">사나이 유희왕 할수있다</button> -->
-                    <!-- <label for="ItemFile" >
-                      <div class="wrapper-image">
-                        <img style="display:none" class="profile-img-default" id="image" src="" />
-                      </div>
-                    </label> -->
                   </div>
-                  <!-- <div>
-
-                    <input style="display:none" type="file" ref="taskimg" name="taskimg" id="taskimg"/>
-                  </div> -->
-                  <!-- <button @click="profileShow()" class="profile-img-btn" id="shownbtn">사진 업로드</button> -->
                   <button style="display:none" type="submit" id="uploadSubmit">Submit</button>
                 </form>
                 <!-- 사진업로드를 클릭하면 함수를 실행하여 taskimg가 눌려서 사진업로드 창이 뜬다. -->
                 <button @click="profileShow()" class="btn profile-img-edit-btn" id="shownbtn">사진 업로드</button>
                 <div style="color:red; font-weight:600; margin-top:15px;">*100KB 이하 이미지 등록</div>
-
-                <!-- <button type="button" class="btn profile-img-edit-btn" id="uploadProfile">사진 업로드</button> -->
               </div>
             </div>
             <!-- 상위의 정보입력 타이틀 -->
@@ -122,7 +104,6 @@
 import ProfileImage from "@/components/common/ProfileImage.vue"
 import axios from '@/util/http-common.js';
 import http from "@/util/http-common.js";
-// import "@/css/profilemodal.css";
 
 export default {
   name: 'ProfileEditModal',
@@ -190,9 +171,6 @@ export default {
         this.imgData=imgsrc;
       })
       .catch((error) => {
-        // if (this.imgsrc == null) {
-        //   document.getElementById("modalimage").src = "/img/ssazip.43ffb363.png"
-        // }
       });
     },
     profileShow: function ( ){
@@ -203,8 +181,6 @@ export default {
       var timg = document.getElementById("uploadItemFile");
       frm.append("file", timg.files[0]);
       frm.append("useremail", this.userInfo.userEmail);
-      // console.log('이미지!!')
-      // console.log(this.userInfo.userEmail)
       http
         .post(`/profile/upload/${this.userInfo.userEmail}`, frm, {
           header: {
