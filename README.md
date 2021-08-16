@@ -228,7 +228,7 @@
 # 💡Usage
 
 ## Sample URL
-> http://13.125.119.76:3000/challenges
+> http://13.125.119.76:3000
 
 ## Vue Project
 ### Project setup
