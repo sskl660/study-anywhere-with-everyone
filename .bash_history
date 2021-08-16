@@ -1,6 +1,3 @@
-git push
-git commit -am "update Dockerfile"
-git push
 git commit -am "update properties"
 git push
 git pull
@@ -498,3 +495,6 @@ git commit -am "save"
 git pull origin master
 git status
 git commit -am "merge"
+cd ~
+git status
+git commit -am "save"
