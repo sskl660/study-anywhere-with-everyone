@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- <p>{{this.user_info}}</p> -->
         <div class="profile-info-container">
             <!-- 타이틀도 추후에 bg-img로 바꿔주기 -->
             <Title style="display: inline-block" :text="this.profileTitle" />
@@ -26,10 +25,7 @@ import ProfileInfo from '@/components/profile/ProfileInfo.vue';
 import ProfileTicket from '@/components/profile/ProfileTicket.vue';
 import ProfileEditModal from '@/components/profile/ProfileEditModal.vue';
 import './css/profile.css';
-// import axios from 'axios'
 import axios from '@/util/http-common.js';
-// import { mapState } from 'vuex'
-// import func from 'vue-editor-bridge'
 import { mapGetters } from 'vuex';
 export default {
     name: 'Profile',
@@ -39,13 +35,8 @@ export default {
         ProfileTicket,
         ProfileEditModal,
     },
-    // props: {
-    //   userEmail: String,
-    // },
     data: function() {
         return {
-            // 유저 이메일 정보 받아와서 넣기
-            // useremail: "jang@naver.com",
             profileTitle: 'string',
             user_info: {
                 userBlog: '',
@@ -69,7 +60,6 @@ export default {
                 userWishfield: '',
             },
             task_tickets: [
-                // 챌린지 하나 내용
                 {
                     achieveRate: 0,
                     challengeName: '',
