@@ -14,7 +14,7 @@
 
 - What is SSAZIP?
 
-  > SSAZIP은 IT 교육생이 자유롭게 스터디를 구성하고, 함께 공부할 수 있는 웹 서비스 환경을 제공합니다.![Intro](.\assets\Intro.gif)
+  > SSAZIP은 IT 교육생이 자유롭게 스터디를 구성하고, 함께 공부할 수 있는 웹 서비스 환경을 제공합니다.![Intro](./assets/Intro.gif)
 
 <br>
 
