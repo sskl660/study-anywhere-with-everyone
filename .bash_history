@@ -1,37 +1,3 @@
-git status
-git add .
-git commit -am "update properties"
-git push
-git pull
-git commit -am "update properties"
-git push
-git pull
-git add .
-git commit -am "update properties"
-git push
-cd ~
-git status
-git checkout master
-git add .
-git commit
-git status
-git status
-git add .
-git status
-git checkout master
-git commit -am "git pull"
-git checkout master
-git pull origin master
-git status
-git log diff
-git log --stat
-git status
-git pull master
-git pull origin
-git status
-git add .
-git pull origin
-git status
 git checkout chat
 git checkout master
 git pull origin master
@@ -498,3 +464,37 @@ ls
 cd ..
 ls
 vi README.md
+cd ~
+ls
+git status
+git add .
+git commit -am "update README main"
+git status
+git commit -am "update"
+git status
+git add .
+git commit -am "update"
+git status
+git pull origin master
+git status
+git commit -am "merge"
+git status
+git push
+cd ..
+cd ~
+ls
+git checkout master
+git stash
+git status
+git checkout master
+git commit -am "save"
+git pull origin master
+git status
+git status
+git commit -am "update README.md"
+git status
+git pull origin master
+git status
+git commit -am "merge"
+git status
+git push
