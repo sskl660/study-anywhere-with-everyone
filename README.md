@@ -225,6 +225,34 @@
 
 <br><br><br>
 
+# 📋Conference Log
+
+ [사전 회의 - Basic Rules](conference/firstMeeting) 
+
+ [1차 회의 - 기획](conference/secondMeeting) 
+
+ [2차 회의 - 기획](conference/thirdMeeting) 
+
+ [3차 회의 - 기술 조사](conference/forthMeeting) 
+
+ [4차 회의 - 기술 명세](conference/fifthMeeting) 
+
+ [5차 회의 - 아이디어](conference/sixthMeeting) 
+
+ [6차 회의 - 아이디어](conference/seventhMeeting) 
+
+ [7차 회의 - Scrum](conference/eighthMeeting) 
+
+ [컨설팅 내역](conference/ninthMeeting) 
+
+ [2차 발표](conference/tenthMeeting) 
+
+<br>
+
+<br>
+
+<br>
+
 # 💡Usage
 
 ## Sample URL
