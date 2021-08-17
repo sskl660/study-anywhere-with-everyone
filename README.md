@@ -228,6 +228,7 @@
 # 📋Conference Log
 
  [사전 회의 - Basic Rules](conference/firstMeeting) 
+ <a href="./conference/firstMeeting.md">사전 회의 - Basic Rules</a>
 
  [1차 회의 - 기획](conference/secondMeeting) 
 
