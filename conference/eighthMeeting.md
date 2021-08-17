@@ -10,8 +10,6 @@
 
 ## 비전 작성
 
----
-
 - **Study Anywhere with Everyone!**
 - **Elevator pitch.**
 
@@ -169,7 +167,6 @@
 
 ## 릴리즈 플래닝
 
----
 
 ### 1 ~ 2주차
 
