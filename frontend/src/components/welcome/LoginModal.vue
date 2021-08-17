@@ -41,6 +41,7 @@
                   class="form-control input-form"
                   id="password-input"
                   v-model="credentials.userPassword"
+                  @keyup.enter="login(credentials)"
                 />
               </div>
             </form>
@@ -203,6 +204,10 @@ export default {
 .btn-light:active:focus,
 .btn-light.active:focus,
 .show > .btn-light.dropdown-toggle:focus {
+  box-shadow: none;
+}
+
+.form-control:focus {
   box-shadow: none;
 }
 </style>

@@ -41,9 +41,6 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default{
   name:'quickMenu',
-  components: {
-    
-  },
   props:{
     menuCount:{
       type: Number,
@@ -186,7 +183,9 @@ export default{
     },
     galaxyEntranceModal () {
       if (window.location.pathname != '/Galaxy') {
-        this.$router.go(-1)
+        if (window.location.pathname == '/profile' || window.location.pathname == '/challengeRoom' || window.location.pathname == '/postDetailAfter') {
+          this.$router.go(-1)
+        }
         swal({
           title: '갤럭시에 오신 것을 환영합니다!',
           text: '상태메시지를 입력해주세요.',

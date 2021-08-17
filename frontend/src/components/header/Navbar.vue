@@ -337,6 +337,11 @@ export default {
   background-color: #1C84C4;
 }
 
+.swal-button--cancel {
+    color: white;
+    background-color: #F53535;
+}
+
 .swal-icon {
   position: absolute;
   width: 60px;
@@ -352,6 +357,10 @@ export default {
   background-color: #1C84C4;
 }
 
+.swal-button--cancel:active {
+  background-color: #F53535;
+}
+
 .swal-button:focus {
   outline: none;
   box-shadow: none;
@@ -359,5 +368,9 @@ export default {
 
 .swal-button:not([disabled]):hover {
   background-color: #1C84C4;
+}
+
+.swal-button--cancel:not([disabled]):hover {
+  background-color: #F53535;
 }
 </style>

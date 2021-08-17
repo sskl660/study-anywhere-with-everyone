@@ -36,7 +36,6 @@
 import ButtonRound from '@/components/common/ButtonRound';
 import LoginModal from '@/components/welcome/LoginModal';
 import '@/views/css/welcome.css';
-import { mapGetters } from 'vuex';
 export default {
     name: 'Welcome',
     components: {
@@ -54,9 +53,13 @@ export default {
     created: function() {
         this.logined();
     },
-    computed: {
-        ...mapGetters(['isLogin']),
-    },
+    beforeRouteLeave(to, from, next) {
+        let modalBackdrops = document.querySelectorAll(".modal-backdrop")
+        modalBackdrops.forEach(modalBackdrop => {
+            modalBackdrop.style.display = "none"
+        })
+        next()
+    }
 };
 </script>
 
