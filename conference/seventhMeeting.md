@@ -8,4 +8,4 @@
 - 회의 시간 :  4시간
 - 회의 내용 : 아이디어 변경점
 
-![wireframe](./assets/wireframe.jpeg)
+<img src="./assets/wireframe.jpeg" alt="wirefrmae" title="wirefrmae" style="zoom:200%;" />
