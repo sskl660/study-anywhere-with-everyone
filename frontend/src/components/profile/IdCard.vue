@@ -3,22 +3,13 @@
     <!-- 프로필카드 좌측 컨테이너 -->
     <div class="idcard-left" style="display: inline-block;">
       <!-- 프로필카드 이미지 -->
-      <!-- <ProfileImage class="profile-img-box" :imgData="this.imgData"/> -->
       <img id="image" class="profile-img-default" src="" alt="" >
-      <!-- <img  class="profile-img-default" src="/img/ssazip.43ffb363.png" alt="" > -->
-      <!-- 깃헙 아이콘. 블로그 아이콘 클릭시 해당 링크로 이동 -->
       <div>
         <form @submit.prevent="submitForm" class="form" enctype="multipart/form-data">
           <div>
             <input style="display:none" type="file" ref="taskimg" name="taskimg" id="taskimg"/>
           </div>
-          <!-- <button @click="profileShow()" class="profile-img-btn" id="shownbtn">사진 업로드</button>
-          <button type="submit">Submit</button> -->
         </form>
-        <!-- <img style="width:100px;height:100px;" id="image" src="" alt=""> -->
-        <!-- <button @click="getImage()">버튼</button> -->
-        <!-- <input @click="getImage()" style="display:none" type="file" ref="taskimg" id="taskimg"/> -->
-        <!-- <button @click="profileShow()" class="profile-img-btn" id="shownbtn">사진 업로드</button> -->
         <a :href="userInfo.userGit" target="_blank"><i class="fa fa-git-square fa-2x" style="color:black" type="button"></i></a>
         <a :href="userInfo.userBlog" target="_blank"><i class="fab fa-blogger fa-2x ms-5" style="color:orange" type="button"></i></a>
       </div>
@@ -60,21 +51,13 @@
   </div>
 </template>
 
-<script>
-// import ProfileImage from "@/components/common/ProfileImage.vue"
-import { mapState } from 'vuex'
+<script>import { mapState } from 'vuex'
 import axios from "@/util/http-common.js";
 import http from "@/util/http-common.js";
-// import ButtonSquare from '@/components/common/ButtonSquare.vue'
 export default {
   name: 'IdCard',
-  components: {
-    // ProfileImage,
-    // ButtonSquare,
-  },
   data: function () {
     return {
-      // followers: [],
       follow: {
         "followFollower": "",
         "userEmail": "",
@@ -154,9 +137,6 @@ export default {
         this.imgData=imgsrc;
       })
       .catch((error) => {
-        // if (this.imgsrc == null) {
-        //   document.getElementById("image").src = "/img/ssazip.43ffb363.png"
-        // }
       });
     },
     

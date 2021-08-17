@@ -76,9 +76,9 @@
             type="text"
             id="name"
             class="info-input name-input"
-            placeholder="8자 이내로 입력해주세요."
+            placeholder="3자 이내로 입력해주세요."
             onfocus="this.placeholder=''"
-            onblur="this.placeholder='8자 이내로 입력해주세요.'"
+            onblur="this.placeholder='3자 이내로 입력해주세요.'"
             v-model="credentials.userName"
           />
         </div>

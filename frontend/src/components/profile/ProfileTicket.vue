@@ -95,7 +95,6 @@ export default {
   height:300px;
   margin-top: 40px;
   margin-left: 50px;
-  /* background-color: rgb(225, 0, 255); */
 }
 .ticket-left{
   width:210px; 
@@ -136,7 +135,6 @@ export default {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
-
 .profile-ticket-scale:hover {
   transform: scale(1.05);
   -webkit-transform: scale(1.);

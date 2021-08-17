@@ -1,34 +1,28 @@
 <template>
     <div>
-        <!-- 상단 문구 -->
-        <h1 class="display-4 message">Coming Soon...</h1>
-
-        <!-- flexbox를 이용해 위치 조정 -->
-        <div class="d-flex justify-content-center welcome-container">
-            <div>
-                <!-- 별 구현 -->
-                <div class="star1-box">
-                    <img class="star1" src="../assets/star.png" alt="star"/>
-                </div>
-                <div class="star2-box">
-                    <img class="star2" src="../assets/star.png" alt="star"/>
-                </div>
-                <div class="star3-box">
-                    <img class="star3" src="../assets/star.png" alt="star"/>
-                </div>
-
-                <!-- SSAZIP 구현 -->
-                <img class="ssazip" src="../assets/ssazip.png" alt="ssazip"/>
-
-                <!-- 로그인, 회원가입 버튼 -->
-                <div class="d-flex menu">
-                    <div class="login-btn"><LoginModal text="Login"/></div>
-                    <div class="join-btn">
-                        <router-link to="/join"><ButtonRound text="Join"/></router-link>
-                    </div>
-                </div>
+        <!-- 배경우주영상 -->
+        <video muted autoplay loop style="width:100%;">
+            <source src="@/assets/space.mp4" type="video/mp4">
+        </video>
+        <!-- 웰컴페이지 구현 -->
+        <div>    
+            <div class="stage neonSSAZIP" style="width:300px; height:350px; position: absolute; top:200px; left:600px;">
+                SSA.zip
             </div>
-        </div>
+            <!-- SSAZIP 구현 -->
+            <div class="stage" style="position: absolute;top:40px;right:790px;">
+                <img class="ssazip box bounce-7" src="../assets/ssazip.png" alt="ssazip"/>
+            </div>
+            <!-- 로그인, 회원가입 버튼 -->
+            <div class="neonLogin login-btn" data-bs-toggle="modal"
+                data-bs-target="#loginModal"
+                data-bs-whatever="@mdo"
+                style="width:150px; position: absolute; top:550px; left:750px; height:75px; line-height:40px; cursor:pointer;">
+                Login
+            </div>
+            <LoginModal/>
+            <router-link class="neonJoin join-btn" style="text-decoration:none; width:150px; height:75px; position: absolute; top:550px; right:750px;line-height:40px;" to="/join">Join</router-link>
+        </div>  
     </div>
 </template>
 
@@ -64,6 +58,15 @@ export default {
 </script>
 
 <style scoped>
+.ssazip {
+  width: 201px;
+  height: 260px;
+  margin-bottom: 20px;
+  /* position: absolute;
+  top:300px;
+  left:800px; */
+  animation: bounce .1s ease infinite alternate;
+}
 /* 로그인과 회원가입 버튼을 감싸는 부분 */
 .menu {
     padding-right: 0px;
@@ -98,4 +101,81 @@ export default {
     border-color: #1c84c4;
 }
 
+/* 뛰어다니는 싸집이 */
+.stage {
+    display: flex;
+    height: 330px;
+}
+/* 싸집이 크기 */
+.box {
+    align-self: flex-end;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    height: 120px;
+    margin: 0 auto 0 auto;
+    transform-origin: bottom;
+    width: 120px;
+}
+.bounce-7 {
+    animation-name: bounce-7;
+    animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1);
+}
+@keyframes bounce-7 {
+    0%   { transform: scale(1,1)      translateY(0); }
+    10%  { transform: scale(1.1,.9)   translateY(0); }
+    30%  { transform: scale(.9,1.1)   translateY(-100px); }
+    50%  { transform: scale(1.05,.95) translateY(0); }
+    57%  { transform: scale(1,1)      translateY(-7px); }
+    64%  { transform: scale(1,1)      translateY(0); }
+    100% { transform: scale(1,1)      translateY(0); }
+}
+
+/* 로그인버튼 */
+.neonLogin {
+  color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #fee613,
+    0 0 82px #fee613;
+  font-size: 2.2rem;
+  animation: pulsate 1.5s infinite alternate;  
+  border: 0.2rem solid #fff;
+  border-radius: 2rem;
+  padding: 0.4em;
+  box-shadow: 0 0 .2rem #fff,
+            0 0 .2rem #fff,
+            0 0 2rem #fee613,
+
+            inset 0 0 1.3rem #fee613; 
+}
+/* 회원가입 버튼 */
+.neonJoin {
+  color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #f44cfa,
+    0 0 82px #f44cfa;
+  font-size: 2.2rem;
+  animation: pulsate 1.5s infinite alternate;  
+  border: 0.2rem solid #fff;
+  border-radius: 2rem;
+  padding: 0.4em;
+  box-shadow: 0 0 .2rem #fff,
+            0 0 .2rem #fff,
+            0 0 2rem #f44cfa,
+            inset 0 0 1.3rem #f44cfa; 
+}
+/* 싸집글자부분 */
+.neonSSAZIP {
+  color: #fff;
+  text-shadow:
+    0 0 10px #fee613;
+  font-size: 10.2rem;
+  animation: pulsate 1.5s infinite alternate;  
+  padding: 0.4em;
+}
 </style>

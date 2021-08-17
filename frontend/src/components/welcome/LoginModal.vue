@@ -1,16 +1,5 @@
 <template>
   <div>
-    <!-- 로그인 버튼 -->
-    <button
-      type="button"
-      class="btn btn-primary login-btn"
-      data-bs-toggle="modal"
-      data-bs-target="#loginModal"
-      data-bs-whatever="@mdo"
-    >
-      {{ text }}
-    </button>
-
     <!-- 로그인 모달창 -->
     <div
       class="modal fade"
