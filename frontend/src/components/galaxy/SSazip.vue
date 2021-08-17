@@ -92,9 +92,7 @@ export default {
     },
     destroyed(to, from, next) {
         clearInterval(this.clocker);
-        alert("나가니")
         next();
-        // }
     },
     mounted: function() {
         // while(document.getElementById('ssazip'))document.getElementById('ssazip').remove();

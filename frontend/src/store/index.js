@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    // 계정관련
     isLogin: false,
     config: null, // jwt 담는 객체
     comments: [],
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     userName: null,
     userTerm: null,
     // Galaxy 관련
+    message: null, // 입장 메시지
     chatType: 'algo', // 채팅창 타입(Algo, CS, Job)
     participantsVuex:[],
   },
@@ -96,6 +98,10 @@ export default new Vuex.Store({
         state.chatType = 'job';
       }
       console.log('채팅 변경');
+    },
+    // 메시지 가져와서 저장하기
+    GET_MESSAGE(state, msg) {
+      state.message = msg
     },
     SET_PARTICIPANTS(state, payload) {
       console.log("SET_PARTICIPANTS mutation working" + payload);
@@ -183,8 +189,6 @@ export default new Vuex.Store({
     },
     // 좋아요
     presslike: function({ commit }, like) {
-      // alert('좋아요 들어오니?');
-      // console.log(like);
       axios({
         method: 'post',
         url: '/challenge/task/like',
@@ -217,9 +221,6 @@ export default new Vuex.Store({
     },
     // 댓글 보내기
     leaveMessage: function({ commit }, msg) {
-      // alert('댓글 들어오니?');
-      // console.log('여기는 store')
-      // console.log(msg);
       axios({
         method: 'post',
         url: '/comment',
@@ -240,6 +241,10 @@ export default new Vuex.Store({
     // 채팅 타입 변경
     changeChatType: function({ commit }, chatType) {
       commit('CHANGE_CHAT_TYPE', chatType);
+    },
+    // 입장 메시지 가져오기
+    getMessage: function ({ commit }, msg) {
+      commit('GET_MESSAGE', msg)
     },
     // 갤럭시방 참가자 관리
     setPart: function ({ commit }, participants){
@@ -269,6 +274,9 @@ export default new Vuex.Store({
     },
     chatType: function(state) {
       return state.chatType;
+    },
+    message: function(state) {
+      return state.message;
     },
     participantsVuex: function (state) {
       return state.participantsVuex;

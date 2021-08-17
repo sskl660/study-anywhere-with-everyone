@@ -7,7 +7,7 @@
         <router-view :key="$route.fullPath" />
     </div>
 </template>
-vue
+
 <script>
 import Header from '@/components/common/Header.vue';
 

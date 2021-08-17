@@ -511,6 +511,7 @@ export default {
 
 /* 모달 */
 .challenge-modal-button {
+  color: #1F3E52;
   position: fixed;
   display: flex;
   justify-content: center;
