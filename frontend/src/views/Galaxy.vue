@@ -15,7 +15,7 @@
     </div>
 
     <!-- Timer 설정 -->
-    <span id="counter"></span><input type="button" value="연장" @click="counter_reset()">
+    <!-- <span id="counter"></span><input type="button" value="연장" @click="counter_reset()"> -->
 
     <div class="popup-background" style="display:none">
        <!-- Layer Popup 설정 시작 -->
@@ -61,7 +61,7 @@ export default {
       startTime: null,
       tid: null,
       cnt: null,
-      mainTimeLimit: 10, // 공부 시간 : 3600 (1시간)
+      mainTimeLimit: 3600, // 공부 시간 : 3600 (1시간)
       popupTimeLimit: 180, // 모달 유지 시간 : 180 (3분)
       isIntendedExit: true
     }
@@ -115,7 +115,7 @@ export default {
     },
 
     counter_run: function() { // 메인화면 세션 카운트
-      document.getElementById("counter").innerText = this.time_format(this.cnt);
+      // document.getElementById("counter").innerText = this.time_format(this.cnt);
       this.cnt--;
       if(this.cnt < 0) {
         clearInterval(this.tid);
