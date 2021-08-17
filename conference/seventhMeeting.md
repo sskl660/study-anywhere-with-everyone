@@ -8,4 +8,4 @@
 - 회의 시간 :  4시간
 - 회의 내용 : 아이디어 변경점
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/97e12f1f-ec6b-44c9-98de-016d79939109/Untitled.jpeg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/97e12f1f-ec6b-44c9-98de-016d79939109/Untitled.jpeg)
+![wireframe](./assets/wireframe.jpeg)
