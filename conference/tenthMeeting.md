@@ -1,6 +1,6 @@
 # ⚽️ 2차 발표(기획 발표)
 
-[https://www.figma.com/embed?embed_host=notion&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FuvFIvJ3ZjaqAQgNQ8ypIbk%2FSSAZIP%3Fnode-id%3D17%253A2](https://www.figma.com/embed?embed_host=notion&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FuvFIvJ3ZjaqAQgNQ8ypIbk%2FSSAZIP%3Fnode-id%3D17%253A2)
+[WireFrame - Figma](https://www.figma.com/embed?embed_host=notion&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FuvFIvJ3ZjaqAQgNQ8ypIbk%2FSSAZIP%3Fnode-id%3D17%253A2)
 
 ## 팀 이름 과 설명, 로고
 
