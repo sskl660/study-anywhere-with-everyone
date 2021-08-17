@@ -227,26 +227,25 @@
 
 # 📋Conference Log
 
- [사전 회의 - Basic Rules](conference/firstMeeting) 
  <a href="./conference/firstMeeting.md">사전 회의 - Basic Rules</a>
 
- [1차 회의 - 기획](conference/secondMeeting) 
+ <a href="./conference/secondMeeting.md">1차 회의 - 기획</a>
 
- [2차 회의 - 기획](conference/thirdMeeting) 
+ <a href="./conference/thirdMeeting.md">2차 회의 - 기획</a>
 
- [3차 회의 - 기술 조사](conference/forthMeeting) 
+ <a href="./conference/forthMeeting.md">3차 회의 - 기술 조사</a>
 
- [4차 회의 - 기술 명세](conference/fifthMeeting) 
+ <a href="./conference/fifthMeeting.md">4차 회의 - 기술 명세</a>
 
- [5차 회의 - 아이디어](conference/sixthMeeting) 
+ <a href="./conference/sixthMeeting.md">5차 회의 - 아이디어</a>
 
- [6차 회의 - 아이디어](conference/seventhMeeting) 
+ <a href="./conference/seventhMeeting.md">6차 회의 - 아이디어</a>
 
- [7차 회의 - Scrum](conference/eighthMeeting) 
+ <a href="./conference/eighthMeeting.md">7차 회의 - Scrum</a>
 
- [컨설팅 내역](conference/ninthMeeting) 
+ <a href="./conference/ninthMeeting.md">컨설팅 내역</a>
 
- [2차 발표](conference/tenthMeeting) 
+ <a href="./conference/tenthMeeting.md">2차 발표 준비</a>
 
 <br>
 
