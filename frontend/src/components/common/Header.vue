@@ -33,17 +33,6 @@ export default {
 </script>
 
 <style>
-.greeting {
-  position:fixed;
-  top: 40px;
-  width: 260px;
-  height: 45px;
-  background-color: rgb(31, 66, 86, 0.7);
-  color:white; 
-  font-size:25px;
-  line-height:50px;
-  border-radius: 1rem;
-}
 .greeting2 {
   position:fixed;
   top: 40px;

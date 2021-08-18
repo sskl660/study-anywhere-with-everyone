@@ -38,8 +38,10 @@ export default {
 }
 .cfail {
   background-color: #EE4748 ;
+  box-shadow:1px 3px 10px #5a1f24;
 }
 .csuccess {
   background-color: #5974B3;
+  box-shadow:3px 3px 10px #3e479b;
 }
 </style>
