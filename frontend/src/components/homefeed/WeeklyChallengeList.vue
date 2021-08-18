@@ -8,9 +8,9 @@
             <img class="crown" src="../../assets/crown.png" alt="crown"/>
         </h3>
         <div v-for="(weekly, index) in weeklyChallenge" :key="index" class="d-flex justify-content-start wcList">
-            <span class="fw-bold">{{index+1}}</span> &nbsp;&nbsp; 
-            <span class="challenger-name" @click="moveToProfile(weekly.userEmail)">{{weekly.userName}}</span> &nbsp;&nbsp; 
-            <span class="challenge-record">{{weekly.week}}건 성공!</span>
+            <span class="fw-bold">{{ index+1 }}</span> &nbsp;&nbsp; 
+            <span class="challenger-name" @click="moveToProfile(weekly.userEmail)">{{ weekly.userName }}</span> &nbsp;&nbsp; 
+            <span class="challenge-record">{{ weekly.week }}건 성공!</span>
         </div>
     </div>
   </div>

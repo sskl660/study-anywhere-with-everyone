@@ -16,6 +16,8 @@ export default new Vuex.Store({
     userEmail: null,
     userName: null,
     userTerm: null,
+    following: null,
+    follower: null,
     // Galaxy 관련
     message: null, // 입장 메시지
     chatType: 'algo', // 채팅창 타입(Algo, CS, Job)
@@ -108,6 +110,12 @@ export default new Vuex.Store({
       console.log(payload);
       state.participantsVuex = payload;
     },
+    GET_FOLLOWER(state, follower) {
+      state.follower = follower
+    },
+    GET_FOLLOWING(state, following) {
+      state.following = following
+    }
   },
   // 젠킨스를 위한 변경사항
   actions: {
@@ -249,6 +257,14 @@ export default new Vuex.Store({
     // 갤럭시방 참가자 관리
     setPart: function ({ commit }, participants){
       commit('SET_PARTICIPANTS', participants);
+    },
+    // 팔로워 수 가져오기
+    getFollower: function ({ commit }, follower) {
+      commit('GET_FOLLOWER', follower);
+    },
+    // 팔로잉 수 가져오기
+    getFollowing: function ({ commit }, following) {
+      commit('GET_FOLLOWING', following);
     }
   },
 
@@ -280,6 +296,12 @@ export default new Vuex.Store({
     },
     participantsVuex: function (state) {
       return state.participantsVuex;
-    }
+    },
+    follower: function (state) {
+      return state.follower;
+    },
+    following: function (state) {
+      return state.following;
+    },
   },
 });
