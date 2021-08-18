@@ -12,7 +12,7 @@
 ~h
 # 명령 행 히스토리 (새것부터 오래된 것 순):
 :wq!
-|2,0,1629137529,,"wq!"
+|2,0,1629244882,,"wq!"
 :q
 |2,0,1628742765,,"q"
 :wq
@@ -30,27 +30,29 @@
 
 # 파일 마크:
 '0  1  0  ~/.git/MERGE_MSG
-|4,48,1,0,1629137529,"~/.git/MERGE_MSG"
+|4,48,1,0,1629244882,"~/.git/MERGE_MSG"
 '1  1  0  ~/.git/MERGE_MSG
-|4,49,1,0,1629120767,"~/.git/MERGE_MSG"
+|4,49,1,0,1629137529,"~/.git/MERGE_MSG"
 '2  1  0  ~/.git/MERGE_MSG
-|4,50,1,0,1629118889,"~/.git/MERGE_MSG"
+|4,50,1,0,1629120767,"~/.git/MERGE_MSG"
 '3  1  0  ~/.git/MERGE_MSG
-|4,51,1,0,1629118889,"~/.git/MERGE_MSG"
-'4  1  3  ~/README.md
-|4,52,1,3,1629117050,"~/README.md"
+|4,51,1,0,1629120767,"~/.git/MERGE_MSG"
+'4  1  0  ~/.git/MERGE_MSG
+|4,52,1,0,1629118889,"~/.git/MERGE_MSG"
 '5  1  0  ~/.git/MERGE_MSG
-|4,53,1,0,1629114720,"~/.git/MERGE_MSG"
+|4,53,1,0,1629118889,"~/.git/MERGE_MSG"
 '6  1  0  ~/.git/MERGE_MSG
-|4,54,1,0,1629114720,"~/.git/MERGE_MSG"
+|4,54,1,0,1629118889,"~/.git/MERGE_MSG"
 '7  1  0  ~/.git/MERGE_MSG
-|4,55,1,0,1629114720,"~/.git/MERGE_MSG"
-'8  1  0  ~/.git/MERGE_MSG
-|4,56,1,0,1629114720,"~/.git/MERGE_MSG"
-'9  1  3  ~/exec/README.md
-|4,57,1,3,1629099864,"~/exec/README.md"
+|4,55,1,0,1629118889,"~/.git/MERGE_MSG"
+'8  1  3  ~/README.md
+|4,56,1,3,1629117050,"~/README.md"
+'9  1  0  ~/.git/MERGE_MSG
+|4,57,1,0,1629114720,"~/.git/MERGE_MSG"
 
 # 점프목록 (새것이 먼저):
+-'  1  0  ~/.git/MERGE_MSG
+|4,39,1,0,1629244882,"~/.git/MERGE_MSG"
 -'  1  0  ~/.git/MERGE_MSG
 |4,39,1,0,1629137529,"~/.git/MERGE_MSG"
 -'  1  0  ~/.git/MERGE_MSG
@@ -73,6 +75,22 @@
 |4,39,1,3,1629117050,"~/README.md"
 -'  1  3  ~/README.md
 |4,39,1,3,1629117050,"~/README.md"
+-'  1  3  ~/README.md
+|4,39,1,3,1629117050,"~/README.md"
+-'  1  3  ~/README.md
+|4,39,1,3,1629117050,"~/README.md"
+-'  1  3  ~/README.md
+|4,39,1,3,1629117050,"~/README.md"
+-'  1  3  ~/README.md
+|4,39,1,3,1629117050,"~/README.md"
+-'  1  3  ~/README.md
+|4,39,1,3,1629117050,"~/README.md"
+-'  1  3  ~/README.md
+|4,39,1,3,1629117050,"~/README.md"
+-'  1  3  ~/README.md
+|4,39,1,3,1629117050,"~/README.md"
+-'  1  3  ~/README.md
+|4,39,1,3,1629117050,"~/README.md"
 -'  1  0  ~/.git/MERGE_MSG
 |4,39,1,0,1629114720,"~/.git/MERGE_MSG"
 -'  1  0  ~/.git/MERGE_MSG
@@ -141,6 +159,70 @@
 |4,39,1,3,1629099864,"~/exec/README.md"
 -'  1  3  ~/exec/README.md
 |4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
+-'  1  3  ~/exec/README.md
+|4,39,1,3,1629099864,"~/exec/README.md"
 -'  1  0  ~/.git/MERGE_MSG
 |4,39,1,0,1629026467,"~/.git/MERGE_MSG"
 -'  1  0  ~/.git/MERGE_MSG
@@ -169,93 +251,11 @@
 |4,39,6,6,1628995629,"~/.git/MERGE_MSG"
 -'  6  6  ~/.git/MERGE_MSG
 |4,39,6,6,1628995629,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628995629,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628995629,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628995629,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628995626,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628995626,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628995626,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628995626,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628993091,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628993091,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628993091,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628993091,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628848824,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628848824,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628848824,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628848824,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628836108,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628836108,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628836108,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628836108,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628773609,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628773609,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628773609,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628773609,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628768153,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628768153,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628768153,"~/.git/MERGE_MSG"
--'  1  0  ~/.git/MERGE_MSG
-|4,39,1,0,1628768153,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
--'  6  6  ~/.git/MERGE_MSG
-|4,39,6,6,1628754556,"~/.git/MERGE_MSG"
 
 # 파일내의 마크 히스토리 (새것부터 오래된 순):
 
 > ~/.git/MERGE_MSG
-	*	1629137528	0
+	*	1629244881	0
 	"	1	0
 	^	6	7
 	.	6	6
