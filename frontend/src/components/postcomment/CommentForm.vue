@@ -12,7 +12,7 @@ export default {
     name: 'CommentForm',
     props:{
         taskInfo:{
-            type : Array
+            type : Object
         },
     },
     data(){
