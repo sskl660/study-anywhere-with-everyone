@@ -7,9 +7,7 @@
             <ProfileInfo class="id-container" :userInfo="newUserInfo" :followers="followers" :followings="followings" />
         </div>
         <div class="d-flex justify-content-center mt-3" style="height:100px;">
-            <div class="ticket-line" style="color:#e1af4e;font-size:30px;line-height:80px;">
-                챌린지 과제제출 현황
-            </div>
+            <div class="ticket-line" style="color:#e1af4e;font-size:30px;line-height:80px;">{{ user_info.userName }}의 챌린지 TICKET BOOK</div>
         </div>
         <!-- 프로필 티켓 -->
         <div v-for="(ticket, idx) in task_tickets" :key="idx">
@@ -75,10 +73,7 @@ export default {
         };
     },
     methods: {
-        ...mapActions([
-            'getFollower',
-            'getFollowing'
-        ]),
+        ...mapActions(['getFollower', 'getFollowing']),
         // 유저 정보 가져오는 함수
         getUserInfo: function() {
             axios({
@@ -88,18 +83,18 @@ export default {
                 .then((res) => {
                     this.user_info = res.data;
                     this.getTitle(this.user_info.userName); //타이틀 내용 채워주기
-                    this.getFollower(this.user_info.userFollower)
-                    this.getFollowing(this.user_info.userFollowing)
+                    this.getFollower(this.user_info.userFollower);
+                    this.getFollowing(this.user_info.userFollowing);
                 })
                 .catch((err) => {});
-            
+
             axios({
                 method: 'get',
                 url: `/profile/info/${this.userEmail}`,
             })
                 .then((res) => {
-                    this.getFollower(res.data.userFollower)
-                    this.getFollowing(res.data.userFollowing)
+                    this.getFollower(res.data.userFollower);
+                    this.getFollowing(res.data.userFollowing);
                 })
                 .catch((err) => {});
 
@@ -132,13 +127,13 @@ export default {
         },
         // 최상단의 타이틀 부분 텍스트 함수
         getTitle: function(name) {
-            this.profileTitle = name+" 님의 프로필";
+            this.profileTitle = name + ' 님의 프로필';
         },
         userChoose: function(user) {
             if (user == 'myProfile') {
                 this.pageOwner = this.userEmail;
             } else {
-                this.pageOwner=user;
+                this.pageOwner = user;
             }
             this.getUserInfo();
         },
@@ -173,8 +168,8 @@ export default {
     margin-left: 10px;
 }
 .ticket-line {
-  background-image: url(~@/assets/ticket-line.png);
-  width:1280px; 
-  height:100px;
+    background-image: url(~@/assets/ticket-line.png);
+    width: 1280px;
+    height: 100px;
 }
 </style>
