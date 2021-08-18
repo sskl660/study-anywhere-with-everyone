@@ -37,6 +37,7 @@ public class UserService {
 
     @Transactional
     public void createUser(UserCreateRequest request){
+        if(request.getUserTerm()<5) request.setUserGraduated(true);
         userRepository.save(request.toEntity());
     }
     @Transactional
