@@ -63,7 +63,7 @@ export default {
       startTime: null,
       tid: null,
       cnt: null,
-      mainTimeLimit: 1000, // 공부 시간 : 3600 (1시간)
+      mainTimeLimit: 3600, // 공부 시간 : 3600 (1시간)
       popupTimeLimit: 180, // 모달 유지 시간 : 180 (3분)
       isIntendedExit: true,
     };
