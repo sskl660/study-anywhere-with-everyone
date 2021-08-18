@@ -10,7 +10,7 @@
           <div class="d-flex justify-content-start">
             <img :id=" 'my-image' + idx " class="profile-img-default" src="" alt="" >
             <div class="feed-content">
-              <div class="feed-message"><span class="fw-bold">{{ feed.userName }}</span>님이 챌린지에 도전하였습니다!</div>
+              <div class="feed-message"><span class="fw-bold follower-name" @click="moveToProfile(feed.userEmail)">{{ feed.userName }}</span>님이 챌린지에 도전하였습니다!</div>
               <div class="feed-time">{{ computedEventtime }}</div>
             </div>
           </div>
@@ -48,7 +48,7 @@
           <div class="d-flex justify-content-start">
             <img :id=" 'my-image' + idx " class="profile-img-default" src="" alt="" >
             <div class="feed-content">
-              <div class="feed-message"><span class="fw-bold">{{ feed.userName }}</span>님이 챌린지를 성공하였습니다!</div>
+              <div class="feed-message"><span class="fw-bold follower-name" @click="moveToProfile(feed.userEmail)">{{ feed.userName }}</span>님이 챌린지를 성공하였습니다!</div>
               <div class="feed-time">{{ computedEventtime }}</div>
             </div>
           </div>
@@ -85,7 +85,7 @@
           <div class="d-flex justify-content-start">
             <img :id=" 'my-image' + idx " class="profile-img-default" src="" alt="" >
             <div class="feed-content">
-              <div class="feed-message"><span class="fw-bold">{{ feed.userName }}</span>님이 갤럭시방에 참여하였습니다!</div>
+              <div class="feed-message"><span class="fw-bold follower-name" @click="moveToProfile(feed.userEmail)">{{ feed.userName }}</span>님이 갤럭시방에 참여하였습니다!</div>
               <div class="feed-time">{{ computedEventtime }}</div>
             </div>
           </div>
@@ -107,7 +107,7 @@
       </div>
     </div>
 
-    <!-- 4. 팔로우 소식 -->
+    <!-- 4. 상대방끼리의 팔로우 소식 -->
     <div v-if="feed.feedType === 4">
       <div class="d-flex justify-content-center feed">
         <div>
@@ -116,7 +116,45 @@
           <div class="d-flex justify-content-start">
             <img :id=" 'my-image' + idx " class="profile-img-default" src="" alt="" >
             <div class="feed-content">
-              <div class="feed-message"><span class="fw-bold">{{ feed.userName }}</span>님이 <span class="fw-bold">{{ feed.followUserName }}</span>님을 팔로우합니다.</div>
+              <div class="feed-message"><span class="fw-bold follower-name" @click="moveToProfile(feed.userEmail)">{{ feed.userName }}</span>님이 <span class="fw-bold">{{ feed.followUserName }}</span>님을 팔로우합니다.</div>
+              <div class="feed-time">{{ computedEventtime }}</div>
+            </div>
+          </div>
+          
+          <!-- 팔로우 하단 -->
+          <div class="d-flex feed-description justify-content-between align-items-center">
+            <!-- 팔로우하는 사람 이미지 -->
+            <div class="d-flex align-items-center">
+              <img :id=" 'follower-image' + idx " class="profile-img-default thumnail" src="" alt="" >
+            </div>
+            <!-- 팔로우하는 사람 정보 -->
+            <div class="d-flex align-items-center follow-user-content">
+              <div>
+                <div class="follow-user-name">{{ feed.followUserName }}</div>
+                <div class="follow-count"> 팔로워 {{ feed.followerCnt }} / 팔로잉 {{ feed.followingCnt }}</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="follow-btn" @click="moveToProfile(feed.followUserEmail)">
+                <ButtonSquare text="프로필 가기"/>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 상대방이 나를 팔로우할 때 -->
+    <div v-if="feed.feedType === 5">
+      <div class="d-flex justify-content-center feed">
+        <div>
+          
+          <!-- 팔로우 상단 -->
+          <div class="d-flex justify-content-start">
+            <img :id=" 'my-image' + idx " class="profile-img-default" src="" alt="" >
+            <div class="feed-content">
+              <div class="feed-message"><span class="fw-bold follower-name" @click="moveToProfile(feed.userEmail)">{{ feed.userName }}</span>님이 나를 팔로우합니다.</div>
               <div class="feed-time">{{ computedEventtime }}</div>
             </div>
           </div>
@@ -200,7 +238,7 @@ export default {
   },
   created: function () {
     this.getMyImage()
-    if (this.feed.feedType === 4) {
+    if (this.feed.feedType === 4 || this.feed.feedType === 5) {
       this.getFollowerImage()
     }
   },
@@ -215,11 +253,13 @@ export default {
       var day = date.getDate();
       day = day < 10 ? '0' + day.toString() : day.toString()
 
+      /* 시차 보정 : 해외 시간으로 적용될 시 주석 해제하여 사용 */
       // var hour = date.getHours() + 9
       // if (24 <= hour) {
       //   day = (parseInt(day) + 1).toString()
       //   hour -= 24
       // }
+
       var hour = date.getHours()
       hour = hour < 10 ? '0' + hour.toString() : hour.toString()
 
@@ -410,7 +450,7 @@ export default {
   color: #949599;
 }
 
-/* 프로필 이동 버튼 */
+/* 프로필 이동 버튼 */ 
 .follow-btn .btn-light {
   color: white;
   background-color: #1C84C4;
@@ -419,5 +459,14 @@ export default {
   width: 150px;
   height: 55px;
   border-radius: 10px;
+}
+
+/* 피드 상단 팔로워 이름 */
+.follower-name {
+  cursor: pointer;
+}
+
+.follower-name:hover {
+  color: #70c8ff;
 }
 </style>

@@ -3,13 +3,14 @@
     <div class="weeklyStudy">
         <h3 class="study-title d-flex align-items-center">
             <strong>
-                주간 갤럭시 TOP5
+                주간 갤럭시 공부시간 TOP5
             </strong>
             <img class="crown" src="../../assets/crown.png" alt="crown"/>
         </h3>
         <div v-for="(galaxy, index) in weeklyStudy" :key="index" class="d-flex justify-content-start wsList">
-            <span class="fw-bold">{{index+1}}</span> &nbsp;&nbsp;
-            <span class="galaxy-member-name" @click="moveToProfile(galaxy.userEmail)">{{galaxy.userName}}</span>
+            <span class="fw-bold">{{ index+1 }}</span> &nbsp;&nbsp;
+            <span class="galaxy-member-name" @click="moveToProfile(galaxy.userEmail)">{{ galaxy.userName }}</span>
+            <span class="galaxy-record">{{ parseInt(galaxy.week/3600) }}시간</span>
         </div>
     </div>
   </div>
@@ -44,7 +45,7 @@ export default {
     },
     created: function(){
         this.getWeeklyStudy();
-    }
+    },
 }
 </script>
 
@@ -99,6 +100,11 @@ export default {
 
 .galaxy-member-name:hover {
     color: #1C84C4;
+}
+
+.galaxy-record {
+    font-weight: bold;
+    color: #FFFFFF;
 }
 
 .crown {
