@@ -8,6 +8,9 @@
                 </line>
             </svg> -->
             <!-- <div id="gravitybtn" style="display: block;position: fixed;margin: 4px;top:0;right:0;border-radius:5px;height: 30px;width: 130px;padding: 5px; background-color:#fff;text-align: center;font: italic bold 16px verdana;color: #fff;line-height: 30px;letter-spacing: 0.5px;cursor:default;z-index: 1000;-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;visibility:visible;"> -->
+                <!-- <div v-for="(line,index) in beforeBallCoords" :key="index">
+                    {{line}}
+                </div> -->
             <div id="gravitybtn">
                 Gravity
                 <input type="radio" name="c" id="but1" checked="" />
@@ -86,23 +89,15 @@ export default {
     created: function() {
         clearInterval(this.clocker);
 
-        // this.gravity();
-        // this.participants=this.participantsVuex;
+    },
+    beforeDestroy: function(){
+        clearInterval(this.clocker);
     },
     destroyed(to, from, next) {
         clearInterval(this.clocker);
-        alert("나가니")
-        next();
-        // }
+        // next();
     },
     mounted: function() {
-        // while(document.getElementById('ssazip'))document.getElementById('ssazip').remove();
-        // this.gravity();
-        // this.participants=this.participantsVuex;
-        // this.socketConnect();
-        //         var cell = document.getElementById("asd");
-        //    while ( cell.hasChildNodes() ) { console.log("!!!!!@!#!@#!@#@!!#####")
-        //        cell.removeChild( cell.firstChild ); }
     },
     beforeUpdate: function() {
         console.log('bf');
@@ -112,10 +107,6 @@ export default {
         this.gravity();
         console.log('updated');
         this.clocker = setInterval(this.showRemaining, 1000);
-        // cancelAnimationFrame(this.ani);
-        //document.getElementById('newDivSpace').remove();
-        // this.participants=this.participantsVuex;
-        // this.gravity();
     },
     computed: {
         ...mapGetters(['participantsVuex']),
@@ -155,14 +146,6 @@ export default {
         gravity: function() {
             console.log('gravity');
             console.log(this.participantsVuex);
-            // console.log(document.getElementById('newDivSpace'));
-            // while(document.getElementById('ssazip'))
-            //  document.getElementById('newDivSpace').remove();
-            /*
-        Play Balls 2 (full page version).
-        Straight JavaScript!
-        kurt.grigg@yahoo.co.uk
-        */
 
             var partList = this.participantsVuex;
             var beforeList = this.beforeParts;
@@ -195,55 +178,6 @@ export default {
             document.oncontextmenu = function() {
                 return false;
             };
-
-            // window.addEventListener('mousedown', function(e) {
-            //     if (!e) {e = window.event;}
-            //     m.down = true;
-            //     m.x1 = m.x2 = e.pageX - scrl(1);
-            //     m.y1 = m.y2 = e.pageY - scrl(0);
-
-            //     d.body.style.cursor = 'crosshair';
-            //     d.getElementById('svg').style.visibility = 'visible';
-            //     d.getElementById('vec').setAttribute('x1', m.x1);
-            //     d.getElementById('vec').setAttribute('y1', m.y1);
-            // }, false);
-
-            // window.addEventListener("mousemove", function(e) {
-            //     if (!e) {e = window.event;}
-            //     if (m.down) {
-            //         m.x2 = e.pageX - scrl(1);
-            //         m.y2 = e.pageY - scrl(0);
-            //     }
-            //     else {
-            //         m.x1 = m.x2 = e.pageX - scrl(1);
-            //         m.y1 = m.y2 = e.pageY - scrl(0);
-            //     }
-            //     d.getElementById('vec').setAttribute('x2', m.x2);
-            //     d.getElementById('vec').setAttribute('y2', m.y2);
-            // }, false);
-
-            // window.addEventListener("mouseup", function(e) {
-            //     if (!e) {e = window.event;}
-            //     if (m.down) {
-            //         m.down = false;
-            //         d.body.style.cursor = 'default';
-            //         d.getElementById('svg').style.visibility = 'hidden';
-
-            //         var dx = (m.x1 - m.x2);
-            //         var dy = (m.y1 - m.y2);
-            //         var dist =  Math.sqrt(dx * dx + dy * dy);
-
-            //         var f = (drop)?1:0.3;
-
-            //         var nvx = (dx / dist * -(dist * force)) * f;
-            //         var nvy = (dy / dist * -(dist * force)) * f;
-
-            //         // 드래그해서 공 생성
-            //         // if (!exempt && dist > 0) {
-            //         //     createBall(m.y1,m.x1,nvy,nvx);
-            //         // }
-            //     }
-            // }, false);
 
             function scrl(a) {
                 var y, x;
@@ -284,13 +218,8 @@ export default {
                 // 채팅방 가리지 않게 만들기
                 h = window.innerHeight - scrollBarBottom - 1;
                 w = window.innerWidth - scrollBarRight - 500;
-                // h = window.innerHeight - scrollBarBottom - 1;
-                // w = window.innerWidth - scrollBarRight - 1;
             }
 
-            console.log('=================use oldDivSpace=========================================');
-            // console.log('=================make newDivSpace=========================================');
-            // var con = d.createElement('div');
             var con = document.getElementById('oldPlace');
 
             con.setAttribute(
@@ -304,13 +233,15 @@ export default {
                     'visibility:hidden;'
             );
 
-            con.innerHTML +=
-                '<svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"' +
-                ' style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">' +
-                '<line id="vec" x1="0" y1="0" x2="0" y2="0" stroke="' +
-                vectorLineColour +
-                '" stroke-width="1.5" stroke-dasharray="3,3">' +
-                '</svg>';
+            if(document.getElementById('svg')==null){
+                con.innerHTML +=
+                    '<svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"' +
+                    ' style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">' +
+                    '<line id="vec" x1="0" y1="0" x2="0" y2="0" stroke="' +
+                    vectorLineColour +
+                    '" stroke-width="1.5" stroke-dasharray="3,3">' +
+                    '</svg>';
+            }
 
             function xy(a, s) {
                 return (a * s) / 100;
@@ -323,11 +254,8 @@ export default {
             /////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////////////////////////////////////
             function createBall(y, x, idx, newOneIdx, nvy, nvx) {
-                // var r = (minRadius + Math.random() * maxRadius) | 0;
                 // r: 알들의 크기
                 var r = 50;
-                // var newball=document.createElement('img');
-                // newball.setAttribute('id',this.)
                 console.log('idx in partList');
                 console.log(idx);
                 if (newOneIdx != -1) {
@@ -369,15 +297,15 @@ export default {
                     ball.setAttribute('id', `ssazip${partList[idx].partEmail}`);
                     //@click="profileF(`+partList[idx].partEmail+`)"
                     ball.innerHTML +=
-                        `<img src="` +
-                        ssazip_pics[num] +
-                        `" style="width:50px" />
-                            <span class="" style=" color:#fff; width:150px"> ${partList[idx].partName} <br/>
-<div style="width:160px" id="` +
-                        partList[idx].partEmail +
-                        `"></div>  </span>
-                            `;
-
+                        `<img src="` +ssazip_pics[num]+`" style="width:50px" />
+                        <span class="" style=" color:#fff; width:150px">
+                            ${partList[idx].partName} <br/>
+                            <div style="width:160px" id="`+
+                                partList[idx].partEmail+
+                            `"></div>
+                        </span>`;
+                            // <div>${ballCoords[idx].px}</div>
+}
                     ball.setAttribute(
                         'style',
                         'display:block;' +
@@ -404,15 +332,10 @@ export default {
                             'px rgba(0,0,0,0.4);' +
                             'opacity:1.0;'
                     );
-                }
-                console.log('xy');
-                console.log(xy);
-                // }
 
                 setTimeout(function() {
                     ball.style.visibility = 'visible';
                 }, 50);
-
 
                 if (!document.getElementById(`ssazip${partList[idx].partEmail}`)) {
                     //&&!document.getElementById(`ssazip${partList[idx].partEmail}`).contains(con)) {
@@ -424,14 +347,9 @@ export default {
                     ballAttr(r, y, x, nvy, nvx, idx);
                     balls.splice(idx, 0, ball);
                     console.log('con 이란 생성 후 싸집이공간');
-                    //                     console.log(JSON.parse(JSON.stringify(balls[0])));
-                    // console.log(JSON.parse(JSON.stringify(ballCoords[0])));
-                    // console.log(JSON.parse(JSON.stringify(con.childNodes[0])));
                 } else {
                     console.log('있던거네');
                     balls.splice(idx, 1, ball);
-                    // console.log(JSON.parse(JSON.stringify(balls[0])));
-                    // console.log(JSON.parse(JSON.stringify(ballCoords[0])));
                 }
                 for (var i = 0; i < balls.length; i++) {
                     console.log(JSON.parse(JSON.stringify(balls[i].id)));
@@ -680,19 +598,6 @@ export default {
                     b.ay = 0;
                 }
             }
-            function faccelerate(delta) {
-                console.log('faccelerate');
-                for (var i = 0; i < balls.length; i++) {
-                    var b = ballCoords[i];
-
-                    b.x += b.ax * delta * delta;
-                    b.y += b.ay * delta * delta;
-                    console.log('-------------------aaaaccccc-------------');
-
-                    b.ax = 0;
-                    b.ay = 0;
-                }
-            }
 
             function assignToHTML() {
                 for (var i = 0; i < balls.length; i++) {
@@ -725,41 +630,24 @@ export default {
                     }
                 }
             }
-            function fstep() {
-                console.log('fstep');
 
-                var steps = 2;
-                var delta = 1 / steps;
-                for (var i = 0; i < steps; i++) {
-                    if (drop) {
-                        //Thanks to Florian Boesch for this anti-jitter doubling trick.
-                        gravity();
-                        faccelerate(delta);
-                        collisions(false);
-                        zeroGravityBorderCollisions();
-                        inertia(delta);
-                        collisions(true);
-                        gravityBorderCollisions();
-                    }
-                }
-            }
 
             function run() {
                 var now = performance.now();
                 if (now - then > milliSeconds) {
                     for (var i = 0; i < ballCoords.length; i++) {
-                        if (ballCoords[i].vx > 0.6) {
-                            ballCoords[i].vx = 0.5;
-                        }
-                        if (ballCoords[i].vy > 0.6) {
-                            ballCoords[i].vy = 0.5;
-                        }
-                        if (ballCoords[i].vx < -0.6) {
-                            ballCoords[i].vx = -0.5;
-                        }
-                        if (ballCoords[i].vy < -0.6) {
-                            ballCoords[i].vy < -0.5;
-                        }
+                        // if (ballCoords[i].vx > 0.6) {
+                        //     ballCoords[i].vx = 0.5;
+                        // }
+                        // if (ballCoords[i].vy > 0.6) {
+                        //     ballCoords[i].vy = 0.5;
+                        // }
+                        // if (ballCoords[i].vx < -0.6) {
+                        //     ballCoords[i].vx = -0.5;
+                        // }
+                        // if (ballCoords[i].vy < -0.6) {
+                        //     ballCoords[i].vy < -0.5;
+                        // }
                     }
                     animate();
                     if (!drop) {
@@ -772,24 +660,7 @@ export default {
                 }
                 window.requestAnimationFrame(run);
             }
-            function firstrun() {
-                console.log('first');
-                console.log(balls);
-                console.log(ballCoords);
 
-                var now = performance.now();
-                if (now - then > milliSeconds) {
-                    animate();
-                    if (!drop) {
-                        collisions(true);
-                        zeroGravityBorderCollisions();
-                    }
-                    fstep();
-                    assignToHTML();
-                    then = performance.now();
-                }
-                window.requestAnimationFrame(run);
-            }
 
             //=========================================================================
             //=========================================================================
@@ -820,11 +691,7 @@ export default {
                 console.log(con.childNodes.length - 2);
                 console.log('=========================================');
 
-                // var num = con.childNodes.length - 2;
-                // if (num == 0) num = partList.length;
                 var num = partList.length;
-
-                ///old
                 var newOneIdx = -1;
                 var deathIdx = -1;
                 if (partList.length - 1 == beforeList.length) {
@@ -837,17 +704,6 @@ export default {
                         }
                     }
 
-                    //     for(var i =0;i<balls.length;i++)
-                    //     ballAttr(50, Math.random() * h,Math.random() * w, 0, 0);
-
-                    //     for (var i = 0; i < partList.length; i++) {
-                    //         if (!beforeList.includes(partList[i].partEmail)) {
-                    //             console.log('새로운거잖아???');
-                    //             console.log('partList에서 인덱스' + i);
-                    //             console.log(partList[i]);
-                    //             createBall(Math.random() * h, Math.random() * w, i);
-                    //         }
-                    //     }
                 } else if (partList.length == beforeList.length - 1) {
                     //퇴장 상황
                     console.log('-----Erazze situ!!!-----');
@@ -893,91 +749,10 @@ export default {
                     // if (deathIdx != -1 && i == deathIdx) continue;
                     createBall(Math.random() * h, Math.random() * w, k, -1);
                 }
-                // if (deathIdx != -1) {
-                //     console.log('era ball');
-                //     createBall(Math.random() * h, Math.random() * w, i, newOneIdx, deathIdx);
-                // }
-
-                // for (var i = 0; i < num; i++) {
-                //     //만들 공 갯수
-                //     // if(document.getElementById(`ssazip${this.participants[i].partEmail}`)) continue;
-                //     console.log('-----ballmaker-----');
-                //     console.log(i);
-
-                //     // if (con.childNodes.length != 2 && con.childNodes.length - 2 > partList.length) {
-                //     //     //참가자보다 싸집이들이 많으면 삭제가 필요하다
-                //     //     console.log('----Eraze Ball-----');
-                //     //     console.log('con.childNodes');
-                //     //     console.log(con.childNodes);
-                //     //     for (var j = 0; j < con.childNodes.length; j++) {
-                //     //         //기존 싸집이를 돌리면서
-                //     //         console.log(j + '번째 싸집이');
-                //     //         console.log('con.childNodes[j]');
-                //     //         console.log(con.childNodes[j]);
-                //     //         if (con.childNodes[j].id == 'svg' || con.childNodes[j].id == 'gravitybtn') {
-                //     //             console.log('con.childNodes[j]패스');
-                //     //             console.log(con.childNodes[j]);
-                //     //             continue;
-                //     //         }
-                //     //         console.log('partList');
-                //     //         console.log(partList);
-                //     //         var erazeCompletedflag = false;
-                //     //         for (var k = 0; k < partList.length; k++) {
-                //     //             //새 참여자 리스트에 있나 없나
-                //     //             // console.log('k');
-                //     //             console.log(k + '번째 참여자');
-                //     //             console.log('partList[k].partEmail');
-                //     //             console.log(partList[k].partEmail);
-                //     //             var email = 'ssazip' + partList[k].partEmail;
-                //     //             if (email == con.childNodes[j].id) {
-                //     //                 //있음 다행
-                //     //                 // balls.pop(j);
-                //     //                 // console.log('balls');
-                //     //                 // console.log(balls);
-                //     //                 // console.log('balls[j].partEmail');
-                //     //                 // console.log(balls[j].partEmail);
-                //     //                 //일치하는게 있다 탐색 중지
-                //     //                 console.log('일치하는게 있다 탐색 중지');
-                //     //                 break;
-                //     //             }
-                //     //             if (k == partList.length - 1) {
-                //     //                 //다 검사해봤느데 없다?
-                //     //                 console.log('없는데?');
-                //     //                 console.log(con.childNodes[j]);
-                //     //                 console.log(con.children[j]);
-                //     //                 console.log(con.childNodes[j].id);
-                //     //                 console.log(con.children.namedItem(`${con.childNodes[j].id}`));
-                //     //                 con.removeChild(con.children.namedItem(`${con.childNodes[j].id}`));
-                //     //                 erazeCompletedflag = true;
-                //     //             }
-                //     //         }
-                //     //         if (erazeCompletedflag) break;
-                //     //     }
-                //     //     // var cell = document.getElementById('asd');
-                //     //     // console.log('싸집이 지우고 ㄴ123121ㅓㅏㅟㅏㅜ');
-                //     //     // while (cell.hasChildNodes()) {
-                //     //     //     cell.removeChild(cell.firstChild);
-                //     //     // }
-                //     //     break;
-                //     // }
-
-                //     // con.removeChild(ball);
-
-                //     createBall(Math.random() * h, Math.random() * w, i);
-                // }
-
-                // console.log(participants)
-                // console.log(this.participants)
-                // console.log(participantsVuex)
-                // console.log(this.participantsVuex);
-
-                // console.log(parts)
-                // createBall(Math.random() * h, Math.random() * w, "123");
-                // }
                 console.log('-----------------------run------------------');
-                console.log(JSON.parse(JSON.stringify(balls)));
+                console.log(JSON.parse(JSON.stringify(balls[0])));
                 console.log(JSON.parse(JSON.stringify(ballCoords)));
-                firstrun();
+                run();
                 d.getElementById('but2').addEventListener(
                     'click',
                     function() {
@@ -1022,13 +797,6 @@ export default {
                     },
                     false
                 );
-
-                // var cell = document.getElementById('asd');
-                //     console.log(cell);
-                // while (cell.hasChildNodes()) {
-                //     console.log('!!!!!@!#!@#!@#@!!#####');
-                //     cell.removeChild(cell.firstChild);
-                // }
             }
 
             start();
@@ -1040,7 +808,6 @@ export default {
             this.beforeBalls = balls.slice();
             this.beforeBallCoords = ballCoords.slice();
 
-            //window.addEventListener('load', start, false);
             window.addEventListener('resize', win, false);
             window.addEventListener('scroll', iniscrl, false);
         },

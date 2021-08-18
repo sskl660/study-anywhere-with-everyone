@@ -441,10 +441,12 @@ export default {
         data: this.challengeInfo,
       })
         .then((res) => {
-          console.log(res);
+          alert('챌린지 생성에 성공하였습니다.');
+          // console.log(res);
           var info = [res.data, this.userEmail];
+          // console.log("생성 리스폰")
           this.joinChall(info);
-          console.log('챌린지 생성 완료' + res.data + ' ' + this.userEmail + '로가입신청');
+          // console.log('챌린지 생성 완료' + res.data + ' ' + this.userEmail + '로가입신청');
           this.$router.push({ name: 'ChallengeRoom', query: { cn: res.data } });
         })
         .catch((err) => {

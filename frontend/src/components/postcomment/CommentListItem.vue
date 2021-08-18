@@ -1,6 +1,6 @@
 <template>
     <div class="commentline">
-        <img :id=" 'msgimage' + index " class="comment-profile" src="" alt="" />
+        <img :id=" 'msgimage' + idx " class="comment-profile" src="" alt="" />
         <h6 id="comment-writer"><strong>{{ comment.userName }}</strong></h6>
         <div id="comment-opinion">{{ comment.commentContent }}</div>
     </div>
@@ -13,31 +13,33 @@ export default {
     name: 'CommentListItem',
     props: {
         comment: {type : Object},
-        index: {type : Number}
+        idx: {type : Number}
     },
     methods:{
         // 이미지 가져오기
-        getProfileImage: function(e) {
-            // console.log('프로필 사진 가져오기')
+        getProfileImageForComment: function(e) {
+            // console.log('개별 사진 가져오기')
             // console.log(this.comment.userEmail);
+            // console.log(this.idx);
             // console.log(this.index);
             http.get(`/viewimage/${this.comment.userEmail}`).then((response) => {
-            console.log("이미지성공");
+            // console.log("이미지성공");
             var imgsrc =
             "data:image/png;base64," +
             btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
-            document.getElementById(`msgimage${this.index}`).src = imgsrc;
+            document.getElementById(`msgimage${this.idx}`).src = imgsrc;
             // this.comment.userImage = imgsrc;
             })
             .catch((error) => {
+                // console.log("개별실패")
                 if (this.imgsrc == null) {
-                document.getElementById(`msgimage${this.index}`).src = "/img/ssazip.43ffb363.png"
+                document.getElementById(`msgimage${this.idx}`).src = "/img/ssazip.43ffb363.png"
                 }
             });
         },
     },
     created: function(){
-        this.getProfileImage();
+        this.getProfileImageForComment();
     }
 }
 </script>
