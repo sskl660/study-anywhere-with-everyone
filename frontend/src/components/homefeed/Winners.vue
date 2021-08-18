@@ -35,7 +35,7 @@ export default {
     border-radius: 30px;
     background-color:rgba(255,255,255, 0.13);
   }
-
+  
   .winners-title {
     font-family: "Noto Sans KR", sans-serif;
     /* margin-top: 100px; */
