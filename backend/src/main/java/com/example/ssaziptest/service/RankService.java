@@ -75,6 +75,7 @@ public class RankService {
         return responses;
     }
 
+//    @Scheduled(cron = "0 13 0 * * *")
     @Scheduled(cron = "0 0 0 ? * 2")
     @Transactional
     public void runEveryMonday(){

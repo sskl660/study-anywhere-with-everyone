@@ -153,7 +153,7 @@
 - ER-Diagram 1, 2 ⇒ https://drive.google.com/file/d/14gTkbjaci8I0HUJZfaLf-nSaZJLiHl5p/view?usp=sharing
   ![ERDiagram](./assets/ERDiagram.png)
 
-
+![ERDiagram2](./assets/ERDiagram2.png)
 
 <br>
 
