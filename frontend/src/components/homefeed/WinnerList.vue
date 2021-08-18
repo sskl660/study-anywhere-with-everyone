@@ -1,8 +1,9 @@
 <template>
   <div>
-    <GraduationList/>
-    <WeeklyChallengeList/>
-    <WeeklyStudyList/>
+    <div class="list-container"><GraduationList/></div>
+    <div class="list-container"><WeeklyChallengeList/></div>
+    <div class="list-container"><WeeklyStudyList/></div>
+    
   </div>
 </template>
 
@@ -20,3 +21,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.list-container {
+  margin-left: 20px;
+}
+</style>

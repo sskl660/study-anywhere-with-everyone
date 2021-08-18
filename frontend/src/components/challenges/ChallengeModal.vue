@@ -434,7 +434,7 @@ export default {
       }
     },
     /* 챌린지 생성 함수 */
-    challengeCreate: function() {
+    challengeCreate: function () {
       axios({
         method: 'post',
         url: '/challengelist/create',
@@ -453,7 +453,7 @@ export default {
         });
     },
     /* 텍스트 내용 길이 제한 체크*/
-    checkform: function() {
+    checkform: function () {
       // 컨텐츠 길이 관련 변수 초기화
       this.checkLength = true;
       if (
@@ -471,10 +471,10 @@ export default {
   },
   computed: {
     /* 과제 추가 및 생성 시 사용되는 플래그 */
-    showFlag: function() {
+    showFlag: function () {
       return this.isShow[this.tasksIndex];
     },
-    computedDescription: function() {
+    computedDescription: function () {
       return this.description;
     },
     /* 사용자의 이메일 가져오기 */
@@ -482,7 +482,7 @@ export default {
   },
   watch: {
     /* 빈 칸 관련 경고 메시지 플래그 */
-    warningFlag: function(newValue) {
+    warningFlag: function (newValue) {
       if (newValue) {
         this.warningShow = true;
       } else {
@@ -490,14 +490,14 @@ export default {
       }
     },
     /* 날짜 관련 경고 메시지 플래그 */
-    dateWarningFlag: function(newValue) {
+    dateWarningFlag: function (newValue) {
       if (newValue) {
         this.dateWarningShow = true;
       } else {
         this.dateWarningShow = false;
       }
     },
-    'challengeInfo.challengeDesc': function() {
+    'challengeInfo.challengeDesc': function () {
       this.checkform();
     },
   },
