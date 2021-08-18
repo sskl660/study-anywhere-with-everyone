@@ -115,7 +115,7 @@ public class TaskService {
         }
     }
 
-    //@Scheduled(cron = "0 * * * * *")
+//    @Scheduled(cron = "0 4 0 * * *")
     @Scheduled(cron = "0 0 0 * * *")
     @Transactional
     public void runEveryMidnight(){
