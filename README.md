@@ -51,16 +51,22 @@
   <br>
   
   > 1시간 간격으로 공부방에서 공부를 지속하고 있는지 여부를 체크합니다.
+  >
+  > ![Galaxy1](./assets/Galaxy1.gif)
 
 <br>
 
 - 피드
 
   > 피드에서 친구의 활동 사항(팔로우, 챌린지 도전, 모각코 방 입장 등...)들을 알 수 있고, 해당 친구의 활동 및 프로필을 조회할 수 있습니다.
+  >
+  > ![Galaxy2](./assets/Galaxy2.gif)
 
   <br>
 
   > 명예의 전당에서는 주간 공부 관련된 활동을 적극적으로 한 친구들을 확인할 수 있고, 해당 친구의 프로필을 조회할 수 있습니다.
+  >
+  > ![Galaxy3](./assets/Galaxy3.gif)
 
   <br>
 
@@ -87,19 +93,13 @@
 > ### Team
 >
 > - 이장섭 : Back-End Developer, Project Manager
->   - `JWT`
 > - 권희은 : Front-End Developer
->   - `UI` 
 >
 > - 김준형 : Front-End Developer
->   - `UI`
 >
 > - 김태현 : Back-End Developer
->   - `CI/CD`, `Real-time Self-coding System` , `QA`
 > - 유희원 : Back-End Developer
->   - `API Design`
 > - 차은채 : Front-End Developer
->   - `UI`
 
 <br><br><br>
 
@@ -152,6 +152,8 @@
 
 - ER-Diagram 1, 2 ⇒ https://drive.google.com/file/d/14gTkbjaci8I0HUJZfaLf-nSaZJLiHl5p/view?usp=sharing
   ![ERDiagram](./assets/ERDiagram.png)
+
+![ERDiagram2](./assets/ERDiagram2.png)
 
 <br>
 
@@ -256,7 +258,7 @@
 # 💡Usage
 
 ## Sample URL
-> http://13.125.119.76:3000
+> http://i5a307.p.ssafy.io/
 
 ## Vue Project
 ### Project setup

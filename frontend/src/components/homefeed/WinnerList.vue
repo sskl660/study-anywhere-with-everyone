@@ -24,6 +24,6 @@ export default {
 
 <style scoped>
 .list-container {
-  margin-left: 20px;
+  margin-left: 0px;
 }
 </style>

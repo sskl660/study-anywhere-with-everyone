@@ -86,9 +86,10 @@
             <br />
             <br />
             <hr id="line" />
-            <div style="margin-left:30px; margin-right:25px; text-align:left">
-              {{ chall_info.challengeDesc }}
-            </div>
+            <div
+              style="margin-left:30px; margin-right:25px; text-align:left"
+              v-html="handleNewLine(chall_info.challengeDesc)"
+            ></div>
             <br />
           </div>
           <div></div>
@@ -160,6 +161,10 @@ export default {
     };
   },
   methods: {
+    // 개행 처리
+    handleNewLine(text) {
+      return String(text).replace(/(?:\r\n|\r|\n)/g, '</br>');
+    },
     submitForm() {
       let message = this.CKEditor.getData();
       if (message == '' || message == null) {
@@ -175,26 +180,26 @@ export default {
       var tfile = document.getElementById('taskfileId');
       //파일 첨부 여부와 사이즈 검색
       if (timg.files.length != 0) {
-        if (timg.files[0].size > 1024 * 64) {
+        if (timg.files[0].size > 1024 * 100) {
           // 용량 초과시 경고후 해당 파일의 용량도 보여줌
           alert(
-            '64kb 이하 이미지만 등록할 수 있습니다.\n\n' +
-              '현재파일 용량 : ' +
+            '100kb 이하 이미지만 등록할 수 있습니다.\n\n' +
+              '현재 이미지 크기 : ' +
               Math.round((timg.files[0].size / 1024) * 100) / 100 +
               'KB'
           );
           return;
         } else {
-          console.log('이미지 탑승');
+          // console.log('이미지 탑승');
           frm.append('img', timg.files[0]);
         }
       }
       if (tfile.files.length != 0) {
-        console.log('파일 탑승');
-        if (tfile.files[0].size > 1024 * 64) {
+        // console.log('파일 탑승');
+        if (tfile.files[0].size > 1024 * 2000) {
           alert(
-            '64kb 이하 첨부파일만 등록할 수 있습니다.\n\n' +
-              '현재파일 용량 : ' +
+            '2 mb 이하 첨부파일만 등록할 수 있습니다.\n\n' +
+              '현재 파일 크기 : ' +
               Math.round((tfile.files[0].size / 1024) * 100) / 100 +
               'KB'
           );
@@ -214,13 +219,13 @@ export default {
           },
         })
         .then((response) => {
-          console.log('과제 제출 성공!');
-          alert('과제 제출이 성공하였습니다.');
+          // console.log('과제 제출 성공!');
+          // alert('과제 제출이 성공하였습니다.');
           this.$router.push({ path: '/challengeRoom', query: { cn: this.challengeno } });
         })
         .catch((error) => {
-          console.log('과제 제출 실패!');
-          console.log(error);
+          // console.log('과제 제출 실패!');
+          // console.log(error);
         });
     },
 
@@ -236,11 +241,11 @@ export default {
           return false;
         }
 
-        if (file.size > 1024 * 64) {
+        if (file.size > 1024 * 100) {
           // 용량 초과시 경고후 해당 파일의 용량도 보여줌
           alert(
-            '64kb 이하 이미지만 등록할 수 있습니다.\n\n' +
-              '현재파일 용량 : ' +
+            '100kb 이하 이미지만 등록할 수 있습니다.\n\n' +
+               '현재 이미지 크기 : '  +
               Math.round((file.size / 1024) * 100) / 100 +
               'KB'
           );
@@ -294,12 +299,12 @@ export default {
       })
         .then((res) => {
           this.chall_info = res.data;
-          console.log('페이지 로드 성공');
-          console.log(res);
+          // console.log('페이지 로드 성공');
+          // console.log(res);
         })
         .catch((err) => {
-          alert('정보부르기 실패');
-          console.log(err);
+          // alert('정보부르기 실패');
+          // console.log(err);
         });
     },
     clickerSubmit: function() {
@@ -308,13 +313,13 @@ export default {
   },
   mounted() {
     ClassicEditor.create(document.querySelector('#divCKEditor'), {
-      placeholder: '친구들에게 보일 과제 설명입니다.',
+      placeholder: '-여기에 과제에 대한 글을 작성하고 친구들에게 설명 해 주세요. -이미지(64kb)와 첨부파일(2Mb)을 올릴 수 있습니다.',
     })
       .then((editor) => {
         this.CKEditor = editor;
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   },
   created: function() {

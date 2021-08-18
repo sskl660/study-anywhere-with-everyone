@@ -3,7 +3,7 @@
         <div class="commentblock">
             <CommentList />
         </div>
-        <div class="commentform">
+        <div class="commentform" v-if="taskInfo!=null" >
             <CommentForm :taskInfo="taskInfo"/>
         </div>
     </div>
@@ -21,7 +21,7 @@ export default {
     },
     props:{
         taskInfo:{
-            type : Array
+            type : []
         },
     },
 }
