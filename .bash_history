@@ -1,5 +1,3 @@
-git push
-git push origin master
 git commit -am "fix(Conflict) : fix conflict in frontend/store/index.js"
 git push origin master
 git diff
@@ -498,3 +496,5 @@ git status
 git commit -am "merge"
 git status
 git push
+git config --system --unset credential.helper
+git config --list
