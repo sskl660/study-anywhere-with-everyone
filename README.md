@@ -225,6 +225,34 @@
 
 <br><br><br>
 
+# 📋Conference Log
+
+ <a href="./conference/firstMeeting.md">사전 회의 - Basic Rules</a>
+
+ <a href="./conference/secondMeeting.md">1차 회의 - 기획</a>
+
+ <a href="./conference/thirdMeeting.md">2차 회의 - 기획</a>
+
+ <a href="./conference/forthMeeting.md">3차 회의 - 기술 조사</a>
+
+ <a href="./conference/fifthMeeting.md">4차 회의 - 기술 명세</a>
+
+ <a href="./conference/sixthMeeting.md">5차 회의 - 아이디어</a>
+
+ <a href="./conference/seventhMeeting.md">6차 회의 - 아이디어</a>
+
+ <a href="./conference/eighthMeeting.md">7차 회의 - Scrum</a>
+
+ <a href="./conference/ninthMeeting.md">컨설팅 내역</a>
+
+ <a href="./conference/tenthMeeting.md">2차 발표 준비</a>
+
+<br>
+
+<br>
+
+<br>
+
 # 💡Usage
 
 ## Sample URL

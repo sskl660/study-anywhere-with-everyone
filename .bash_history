@@ -1,17 +1,3 @@
-git checkout chat
-git checkout master
-git pull origin master
-git pull origin
-git config core.protectNTFS false
-git pull origin master
-git add .
-git status
-git status
-git commit -am "fix(Conflict) : fix conflict in frontend/store/index.js"
-git status
-git push
-git pull
-git status
 git push
 git push origin master
 git commit -am "fix(Conflict) : fix conflict in frontend/store/index.js"
@@ -491,6 +477,20 @@ git commit -am "save"
 git pull origin master
 git status
 git status
+git commit -am "update README.md"
+git status
+git pull origin master
+git status
+git commit -am "merge"
+git status
+git push
+cd ~
+git status
+git add .
+git commit -am "update"
+git commit -am "update README.md"
+git status
+git add .
 git commit -am "update README.md"
 git status
 git pull origin master
