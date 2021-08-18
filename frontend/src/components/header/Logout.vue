@@ -96,22 +96,21 @@ import {mapActions, mapState} from 'vuex'
 .logout-content {
   background-color: #99b7ff;
   width: 500px;
-  height: 180px;
-  border-radius: 1rem;
+  height: 170px;
+  border-radius: 1.5rem;
   margin-top: 390px;
 }
 
 .logout-footer {
-  display: flex;
-  justify-content: center;
   padding-top: 0px;
   border-style: none;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
+  padding-right: 25px;
 }
 
 .logout-message {
   font-family: "Noto Sans KR", sans-serif;
-  font-size: 26px;
+  font-size: 27px;
   font-weight: bold;
   position: absolute;
   margin-left: 120px;
@@ -123,7 +122,6 @@ button {
   font-size: 17px;
   width: 90px;
   height: 40px;
-  border-radius: 0.5rem;
 }
 
 .star {
@@ -133,10 +131,10 @@ button {
 }
 
 .btn-success {
-  margin-right: 40px;
   color: #fff;
   background-color: #1C84C4;
   border-style: none;
+  font-weight: bold;
 }
 
 .btn-check:focus + .btn-success, .btn-success:focus {
@@ -165,11 +163,11 @@ button {
 }
 
 .btn-danger {
-  margin-left: 40px;
   color: #fff;
   background-color: #F53535;
   border-color: #F53535;
   border-style: none;
+  font-weight: bold;
 }
 
 .btn-danger:hover {

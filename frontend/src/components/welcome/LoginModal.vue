@@ -1,16 +1,5 @@
 <template>
   <div>
-    <!-- 로그인 버튼 -->
-    <button
-      type="button"
-      class="btn btn-primary login-btn"
-      data-bs-toggle="modal"
-      data-bs-target="#loginModal"
-      data-bs-whatever="@mdo"
-    >
-      {{ text }}
-    </button>
-
     <!-- 로그인 모달창 -->
     <div
       class="modal fade"
@@ -41,6 +30,7 @@
                   class="form-control input-form"
                   id="password-input"
                   v-model="credentials.userPassword"
+                  @keyup.enter="login(credentials)"
                 />
               </div>
             </form>
@@ -203,6 +193,10 @@ export default {
 .btn-light:active:focus,
 .btn-light.active:focus,
 .show > .btn-light.dropdown-toggle:focus {
+  box-shadow: none;
+}
+
+.form-control:focus {
   box-shadow: none;
 }
 </style>

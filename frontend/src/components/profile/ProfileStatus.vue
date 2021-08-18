@@ -17,7 +17,6 @@
               <div class="drop-list-title" style="">follower</div>
               <div class="drop-list">
                 <div v-for="(follower, idx) in followers" :key="idx">
-                  <!-- <li><a class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;" href="#">{{follower[1]}}</a></li> -->
                   <li>
                     <router-link class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;" :to="{ path: '/profile', query: { user: follower[0]  }}">
                       {{follower[1]}}
@@ -28,7 +27,6 @@
               </div>              
             </ul>
           </div>
-          <!-- <div @click="followerList" style="font-weight:bold">{{userInfo.userFollower}}</div> -->
         </div>
         
         <div>
@@ -47,17 +45,13 @@
                       <!-- 키값 : value값 -->
                     </router-link>
                   </li>
-                  <!-- <li><a class="dropdown-item" style="color:#420909; font-weight:600; font-size:18px;" href="#">{{following[1]}}</a></li> -->
                 </div>
               </div>              
             </ul>
           </div>
-          <!-- <div @click="followingList" style="font-weight:bold">{{userInfo.userFollowing}}</div> -->
         </div>
       </div>
-
     </div>
-
   </div>
 </template>
 

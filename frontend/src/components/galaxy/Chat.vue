@@ -1,19 +1,21 @@
 <!-- 메세지 입력창 하단으로 배치-->
 <!-- 채팅창 CSS 입히기-->
 <template>
-    <div>
-        <div class="participantList" id="participantbox">
-            <span class="dropdown">
-                <div class="drop-list-title" style="">참여자 목록</div>
-                <div class="drop-list">
-                    <div v-for="(user, index) in this.participants" :key="index">
-                        <div class="image-box" @click="toProfile(user.partEmail)">
-                            <div class="content">{{ user.partTerm }} 기 {{ user.partName }}</div>
-                        </div>
-                    </div>
+  <div>
+    <div class="participantList" id="participantbox">
+
+        <span class="dropdown">
+              <div class="drop-list-title" style="">참여자 목록</div>
+              <div class="drop-list">
+                <div v-for="user in this.participants" :key="user">
+                  <div class="image-box" @click="toProfile(user.partEmail)">
+                    <div class="content">{{ user.partTerm }} 기 {{ user.partName }}</div>
+                  </div>
                 </div>
-            </span>
-        </div>
+              </div>
+          </span>
+
+      </div>
         <div>
             <div v-if="chatType == 'algo'">
                 <!-- <div class="dropdown">
@@ -160,6 +162,7 @@
                 />&nbsp;
             </div>
         </div>
+        <SSazipRank id="galaxyRank" :ranker="ranker" />
     </div>
 </template>
 
@@ -169,58 +172,61 @@ import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { mapActions, mapGetters } from 'vuex';
 import { chatURL } from '@/util/http-common.js';
+import SSazipRank from '@/components/galaxy/SSazipRank.vue';
 
 export default {
-    name: 'App',
-    data() {
-        return {
-            enterMessage: [],
-            exitMessage: [],
-            idx: '',
-            message: '',
-            // 소켓 연결
-            stompClient: null,
-            // 메세지 내용 저장
-            receivedMessagesAlgo: [],
-            receivedMessagesCS: [],
-            receivedMessagesJob: [],
-            participants: [], // length. 참여자수, 이메일 userEmail
-            // 참여자 정보 전달 채널
-            partChannel: null,
-            // 대화 채널
-            channel: null,
-            // 상위 5명
-            ranker: [],
-        };
+  name: 'App',
+  components:{
+    SSazipRank
+  },
+  data() {
+    return {
+      enterMessage: [],
+      exitMessage: [],
+      idx: '',
+      message: '',
+      // 소켓 연결
+      stompClient: null,
+      // 메세지 내용 저장
+      receivedMessagesAlgo: [],
+      receivedMessagesCS: [],
+      receivedMessagesJob: [],
+      participants: [], // length. 참여자수, 이메일 userEmail
+      // 참여자 정보 전달 채널
+      partChannel: null,
+      // 대화 채널
+      channel: null,
+      // 상위 5명
+      ranker: [],
+    };
+  },
+  mounted() {
+    this.socketConnect();
+  },
+  destroyed() {
+    this.socketDisconnect();
+  },
+  updated() {
+    this.scrollDown();
+  },
+  methods: {
+    ...mapActions(['setPart']),
+    // 자동 스크롤
+    scrollDown() {
+      var scrollbox = document.getElementById('roomBox');
+      scrollbox.scrollTop = scrollbox.scrollHeight;
+      console.log(this.participants.length);
     },
-    mounted() {
-        this.socketConnect();
-    },
-    destroyed() {
-        this.socketDisconnect();
-    },
-    updated() {
-        this.scrollDown();
-    },
-    methods: {
-        ...mapActions(['setPart']),
-        // 자동 스크롤
-        scrollDown() {
-            var scrollbox = document.getElementById('roomBox');
-            scrollbox.scrollTop = scrollbox.scrollHeight;
-            console.log(this.participants.length);
-        },
         // 메세지 전송하는 함수.
         sendMessage() {
-            // 메세지가 존재하고, 연결 정보가 유지되는 경우
-            if (this.message.trim() && this.stompClient) {
-                // 메세지 형식을 정의한다(JSON).
-                const sendMessage = {
-                    senderId: this.userEmail,
-                    sender: this.userTerm + '기 ' + this.userName,
-                    content: this.message.trim(),
-                };
-
+          // 메세지가 존재하고, 연결 정보가 유지되는 경우
+          if (this.message.trim() && this.stompClient) {
+            // 메세지 형식을 정의한다(JSON).
+            const sendMessage = {
+              senderId: this.userEmail,
+              sender: this.userTerm + '기 ' + this.userName,
+              content: this.message.trim(),
+            };
                 // 해당 Endpoint로 메세지를 전송한다.
                 // Destination, header, body로 구성된다.
                 // 채팅 Type에 따라서 다르게 보낸다.
@@ -453,6 +459,7 @@ input:focus {
     padding-top: 2%;
     padding-bottom: 2%;
     margin-left: 2%;
+    font-family: 'BBTreeGB';
 }
 
 #CMname {
@@ -476,6 +483,7 @@ input:focus {
     padding-bottom: 2%;
     margin-right: 2%;
     text-align: left;
+    font-family: 'BBTreeGB';
 }
 
 #Ccome {
@@ -512,6 +520,9 @@ input:focus {
     z-index: 2;
     background: none;
     font-weight: bold;
+    
+    padding: 3%;
+    cursor: pointer;
 }
 .image-box .content::after,
 .image-box .content::before {

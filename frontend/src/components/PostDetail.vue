@@ -86,9 +86,10 @@
             <br />
             <br />
             <hr id="line" />
-            <div style="margin-left:30px; margin-right:25px; text-align:left">
-              {{ chall_info.challengeDesc }}
-            </div>
+            <div
+              style="margin-left:30px; margin-right:25px; text-align:left"
+              v-html="handleNewLine(chall_info.challengeDesc)"
+            ></div>
             <br />
           </div>
           <div></div>
@@ -160,6 +161,10 @@ export default {
     };
   },
   methods: {
+    // 개행 처리
+    handleNewLine(text) {
+      return String(text).replace(/(?:\r\n|\r|\n)/g, '</br>');
+    },
     submitForm() {
       let message = this.CKEditor.getData();
       if (message == '' || message == null) {

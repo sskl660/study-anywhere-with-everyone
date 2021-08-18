@@ -1,5 +1,5 @@
 <template>
-  <div class="" v-if="showMsg[0].userEmail!='string'">
+  <div class="" v-if="showMsg[0]!=null">
       <div v-for="(comment, iddd) in showMsg" :key="iddd">
         {{comment.userEmail}}
         <CommentListItem :comment="comment" :idx="iddd"/>
@@ -17,13 +17,13 @@ export default {
     data(){
         return{
             showMsg:[
-                {
-                    commentContent: "string",
-                    commentDate: "2021-08-08T08:15:23.457Z",
-                    userEmail: "string",
-                    userImage: "string",
-                    userName: "string"
-                }
+                // {
+                //     commentContent: "string",
+                //     commentDate: "2021-08-08T08:15:23.457Z",
+                //     userEmail: "string",
+                //     userImage: "string",
+                //     userName: "string"
+                // }
             ],
         }
     },

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- <p>{{this.user_info}}</p> -->
         <div class="profile-info-container">
             <!-- 타이틀도 추후에 bg-img로 바꿔주기 -->
             <Title style="display: inline-block" :text="this.profileTitle" />
@@ -26,11 +25,8 @@ import ProfileInfo from '@/components/profile/ProfileInfo.vue';
 import ProfileTicket from '@/components/profile/ProfileTicket.vue';
 import ProfileEditModal from '@/components/profile/ProfileEditModal.vue';
 import './css/profile.css';
-// import axios from 'axios'
 import axios from '@/util/http-common.js';
-// import { mapState } from 'vuex'
-// import func from 'vue-editor-bridge'
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
     name: 'Profile',
     components: {
@@ -39,13 +35,8 @@ export default {
         ProfileTicket,
         ProfileEditModal,
     },
-    // props: {
-    //   userEmail: String,
-    // },
     data: function() {
         return {
-            // 유저 이메일 정보 받아와서 넣기
-            // useremail: "jang@naver.com",
             profileTitle: 'string',
             user_info: {
                 userBlog: '',
@@ -69,7 +60,6 @@ export default {
                 userWishfield: '',
             },
             task_tickets: [
-                // 챌린지 하나 내용
                 {
                     achieveRate: 0,
                     challengeName: '',
@@ -85,6 +75,10 @@ export default {
         };
     },
     methods: {
+        ...mapActions([
+            'getFollower',
+            'getFollowing'
+        ]),
         // 유저 정보 가져오는 함수
         getUserInfo: function() {
             axios({
@@ -94,10 +88,20 @@ export default {
                 .then((res) => {
                     this.user_info = res.data;
                     this.getTitle(this.user_info.userName); //타이틀 내용 채워주기
+                    this.getFollower(this.user_info.userFollower)
+                    this.getFollowing(this.user_info.userFollowing)
                 })
-                .catch((err) => {
-                    // console.log(err);
-                });
+                .catch((err) => {});
+            
+            axios({
+                method: 'get',
+                url: `/profile/info/${this.userEmail}`,
+            })
+                .then((res) => {
+                    this.getFollower(res.data.userFollower)
+                    this.getFollowing(res.data.userFollowing)
+                })
+                .catch((err) => {});
 
             axios({
                 method: 'get',
@@ -106,9 +110,7 @@ export default {
                 .then((res) => {
                     this.task_tickets = res.data.reverse();
                 })
-                .catch((err) => {
-                    // console.log(err);
-                });
+                .catch((err) => {});
 
             axios({
                 method: 'get',
@@ -117,9 +119,7 @@ export default {
                 .then((res) => {
                     this.followers = res.data;
                 })
-                .catch((err) => {
-                    // console.log(err);
-                });
+                .catch((err) => {});
 
             axios({
                 method: 'get',
@@ -128,9 +128,7 @@ export default {
                 .then((res) => {
                     this.followings = res.data;
                 })
-                .catch((err) => {
-                    // console.log(err);
-                });
+                .catch((err) => {});
         },
         // 최상단의 타이틀 부분 텍스트 함수
         getTitle: function(name) {

@@ -1,10 +1,13 @@
 <template>
     <div id="app">
+        <video muted autoplay loop class="back" style="width:100%;position:fixed;top:0px;z-index:-99;left:0px">
+            <source src="@/assets/universebackground.mp4" type="video/mp4">
+        </video>
         <Header />
         <router-view :key="$route.fullPath" />
     </div>
 </template>
-vue
+
 <script>
 import Header from '@/components/common/Header.vue';
 

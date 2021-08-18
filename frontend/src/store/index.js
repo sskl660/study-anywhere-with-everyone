@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    // 계정관련
     isLogin: false,
     config: null, // jwt 담는 객체
     comments: [],
@@ -15,7 +16,10 @@ export default new Vuex.Store({
     userEmail: null,
     userName: null,
     userTerm: null,
+    following: null,
+    follower: null,
     // Galaxy 관련
+    message: null, // 입장 메시지
     chatType: 'algo', // 채팅창 타입(Algo, CS, Job)
     participantsVuex:[],
   },
@@ -28,7 +32,7 @@ export default new Vuex.Store({
   mutations: {
     // 가입
     JOIN: function(state) {
-      console.log(state);
+      // console.log(state);
       router.push({ name: 'Welcome' });
     },
     // 로그인
@@ -39,7 +43,7 @@ export default new Vuex.Store({
     },
     // 로그아웃
     LOGOUT: function(state) {
-      console.log('로그아웃 성공');
+      // console.log('로그아웃 성공');
       state.isLogin = false;
       localStorage.removeItem('jwt');
       state.config = null;
@@ -56,16 +60,16 @@ export default new Vuex.Store({
       state.config = {
         Anthorization: `JWT ${token}`,
       };
-      console.log('토큰 부여중');
-      console.log(userInfoResponse);
-      console.log(userInfoResponse.userEmail);
+      // console.log('토큰 부여중');
+      // console.log(userInfoResponse);
+      // console.log(userInfoResponse.userEmail);
       state.userEmail = userInfoResponse.userEmail;
       state.userName = userInfoResponse.userName;
       state.userTerm = userInfoResponse.userTerm;
     },
     // 댓글
     ADD_COMMENT(state, commentItem) {
-      console.log(state);
+      // console.log(state);
       state.comments.push(commentItem);
     },
     //이메일 체크
@@ -80,7 +84,7 @@ export default new Vuex.Store({
     },
     JOIN_CHALL(state) {
       // state에서 사용하는 변수는 클라이언트가 사용하는 변수들.
-      console.log(state);
+      // console.log(state);
     },
     // PRESSLIKE: function (state) {
     //     console.log(state);
@@ -95,13 +99,23 @@ export default new Vuex.Store({
       } else if (chatType == 3) {
         state.chatType = 'job';
       }
-      console.log('채팅 변경');
+      // console.log('채팅 변경');
+    },
+    // 메시지 가져와서 저장하기
+    GET_MESSAGE(state, msg) {
+      state.message = msg
     },
     SET_PARTICIPANTS(state, payload) {
-      console.log("SET_PARTICIPANTS mutation working" + payload);
-      console.log(payload);
+      // console.log("SET_PARTICIPANTS mutation working" + payload);
+      // console.log(payload);
       state.participantsVuex = payload;
     },
+    GET_FOLLOWER(state, follower) {
+      state.follower = follower
+    },
+    GET_FOLLOWING(state, following) {
+      state.following = following
+    }
   },
   // 젠킨스를 위한 변경사항
   actions: {
@@ -113,12 +127,12 @@ export default new Vuex.Store({
         data: credentials,
       })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           commit('JOIN');
         })
         .catch((err) => {
-          console.log('actionerr');
-          console.log(err);
+          // console.log('actionerr');
+          // console.log(err);
         });
     },
     // 로그인
@@ -129,15 +143,15 @@ export default new Vuex.Store({
         data: credentials,
       })
         .then((res) => {
-          console.log('로그인 통신 성공');
-          console.log(credentials);
-          console.log(res.data.userInfoResponse);
+          // console.log('로그인 통신 성공');
+          // console.log(credentials);
+          // console.log(res.data.userInfoResponse);
           commit('LOGIN', res.data.accessToken);
           commit('SET_TOKEN', res.data.userInfoResponse);
         })
         .catch((err) => {
           alert('계정이나 인터넷을 확인해주세요');
-          console.log(err);
+          // console.log(err);
         });
     },
     // 로그아웃
@@ -155,9 +169,9 @@ export default new Vuex.Store({
         url: `/signup/check/${email}`,
       })
         .then((res) => {
-          console.log(email);
+          // console.log(email);
           commit('EMAIL_CHECK', res.data);
-          console.log(res.data);
+          // console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -174,29 +188,30 @@ export default new Vuex.Store({
         .then((res) => {
           // 통신이 넘어오는 것
           console.log(res);
+          console.log('res');
           commit('JOIN_CHALL');
           // commit('JOIN_CHALL', res.data); //res는 백엔드에서 넘겨주는 response, res.data는 body부분
+          // this.$router.push({ name: 'ChallengeRoom', query: { cn: res.data } });
+
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     },
     // 좋아요
     presslike: function({ commit }, like) {
-      // alert('좋아요 들어오니?');
-      // console.log(like);
       axios({
         method: 'post',
         url: '/challenge/task/like',
         data: like,
       })
         .then((res) => {
-          console.log(res);
-          console.log(commit);
+          // console.log(res);
+          // console.log(commit);
           // commit('PRESSLIKE');
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     },
     // 좋아요 취소
@@ -207,29 +222,26 @@ export default new Vuex.Store({
         data: like,
       })
         .then((res) => {
-          console.log(res);
-          console.log(commit);
+          // console.log(res);
+          // console.log(commit);
           // commit('PRESSUNLIKE');
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     },
     // 댓글 보내기
     leaveMessage: function({ commit }, msg) {
-      // alert('댓글 들어오니?');
-      // console.log('여기는 store')
-      // console.log(msg);
       axios({
         method: 'post',
         url: '/comment',
         data: msg,
       })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     },
     // 댓글 기능
@@ -241,9 +253,21 @@ export default new Vuex.Store({
     changeChatType: function({ commit }, chatType) {
       commit('CHANGE_CHAT_TYPE', chatType);
     },
+    // 입장 메시지 가져오기
+    getMessage: function ({ commit }, msg) {
+      commit('GET_MESSAGE', msg)
+    },
     // 갤럭시방 참가자 관리
     setPart: function ({ commit }, participants){
       commit('SET_PARTICIPANTS', participants);
+    },
+    // 팔로워 수 가져오기
+    getFollower: function ({ commit }, follower) {
+      commit('GET_FOLLOWER', follower);
+    },
+    // 팔로잉 수 가져오기
+    getFollowing: function ({ commit }, following) {
+      commit('GET_FOLLOWING', following);
     }
   },
 
@@ -270,8 +294,17 @@ export default new Vuex.Store({
     chatType: function(state) {
       return state.chatType;
     },
+    message: function(state) {
+      return state.message;
+    },
     participantsVuex: function (state) {
       return state.participantsVuex;
-    }
+    },
+    follower: function (state) {
+      return state.follower;
+    },
+    following: function (state) {
+      return state.following;
+    },
   },
 });

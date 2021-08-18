@@ -20,7 +20,7 @@
                     <!-- 가입하기 버튼 -->
                     <div v-if="!overStartDate && !didJoin() && !overMember()" class="Cjoin_btn" @click="hidebtn(chall_info.challengeNo, userEmail)">
                         <ButtonRound :text="msg" />
-                    </div>  
+                    </div>
                     <!-- 마감 시간 -->
                     <div class="alarm">
                         <h5 id="rest"></h5>
@@ -45,7 +45,7 @@
                                 </tr>
                             </thead>
                             <!-- 블렛 저널 테이블 바디 -->
-                            <tbody v-if="task_info[0].taskNo!=0">
+                            <tbody v-if="task_info[0].taskNo != 0">
                                 <tr v-for="(person, index) in chall_info.challengeGroup" :key="index">
                                     <th scope="row" style="background-color: #b7beda">{{ person[1] }}</th>
                                     <td v-for="(taskIdx, index2) in chall_info.challengeTaskCnt" :key="index2">
@@ -88,39 +88,51 @@
             <div class="col col-5 flex-item">
                 <div class="ChallengeDetail">
                     <div class="Cdetail">
-                        <p>{{ chall_info.challengeDesc }}</p>
-
+                        <p v-html="handleNewLine(chall_info.challengeDesc)"></p>
+                                        <div>챌린지 기간 : {{chall_info.challengeStartdate}}~{{chall_info.challengeEnddate}}</div>
                         <div>
-                            <div v-for="(task, index) in chall_info.challengeTaskdeadlines" :key="index">{{ index+1 }} 번째 과제 : {{ task }} 까지</div>
+                            <div v-for="(task, index) in chall_info.challengeTaskdeadlines" :key="task">
+                                - {{ index + 1 }} 번째 과제 : {{ task }} 까지
+                            </div>
                         </div>
-                        <br /><br />
-                        <strong
-                            >참여멤버 :
-                            <span v-for="(name, index) in chall_info.challengeGroup" :key="index" @click="nameprofile(index)" style="cursor:pointer;">
-                                <router-link
-                                    style="color:#blue; font-weight:600; text-decoration: none;"
-                                    :to="{ name: 'Profile', query: { user: name[0] } }"
-                                >
-                                    #{{ name[1] }}<span v-if="index == 0"> 팀장님 </span>
-                                </router-link>
-                            </span>
-                            &nbsp; [정원]{{ chall_info.challengeGroup.length }}/{{ chall_info.challengeCapacity }}
-                        </strong>
-                        <br>
-                        <div>
-                            <strong> 난이도 : </strong
-                            ><span v-for="level in chall_info.challengeLevel" :key="level"
-                                ><img src="../assets/star.png" alt="levelstar" id="levelstar"
-                            /></span>
-                            <br><br>
+                                    <br /><br />
+                                    <strong
+                                        >참여멤버 :
+                                        <span
+                                            v-for="(name, index) in chall_info.challengeGroup"
+                                            :key="index"
+                                            @click="nameprofile(index)"
+                                            style="cursor:pointer;"
+                                        >
+                                            <router-link
+                                                style="color:#blue; font-weight:600; text-decoration: none;"
+                                                :to="{ name: 'Profile', query: { user: name[0] } }"
+                                            >
+                                                #{{ name[1] }}<span v-if="index == 0"> 팀장님 </span>
+                                            </router-link>
+                                        </span>
+                                        &nbsp; [정원]{{ chall_info.challengeGroup.length }}/{{ chall_info.challengeCapacity }}
+                                    </strong>
+                                    <br />
+                                    <div>
+                                        <strong> 난이도 : </strong
+                                        ><span v-for="level in chall_info.challengeLevel" :key="level"
+                                            ><img src="../assets/star.png" alt="levelstar" id="levelstar"
+                                        /></span>
+                                        <br /><br />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ChallengeTicket">
+                                <ChallengeTicket :challTicket="chall_ticket" :ProcessRateArr="makeArr()" />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="ChallengeTicket">
-                    <ChallengeTicket :challTicket="chall_ticket" :ProcessRateArr="makeArr()" />
-                </div>
-            </div>
-        </div>
+
+        <!-- <div class="tutorial"> -->
+            <!-- <img id="explain" src="../assets/challengetutorialssazip.png" alt="" /> -->
+            <!-- <img id="tuter" src="../assets/ssazip.png" alt=""> -->
+        <!-- </div> -->
     </div>
 </template>
 <script>
@@ -195,6 +207,11 @@ export default {
     },
 
     methods: {
+        // 개행 처리
+        handleNewLine(text) {
+            return String(text).replace(/(?:\r\n|\r|\n)/g, '</br>');
+        },
+
         makeArr: function() {
             var ProcessRateArr = [false, false, false, false, false, false, false];
             // console.log(ProcessRateArr)
@@ -218,6 +235,7 @@ export default {
         },
         //챌린지 페이지에서 챌린지 정보 불러오는 통신
         getChallInfo: function() {
+            // console.log("챌린지 정보 요청 중")
             axios({
                 methods: 'get',
                 url: `/challenge/info/${this.challengeno}`,
@@ -225,14 +243,13 @@ export default {
                 .then((res) => {
                     // console.log('챌린지 정보 부르기 성공');
                     this.chall_info = res.data;
-                        this.chall_info.challengeStartdate += ' 00:00:01';
+                    this.chall_info.challengeStartdate += ' 00:00:01';
                     var startD = new Date(this.chall_info.challengeStartdate);
-                    if(startD - new Date() - 1<0)
-                        this.makeTrue();
+                    if (startD - new Date() - 1 < 0) this.makeTrue();
                     // var pre = new Date();
                     // if (startD.getFullYear() - pre.getFullYear() + startD.getMonth() - pre.getMonth() + startD.getDate() - pre.getDate() < 0) {
                     // }
-                
+
                     this.countDownTimer();
                 })
                 .catch((err) => {
@@ -249,8 +266,7 @@ export default {
                 .then((res) => {
                     this.chall_ticket = res.data;
                 })
-                .catch((err) => {
-                });
+                .catch((err) => {});
         },
 
         countDownTimer: function() {
@@ -280,7 +296,6 @@ export default {
             document.getElementById('rest').textContent += minutes + '분 ';
             document.getElementById('rest').textContent += seconds + '초';
         },
-
         ...mapActions({
             // import 해주는 느낌
             joinChall: 'joinChallenge',
@@ -294,7 +309,7 @@ export default {
             this.joinChall(info); // email이랑 챌린지 번호 전송
             this.$router.go();
         },
-        goBack: function(){
+        goBack: function() {
             // alert('goBack function')
             this.$router.go(-1);
         },
@@ -316,28 +331,15 @@ export default {
             if (this.chall_info.challengeGroup.length >= this.chall_info.challengeCapacity) return true;
             else return false;
         },
-        // overTime: function(flag) {
-        //     if (flag) {
-        //         return true;
-        //     } else return false;
-        // },
         makeTrue: function() {
             this.overStartDate = true;
         },
-        // timerSpt:function(){
-        //     console.log("timerSpt");
-        //     clearInterval(this.showRemaining());
-        //     // clearInterval(timer);
-        //     //clearInterval(this.timer);
-        // }
     },
-    beforeCreate:function(){
-        },
     created: function() {
         this.challengeno = this.$route.query.cn;
-        this.getTaskInfo();
         this.getChallInfo(); //생성할 때 바로 불러줘
         this.makeArr();
+        this.getTaskInfo();
         // this.countDownTimer('rest', this.chall_info.challengeStartdate);
         this.getChallTicket();
         //document.getElementById(id).textContent = '';
@@ -382,10 +384,10 @@ export default {
     margin-bottom: 10px;
 }
 
-.goChallenge .btn-light{
+.goChallenge .btn-light {
     color: #1f4256;
-    background-color: #E1AF4E;
-    border-color: #E1AF4E;
+    background-color: #e1af4e;
+    border-color: #e1af4e;
     font-size: 25px;
     font-weight: bold;
     width: 100px;
@@ -457,5 +459,37 @@ th {
 #levelstar {
     width: 45px;
     height: 45px;
+}
+
+th {
+    position: relative;
+    /* display: inline-block; */
+}
+
+.namepoint {
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 0; */
+    /* transform: translateY(-50%); */
+    /* width: 50%; */
+    /* font-size: 25px; */
+    /* color: #ffffff; */
+    /* font-weight: 900; */
+    height: 100%;
+}
+
+#tuter {
+    width: 50px;
+    height: 63px;
+    position: relative;
+    margin-left: -3730px;
+    margin-top: 750px;
+}
+#explain {
+    width: 150px;
+    height: 311px;
+    position: relative;
+    margin-left: -3625px;
+    margin-top: 503px;
 }
 </style>

@@ -2,12 +2,22 @@
   <div>
     <div class="d-flex justify-content-center feed-container">
       <div class="feed">
-        <FeedListItem
-          v-for="(feed, idx) in feedList" 
-          :key="idx" 
-          :feed="feed"
-          :idx="idx"
-        />
+
+        <div v-if="feedList.length === 0">
+         <FeedTutorial/>
+        </div>
+
+        <div v-else>
+          <div v-if="feedList.toString() !== 'none'">
+            <FeedListItem
+              v-for="(feed, idx) in feedList" 
+              :key="idx" 
+              :feed="feed"
+              :idx="idx"
+            />
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>
@@ -15,17 +25,19 @@
 
 <script>
 import FeedListItem from '@/components/homefeed/FeedListItem'
+import FeedTutorial from '@/components/homefeed/FeedTutorial'
 import { mapGetters } from 'vuex';
 import axios from '@/util/http-common.js';
 
 export default {
   name: 'FeedList',
   components: {
-    FeedListItem
+    FeedListItem,
+    FeedTutorial 
   },
   data: function () {
     return {
-      feedList: null
+      feedList: ['none']
     }
   },
   methods: {
@@ -59,7 +71,7 @@ export default {
   height: 800px;
   border-radius: 30px;
   background-color:rgba(255,255,255, 0.2);
-  margin-top: 120px;
+  margin-top: 110px;
   padding-top: 80px;
   overflow-y: scroll;
 }
