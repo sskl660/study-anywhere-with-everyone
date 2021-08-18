@@ -67,19 +67,20 @@ export default {
     border-radius: 33px;
     margin-top: 30px;
     margin-left: 57px;
-    height: 280px;
+    height: 270px;
 }
 
 .weekly-title {
     text-align: left;
     margin-left: 50px;
     margin-bottom: 10px; 
-    padding-top:20px
+    padding-top:10px;
+    font-size: 28px;
 }
 
 .wcList{
     font-family: 'NanumSquareRound';
-    font-size: 23px;
+    font-size: 22px;
     margin-left: 50px;
     margin-bottom: 10px;
 }

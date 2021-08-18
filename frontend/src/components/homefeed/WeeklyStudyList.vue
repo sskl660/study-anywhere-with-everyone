@@ -3,7 +3,7 @@
     <div class="weeklyStudy">
         <h3 class="study-title d-flex align-items-center">
             <strong>
-                주간 갤럭시 공부시간 TOP5
+                주간 공부시간 TOP5
             </strong>
             <img class="crown" src="../../assets/crown.png" alt="crown"/>
         </h3>
@@ -67,19 +67,19 @@ export default {
     border-radius: 33px;
     margin-top: 30px;
     margin-left: 57px;
-    height: 280px;
+    height: 270px;
 }
 
 .study-title {
     text-align: left;
     margin-left: 50px;
     margin-bottom: 10px; 
-    padding-top:20px
+    padding-top:10px
 }
 
 .wsList{
     font-family: 'NanumSquareRound';
-    font-size: 23px;
+    font-size: 22px;
     margin-left: 50px;
     margin-bottom: 10px;
 }
@@ -105,6 +105,7 @@ export default {
 .galaxy-record {
     font-weight: bold;
     color: #FFFFFF;
+    line-height:20px;
 }
 
 .crown {
