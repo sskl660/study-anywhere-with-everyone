@@ -1,7 +1,6 @@
 <template>
   <div class="" v-if="showMsg[0]!=null">
       <div v-for="(comment, iddd) in showMsg" :key="iddd">
-        {{comment.userEmail}}
         <CommentListItem :comment="comment" :idx="iddd"/>
       </div>
   </div>
