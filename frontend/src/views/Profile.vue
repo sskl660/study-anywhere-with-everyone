@@ -8,7 +8,7 @@
         </div>
         <div class="d-flex justify-content-center mt-3" style="height:100px;">
             <div class="ticket-line" style="color:#e1af4e;font-size:30px;line-height:80px;">
-                내 챌린지 과제제출 현황
+                챌린지 과제제출 현황
             </div>
         </div>
         <!-- 프로필 티켓 -->
