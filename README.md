@@ -51,6 +51,8 @@
   <br>
   
   > 1시간 간격으로 공부방에서 공부를 지속하고 있는지 여부를 체크합니다.
+  >
+  > ![Galaxy1](./assets/Galaxy1.gif)
 
 <br>
 
@@ -87,19 +89,13 @@
 > ### Team
 >
 > - 이장섭 : Back-End Developer, Project Manager
->   - `JWT`
 > - 권희은 : Front-End Developer
->   - `UI` 
 >
 > - 김준형 : Front-End Developer
->   - `UI`
 >
 > - 김태현 : Back-End Developer
->   - `CI/CD`, `Real-time Self-coding System` , `QA`
 > - 유희원 : Back-End Developer
->   - `API Design`
 > - 차은채 : Front-End Developer
->   - `UI`
 
 <br><br><br>
 
@@ -256,7 +252,7 @@
 # 💡Usage
 
 ## Sample URL
-> http://13.125.119.76:3000
+> http://i5a307.p.ssafy.io/
 
 ## Vue Project
 ### Project setup
