@@ -5,6 +5,7 @@
     <div class="stars-left-box">
       <img class="stars" src="../assets/manystar.png" alt="manystar">
     </div>
+    <Title  text="챌린지 목록"/>
     <div class="stars-right-box">
       <img class="stars" src="../assets/manystar.png" alt="manystar">
     </div>
@@ -31,6 +32,7 @@
 import SearchBar from '@/components/challenges/SearchBar'
 import ChallengeList from '@/components/challenges/ChallengeList'
 import ChallengeModal from '@/components/challenges/ChallengeModal'
+import Title from '@/components/common/Title.vue';
 import "@/views/css/challenges.css";
 import axios from '@/util/http-common.js';
 
@@ -40,6 +42,7 @@ export default {
     SearchBar, // 검색바
     ChallengeList, // 챌린지 목록
     ChallengeModal, //챌린지 모달
+    Title
   },
   data: function () {
     return {
