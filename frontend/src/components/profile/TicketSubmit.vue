@@ -39,7 +39,7 @@ export default {
 }
 .miss {
   background-color: #EE4748 ;
-   box-shadow:1px 3px 10px #5a1f24;
+  box-shadow:1px 3px 10px #5a1f24;
 }
 .submit {
   background-color: #5974B3;

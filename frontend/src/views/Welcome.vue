@@ -5,31 +5,32 @@
             <source src="@/assets/space.mp4" type="video/mp4">
         </video>
         <!-- 웰컴페이지 구현 -->
-        <div>    
-            <div class="stage neonSSAZIP" style="width:300px; height:350px; position: absolute; top:200px; left:600px;">
+        <div class="welcome-container"  >   
+            <div class="stage neonSSAZIP" >
                 SSA.zip
             </div>
             <!-- SSAZIP 구현 -->
-            <div class="stage" style="position: absolute;top:40px;right:790px;">
+            <div class="stage" >
                 <img class="ssazip box bounce-7" src="../assets/ssazip.png" alt="ssazip"/>
             </div>
             <!-- 로그인, 회원가입 버튼 -->
             <div class="neonLogin login-btn" data-bs-toggle="modal"
                 data-bs-target="#loginModal"
                 data-bs-whatever="@mdo"
-                style="width:150px; position: absolute; top:550px; left:750px; height:75px; line-height:40px; cursor:pointer;">
+                style="line-height:40px; cursor:pointer;">
                 Login
             </div>
-            <LoginModal/>
-            <router-link class="neonJoin join-btn" style="text-decoration:none; width:150px; height:75px; position: absolute; top:550px; right:750px;line-height:40px;" to="/join">Join</router-link>
+            <router-link class="neonJoin join-btn" style="text-decoration:none;" to="/join">Join</router-link>
         </div>  
+        <LoginModal/>
     </div>
 </template>
 
 <script>
 import ButtonRound from '@/components/common/ButtonRound';
 import LoginModal from '@/components/welcome/LoginModal';
-import '@/views/css/welcome.css';
+import { mapGetters } from 'vuex';
+
 export default {
     name: 'Welcome',
     components: {
@@ -53,27 +54,39 @@ export default {
             modalBackdrop.style.display = "none"
         })
         next()
+    },
+    computed: {
+        ...mapGetters(['isLogin']),
     }
 };
 </script>
 
 <style scoped>
+.welcome-container {
+  position: absolute;
+  top: 60%;
+  left:50%;
+  transform: translate(-50%, -50%)
+}
 .ssazip {
   width: 201px;
   height: 260px;
-  margin-bottom: 20px;
+  position:absolute;
+  top: 6.5%;
+  left: 57%;
+  /* margin-bottom: 20px; */
   /* position: absolute;
   top:300px;
   left:800px; */
   animation: bounce .1s ease infinite alternate;
 }
 /* 로그인과 회원가입 버튼을 감싸는 부분 */
-.menu {
+/* .menu {
     padding-right: 0px;
-}
+} */
 
 /* 회원가입 버튼 */
-.join-btn .btn-light {
+/* .join-btn .btn-light {
     color: #ffffff;
     background-color: #1c84c4;
     border-color: #1c84c4;
@@ -81,17 +94,16 @@ export default {
     font-weight: bold;
     width: 180px;
     height: 60px;
-    margin-left: 90px;
-}
+} */
 
 /* 회원가입 버튼 색 변경 방지 */
-.join-btn .btn-light:hover {
+/* .join-btn .btn-light:hover {
     color: #ffffff;
     background-color: #1c84c4;
     border-color: #1c84c4;
-}
+} */
 
-.btn-check:checked + .btn-light,
+/* .btn-check:checked + .btn-light,
 .btn-check:active + .btn-light,
 .btn-light:active,
 .btn-light.active,
@@ -99,7 +111,7 @@ export default {
     color: #ffffff;
     background-color: #1c84c4;
     border-color: #1c84c4;
-}
+} */
 
 /* 뛰어다니는 싸집이 */
 .stage {
@@ -143,12 +155,17 @@ export default {
   animation: pulsate 1.5s infinite alternate;  
   border: 0.2rem solid #fff;
   border-radius: 2rem;
-  padding: 0.4em;
+  /* padding: 0.4em; */
   box-shadow: 0 0 .2rem #fff,
             0 0 .2rem #fff,
             0 0 2rem #fee613,
-
             inset 0 0 1.3rem #fee613; 
+  position:absolute;
+  top: 48%;
+  left: 20%;
+  width:140px;
+  height:60px;
+  padding-top:5px;
 }
 /* 회원가입 버튼 */
 .neonJoin {
@@ -163,11 +180,16 @@ export default {
   animation: pulsate 1.5s infinite alternate;  
   border: 0.2rem solid #fff;
   border-radius: 2rem;
-  padding: 0.4em;
+  /* padding: 0.4em; */
   box-shadow: 0 0 .2rem #fff,
             0 0 .2rem #fff,
             0 0 2rem #f44cfa,
             inset 0 0 1.3rem #f44cfa; 
+  position:absolute;
+  top: 48%;
+  left: 60%;
+  width:140px;
+  height:60px;
 }
 /* 싸집글자부분 */
 .neonSSAZIP {

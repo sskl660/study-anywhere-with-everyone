@@ -114,7 +114,7 @@ export default {
 }
 
 .feed-container {
-  width: 1300px;
+  width: 1200px;
 }
 
 h5 {

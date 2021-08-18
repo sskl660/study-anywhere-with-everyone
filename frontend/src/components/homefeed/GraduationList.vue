@@ -64,8 +64,10 @@ export default {
 .graduation-title {
     font-family: "Noto Sans KR", sans-serif;
     text-align: left;
-    margin-bottom: 10px; 
+    /* margin-bottom: 10px;  */
     margin-left: 50px;
+    padding-top:5px;
+    font-size:28px;
 }
 
 .graduation{
@@ -74,13 +76,13 @@ export default {
     border-radius: 33px;
     margin-top: 30px;
     margin-left: 57px;
-    height: 120px;
+    height: 100px;
 }
 
 .graduatedStudent{
-    font-size: 23px;
+    font-size: 22px;
     margin-left: 50px;
-    margin-bottom: 7px;
+    /* margin-bottom: 7px; */
 }
 
 .graduate-name {

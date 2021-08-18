@@ -54,6 +54,7 @@ export default {
 }
 .miss {
   background-color: #EE4748 ;
+  
 }
 .submit {
   background-color: #5974B3;
