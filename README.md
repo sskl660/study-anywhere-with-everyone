@@ -14,29 +14,29 @@
 
 - What is SSAZIP?
 
-  > SSAZIP은 IT 교육생이 자유롭게 스터디를 구성하고, 함께 공부할 수 있는 웹 서비스 환경을 제공합니다.![Intro](C:\Users\user081312\Desktop\SSAZIP\assets\Intro.gif)
+  > SSAZIP은 IT 교육생이 자유롭게 스터디를 구성하고, 함께 공부할 수 있는 웹 서비스 환경을 제공합니다.![Intro](./assets/Intro.gif)
 
 <br>
 
 - 챌린지형 스터디 시스템(Challenge-Type Study System)
 
-  > 함께 진행하는 챌린지를 형성하여 단기 스터디를 모집할 수 있고, 해당 스터디를 검색하여 참여도 가능합니다.![Challenge1](C:\Users\user081312\Desktop\SSAZIP\assets\Challenge1.gif)
+  > 함께 진행하는 챌린지를 형성하여 단기 스터디를 모집할 수 있고, 해당 스터디를 검색하여 참여도 가능합니다.![Challenge1](./assets/Challenge1.gif)
   >
-  > ![Challenge5](C:\Users\user081312\Desktop\SSAZIP\assets\Challenge5.gif)
+  > ![Challenge5](./assets/Challenge5.gif)
 
   <br>
 
   > 해당 챌린지에 참여하여 과제를 제출할 수 있고, 서로의 과제를 열람할 수 있습니다.
   >
-  > ![Challenge2](C:\Users\user081312\Desktop\SSAZIP\assets\Challenge2.gif)
+  > ![Challenge2](./assets/Challenge2.gif)
   >
-  > ![Challenge3](C:\Users\user081312\Desktop\SSAZIP\assets\Challenge3.gif)
+  > ![Challenge3](./assets/Challenge3.gif)
 
   <br>
 
   > 각 챌린지는 프로필 피드에 기록되어 원할 때 확인할 수 있습니다.
   >
-  > ![Challenge4](C:\Users\user081312\Desktop\SSAZIP\assets\Challenge4.gif)
+  > ![Challenge4](./assets/Challenge4.gif)
 
 <br>
 
@@ -68,13 +68,13 @@
 
   > 프로필 편집이 가능합니다.
   >
-  > ![Profile1](C:\Users\user081312\Desktop\SSAZIP\assets\Profile1.gif)
+  > ![Profile1](./assets/Profile1.gif)
 
   <br>
 
   > 관심 인물을 팔로우할 수 있으며, 팔로워와 팔로잉 목록을 확인할 수 있습니다.
   >
-  > ![Profile2](C:\Users\user081312\Desktop\SSAZIP\assets\Profile2.gif)
+  > ![Profile2](./assets/Profile2.gif)
 
 <br><br><br>
 
@@ -138,9 +138,9 @@
 
 ### Burndown Charts for Reference!
 
-![BurndownChart1](C:\Users\user081312\Desktop\SSAZIP\assets\BurndownChart1.PNG)
+![BurndownChart1](./assets/BurndownChart1.PNG)
 
-​	![BurndownChart2](C:\Users\user081312\Desktop\SSAZIP\assets\BurndownChart2.PNG)
+​	![BurndownChart2](./assets/BurndownChart2.PNG)
 
 <br>
 
@@ -150,25 +150,29 @@
 
 # ⚙Project Architecture
 
-- ER-Diagram 1, 2 ⇒ https://drive.google.com/file/d/14gTkbjaci8I0HUJZfaLf-nSaZJLiHl5p/view?usp=sharing![ERDiagram](C:\Users\user081312\Desktop\SSAZIP\assets\ERDiagram.png)
+- ER-Diagram 1, 2 ⇒ https://drive.google.com/file/d/14gTkbjaci8I0HUJZfaLf-nSaZJLiHl5p/view?usp=sharing
+  ![ERDiagram](./assets/ERDiagram.png)
 
 <br>
 
-- API Architecture ⇒ swagger-ui.html![APIArchitecture](C:\Users\user081312\Desktop\SSAZIP\assets\APIArchitecture.PNG)
+- API Architecture ⇒ swagger-ui.html![APIArchitecture](./assets/APIArchitecture.PNG)
 
 <br>
 
-- Wireframe 1, 2 ⇒ https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=17%3A2![Wireframe1](C:\Users\user081312\Desktop\SSAZIP\assets\Wireframe1.PNG)
+- Wireframe 1, 2 ⇒ https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=17%3A2
+  ![Wireframe1](./assets/Wireframe1.PNG)
 
-  ![Wireframe2](C:\Users\user081312\Desktop\SSAZIP\assets\Wireframe2.PNG)
-
-<br>
-
-- Prototype ⇒ https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=1%3A2![Prototype](C:\Users\user081312\Desktop\SSAZIP\assets\Prototype.PNG)
+  ![Wireframe2](./assets/Wireframe2.PNG)
 
 <br>
 
-- Component Architecture ⇒ https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=1%3A2![ComponentArchitecture](C:\Users\user081312\Desktop\SSAZIP\assets\ComponentArchitecture.PNG)
+- Prototype ⇒ https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=1%3A2
+  ![Prototype](./assets/Prototype.PNG)
+
+<br>
+
+- Component Architecture ⇒ https://www.figma.com/file/uvFIvJ3ZjaqAQgNQ8ypIbk/SSAZIP?node-id=1%3A2
+  ![ComponentArchitecture](./assets/ComponentArchitecture.PNG)
 
 <br>
 
@@ -221,10 +225,38 @@
 
 <br><br><br>
 
+# 📋Conference Log
+
+ <a href="./conference/firstMeeting.md">사전 회의 - Basic Rules</a>
+
+ <a href="./conference/secondMeeting.md">1차 회의 - 기획</a>
+
+ <a href="./conference/thirdMeeting.md">2차 회의 - 기획</a>
+
+ <a href="./conference/forthMeeting.md">3차 회의 - 기술 조사</a>
+
+ <a href="./conference/fifthMeeting.md">4차 회의 - 기술 명세</a>
+
+ <a href="./conference/sixthMeeting.md">5차 회의 - 아이디어</a>
+
+ <a href="./conference/seventhMeeting.md">6차 회의 - 아이디어</a>
+
+ <a href="./conference/eighthMeeting.md">7차 회의 - Scrum</a>
+
+ <a href="./conference/ninthMeeting.md">컨설팅 내역</a>
+
+ <a href="./conference/tenthMeeting.md">2차 발표 준비</a>
+
+<br>
+
+<br>
+
+<br>
+
 # 💡Usage
 
 ## Sample URL
-> http://13.125.119.76:3000/challenges
+> http://13.125.119.76:3000
 
 ## Vue Project
 ### Project setup
