@@ -3,7 +3,6 @@
 <template>
   <div id="ds" class="">
     <SSazip id="asd"/>
-    <!-- <SSazipRank id="galaxyRank"/> -->
     <div class="">
       <div><ChatTab /></div>
     </div>
@@ -46,7 +45,6 @@ import SSazip from '@/components/galaxy/SSazip.vue';
 import swal from 'sweetalert';
 import axios from '@/util/http-common.js';
 import { mapActions, mapGetters } from 'vuex'
-// import SSazipRank from '@/components/galaxy/SSazipRank.vue';
 
 export default {
   name: 'Galaxy',
@@ -54,14 +52,13 @@ export default {
     Chat,
     ChatTab,
     SSazip,
-    // SSazipRank,
   },
   data: function () {
     return {
       startTime: null,
       tid: null,
       cnt: null,
-      mainTimeLimit: 3600, // 공부 시간 : 3600 (1시간)
+      mainTimeLimit: 10, // 공부 시간 : 3600 (1시간)
       popupTimeLimit: 180, // 모달 유지 시간 : 180 (3분)
       isIntendedExit: true
     }
@@ -192,6 +189,11 @@ export default {
 
     clearInterval(this.tid);
 
+    const userInfo = {
+      startTime: this.startTime,
+      userEmail: this.userEmail
+    }
+
     if (this.isIntendedExit) {
       swal({
         title: '정말 갤럭시 방을 나가시겠어요?',
@@ -203,11 +205,6 @@ export default {
       })
         .then((value) => {
           if (value) {
-            const userInfo = {
-              startTime: this.startTime,
-              userEmail: this.userEmail
-            }
-
             axios({
               method: 'post',
               url: '/galaxy/exit',
@@ -225,23 +222,20 @@ export default {
           swal.close()
         })
     } else {
-      this.getMessage(null)
-      next()
+      axios({
+        method: 'post',
+        url: '/galaxy/exit',
+        data: userInfo
+      })
+        .then(res => {
+          this.getMessage(null)
+          next()
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
-    
   },
-  // methods:{
-  //   createSSazipContainer: function () {
-  //     const SSazipCon = document.getElementById('newDivSpace')
-  //     SSazipCon.style = "width:500px;"
-  //   }
-  // }
-  // updated: function() {
-  //   this.$router.go()
-  // }
-  // connected: function(){
-  //   this.$router.go()
-  // }
 };
 
 

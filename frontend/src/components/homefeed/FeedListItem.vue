@@ -94,10 +94,10 @@
           <div class="feed-description d-flex align-items-center">
             <div>
               <div class="galaxy-comment">"{{ feed.galaxyComment }}"</div>
-              <div class="galaxy-member-count">{{ feed.galaxyMemberCnt }}명 참여중</div>
+              <div class="galaxy-member-count">{{ participantsVuex.length }}명 참여중</div>
             </div>
              <div class="d-flex align-items-center">
-              <div class="galaxy-btn">
+              <div class="galaxy-btn" @click="galaxyEntranceModal()">
                 <ButtonSquare text="갤럭시 가기"/>
               </div>
             </div>
@@ -109,40 +109,44 @@
 
     <!-- 4. 상대방끼리의 팔로우 소식 -->
     <div v-if="feed.feedType === 4">
-      <div class="d-flex justify-content-center feed">
-        <div>
-          
-          <!-- 팔로우 상단 -->
-          <div class="d-flex justify-content-start">
-            <img :id=" 'my-image' + idx " class="profile-img-default" src="" alt="" >
-            <div class="feed-content">
-              <div class="feed-message"><span class="fw-bold follower-name" @click="moveToProfile(feed.userEmail)">{{ feed.userName }}</span>님이 <span class="fw-bold">{{ feed.followUserName }}</span>님을 팔로우합니다.</div>
-              <div class="feed-time">{{ computedEventtime }}</div>
-            </div>
-          </div>
-          
-          <!-- 팔로우 하단 -->
-          <div class="d-flex feed-description justify-content-between align-items-center">
-            <!-- 팔로우하는 사람 이미지 -->
-            <div class="d-flex align-items-center">
-              <img :id=" 'follower-image' + idx " class="profile-img-default thumnail" src="" alt="" >
-            </div>
-            <!-- 팔로우하는 사람 정보 -->
-            <div class="d-flex align-items-center follow-user-content">
-              <div>
-                <div class="follow-user-name">{{ feed.followUserName }}</div>
-                <div class="follow-count"> 팔로워 {{ feed.followerCnt }} / 팔로잉 {{ feed.followingCnt }}</div>
+      
+      <div v-if="userEmail !== feed.followUserEmail">
+        <div class="d-flex justify-content-center feed">
+          <div>
+            
+            <!-- 팔로우 상단 -->
+            <div class="d-flex justify-content-start">
+              <img :id=" 'my-image' + idx " class="profile-img-default" src="" alt="" >
+              <div class="feed-content">
+                <div class="feed-message"><span class="fw-bold follower-name" @click="moveToProfile(feed.userEmail)">{{ feed.userName }}</span>님이 <span class="fw-bold">{{ feed.followUserName }}</span>님을 팔로우합니다.</div>
+                <div class="feed-time">{{ computedEventtime }}</div>
               </div>
             </div>
-            <div class="d-flex align-items-center">
-              <div class="follow-btn" @click="moveToProfile(feed.followUserEmail)">
-                <ButtonSquare text="프로필 가기"/>
+            
+            <!-- 팔로우 하단 -->
+            <div class="d-flex feed-description justify-content-between align-items-center">
+              <!-- 팔로우하는 사람 이미지 -->
+              <div class="d-flex align-items-center">
+                <img :id=" 'follower-image' + idx " class="profile-img-default thumnail" src="" alt="" >
+              </div>
+              <!-- 팔로우하는 사람 정보 -->
+              <div class="d-flex align-items-center follow-user-content">
+                <div>
+                  <div class="follow-user-name">{{ feed.followUserName }}</div>
+                  <div class="follow-count"> 팔로워 {{ feed.followerCnt }} / 팔로잉 {{ feed.followingCnt }}</div>
+                </div>
+              </div>
+              <div class="d-flex align-items-center">
+                <div class="follow-btn" @click="moveToProfile(feed.followUserEmail)">
+                  <ButtonSquare text="프로필 가기"/>
+                </div>
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
+
     </div>
 
     <!-- 5. 상대방이 나를 팔로우할 때 -->
@@ -188,7 +192,10 @@
 
 <script>
 import ButtonSquare from '@/components/common/ButtonSquare';
+import swal from 'sweetalert';
 import http from "@/util/http-common.js";
+import axios from '@/util/http-common.js';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'FeedListItem',
@@ -209,6 +216,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'getMessage',
+    ]),
     getMyImage: function() {
       http.get(`/viewimage/${this.feed.userEmail}`)
       .then((response) => {
@@ -234,6 +244,70 @@ export default {
     },
     moveToProfile: function(email) {
       this.$router.push({path: '/profile', query: {user: email}});
+    },
+    galaxyEntranceModal () {
+      if (window.location.pathname != '/Galaxy') {
+        if (window.location.pathname == '/profile' || window.location.pathname == '/challengeRoom' || window.location.pathname == '/postDetailAfter') {
+          this.$router.go(-1)
+        }
+        swal({
+          title: '갤럭시에 오신 것을 환영합니다!',
+          text: '상태메시지를 입력해주세요.',
+          icon: "/img/star.5dee8d8d.png",
+          content: {
+            element: "input",
+            attributes: {
+              placeholder: '메시지는 20자 이내로 작성해주세요.'
+            }
+          },
+          button: {
+            text: '입장',
+            closeModal: false
+          }
+        })
+          .then(message => {
+            if (!message) {
+              return swal({
+                text: '메시지는 필수 입력사항입니다!',
+                button: {
+                  text: '확인',
+                }
+              })
+            }
+
+            if (20 < message.length) {
+              return swal({
+                text: '메시지는 20자 이내여야 합니다!',
+                button: {
+                  text: '확인',
+                }
+              })
+            }
+
+            const userInfo = {
+              message: message,
+              userEmail: this.userEmail
+            } 
+
+            axios({
+              method: 'post',
+              url: '/galaxy/entry',
+              data: userInfo
+            })
+              .then(res => {
+                this.getMessage(message)
+                this.$router.push({path: '/Galaxy'})
+              })
+              .catch(err => {
+                console.log(err)
+              })
+
+            swal.close()
+          })
+        .catch(err => {
+          console.log(err)
+        })
+      }
     },
   },
   created: function () {
@@ -280,6 +354,10 @@ export default {
 
       return hour
     },
+    ...mapGetters([
+      'userEmail',
+      'participantsVuex'
+    ])
   }
 }
 </script>
