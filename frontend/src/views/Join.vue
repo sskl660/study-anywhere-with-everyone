@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-center">
     <div class="join-container">
       <!-- 계정 등록 -->
-      <p>계정 등록</p>
+      <p class="account-title">계정 등록</p>
       <div class="d-flex email-container">
         <label for="email" class="input-label">이메일</label>
         <input
@@ -22,10 +22,10 @@
         <br />
       </div>
 
-      <h6 v-if="error.userEmail == 'styleError'" style="color:red">
+      <h6 v-if="error.userEmail == 'styleError'" class="account-warning" style="color:red">
         이메일 형식이 일치하지 않습니다.
       </h6>
-      <h6 v-if="error.userEmail == 'lengthError'" style="color:red">
+      <h6 v-if="error.userEmail == 'lengthError'" class="account-warning" style="color:red">
         아이디는 최대 30자 이상이어야 합니다.
       </h6>
 
@@ -42,7 +42,7 @@
         />
       </div>
 
-      <h6 v-if="error.userPassword == 'notValid'" style="color:red">
+      <h6 v-if="error.userPassword == 'notValid'" class="account-warning" style="color:red">
         비밀번호 양식이 맞지 않습니다.
       </h6>
 
@@ -58,7 +58,7 @@
       </div>
       <br />
 
-      <h6 v-if="error.userPasswordConfirm == 'notSame'" style="color:red">
+      <h6 v-if="error.userPasswordConfirm == 'notSame'" class="password-confirm-warning" style="color:red">
         비밀번호가 일치하지 않습니다!
       </h6>
 
@@ -71,54 +71,62 @@
       <p>정보 등록</p>
       <div class="d-flex justify-content-center">
         <div>
-          <label for="name" class="input-label name-label">이름</label>
-          <input
-            type="text"
-            id="name"
-            class="info-input name-input"
-            placeholder="3자 이내로 입력해주세요."
-            onfocus="this.placeholder=''"
-            onblur="this.placeholder='3자 이내로 입력해주세요.'"
-            v-model="credentials.userName"
-          />
-        </div>
+          <div>
+            <label for="name" class="input-label name-label">이름</label>
+            <input
+              type="text"
+              id="name"
+              class="info-input name-input"
+              placeholder="3자 이내로 입력해주세요."
+              onfocus="this.placeholder=''"
+              onblur="this.placeholder='3자 이내로 입력해주세요.'"
+              v-model="credentials.userName"
+            />
+          </div>
 
-        <h6 v-if="error.userName == 'notValid'" style="color:red">
-          이름의 길이는 1자 이상, 3자 이하입니다.
-        </h6>
+          <h6 v-if="error.userName == 'notValid'" class="name-warning" style="color:red">
+            이름의 길이는 1자 이상, 3자 이하입니다.
+          </h6>
+        </div>
 
         <div>
-          <label for="phone" class="input-label">전화번호</label>
-          <input
-            type="text"
-            id="phone"
-            class="info-input phone-input"
-            placeholder="ex) 01012345678"
-            onfocus="this.placeholder=''"
-            onblur="this.placeholder='ex) 01012345678'"
-            v-model="credentials.userNumber"
-          />
-        </div>
+          <div>
+            <label for="phone" class="input-label">전화번호</label>
+            <input
+              type="text"
+              id="phone"
+              class="info-input phone-input"
+              placeholder="ex) 01012345678"
+              onfocus="this.placeholder=''"
+              onblur="this.placeholder='ex) 01012345678'"
+              v-model="credentials.userNumber"
+            />
+          </div>
 
-        <h6 v-if="error.userNumber == 'notValid'" style="color:red">
-          전화번호 양식이 맞지 않습니다.
-        </h6>
+          <h6 v-if="error.userNumber == 'notValid'" class="phone-number-warning" style="color:red">
+            전화번호 양식이 맞지 않습니다.
+          </h6>
+        </div>
       </div>
 
       <div class="d-flex justify-content-center last-row-input">
-        <div>
-          <label for="grade" class="input-label">기수</label>
-          <input
-            type="number"
-            id="grade"
-            class="info-input grade-input"
-            v-model="credentials.userTerm"
-          />
-        </div>
 
-        <h6 v-if="error.userTerm == 'notValid'" style="color:red">
-          올바른 기수를 입력해주세요!
-        </h6>
+        <div>
+          <div>
+            <label for="grade" class="input-label">기수</label>
+            <input
+              type="number"
+              id="grade"
+              class="info-input grade-input"
+              v-model="credentials.userTerm"
+            />
+          </div>
+
+          <h6 v-if="error.userTerm == 'notValid'" class="term-warning" style="color:red">
+            올바른 기수를 입력해주세요!
+          </h6>
+        </div>
+        
 
         <div class="d-flex">
           <label for="code" class="input-label">참여코드</label>
@@ -131,7 +139,7 @@
       </div>
       <br />
 
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center button-container">
         <!-- 돌아가기 버튼 -->
         <div class="back-button">
           <router-link to="/"><ButtonRound text="돌아가기"/></router-link>
@@ -192,6 +200,11 @@ export default {
       'join', // 회원가입 함수 등록
       'emailcheck', //아이디 체크
     ]),
+    logined: function() {
+      if (this.isLogin) {
+        this.$router.push({ path: '/homefeed' });
+      }
+    },
     codeCheck: function(accessCode) {
       if (accessCode == '307') {
         this.error.userCode = true;
@@ -242,7 +255,7 @@ export default {
       else this.error.userName = true;
 
       // 전화번호
-      if (this.credentials.userNumber.length <= 0 || this.credentials.userNumber.length > 16) {
+      if (this.credentials.userNumber.length != 11 || this.credentials.userNumber.slice(0, 3) != '010') {
         this.error.userNumber = 'notValid';
         return;
       }
@@ -283,6 +296,7 @@ export default {
   computed: {
     ...mapGetters([
       'emailposi', //이메일 사용 가능 여부 flag
+      'isLogin' // 로그인 여부 flag
     ]),
   },
   // 입력 변수 감시
@@ -307,6 +321,7 @@ export default {
     },
   },
   created() {
+    this.logined();
     // 패스워드 규칙. 최소 8자 ~ 최대 100자. 숫자와 문자 포함해야함.
     this.passwordSchema
       .is()
@@ -348,7 +363,7 @@ p {
   color: #f59c35;
   text-align: left;
   margin-left: 100px;
-  margin-top: 35px;
+  /* margin-top: 35px; */
   margin-bottom: 25px;
 }
 
@@ -380,7 +395,7 @@ input::placeholder {
   width: 400px;
   height: 40px;
   border-radius: 0.5rem;
-  margin-bottom: 25px;
+  margin-bottom: 40px;
 }
 
 /* 이메일 입력 전체 영역 */
@@ -408,7 +423,7 @@ input::placeholder {
   width: 250px;
   height: 40px;
   border-radius: 0.5rem;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 /* 이름 입력칸 */
@@ -455,8 +470,8 @@ input::placeholder {
   height: 60px;
   margin-top: 10px;
   margin-right: 50px;
-  color: #ffffff;
-  background-color: #919599;
+  color: #1f4256;
+  background-color: #e1af4e;
   border-style: none;
 }
 
@@ -477,8 +492,47 @@ input::placeholder {
   position: absolute;
   width: 370px;
   height: 200px;
-  top: 302px;
+  top: 310px;
   right: 470px;
+}
+
+/* 계정 경고 메시지 */
+.account-warning {
+  position: absolute;
+  margin-top: -29px;
+  margin-left: 270px;
+}
+
+/* 계정 경고 메시지 */
+.password-confirm-warning {
+  position: absolute;
+  margin-top: -53px;
+  margin-left: 270px;
+}
+
+/* 이름 경고 메시지 */
+.name-warning {
+  position: absolute;
+  margin-top: -30px;
+  margin-left: 61px;
+}
+
+/* 전화번호 경고 메시지 */
+.phone-number-warning {
+  position: absolute;
+  margin-top: -30px;
+  margin-left: 105px;
+}
+
+/* 기수 경고 메시지 */
+.term-warning {
+  position: absolute;
+  margin-top: -30px;
+  margin-left: 61px;
+}
+
+.account-title {
+  margin-top: 15px;
 }
 
 /* SSAZIP 여러 개 모인 이미지 : 반응형 CSS */
@@ -487,7 +541,7 @@ input::placeholder {
     position: absolute;
     width: 370px;
     height: 200px;
-    top: 302px;
+    top: 310px;
     right: 10px;
   }
 }
@@ -497,7 +551,7 @@ input::placeholder {
     position: absolute;
     width: 370px;
     height: 200px;
-    top: 302px;
+    top: 310px;
     right: 50px;
   }
 }
@@ -507,7 +561,7 @@ input::placeholder {
     position: absolute;
     width: 370px;
     height: 200px;
-    top: 302px;
+    top: 310px;
     right: 80px;
   }
 }
@@ -517,7 +571,7 @@ input::placeholder {
     position: absolute;
     width: 370px;
     height: 200px;
-    top: 302px;
+    top: 310px;
     right: 100px;
   }
 }
@@ -527,7 +581,7 @@ input::placeholder {
     position: absolute;
     width: 370px;
     height: 200px;
-    top: 302px;
+    top: 310px;
     right: 120px;
   }
 }
@@ -537,7 +591,7 @@ input::placeholder {
     position: absolute;
     width: 370px;
     height: 200px;
-    top: 302px;
+    top: 310px;
     right: 130px;
   }
 }
@@ -547,7 +601,7 @@ input::placeholder {
     position: absolute;
     width: 370px;
     height: 200px;
-    top: 302px;
+    top: 310px;
     right: 250px;
   }
 }
@@ -557,7 +611,7 @@ input::placeholder {
     position: absolute;
     width: 370px;
     height: 200px;
-    top: 302px;
+    top: 310px;
     right: 310px;
   }
 }
@@ -567,7 +621,7 @@ input::placeholder {
     position: absolute;
     width: 370px;
     height: 200px;
-    top: 302px;
+    top: 310px;
     right: 360px;
   }
 }

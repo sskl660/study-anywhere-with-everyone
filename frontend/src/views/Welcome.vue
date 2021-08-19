@@ -27,14 +27,12 @@
 </template>
 
 <script>
-import ButtonRound from '@/components/common/ButtonRound';
 import LoginModal from '@/components/welcome/LoginModal';
 import { mapGetters } from 'vuex';
 
 export default {
     name: 'Welcome',
     components: {
-        ButtonRound, // 둥근 버튼을 가져옴
         LoginModal, // 로그인 모달을 가져옴
     },
     methods: {
@@ -74,50 +72,15 @@ export default {
   position:absolute;
   top: 6.5%;
   left: 57%;
-  /* margin-bottom: 20px; */
-  /* position: absolute;
-  top:300px;
-  left:800px; */
   animation: bounce .1s ease infinite alternate;
 }
-/* 로그인과 회원가입 버튼을 감싸는 부분 */
-/* .menu {
-    padding-right: 0px;
-} */
-
-/* 회원가입 버튼 */
-/* .join-btn .btn-light {
-    color: #ffffff;
-    background-color: #1c84c4;
-    border-color: #1c84c4;
-    font-size: 25px;
-    font-weight: bold;
-    width: 180px;
-    height: 60px;
-} */
-
-/* 회원가입 버튼 색 변경 방지 */
-/* .join-btn .btn-light:hover {
-    color: #ffffff;
-    background-color: #1c84c4;
-    border-color: #1c84c4;
-} */
-
-/* .btn-check:checked + .btn-light,
-.btn-check:active + .btn-light,
-.btn-light:active,
-.btn-light.active,
-.show > .btn-light.dropdown-toggle {
-    color: #ffffff;
-    background-color: #1c84c4;
-    border-color: #1c84c4;
-} */
 
 /* 뛰어다니는 싸집이 */
 .stage {
     display: flex;
     height: 330px;
 }
+
 /* 싸집이 크기 */
 .box {
     align-self: flex-end;
