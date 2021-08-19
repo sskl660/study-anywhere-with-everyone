@@ -325,9 +325,9 @@ export default {
                         `" style="width:50px" />
                         <span class="" style=" color:#fff; width:150px">
                             ${partList[idx].partName} <br/>
-                            <div style="width:160px" id="` +
-                        partList[idx].partEmail +
-                        `"></div>
+                            <div style="width:160px;margin-left:-50px;" id="`+
+                                partList[idx].partEmail+
+                            `"></div>
                         </span>`;
                     // <div>${ballCoords[idx].px}</div>
                 ball.setAttribute(
