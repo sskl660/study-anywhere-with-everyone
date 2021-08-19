@@ -27,12 +27,12 @@
                     </div>
                 </div> -->
             </div>
-            <!-- <img style="display:none" src="@/assets/ssazip.png" alt="" />
+            <img style="display:none" src="@/assets/ssazip.png" alt="" />
             <img style="display:none" src="@/assets/ssazip_mint.png" alt="" />
             <img style="display:none" src="@/assets/ssazip_orange.png" alt="" />
             <img style="display:none" src="@/assets/ssazip_purple.png" alt="" />
             <img style="display:none" src="@/assets/ssazip_yellow.png" alt="" />
-            <img style="display:none" src="@/assets/ssazip_red.png" alt="" /> -->
+            <img style="display:none" src="@/assets/ssazip_red.png" alt="" />
 
             <!-- <div v-for="(idx,index) in participantsVuex" :key="index"> -->
             <!-- {{index}} -->
@@ -313,6 +313,13 @@ export default {
                     // console.log('는 새로 생성 할 친구네!');
                     const num = parseInt(Math.random() * 5);
                     var ssazip_pics = [
+                        // "@/assets/ssazip.png",
+                        // "@/assets/ssazip_mint.png",
+                        // "@/assets/ssazip_orange.png",
+                        // "@/assets/ssazip_purple.png",
+                        // "@/assets/ssazip_red.png",
+                        // "@/assets/ssazip_yellow.png",
+
                         '/img/ssazip.43ffb363.png',
                         '/img/ssazip_mint.3c829d99.png',
                         '/img/ssazip_orange.6b3c93af.png',
