@@ -129,10 +129,10 @@
                         </div>
                     </div>
 
-        <!-- <div class="tutorial"> -->
-            <!-- <img id="explain" src="../assets/challengetutorialssazip.png" alt="" /> -->
+        <div class="tutorial">
+            <img id="explain" src="../assets/challengetutorialssazip.png" alt="" />
             <!-- <img id="tuter" src="../assets/ssazip.png" alt=""> -->
-        <!-- </div> -->
+        </div>
     </div>
 </template>
 <script>
@@ -243,7 +243,7 @@ export default {
                 .then((res) => {
                     // console.log('챌린지 정보 부르기 성공');
                     this.chall_info = res.data;
-                    this.getChallengers(this.chall_info.challengeGroup.length);
+                    // this.getChallengers(this.chall_info.challengeGroup.length);
                     this.chall_info.challengeStartdate += ' 00:00:01';
                     var startD = new Date(this.chall_info.challengeStartdate);
                     if (startD - new Date() - 1 < 0) this.makeTrue();
@@ -300,7 +300,6 @@ export default {
         ...mapActions({
             // import 해주는 느낌
             joinChall: 'joinChallenge',
-            getChallengers: 'getChallengers'
         }),
         // 가입하기 버튼 눌렀을 때
         hidebtn: function(chall_No, user) {

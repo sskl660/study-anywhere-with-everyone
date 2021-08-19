@@ -16,6 +16,7 @@
                 v-for="(challenge, idx) in reversedChallengeList" 
                 :key="idx" 
                 :challenge="challenge"
+                :idx="idx"
             />
         </div>
     </div>

@@ -191,7 +191,8 @@ export default {
   computed: {
   ...mapGetters([
     'userEmail', 
-    'isLogin']),
+    'isLogin'
+  ]),
   },
   beforeRouteLeave(to, from, next) {
     if (document.getElementById('newDivSpace')) {
