@@ -598,6 +598,7 @@ a {
 .participantList {
     position: absolute;
     margin-left: -170px;
+    margin-top: -13px;
 }
 
 #participantbox {

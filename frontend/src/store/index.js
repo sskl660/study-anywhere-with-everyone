@@ -166,7 +166,7 @@ export default new Vuex.Store({
     },
     // 로그아웃
     logout: function({ commit, state }) {
-      if (window.location.pathname != '/Galaxy') {
+      if (window.location.pathname === '/Galaxy') {
         axios({
           method: 'post',
           url: '/galaxy/exit',
