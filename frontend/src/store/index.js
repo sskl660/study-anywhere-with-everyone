@@ -81,7 +81,7 @@ export default new Vuex.Store({
       // state는 기본값. 그냥 써주기 // returnflag는 res.data(t인지 f인지 들어있는 정보)
       state.emailposi = returnflag; // 저장해주고 값 바꿔주기
       if (!returnflag) {
-        swal('이메일이 중복 됩니다!');
+        swal('이메일이 중복됩니다!');
       } else {
         swal('중복체크 완료!');
       }
@@ -160,13 +160,13 @@ export default new Vuex.Store({
           commit('SET_TOKEN', res.data.userInfoResponse);
         })
         .catch((err) => {
-          swal('계정이나 인터넷을 확인해주세요');
+          swal('이메일이나 비밀번호가 올바르지 않습니다!');
           // console.log(err);
         });
     },
     // 로그아웃
     logout: function({ commit, state }) {
-      if (window.location.pathname != '/Galaxy') {
+      if (window.location.pathname === '/Galaxy') {
         axios({
           method: 'post',
           url: '/galaxy/exit',

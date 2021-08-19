@@ -1,13 +1,3 @@
-git commit -am "fix(Conflict) : fix conflict in frontend/store/index.js"
-git push origin master
-git diff
-git log
-git log --stat
-git status
-git add.
-git commit -am "fix(Conflict) : fix conflict in frontend/store/index.js"
-git add .
-git commit -am "fix(Conflict) : fix conflict in frontend/store/index.js"
 git status
 git push
 git status
@@ -498,3 +488,13 @@ git status
 git push
 git config --system --unset credential.helper
 git config --list
+cd ~
+git commit -am "save"
+git pull origin master
+git commit -am "save"
+git pull origin master
+git status
+git add .
+git commit -am "update readme!"
+git status
+git push

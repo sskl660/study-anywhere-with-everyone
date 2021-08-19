@@ -390,6 +390,7 @@ export default {
 
 .input-group-text {
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
 h3 {
