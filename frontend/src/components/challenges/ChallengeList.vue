@@ -13,7 +13,7 @@
         <!-- 챌린지 티켓 -->
         <div class="challenge-list-container">
             <ChallengeListItem 
-                v-for="(challenge, idx) in reversedChallengeList" 
+                v-for="(challenge, idx) in challengeList" 
                 :key="idx" 
                 :challenge="challenge"
                 :idx="idx"
