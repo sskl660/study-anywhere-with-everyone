@@ -11,9 +11,9 @@
             ★
           </span>
         </div>
-        <div v-if="hour <= 0" class="challenge-content challenge-end">참여가 마감되었습니다.</div>
+        <div v-if="hour <= 0 || challenge.challengers >= challenge.challengeCapacity" class="challenge-content challenge-end">참여가 마감되었습니다.</div>
         <div v-else class="challenge-content challenge-remain-hour">참여마감 : {{ hour }}시간 뒤</div>
-        <div class="challenge-content challenge-capacity">참가인원 : {{ challenge.challengeCapacity }}/10</div>
+        <div class="challenge-content challenge-capacity">참가인원 : {{ challenge.challengers }}/{{ challenge.challengeCapacity }}</div>
       </div>
     </div>
     
@@ -23,6 +23,7 @@
 
 <script>
 import "@/components/css/challenges/challengelistitem.css";
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'ChallengeListItem',
@@ -50,6 +51,9 @@ export default {
   },
   created: function () {
     this.remainTime()
+  },
+  computed: {
+    ...mapGetters(['challengers']),
   }
 }
 </script>

@@ -63,13 +63,16 @@ export default {
       startTime: null,
       tid: null,
       cnt: null,
-      mainTimeLimit: 10, // 공부 시간 : 3600 (1시간)
+      mainTimeLimit: 3600, // 공부 시간 : 3600 (1시간)
       popupTimeLimit: 180, // 모달 유지 시간 : 180 (3분)
       isIntendedExit: true,
     };
   },
   methods: {
-    ...mapActions(['getMessage']),
+    ...mapActions([
+      'getMessage',
+      'getUserInfo'
+    ]),
 
     getStartTime: function() {
       var date = new Date();
@@ -186,7 +189,9 @@ export default {
     this.counter_init();
   },
   computed: {
-    ...mapGetters(['userEmail']),
+  ...mapGetters([
+    'userEmail', 
+    'isLogin']),
   },
   beforeRouteLeave(to, from, next) {
     if (document.getElementById('newDivSpace')) {
@@ -200,7 +205,11 @@ export default {
       userEmail: this.userEmail,
     };
 
-    if (this.isIntendedExit) {
+    this.getUserInfo(userInfo)
+
+    if (!this.isLogin) {
+      next()
+    } else if (this.isIntendedExit) {
       swal({
         title: '정말 갤럭시 방을 나가시겠어요?',
         icon: '/img/star.5dee8d8d.png',
