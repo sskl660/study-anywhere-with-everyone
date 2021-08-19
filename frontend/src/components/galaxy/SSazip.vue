@@ -1,6 +1,7 @@
 <template>
     <div>
         <div>
+
             <!-- style="display:block;position:absolute;top:0px;left:0px;height:100%;width:100%;background:transparent;overflow:hidden;visibility:hidden;" -->
 
             <!-- <svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">
@@ -13,7 +14,6 @@
                 <input type="radio" name="c" id="but1" checked="" />
                 <input type="radio" style="cursor:pointer;" name="c" id="but2" />
             </div>
-            
 
             <!-- <div v-for="(idx, ssazip_num) in temp_galaxy_data" :key="ssazip_num">
                 <SmallSSazip />
@@ -87,17 +87,15 @@ export default {
     },
     created: function() {
         clearInterval(this.clocker);
-
     },
-    beforeDestroy: function(){
+    beforeDestroy: function() {
         clearInterval(this.clocker);
     },
     destroyed(to, from, next) {
         clearInterval(this.clocker);
         // next();
     },
-    mounted: function() {
-    },
+    mounted: function() {},
     beforeUpdate: function() {
         console.log('bf');
         console.log(document.getElementById('newDivSpace'));
@@ -106,6 +104,21 @@ export default {
         this.gravity();
         console.log('updated');
         this.clocker = setInterval(this.showRemaining, 1000);
+        console.log('---------------------------------------');
+        for (var i = 0; i < this.beforeBallCoords.length; i++) {
+            console.log('ax=' + this.beforeBallCoords[i].ax);
+            console.log('ay=' + this.beforeBallCoords[i].ay);
+            console.log('M=' + this.beforeBallCoords[i].M);
+            console.log('px=' + this.beforeBallCoords[i].px);
+            console.log('py=' + this.beforeBallCoords[i].py);
+            console.log('r=' + this.beforeBallCoords[i].r);
+            console.log('vx=' + this.beforeBallCoords[i].vx);
+            console.log('vy=' + this.beforeBallCoords[i].vy);
+            console.log('x=' + this.beforeBallCoords[i].x);
+            console.log('y=' + this.beforeBallCoords[i].y);
+            console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+        }
+        console.log('---------------------------------------');
     },
     computed: {
         ...mapGetters(['participantsVuex']),
@@ -136,6 +149,18 @@ export default {
                 document.getElementById(this.participantsVuex[i].partEmail).textContent = hours + '시간';
                 document.getElementById(this.participantsVuex[i].partEmail).textContent += minutes + '분';
                 document.getElementById(this.participantsVuex[i].partEmail).textContent += seconds + '초 공부 중';
+                // document.getElementById(this.participantsVuex[i].partEmail).textContent +=
+
+                    // ' M=' +
+                    // this.beforeBallCoords[i].M+
+                    // ' vx=' +
+                    // this.beforeBallCoords[i].vx +
+                    // ' vy=' +
+                    // this.beforeBallCoords[i].vy ;
+                    // ' x=' +
+                    // this.beforeBallCoords[i].x +
+                    // ' y=' +
+                    // this.beforeBallCoords[i].y;
             }
         },
         tmpClicker(param) {
@@ -232,7 +257,7 @@ export default {
                     'visibility:hidden;'
             );
 
-            if(document.getElementById('svg')==null){
+            if (document.getElementById('svg') == null) {
                 con.innerHTML +=
                     '<svg id="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"' +
                     ' style="display:block;position:absolute;top:0px;left:0px;visibility:hidden;z-index:1000;">' +
@@ -271,11 +296,10 @@ export default {
                 console.log('생성할 참여자');
                 console.log(partList[idx].partEmail);
 
-
                 if (d.getElementById(`ssazip${partList[idx].partEmail}`) != null) {
                     console.log(partList[idx].partEmail);
                     console.log('는 있던 친구네!');
-                    var ball = d.getElementById(`ssazip${partList[idx].partEmail}`);
+                    // var ball = d.getElementById(`ssazip${partList[idx].partEmail}`);
                 }
                 // var ball = d.getElementById(`ssazip${partList[idx].partEmail}`);
                 else {
@@ -296,45 +320,47 @@ export default {
                     ball.setAttribute('id', `ssazip${partList[idx].partEmail}`);
                     //@click="profileF(`+partList[idx].partEmail+`)"
                     ball.innerHTML +=
-                        `<img src="` +ssazip_pics[num]+`" style="width:50px" />
+                        `<img src="` +
+                        ssazip_pics[num] +
+                        `" style="width:50px" />
                         <span class="" style=" color:#fff; width:150px">
                             ${partList[idx].partName} <br/>
-                            <div style="width:160px" id="`+
-                                partList[idx].partEmail+
-                            `"></div>
+                            <div style="width:160px" id="` +
+                        partList[idx].partEmail +
+                        `"></div>
                         </span>`;
-                            // <div>${ballCoords[idx].px}</div>
-}
-                    ball.setAttribute(
-                        'style',
-                        'display:block;' +
-                            // +'src: url(~@/assets/sszip.png);'
-                            'position:absolute;' +
-                            'height:' +
-                            r +
-                            'px;' +
-                            'width:' +
-                            r +
-                            'px;' +
-                            'top:0px;left:0px;' +
-                            // +'background-color:'+randomColour()+';'
-                            'border-radius:50%;' +
-                            'box-shadow:inset 0 0 ' +
-                            xy(1, r) +
-                            'px ' +
-                            xy(1, r) +
-                            'px rgba(0,0,0,0.2),' +
-                            'inset 0 -' +
-                            xy(25, r) +
-                            'px ' +
-                            xy(50, r) +
-                            'px rgba(0,0,0,0.4);' +
-                            'opacity:1.0;'
-                    );
+                    // <div>${ballCoords[idx].px}</div>
+                ball.setAttribute(
+                    'style',
+                    'display:block;' +
+                        // +'src: url(~@/assets/sszip.png);'
+                        'position:absolute;' +
+                        'height:' +
+                        r +
+                        'px;' +
+                        'width:' +
+                        r +
+                        'px;' +
+                        'top:0px;left:0px;' +
+                        // +'background-color:'+randomColour()+';'
+                        'border-radius:50%;' +
+                        'box-shadow:inset 0 0 ' +
+                        xy(1, r) +
+                        'px ' +
+                        xy(1, r) +
+                        'px rgba(0,0,0,0.2),' +
+                        'inset 0 -' +
+                        xy(25, r) +
+                        'px ' +
+                        xy(50, r) +
+                        'px rgba(0,0,0,0.4);' +
+                        'opacity:1.0;'
+                );
 
                 setTimeout(function() {
                     ball.style.visibility = 'visible';
                 }, 50);
+                    }
 
                 if (!document.getElementById(`ssazip${partList[idx].partEmail}`)) {
                     //&&!document.getElementById(`ssazip${partList[idx].partEmail}`).contains(con)) {
@@ -343,12 +369,12 @@ export default {
 
                     con.appendChild(ball);
                     console.log(nvy);
-                    ballAttr(r, y, x, nvy, nvx, idx);
+                    ballAttr(r, y, x, 0, 0, idx);
                     balls.splice(idx, 0, ball);
                     console.log('con 이란 생성 후 싸집이공간');
                 } else {
                     console.log('있던거네');
-                    balls.splice(idx, 1, ball);
+                    // balls.splice(idx, 1, ball);
                 }
                 for (var i = 0; i < balls.length; i++) {
                     console.log(JSON.parse(JSON.stringify(balls[i].id)));
@@ -361,7 +387,7 @@ export default {
             gravCon.setAttribute(
                 'style',
                 // 'display: block;' +
-                    'position: fixed;' +
+                'position: fixed;' +
                     'margin: 4px;' +
                     'top:105px; right:515px;' +
                     'border-radius:5px;' +
@@ -397,8 +423,8 @@ export default {
                 var zx = newBall ? x - nvx : 0;
                 var zy = newBall ? y - nvy : 0;
 
-                var vex = newBall ? nvx : -ballVelocity + Math.random() * (ballVelocity * 2);
-                var vey = newBall ? nvy : -ballVelocity + Math.random() * (ballVelocity * 2);
+                var vex = newBall ? nvx : -1 + Math.random() * (1  );
+                var vey = newBall ? nvy : -1 + Math.random() * (1 );
 
                 var b = {
                     r: rad * 0.5,
@@ -426,6 +452,16 @@ export default {
                 } else {
                     for (var i = 0; i < balls.length; i++) {
                         var b = ballCoords[i];
+                        if(Math.sqrt(b.vx*b.vx+b.vy*b.vy)>1.5||Math.abs(b.vx)>0.8||Math.abs(b.vy)>0.8){
+                            if(b.vx<0)b.vx=-0.3;
+                            else b.vx=0.3;
+
+                            if(b.vy<0){
+                                b.by=-0.3;
+                            }
+                            else b.by=0.3;
+                            
+                        }
                         b.x += b.vx;
                         b.y += b.vy;
 
@@ -602,6 +638,7 @@ export default {
             function assignToHTML() {
                 for (var i = 0; i < balls.length; i++) {
                     var b = ballCoords[i];
+
                     balls[i].style.transform = 'translate3d(' + (b.x - b.r) + 'px, ' + (b.y - b.r) + 'px, 0) rotate(22.5deg)';
                 }
             }
@@ -631,7 +668,6 @@ export default {
                 }
             }
 
-
             function run() {
                 var now = performance.now();
                 if (now - then > milliSeconds) {
@@ -660,7 +696,6 @@ export default {
                 }
                 window.requestAnimationFrame(run);
             }
-
 
             //=========================================================================
             //=========================================================================
@@ -703,7 +738,6 @@ export default {
                             break;
                         }
                     }
-
                 } else if (partList.length == beforeList.length - 1) {
                     //퇴장 상황
                     console.log('-----Erazze situ!!!-----');

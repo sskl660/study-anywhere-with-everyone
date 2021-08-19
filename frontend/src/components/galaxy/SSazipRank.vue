@@ -109,8 +109,8 @@ export default {
   },
   methods:{
       printt: function(){
-          console.log('여기 확인 좀 해주소')
-          console.log(this.ranker[1].enterTime.substring(5,19))
+        //   console.log('여기 확인 좀 해주소')
+        //   console.log(this.ranker[1].enterTime.substring(5,19))
       }
   },
   created: function() {
