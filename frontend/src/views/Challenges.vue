@@ -67,6 +67,7 @@ export default {
       })
         .then(res => {
           res.data.forEach(challenge => {
+
             axios({
               methods: 'get',
               url: `/challenge/info/${challenge.challengeNo}`,
@@ -80,26 +81,27 @@ export default {
                 let day = Math.ceil(interval / (1000 * 60 * 60 * 24));
                 let hour = Math.ceil((interval % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + (day - 1) * 24 - 9;
                 challenge.remainTime = hour
-
+                
                 if (challenge.challengeCategory === 'ALGO') {
                   this.algoList.push(challenge)
+                  this.algoList.sort(function(a, b) {
+                    return b.challengeNo - a.challengeNo
+                  })
                 }
-                else if (challenge.challengeCategory === 'CS') {
+                if (challenge.challengeCategory === 'CS') {
                   this.csList.push(challenge)
+                  this.csList.sort(function(a, b) {
+                    return b.challengeNo - a.challengeNo
+                  })
                 }
-                else if (challenge.challengeCategory === 'JOB') {
+                if (challenge.challengeCategory === 'JOB') {
                   this.jobList.push(challenge)
+                  this.jobList.sort(function(a, b) {
+                    return b.challengeNo - a.challengeNo
+                  })
                 }
-
-
               })
-              .catch(err => {
-                console.log(err)
-              })
-
-            
           })
-
           this.allList.push(this.algoList)
           this.allList.push(this.csList)
           this.allList.push(this.jobList)
