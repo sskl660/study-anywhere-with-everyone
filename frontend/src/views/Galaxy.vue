@@ -3,11 +3,13 @@
 <template>
   <div id="ds" class="">
     <SSazip id="asd" />
-    <div class="">
-      <div><ChatTab /></div>
-    </div>
-    <div class="GalaxyChat">
-      <div><Chat /></div>
+    <div style="postion: relative;">
+      <div class="">
+        <div><ChatTab /></div>
+      </div>
+      <div class="GalaxyChat">
+        <div><Chat /></div>
+      </div>
     </div>
     <div class="galaxy-exit-button">
       <img class="exit" src="../assets/exit-icon.png" alt="exit" @click="exit()" />
