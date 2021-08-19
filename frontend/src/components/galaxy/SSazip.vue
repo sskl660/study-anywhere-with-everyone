@@ -27,6 +27,12 @@
                     </div>
                 </div> -->
             </div>
+            <img style="display:none" src="@/assets/ssazip.png" alt="" />
+            <img style="display:none" src="@/assets/ssazip_mint.png" alt="" />
+            <img style="display:none" src="@/assets/ssazip_orange.png" alt="" />
+            <img style="display:none" src="@/assets/ssazip_purple.png" alt="" />
+            <img style="display:none" src="@/assets/ssazip_yellow.png" alt="" />
+            <img style="display:none" src="@/assets/ssazip_red.png" alt="" />
 
             <!-- <div v-for="(idx,index) in participantsVuex" :key="index"> -->
             <!-- {{index}} -->
