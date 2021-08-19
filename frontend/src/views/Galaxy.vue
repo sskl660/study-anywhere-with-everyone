@@ -232,7 +232,7 @@ export default {
               next();
             })
             .catch((err) => {
-              console.log(err);
+              // console.log(err);
             });
         }
 
@@ -249,7 +249,7 @@ export default {
           next();
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     }
   },
