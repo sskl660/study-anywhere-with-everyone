@@ -2,13 +2,13 @@
 
 ---
 
-![s_welcome](./assets/s_welcome.png)
+![s_welcome](../assets/s_welcome.png)
 
 - 첫 페이지
 
   회원가입 또는 로그인을 할 수 있습니다.
 
-![s_join](./assets/s_join.png)
+![s_join](../assets/s_join.png)
 
 - 회원가입
 
@@ -18,13 +18,13 @@
 
   모두 입력해야 가입 가능합니다.
 
-![s_login](./assets/s_login.png)
+![s_login](../assets/s_login.png)
 
 - 로그인
 
   이메일, 비밀번호를 입력하여 로그인 해주세요.
 
-![s_feed_begin](./assets/s_feed_begin.png)
+![s_feed_begin](../assets/s_feed_begin.png)
 
 - 피드 페이지(초기 화면)
 
@@ -40,19 +40,19 @@
 
   우측 상단에 있는 버튼: 네비게이션 버튼
 
-![s_nav](./assets/s_follow.png)
+![s_nav](../assets/s_follow.png)
 
 - 팔로우
 
   다른 사람의 프로필에 방문하여 팔로우 해보세요! 친구의 활동 소식을 피드에서 확인할 수 있습니다.
 
-![s_nav](./assets/s_nav.png)
+![s_nav](../assets/s_nav.png)
 
 - 네비게이션 버튼
 
   순서대로 홈(피드), 내 프로필, 챌린지 목록, 갤럭시로 이동할 수 있는 버튼입니다.
 
-![s_editProfile](./assets/s_editProfile.png)
+![s_editProfile](../assets/s_editProfile.png)
 
 - 내 프로필 편집(프로필 페이지)
 
@@ -64,7 +64,7 @@
 
 <챌린지 목록>
 
-![s_challengeDetail](./s_challengeDetail.png)
+![s_challengeDetail](../s_challengeDetail.png)
 
 - 챌린지 상세 페이지
 
@@ -76,7 +76,7 @@
 
   참여 멤버들을 클릭하여 프로필에 방문해보세요!
 
-![s_afterchalljoin](./assets/s_afterchalljoin.png)
+![s_afterchalljoin](../assets/s_afterchalljoin.png)
 
 - 챌린지 가입 완료 후
 
@@ -84,7 +84,7 @@
 
   참고로 파란색 칸은 제출완료, 하얀색 칸은 과제 마감기간이 지나지 않은 미제출 상태, 마지막으로 빨간색 칸은 기간이 지난 미제출 상태를 나타냅니다!
 
-![s_tasksubmit](./assets/s_tasksubmit.png)
+![s_tasksubmit](../assets/s_tasksubmit.png)
 
 - 과제제출
 
@@ -94,7 +94,7 @@
 
 <과제 제출 후 모습, 댓글>
 
-![s_enterGalaxy](./assets/s_enterGalaxy.png)
+![s_enterGalaxy](../assets/s_enterGalaxy.png)
 
 - 갤럭시 입장
 
@@ -102,13 +102,13 @@
 
 <갤럭시 화면>
 
-![s_galaxyCheck](./assets/s_galaxyCheck.png)
+![s_galaxyCheck](../assets/s_galaxyCheck.png)
 
 - 세션 갱신
 
   한시간 주기로 잘 공부하고 있는지, 계속 공부할 것인지 체크하는 창이 뜹니다. 이 창은 약 3분동안 나타나있고, 시간이 지나면 자동으로 갤럭시에서 나오게 되니 이 점 참고해주세요!
 
-![s_galaxyExit](./assets/s_galaxyExit.png)
+![s_galaxyExit](../assets/s_galaxyExit.png)
 
 - 갤럭시 퇴장
 
