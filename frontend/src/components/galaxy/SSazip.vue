@@ -9,11 +9,11 @@
                 </line>
             </svg> -->
             <!-- <div id="gravitybtn" style="display: block;position: fixed;margin: 4px;top:0;right:0;border-radius:5px;height: 30px;width: 130px;padding: 5px; background-color:#fff;text-align: center;font: italic bold 16px verdana;color: #fff;line-height: 30px;letter-spacing: 0.5px;cursor:default;z-index: 1000;-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;visibility:visible;"> -->
-            <div id="gravitybtn" class="banana">
+            <!-- <div id="gravitybtn" class="banana">
                 Gravity
                 <input type="radio" name="c" id="but1" checked="" />
                 <input type="radio" style="cursor:pointer;" name="c" id="but2" />
-            </div>
+            </div> -->
 
             <!-- <div v-for="(idx, ssazip_num) in temp_galaxy_data" :key="ssazip_num">
                 <SmallSSazip />
@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import SmallSSazip from '@/components/galaxy/SmallSSazip.vue';
 // import gravity from "@/components/temporary/gravity.js"
 // import $ from 'jquery';
 import { mapGetters } from 'vuex';
@@ -64,9 +63,6 @@ import swal from 'sweetalert';
 export default {
     name: 'SSazip',
     clocker: null,
-    components: {
-        SmallSSazip,
-    },
     giveme: null,
     ccc: null,
     data() {
@@ -383,35 +379,35 @@ export default {
 
             // 중력 무중력 조작기
             // var gravCon = d.createElement('div');
-            var gravCon = d.getElementById('gravitybtn');
-            gravCon.setAttribute(
-                'style',
-                // 'display: block;' +
-                'position: fixed;' +
-                    'margin: 4px;' +
-                    'top:105px; right:515px;' +
-                    'border-radius:5px;' +
-                    'height: 45px;' +
-                    'width: 130px;' +
-                    'padding: 5px;' +
-                    // 'background-color:#F1C069;' +
-                    'text-align: center;' +
-                    'font: bold 16px verdana;' +
-                    'color: #fff;' +
-                    'line-height: 35px;' +
-                    'letter-spacing: 0.5px;' +
-                    'cursor:default;' +
-                    'z-index: 1000;' +
-                    '-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;' +
-                    'visibility:visible;'
-            );
+            // var gravCon = d.getElementById('gravitybtn');
+            // gravCon.setAttribute(
+            //     'style',
+            //     // 'display: block;' +
+            //     'position: fixed;' +
+            //         'margin: 4px;' +
+            //         'top:105px; right:515px;' +
+            //         'border-radius:5px;' +
+            //         'height: 45px;' +
+            //         'width: 130px;' +
+            //         'padding: 5px;' +
+            //         // 'background-color:#F1C069;' +
+            //         'text-align: center;' +
+            //         'font: bold 16px verdana;' +
+            //         'color: #fff;' +
+            //         'line-height: 35px;' +
+            //         'letter-spacing: 0.5px;' +
+            //         'cursor:default;' +
+            //         'z-index: 1000;' +
+            //         '-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;' +
+            //         'visibility:visible;'
+            // );
 
-            gravCon.innerHTML =
-                // gravCon.backgroundImage= "url('/img/ssazip.43ffb363.png')";
-                '중력 ON!!! <input type="radio" style="cursor:pointer;" name="c" id="but1" checked>' +
-                '<input type="radio" style="cursor:pointer;"name="c" id="but2">';
+            // gravCon.innerHTML =
+            //     // gravCon.backgroundImage= "url('/img/ssazip.43ffb363.png')";
+            //     '중력 ON!!! <input type="radio" style="cursor:pointer;" name="c" id="but1" checked>' +
+            //     '<input type="radio" style="cursor:pointer;"name="c" id="but2">';
 
-            con.appendChild(gravCon);
+            // con.appendChild(gravCon);
 
             function ballAttr(rad, y, x, nvy, nvx, idx) {
                 console.log('ballAttr');
