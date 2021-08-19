@@ -78,6 +78,7 @@ export default {
     -moz-transition: all 1s ease;
     transition: all 1s ease;
     .core-menu {
+      cursor: pointer;
       width: 100%;
       height: 100%;
       position: absolute;
