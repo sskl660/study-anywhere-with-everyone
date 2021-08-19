@@ -12,6 +12,7 @@ import PostDetailAfter from '../components/PostDetailAfter.vue';
 import EPeacefulWorld from '../views/EPeacefulWorld.vue';
 import Galaxy from '../views/Galaxy.vue';
 import store from "../store/index";
+import swal from 'sweetalert';
 // import SSazip from '../views/SSazip.vue';
 
 Vue.use(VueRouter);
@@ -100,7 +101,7 @@ router.beforeEach(function (to, from, next) {
     // 4. 로그인한 상태에서 갤럭시방을 URL로 접근하려고 하면, 경고창을 띄우고 이전 페이지로 이동시킴.
     if (to.name === 'Galaxy') {
       if (!store.state.message) {
-        alert('갤럭시방에 대한 접근이 올바르지 않습니다!')
+        swal('갤럭시방에 대한 접근이 올바르지 않습니다!')
         if (!from.name) {
           next('/')
         } else {
@@ -113,7 +114,7 @@ router.beforeEach(function (to, from, next) {
       next()
     }
   } else {
-    alert('로그인이 필요합니다!')
+    swal('로그인이 필요합니다!')
     next('/')
   }
 });

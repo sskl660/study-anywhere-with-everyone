@@ -3,6 +3,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import router from '@/router';
 import createPersistedState from 'vuex-persistedstate';
+import swal from 'sweetalert';
 
 Vue.use(Vuex);
 
@@ -18,10 +19,13 @@ export default new Vuex.Store({
     userTerm: null,
     following: null,
     follower: null,
+    //Challenge 관련
+    challengers: 0,
     // Galaxy 관련
     message: null, // 입장 메시지
     chatType: 'algo', // 채팅창 타입(Algo, CS, Job)
     participantsVuex:[],
+    userInfo: null // 퇴장 시 정보
   },
   // state를 유지하기 위해
   plugins: [
@@ -77,9 +81,9 @@ export default new Vuex.Store({
       // state는 기본값. 그냥 써주기 // returnflag는 res.data(t인지 f인지 들어있는 정보)
       state.emailposi = returnflag; // 저장해주고 값 바꿔주기
       if (!returnflag) {
-        alert('이메일이 중복 됩니다!');
+        swal('이메일이 중복 됩니다!');
       } else {
-        alert('중복체크 완료!');
+        swal('중복체크 완료!');
       }
     },
     JOIN_CHALL(state) {
@@ -88,7 +92,7 @@ export default new Vuex.Store({
     },
     // PRESSLIKE: function (state) {
     //     console.log(state);
-    //     alert('좋아요를 눌렀습니다');
+    //     swal('좋아요를 눌렀습니다');
     // }
     // 채팅창 타입 변경
     CHANGE_CHAT_TYPE(state, chatType) {
@@ -115,6 +119,12 @@ export default new Vuex.Store({
     },
     GET_FOLLOWING(state, following) {
       state.following = following
+    },
+    GET_CHALLENGERS(state, challengers) {
+      state.challengers = challengers
+    },
+    GET_USER_INFO(state, userInfo) {
+      state.userInfo = userInfo
     }
   },
   // 젠킨스를 위한 변경사항
@@ -150,12 +160,25 @@ export default new Vuex.Store({
           commit('SET_TOKEN', res.data.userInfoResponse);
         })
         .catch((err) => {
-          alert('계정이나 인터넷을 확인해주세요');
+          swal('계정이나 인터넷을 확인해주세요');
           // console.log(err);
         });
     },
     // 로그아웃
-    logout: function({ commit }) {
+    logout: function({ commit, state }) {
+      if (window.location.pathname != '/Galaxy') {
+        axios({
+          method: 'post',
+          url: '/galaxy/exit',
+          data: state.userInfo,
+        })
+          .then((res) => {
+            this.getMessage(null);
+          })
+          .catch((err) => {
+            console.log(err);
+        });
+      }
       commit('LOGOUT');
     },
     // 토큰 부여
@@ -175,7 +198,7 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err);
-          alert('잠시후 다시 시도 해주세요');
+          swal('잠시후 다시 시도 해주세요');
         });
     },
     // 챌린지 가입
@@ -268,6 +291,14 @@ export default new Vuex.Store({
     // 팔로잉 수 가져오기
     getFollowing: function ({ commit }, following) {
       commit('GET_FOLLOWING', following);
+    },
+    // 챌린지 참가자 수 가져오기
+    getChallengers: function ({ commit }, challengers) {
+      commit('GET_CHALLENGERS', challengers)
+    },
+    // 갤럭시방 퇴장 시 유저 정보 가져오기
+    getUserInfo: function ({ commit }, userInfo) {
+      commit('GET_USER_INFO', userInfo)
     }
   },
 
@@ -305,6 +336,9 @@ export default new Vuex.Store({
     },
     following: function (state) {
       return state.following;
+    },
+    challengers: function (state) {
+      return state.challengers;
     },
   },
 });

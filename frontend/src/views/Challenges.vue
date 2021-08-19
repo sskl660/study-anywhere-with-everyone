@@ -5,7 +5,9 @@
     <div class="stars-left-box">
       <img class="stars" src="../assets/manystar.png" alt="manystar">
     </div>
-    <Title  text="챌린지 목록"/>
+    <div class="challenge-list-title">
+      챌린지 목록
+    </div>
     <div class="stars-right-box">
       <img class="stars" src="../assets/manystar.png" alt="manystar">
     </div>
@@ -22,7 +24,8 @@
         v-for="(challengeList, idx) in allList"
         :key="idx"
         :challengeList="challengeList"
-        />
+        :idx="idx"
+      />
     </div>
 
   </div>
@@ -32,7 +35,6 @@
 import SearchBar from '@/components/challenges/SearchBar'
 import ChallengeList from '@/components/challenges/ChallengeList'
 import ChallengeModal from '@/components/challenges/ChallengeModal'
-import Title from '@/components/common/Title.vue';
 import "@/views/css/challenges.css";
 import axios from '@/util/http-common.js';
 
@@ -42,7 +44,6 @@ export default {
     SearchBar, // 검색바
     ChallengeList, // 챌린지 목록
     ChallengeModal, //챌린지 모달
-    Title
   },
   data: function () {
     return {
@@ -61,17 +62,24 @@ export default {
       })
         .then(res => {
           res.data.forEach(challenge => {
-            if (challenge.challengeCategory === 'ALGO') {
-              this.algoList.push(challenge)
-            }
-            if (challenge.challengeCategory === 'CS') {
-              this.csList.push(challenge)
-            }
-            if (challenge.challengeCategory === 'JOB') {
-              this.jobList.push(challenge)
-            }
+            axios({
+              methods: 'get',
+              url: `/challenge/info/${challenge.challengeNo}`,
+            })
+              .then(challInfo => {
+                challenge.challengers = challInfo.data.challengeGroup.length
+                if (challenge.challengeCategory === 'ALGO') {
+                  this.algoList.push(challenge)
+                }
+                if (challenge.challengeCategory === 'CS') {
+                  this.csList.push(challenge)
+                }
+                if (challenge.challengeCategory === 'JOB') {
+                  this.jobList.push(challenge)
+                }
+              })
           })
-
+          
           this.allList.push(this.algoList)
           this.allList.push(this.csList)
           this.allList.push(this.jobList)

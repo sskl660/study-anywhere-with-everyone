@@ -218,6 +218,7 @@
 <script>
 import axios from '@/util/http-common.js';
 import { mapActions, mapGetters } from 'vuex';
+import swal from 'sweetalert';
 
 export default {
     name: 'ChallengeModal',
@@ -304,9 +305,10 @@ export default {
 
             // 날짜가 올바르게 입력되었는지 체크
             if (this.challengeInfo.challengeStartdate && this.challengeInfo.challengeEnddate) {
+                const today = new Date()
                 const startDate = new Date(this.challengeInfo.challengeStartdate);
                 const endDate = new Date(this.challengeInfo.challengeEnddate);
-                if (startDate > endDate) {
+                if (startDate > endDate || today > startDate) {
                     this.isOkay = false;
                     this.dateOkay = false;
                     this.dateFlag = false;
@@ -368,7 +370,7 @@ export default {
                 data: this.challengeInfo,
             })
                 .then((res) => {
-                    alert('챌린지 생성에 성공하였습니다.');
+                    swal('챌린지 생성에 성공하였습니다.');
                     // console.log(res);
                     var info = [res.data, this.userEmail];
                     // console.log('생성 리스폰');
@@ -387,7 +389,7 @@ export default {
                         });
                 })
                 .catch((err) => {
-                    alert('챌린지 생성에 실패하였습니다.');
+                    swal('챌린지 생성에 실패하였습니다.');
                     // console.log(err);
                 });
         },
