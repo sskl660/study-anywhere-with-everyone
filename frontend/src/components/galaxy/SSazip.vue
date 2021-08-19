@@ -59,6 +59,7 @@ import SmallSSazip from '@/components/galaxy/SmallSSazip.vue';
 // import gravity from "@/components/temporary/gravity.js"
 // import $ from 'jquery';
 import { mapGetters } from 'vuex';
+import swal from 'sweetalert';
 
 export default {
     name: 'SSazip',
@@ -163,7 +164,7 @@ export default {
             }
         },
         tmpClicker(param) {
-            alert(param);
+            swal(param);
         },
 
         gravity: function() {

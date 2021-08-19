@@ -62,7 +62,7 @@ export default {
 }
 
 .weeklyChallenge{
-    background-color: #FFF59D;
+    background-color: #fff174;
     width: 80%;
     border-radius: 33px;
     margin-top: 30px;
@@ -88,7 +88,7 @@ export default {
 .challenger-name {
     font-family: 'NanumSquareRound';
     text-align: left;
-    width: 100px;
+    width: 83px;
     margin-top: 1px;
     cursor: pointer;
     font-weight: bold;
@@ -100,7 +100,7 @@ export default {
 
 .challenge-record {
     font-weight: bold;
-    color: #FC9B41;
+    color: #ff8f26;
 }
 
 .crown {

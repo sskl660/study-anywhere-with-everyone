@@ -13,7 +13,12 @@
                         <form>
                             <!-- 챌린지명 -->
                             <div class="d-flex name-container">
-                                <label for="challenge-name" class="col-form-label">챌린지명</label>
+                                <label v-if="checkName" for="challenge-name" class="col-form-label">
+                                    챌린지명
+                                </label>
+                                <label v-else for="challenge-name" class="col-form-label" style="color:red">
+                                    챌린지명
+                                </label>
                                 <input
                                     type="text"
                                     class="form-control"
@@ -195,7 +200,7 @@
                     <div class="modal-footer d-flex justify-content-between">
                         <!-- 경고 메시지 -->
                         <div>
-                            <div class="warning" v-if="warningShow">모든 항목을 입력해주세요.</div>
+                            <div class="warning" v-if="warningShow">모든 항목을 올바르게 입력해주세요.</div>
                             <div class="warning" v-if="dateWarningShow">날짜가 올바르지 않습니다.</div>
                         </div>
 
@@ -218,6 +223,7 @@
 <script>
 import axios from '@/util/http-common.js';
 import { mapActions, mapGetters } from 'vuex';
+import swal from 'sweetalert';
 
 export default {
     name: 'ChallengeModal',
@@ -240,6 +246,7 @@ export default {
             isShow: [false, false, false, false, false, false, false], // 과제가 보여지는지의 여부를 담은 배열
 
             checkLength: false, // 컨텐츠 길이 제한
+            checkName: false, // 챌린지명 길이 제한
 
             description: '챌린지 자세한 설명\n(커리큘럼, 상세설명, 진행상황 등)\n챌린지 과제번호 - 과제 소개\n\n*과제별 소개를 명확히 써주세요.',
 
@@ -302,18 +309,24 @@ export default {
                 }
             }
 
+            // 챌린지명, 챌린지 소개 체크
+            if (!this.checkName || !this.checkLength) {
+                this.isOkay = false;
+            }
+
             // 날짜가 올바르게 입력되었는지 체크
             if (this.challengeInfo.challengeStartdate && this.challengeInfo.challengeEnddate) {
-                const startDate = new Date(this.challengeInfo.challengeStartdate);
-                const endDate = new Date(this.challengeInfo.challengeEnddate);
-                if (startDate > endDate) {
+                const today = new Date().getDate()
+                const startDate = new Date(this.challengeInfo.challengeStartdate).getDate();
+                const endDate = new Date(this.challengeInfo.challengeEnddate).getDate();
+                if (startDate > endDate || today > startDate) {
                     this.isOkay = false;
                     this.dateOkay = false;
                     this.dateFlag = false;
                 } else {
                     const deadlines = this.challengeInfo.challengeTaskdeadlines;
                     for (let i = 0; i < this.challengeInfo.challengeTaskCnt; i++) {
-                        const deadline = new Date(deadlines[i]);
+                        const deadline = new Date(deadlines[i]).getDate();
                         if (!deadline || deadline < startDate || endDate < deadline) {
                             this.isOkay = false;
                             this.dateOkay = false;
@@ -368,7 +381,7 @@ export default {
                 data: this.challengeInfo,
             })
                 .then((res) => {
-                    alert('챌린지 생성에 성공하였습니다.');
+                    swal('챌린지 생성에 성공하였습니다.');
                     // console.log(res);
                     var info = [res.data, this.userEmail];
                     // console.log('생성 리스폰');
@@ -387,24 +400,26 @@ export default {
                         });
                 })
                 .catch((err) => {
-                    alert('챌린지 생성에 실패하였습니다.');
+                    swal('챌린지 생성에 실패하였습니다.');
                     // console.log(err);
                 });
         },
         /* 텍스트 내용 길이 제한 체크*/
         checkform: function() {
-            // 컨텐츠 길이 관련 변수 초기화
-            this.checkLength = true;
-
             // 챌린지 명은 12글자 이하.
-            if (this.challengeInfo.challengeName > 12) {
-                this.checkLength = false;
-                return;
+            if (0 < this.challengeInfo.challengeName.length && this.challengeInfo.challengeName.length <= 12) {
+                this.checkName = true;
+                // return;
+            } else {
+                this.checkName = false;
             }
+
             // 챌린지 소개 내용은 1글자 이상, 600글자 이하.
-            if (this.challengeInfo.challengeDesc.length <= 0 || this.challengeInfo.challengeDesc.length > 600) {
+            if (0 < this.challengeInfo.challengeDesc.length && this.challengeInfo.challengeDesc.length <= 600) {
+                this.checkLength = true;
+                // return;
+            } else {
                 this.checkLength = false;
-                return;
             }
         },
         /* 챌린지 가입 함수 가져오기 */
