@@ -280,12 +280,13 @@ export default {
                 .get(`/challenge/task/img/${this.task_No}`)
                 .then((response) => {
                     // console.log('이미지소환성공');
-                    // console.log(response.data);
+                    console.log(response.data);
                     var imgsrc = 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
                     document.getElementById('image').src = imgsrc;
                     this.imgFlag = true;
-                    if(response.data===noImage)
-                      this.imgFlag =false;
+                    if(response.data=='noImage'){
+                        this.imgFlag =false;
+                    }
                     // this.imgData = imgsrc;
                     // console.log(imgsrc);
                 })

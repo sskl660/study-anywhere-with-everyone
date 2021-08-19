@@ -452,7 +452,7 @@ export default {
                 } else {
                     for (var i = 0; i < balls.length; i++) {
                         var b = ballCoords[i];
-                        if(Math.sqrt(b.vx*b.vx+b.vy*b.vy)>1.5||Math.abs(b.vx)>0.8||Math.abs(b.vy)>0.8){
+                        if(Math.sqrt(b.vx*b.vx+b.vy*b.vy)>1.5||Math.abs(b.vx)>0.6||Math.abs(b.vy)>0.6){
                             if(b.vx<0)b.vx=-0.3;
                             else b.vx=0.3;
 
