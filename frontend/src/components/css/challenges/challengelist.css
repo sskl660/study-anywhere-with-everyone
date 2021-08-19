@@ -1,11 +1,32 @@
 /* 챌린지 목록 제목 컨테이너 */
-.challenge-title-container {
+.challenge-title-container0 {
   background-color:rgba(255,255,255, 0.2);
   margin-top: 100px;
   width: 450px;
   height: 130px;
   border-radius: 3rem 3rem 0rem 0rem;
-  padding-top: 50px;
+  padding-top: 38px;
+  background-color: #cc922c;
+}
+
+.challenge-title-container1 {
+  background-color:rgba(255,255,255, 0.2);
+  margin-top: 100px;
+  width: 450px;
+  height: 130px;
+  border-radius: 3rem 3rem 0rem 0rem;
+  padding-top: 38px;
+  background-color: #c52e1e;
+}
+
+.challenge-title-container2 {
+  background-color:rgba(255,255,255, 0.2);
+  margin-top: 100px;
+  width: 450px;
+  height: 130px;
+  border-radius: 3rem 3rem 0rem 0rem;
+  padding-top: 38px;
+  background-color: #32479c;
 }
 
 /* 챌린지 목록 제목 */
@@ -21,7 +42,7 @@
 /* 챌린지 목록 컨테이너 */
 .challenge-list-container {
   background-color:rgba(255,255,255, 0.2);
-  padding-top: 10px;
+  padding-top: 44px;
   margin-bottom: 100px;
   width: 450px;
   height: 1000px;

@@ -1,6 +1,6 @@
 /* 챌린지 전체를 감싸는 컨테이너 */
 .challenges-container {
-  margin-top: 90px;
+  margin-top: 120px;
 }
 
 /* 상단 별 위치 조정 */
@@ -11,7 +11,7 @@
 
 .stars-left-box {
   position: absolute;
-  margin-top: -180px;
+  margin-top: -210px;
   margin-left: 240px;
   width: 50px;
   height: 50px;
@@ -19,7 +19,7 @@
 
 .stars-right-box {
   position: absolute;
-  margin-top: -180px;
+  margin-top: -210px;
   margin-left: 1305px;
   width: 50px;
   height: 50px;
@@ -29,4 +29,15 @@
 .challenges {
   margin-left: 150px;
   margin-right: 150px;
+}
+
+/* 최상단 제목 */
+.challenge-list-title {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: bold;
+  position: absolute;
+  color: rgb(249, 212, 121);
+  font-size: 35px;
+  margin-left: 860px;
+  top: 33px;
 }
