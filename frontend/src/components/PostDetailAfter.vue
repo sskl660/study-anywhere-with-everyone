@@ -80,8 +80,8 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
 import '@/components/css/postdetailafter.css';
-import ButtonSquare from '@/components/common/ButtonSquare.vue';
 import CommentBox from '@/components/challengeroom/CommentBox.vue';
 import axios from '@/util/http-common.js';
 import http from '@/util/http-common.js';
@@ -91,7 +91,6 @@ export default {
     name: 'PostDetailAfter',
     components: {
         // Title,          // 타이틀 가져오기
-        ButtonSquare, // 둥근 버튼 가져오기
         CommentBox, // 댓글 구현하기
     },
     // props: { //여기를 this. router. query. url에 있는 key값 바꿔줘야한다
@@ -165,7 +164,7 @@ export default {
                     this.task_info = res.data;
                     // console.log(this.task_info);
                     if (this.task_info.taskNo == 0) {
-                        alert('없는 과제 입니다.');
+                        swal('없는 과제 입니다.');
                         this.$router.push({ path: '/homefeed' });
                     }
                 })
@@ -227,31 +226,26 @@ export default {
                 });
         },
         erazeTask: function() {
-            if (confirm('정말 삭제하시겠습니까??') == true) {
-                //확인
-                // document.form.submit();
-                axios({
-                    method: 'delete',
-                    url: `/challenge/task/${this.task_No}`,
-                })
-                    .then((res) => {
-                        // console.log('erazeTask res로그 삭제성공');
-                        // console.log(this.$route.query.taskNo + '번호 삭제');
-                        this.$router.go(-1);
-                        //                        this.$router.push({ path: '/challengeRoom', query: { cn: this.chall_no } });
+            swal({
+                text: '정말 삭제하시겠습니까?',
+                buttons: {
+                    text: '네',
+                },
+            }).then((value) => {
+                if (value) {
+                    axios({
+                        method: 'delete',
+                        url: `/challenge/task/${this.task_No}`,
                     })
-                    .catch((err) => {
-                        // console.log('erazeTask err로그');
-                        // console.log(this.chall_no + '삭제시도');
-                        // console.log(this.$route.query.taskNo + '번호 삭제 시도');
-                        // console.log(err);
-                    });
-            } else {
-                //취소
-                return;
-            }
+                        .then((res) => {
+                            this.$router.go(-1);
+                        })
+                        .catch((err) => {});
+                    } else {
+                        return;
+                    }
+                })
         },
-
         // 이미지 가져오기
         getProfileImageMy: function() {
             // console.log('프로필 사진 가져오기 여기123!!');
@@ -284,8 +278,9 @@ export default {
                     var imgsrc = 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, new Uint8Array(response.data)));
                     document.getElementById('image').src = imgsrc;
                     this.imgFlag = true;
-                    if(response.data===noImage)
-                      this.imgFlag =false;
+                    if(response.data == 'noImage') {
+                        this.imgFlag =false;
+                    }
                     // this.imgData = imgsrc;
                     // console.log(imgsrc);
                 })

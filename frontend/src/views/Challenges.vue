@@ -37,6 +37,8 @@ import ChallengeList from '@/components/challenges/ChallengeList'
 import ChallengeModal from '@/components/challenges/ChallengeModal'
 import "@/views/css/challenges.css";
 import axios from '@/util/http-common.js';
+import { mapActions, mapGetters } from 'vuex';
+
 
 export default {
   name: 'Challenges',
@@ -55,6 +57,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'getChallengers',
+    ]),
     getChallengeList: function () {
       axios({
         method: 'get',
@@ -68,18 +73,33 @@ export default {
             })
               .then(challInfo => {
                 challenge.challengers = challInfo.data.challengeGroup.length
+                
+                let today = new Date().getTime()
+                let deadline = new Date(challenge.challengeStartdate).getTime()
+                let interval =  deadline - today;
+                let day = Math.ceil(interval / (1000 * 60 * 60 * 24));
+                let hour = Math.ceil((interval % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + (day - 1) * 24 - 9;
+                challenge.remainTime = hour
+
                 if (challenge.challengeCategory === 'ALGO') {
                   this.algoList.push(challenge)
                 }
-                if (challenge.challengeCategory === 'CS') {
+                else if (challenge.challengeCategory === 'CS') {
                   this.csList.push(challenge)
                 }
-                if (challenge.challengeCategory === 'JOB') {
+                else if (challenge.challengeCategory === 'JOB') {
                   this.jobList.push(challenge)
                 }
+
+
               })
+              .catch(err => {
+                console.log(err)
+              })
+
+            
           })
-          
+
           this.allList.push(this.algoList)
           this.allList.push(this.csList)
           this.allList.push(this.jobList)
@@ -113,5 +133,10 @@ export default {
   created: function () {
     this.getChallengeList()
   },
+  computed: {
+    ...mapGetters([
+      'challengers',
+    ]),
+  }
 }
 </script>
