@@ -69,24 +69,59 @@
             <!-- <img id="fiveKing" src="~@/assets/kingfive.png" alt=""> -->
         </div>
         <div>
+            <!-- {{this.ranker[0].enterTime.substring(5,7)}}월
+                    {{this.ranker[0].enterTime.substring(8,10)}}일
+                    {{this.ranker[0].enterTime.substring(11,13)}}시
+                    {{this.ranker[0].enterTime.substring(14,16)}}분
+                    {{this.ranker[0].enterTime.substring(17,19)}}초 -->
             <div v-if="ranker[0]">
-                <span id="firstTime">{{this.ranker[0].enterTime.substring(5,19)}}</span>
+                <span id="firstTime">
+                    {{this.ranker[0].enterTime.substring(5,7)}}월
+                    {{this.ranker[0].enterTime.substring(8,10)}}일
+                    {{this.ranker[0].enterTime.substring(11,13)}}시
+                    {{this.ranker[0].enterTime.substring(14,16)}}분
+                    {{this.ranker[0].enterTime.substring(17,19)}}초 입장
+                </span>
                 <span id="first">{{this.ranker[0].partName}}</span>
             </div>
             <div v-if="ranker[1]">
-                <span id="secondTime">{{this.ranker[1].enterTime.substring(5,19)}}</span>
+                <span id="secondTime">
+                    {{this.ranker[1].enterTime.substring(5,7)}}월
+                    {{this.ranker[1].enterTime.substring(8,10)}}일
+                    {{this.ranker[1].enterTime.substring(11,13)}}시
+                    {{this.ranker[1].enterTime.substring(14,16)}}분
+                    {{this.ranker[1].enterTime.substring(17,19)}}초 입장
+                </span>
                 <span id="second" >{{this.ranker[1].partName}}</span>
             </div>
             <div v-if="ranker[2]">
-                <span id="thirdTime">{{this.ranker[2].enterTime.substring(5,19)}}</span>
+                <span id="thirdTime">
+                    {{this.ranker[2].enterTime.substring(5,7)}}월
+                    {{this.ranker[2].enterTime.substring(8,10)}}일
+                    {{this.ranker[2].enterTime.substring(11,13)}}시
+                    {{this.ranker[2].enterTime.substring(14,16)}}분
+                    {{this.ranker[2].enterTime.substring(17,19)}}초 입장
+                </span>
                 <span id="third">{{this.ranker[2].partName}}</span>
             </div>
             <div v-if="ranker[3]">
-                <span id="forthTime">{{this.ranker[3].enterTime.substring(5,19)}}</span>
+                <span id="forthTime">
+                    {{this.ranker[3].enterTime.substring(5,7)}}월
+                    {{this.ranker[3].enterTime.substring(8,10)}}일
+                    {{this.ranker[3].enterTime.substring(11,13)}}시
+                    {{this.ranker[3].enterTime.substring(14,16)}}분
+                    {{this.ranker[3].enterTime.substring(17,19)}}초 입장
+                </span>
                 <span id="forth" >{{this.ranker[3].partName}}</span>
             </div>
             <div v-if="ranker[4]">
-                <span id="fifthTime">{{this.ranker[4].enterTime.substring(5,19)}}</span>
+                <span id="fifthTime">
+                    {{this.ranker[4].enterTime.substring(5,7)}}월
+                    {{this.ranker[4].enterTime.substring(8,10)}}일
+                    {{this.ranker[4].enterTime.substring(11,13)}}시
+                    {{this.ranker[4].enterTime.substring(14,16)}}분
+                    {{this.ranker[4].enterTime.substring(17,19)}}초 입장
+                </span>
                 <span id="fifth" >{{this.ranker[4].partName}}</span>
             </div>
         </div>
@@ -109,8 +144,8 @@ export default {
   },
   methods:{
       printt: function(){
-          console.log('여기 확인 좀 해주소')
-          console.log(this.ranker[1].enterTime.substring(5,19))
+        //   console.log('여기 확인 좀 해주소')
+        //   console.log(this.ranker[1].enterTime.substring(5,19))
       }
   },
   created: function() {
@@ -456,7 +491,7 @@ export default {
     position: absolute;
     /* margin-left: -655px; 
     margin-top: 360px; */
-    margin-left: -685px;
+    margin-left: -720px;
     margin-top: 350px;
     transform:rotate(20deg);
     color: white;
@@ -466,7 +501,7 @@ export default {
 
 #secondTime{
     position: absolute;
-    margin-left: -470px;
+    margin-left: -512px;
     margin-top: 156px;
     transform:rotate(20deg);
     color: white;
@@ -476,8 +511,8 @@ export default {
 
 #thirdTime{
     position: absolute;
-    margin-left: -380px;
-    margin-top: 378px;
+    margin-left: -414px;
+    margin-top: 380px;
     transform:rotate(20deg);
     color: white;
     font-size: 15px;
@@ -486,7 +521,7 @@ export default {
 
 #forthTime{
     position: absolute;
-    margin-left: -207px;
+    margin-left: -250px;
     margin-top: 230px;
     transform:rotate(20deg);
     color: white;
@@ -496,7 +531,7 @@ export default {
 
 #fifthTime{
     position: absolute;
-    margin-left: -123px;
+    margin-left: -160px;
     margin-top: 435px;
     transform:rotate(20deg);
     color: white;

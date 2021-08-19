@@ -7,7 +7,7 @@
         <span class="dropdown">
               <div class="drop-list-title" style="">참여자 목록</div>
               <div class="drop-list">
-                <div v-for="user in this.participants" :key="user">
+                <div v-for="(user,indexx) in this.participants" :key="indexx">
                   <div class="image-box" @click="toProfile(user.partEmail)">
                     <div class="content">{{ user.partTerm }} 기 {{ user.partName }}</div>
                   </div>
