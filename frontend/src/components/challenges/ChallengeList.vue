@@ -66,10 +66,5 @@ export default {
     created: function() {
         this.getTitle();
     },
-    computed: {
-        reversedChallengeList: function() {
-            return [...this.challengeList].reverse();
-        },
-    },
 }
 </script>

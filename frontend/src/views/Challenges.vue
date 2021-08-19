@@ -73,7 +73,6 @@ export default {
               url: `/challenge/info/${challenge.challengeNo}`,
             })
               .then(challInfo => {
-
                 challenge.challengers = challInfo.data.challengeGroup.length
                 
                 let today = new Date().getTime()
