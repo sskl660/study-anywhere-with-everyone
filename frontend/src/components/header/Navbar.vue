@@ -14,22 +14,11 @@
         :color="color"
         :position="position"
       />
-
-      <!-- <quick-menu
-        :menu-count="count"
-        :icon-class="icons"
-        :menu-url-list="list"
-        :background-color="backgroundColor"
-        :color="color"
-        :position="position"
-      >
-      </quick-menu> -->
     </div>
   </div>
 </template>
 
 <script>
-// import quickMenu from 'vue-quick-menu';
 import QuickMenu from '@/components/header/QuickMenu'
 import { mapGetters } from 'vuex';
 export default {
@@ -51,13 +40,7 @@ export default {
       isOpenNewTab: false,
     };
   },
-  methods: {
-    one: function () {
-      console.log(1)
-    }
-  },
   components: {
-    // quickMenu: quickMenu,
     QuickMenu
   },
   computed: {
@@ -180,7 +163,8 @@ export default {
       }
       &:hover {
         cursor: pointer;
-        background-color: #fff !important;
+        // background-color: #fff !important;
+        background-color: rgb(48, 48, 48) !important;
       }
     }
   }
