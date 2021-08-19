@@ -120,6 +120,7 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
 import '@/components/css/PostDetail.css';
 // import ButtonSquare from '@/components/common/ButtonSquare.vue'
 import ProfileImage from '@/components/common/ProfileImage.vue';
@@ -168,11 +169,11 @@ export default {
     submitForm() {
       let message = this.CKEditor.getData();
       if (message == '' || message == null) {
-        alert('글을 작성해주세요');
+        swal('글을 작성해주세요');
         return;
       }
       if (message.length > 2000) {
-        alert('내용은 2000자를 초과할 수 없습니다. 현재 글자 수 ' + message.length + '자');
+        swal('내용은 2000자를 초과할 수 없습니다. 현재 글자 수 ' + message.length + '자');
         return;
       }
       var frm = new FormData();
@@ -182,7 +183,7 @@ export default {
       if (timg.files.length != 0) {
         if (timg.files[0].size > 1024 * 100) {
           // 용량 초과시 경고후 해당 파일의 용량도 보여줌
-          alert(
+          swal(
             '100kb 이하 이미지만 등록할 수 있습니다.\n\n' +
               '현재 이미지 크기 : ' +
               Math.round((timg.files[0].size / 1024) * 100) / 100 +
@@ -197,7 +198,7 @@ export default {
       if (tfile.files.length != 0) {
         // console.log('파일 탑승');
         if (tfile.files[0].size > 1024 * 2000) {
-          alert(
+          swal(
             '2 mb 이하 첨부파일만 등록할 수 있습니다.\n\n' +
               '현재 파일 크기 : ' +
               Math.round((tfile.files[0].size / 1024) * 100) / 100 +
@@ -220,7 +221,7 @@ export default {
         })
         .then((response) => {
           // console.log('과제 제출 성공!');
-          // alert('과제 제출이 성공하였습니다.');
+          // swal('과제 제출이 성공하였습니다.');
           this.$router.push({ path: '/challengeRoom', query: { cn: this.challengeno } });
         })
         .catch((error) => {
@@ -237,13 +238,13 @@ export default {
       if (files.length) {
         let file = files[0];
         if (!/^image\//.test(file.type)) {
-          alert('이미지 파일만 등록이 가능합니다');
+          swal('이미지 파일만 등록이 가능합니다');
           return false;
         }
 
         if (file.size > 1024 * 100) {
           // 용량 초과시 경고후 해당 파일의 용량도 보여줌
-          alert(
+          swal(
             '100kb 이하 이미지만 등록할 수 있습니다.\n\n' +
                '현재 이미지 크기 : '  +
               Math.round((file.size / 1024) * 100) / 100 +
@@ -289,7 +290,7 @@ export default {
       };
     },
     goBack: function() {
-      // alert('goBack function')
+      // swal('goBack function')
       this.$router.go(-1);
     },
     getChallInfo: function() {
@@ -303,7 +304,7 @@ export default {
           // console.log(res);
         })
         .catch((err) => {
-          // alert('정보부르기 실패');
+          // swal('정보부르기 실패');
           // console.log(err);
         });
     },

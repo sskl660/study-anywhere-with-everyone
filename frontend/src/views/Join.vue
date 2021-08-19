@@ -151,6 +151,7 @@ import ButtonSquare from '@/components/common/ButtonSquare';
 import { mapActions, mapGetters } from 'vuex';
 import PV from 'password-validator';
 import * as EmailValidator from 'email-validator';
+import swal from 'sweetalert';
 
 export default {
   name: 'Join',
@@ -194,10 +195,10 @@ export default {
     codeCheck: function(accessCode) {
       if (accessCode == '307') {
         this.error.userCode = true;
-        alert('참여코드 확인 완료');
+        swal('참여코드 확인 완료');
       } else {
         this.error.userCode = false;
-        alert('참여코드를 확인해주세요!');
+        swal('참여코드를 확인해주세요!');
       }
     },
     // 입력 규칙 체크
@@ -265,15 +266,15 @@ export default {
     },
     joinCheck(credentials) {
       if (!this.emailposi) {
-        alert('이메일 중복 여부를 체크해주세요!');
+        swal('이메일 중복 여부를 체크해주세요!');
         return;
       }
       if (!this.isSubmit) {
-        alert('모든 정보를 정확히 기입해주세요!');
+        swal('모든 정보를 정확히 기입해주세요!');
         return;
       }
       if (!this.error.userCode) {
-        alert('코드를 인증해주세요!!');
+        swal('코드를 인증해주세요!!');
         return;
       }
       this.join(credentials);

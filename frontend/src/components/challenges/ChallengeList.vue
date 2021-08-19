@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 챌린지 목록 제목 -->
-        <div class="challenge-title-container">
+        <div :class=" 'challenge-title-container' + idx">
             <div class="challenge-title">{{ title }}</div>
         </div>
 
@@ -26,6 +26,9 @@ export default {
         challengeList: {
             type: Array,
         },
+        idx: {
+            type: Number,
+        }
     },
     data: function() {
         return {
@@ -37,13 +40,13 @@ export default {
     },
     methods: {
         getTitle: function() {
-            if (this.challengeList[0].challengeCategory === 'ALGO') {
+            if (this.idx === 0) {
                 this.title = '알고리즘';
             }
-            if (this.challengeList[0].challengeCategory === 'CS') {
+            if (this.idx === 1) {
                 this.title = 'CS';
             }
-            if (this.challengeList[0].challengeCategory === 'JOB') {
+            if (this.idx === 2) {
                 this.title = '취업';
             }
         },

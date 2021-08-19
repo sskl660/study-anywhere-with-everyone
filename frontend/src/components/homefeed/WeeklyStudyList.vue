@@ -62,7 +62,7 @@ export default {
 }
 
 .weeklyStudy{
-    background-color: #B7BEDA;
+    background-color: #9ba8da;
     width: 80%;
     border-radius: 33px;
     margin-top: 30px;
