@@ -45,7 +45,7 @@ export default {
         { isLink: true, url: '/challenges' },
         { isLink: true, url: '' },
       ],
-      backgroundColor: '#F9D479',
+      backgroundColor: '#FFD261',
       color: '#EE4748',
       position: 'top-right',
       isOpenNewTab: false,
