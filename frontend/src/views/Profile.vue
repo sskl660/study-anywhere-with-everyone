@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="profile-info-container">
+        <div class="profile-info-container">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
             <!-- 타이틀도 추후에 bg-img로 바꿔주기 -->
             <Title style="display: inline-block" :text="this.profileTitle" />
             <!-- 프로필 상단의 카드와 팔로워, 각오 소개글 -->

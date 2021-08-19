@@ -91,29 +91,29 @@ const router = new VueRouter({
 
 export default router;
 
-router.beforeEach(function (to, from, next) {
-  // 1. JWT 토큰을 가져온다.
-  const token = localStorage.getItem('jwt')
-  // 2. JWT 토큰이 있거나, 웰컴 페이지이거나, 회원가입 페이지일 경우에는 접근 가능
-  // 3. 이외의 경우에는 로그인해야 접근 가능. 토큰이 없으면 경고창을 띄운 뒤 웰컴 페이지로 이동.
-  if (token || to.name === 'Welcome' ||  to.name === 'Join') {
-    // 4. 로그인한 상태에서 갤럭시방을 URL로 접근하려고 하면, 경고창을 띄우고 이전 페이지로 이동시킴.
-    if (to.name === 'Galaxy') {
-      if (!store.state.message) {
-        alert('갤럭시방에 대한 접근이 올바르지 않습니다!')
-        if (!from.name) {
-          next('/')
-        } else {
-          router.go(-1)
-        }
-      } else {
-        next()
-      }
-    } else {
-      next()
-    }
-  } else {
-    alert('로그인이 필요합니다!')
-    next('/')
-  }
-});
+// router.beforeEach(function (to, from, next) {
+//   // 1. JWT 토큰을 가져온다.
+//   const token = localStorage.getItem('jwt')
+//   // 2. JWT 토큰이 있거나, 웰컴 페이지이거나, 회원가입 페이지일 경우에는 접근 가능
+//   // 3. 이외의 경우에는 로그인해야 접근 가능. 토큰이 없으면 경고창을 띄운 뒤 웰컴 페이지로 이동.
+//   if (token || to.name === 'Welcome' ||  to.name === 'Join') {
+//     // 4. 로그인한 상태에서 갤럭시방을 URL로 접근하려고 하면, 경고창을 띄우고 이전 페이지로 이동시킴.
+//     if (to.name === 'Galaxy') {
+//       if (!store.state.message) {
+//         alert('갤럭시방에 대한 접근이 올바르지 않습니다!')
+//         if (!from.name) {
+//           next('/')
+//         } else {
+//           router.go(-1)
+//         }
+//       } else {
+//         next()
+//       }
+//     } else {
+//       next()
+//     }
+//   } else {
+//     alert('로그인이 필요합니다!')
+//     next('/')
+//   }
+// });
