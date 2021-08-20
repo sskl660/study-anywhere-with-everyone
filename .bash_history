@@ -1,19 +1,3 @@
-git status
-git push
-git status
-git push
-git pull origin master
-git config core.protectNTFS false
-git pull origin master
-git fetch origin master
-git status
-git branch
-git merge origin master
-git merge origin/master
-git add .
-git merge origin/master
-git checkout -f HEAD
-git pull
 git pull origin master
 git clone https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307.git
 git clone 
@@ -497,4 +481,20 @@ git status
 git add .
 git commit -am "update readme!"
 git status
+git push
+cd ~
+git status
+git commit -am "save"
+git pull origin master
+git commit -am "save"
+git status
+git add .
+git commit -am "update readme"
+git status
+git pull origin master
+ls
+git status
+git commit -am "merge"
+git status
+git commit -am "save"
 git push
