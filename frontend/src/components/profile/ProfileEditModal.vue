@@ -179,6 +179,19 @@ export default {
     submitForm() {
       var frm = new FormData();
       var timg = document.getElementById("uploadItemFile");
+      if (timg.files[0].size > 1024 * 100) {
+          // 용량 초과시 경고후 해당 파일의 용량도 보여줌
+          swal(
+            '100kb 이하 이미지만 등록할 수 있습니다.\n\n' +
+              '현재 이미지 크기 : ' +
+              Math.round((timg.files[0].size / 1024) * 100) / 100 +
+              'KB'
+          );
+          return;
+        } else {
+          // console.log('이미지 탑승');
+          frm.append('img', timg.files[0]);
+        }
       frm.append("file", timg.files[0]);
       frm.append("useremail", this.userInfo.userEmail);
       http
