@@ -2,6 +2,7 @@
   <div>
     <button v-if="isLogin" type="button" class="btn btn-primary logout-btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
       <i class="fas fa-sign-out-alt fa-flip-horizontal fa-2x"></i>
+      <figcaption class="logout-msg">로그아웃</figcaption> 
     </button>
 
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
@@ -40,6 +41,14 @@ import {mapActions, mapState} from 'vuex'
 </script>
 
 <style scoped>
+figcaption {
+  opacity: 0;
+  position: absolute;
+  font-size: 14px;
+  color: white;
+  left: 5px;
+}
+
 .logout-btn {
   position: fixed;
   display: flex;
@@ -61,8 +70,12 @@ import {mapActions, mapState} from 'vuex'
 
 .logout-btn:hover {
   color: #1F3E52;
-  background-color: #DDDDDD;
+  background-color: rgb(48, 48, 48);
   border-color: #DDDDDD;
+}
+
+.logout-btn:hover .logout-msg {
+  opacity: 1
 }
 
 .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {

@@ -93,8 +93,9 @@
           <!-- 갤럭시방 참여 하단 -->
           <div class="feed-description d-flex align-items-center">
             <div>
+              <div class="galaxy-message">{{ feed.userName }}님의 상태메시지</div>
               <div class="galaxy-comment">"{{ feed.galaxyComment }}"</div>
-              <div class="galaxy-member-count">{{ participantsVuex.length }}명 참여중</div>
+              <!-- <div class="galaxy-member-count">{{ participantsVuex.length }}명 참여중</div> -->
             </div>
              <div class="d-flex align-items-center">
               <div class="galaxy-btn" @click="galaxyEntranceModal()">
@@ -471,6 +472,13 @@ export default {
   text-align: left;
   color: #8FC8FE;
   font-size: 18px;
+}
+
+.galaxy-message {
+  /* font-size: 17px; */
+  color: #F59C35;
+  text-align: left;
+  margin-bottom: 10px;
 }
 
 /* 갤럭시방 코멘트 */

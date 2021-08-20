@@ -3,6 +3,7 @@
         <!-- 챌린지 모달 버튼 -->
         <div class="challenge-modal-button" data-bs-toggle="modal" data-bs-target="#challengeModal" data-bs-whatever="@getbootstrap">
             +
+            <figcaption>챌린지 생성</figcaption> 
         </div>
 
         <!-- 챌린지 모달 -->
@@ -754,5 +755,21 @@ textarea {
     color: white;
     background-color: #f53535;
     border-style: none;
+}
+
+.challenge-modal-button:hover {
+    background-color: rgb(48, 48, 48);
+}
+
+figcaption {
+  opacity: 0;
+  position: absolute;
+  font-size: 16px;
+  color: white;
+  top: 7px;
+}
+
+.challenge-modal-button:hover figcaption {
+    opacity: 1;
 }
 </style>
