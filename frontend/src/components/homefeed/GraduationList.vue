@@ -70,7 +70,7 @@ export default {
 }
 
 .graduation{
-    background-color: #ffc15d;
+    background-color: #ffc567;
     width: 80%;
     border-radius: 33px;
     margin-top: 30px;

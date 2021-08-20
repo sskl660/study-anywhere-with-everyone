@@ -11,8 +11,8 @@
         <div><Chat /></div>
       </div>
     </div>
-    <div class="galaxy-exit-button">
-      <img class="exit" src="../assets/exit-icon.png" alt="exit" @click="exit()"/>
+    <div class="galaxy-exit-button" @click="exit()">
+      <img class="exit" src="../assets/exit-icon.png" alt="exit"/>
       <figcaption>나가기</figcaption> 
     </div>
 
