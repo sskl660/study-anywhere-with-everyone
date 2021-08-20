@@ -60,11 +60,29 @@
 
   프로필 사진은 100kb를, 다른 정보들은 주어진 글자 수를 넘지 않도록 주의해주세요!
 
-<프로필 적용된모습 사진>
+![s_profileDetail](../assets/s_profileDetail.png)
 
-<챌린지 목록>
+- 프로필 페이지
 
-![s_challengeDetail](../s_challengeDetail.png)
+  프로필을 수정하고, 챌린지에 참여하면 위와 같은 프로필 페이지가 나타납니다!
+
+![s_challengeList](../assets/s_challengeList.png)
+
+- 챌린지 목록페이지
+
+  각 카테고리별 챌린지 목록을 확인할 수 있습니다! 
+
+  상단의 검색바를 통해 챌린지명 또는 참여자 명으로 챌린지를 검색할 수 있습니다.
+
+  우측 하단의 + 버튼을 눌러 챌린지를 생성할 수 있습니다.
+
+![s_makeChallenge](../assets/s_makeChallenge.png)
+
+- 챌린지 생성
+
+  챌린지명, 카테고리, 난이도, 챌린지소개, 챌린지 진행 기간, 인원, 그리고 과제별 마감기한을 입력 후 등록 버튼을 눌러 챌린지를 생성할 수 있습니다! 챌린지를 생성하면 자동으로 해당 챌린지의 팀장이 됩니다!
+
+![s_challengeDetail](../assets/s_challengeDetail.png)
 
 - 챌린지 상세 페이지
 
@@ -92,7 +110,13 @@
 
   다 작성 후 '생성' 버튼을 누르면 제출 완료!
 
-<과제 제출 후 모습, 댓글>
+![s_taskdetail](../assets/s_taskdetail.png)
+
+- 제출 후 모습
+
+  제출한 과제를 열면 제출한 내용과 첨부파일을 확인할 수 있습니다.
+
+  우측에 댓글을 남겨 서로 응원해주세요!
 
 ![s_enterGalaxy](../assets/s_enterGalaxy.png)
 
@@ -100,7 +124,15 @@
 
   내비게이션-우주선 모양의 버튼을 클릭하여 갤럭시로 입장할 수 있습니다. 입장 전, 나의 팔로워들의 피드에 나타낼 상태메세지를 입력하신 후 입장해주세요!
 
-<갤럭시 화면>
+![s_galaxy](../assets/s_galaxy.png)
+
+- 갤럭시 페이지
+
+  입장 후 모습입니다. 들어온 순서대로 왕좌에 앉을 수 있습니다. 
+
+  참여자 목록에서 이름을 누르면 새창으로 프로필 페이지가 열립니다.
+
+  우측의 Algo, CS, Job 탭을 눌러 채팅방을 이동할 수 있고 참여자들과 채팅을 할 수 있습니다.
 
 ![s_galaxyCheck](../assets/s_galaxyCheck.png)
 

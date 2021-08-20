@@ -2,26 +2,38 @@
 	<div class="quick-menu" ref="quickMenu" :style="quickMenuStyle">
 
     <div v-for="(n, key) in menuCount" class="sub-menu" :key="n" :style="getSubMenu(n-1)">
+
       <div v-if="menuUrlList[n-1].url === ''">
         <div class="sub-sub-menu" @click="galaxyEntranceModal()">
           <router-link v-if="menuUrlList[n-1].isLink" :to="menuUrlList[n-1].url" :target="openNewTab" :style="subMenuStyle" @mouseover.stop="mouseEnterSubMenu" @mouseout.stop="mouseOutSubMenu">
             <i :class="iconClass[n-1]" ref="icon"></i>
+            <figcaption class="menu-name-galaxy">갤럭시</figcaption> 
           </router-link>
           <a v-else :style="subMenuStyle" @mouseover.stop="mouseEnterSubMenu" @mouseout.stop="mouseOutSubMenu" @click="processCallback(key)">
             <i :class="iconClass[n-1]" ref="icon"></i>
           </a>
         </div>
       </div>
+
       <div v-else>
         <div class="sub-sub-menu">
           <router-link v-if="menuUrlList[n-1].isLink" :to="menuUrlList[n-1].url" :target="openNewTab" :style="subMenuStyle" @mouseover.stop="mouseEnterSubMenu" @mouseout.stop="mouseOutSubMenu">
             <i :class="iconClass[n-1]" ref="icon"></i>
+            <figcaption v-if="menuUrlList[n-1].url === '/homefeed'" class="menu-name-home">
+              홈
+            </figcaption>
+            <figcaption v-else-if="menuUrlList[n-1].url === '/challenges'" class="menu-name-challenge">
+              챌린지
+            </figcaption>
+            <figcaption v-else class="menu-name-profile">
+              프로필
+            </figcaption>
           </router-link>
           <a v-else :style="subMenuStyle" @mouseover.stop="mouseEnterSubMenu" @mouseout.stop="mouseOutSubMenu" @click="processCallback(key)">
             <i :class="iconClass[n-1]" ref="icon"></i>
           </a>
         </div>
-        </div>
+      </div>
         
     </div>
 
@@ -255,6 +267,58 @@ export default{
 <style scoped>
 .sub-sub-menu {
   height: 60px;
+}
+
+.menu-name-galaxy {
+  opacity: 0;
+  position: absolute;
+  left: 5px;
+  bottom: 15px;
+  font-size: 18px;
+  color: white;
+}
+
+a:hover .menu-name-galaxy{
+  opacity: 1
+}
+
+.menu-name-home {
+  opacity: 0;
+  position: absolute;
+  left: 22px;
+  bottom: 15px;
+  font-size: 18px;
+  color: white;
+}
+
+a:hover .menu-name-home {
+  opacity: 1
+}
+
+.menu-name-challenge {
+  opacity: 0;
+  position: absolute;
+  left: 7px;
+  bottom: 15px;
+  font-size: 18px;
+  color: white;
+}
+
+a:hover .menu-name-challenge {
+  opacity: 1
+}
+
+.menu-name-profile {
+  opacity: 0;
+  position: absolute;
+  left: 6px;
+  bottom: 15px;
+  font-size: 18px;
+  color: white;
+}
+
+a:hover .menu-name-profile {
+  opacity: 1
 }
 </style>
 

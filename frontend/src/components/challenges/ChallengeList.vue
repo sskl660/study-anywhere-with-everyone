@@ -3,9 +3,9 @@
         <!-- 챌린지 목록 제목 -->
         <div :class=" 'challenge-title-container' + idx" class="d-flex justify-content-center">
             <div style="display: inline-block" >
-                <img v-if="imgAlgo" src="@/assets/algo.png" style="width:90px; cursor: pointer; margin-left:-50px;" @click="changeChatType(1)" />
-                <img v-if="imgCs" src="@/assets/cs.png" style="width:90px; cursor: pointer; margin-left:0px;" @click="changeChatType(1)" />
-                <img v-if="imgJob" src="@/assets/job.png" style="width:90px; cursor: pointer; margin-left:-10px;" @click="changeChatType(1)" />
+                <img v-if="imgAlgo" src="@/assets/algo.png" style="width:90px; margin-left:-50px; margin-top: -2px;"/>
+                <img v-if="imgCs" src="@/assets/cs.png" style="width:90px; margin-left:0px;"/>
+                <img v-if="imgJob" src="@/assets/job.png" style="width:90px; margin-left:-10px;"/>
             </div>
             <div :class="'challenge-title'+idx" style="display:inline-block; width:150px; line-height:90px;">{{ title }}</div>
         </div>
@@ -13,9 +13,10 @@
         <!-- 챌린지 티켓 -->
         <div class="challenge-list-container">
             <ChallengeListItem 
-                v-for="(challenge, idx) in reversedChallengeList" 
+                v-for="(challenge, idx) in challengeList" 
                 :key="idx" 
                 :challenge="challenge"
+                :idx="idx"
             />
         </div>
     </div>
@@ -64,11 +65,6 @@ export default {
     },
     created: function() {
         this.getTitle();
-    },
-    computed: {
-        reversedChallengeList: function() {
-            return [...this.challengeList].reverse();
-        },
     },
 }
 </script>

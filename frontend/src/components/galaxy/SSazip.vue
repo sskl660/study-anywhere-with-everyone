@@ -9,11 +9,11 @@
                 </line>
             </svg> -->
             <!-- <div id="gravitybtn" style="display: block;position: fixed;margin: 4px;top:0;right:0;border-radius:5px;height: 30px;width: 130px;padding: 5px; background-color:#fff;text-align: center;font: italic bold 16px verdana;color: #fff;line-height: 30px;letter-spacing: 0.5px;cursor:default;z-index: 1000;-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;visibility:visible;"> -->
-            <div id="gravitybtn" class="banana">
+            <!-- <div id="gravitybtn" class="banana">
                 Gravity
                 <input type="radio" name="c" id="but1" checked="" />
                 <input type="radio" style="cursor:pointer;" name="c" id="but2" />
-            </div>
+            </div> -->
 
             <!-- <div v-for="(idx, ssazip_num) in temp_galaxy_data" :key="ssazip_num">
                 <SmallSSazip />
@@ -27,6 +27,12 @@
                     </div>
                 </div> -->
             </div>
+            <img style="display:none" src="@/assets/ssazip.png" alt="" />
+            <img style="display:none" src="@/assets/ssazip_mint.png" alt="" />
+            <img style="display:none" src="@/assets/ssazip_orange.png" alt="" />
+            <img style="display:none" src="@/assets/ssazip_purple.png" alt="" />
+            <img style="display:none" src="@/assets/ssazip_yellow.png" alt="" />
+            <img style="display:none" src="@/assets/ssazip_red.png" alt="" />
 
             <!-- <div v-for="(idx,index) in participantsVuex" :key="index"> -->
             <!-- {{index}} -->
@@ -55,7 +61,6 @@
 </template>
 
 <script>
-import SmallSSazip from '@/components/galaxy/SmallSSazip.vue';
 // import gravity from "@/components/temporary/gravity.js"
 // import $ from 'jquery';
 import { mapGetters } from 'vuex';
@@ -64,9 +69,6 @@ import swal from 'sweetalert';
 export default {
     name: 'SSazip',
     clocker: null,
-    components: {
-        SmallSSazip,
-    },
     giveme: null,
     ccc: null,
     data() {
@@ -87,38 +89,41 @@ export default {
     },
     created: function() {
         clearInterval(this.clocker);
+        clearInterval(this.showRemaining);
     },
     beforeDestroy: function() {
         clearInterval(this.clocker);
+        clearInterval(this.showRemaining);
     },
     destroyed(to, from, next) {
         clearInterval(this.clocker);
+        clearInterval(this.showRemaining);
         // next();
     },
     mounted: function() {},
     beforeUpdate: function() {
-        console.log('bf');
-        console.log(document.getElementById('newDivSpace'));
+        // console.log('bf');
+        // console.log(document.getElementById('newDivSpace'));
     },
     updated: function() {
         this.gravity();
-        console.log('updated');
+        // console.log('updated');
         this.clocker = setInterval(this.showRemaining, 1000);
-        console.log('---------------------------------------');
-        for (var i = 0; i < this.beforeBallCoords.length; i++) {
-            console.log('ax=' + this.beforeBallCoords[i].ax);
-            console.log('ay=' + this.beforeBallCoords[i].ay);
-            console.log('M=' + this.beforeBallCoords[i].M);
-            console.log('px=' + this.beforeBallCoords[i].px);
-            console.log('py=' + this.beforeBallCoords[i].py);
-            console.log('r=' + this.beforeBallCoords[i].r);
-            console.log('vx=' + this.beforeBallCoords[i].vx);
-            console.log('vy=' + this.beforeBallCoords[i].vy);
-            console.log('x=' + this.beforeBallCoords[i].x);
-            console.log('y=' + this.beforeBallCoords[i].y);
-            console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-        }
-        console.log('---------------------------------------');
+        // console.log('---------------------------------------');
+        // for (var i = 0; i < this.beforeBallCoords.length; i++) {
+        //     console.log('ax=' + this.beforeBallCoords[i].ax);
+        //     console.log('ay=' + this.beforeBallCoords[i].ay);
+        //     console.log('M=' + this.beforeBallCoords[i].M);
+        //     console.log('px=' + this.beforeBallCoords[i].px);
+        //     console.log('py=' + this.beforeBallCoords[i].py);
+        //     console.log('r=' + this.beforeBallCoords[i].r);
+        //     console.log('vx=' + this.beforeBallCoords[i].vx);
+        //     console.log('vy=' + this.beforeBallCoords[i].vy);
+        //     console.log('x=' + this.beforeBallCoords[i].x);
+        //     console.log('y=' + this.beforeBallCoords[i].y);
+        //     console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+        // }
+        // console.log('---------------------------------------');
     },
     computed: {
         ...mapGetters(['participantsVuex']),
@@ -168,8 +173,8 @@ export default {
         },
 
         gravity: function() {
-            console.log('gravity');
-            console.log(this.participantsVuex);
+            // console.log('gravity');
+            // console.log(this.participantsVuex);
 
             var partList = this.participantsVuex;
             var beforeList = this.beforeParts;
@@ -280,34 +285,41 @@ export default {
             function createBall(y, x, idx, newOneIdx, nvy, nvx) {
                 // r: 알들의 크기
                 var r = 50;
-                console.log('idx in partList');
-                console.log(idx);
+                // console.log('idx in partList');
+                // console.log(idx);
                 if (newOneIdx != -1) {
                     idx = newOneIdx;
-                    console.log('추가인원생성 예정');
+                    // console.log('추가인원생성 예정');
                 }
 
-                console.log('------------create Ball--------------');
-                console.log('con 이란 생성전 싸집이공간');
-                console.log(JSON.parse(JSON.stringify(con.childElementCount)));
+                // console.log('------------create Ball--------------');
+                // console.log('con 이란 생성전 싸집이공간');
+                // console.log(JSON.parse(JSON.stringify(con.childElementCount)));
 
-                console.log('참여자 목록');
-                console.log(JSON.parse(JSON.stringify(partList)));
-                console.log('생성할 참여자');
-                console.log(partList[idx].partEmail);
+                // console.log('참여자 목록');
+                // console.log(JSON.parse(JSON.stringify(partList)));
+                // console.log('생성할 참여자');
+                // console.log(partList[idx].partEmail);
 
                 if (d.getElementById(`ssazip${partList[idx].partEmail}`) != null) {
-                    console.log(partList[idx].partEmail);
-                    console.log('는 있던 친구네!');
+                    // console.log(partList[idx].partEmail);
+                    // console.log('는 있던 친구네!');
                     // var ball = d.getElementById(`ssazip${partList[idx].partEmail}`);
                 }
                 // var ball = d.getElementById(`ssazip${partList[idx].partEmail}`);
                 else {
                     var ball = d.createElement('div');
-                    console.log(partList[idx].partEmail);
-                    console.log('는 새로 생성 할 친구네!');
+                    // console.log(partList[idx].partEmail);
+                    // console.log('는 새로 생성 할 친구네!');
                     const num = parseInt(Math.random() * 5);
                     var ssazip_pics = [
+                        // "@/assets/ssazip.png",
+                        // "@/assets/ssazip_mint.png",
+                        // "@/assets/ssazip_orange.png",
+                        // "@/assets/ssazip_purple.png",
+                        // "@/assets/ssazip_red.png",
+                        // "@/assets/ssazip_yellow.png",
+
                         '/img/ssazip.43ffb363.png',
                         '/img/ssazip_mint.3c829d99.png',
                         '/img/ssazip_orange.6b3c93af.png',
@@ -364,57 +376,57 @@ export default {
 
                 if (!document.getElementById(`ssazip${partList[idx].partEmail}`)) {
                     //&&!document.getElementById(`ssazip${partList[idx].partEmail}`).contains(con)) {
-                    console.log('공이없다 추가한다링');
-                    console.log(JSON.parse(JSON.stringify(ballCoords)));
+                    // console.log('공이없다 추가한다링');
+                    // console.log(JSON.parse(JSON.stringify(ballCoords)));
 
                     con.appendChild(ball);
-                    console.log(nvy);
+                    // console.log(nvy);
                     ballAttr(r, y, x, 0, 0, idx);
                     balls.splice(idx, 0, ball);
-                    console.log('con 이란 생성 후 싸집이공간');
+                    // console.log('con 이란 생성 후 싸집이공간');
                 } else {
-                    console.log('있던거네');
+                    // console.log('있던거네');
                     // balls.splice(idx, 1, ball);
                 }
                 for (var i = 0; i < balls.length; i++) {
-                    console.log(JSON.parse(JSON.stringify(balls[i].id)));
+                    // console.log(JSON.parse(JSON.stringify(balls[i].id)));
                 }
             }
 
             // 중력 무중력 조작기
             // var gravCon = d.createElement('div');
-            var gravCon = d.getElementById('gravitybtn');
-            gravCon.setAttribute(
-                'style',
-                // 'display: block;' +
-                'position: fixed;' +
-                    'margin: 4px;' +
-                    'top:105px; right:515px;' +
-                    'border-radius:5px;' +
-                    'height: 45px;' +
-                    'width: 130px;' +
-                    'padding: 5px;' +
-                    // 'background-color:#F1C069;' +
-                    'text-align: center;' +
-                    'font: bold 16px verdana;' +
-                    'color: #fff;' +
-                    'line-height: 35px;' +
-                    'letter-spacing: 0.5px;' +
-                    'cursor:default;' +
-                    'z-index: 1000;' +
-                    '-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;' +
-                    'visibility:visible;'
-            );
+            // var gravCon = d.getElementById('gravitybtn');
+            // gravCon.setAttribute(
+            //     'style',
+            //     // 'display: block;' +
+            //     'position: fixed;' +
+            //         'margin: 4px;' +
+            //         'top:105px; right:515px;' +
+            //         'border-radius:5px;' +
+            //         'height: 45px;' +
+            //         'width: 130px;' +
+            //         'padding: 5px;' +
+            //         // 'background-color:#F1C069;' +
+            //         'text-align: center;' +
+            //         'font: bold 16px verdana;' +
+            //         'color: #fff;' +
+            //         'line-height: 35px;' +
+            //         'letter-spacing: 0.5px;' +
+            //         'cursor:default;' +
+            //         'z-index: 1000;' +
+            //         '-moz-user-select: none;user-select: none;-webkit-user-select: none;-ms-user-select: none;' +
+            //         'visibility:visible;'
+            // );
 
-            gravCon.innerHTML =
-                // gravCon.backgroundImage= "url('/img/ssazip.43ffb363.png')";
-                '중력 ON!!! <input type="radio" style="cursor:pointer;" name="c" id="but1" checked>' +
-                '<input type="radio" style="cursor:pointer;"name="c" id="but2">';
+            // gravCon.innerHTML =
+            //     // gravCon.backgroundImage= "url('/img/ssazip.43ffb363.png')";
+            //     '중력 ON!!! <input type="radio" style="cursor:pointer;" name="c" id="but1" checked>' +
+            //     '<input type="radio" style="cursor:pointer;"name="c" id="but2">';
 
-            con.appendChild(gravCon);
+            // con.appendChild(gravCon);
 
             function ballAttr(rad, y, x, nvy, nvx, idx) {
-                console.log('ballAttr');
+                // console.log('ballAttr');
 
                 // if (balls.length < numberOfBalls) {
                 newBall = false;
@@ -438,12 +450,12 @@ export default {
                     vx: vex,
                     vy: vey,
                 };
-                console.log('ballCoords');
-                console.log(ballCoords);
+                // console.log('ballCoords');
+                // console.log(ballCoords);
 
                 // ballCoords.push(b);
                 ballCoords.splice(idx, 0, b);
-                console.log(ballCoords);
+                // console.log(ballCoords);
             }
 
             function animate() {
@@ -452,7 +464,7 @@ export default {
                 } else {
                     for (var i = 0; i < balls.length; i++) {
                         var b = ballCoords[i];
-                        if(Math.sqrt(b.vx*b.vx+b.vy*b.vy)>1.5||Math.abs(b.vx)>0.8||Math.abs(b.vy)>0.8){
+                        if(Math.sqrt(b.vx*b.vx+b.vy*b.vy)>1.5||Math.abs(b.vx)>0.6||Math.abs(b.vy)>0.6){
                             if(b.vx<0)b.vx=-0.3;
                             else b.vx=0.3;
 
@@ -708,23 +720,23 @@ export default {
             function start() {
                 win();
 
-                console.log('---------------------startFuntion------------');
-                console.log('partList  신 참여자 리스트');
-                console.log(JSON.parse(JSON.stringify(partList)));
-                console.log('partList.length 신 참여자 수');
-                console.log(partList.length);
-                console.log('beforeList 이전 참여자 리스트(이메일)');
-                console.log(JSON.parse(JSON.stringify(beforeList)));
-                console.log('beforeList.leng 이전참여자 수');
-                console.log(beforeList.length);
-                console.log('balls.length 기존 볼, 갯수');
-                console.log(JSON.parse(JSON.stringify(balls)));
-                console.log(balls.length);
-                console.log('con.childNodes 싸집이 공간');
-                console.log(JSON.parse(JSON.stringify(con.childNodes)));
-                console.log('con.childNodes.length-2 싸집이 갯수???');
-                console.log(con.childNodes.length - 2);
-                console.log('=========================================');
+                // console.log('---------------------startFuntion------------');
+                // console.log('partList  신 참여자 리스트');
+                // console.log(JSON.parse(JSON.stringify(partList)));
+                // console.log('partList.length 신 참여자 수');
+                // console.log(partList.length);
+                // console.log('beforeList 이전 참여자 리스트(이메일)');
+                // console.log(JSON.parse(JSON.stringify(beforeList)));
+                // console.log('beforeList.leng 이전참여자 수');
+                // console.log(beforeList.length);
+                // console.log('balls.length 기존 볼, 갯수');
+                // console.log(JSON.parse(JSON.stringify(balls)));
+                // console.log(balls.length);
+                // console.log('con.childNodes 싸집이 공간');
+                // console.log(JSON.parse(JSON.stringify(con.childNodes)));
+                // console.log('con.childNodes.length-2 싸집이 갯수???');
+                // console.log(con.childNodes.length - 2);
+                // console.log('=========================================');
 
                 var num = partList.length;
                 var newOneIdx = -1;
@@ -740,7 +752,7 @@ export default {
                     }
                 } else if (partList.length == beforeList.length - 1) {
                     //퇴장 상황
-                    console.log('-----Erazze situ!!!-----');
+                    // console.log('-----Erazze situ!!!-----');
                     var tmp = [];
                     for (var i = 0; i < partList.length; i++) {
                         tmp.push(partList[i].partEmail);
@@ -752,85 +764,85 @@ export default {
                             break;
                         }
                     }
-                    console.log('-----삭제전 ball, ballCo-----');
-                    console.log(balls);
-                    console.log(ballCoords);
+                    // console.log('-----삭제전 ball, ballCo-----');
+                    // console.log(balls);
+                    // console.log(ballCoords);
                     balls.splice(deathIdx, 1);
                     ballCoords.splice(deathIdx, 1);
-                    console.log('-----삭제후 ball, ballco-----');
-                    console.log(balls);
-                    console.log(ballCoords);
-                    console.log('-----삭제전 con-----');
+                    // console.log('-----삭제후 ball, ballco-----');
+                    // console.log(balls);
+                    // console.log(ballCoords);
+                    // console.log('-----삭제전 con-----');
                     var er = d.getElementById(`ssazip${beforeList[deathIdx]}`);
-                    console.log(er.parentNode);
+                    // console.log(er.parentNode);
                     er.parentNode.removeChild(er);
-                    console.log('-----삭제 후 con-----');
-                    console.log(d.getElementById('oldPlace'));
+                    // console.log('-----삭제 후 con-----');
+                    // console.log(d.getElementById('oldPlace'));
                 }
                 if (newOneIdx != -1) {
-                    console.log('new ball cre');
+                    // console.log('new ball cre');
                     createBall(Math.random() * h, Math.random() * w, -1, newOneIdx);
                 }
                 for (var k = 0; k < num; k++) {
-                    console.log('-----default ballmaker 초기나 이전 공-----');
-                    console.log(k + '번째');
+                    // console.log('-----default ballmaker 초기나 이전 공-----');
+                    // console.log(k + '번째');
                     //만들 공 갯수
                     // if(document.getElementById(`ssazip${this.participants[i].partEmail}`)) continue;
                     if (newOneIdx != -1 && k == newOneIdx) {
-                        console.log(k + '는 새로운친구야 패스');
+                        // console.log(k + '는 새로운친구야 패스');
                         continue;
                     }
                     // if (deathIdx != -1 && i == deathIdx) continue;
                     createBall(Math.random() * h, Math.random() * w, k, -1);
                 }
-                console.log('-----------------------run------------------');
-                console.log(JSON.parse(JSON.stringify(balls[0])));
-                console.log(JSON.parse(JSON.stringify(ballCoords)));
+                // console.log('-----------------------run------------------');
+                // console.log(JSON.parse(JSON.stringify(balls[0])));
+                // console.log(JSON.parse(JSON.stringify(ballCoords)));
                 run();
-                d.getElementById('but2').addEventListener(
-                    'click',
-                    function() {
-                        gravOn();
-                    },
-                    false
-                );
-                d.getElementById('but2').addEventListener(
-                    'mouseover',
-                    function() {
-                        exempt = true;
-                    },
-                    false
-                );
-                d.getElementById('but2').addEventListener(
-                    'mouseout',
-                    function() {
-                        exempt = false;
-                    },
-                    false
-                );
+                // d.getElementById('but2').addEventListener(
+                //     'click',
+                //     function() {
+                //         gravOn();
+                //     },
+                //     false
+                // );
+                // d.getElementById('but2').addEventListener(
+                //     'mouseover',
+                //     function() {
+                //         exempt = true;
+                //     },
+                //     false
+                // );
+                // d.getElementById('but2').addEventListener(
+                //     'mouseout',
+                //     function() {
+                //         exempt = false;
+                //     },
+                //     false
+                // );
 
-                d.getElementById('but1').addEventListener(
-                    'click',
-                    function() {
-                        restart();
-                        gravOff();
-                    },
-                    false
-                );
-                d.getElementById('but1').addEventListener(
-                    'mouseover',
-                    function() {
-                        exempt = true;
-                    },
-                    false
-                );
-                d.getElementById('but1').addEventListener(
-                    'mouseout',
-                    function() {
-                        exempt = false;
-                    },
-                    false
-                );
+                // d.getElementById('but1').addEventListener(
+                //     'click',
+                //     function() {
+                //         restart();
+                //         gravOff();
+                //     },
+                //     false
+                // );
+                // d.getElementById('but1').addEventListener(
+                //     'mouseover',
+                //     function() {
+                //         exempt = true;
+                //     },
+                //     false
+                // );
+                // d.getElementById('but1').addEventListener(
+                //     'mouseout',
+                //     function() {
+                //         exempt = false;
+                //     },
+                //     false
+                // );
             }
 
             start();

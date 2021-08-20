@@ -215,7 +215,7 @@ export default {
     scrollDown() {
       var scrollbox = document.getElementById('roomBox');
       scrollbox.scrollTop = scrollbox.scrollHeight;
-      console.log(this.participants.length);
+    //   console.log(this.participants.length);
     },
         // 메세지 전송하는 함수.
         sendMessage() {
@@ -254,14 +254,14 @@ export default {
                     )
                 );
                 // console.log(this.participants);
-                console.log(this.ranker);
+                // console.log(this.ranker);
 
                 // 이름 순으로 참여자 정렬
                 receiveMessage.sort(function(a, b) {
                     return a.partName > b.partName ? 1 : -1;
                 });
                 this.participants = receiveMessage;
-                console.log(this.participants);
+                // console.log(this.participants);
                 this.setPart(this.participants);
 
                 /////////////////////////////////////////////////////////
@@ -288,7 +288,7 @@ export default {
         },
 
         onError(error) {
-            console.log(error);
+            // console.log(error);
         },
 
         // 소켓 연결
@@ -598,6 +598,7 @@ a {
 .participantList {
     position: absolute;
     margin-left: -170px;
+    margin-top: -13px;
 }
 
 #participantbox {

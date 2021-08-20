@@ -3,14 +3,17 @@
 <template>
   <div id="ds" class="">
     <SSazip id="asd" />
-    <div class="">
-      <div><ChatTab /></div>
+    <div style="postion: relative;">
+      <div class="">
+        <div><ChatTab /></div>
+      </div>
+      <div class="GalaxyChat">
+        <div><Chat /></div>
+      </div>
     </div>
-    <div class="GalaxyChat">
-      <div><Chat /></div>
-    </div>
-    <div class="galaxy-exit-button">
-      <img class="exit" src="../assets/exit-icon.png" alt="exit" @click="exit()" />
+    <div class="galaxy-exit-button" @click="exit()">
+      <img class="exit" src="../assets/exit-icon.png" alt="exit"/>
+      <figcaption>나가기</figcaption> 
     </div>
 
     <!-- Timer 설정 -->
@@ -189,9 +192,10 @@ export default {
     this.counter_init();
   },
   computed: {
-  ...mapGetters([
-    'userEmail', 
-    'isLogin']),
+    ...mapGetters([
+      'userEmail', 
+      'isLogin'
+    ]),
   },
   beforeRouteLeave(to, from, next) {
     if (document.getElementById('newDivSpace')) {
@@ -229,7 +233,7 @@ export default {
               next();
             })
             .catch((err) => {
-              console.log(err);
+              // console.log(err);
             });
         }
 
@@ -246,7 +250,7 @@ export default {
           next();
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     }
   },
@@ -441,5 +445,21 @@ export default {
 .exit-modal-footer {
   margin-top: 20px;
   margin-right: 30px;
+}
+
+figcaption {
+  opacity: 0;
+  position: absolute;
+  font-size: 15px;
+  color: white;
+  top: 20px;
+}
+
+.galaxy-exit-button:hover {
+  background-color: rgb(48, 48, 48);
+}
+
+.galaxy-exit-button:hover figcaption {
+  opacity: 1;
 }
 </style>

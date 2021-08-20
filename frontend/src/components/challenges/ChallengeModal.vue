@@ -3,6 +3,7 @@
         <!-- 챌린지 모달 버튼 -->
         <div class="challenge-modal-button" data-bs-toggle="modal" data-bs-target="#challengeModal" data-bs-whatever="@getbootstrap">
             +
+            <figcaption>챌린지 생성</figcaption> 
         </div>
 
         <!-- 챌린지 모달 -->
@@ -253,12 +254,12 @@ export default {
             /* API에 넘겨줄 챌린지 정보 */
             challengeInfo: {
                 challengeCapacity: 0,
-                challengeCategory: null,
+                challengeCategory: '',
                 challengeDesc: '',
-                challengeEnddate: null,
+                challengeEnddate: '',
                 challengeLevel: 0,
-                challengeName: null,
-                challengeStartdate: null,
+                challengeName: '',
+                challengeStartdate: '',
                 challengeTaskCnt: 0,
                 challengeTaskdeadlines: [null, null, null, null, null, null, null],
             },
@@ -316,9 +317,12 @@ export default {
 
             // 날짜가 올바르게 입력되었는지 체크
             if (this.challengeInfo.challengeStartdate && this.challengeInfo.challengeEnddate) {
-                const today = new Date().getDate()
-                const startDate = new Date(this.challengeInfo.challengeStartdate).getDate();
-                const endDate = new Date(this.challengeInfo.challengeEnddate).getDate();
+                const today = new Date()
+                const startDate = new Date(this.challengeInfo.challengeStartdate)
+                const endDate = new Date(this.challengeInfo.challengeEnddate)
+                
+                today.setHours(8)
+        
                 if (startDate > endDate || today > startDate) {
                     this.isOkay = false;
                     this.dateOkay = false;
@@ -326,8 +330,9 @@ export default {
                 } else {
                     const deadlines = this.challengeInfo.challengeTaskdeadlines;
                     for (let i = 0; i < this.challengeInfo.challengeTaskCnt; i++) {
-                        const deadline = new Date(deadlines[i]).getDate();
-                        if (!deadline || deadline < startDate || endDate < deadline) {
+                        console.log(i)
+                        const deadline = new Date(deadlines[i]);
+                        if ((!deadline) || (deadline < startDate) || (endDate < deadline)) {
                             this.isOkay = false;
                             this.dateOkay = false;
                             this.dateFlag = false;
@@ -417,7 +422,7 @@ export default {
             // 챌린지 소개 내용은 1글자 이상, 600글자 이하.
             if (0 < this.challengeInfo.challengeDesc.length && this.challengeInfo.challengeDesc.length <= 600) {
                 this.checkLength = true;
-                // return;
+                return;
             } else {
                 this.checkLength = false;
             }
@@ -750,5 +755,21 @@ textarea {
     color: white;
     background-color: #f53535;
     border-style: none;
+}
+
+.challenge-modal-button:hover {
+    background-color: rgb(48, 48, 48);
+}
+
+figcaption {
+  opacity: 0;
+  position: absolute;
+  font-size: 16px;
+  color: white;
+  top: 7px;
+}
+
+.challenge-modal-button:hover figcaption {
+    opacity: 1;
 }
 </style>
