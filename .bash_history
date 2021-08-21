@@ -1,16 +1,3 @@
-git pull origin master
-git clone https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307.git
-git clone 
-git clone https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307.git
-git clonehttps://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307.git
-git clone https://lab.ssafy.com/s05-webmobile2-sub3/S05P13A307.git
-cd S05P13A307/
-ls
-git pull
-git status
-git pull origin master
-git status
-git merge origin master
 git status
 git clone 
 user081312@DESKTOP-1NH5HJI MINGW64 /c/Users/user081312/Desktop
@@ -498,3 +485,16 @@ git commit -am "merge"
 git status
 git commit -am "save"
 git push
+cd ~
+git status
+git commit -am "save"
+git pull origin master
+git status
+git commit -am "merge"
+git status
+git remote add origin https://github.com/sskl660/study-anywhere-with-everyone.git
+git remote add mine https://github.com/sskl660/study-anywhere-with-everyone.git
+git push -u mine master
+git push -u mine master
+git push -u mine master
+git push -u mine master
