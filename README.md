@@ -263,6 +263,7 @@
 
 ## Sample URL
 > http://sawe.kro.kr/
+> 입장코드 : 307
 
 ## Vue Project
 ### Project setup
