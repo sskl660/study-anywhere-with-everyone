@@ -262,7 +262,7 @@
 # 💡Usage
 
 ## Sample URL
-> http://i5a307.p.ssafy.io/
+> http://sawe.kro.kr/
 
 ## Vue Project
 ### Project setup
@@ -315,13 +315,6 @@
 - Ubuntu 20.04 LTS
 - Docker 20.10.7
 - Jenkins 2.304
-
-<br>
-
-## Properties
-- Database : 13.125.119.76:3306 (아이디: ssafy, 비밀번호: SSAZIPA307)
-- 서버 주소(Jupyter Nodebook) : https://13.125.119.76:8888 (비밀번호: SSAZIPA307)
-- 젠킨스 주소 : http://13.125.119.76:9090/ (아이디: sskl660 비밀번호: SSAZIPA307)
 
 <br>
 
